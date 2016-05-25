@@ -6,11 +6,11 @@
 
     <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</title>
 
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
-    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/blog/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://z351522453.github.com/blog">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -43,7 +43,46 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://z351522453.github.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html"><h3 class="article-title">一、遊戲開發數學基礎(坐标系、向量、矩阵)</h3></a>
+            <a href="http://z351522453.github.com/blog/san-lua-zhong-de-bi-bao.html"><h3 class="article-title">三、Lua 中的閉包</h3></a>
+<h6 class="subheader" title="2015-06-16T12:05:00+08:00">周二 16 六月 2015
+</h6>
+
+
+<p>对于习惯了 C/C++ 这种不可嵌套定义函數的语言来说, 理解闭包真不太容易;</p>
+<p>要解釋閉包就要先理解幾個小知識點:
+Lua 中的函数是带有词法定界（lexical scoping）的第一类值（first-class values）.</p>
+<p><strong>第一类值（first-class values）</strong>是指,<strong> </strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
+正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/san-lua-zhong-de-bi-bao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/blog/er-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">二、Lua 中的面向對象</h3></a>
+<h6 class="subheader" title="2015-06-15T19:47:00+08:00">周一 15 六月 2015
+</h6>
+
+
+<p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
+<p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">People =&lt;span style=&quot;color: #000000&quot;&gt; {}
+People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/blog/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html"><h3 class="article-title">一、遊戲開發數學基礎(坐标系、向量、矩阵)</h3></a>
 <h6 class="subheader" title="2015-06-15T17:08:00+08:00">周一 15 六月 2015
 </h6>
 
@@ -51,18 +90,18 @@
 <p><strong>笛卡爾坐標系</strong></p>
 <p>笛卡爾坐標系有 1D、2D、3D 三種, 因為我們要學的 cocos2d-x 是基於 2D 的, 因此, 我們主要討論 2D 笛卡爾坐標系.</p>
 <p>2D 笛卡爾坐標系 就是我們中學學過的 x/y 坐標系, 當然也稍有不同.</p>
-<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html"><h3 class="article-title">(二十九) 容器的一些其他操作</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html"><h3 class="article-title">(二十九) 容器的一些其他操作</h3></a>
 <h6 class="subheader" title="2015-06-14T16:59:00+08:00">周日 14 六月 2015
 </h6>
 
@@ -72,54 +111,54 @@
 <p><strong>containsAll:</strong>
 判斷 Collection 中是否包含指定的所有元素.</p>
 <p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題? 這裡 List 和 Set 的解決方法是不同的;</p>
-<p><strong>先看 ...</strong></p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+<p><strong>先看 ...</strong></p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
 <h6 class="subheader" title="2015-06-14T15:04:00+08:00">周日 14 六月 2015
 </h6>
 
 
 <p>在寫測試代碼的時候, 發現個問題:
 程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
-<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
 <h6 class="subheader" title="2015-06-14T14:53:00+08:00">周日 14 六月 2015
 </h6>
 
 
 <p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
 <p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
-<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-qi-map-he-hashmap.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-qi-map-he-hashmap.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
 <h6 class="subheader" title="2015-06-14T04:53:00+08:00">周日 14 六月 2015
 </h6>
 
@@ -130,18 +169,18 @@
 <p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
 <p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
 <hr />
-<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
 <h6 class="subheader" title="2015-06-13T15:47:00+08:00">周六 13 六月 2015
 </h6>
 
@@ -150,18 +189,18 @@
 <p>常用的方法:
 <img alt="" src="http://i59.tinypic.com/ofyt8z.jpg" /></p>
 <p>Math 类还提供了许多其他方法, 可自行查阅.
-???</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+???</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
 <h6 class="subheader" title="2015-06-13T13:37:00+08:00">周六 13 六月 2015
 </h6>
 
@@ -169,18 +208,18 @@
 <p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
 这个类最主要的作用就是获取当前时间.</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
-&lt;span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+&lt;span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-si-shi-jian-de-chu-li.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-si-shi-jian-de-chu-li.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
+            <a href="http://z351522453.github.com/blog/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
 <h6 class="subheader" title="2015-06-13T13:28:00+08:00">周六 13 六月 2015
 </h6>
 
@@ -190,61 +229,13 @@
 </em>. 使用 String 类的 valueOf() 方法
 *. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
-String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://z351522453.github.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"><h3 class="article-title">(二十二) Java 中的包装类</h3></a>
-<h6 class="subheader" title="2015-06-13T13:20:00+08:00">周六 13 六月 2015
-</h6>
-
-
-<p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
-<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
-<p>包装类主要提供了两大类方法:
-<em>. 将本类型和其他基本类型进行转换的方法
-</em>. 将字符串和本类型及包装类互相转换的方法</p>
-<hr />
-<p>以 Integet 为例, 其它类似</p>
-<p>Integer n1 = new Integer(5);
-Integet n2 = new Integer(“5”);</p>
-<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
-<hr />
-<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
-<p><strong>装箱：</strong>把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
-<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p><strong>拆箱：</strong>和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://z351522453.github.com/er-shi-yi-stringbuilder-lei.html"><h3 class="article-title">(二十一) StringBuilder 类</h3></a>
-<h6 class="subheader" title="2015-06-13T12:29:00+08:00">周六 13 六月 2015
-</h6>
-
-
-<p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
-<p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
-至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://z351522453.github.com/er-shi-yi-stringbuilder-lei.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
@@ -253,9 +244,9 @@ Integet n2 = new Integer(“5”);</p>
 <h6 class="subheader">Page 18 of 29</h6>
 
 <p>
-            <a href="http://z351522453.github.com/index17.html">&laquo; Prev</a>
+            <a href="http://z351522453.github.com/blog/index17.html">&laquo; Prev</a>
 
-        <a href="http://z351522453.github.com/index19.html">Next &raquo;</a>
+        <a href="http://z351522453.github.com/blog/index19.html">Next &raquo;</a>
 </p>
 </div>
 
@@ -266,34 +257,34 @@ Integet n2 = new Integer(“5”);</p>
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
-            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+            <li><a href="http://z351522453.github.com/blog/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/blog/tags.html">Tags</a>
         </ul>
 
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
-            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
-            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
-            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
-            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
-            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
-            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a></li>
    
         </ul>
 

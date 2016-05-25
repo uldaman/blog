@@ -6,11 +6,11 @@
 
     <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Martin</title>
 
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
-    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/blog/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://z351522453.github.com/blog">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -43,7 +43,46 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://z351522453.github.com/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html"><h3 class="article-title">models -- 数据库表、字段及连表</h3></a>
+            <a href="http://z351522453.github.com/blog/models-mo-ban-yu-yan-ji-formyan-zheng.html"><h3 class="article-title">models -- 模板语言及Form验证</h3></a>
+<h6 class="subheader" title="2015-09-06T08:59:00+08:00">周日 06 九月 2015
+</h6>
+
+
+<p><strong>模板语言</strong></p>
+<p>依赖于 Python, 可以把数据内嵌到 html 中展示.</p>
+<p>eg:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/models-mo-ban-yu-yan-ji-formyan-zheng.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/blog/models-shu-ju-ku-zeng-shan-gai-cha.html"><h3 class="article-title">models — 数据库增删改查</h3></a>
+<h6 class="subheader" title="2015-09-06T05:33:00+08:00">周日 06 九月 2015
+</h6>
+
+
+<p>models.py 定义只是数据库的表、字段信息, 真实的向数据库中写数据的代码还是 views.py (业务逻辑中处理) 完成的.</p>
+<p>objects 是 Django 实现的 MTV 中的 M, Django 中的模型类都有一个 objects 对象, 它是一个 Django 中定义的 QuerySet 类型的对象, 它包含了模型对象的实例.</p>
+<p><strong>增</strong></p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/models-shu-ju-ku-zeng-shan-gai-cha.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/blog/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html"><h3 class="article-title">models -- 数据库表、字段及连表</h3></a>
 <h6 class="subheader" title="2015-09-05T04:30:00+08:00">周六 05 九月 2015
 </h6>
 
@@ -51,18 +90,18 @@
 <p>Django 对数据库的操作比较简单, 它已经对数据库进行了封闭, 我们无需去关注数据库的细节(即无需像三层架构那样对数据库进行封闭, Django 已经为我们封装好了).</p>
 <p>首先, 打开工作目录下的 settings.py 文件, 修改 DATABASES:</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">DATABASES =&lt;span style=&quot;color: #000000&quot;&gt; {
-    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;default ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;default ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/models-shu-ju-ku-an-zhuang.html"><h3 class="article-title">models -- 数据库安装</h3></a>
+            <a href="http://z351522453.github.com/blog/models-shu-ju-ku-an-zhuang.html"><h3 class="article-title">models -- 数据库安装</h3></a>
 <h6 class="subheader" title="2015-09-05T02:25:00+08:00">周六 05 九月 2015
 </h6>
 
@@ -78,36 +117,36 @@
 <p><img alt="" src="http://i61.tinypic.com/2cmptgy.jpg" /></p>
 <p>接下来, 把安装路径下的 Bin 目录添加到环境变量, 如: C:\Program Files\MySQL\MySQL Server 5.6\bin;</p>
 <p><strong>然后设置字符集</strong></p>
-<p>进入安装目录 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+<p>进入安装目录 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/models-shu-ju-ku-an-zhuang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/models-shu-ju-ku-an-zhuang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/django-lu-you-xi-tong.html"><h3 class="article-title">Django 路由系统</h3></a>
+            <a href="http://z351522453.github.com/blog/django-lu-you-xi-tong.html"><h3 class="article-title">Django 路由系统</h3></a>
 <h6 class="subheader" title="2015-09-04T16:52:00+08:00">周五 04 九月 2015
 </h6>
 
 
 <p><span style="color: #0000ff">from</span> web.views <span style="color: #0000ff">import</span><span style="color: #000000"> index</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
-    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/django-lu-you-xi-tong.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/django-lu-you-xi-tong.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/django-kuang-jia-chu-kui.html"><h3 class="article-title">Django 框架初窥</h3></a>
+            <a href="http://z351522453.github.com/blog/django-kuang-jia-chu-kui.html"><h3 class="article-title">Django 框架初窥</h3></a>
 <h6 class="subheader" title="2015-09-04T15:43:00+08:00">周五 04 九月 2015
 </h6>
 
@@ -117,18 +156,18 @@
 <p>urls.py &ndash; 路由系统( url 映射)</p>
 <p>wsgi.py &ndash; wsgi 模块 (Web Server Gateway Interface 服务器网关接口)</p>
 <p>开始创建的那个项目是一个工程项目, 一个项目里会包含多个 app, 每一个 app 才是一个网站.
-在 WingIDE 的 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+在 WingIDE 的 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/django-kuang-jia-chu-kui.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/django-kuang-jia-chu-kui.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/python-web-huan-jing-pei-zhi.html"><h3 class="article-title">python web 环境配置</h3></a>
+            <a href="http://z351522453.github.com/blog/python-web-huan-jing-pei-zhi.html"><h3 class="article-title">python web 环境配置</h3></a>
 <h6 class="subheader" title="2015-09-03T16:05:00+08:00">周四 03 九月 2015
 </h6>
 
@@ -138,18 +177,18 @@
 <p>Model（模型）是应用程序中用于处理应用程序数据逻辑的部分, 通常模型对象负责在数据库中存取数据.</p>
 <p>View（视图）是应用程序中处理数据显示的部分, 通常视图是依据模型数据创建的(简单说就是前端).</p>
 <p>Controller（控制器）是应用程序中处理用户交互的部分, 通常控制器负责从视图读取数据, 控制用户输入, 并向模型发送数据.</p>
-<p>因为 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+<p>因为 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/python-web-huan-jing-pei-zhi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/python-web-huan-jing-pei-zhi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/python-mian-xiang-dui-xiang-gao-ji-bian-cheng.html"><h3 class="article-title">python 面向对象高级编程</h3></a>
+            <a href="http://z351522453.github.com/blog/python-mian-xiang-dui-xiang-gao-ji-bian-cheng.html"><h3 class="article-title">python 面向对象高级编程</h3></a>
 <h6 class="subheader" title="2015-09-02T18:48:00+08:00">周三 02 九月 2015
 </h6>
 
@@ -158,18 +197,18 @@
 <p>和 C++ 的类不同, python 中的类及其实例是可以动态修改的.</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;动态为实例新增一个属性, 假设存在一个 Student 类&lt;/span&gt;
 s=&lt;span style=&quot;color: #000000&quot;&gt; Student()
-s.name &lt;/span&gt;= &lt;span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+s.name &lt;/span&gt;= &lt;span ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/python-mian-xiang-dui-xiang-gao-ji-bian-cheng.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/python-mian-xiang-dui-xiang-gao-ji-bian-cheng.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/jquery-ji-chu.html"><h3 class="article-title">jQuery 基础</h3></a>
+            <a href="http://z351522453.github.com/blog/jquery-ji-chu.html"><h3 class="article-title">jQuery 基础</h3></a>
 <h6 class="subheader" title="2015-09-02T10:25:00+08:00">周三 02 九月 2015
 </h6>
 
@@ -177,18 +216,18 @@ s.name &lt;/span&gt;= &lt;span ...</pre></div><p class="subheader">Category: <a 
 <p>jQuery 是一套跨浏览器的 JavaScript 库, 简化 HTML 与 JavaScript 之间的操作.
 使用 jQuery 先从其官网上下载它, 我提供一个 1.11.3 的版本.
 <a href="http://yunpan.cn/cmrJPrqjPZ35c">http://yunpan.cn/cmrJPrqjPZ35c</a> 访问密码 271a</p>
-<p>有问题查帮助就可以了 <a href="http://www.php100.com/manual/jquery/">http://www.php100.com/manual/jquery ...</a></p><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+<p>有问题查帮助就可以了 <a href="http://www.php100.com/manual/jquery/">http://www.php100.com/manual/jquery ...</a></p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/jquery-ji-chu.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/jquery-ji-chu.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://z351522453.github.com/dom-ji-chu.html"><h3 class="article-title">DOM 基础</h3></a>
+            <a href="http://z351522453.github.com/blog/dom-ji-chu.html"><h3 class="article-title">DOM 基础</h3></a>
 <h6 class="subheader" title="2015-08-31T14:41:00+08:00">周一 31 八月 2015
 </h6>
 
@@ -200,52 +239,13 @@ s.name &lt;/span&gt;= &lt;span ...</pre></div><p class="subheader">Category: <a 
 <p><strong>获取或者修改样式:</strong> obj.className</p>
 <p><strong>获取或设置属性:</strong> getattribute(key) setattribute(key, val)</p>
 <p><strong>获取或修改标签文本内容(指&lt;&gt; </>中间的文本部分):</strong> obj.innerText &ndash; 以文本方式</p>
-<p><strong>获取或修改标签文本内容(指&lt;&gt; </>中间的文本部分 ...<//></strong></p><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+<p><strong>获取或修改标签文本内容(指&lt;&gt; </>中间的文本部分 ...<//></strong></p><p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://z351522453.github.com/dom-ji-chu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://z351522453.github.com/js-jian-dan-ru-men.html"><h3 class="article-title">js 简单入门</h3></a>
-<h6 class="subheader" title="2015-08-29T15:14:00+08:00">周六 29 八月 2015
-</h6>
-
-
-<p>js 在 html 中的使用方式和 css 很像, 可以通过内联和外部引用两方式:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text/javascript ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://z351522453.github.com/js-jian-dan-ru-men.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://z351522453.github.com/css.html"><h3 class="article-title">CSS</h3></a>
-<h6 class="subheader" title="2015-08-27T10:02:00+08:00">周四 27 八月 2015
-</h6>
-
-
-<p>链接：<a href="http://pan.baidu.com/s/1uhgM6">http://pan.baidu.com/s/1uhgM6</a> 密码：z1gq</p>
-<p>div 和 span 的存在就是为了应用 CSS 样式, 他们单独存在没有意义.
-div 和 span 的区别, 在于 span 是内联元素, 而 div 是块级元素(简单地说, 它等同于其前后有断行).</p>
-<p><strong>盒模型</strong></p>
-<p><img alt="" src="http://i59.tinypic.com/zt6o8w.jpg" /></p>
-<table cellpadding="2" width="656" border="1" cellspacing="0" class="table" > <tbody > <tr >
-<td width="200" valign="top" >Margin ...</td></tr></tbody></table><p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://z351522453.github.com/css.html">Read More</a>
+            <a class="button radius secondary small right" href="http://z351522453.github.com/blog/dom-ji-chu.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
@@ -254,9 +254,9 @@ div 和 span 的区别, 在于 span 是内联元素, 而 div 是块级元素(简
 <h6 class="subheader">Page 15 of 29</h6>
 
 <p>
-            <a href="http://z351522453.github.com/author/martin14.html">&laquo; Prev</a>
+            <a href="http://z351522453.github.com/blog/author/martin14.html">&laquo; Prev</a>
 
-        <a href="http://z351522453.github.com/author/martin16.html">Next &raquo;</a>
+        <a href="http://z351522453.github.com/blog/author/martin16.html">Next &raquo;</a>
 </p>
 </div>
 
@@ -267,34 +267,34 @@ div 和 span 的区别, 在于 span 是内联元素, 而 div 是块级元素(简
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
-            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+            <li><a href="http://z351522453.github.com/blog/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/blog/tags.html">Tags</a>
         </ul>
 
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
-            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
-            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
-            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
-            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
-            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
-            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a></li>
    
         </ul>
 

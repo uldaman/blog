@@ -6,11 +6,11 @@
 
     <title>(三) C++开发者都应该使用的10个C++11特性 — 基于范围的for循环</title>
 
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
-    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/blog/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://z351522453.github.com/blog">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -44,7 +44,7 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://z351522453.github.com/san-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-ji-yu-fan-wei-de-forxun-huan.html" rel="bookmark"
+        <h3 class="article-title"><a href="http://z351522453.github.com/blog/san-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-ji-yu-fan-wei-de-forxun-huan.html" rel="bookmark"
         title="Permalink to (三) C++开发者都应该使用的10个C++11特性 — 基于范围的for循环">(三) C++开发者都应该使用的10个C++11特性 — 基于范围的for循环</a></h3>
     </header>
 
@@ -54,45 +54,40 @@
 
     <p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持&rdquo;糖块句法&rdquo;, 允许程序通过一个简单的&rdquo;foreach&rdquo;语句自动遍历list中的元素.
 C++11增加了一个类似的特性, for语句可以简单地遍历列表中的元素.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; my_array[&lt;span style=&quot;color: #800080&quot;&gt;5&lt;/span&gt;] = {&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800080&quot;&gt;2&lt;/span&gt;, &lt;span style=&quot;color: #800080&quot;&gt;3&lt;/span&gt;, &lt;span style=&quot;color: #800080&quot;&gt;4&lt;/span&gt;, &lt;span style=&quot;color: #800080&quot;&gt;5&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;};
-&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; double the value of each element in my_array:&lt;/span&gt;
- &lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; &amp;&lt;span style=&quot;color: #000000&quot;&gt;x : my_array) {
-     x &lt;/span&gt;*= &lt;span style=&quot;color: #800080&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-}&lt;/span&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">int</span> my_array[<span style="color: #666666">5</span>] <span style="color: #666666">=</span> {<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>};
+<span style="color: #008800; font-style: italic">// double the value of each element in my_array:</span>
+<span style="color: #AA22FF; font-weight: bold">for</span> (<span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #666666">&amp;</span><span style="color: #A0A000">x</span> : my_array) {
+     x <span style="color: #666666">*=</span> <span style="color: #666666">2</span>;
+}<span style="color: #666666">&lt;</span>
 </pre></div>
 
 
-<p>这种形式的for语句叫作&rdquo;基于范围的for语句&rdquo;, 它会遍历列表中的每一个元素.
-<strong>请注意上面的 &amp; 符号, 如果想要通过 x 更改数组中的值就必须要使用引用类型, 否则 x 是一个拷贝的值(就像参数的参数一样).</strong>
-可以用在C风格数组, 初始化列表和那些带有能返回迭代器的begin()和end()函数的类型上.
-所有提供了begin/end的标准容器都可以使用基于范围的for语句.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">std::map&lt;std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt;, std::vector&lt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&gt;&gt;&lt;span style=&quot;color: #000000&quot;&gt; map;
-std::vector&lt;/span&gt;&lt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&gt;&lt;span style=&quot;color: #000000&quot;&gt; v;
-v.push_back(&lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-v.push_back(&lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;2&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-v.push_back(&lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;3&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-map[&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;one&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;] =&lt;span style=&quot;color: #000000&quot;&gt; v;
+<p><br>
+这种形式的for语句叫作&rdquo;基于范围的for语句&rdquo;, 它会遍历列表中的每一个元素.</p>
+<p><strong>请注意上面的 &amp; 符号, 如果想要通过 x 更改数组中的值就必须要使用引用类型, 否则 x 是一个拷贝的值(就像参数的参数一样).</strong></p>
+<p>可以用在C风格数组, 初始化列表和那些带有能返回迭代器的begin()和end()函数的类型上.</p>
+<p>所有提供了begin/end的标准容器都可以使用基于范围的for语句.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">std<span style="color: #666666">::</span>map<span style="color: #666666">&lt;</span>std<span style="color: #666666">::</span>string, std<span style="color: #666666">::</span>vector<span style="color: #666666">&lt;</span><span style="color: #00BB00; font-weight: bold">int</span><span style="color: #666666">&gt;&gt;</span> map;
+std<span style="color: #666666">::</span>vector<span style="color: #666666">&lt;</span><span style="color: #00BB00; font-weight: bold">int</span><span style="color: #666666">&gt;</span> v;
+v.push_back(<span style="color: #666666">1</span>);
+v.push_back(<span style="color: #666666">2</span>);
+v.push_back(<span style="color: #666666">3</span>);
+map[<span style="color: #BB4444">&quot;one&quot;</span>] <span style="color: #666666">=</span> v;
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt;(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; auto&amp;&lt;span style=&quot;color: #000000&quot;&gt; kvp : map)
-{
-  std::cout &lt;/span&gt;&lt;&lt; kvp.first &lt;&lt;&lt;span style=&quot;color: #000000&quot;&gt; std::endl;
+<span style="color: #AA22FF; font-weight: bold">for</span>(<span style="color: #AA22FF; font-weight: bold">const</span> <span style="color: #AA22FF; font-weight: bold">auto</span><span style="color: #666666">&amp;</span> <span style="color: #A0A000">kvp</span> : map) {
+  std<span style="color: #666666">::</span>cout <span style="color: #666666">&lt;&lt;</span> kvp.first <span style="color: #666666">&lt;&lt;</span> std<span style="color: #666666">::</span>endl;
 
-  &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(auto v : kvp.second)
-  {
-     std::cout &lt;/span&gt;&lt;&lt; v &lt;&lt;&lt;span style=&quot;color: #000000&quot;&gt; std::endl;
+  <span style="color: #AA22FF; font-weight: bold">for</span>(<span style="color: #AA22FF; font-weight: bold">auto</span> <span style="color: #A0A000">v</span> : kvp.second) {
+     std<span style="color: #666666">::</span>cout <span style="color: #666666">&lt;&lt;</span> v <span style="color: #666666">&lt;&lt;</span> std<span style="color: #666666">::</span>endl;
   }
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; arr[] = {&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;,&lt;span style=&quot;color: #800080&quot;&gt;2&lt;/span&gt;,&lt;span style=&quot;color: #800080&quot;&gt;3&lt;/span&gt;,&lt;span style=&quot;color: #800080&quot;&gt;4&lt;/span&gt;,&lt;span style=&quot;color: #800080&quot;&gt;5&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;};
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt;(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&amp;&lt;span style=&quot;color: #000000&quot;&gt; e : arr)
-{
-  e &lt;/span&gt;= e*&lt;span style=&quot;color: #000000&quot;&gt;e;
-}&lt;/span&gt;
+<span style="color: #00BB00; font-weight: bold">int</span> arr[] <span style="color: #666666">=</span> {<span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>};
+<span style="color: #AA22FF; font-weight: bold">for</span>(<span style="color: #00BB00; font-weight: bold">int</span><span style="color: #666666">&amp;</span> <span style="color: #A0A000">e</span> : arr) {
+  e <span style="color: #666666">=</span> e<span style="color: #666666">*</span>e;
+}
 </pre></div>
-
-
-<p>練</p>
-<p class="subheader">Category: <a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a>
+<p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/c11xin-te-xing.html">C++11新特性</a>
 
 </p>
 
@@ -107,34 +102,34 @@ map[&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
-            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+            <li><a href="http://z351522453.github.com/blog/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/blog/tags.html">Tags</a>
         </ul>
 
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
-            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
-            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
-            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
-            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
-            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
-            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a></li>
    
         </ul>
 

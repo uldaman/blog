@@ -6,11 +6,11 @@
 
     <title>从 wp 迁移到 pelican (github)</title>
 
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
-    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/blog/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/blog/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://z351522453.github.com/blog">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -44,7 +44,7 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://z351522453.github.com/cong-wp-qian-yi-dao-pelican-github.html" rel="bookmark"
+        <h3 class="article-title"><a href="http://z351522453.github.com/blog/cong-wp-qian-yi-dao-pelican-github.html" rel="bookmark"
         title="Permalink to 从 wp 迁移到 pelican (github)">从 wp 迁移到 pelican (github)</a></h3>
     </header>
 
@@ -53,6 +53,14 @@
 
 
     <p>考虑了很久, 终于下定决心把博客从 wordpress 迁移到 github 上了, 这里作个记录, 方便以后查询.</p>
+<div class="toc">
+<ul>
+<li><a href="#1-pelican">1. Pelican 博客搭建</a></li>
+<li><a href="#2">2. 更换主题</a></li>
+<li><a href="#3-wordpress">3. 迁移 wordpress</a></li>
+<li><a href="#4-github">4. 发布到 github</a></li>
+</ul>
+</div>
 <h1 id="1-pelican">1. Pelican 博客搭建</h1>
 <p>首先, 要在 github 上建立自己的主页, 方法很简单, 在自己的 github 上 new 一个 repository，名字必须是 <strong>yourname.github.com</strong>, 然后通过 yourname.github.com 就能访问了这个 repository 主干下的 index.html 文件了, 为方便测试, 可以手动添加一个 index.html, 然后随便写上几句话, 然后通过 yourname.github.com 查看效果.</p>
 <p>接下来, 就是搭建本地博客了, 这里使用的是 pelican 系统, why? 因为它是 Python 写的, 而我又刚好懂那么一丢丢 python&hellip;</p>
@@ -178,6 +186,16 @@ MD_EXTENSIONS = [
 </pre></div>
 
 
+<p><br>
+<strong>注意</strong>, MD 语法高亮的设置需要 python 包 <code>pygments</code> 支持, 所以, 先安装 <code>pygments</code> 吧.</p>
+<blockquote>
+<p>pygments_style 可以在 <a href="http://pygments.org/demo/?lang=cpp&amp;sort=">http://pygments.org/demo/</a> 进行调试<br>
+Reference:<br>
+<a href="http://crunk.io/post/introduction-to-pelican/">Introduction to Pelican</a><br>
+<a href="http://fatsoon.com/python/2014/07/26/use-highlite-in-django.html">Django 中使用 markdown 和代码高亮</a><br>
+<a href="https://pythonhosted.org/Markdown/extensions/code_hilite.html">Python Markdown v2.6.6 documentation » CodeHilite Extension</a><br>
+<a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a></p>
+</blockquote>
 <p>然后再重新用 cmd 进入 myblog 目录, 执行 <strong>make html</strong> + <strong>make serve</strong>, 访问: <strong>http://localhost:8000/</strong>, 看看我们的博客主题是不是已经发生变化啦~~</p>
 <h1 id="3-wordpress">3. 迁移 wordpress</h1>
 <p>环境搭建好后, 就是把我们 wordpress(后面简称 wp) 的内容迁移过来啦.</p>
@@ -260,9 +278,8 @@ files<span style="color: #666666">=</span>os<span style="color: #666666">.</span
 <p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: <strong>www.smallcpp.com</strong>, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:</p>
 <div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">@      CNAME        yourname.github.com
 www    CNAME        yourname.github.com
-blog   显性URL      http://www.smallcpp.com/
 </pre></div>
-<p class="subheader">Category: <a href="http://z351522453.github.com/category/za-xiang.html">杂项</a>
+<p class="subheader">Category: <a href="http://z351522453.github.com/blog/category/za-xiang.html">杂项</a>
 
 </p>
 
@@ -277,34 +294,34 @@ blog   显性URL      http://www.smallcpp.com/
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
-            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+            <li><a href="http://z351522453.github.com/blog/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/blog/tags.html">Tags</a>
         </ul>
 
 		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
-            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
-            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
-            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
-            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
-            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
-            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
-            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
-            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/blog/category/zai-xue-java.html">再学 JAVA</a></li>
    
         </ul>
 
