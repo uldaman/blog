@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>02、UML 用例图</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/02-uml-yong-li-tu.html" rel="bookmark"
+        title="Permalink to 02、UML 用例图">02、UML 用例图</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-04-01T00:03:00+08:00">周五 01 四月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">用例卡片</a></li>
+<li><a href="#staruml">StarUML 用例图</a></li>
+</ul>
+</div>
+<p>用例, 是帮助角色确定__系统使用情况__的 UML 组件</p>
+<p>用例组, 是从用户角度出发对__如何使用系统的描述__</p>
+<p>用例图, 用图形的方式来描述情景, 主要用来描述 &ldquo;<strong>用户</strong>、<strong>需求</strong>、<strong>系统功能单元</strong>&rdquo; 之间的关系, 它展示了一个外部用户能够观察到的系统功能模型, 也就是说, 它应该是从__用户__的角度来描述系统, 而非开发者.</p>
+<h1 id="_1">用例卡片</h1>
+<p>在用例图出现之前, 当需要去客户那讨论某些功能的需求时, 常常会带上一堆的 &ldquo;卡片&rdquo;, 每张卡片上都是一张__用例表单__, 讨论过程中按照客户的要求填写这个表单, 等讨论结束, 就按这个表单的内容进行开发, 这个记录了需求表单的卡片, 就叫它 &ldquo;<strong>用例卡片</strong>&rdquo;, 下面是一个__登录功能__的用例卡片.</p>
+<p><img alt="用例图" src="http://i63.tinypic.com/2u53yvb.jpg" /></p>
+<p>通过这张卡片, 可以总结出一些__用例要素__:</p>
+<ul>
+<li>参与者<ul>
+<li>包括使用者、系统用户和其它交互的系统</li>
+</ul>
+</li>
+<li>前置条件</li>
+<li>场景中的步骤<ul>
+<li>事件流</li>
+</ul>
+</li>
+<li>后置条件</li>
+</ul>
+<h1 id="staruml">StarUML 用例图</h1>
+<p>打开 StarUML, 选择 <strong>Rational Approach</strong>.</p>
+<p>StarUML 界面右侧的 <strong>Model Explorer</strong> 中 &lt;&lt;<strong>use case view</strong>>> 就是用例图 view, 我们要添加用例图, 就要在这个 view 下添加.</p>
+<p>&lt;&lt;<strong>use case view</strong>>> 自带了一个 <strong>Main</strong> 用例图, 点击下 &lt;&lt;<strong>use case view</strong>>> 下的 Main, 在StarUML 界面左侧, 就打开了用例图工具栏.</p>
+<p><img alt="" src="http://i66.tinypic.com/9uwxo1.jpg" /></p>
+<table>
+<thead>
+<tr>
+<th>StarUML</th>
+<th>翻译</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Package</td>
+<td>包</td>
+<td>分类、模块、子模块<br>类比文件夹的功能</td>
+</tr>
+<tr>
+<td>UseCase</td>
+<td>用例</td>
+<td>描述一个用户的具体动作<br>要求是__动宾短语__</td>
+</tr>
+<tr>
+<td>Actor</td>
+<td>角色</td>
+<td>执行者<br>包括用户、后台系统员或者其他系统</td>
+</tr>
+<tr>
+<td>Association</td>
+<td>关联</td>
+<td>表示参与者与用例之间可以通信</td>
+</tr>
+<tr>
+<td>DirecteAssociation</td>
+<td>定向关联</td>
+<td>也表示参与者与用例之间可以通信, 但是用箭头表示通信方向<br>__箭头__指向消息接收方</td>
+</tr>
+<tr>
+<td>Generalization</td>
+<td>泛化</td>
+<td>继承关系<br>子用例和父用例相似, 但表现出更特别的行为<br>子用例将继承父用例的所有结构、行为和关系<br>__箭头__指向父用例</td>
+</tr>
+<tr>
+<td>Dependency</td>
+<td>依赖</td>
+<td>源用例依赖于目标用例<br>如冰箱依赖插头, 去食堂吃饭依赖于有餐卡<br>__箭头__指向目标用例</td>
+</tr>
+<tr>
+<td>Include</td>
+<td>包含</td>
+<td>用来把一个较复杂用例所表示的功能进行分解<br>包含属于依赖的一种<br>__箭头__指向分解出来的子用例</td>
+</tr>
+<tr>
+<td>Extend</td>
+<td>扩展</td>
+<td>指用例功能的延伸<br>相当于在__一定条件下__为基础用例提供一个附加功能<br>如, 只有在书籍丢失用例成立的情况下才会触发补偿用例<br>__箭头__指向基础用例</td>
+</tr>
+<tr>
+<td>System Boundary</td>
+<td>系统边界</td>
+<td>用来把一些联系紧密的用例包含起来<br>一般认为被包含的用例共同完成某一功能<br>而边界外的用例则与这个功能无关</td>
+</tr>
+</tbody>
+</table>
+<p>Extend (扩展) 图样示例:</p>
+<p><img alt="" src="http://i63.tinypic.com/bdn036.jpg" /></p>
+<p>只有当 &ldquo;<strong>失书</strong>&rdquo; 的扩展点发生后, 才会触发补偿的用例.</p>
+<blockquote>
+<p>小技巧:<br>
+当发现线条不规整时, 可选中该线条, 按 <strong>Ctrl + L</strong> 来自动规整.</p>
+</blockquote>
+<p>对于每个图样, 可以在 StarUML __右下方__设置其属性:</p>
+<p><img alt="" src="http://i67.tinypic.com/2le6rnp.jpg" /></p>
+<p>对于用例图来说, 我们只关心它的 Name 和 Stereotype 属性, 后面的 Visibility、IsAbstract、Attributes、Operations 在画类图的时候才会有所体现.</p>
+<p>当然你也可以在 &lt;&lt;<strong>use case view</strong>>> 上右键选择新添加用例图:<br>
+&lt;&lt;<strong>use case view</strong>>> --> Add Diagram --> Use Case Diagram</p>
+<p><img alt="" src="http://i66.tinypic.com/2zp5n6h.jpg" /></p>
+<p>在 StarUML 左侧, 除了 UseCase 的工具栏外, 还有一个__注释__工具栏 (Annotation), 这个工具栏是所有 UML 图形通用的:</p>
+<table>
+<thead>
+<tr>
+<th>StarUML</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>文本</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>注释</td>
+</tr>
+<tr>
+<td>NoteLink</td>
+<td>注释连接线</td>
+</tr>
+<tr>
+<td>Rectangle</td>
+<td>矩形</td>
+</tr>
+<tr>
+<td>Elipse</td>
+<td>椭圆</td>
+</tr>
+<tr>
+<td>Rounded Rectangle</td>
+<td>圆角矩形</td>
+</tr>
+</tbody>
+</table>
+<p>这里我们常用的是 <strong>Note</strong> 和 <strong>NoteLink</strong>.</p>
+<blockquote>
+<p>小技巧:<br>
+当使用图形时, 可以在工具栏上设置图形的层次.<br>
+<img alt="" src="http://i63.tinypic.com/ipbcd1.jpg" /></p>
+</blockquote>
+<p><strong>关于删除</strong><br>
+如果你在 StarUML 画布上拖入某个图样, 那么直接在画布上删除仅仅是在画布上删除它, 它还是在右边的 Model Explorer 中, 必须要在 Model Explorer 中删除才是真的删除, 或者在画布上 Ctrl + Del 删除.</p>
+<p><strong>关于用例图设计</strong><br>
+通常情况下, 一个系统可能会被我们分为几个__模块__, 每个模块都完成独立的功能, 我们把这些模块用 <strong>Package</strong> 表示, 在 <strong>Main</strong> 视图下列出大纲, 然后在每个 <strong>Package</strong> 下画各自的 <strong>UseCase</strong>, 如下图所示:</p>
+<p><img alt="" src="http://i67.tinypic.com/2moa45i.jpg" /></p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>03、Go 工程</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/03-go-gong-cheng.html" rel="bookmark"
+        title="Permalink to 03、Go 工程">03、Go 工程</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-01-19T20:00:00+08:00">周二 19 一月 2016
+</h6>
+
+
+    <p>我们通过一个命令行版本的计算器程序来体验下如何用 LiteIDE 进行 Go 开发.</p>
+<p>打开 LiteIDE, 点击新建</p>
+<p><img alt="新建 calc" src="http://i66.tinypic.com/24vutn4.jpg" /></p>
+<p>在 main.go 中输入如下代码:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// clac project main.go</span>
+<span style="color: #AA22FF; font-weight: bold">package</span> main
+
+<span style="color: #AA22FF; font-weight: bold">import</span> (
+    <span style="color: #BB4444">&quot;fmt&quot;</span>
+    <span style="color: #BB4444">&quot;os&quot;</span>    <span style="color: #008800; font-style: italic">// 用来取命令行参数</span>
+    <span style="color: #BB4444">&quot;simplemath&quot;</span>    <span style="color: #008800; font-style: italic">// 我们自定义的包, 里面是 add 算法</span>
+    <span style="color: #BB4444">&quot;strconv&quot;</span>    <span style="color: #008800; font-style: italic">// 用来做字符串转换</span>
+)
+
+<span style="color: #AA22FF; font-weight: bold">var</span> Usage = <span style="color: #AA22FF; font-weight: bold">func</span>() {
+    fmt.Println(<span style="color: #BB4444">&quot;USAGE: calc command [arguments]...&quot;</span>)
+    fmt.Println(<span style="color: #BB4444">&quot;\nThe commands are:\n\tadd\tAddition of two values.&quot;</span>)
+}
+
+<span style="color: #AA22FF; font-weight: bold">func</span> main() {
+    args <span style="color: #666666">:=</span> os.Args    <span style="color: #008800; font-style: italic">// := 表示同时进行变量声明和初始化的工作</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> args <span style="color: #666666">==</span> <span style="color: #AA22FF; font-weight: bold">nil</span> <span style="color: #666666">||</span> <span style="color: #AA22FF">len</span>(args) &lt; <span style="color: #666666">3</span> {
+        Usage()
+        <span style="color: #AA22FF; font-weight: bold">return</span>
+    }
+
+    <span style="color: #AA22FF; font-weight: bold">switch</span> args[<span style="color: #666666">1</span>] {
+    <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&quot;add&quot;</span>:
+        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">len</span>(args) <span style="color: #666666">!=</span> <span style="color: #666666">4</span> {
+            fmt.Println(<span style="color: #BB4444">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
+            <span style="color: #AA22FF; font-weight: bold">return</span>
+        }
+        v1, err1 <span style="color: #666666">:=</span> strconv.Atoi(args[<span style="color: #666666">2</span>])
+        v2, err2 <span style="color: #666666">:=</span> strconv.Atoi(args[<span style="color: #666666">3</span>])
+        <span style="color: #AA22FF; font-weight: bold">if</span> err1 <span style="color: #666666">!=</span> <span style="color: #AA22FF; font-weight: bold">nil</span> <span style="color: #666666">||</span> err2 <span style="color: #666666">!=</span> <span style="color: #AA22FF; font-weight: bold">nil</span> {
+            fmt.Println(<span style="color: #BB4444">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
+            <span style="color: #AA22FF; font-weight: bold">return</span>
+        }
+        ret <span style="color: #666666">:=</span> simplemath.Add(v1, v2)
+        fmt.Println(<span style="color: #BB4444">&quot;Result: &quot;</span>, ret)
+    <span style="color: #AA22FF; font-weight: bold">default</span>:
+        Usage()
+    }
+}
+</pre></div>
+
+
+<p><br>
+然后, 在 src 目录下 (与 calc 目录同级) 新建个 <strong>simplemath</strong> 目录, 并新建个 add.go 文件:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">package</span> simplemath
+
+<span style="color: #AA22FF; font-weight: bold">func</span> Add(a <span style="color: #00BB00; font-weight: bold">int</span>, b <span style="color: #00BB00; font-weight: bold">int</span>) <span style="color: #00BB00; font-weight: bold">int</span> {
+    <span style="color: #AA22FF; font-weight: bold">return</span> a <span style="color: #666666">+</span> b
+}
+</pre></div>
+
+
+<p><br>
+此时的文件结构如下:</p>
+<p><img alt="文件结构" src="http://i68.tinypic.com/2r71y04.jpg" /></p>
+<p>点击 LiteIDE 工具栏上的 <strong>B</strong> 图标进行编译, 然后 calc 目录下就生成了一个 exe 可执行文件, 打开 cmd 测试下:</p>
+<p><img alt="命令行" src="http://i63.tinypic.com/2ztem21.jpg" /></p>
+<p>另外, LiteIDE 支持__单元测试__, 我们在写 simplemath 包时, 可以为 add 函数编写了对应的单元测试代码.</p>
+<p>再新建个 add_test.go 文件:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">package</span> simplemath
+
+<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #BB4444">&quot;testing&quot;</span>
+
+<span style="color: #AA22FF; font-weight: bold">func</span> TestAdd1(t <span style="color: #666666">*</span>testing.T) {
+    r <span style="color: #666666">:=</span> Add(<span style="color: #666666">1</span>, <span style="color: #666666">2</span>)
+    <span style="color: #AA22FF; font-weight: bold">if</span> r <span style="color: #666666">!=</span> <span style="color: #666666">3</span> {
+        t.Errorf(<span style="color: #BB4444">&quot;Add(1, 2) failed. Got %d, expected 3.&quot;</span>, r)
+    }
+}
+</pre></div>
+
+
+<p><br>
+点击 LiteIDE 工具栏上的 <strong>T</strong> 图标就能执行该测试单元了.</p>
+<p><img alt="测试单元" src="http://i65.tinypic.com/347fuz6.jpg" /></p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/golang.html">Golang</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

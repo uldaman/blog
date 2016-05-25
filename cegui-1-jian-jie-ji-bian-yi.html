@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[CEGUI]. 1、简介及编译'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/cegui-1-jian-jie-ji-bian-yi.html" rel="bookmark"
+        title="Permalink to '[CEGUI]. 1、简介及编译'">'[CEGUI]. 1、简介及编译'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-05-08T10:59:00+08:00">周五 08 五月 2015
+</h6>
+
+
+    <p>CEGUI 是一个自由免费的 GUI 库, 基于LGPL协议, 使用C++实现, 完全面向对象设计.
+CEGUI 开发者的目的是希望能够让游戏开发人员从繁琐的 GUI 实现细节中抽身出来, 以便有更多的开发时间可以放在游戏性上.
+CEGUI 的渲染需要 3D 图形 API 的支持，如 OpenGL 或 Direct3D, 另外, 使用更高级的图形库也是可以的, 比如OGRE、Irrlicht和RenderWare等.</p>
+<p><strong>编译:</strong>
+vs2013
+Directx 9.0
+cegui0.8.4
+cegui-deps-0.8.x-src
+cmake3.2.2</p>
+<p>在安装 CEGUI 前, 先要安装 vs2013 和 Directx 9.0 SDK. 然后在 CEGUI 官网下载 CEGUI 源码包(cegui-0.8.4) 以及 CEGUI 依赖库(cegui-deps-0.8.x-src). 接着再去下载 cmake.
+这里我已经都打包好了: <a href="http://yunpan.cn/cwdGnStFtvGum">http://yunpan.cn/cwdGnStFtvGum </a> 访问密码 d682</p>
+<p>下载好后, 解压 cegui0.8.4 和 cegui-deps-0.8.x-src 到安装目录, 我选的是 E 盘.
+接下来安装 cmake, 运行 camke, 拖动刚解压的 cegui-deps-0.8.x-src 文件夹下的 CMakeLists.txt 到 cmake 上.
+<img alt="" src="http://i59.tinypic.com/2lxgoiw.jpg" /></p>
+<p>点击 cmake 界面下的 Configure 按钮, 然后选择当前编译器版本 vs2013, 最后点击 Finish 按钮, 此时会开始加载 CMakeLists.txt 文件, 等它加载完毕.
+<img alt="" src="http://i62.tinypic.com/1127k8k.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/2ntciuw.jpg" /></p>
+<p>再次点击 cmake 界面下的 Configure 按钮, 等界面变白后, 再点击 Generate 按钮.
+<img alt="" src="http://i57.tinypic.com/n5pmya.jpg" /></p>
+<p>此时, 会在工程建立路径下生成 CEGUI-DEPS.sln, 打开后右键解决方案 –&gt; 批生成 –&gt; ALL_BUILD Debug|Win32  + ALL_BUILD Release|Win32 对依赖库进行编译.
+<img alt="" src="http://i59.tinypic.com/a08fb4.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/16kyqyu.jpg" /></p>
+<p>编译完成之后在 cegui-deps-0.8.x-src 文件夹下会出现 dependencies 文件夹, 将该文件夹移动到之前解压的 cegui-0.8.4 文件夹中, 然后这个 cegui-deps-0.8.x-src 文件夹就可以删掉了, 没啥用的样子.</p>
+<p>接下来采用相同步骤对 cegui-0.8.4 进行编译, 此时需要手动设置 CEGUI的XML 解析器，即将 CEGUI_BUILD_XMLPARSER_EXPAT 设为 checked, 其他属性设置默认即可满足要求, 如下图:
+<img alt="" src="http://i61.tinypic.com/8xikc3.jpg" /></p>
+<p>Congigure 完成之后 Generate, 生成 cegui.sln 文件, 打开 cegui.sln.
+右键 ALL_BUILD, 选择[属性], 选择[VC++目录], 设置[包含目录][库目录]为 dependencies 文件夹下的 include 和 lib 文件夹.
+然后右键解决方案 –&gt; 批生成 –&gt; ALL_BUILD Debug|Win32  + ALL_BUILD Release|Win32 进行编译.
+<img alt="" src="http://i61.tinypic.com/ifobiq.jpg" /></p>
+<p>初次编译会报错.</p>
+<p><img alt="" src="http://i59.tinypic.com/2nsvqr9.jpg" /></p>
+<p>点击错误</p>
+<p>定位到 Sample_FontDemo.cpp 文件
+第133行：
+将(encoded_char<em>)&rdquo;+ - ? B I W Y f n t ℹ ⇦ ⇧ ⇨ ⇩ ⌘ ☎ ☐ ☑ ⚖ ⚙ ⚠ ⛏ ✎ ✑ ✓ ✔ ✕ ✖ ❝ ❞ ➡ ⬀ ⬁ ⬂ ⬃ ⬅ ⬆ ⬇ ⬈ ⬉ ⬊ ⬋                    &rdquo;
+修改为(encoded_char</em>)&rdquo;+111111111111111111111111&rdquo;
+第147行：
+将每个 &ldquo;⬀ &rdquo; 修改为&rdquo;1&rdquo;</p>
+<p>定位到GameMenu.cpp文件
+第691行：
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)
+第717行：
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)
+第749行：
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)</p>
+<p>重新进行编译, 完成之后在 cegui-0.8.4 文件夹的 bin 文件夹下找到 CEGUISampleFramework-0.8.exe, 双击打开.
+这时, 它会报个错:
+<img alt="" src="http://i61.tinypic.com/e9b66f.jpg" /></p>
+<p>我们将 dependencies 文件夹的 bin 文件夹里的文件全部复制一份到 cegui-0.8.4 文件夹的 bin 文件夹下, 再重新打开 CEGUISampleFramework-0.8.exe.
+<img alt="" src="http://i61.tinypic.com/hsne38.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/2gy2dqc.jpg" />
+?</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

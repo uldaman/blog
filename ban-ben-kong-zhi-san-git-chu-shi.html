@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[版本控制] 三、Git 初識'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/ban-ben-kong-zhi-san-git-chu-shi.html" rel="bookmark"
+        title="Permalink to '[版本控制] 三、Git 初識'">'[版本控制] 三、Git 初識'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-18T18:20:00+08:00">周四 18 六月 2015
+</h6>
+
+
+    <p>首先推薦一個在線 Gti 學習網站: <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">傳送門</a></p>
+<p>另外, 还有个 Google Code 的声明也可以看看: <a href="http://www.infoq.com/cn/news/2015/03/goodbye-google-code-hello-github">再見, Google Code, 你好, GitHub</a></p>
+<p>還提供一個 Git Book 的中文 PDF: <a href="http://yunpan.cn/cQF9zES6Zt5d5">http://yunpan.cn/cQF9zES6Zt5d5</a>  访问密码 7e81</p>
+<hr />
+<p><img alt="" src="http://i59.tinypic.com/2hd0d40.jpg" /></p>
+<p>Git 的開發流程大概如上圖, Git 非常鼓勵大家使用分支來工作.</p>
+<p><strong>Git 的特點:</strong>
+<em>. Git 的版本控制都是通過快照的形式(磁盤快照), 而不是記錄文件變化.
+</em>. 幾乎所有的操作都是本地的, 只有當所有的倉庫需要合併的時候再聯上網.
+*. Git 文件狀態的生命週期示意圖:
+<img alt="" src="http://i59.tinypic.com/21c5hsj.jpg" /></p>
+<hr />
+<p>Git 環境變量
+Git 安裝目錄下有個 etc 目錄, 裡面有個 gitconfig 文件, 它保存的就是 Git 的配置信息, 包括環境變量.</p>
+<p>可以通過一些命令來操作 Git 配置, 如: 設置身份
+$ git config &ndash;global user.name “xx”
+$ git config &ndash;global user.email xxxx.xxx
+其他的命令可以使用 $ git config &ndash;help 自行搜索.</p>
+<hr />
+<p>Git 中的一些基本概念
+Blessed(Remote) repostory: 遠程倉庫
+local repostory: 本地倉庫
+stage area: 臨時區(相當於 SVN 中的 Add 那種, 但是也有很大的區別, SVN 是新添加的文件需要 Add, 而 Git 中, 任何文件, 包括新文件和修改的, 都需要先提交的臨時區, 再提交到本地庫.)
+workspace: 工作區
+??</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

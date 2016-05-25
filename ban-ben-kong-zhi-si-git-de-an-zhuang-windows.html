@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[版本控制] 四、Git 的安裝(Windows)'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/ban-ben-kong-zhi-si-git-de-an-zhuang-windows.html" rel="bookmark"
+        title="Permalink to '[版本控制] 四、Git 的安裝(Windows)'">'[版本控制] 四、Git 的安裝(Windows)'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-19T19:40:00+08:00">周五 19 六月 2015
+</h6>
+
+
+    <p>最早 Git 是在 Linux 上开发的, 很长一段时间内, Git 也只能在 Linux 和 Unix 系统上跑, 不过, 慢慢地有人把它移植到了 Windows 上, 现在, Git 可以在 Linux、Unix、Mac 和 Windows 这几大平台上正常运行了.
+要使用 Git, 第一步当然是安装Git了, 這裡以 Windows 為例(Why? 因為本屌暫時使用的就是 Windows, 其它系統安裝參考: <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000">傳送門</a>).</p>
+<p>首先, 先去下載 Windows 下 Git 安裝包 msysgit(<a href="http://msysgit.github.io/">傳送門</a>), 或者可以自行 google Git.</p>
+<p>安裝好後, 運行『Git Bash』, 它是一個類似命令行的窗口, 這是一個 Windows 下模擬的 Linux 環境, 在這個窗口裡可以使用 Linux 的命令.
+<img alt="" src="http://i60.tinypic.com/11sfnt0.jpg" /></p>
+<p>安裝完成後, 還需要設置下本機使用的 Git 賬戶(用戶名和密碼).
+這個賬戶是給服務器看的, 因為 Git 是分佈式版本控制系統, 每台電腦都可以 Push 補丁到服務器, 所以服務要就需要知道是誰進行了提交, 這裡的誰就是上面設置的賬戶.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">$ git config --global user.name &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Your Name&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+$ git config &lt;/span&gt;--global user.email &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;email@example.com&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
+</pre></div>
+
+
+<p>『global』即全局, 這個參數表示這台機器上所有的 Git 倉庫都會使用這個配置.</p>
+<p>你還可以通過『git config &ndash;list』來查看當前的 config 配置.</p>
+<hr />
+<p>最後, 我們來安裝一下 TortoiseGit, 這和 TortoiseSVN 一樣, 是一個 Git 圖形化操作工具.</p>
+<p>先安装 msysgit, 然后安装 TortoiseGit, 因为 TortoiseGit 需要使用到 msysgit 提供的 Git 核心, 如果你弄反了, 也没有关系, 可以进入 TortoiseGit 的设置界面(右键菜单上 TortoiseGit -&gt; Settings -&gt; General -&gt; MSysGit –&gt; Path), 手动指定 Git 核心文件的位置.</p>
+<p>如果使用 GitHub 的話, 那還有比 TortoiseGit 更好的先擇, 那就是 GitHub for windows.
+? ?</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[版本控制] 六、分支管理'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/ban-ben-kong-zhi-liu-fen-zhi-guan-li.html" rel="bookmark"
+        title="Permalink to '[版本控制] 六、分支管理'">'[版本控制] 六、分支管理'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-20T12:17:00+08:00">周六 20 六月 2015
+</h6>
+
+
+    <p>『git branch 』查看當前分支</p>
+<p>『git branch xx』建立分支</p>
+<p>『git checkout xx』切換分支</p>
+<p>『<code>git checkout』</code>命令加上 –b 参数表示创建并切换, 相当于 branch + checkout.</p>
+<p>『git show-branch』查看當前分支和主分支的差異, 這裡要稍微說明一下.
+<img alt="" src="http://i57.tinypic.com/9zytf7.jpg" />
+输出分为上下两部分, 使用短划线&rdquo;&ndash;&ldquo;分隔, 如果是三個分支則是&rdquo;&mdash;&ldquo;, 以此類推, 這張圖是二個分支, 所以是&rdquo;—&rdquo;.
+&ndash; 上面的部分用于显示分支列表, * 代表當前分支, 而 ! 則代表其它分支. 後面 [ ] 裡是分支名, 再接下來是最新的 commit 信息.
+&ndash; 下面的部分是詳細的 commit 歷史列表, * 表示後面的 [分支(当前分支)] 有此 commit, 而 + 表示後面的 [分支(非当前分支)] 有此commit, 還有可能出現 -, - 表示所在分支是经过 merge 得到的(- 在最新的 Git 中好像沒有了).</p>
+<p>『git merge HEAD xx』把 xx 分支的最新版本合併到當前分支.
+『git checkout xx』+ 『git pull . yy』也可以把 yy 分支合併到 xx 分支.
+合併的時候可能會出現衝突(多數情況是多人修改了同一份文件), 此時需要我們來解決衝突, 參考 <a href="http://gitbook.liuhui998.com/3_3.html">分支與合併@基礎</a>.</p>
+<p>『<code>git branch -d xx』刪除分支</code></p>
+<p><strong>Git 创建、合并和删除分支非常快, 所以 Git 所鼓励的工作方式是: 通過使用分支完成日常任务, 合并后再删掉分支.</strong>
+???</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

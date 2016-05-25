@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>5、QT 中文乱码</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/5-qt-zhong-wen-luan-ma.html" rel="bookmark"
+        title="Permalink to 5、QT 中文乱码">5、QT 中文乱码</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-15T14:13:00+08:00">周日 15 二月 2015
+</h6>
+
+
+    <p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
+<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">QTextCodec::setCodecForTr(...)
+QTextCodec::setCodecForCStrings(...)
+QTextCodec::setCodecForLocale(...)
+
+
+
+然后这三句代码是有安全隐患的, 下面的文章都有说明:
+</pre></div>
+
+
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
+<p>但是在 Qt5 之后, 移除了 setCodecForTr 函数, 之前的 setCodecxxx 各种副作用都不再存在, 而且中文问题更为简单:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">QString s1 = QStringLiteral(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;中文&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+QString s2 &lt;/span&gt;= QString::fromWCharArray(L&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;中文&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;);
+</pre></div>
+
+
+<p>这两种写法都是可以的.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;a href=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image25.png&quot;&gt;&lt;img src=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb25.png&quot; style=&quot;background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&quot; title=&quot;image&quot; height=&quot;342&quot; width=&quot;502&quot; alt=&quot;image&quot; border=&quot;0&quot;&gt;&lt;/a&gt;
+
+
+
+因为在 VS 中鼓励大家使用 TEXT/_T 宏而不用L, 所以 QStringLiteral 用的相对要多点.
+</pre></div>
+
+
+<p>关于 Qt 中文的问题, 可参考下面两篇文章:</p>
+<p><a href="http://www.tuicool.com/articles/6nUrIr">zz 解释QStringLiteral</a></p>
+<p><a href="http://blog.csdn.net/dbzhang800/article/details/7542672">QString 乱谈(3)-Qt5与中文</a>
+es0</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

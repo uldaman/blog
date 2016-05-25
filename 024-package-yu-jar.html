@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>024、package 与 jar</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/024-package-yu-jar.html" rel="bookmark"
+        title="Permalink to 024、package 与 jar">024、package 与 jar</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-15T22:34:00+08:00">周二 15 三月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#1-package">1. 导出 package</a></li>
+<li><a href="#2-package">2. 导入 package</a></li>
+<li><a href="#3">3. 权限总结</a></li>
+<li><a href="#4-cp">4. -cp 参数</a></li>
+<li><a href="#5-jar">5. JAR 包</a></li>
+</ul>
+</div>
+<h2 id="1-package">1. 导出 package</h2>
+<p>包, 即软件包, 可以理解成文件夹.</p>
+<p>使用关键字 <strong>package 包名</strong> 来使用, 如: package test;</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// Test.java</span>
+<span style="color: #AA22FF; font-weight: bold">package</span> <span style="color: #0000FF; font-weight: bold">com.test</span><span style="color: #666666">;</span>
+
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Test</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">// . . .</span>
+<span style="color: #666666">}</span>
+</pre></div>
+
+
+<p>编译方法:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">javac -d . Test.java // 点代表当前目录
+</pre></div>
+
+
+<p><strong>-d</strong> 参数:<br>
+该参数的作用是依照包名在指定目录下生成相应的文件夹, 并把生成的目标文件放在该文件夹下.</p>
+<p>打包后, 就在当前目录下生成了一个目录树: <strong>./com/test/Test.class</strong>, 同时这个类的命名为 <strong>&ldquo;包名&rdquo;＋&rdquo; . &ldquo;＋&rdquo;类名&rdquo;</strong>, 即: com.test.Test, 也就是说, 使用 java 命令执行时, 要写成:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">java com.test.Test
+</pre></div>
+
+
+<p>在非导入的情况下, 调用类的原则如下:(导入的情况见下面一节)</p>
+<ul>
+<li>如果两个类在同一个包，调用的时候不需要写全名;</li>
+<li>如果两个类不在一个包，调用的时候需要写全名;</li>
+</ul>
+<p><strong>包命名规范:</strong></p>
+<ul>
+<li>所有字母小写</li>
+<li>域名倒过来写，如：com.baidu</li>
+</ul>
+<h2 id="2-package">2. 导入 package</h2>
+<p>刚已经知道, 当跨包使用一个类的时候, 要写类的全名，如此太麻烦，可以通过导入包的方法来一次性解决，不再需要写类的全名，就像是在同一个包内一样.</p>
+<p>使用 <strong>import</strong> 关键字，如: import com.test.Test</p>
+<p>导入后，在被导入的类中使用导入的类不需要再写全名.</p>
+<h2 id="3">3. 权限总结</h2>
+<p><img alt="权限总结" src="http://i61.tinypic.com/5p52lf.jpg" /></p>
+<h2 id="4-cp">4. -cp 参数</h2>
+<p>当我们实际开发时, 常常会建立 <strong>classes、src、lib</strong> 三个文件夹来建立文件管理.</p>
+<ul>
+<li>classes, class 目录, 我们编译 *.java 文件生成的 *.class 文件都放在这里</li>
+<li>src, 源文件目录, 即我们的 *.java 文件</li>
+<li>lib, jar 包都放这里</li>
+</ul>
+<p>当在 src 文件夹下写好源代码后, 通过 <strong>-d</strong> 参数指定生成的 *.class 文件放在 classes 目录下, 通过 <strong>-cp(ClassPath)</strong> 参数指定依赖库目录, -cp 可以除了指定目录外还可以指定 jar 包.</p>
+<p>如, 现在把刚才的 Test.java 放到 src 目录, 然后重新生成 *.class 文件.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">javac -cp classes/;lib/xxx.jar; -d classes/ src/Test.java
+</pre></div>
+
+
+<h2 id="5-jar">5. JAR 包</h2>
+<p>参考网文: <a href="http://blog.chinaunix.net/uid-692788-id-2681136.html">http://blog.chinaunix.net/uid-692788-id-2681136.html</a></p>
+<p>JAR 包是 Java 中所特有一种压缩文档, 它是由 JDK ~\bin\jar.exe 命令生成, 该命令将指定目录下的 package 压缩成 jar 包, 其实就可以把它理解为 .zip 包, 当然也是有区别的, JAR 包中有一个 META-INF\MANIFEST.MF 文件, 当你生成 JAR 包时, 它会自动生成.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">C:\Users\Administrator\Desktop&gt;jar
+用法: jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...
+选项:
+    -c  创建新档案
+    -t  列出档案目录
+    -x  从档案中提取指定的 (或所有) 文件
+    -u  更新现有档案
+    -v  在标准输出中生成详细输出
+    -f  指定档案文件名
+    -m  包含指定清单文件中的清单信息
+    -n  创建新档案后执行 Pack200 规范化
+    -e  为捆绑到可执行 jar 文件的独立应用程序指定应用程序入口点
+    -0  仅存储; 不使用任何 ZIP 压缩
+    -P  保留文件名中的前导 &#39;/&#39; (绝对路径) 和 &quot;..&quot; (父目录) 组件
+    -M  不创建条目的清单文件
+    -i  为指定的 jar 文件生成索引信息
+    -C  更改为指定的目录并包含以下文件
+如果任何文件为目录, 则对其进行递归处理。
+清单文件名, 档案文件名和入口点名称的指定顺序
+与 &#39;m&#39;, &#39;f&#39; 和 &#39;e&#39; 标记的指定顺序相同。
+
+示例 1: 将两个类文件归档到一个名为 classes.jar 的档案中:
+       jar cvf classes.jar Foo.class Bar.class
+示例 2: 使用现有的清单文件 &#39;mymanifest&#39; 并
+           将 foo/ 目录中的所有文件归档到 &#39;classes.jar&#39; 中:
+       jar cvfm classes.jar mymanifest -C foo/ .
+</pre></div>
+
+
+<p>根据上一节所说, 我们的 class 文件都在 classes 目录下, jar 目录生成在 lib 目录下, 所以:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">jar cvf lib/test.jar -C classes/ . (&lt;=注意这个点, 这个点是必须的, 而且前面有个空格)
+</pre></div>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

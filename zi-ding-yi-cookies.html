@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>自定义 cookies</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/zi-ding-yi-cookies.html" rel="bookmark"
+        title="Permalink to 自定义 cookies">自定义 cookies</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-09-14T03:56:00+08:00">周一 14 九月 2015
+</h6>
+
+
+    <p>Django cookies 操作
+设置: response.set_cookie(key, value)
+获取 request.COOKIES.get(key, default)</p>
+<p>HTML cookies 操作
+需要引用 jquery.js 和 jquery.cookies.js 两个文件
+设置: $.cookie(key, value, path), 如: $.cookie(‘pager_num’, 10, { path:&rsquo;/’})
+获取: $.cookie(key)</p>
+<p>cookies 一般要 server 端和 ui 端配合展示, 例如, 可以在 html 中设置 cookie, 然后在 django 中获取、判断、使用, 也可以在 django 中设置, 然后在 html 中获取、判断、使用.</p>
+<p><strong>上案例:</strong></p>
+<p>Django 端:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):
+    loginDict &lt;/span&gt;= request.session.get(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;is_login&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, None)
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; loginDict :
+        currentPage &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; int(p)
+        nPage &lt;/span&gt;= int(request.COOKIES.get(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;page_num&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, 5)) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 当前设置的显示多少条&lt;/span&gt;
+        start = nPage * (currentPage - 1&lt;span style=&quot;color: #000000&quot;&gt;)
+        end &lt;/span&gt;= nPage *&lt;span style=&quot;color: #000000&quot;&gt; currentPage
+        itemList &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; Asset.objects.all()[start : end]
+
+        nMaxCount &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; Asset.objects.all().count()
+        nPages &lt;/span&gt;= (nMaxCount + nPage -1)//&lt;span style=&quot;color: #000000&quot;&gt; nPage
+        pageList &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; []
+
+
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; currentPage &gt; 1&lt;span style=&quot;color: #000000&quot;&gt;:
+            pre_herf &lt;/span&gt;= &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&lt;a href=&quot;/web/all/%d&quot;&gt;上一页&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt; % (currentPage - 1&lt;span style=&quot;color: #000000&quot;&gt;)
+            pageList.append(mark_safe(pre_herf))
+
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; x &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; range(1,nPages + 1&lt;span style=&quot;color: #000000&quot;&gt;):
+            herf &lt;/span&gt;= &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&lt;a href=&quot;/web/all/%d&quot;&gt;%d&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt; %&lt;span style=&quot;color: #000000&quot;&gt; (x, x)
+            pageList.append(mark_safe(herf))
+
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; currentPage &lt;&lt;span style=&quot;color: #000000&quot;&gt; nPages:
+            next_herf &lt;/span&gt;= &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&lt;a href=&quot;/web/all/%d&quot;&gt;下一页&lt;/a&gt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt; % (currentPage + 1&lt;span style=&quot;color: #000000&quot;&gt;)
+            pageList.append(mark_safe(next_herf))
+
+        result &lt;/span&gt;= render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+                                    {&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;data&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:itemList,
+                                     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;count&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:nMaxCount,
+                                     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;pages&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:nPages,
+                                     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;pageList&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:pageList,
+                                     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;user&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:loginDict[&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;user&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;]})
+        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; result.set_cookie(&#39;page_num&#39;, nPages) # 设置 cookie&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; result
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; redirect(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;/web/login&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;)
+</pre></div>
+
+
+<p>HTML 端:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;meta &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;charset&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;UTF-8&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;你好&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        用户: {{user}}
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;table &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;border&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;1px&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+            {% for item in data %}
+                &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;tr&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{item.id}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{item.hostName}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;tr&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+            {% endfor %}
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;table&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        总条数: {{count}}
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        总页: {{pages}}
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;select &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;id&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;s1&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; onchange&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;OnChange(this);&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+            &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;value &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;5&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;5&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+            &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;value &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;10&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;10&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+            &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;value&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;15&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;15&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;option&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;select&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;br&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;/&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        {% for item in pageList %}
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;span&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{item}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;span&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        {% endfor %}
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;src&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;/static/jquery-1.11.3.js&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;src&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;/static/jquery.cookie.js&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text/javascript&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;
+        $(&lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;() {
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;var&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; nPage &lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; $.cookie(&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;page_num&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;);
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; (nPage) {
+                $(&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;#s1&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;).val(nPage);
+            } &lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; {
+
+            }
+        })();
+
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; OnChange(arg) {
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff; background-color: #f5f5f5&quot;&gt;var&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; nPage &lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;=&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; $(arg).val();
+            $.cookie(&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;page_num&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;, nPage, { path : &lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;/&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt; });
+        }
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+</pre></div>
+
+
+<p>   </p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

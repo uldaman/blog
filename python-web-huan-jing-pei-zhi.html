@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>python web 环境配置</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/python-web-huan-jing-pei-zhi.html" rel="bookmark"
+        title="Permalink to python web 环境配置">python web 环境配置</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-09-03T16:05:00+08:00">周四 03 九月 2015
+</h6>
+
+
+    <p>MVC &ndash; M 是指业务模型, V 是指用户界面, C 则是控制器.</p>
+<p>MVC 模式同时提供了对 HTML、CSS 和 JavaScript 的完全控制.</p>
+<p>Model（模型）是应用程序中用于处理应用程序数据逻辑的部分, 通常模型对象负责在数据库中存取数据.</p>
+<p>View（视图）是应用程序中处理数据显示的部分, 通常视图是依据模型数据创建的(简单说就是前端).</p>
+<p>Controller（控制器）是应用程序中处理用户交互的部分, 通常控制器负责从视图读取数据, 控制用户输入, 并向模型发送数据.</p>
+<p>因为 &ldquo;C&rdquo; 是 Django 框架本身处理而导致 Django 大部分精彩的东西在于模型, 模板和视图
+所以 Django 被称位 MTV 框架:
+M, 代表模型, 是数据访问层, 它包含了关于数据的一切东西, 怎样得到数据, 怎样验证数据, 它具有什么行为以及数据之间的关系.
+T, 代表模板, 是展现层, 它包含了呈现相关的决策, 如内容怎样在Web页面中显示以及其它类型的文档.
+V, 代表视图, 是业务逻辑层, 它包含了访问模型的逻辑和选择合适的模板.
+你可以认为视图是模型和模板的桥梁, 如果对 MVC 框架熟悉, 可以把 Django 的 view 想象成 &ldquo;controllers&rdquo; ,
+把 Django 的 template 想象成 &ldquo;views&rdquo; , 这是对 MVC 的不同解释造成的不幸的混乱.</p>
+<p><strong>Django 的安装</strong></p>
+<p>使用<strong> </strong>`pip install Django 就能直接安装, 当然也可以下载安装包, 安装好后, 进入 Python 环境:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; django
+django.VERSION&lt;/span&gt;
+</pre></div>
+
+
+<p>就能知道有没有安装成功了&hellip;`</p>
+<p><strong>创建 Django 程序</strong></p>
+<p>使用命令行创建</p>
+<p>先进入目标文件夹, 如桌面:
+<img alt="" src="http://i57.tinypic.com/zkki11.jpg" /></p>
+<p>然后使用 <strong>django-admin startproject</strong> <strong>项目名</strong> 来新建项目(前提是 django-admin.exe 已经被安装到 Python Scripts 目录下, 并且 Scripts 目录被添加到环境变量).
+<img alt="" src="http://i60.tinypic.com/ifn22u.jpg" /></p>
+<p>该项目自带一个简单的单请求 web server, 使用 <strong>python manage.py runserver</strong> 就能运行起这个 web server, 当然这个 web server 不能应用于生产环境, 还需要我们修改.
+<strong>runserver</strong> 后还能跟端口做为参数;
+它还有一个常用的参数 <strong>&ndash;noreload</strong>, 它表示如果服务运行时, 改变了 .py 文件, 服务不会重新加载(只能重启服务), 如果不加这个参数, 那么服务会重新加载 .py 文件. 这个参数主要是用来供<strong> WingIDE 调试 Django </strong>程序的(在后面还有说明).</p>
+<p>打开 WingIDE, 在右侧添加刚新建的项目:
+<img alt="" src="http://i61.tinypic.com/slmx4x.jpg" /></p>
+<p>接下来, 菜单栏会多出 Django 一项, 点击选择 [Configure Project for Django].<img alt="" src="http://i61.tinypic.com/29efwjb.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/2wehxzt.jpg" /></p>
+<p>调试时, 点击运行, 然后填写命令行参数就能调试 Django 程序了.<img alt="" src="http://i62.tinypic.com/i2m06s.jpg" /></p>
+<p>但是这样, 会存在一个问题, 就是调试时, WingIDE 会启动一个新的 Ptyhon 进程来做为服务器, 当我们停止调试时, 并不能关掉这个新创建的进程, 加上 <strong>&ndash;noreload</strong> 能解决这个问题, 这个参数将父进程直接作为 Http Server 来运行.
+)0_</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>17、通用对话框之 QFileDialog</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html" rel="bookmark"
+        title="Permalink to 17、通用对话框之 QFileDialog">17、通用对话框之 QFileDialog</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-05-26T08:25:00+08:00">周二 26 五月 2015
+</h6>
+
+
+    <blockquote>
+<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p>实现代码如下:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Open File&quot;</span>, <span style="color: #AA22FF">NULL</span>, <span style="color: #BB4444">&quot;file (*.*)&quot;</span>);
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file.setFileName(fileName);
+        <span style="color: #AA22FF; font-weight: bold">if</span> (file.open(QIODevice<span style="color: #666666">::</span>ReadWrite)) {
+            QTextStream in(<span style="color: #666666">&amp;</span>file);
+            ui.textEdit<span style="color: #666666">-&gt;</span>setText(in.readAll());
+            file.close();
+        }
+    }
+}
+
+<span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>SaveFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getSaveFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Save File&quot;</span>, <span style="color: #BB4444">&quot;Untitled.txt&quot;</span>);
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file.setFileName(fileName);
+        <span style="color: #AA22FF; font-weight: bold">if</span> (file.open(QIODevice<span style="color: #666666">::</span>ReadWrite)) {
+            QTextStream out(<span style="color: #666666">&amp;</span>file);
+            out <span style="color: #666666">&lt;&lt;</span> ui.textEdit<span style="color: #666666">-&gt;</span>toPlainText(); <span style="color: #008800; font-style: italic">//取纯文本</span>
+            file.close();
+        }
+    }
+}
+</pre></div>
+
+
+<p><br>
+这两个函数中分别使用了 QFileDialog 的两个静态函数: getOpenFileName() 和 getSaveFileName();</p>
+<p>先来看下 getOpenFileName() , 这个函数获取需要打开的文件的全路径.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">QString getOpenFileName(QWidget <span style="color: #666666">*</span> parent <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> caption <span style="color: #666666">=</span> QString(),
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> dir <span style="color: #666666">=</span> QString(),
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> filter <span style="color: #666666">=</span> QString(),
+                        QString <span style="color: #666666">*</span> selectedFilter <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
+                        Options options <span style="color: #666666">=</span> <span style="color: #666666">0</span>)
+</pre></div>
+
+
+<p><br></p>
+<ul>
+<li>parent: 父窗口.</li>
+<li>caption: 对话框标题;</li>
+<li>dir: 对话框打开时的默认目录, &ldquo;.&rdquo; 代表程序运行目录, &ldquo;/&rdquo; 代表当前盘符的根目录(特指 Windows 平台; Linux 平台当然就是根目录), 这个参数也可以是平台相关的, 比如&rdquo;C:\&ldquo;等;</li>
+<li>filter: 过滤器. 我们使用文件对话框可以浏览很多类型的文件, 但是, 很多时候我们仅希望打开特定类型的文件. 比如, 文本编辑器希望打开文本文件, 图片浏览器希望打开图片文件. 过滤器就是用于过滤特定的后缀名. 如果我们使用&rdquo;Image Files(<em>.jpg </em>.png)&rdquo;, 则只能显示后缀名是 jpg 或者 png 的文件. 如果需要多个过滤器, 使用&rdquo;;;&rdquo;分割, 比如&rdquo;JPEG Files(<em>.jpg);;PNG Files(</em>.png)&rdquo;;</li>
+<li>selectedFilter: 默认选择的过滤器;</li>
+<li>options: 对话框的一些参数设定, 比如只显示文件夹等等, 它的取值是enum QFileDialog::Option, 每个选项可以使用 | 运算组合起来.</li>
+<li>Qt_Notepad::OpenFile() 函数中我们先获取了文件的全路径, 然后判断下是否获取到了, 如果成功获取了文件路径, 就创建一个 QFile 对象,  然后将用户选择的文件路径传递给这个对象, 接下来使用 QFile::open() 打开文件, 参数是以何种方式打开. 打开成功则返回 true, 由此继续进行下面的操作, 使用 QTextStream::readAll() 读取文件所有内容, 然后将其赋值给 QTextEdit 显示出来. 最后不要忘记关闭文件.</li>
+<li>Qt_Notepad::SaveFile() 函数也类似, 只不过最后一步, 我们使用 &lt;&lt; 重定向, 将 QTextEdit 的内容输出到一个文件中. 关于文件操作, 我们会在后面的学习.</li>
+</ul>
+<p>完整源码: <a href="http://yunpan.cn/cwdG4VIJd8c5V">http://yunpan.cn/cwdG4VIJd8c5V</a>  访问密码 13dc</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

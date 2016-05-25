@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Python 高级特性之定制类</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/python-gao-ji-te-xing-zhi-ding-zhi-lei.html" rel="bookmark"
+        title="Permalink to Python 高级特性之定制类">Python 高级特性之定制类</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-29T14:00:00+08:00">周二 29 三月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#slots">slots (限制动态属性)</a></li>
+<li><a href="#property-gettersetter">property (神奇的 getter/setter)</a></li>
+<li><a href="#str-repr">str 与 repr (打印类)</a></li>
+<li><a href="#iter">iter (遍历类)</a></li>
+<li><a href="#call">call (实例自调用)</a></li>
+<li><a href="#getattr">getattr (动态生成属性)</a></li>
+<li><a href="#getitemsetitemdelitem">getitem、setitem、delitem</a></li>
+</ul>
+</div>
+<p>在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!<br>
+在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!<br>
+在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!</p>
+<h1 id="slots">slots (限制动态属性)</h1>
+<p>作为一种动态语言, python 支持 在类实例化后, 为实例动态添加属性/方法的功能.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+    <span style="color: #AA22FF; font-weight: bold">pass</span>
+
+s <span style="color: #666666">=</span> Student()
+s<span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;Michael&#39;</span> <span style="color: #008800; font-style: italic"># 动态给实例绑定一个属性</span>
+<span style="color: #AA22FF; font-weight: bold">print</span> s<span style="color: #666666">.</span>name
+</pre></div>
+
+
+<p>然而在某些情况下, 我们可能并不希望这样用, 此时, 可以通过类的 <strong>__slots__</strong> 变量, 来限制上面说到的功能.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+    __slots__ <span style="color: #666666">=</span> (<span style="color: #BB4444">&#39;name&#39;</span>, <span style="color: #BB4444">&#39;age&#39;</span>) <span style="color: #008800; font-style: italic"># 用tuple定义允许绑定的属性名称</span>
+
+
+
+s <span style="color: #666666">=</span> Student() <span style="color: #008800; font-style: italic"># 创建新的实例</span>
+s<span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;Michael&#39;</span> <span style="color: #008800; font-style: italic"># 绑定属性&#39;name&#39;</span>
+s<span style="color: #666666">.</span>age <span style="color: #666666">=</span> <span style="color: #666666">25</span> <span style="color: #008800; font-style: italic"># 绑定属性 &#39;age&#39;</span>
+
+s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #666666">99</span> <span style="color: #008800; font-style: italic"># 绑定未在 __slots__ 中指定的属性 &#39;score&#39;</span>
+</pre></div>
+
+
+<p><br>
+当我们运行 <code>s.score = 99</code> 时, 就会出错:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;
+</pre></div>
+
+
+<p>由于 &lsquo;score&rsquo; 没有被放到 <strong>__slots__</strong> 中, 所以不能绑定 score 属性, 试图绑定 score 将得到 <strong>AttributeError</strong> 的错误</p>
+<p>使用 <strong>__slots__</strong> 要注意, <strong>__slots__</strong> 定义的属性仅对__当前类__起作用, 对继承的子类是不起作用的, 除非在子类中也定义 <strong>__slots__</strong>, 这样, 子类允许定义的属性就是自身的 <strong>__slots__</strong> <strong>加上__父类的 </strong>__slots__<strong>(注意, 是__加上</strong>! <strong>加上</strong>! <strong>加上</strong>! 重要的事说三遍).</p>
+<h1 id="property-gettersetter">property (神奇的 getter/setter)</h1>
+<p>在 Java 中, 有一种 JavaBean 规范, 即所有属性对外部那是 private 的, 想要访问/设置, 必须通过 getter 和 setter 方法.</p>
+<p>这在 Python 中有更好的实现, 那就是 <strong>property</strong>, 它是一个装饰器, 负责把一个__方法变成属性__调用.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF">@property</span>
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">score</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>_score
+
+    <span style="color: #AA22FF">@score.setter</span>
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">score</span>(<span style="color: #AA22FF">self</span>, value):
+        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> <span style="color: #AA22FF">isinstance</span>(value, <span style="color: #AA22FF">int</span>):
+            <span style="color: #AA22FF; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BB4444">&#39;score must be an integer!&#39;</span>)
+        <span style="color: #AA22FF; font-weight: bold">if</span> value <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span> <span style="color: #AA22FF; font-weight: bold">or</span> value <span style="color: #666666">&gt;</span> <span style="color: #666666">100</span>:
+            <span style="color: #AA22FF; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">ValueError</span>(<span style="color: #BB4444">&#39;score must between 0 ~ 100!&#39;</span>)
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>_score <span style="color: #666666">=</span> value
+</pre></div>
+
+
+<p><br>
+把一个 <strong>getter</strong> 方法变成属性, 只需要加上 <strong>@property</strong> 就可以了, 此时, <strong>@property</strong> 本身又创建了另一个装饰器 <strong>@xxx.setter</strong>, 负责把一个 <strong>setter</strong> 方法变成属性赋值, 于是, 我们就拥有一个可控的属性操作:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #666666">60</span> <span style="color: #008800; font-style: italic"># OK, 实际转化为 s.set_score(60)</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #008800; font-style: italic"># OK, 实际转化为 s.get_score()</span>
+<span style="color: #666666">60</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #666666">9999</span>
+Traceback (most recent call last):
+  <span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">ValueError</span>: score must between <span style="color: #666666">0</span> <span style="color: #666666">~</span> <span style="color: #666666">100</span><span style="border: 1px solid #FF0000">!</span>
+</pre></div>
+
+
+<p><br>
+不仅如此, 还可以定义只读属性, 只定义 <strong>getter</strong> 方法, 不定义 <strong>setter</strong> 方法就是一个只读属性:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF">@property</span>
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">birth</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>_birth
+
+    <span style="color: #AA22FF">@birth.setter</span>
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">birth</span>(<span style="color: #AA22FF">self</span>, value):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>_birth <span style="color: #666666">=</span> value
+
+    <span style="color: #AA22FF">@property</span>
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">age</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">2014</span> <span style="color: #666666">-</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>_birth
+</pre></div>
+
+
+<p>上面的 <strong>birth</strong> 是可读写属性, 而 <strong>age</strong> 就是一个只读属性.</p>
+<h1 id="str-repr">str 与 repr (打印类)</h1>
+<p>当我们需要打指定 <strong>print</strong> 类或者直接输入类时的输出内容, 就可以定制 <strong>__str__</strong> 和 <strong>__repr__</strong>,
+直接显示变量调用的是 <strong>__str__</strong>, print 时调用的是是 <strong>__repr__</strong>.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__init__</span>(<span style="color: #AA22FF">self</span>, name):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__str__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #BB4444">&#39;Student object (name = </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">)&#39;</span> <span style="color: #666666">%</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name
+
+    __repr__ <span style="color: #666666">=</span> __str__
+</pre></div>
+
+
+<h1 id="iter">iter (遍历类)</h1>
+<p>如果一个类想被用于 <strong>for &hellip; in</strong> 循环, 类似 list 或 tuple 那样, 就必须实现一个 <strong>__iter__</strong> 方法, 该方法返回一个迭代对象, 然后, Python 的 for 循环就会不断调用该迭代对象的 <strong>next()</strong> 方法拿到循环的下一个值, 直到遇到 <strong>StopIteration</strong> 错误时退出循环.</p>
+<p>我们以斐波那契数列为例, 写一个 Fib 类, 可以作用于 for 循环:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Fib</span>(<span style="color: #AA22FF">object</span>):
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__init__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>a, <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> <span style="color: #666666">0</span>, <span style="color: #666666">1</span> <span style="color: #008800; font-style: italic"># 初始化两个计数器 a, b</span>
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__iter__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">self</span> <span style="color: #008800; font-style: italic"># 实例本身就是迭代对象, 故返回自己</span>
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">next</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>a, <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>b, <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>a <span style="color: #666666">+</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>b <span style="color: #008800; font-style: italic"># 计算下一个值</span>
+        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>a <span style="color: #666666">&gt;</span> <span style="color: #666666">100000</span>: <span style="color: #008800; font-style: italic"># 退出循环的条件</span>
+            <span style="color: #AA22FF; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">StopIteration</span>()
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>a <span style="color: #008800; font-style: italic"># 返回下一个值</span>
+</pre></div>
+
+
+<p><br>
+使用结果如下:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #AA22FF; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> Fib():
+<span style="color: #666666">...</span>     <span style="color: #AA22FF; font-weight: bold">print</span> n
+<span style="color: #666666">...</span>
+<span style="color: #666666">1</span>
+<span style="color: #666666">1</span>
+<span style="color: #666666">2</span>
+<span style="color: #666666">3</span>
+<span style="color: #666666">5</span>
+<span style="color: #666666">...</span>
+<span style="color: #666666">46368</span>
+<span style="color: #666666">75025</span>
+</pre></div>
+
+
+<h1 id="call">call (实例自调用)</h1>
+<p>当调用一个类的实例方法时, 可以用 xxx.method() 来调用, 那能不能直接在实例本身上调用呢, 像 xxx() 这样?</p>
+<p>任何类, 只需要定义一个 <strong>__call__</strong> 方法, 就可以直接对实例进行调用.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__init__</span>(<span style="color: #AA22FF">self</span>, name):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__call__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF; font-weight: bold">print</span>(<span style="color: #BB4444">&#39;My name is </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">.&#39;</span> <span style="color: #666666">%</span> <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name)
+</pre></div>
+
+
+<p>调用方式如下:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student(<span style="color: #BB4444">&#39;Michael&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> s()
+My name <span style="color: #AA22FF; font-weight: bold">is</span> Michael<span style="color: #666666">.</span>
+</pre></div>
+
+
+<p><strong>__call__</strong>  还可以定义参数, 对实例进行直接调用就好比对一个函数进行调用一样, 所以你完全可以把对象看成函数, 把函数看成对象.</p>
+<p>如果需要判断一个对象是否能被调用, 通过 <strong>callable()</strong> 函数就可以了.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #AA22FF">callable</span>(Student())
+<span style="color: #AA22FF">True</span>
+</pre></div>
+
+
+<h1 id="getattr">getattr (动态生成属性)</h1>
+<p>正常情况下, 当我们调用类的方法或属性时, 如果不存在, 就会报错. 比如定义 Student 类:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__init__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;Michael&#39;</span>
+</pre></div>
+
+
+<p><br>
+调用 name 属性, 没问题, 但是, 调用不存在的 score 属性, 就有问题了:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #AA22FF; font-weight: bold">print</span> s<span style="color: #666666">.</span>name
+Michael
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #AA22FF; font-weight: bold">print</span> s<span style="color: #666666">.</span>score
+Traceback (most recent call last):
+  <span style="color: #666666">...</span>
+<span style="color: #D2413A; font-weight: bold">AttributeError</span>: <span style="color: #BB4444">&#39;Student&#39;</span> <span style="color: #AA22FF">object</span> has no attribute <span style="color: #BB4444">&#39;score&#39;</span>
+</pre></div>
+
+
+<p>错误信息很清楚地告诉我们, 没有找到 score 这个 attribute.</p>
+<p>要避免这个错误, 除了可以加上一个 score 属性外, Python 还有另一个机制, 那就是写一个 <strong>__getattr__</strong> 方法, 动态返回一个属性. 修改如下:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__init__</span>(<span style="color: #AA22FF">self</span>):
+        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;Michael&#39;</span>
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__getattr__</span>(<span style="color: #AA22FF">self</span>, attr):
+        <span style="color: #AA22FF; font-weight: bold">if</span> attr <span style="color: #666666">==</span> <span style="color: #BB4444">&#39;score&#39;</span>:
+            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">99</span>
+</pre></div>
+
+
+<p><br>
+当调用不存在的属性时, 比如 score, Python 解释器会试图调用 <strong>__getattr__</strong>(self, &lsquo;score&rsquo;) 来尝试获得属性, 这样, 我们就有机会返回score的值:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>name
+<span style="color: #BB4444">&#39;Michael&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score
+<span style="color: #666666">99</span>
+</pre></div>
+
+
+<p><br>
+__返回函数__也是完全可以的:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__getattr__</span>(<span style="color: #AA22FF">self</span>, attr):
+        <span style="color: #AA22FF; font-weight: bold">if</span> attr<span style="color: #666666">==</span><span style="color: #BB4444">&#39;age&#39;</span>:
+            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">lambda</span>: <span style="color: #666666">25</span>
+</pre></div>
+
+
+<p><br>
+只是调用方式要变为:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>age()
+<span style="color: #666666">25</span>
+</pre></div>
+
+
+<p><br>
+注意, 只有在没有找到属性的情况下, 才调用 <strong>__getattr__</strong>, 已有的属性, 比如 name, 不会在 <strong>__getattr__</strong> 中查找.</p>
+<p>此外, 注意, 如果我们访问一个类中没有定义, 又没有在 <strong>__getattr__</strong> 中定义的属性, 就会返回 <strong>None</strong>, 这是因为我们定义的 <strong>__getattr__</strong> 默认返回就是 None, 所以按照约定, 应该 <strong>AttributeError</strong> 的错误:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span>(<span style="color: #AA22FF">object</span>):
+
+    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">__getattr__</span>(<span style="color: #AA22FF">self</span>, attr):
+        <span style="color: #AA22FF; font-weight: bold">if</span> attr <span style="color: #666666">==</span> <span style="color: #BB4444">&#39;age&#39;</span>:
+            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">lambda</span>: <span style="color: #666666">25</span>
+        <span style="color: #AA22FF; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">AttributeError</span>(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BB4444">Student</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BB4444"> object has no attribute </span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BB4444">&#39;</span> <span style="color: #666666">%</span> attr)
+</pre></div>
+
+
+<p><strong>问题?</strong><br>
+我们完成可以为类直接定义新属性, 使用 <strong>__getattr__</strong> 方法到底有什么用处呢?</p>
+<p><strong>举个例子:</strong><br>(参考: <a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013946328809098c1be08a2c7e4319bd60269f62be04fa000">廖雪峰老师教程</a>)</p>
+<p>现在很多网站都搞 <strong>REST API</strong>, 比如新浪微博、豆瓣啥的:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">http://api.server/user/friends
+http://api.server/user/timeline/list
+</pre></div>
+
+
+<p><br>
+如果要调用这些 API, 那不是要给每个 URL 对应的 API 都写一个方法? 这还不得累死, 而且, API 一旦改动, 我们写的方法也要改&hellip;</p>
+<p>这里就可以利用完全动态的 <strong>__getattr__</strong>, 我们可以写出一个链式调用:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">class Chain(object):
+
+    def __init__(self, path=&#39;&#39;):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain(&#39;%s/%s&#39; % (self._path, path))
+
+    def __str__(self):
+        return self._path
+</pre></div>
+
+
+<p><br>
+试试:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&gt;&gt;&gt; Chain().status.user.timeline.list
+&#39;/status/user/timeline/list&#39;
+</pre></div>
+
+
+<p><br></p>
+<p>这样, 无论 API 有多少, 我们都可以通过上面这种链式调用的方法去访问!</p>
+<h1 id="getitemsetitemdelitem">getitem、setitem、delitem</h1>
+<p>通过这三个方法, 可以将自己定义的类表现得和内置的 <strong>list、tuple、dict</strong> 没什么区别, 但这么做的话, 还有很多工作要做, 以后需要用到的时候再来补充吧.</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        <article>
+            <a href="http://z351522453.github.com/pu-bu-shi-kai-fa-vs-die-dai-shi-kai-fa-zhuan.html"><h3 class="article-title">瀑布式开发 VS 迭代式开发[转]</h3></a>
+<h6 class="subheader" title="2015-03-02T05:48:00+08:00">周一 02 三月 2015
+</h6>
+
+
+<p>两者都是一种开发模式, 就像设计模式一样, 考虑的角度不一样, 个人感觉谈不到取代一说.</p>
+<p>传统的瀑布式开发, 也就是从需求到设计, 从设计到编码, 从编码到测试, 从测试到提交大概这样的流程, 要求每一个开发阶段都要做到最好. 特别是前期阶段, 设计的越完美, 提交后的成本损失就越少. 我现在从事的外包项目就是这样的流程.</p>
+<p>迭代式开发, 不要求每一个阶段的任务做的都是最完美的, 而是明明知道还有很多不足的地方, 却偏偏不去完善它, 而是把主要功能先搭建起来为目的, 以最短的时间, 最少的损失先完成一个&rdquo;不完美的成果物&rdquo;直至提交. 然后再通过客户或用户的反馈信息, 在这个&rdquo;不完美的成果物&rdquo;上逐步进行完善.</p>
+<p>这两种开发模式都各自具有自己的特点, 迭代式开发适合在一些需求信息不明确的项目中, 这样在开发过程中遇到需求的变化时 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/za-xiang.html">杂项</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/pu-bu-shi-kai-fa-vs-die-dai-shi-kai-fa-zhuan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
+<h6 class="subheader" title="2015-02-28T09:51:00+08:00">周六 28 二月 2015
+</h6>
+
+
+<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
+<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
+<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
+<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
+<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
+<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
+<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/ru-he-pan-duan-che-lun-wei-zhi.html"><h3 class="article-title">如何判断车轮位置</h3></a>
+<h6 class="subheader" title="2015-02-27T06:10:00+08:00">周五 27 二月 2015
+</h6>
+
+
+<p>先看看驾校里教的方法.</p>
+<h1 id="_1">左轮:</h1>
+<p>当我们的视线通过左雨刮器突起的结点和地面上的物体重合时, 我们的左轮在行进时就会在该物体处压过.</p>
+<p><img alt="" src="http://i58.tinypic.com/ar3vb.jpg" /></p>
+<p>离中线60公分行驶</p>
+<p>当我们正常行驶时, 离中心线60公分是比较安全的. 当我们的视线通过车身与A柱的交角和中线重合时, 车身距离中线是60公分.</p>
+<p>所谓的交角是指那下图红点处, 可以看到红点左是A柱(灰颜色), 右是车身(黑颜色).</p>
+<p><img alt="" src="http://i61.tinypic.com/24q8hm0.jpg" /></p>
+<p>根据车型不一样, 这里判断可能有误差, 可以适当让白线往车身上让一点.</p>
+<p><img alt="" src="http://i60.tinypic.com/8yavq8.jpg" /></p>
+<h1 id="_2">右轮:</h1>
+<p>当我们视线通过右雨刮器突起的结点和白线相交时, 轮胎会从白线上压过.</p>
+<p><img alt="" src="http://i58.tinypic.com/i21tuc.jpg" /></p>
+<p>右侧离路边60公分行驶</p>
+<p>当右喷水器和路面边目标重叠时, 车身离路边还有60厘米.</p>
+<p><img alt="" src="http://i60.tinypic.com/2v0df28.jpg" /></p>
+<p>判断右侧车轮距右侧车道线60cm的问题其实并没有统一的标准, 并且不同车辆的参照物也有所不同, 只要保证路面白线在机器盖中央偏右一些位置就没有问题.</p>
+<p><img alt="" src="http://oi60.tinypic.com/300ry47.jpg" /></p>
+<hr />
+<p>通过使用不同车辆验证后发现, 这样的方法有一定的参考性, 但是还不算严谨; 由于每个车的雨刮器位置和大小都不一样 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/ru-he-pan-duan-che-lun-wei-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
+<h6 class="subheader" title="2015-02-26T13:48:00+08:00">周四 26 二月 2015
+</h6>
+
+
+<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
+<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg" /></p>
+<hr />
+<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
+<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
+<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg" /></p>
+<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
+<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg" /></p>
+<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
+<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg" /></p>
+<p>点击 [显示从 QWidget ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/6-xin-hao-yu-cao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/wo-de-lian-che-guo-cheng-he-gei-chun-xin-shou-men-de-jian-yi-zhuan.html"><h3 class="article-title">我的练车过程和给纯新手们的建议[转]</h3></a>
+<h6 class="subheader" title="2015-02-26T11:54:00+08:00">周四 26 二月 2015
+</h6>
+
+
+<p>原文传送门:<a href="http://www.19lou.com/forum-1460-thread-10201332730858530-1-1.html">新手上路之十二：我的练车过程和给纯新手们的建议</a></p>
+<hr />
+<p>**练车目的：</p>
+<p>**&gt; 熟悉新车。即档位离合刹车油门等等的力度，熟悉车身大小和车轮位置（空间感）。</p>
+<blockquote>
+<p>适应速度，快慢都不可紧张。
+增加经验。</p>
+</blockquote>
+<p><strong>熟悉步骤：</strong></p>
+<p>1、熟悉车的档位和方向盘的感觉，脚下3块踏板的位置。灯，喇叭，雨刮器的适用。左右后视镜，内后视镜，座椅的高低调整到合适的感觉 &ndash;&gt;找了个空地方，直行后退，随意转弯，刹车油门的位置。大约1、2档之内切换切换就可以了。</p>
+<p>2、熟悉离合器的位置和油门刹车力度。&ndash;&gt; 找了个空地方 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/wo-de-lian-che-guo-cheng-he-gei-chun-xin-shou-men-de-jian-yi-zhuan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/xie-45deg-dao-ku.html"><h3 class="article-title">斜45° 倒库</h3></a>
+<h6 class="subheader" title="2015-02-25T10:22:00+08:00">周三 25 二月 2015
+</h6>
+
+
+<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></p>
+<p>1、将车停在停车线左侧，右反光镜对准停车位的右线。</p>
+<p><img alt="" src="http://i57.tinypic.com/5zeh3q.jpg" /></p>
+<p>2、左打满，前行。</p>
+<p><img alt="" src="http://i62.tinypic.com/2qimbyb.jpg" /></p>
+<p>3、当车身纵向与停车位成一条直线时，回正方向，开始倒车。</p>
+<p><img alt="" src="http://i61.tinypic.com/21otpx3.jpg" /></p>
+<p>4、入库后停车。</p>
+<p><img alt="" src="http://i59.tinypic.com/fu2cfs.jpg" /></p>
+<p>上面演示的是车在停车位的左侧，如果车在停车位的右侧就是左反光镜对准停车线的左线，右打满前行，剩下都是一样的。
+**?</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/xie-45deg-dao-ku.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/zheng-xiang-dao-ku-ji-qiao.html"><h3 class="article-title">正向倒库技巧</h3></a>
+<h6 class="subheader" title="2015-02-25T10:11:00+08:00">周三 25 二月 2015
+</h6>
+
+
+<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></p>
+<p>1、将车停在停车线旁1.5米左右的位置。</p>
+<p><img alt="" src="http://i60.tinypic.com/29f5n36.jpg" /></p>
+<p>2、您所坐的位置，正好处于隔一个车位的中间(是隔一个车位, 不是邻车位)。</p>
+<p><img alt="" src="http://i62.tinypic.com/2r57uvn.jpg" /></p>
+<p>这里还有一个方法是判断后轮的位置.</p>
+<p>对于绝大多数家用轿车来说, 车辆行驶到<strong>后轮超过车位右侧1米左右</strong>的距离比较容易进入车位, 如果右侧车位旁边都是汽车的话, 大概就是右后轮与右侧车辆中间位置对齐.</p>
+<p><img alt="" src="http://i57.tinypic.com/8xk3ue.jpg" /></p>
+<p><img alt="" src="http://i62.tinypic.com/2vmbw4k.jpg" /></p>
+<p>3、然后左打满，开始倒车。</p>
+<p><img alt="" src="http://i62.tinypic.com/fn95s7.jpg" /></p>
+<p>4、车正后回正方向，继续往后倒。</p>
+<p><img alt="" src="http://i59.tinypic.com/24nmdev.jpg" /></p>
+<p>5 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/zheng-xiang-dao-ku-ji-qiao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/kao-bian-ting-che.html"><h3 class="article-title">靠边停车</h3></a>
+<h6 class="subheader" title="2015-02-25T08:44:00+08:00">周三 25 二月 2015
+</h6>
+
+
+<p>最好用均速靠边, 就是说准备靠边了, 先踩刹车减速到2档速度, 踩离合换2档, 松离合, 这时车子就是2档均速.</p>
+<p><strong>第一步：</strong>先确定靠边停车的位置, 然后打开右转向灯, 向右转动方向盘(角度为90度).</p>
+<p><strong>第二步：</strong>当车头中间与马路牙子重合时, 迅速向左转动方向盘(角度大于180度).</p>
+<p><strong>第三步：</strong>当车头1/3处与马路牙子重合时, 将方向盘回正, 此时如果车子出现偏离, 对车子进行微量调整, 使马路牙子保持在车头1/3处.</p>
+<p><strong>第四步：</strong>当车身与马路牙子平行时, 距离马路牙子10到30厘米处, 停车.</p>
+<p>也可以把二三步合在一起, 就是一开始靠边时, 少转点方向盘 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/kao-bian-ting-che.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/huan-dang-ji-cha-che.html"><h3 class="article-title">换档及刹车</h3></a>
+<h6 class="subheader" title="2015-02-25T08:15:00+08:00">周三 25 二月 2015
+</h6>
+
+
+<h1 id="_1">换档</h1>
+<p>大部分设计为五档车, 一档提速10公里左右, 比如0到10公里/小时的速度就是在一档范围内, 10-20公里/小时在二档范围; 20-30公里/小时在三档范围; 30-50公里/小时在四档范围; 50-上限在五档范围, 上限受限于车的马力.</p>
+<p>换挡要点:</p>
+<p>由低档到高档一定是一级一级换上去, 不能跳档.</p>
+<p>但是从高档换到低档可以根据车速跳档, 比如从5档直接到2档, 或者3档.</p>
+<p>空挡和离合踩下去时效果一致, 都是切断动力传送, 停车和启动时都要把档位放置到空挡, 作为双保险之一.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;font-family: 微软雅黑;&quot;&gt;一般换档是根据发动机的转速(车上有转速表), 维持1800-2000是省油状态 ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/huan-dang-ji-cha-che.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/ce-wei-ting-che.html"><h3 class="article-title">侧位停车</h3></a>
+<h6 class="subheader" title="2015-02-25T06:15:00+08:00">周三 25 二月 2015
+</h6>
+
+
+<p><img alt="" src="http://i60.tinypic.com/24y45k6.jpg" /></p>
+<p>第一步：
+把车开到前面那辆车的旁边, 与之保持平行, 两车的横向间距控制在<strong>30厘米</strong>左右.</p>
+<p><img alt="" src="http://i59.tinypic.com/fyea80.jpg" /></p>
+<p>第二步：
+保持方向盘不动, 向后倒车, 使车的外后视镜跟旁车的<strong>B柱(图示)齐平</strong>.</p>
+<p><img alt="" src="http://i61.tinypic.com/nq24g5.jpg" /></p>
+<p>第三步：</p>
+<p>确保横向距离30厘米, 外后视镜跟旁车的B柱齐平, 然后打满方向开始倒车.</p>
+<p><img alt="" src="http://i58.tinypic.com/5dktb9.jpg" /></p>
+<p>第四步：</p>
+<p>把你的车身倒到和前车夹角呈<strong>45°</strong>, 这时候你的车头和前车的车尾的连线差不多与车位垂直.
+这里除了判断<strong>车头和前车的车尾的连线是否与车位垂直</strong>外, 还有两个判断方法:</p>
+<ul>
+<li>右倒车镜里,  本车完全挡住后车</li>
+<li>左倒车镜里,  后车前脸完全出现</li>
+</ul>
+<p><img alt="" src="http://i62.tinypic.com/f0bz2h.jpg" /></p>
+<p>第五步 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/ce-wei-ting-che.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 26 of 29</h6>
+
+<p>
+            <a href="http://z351522453.github.com/index25.html">&laquo; Prev</a>
+
+        <a href="http://z351522453.github.com/index27.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

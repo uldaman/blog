@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>027、线程同步(Thinking in Java)</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/027-xian-cheng-tong-bu-thinking-in-java.html" rel="bookmark"
+        title="Permalink to 027、线程同步(Thinking in Java)">027、线程同步(Thinking in Java)</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-17T10:55:00+08:00">周四 17 三月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#1-synchronized">1. synchronized 关键字</a></li>
+<li><a href="#2-lock">2. Lock 对象</a></li>
+</ul>
+</div>
+<p>线程安全问题和线程同步的概念不多描述了, 主要看看 Java 中的解决方案.</p>
+<h2 id="1-synchronized">1. synchronized 关键字</h2>
+<p><strong>synchronized</strong> 关键字可用来给对象的方法或者代码块加锁, 当它锁定一个方法或者一个代码块的时候, 同一时刻最多只有一个线程执行这段代码, 当两个并发线程访问同一个对象 object 中的这个加锁同步代码块时, 一个时间内只能有一个线程得到执行, 另一个线程必须等待当前线程执行完这个代码块以后才能执行该代码块.</p>
+<p>通常设计中, 要控制对共享资源的访问, 得先把它包装进一个对象, 然后把所有要访问这个资源的方法标记为 <strong>synchronized</strong>.</p>
+<p>所有对象都自动含有单一的锁(也称__监视器__), 当在对象上调用其任意 synchronized 方法时, 该对象都会被自动加锁, 这时, 该对象上的其他 synchronized 方法只有等到前一个方法调用完毕并释放锁之后才能被调用.</p>
+<h2 id="2-lock">2. Lock 对象</h2>
+<p>Java SE5 的 <strong>java.util.concurrent</strong> 类库还包含有定义在 <strong>java.util.concurrent.locks</strong> 中的显式的互斥机制.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.util.concurrent.locks.*</span><span style="color: #666666">;</span>
+
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MutexEvent</span> <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> Lock lock <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ReentrantLock<span style="color: #666666">();</span>
+
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">fun</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        lock<span style="color: #666666">.</span><span style="color: #BB4444">lock</span><span style="color: #666666">();</span>
+        <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
+            <span style="color: #008800; font-style: italic">// ...</span>
+            <span style="color: #AA22FF; font-weight: bold">return</span><span style="color: #666666">;</span>
+        <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">finally</span> <span style="color: #666666">{</span>
+            lock<span style="color: #666666">.</span><span style="color: #BB4444">unlock</span><span style="color: #666666">();</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
+</pre></div>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

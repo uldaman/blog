@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>02、Go 初识</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/02-go-chu-shi.html" rel="bookmark"
+        title="Permalink to 02、Go 初识">02、Go 初识</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-01-07T21:00:00+08:00">周四 07 一月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 语言特性</a></li>
+<li><a href="#2">2. 语言结构</a></li>
+</ul>
+</div>
+<h1 id="1">1. 语言特性</h1>
+<p>我觉得吧, 大概有个印象即可, 深入学习并使用一段时间, 然后和 C 及 Python 一比较, 自然就明白了.</p>
+<p><img alt="GO 的特性" src="http://i68.tinypic.com/a1kgh5.jpg" /></p>
+<h1 id="2">2. 语言结构</h1>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">package</span> main
+
+<span style="color: #AA22FF; font-weight: bold">import</span> (
+    <span style="color: #BB4444">&quot;fmt&quot;</span>
+)
+
+<span style="color: #AA22FF; font-weight: bold">func</span> main() {
+    <span style="color: #008800; font-style: italic">/* 这是我的第一个简单的程序 */</span>
+    fmt.Println(<span style="color: #BB4444">&quot;Hello World!&quot;</span>)
+}
+</pre></div>
+
+
+<p><br></p>
+<ul>
+<li>第一行代码 <strong>package main</strong> 定义了包名, 必须在源文件中非注释的第一行指明这个文件属于哪个包. 如：package main.</li>
+</ul>
+<blockquote>
+<p>包是Go语言里最基本的分发单位, 也是工程管理中依赖关系的体现, 要生成 Go 可执行程序, 必须建立一个名为 <strong>main</strong> 的包, 并且在该包中包含一个叫 <strong>main()</strong> 的函数(该函数一般是Go可执行程序的执行起点)</p>
+</blockquote>
+<ul>
+<li>下一行 import 告诉 Go 编译器这个程序需要使用 <strong>fmt</strong> 包(的函数, 或其他元素), fmt 包实现了格式化 IO(输入/输出)的函数.</li>
+<li>下一行 func main() 是程序开始执行的函数, 一般来说都是程序启动后第一个执行的函数(如果有 <strong>init()</strong> 函数则会先执行 init() 函数).</li>
+</ul>
+<blockquote>
+<p>main() 函数没有返回值, 也没有参数, 通过 <strong>os.Args</strong> 来获取命令行参数.</p>
+</blockquote>
+<ul>
+<li>下一行 /*&hellip;*/ 是块注释, 注释方面的方法和 C 一致, // 为行注释, /**/ 为块注释.</li>
+<li>下一行 fmt.Println(&hellip;) 可以将字符串输出到控制台, 并在最后自动增加换行字符 <strong>\n</strong>, 使用 fmt.Print(&ldquo;hello, world\n&rdquo;) 可以得到相同的结果.</li>
+</ul>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// 一个常规的函数定义包含以下部分:</span>
+<span style="color: #AA22FF; font-weight: bold">func</span> 函数名(参数列表)(返回值列表) {
+    <span style="color: #008800; font-style: italic">// 函数体</span>
+}
+</pre></div>
+
+
+<p><br>
+Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必须赋值, 在函数返回时没有被明确赋值的返回值都会被设置为默认值.</p>
+<p>当标识符(包括常量、变量、类型、函数名、结构字段等等)以一个__大写__字母开头, 如：Group1, 那么使用这种形式的标识符的对象就可以被外部包的代码所使用(客户端程序需要先导入这个包), 这被称为<strong>导出</strong>(像面向对象语言中的 <strong>public</strong>);<br>
+标识符如果以__小写__字母开头, 则对包外是不可见的, 但是他们在整个包的内部是可见并且可用的(像面向对象语言中的 <strong>private</strong>).</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/golang.html">Golang</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

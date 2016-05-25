@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>14、[C++] 建造者模式</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/14-c-jian-zao-zhe-mo-shi.html" rel="bookmark"
+        title="Permalink to 14、[C++] 建造者模式">14、[C++] 建造者模式</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-23T12:31:00+08:00">周一 23 二月 2015
+</h6>
+
+
+    <p>谈到建造自然会想到楼房.</p>
+<p>楼房是千差万别的, 楼房的外形、层数、内部房间的数量、房间的装饰等等都不一样, 但是对于建造者来说, 抽象出来的建筑流程是确定的, 往往建筑一座楼房包括下面的步骤：打桩, 建立基础 –&gt; 建立框架等.</p>
+<p>建造者模式的本质和建造楼房是一致的：<strong>即流程不变, 但每个流程实现的具体细节则是经常变化的</strong>.</p>
+<p>建造者模式的好处就是保证了流程不会变化, 流程即不会增加、也不会遗漏或者产生流程次序错误, 这是非常重要的.</p>
+<p>再想像一下麦当劳和肯得鸡, 为什么它们的食物味道都是一样的?</p>
+<p>因为它们产品的味道都是由工作流程决定的, 原料放多少, 加热几分钟都有严格规定; 我们去那里消费, 不用关心他们的工作流程, 如果发现鸡翅烤得焦了, 他们会调整具体的工作流程中的烧烤时间, 如果要新加一种汉堡, 做法都相同, 只是配料不同, 工作流程是不变的, 这也是一种典型的建造者模式.</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/1f2dfcd7b30e.jpg"><img alt="建造者模式" src="http://www.smallcpp.com/wp-content/uploads/2015/02/thumb1.jpg" /></a></p>
+<p><strong>建造者模式: 将一个复杂对象的构建与它的表示分离, 使得同样的构建过程可以创建不同的表示.</strong></p>
+<p>Product：要创建的复杂对象.</p>
+<p>Builder：给出一个抽象接口，以规范产品对象的各个组成成分的建造. 这个接口规定要实现复杂对象的哪些部分的创建，并不涉及具体的对象部件的创建.</p>
+<p>ConcreteBuilder：实现Builder接口，针对不同的商业逻辑，具体化复杂对象的各部分的创建.  在建造过程完成后，提供产品的实例.</p>
+<p>Director：调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产品的信息，只负责保证对象各部分完整创建或按某种顺序创建.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">#include &lt;iostream&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;vector&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Product {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    vector&lt;/span&gt;&lt;&lt;span style=&quot;color: #0000ff;&quot;&gt;string&lt;/span&gt;&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_parts;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; Add(&lt;span style=&quot;color: #0000ff;&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; part) {
+        m_parts.push_back(part);
+    }
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Show() {
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;产品 -- --&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (unsigned &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; m_parts.size(); i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
+            cout &lt;/span&gt;&lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; m_parts[i].c_str();
+        }
+        cout &lt;/span&gt;&lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; BuildPartA() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; BuildPartB() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; Product GetResult() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_1
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartA() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件A&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    }
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartB() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件B&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    }
+
+    Product GetResult() {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_product;
+    }
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    Product m_product;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_2
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartA() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件X&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    }
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartB() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件Y&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    }
+
+    Product GetResult() {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_product;
+    }
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    Product m_product;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Director {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; Construct(Builder*&lt;span style=&quot;color: #000000;&quot;&gt; builder) {
+        builder&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;BuildPartA();
+        builder&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;BuildPartB();
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
+    Director director;
+
+    &lt;span style=&quot;color: #000000;&quot;&gt;Builder&lt;/span&gt;* p_b1 = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_1();
+    Builder&lt;/span&gt;* p_b2 = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_2();
+
+    director.Construct(p_b1);
+    Product p1 &lt;/span&gt;= p_b1-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;GetResult();
+    p1.Show();
+
+    cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;**********************************************&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
+
+    director.Construct(p_b2);
+    Product p2 &lt;/span&gt;= p_b2-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;GetResult();
+    p2.Show();
+
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;&lt;/span&gt;
+</pre></div>
+
+
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image26.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb26.png" /></a></p>
+<p>关键就在 Direcotr 这个类, 它控制整个的建造过程, 隔离了用户与建造过程的关联.</p>
+<hr />
+<p><strong>使用建造者模式的场合和好处</strong></p>
+<p><strong>使用建造者模式的好处：</strong></p>
+<p>1.使用建造者模式可以使客户端不必知道产品内部组成的细节。</p>
+<p>2.具体的建造者类之间是相互独立的，对系统的扩展非常有利。</p>
+<p>3.由于具体的建造者是独立的，因此可以对建造过程逐步细化，而不对其他的模块产生任何影响。</p>
+<p><strong>使用建造模式的场合：</strong></p>
+<p>1.创建一些复杂的对象时，这些对象的内部组成构件间的建造顺序是稳定的，但是对象的内部组成构件面临着复杂的变化。</p>
+<p>2.要创建的复杂对象的算法，独立于该对象的组成部分，也独立于组成部分的装配方法时。
+or </p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

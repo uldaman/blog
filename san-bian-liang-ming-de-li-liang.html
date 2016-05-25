@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>三、變量名的力量</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/san-bian-liang-ming-de-li-liang.html" rel="bookmark"
+        title="Permalink to 三、變量名的力量">三、變量名的力量</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-23T11:45:00+08:00">周二 23 六月 2015
+</h6>
+
+
+    <blockquote>在此之前, 我已習慣匈牙利命名法, 之所以還要讀這個, 是想看看作者在這方面有什麼獨特的見解值得我借鑒.
+>
+> </blockquote>
+
+<p><strong>一個好的變量名是可讀的、易記的和恰如其分的.</strong></p>
+<p><strong>最重要的命名事項</strong>
+通常, 對變量的描述就是最佳的變量名, 如表示運動場中坐椅數量的變量可能會命名為: numberOfSeatsInTheStadium.</p>
+<p><strong>以問題為導向</strong>
+一個好記的名字反映的通常是問題, 而不是解決方案, 也就是說, 通常表達的是 what 而不是 how.</p>
+<p><strong>最適當的名字長度</strong>
+變量名的長度應該介於 x ~ maximunNumberOfPointInModernOlympics 之間, 太短的名字無法傳達足夠的信息;
+原文提到, 變量名長度在 10 ~16 或者 8 ~ 20 個字符之間是最好的.</p>
+<p><strong>變量名對作用域的影響</strong>
+短的變量名也不總是不好, 如果把一個變量名取得很短時, 那麼它應該表示這是一個臨時的數據, 它的作用域非常有即, 如 for 語句中的 i 變量.
+不過, 作為一項防禦式編程策略, 一些細心的程序員會避免使用短的變量名.
+對於全局變量, 如果要限制它的作用域, 應該考慮使用名稱空間的方式.</p>
+<p><strong>變量名中的計算值限定詞
+</strong>一些變量可能被用作表達某個計算結果, 如最大值(Max)、最小值(Min)、平均值(Average), 應該把這些限定詞放在名字的最後.
+不過 Num 限定詞是個例外, 它放在變量名的開始代表一個總數, 放在結束則代表一個序號, 這已經是約定俗成的了. 然而這樣使用可能會帶來麻煩, 因此, 用 Count 或 Total 來代表總數, 而用 Index 來代表序號.</p>
+<p><strong>變量名中的常用對仗詞</strong>
+何為對仗詞? 就像 begin/end、 first/last 這種, 書中列出一些常用的對仗詞
+begin/end
+first/last
+locked/unlocked
+min/max
+next/previous
+old/new
+opened/closed
+visible/invisible
+source/target
+source/destination
+up/down</p>
+<hr />
+<p><strong>為特定類型的數據命名</strong></p>
+<p><strong>為循環下標命名</strong>
+for、while 等循環體中, i、j、k 這些名字都已經約定俗成的了.
+但是, 如果一個變量要在循環之外使用, 那麼它應該取一個更有意義的名字. 如:
+int nCount = 0;
+while (nCount &lt; 100) {
+// &hellip;
+nCount++;
+}
+另外, 如果循環體很長, 不止幾行, 那麼也應該為 i/j/k 取一個有意義的名字, 因為太長的代碼會讓人忘記 i/j/k 本來具有的含義.
+循環嵌套中, 也應該為循環變量取一個有意義的名字, 因為循環嵌套中, 會很容易弄混 i/j/k 分別代表哪個循環的.
+總之, i/j/k 應該只於簡單的循環內.</p>
+<p><strong>為狀態變量命名</strong>
+應該為狀態變量取一個比 flag 更好的名字, 甚至標記的名字中都不應該含有 flag;
+另外, 標記的賦值應該用枚舉類型、具名常量, 或用作具名常量(何為具名常量?參考文章結尾說明)的全局變量.
+下面是一個很好的例子:
+int nStatusFlag = 0x80;
+如果沒有說明, 你不會知道 nStatusFlag 和 0x80 是什麼含義, 而下面的語句則沒有這個問題:
+int nCharacterType = CONTROL_CHARACTER;
+這樣一看, 就知道是給一個表示字符類型的變量賦值.</p>
+<p><strong>為臨時變量命名</strong>
+臨時變量用於存儲計算的中間結果(我一般用 temp 來命名).
+作者提醒讀者應該警惕臨時變量, 不應該被簡單的賦予 temp、x 之類的缺乏描述性的名字, 應該用真正的變量名去代替.</p>
+<p><strong>為布爾變量命名</strong>
+書中列舉了一些應該謹記的典型布爾變量名:
+done: 表示某件事情已完成.
+error: 表示有錯誤發生.
+found: 表示某個值已經找到.
+success/ok: 表示一項操作是否成功.
+布爾變量名, 應該隱含 &ldquo;真/假&rdquo; 的含義, 如 status 這樣的布爾變量就沒有什麼意義.
+另外, 作者說明, 不應該使用否定的名字變量名, 如 notFound, 也就是應該使用肯定的變量名.</p>
+<p><strong>為枚舉類型命名</strong>
+通常可以使用組前綴來命名枚舉變量, 如用 Corlor_、Planet_ 這樣的前綴來明確表示該類型的成員屬於一個組, 如:
+enum Corlor {
+Color_Red,
+Color_Blue,
+}
+同時, 還應該為枚舉類型本身的名字加以前綴, 如 e_Corlor.
+enum e_Corlor {
+Color_Red,
+Color_Blue,
+}</p>
+<p><strong>為常量命名</strong>
+在具名常量時, 應該根據該常量所表示的含義, 而不是該常量所具有的數值.</p>
+<blockquote>**具名常量:** 即用一個名字而不是數字來表示固定值, 例如用 MAXIMUM_EMPLOYEES 而不是 1000.
+>
+> </blockquote>
+
+<hr />
+<p><strong>在上敘的一般事項之外, 本書還推薦了一些命名規則</strong></p>
+<p><strong>區分變量名和子程序名</strong>
+變量名和對象名以小寫字母開始, 子程序名以大寫字母開始.</p>
+<p><strong>區分類和對象</strong>
+這裡提供幾種方案:
+<em>. 類以大寫字母開始, 對象以小寫字母開始, 如 Widget widget;
+</em>. 類名全部大寫, 如 WIDGET widget;
+<em>. 通過給類型加 t_ 前綴, 如 t_Widget Widget;
+</em>. 通過給對象加 a前綴, 如 Widget aWidget;
+*. 通過對象和類採用更明確意義的名字, 如 Widget employeeWidget.
+(本人使用的是給類加 c 前綴, 給對象加 o 前綴, 如 cWidget oWidget, c 表示這是一個 Class, o 表示這是一個 Object)</p>
+<p><strong>標識全局變量</strong>
+g_ 前綴</p>
+<p><strong>標識成員變量</strong>
+m_ 前綴</p>
+<p><strong>標識類型聲明</strong>
+t_ 前綴</p>
+<p><strong>標識具名常量</strong>
+全部大寫, 下劃線分隔單詞</p>
+<p><strong>標識枚舉類型和其元素</strong>
+這個上面已經說過了, 類型用 e_ 前綴, 元素用類型前綴.</p>
+<p><strong>與語言相差的命名規則</strong>
+這裡以 C/C++ 為例(因為本人使用的就是 C/C++)
+i/j 是整數下標
+c/ch 是字符變量
+n 是整數
+s/str 是字符串
+p 是指針
+常量、typedef 和預處理宏全部大寫, 當然, 如果 typedef 定義的是類型(結構體), 那麼也可以用 t_ 前綴
+下劃線只有在全部大寫的名字中才會使用</p>
+<hr />
+<p><strong>小結</strong></p>
+<p>上面講了一堆怎麼命名變量, 看上去已經顯得非常複雜了, 其實只要謹記三點就可以:
+<em>. 變量代表的內容
+</em>. 變量的類型
+*. 變量的作用域</p>
+<hr />
+<p><strong>創建具備可讀性的短名字</strong></p>
+<p>在其實是計算機領域早期的遺留物, 早期語言, 如匯編, 它要求變量名長度在 2 ~ 8 個字符, 而現代語言, 如 C++, 就完成沒有這個限制, 在這類高級語言時, 幾乎沒有任何理由去縮短具有豐富含義的名字.
+但是, 如果環境要求你創建簡短的名字, 那麼這提供一些縮寫的技巧.</p>
+<p><strong>縮寫一般原則</strong>
+注意, 其中的一些原則彼此衝突, 所以不要混合應用所有的原則.
+<em>. 使用標準縮寫, 就是讓你查字典..
+</em>. 去掉所有非前置元音, 如 computer 變成 cmptr, screen 變成 scrn
+<em>. 去掉虛詞 and、or、the 等
+</em>. 使用每個單詞的每一個或前幾個字母
+<em>. 統一地在每個單詞的第一、第二或第三個字母後截斷(和上面一條感覺差不多..)
+</em>. 保留每個單詞的第一個和最後一個
+<em>. 使用名字中的每個重要單詞, 最多不超過三個
+</em>. 去除無用的後綴 &ndash; ing、ed 等
+<em>. 保留每個音節中最引人注意的發音
+</em>. 確保不要改變變量的含義
+*. 反覆使用上述技術, 直到變量名長度達到要求</p>
+<p><strong>需要注意的地方</strong>
+<em>. 要麼刪除不止一個字符, 要麼就拼寫完整, 也就是說不要用只刪除一個字符的方式來縮寫.
+</em>. 縮寫要一致, 也就是某個單詞如果縮寫了, 那麼就應該全部縮寫
+<em>. 創建你能讀出來的名字, 也就是說, 某個名字用編寫後, 你還是能讀出他的音
+</em>. 避免使用容易看錯或讀錯的字符組合, 例如, 你的變量要表達出 B 結尾的意思, 應該使用 ??EndB, 而不應該是 BEnd.
+<em>. 使用詞典來解決命名沖突, 假如, 你有兩個變量, 分別為 fullRevenueDisbursal 和 fired, 你還有一個縮寫為 frd, 這樣你就無法知道 frd 代表的是 fullRevenueDisbursal 還是 fired, 所以此時, 就可以查詞典, 找一個單詞來代替 fired.
+</em>. 在代碼時用縮寫對照表來解釋極短名稱的含義.
+*. 在一份項目級的文檔中說明所有縮寫(和上面一條差不多)</p>
+<hr />
+<p><strong>應該避免的名字</strong>
+避免使用令人誤解的名字或縮寫
+避免使用具有相似含義的名字(如果你能夠交換兩個變量的名字而不會妨礙對程序的理解, 就需要重新命名了)
+避免使用具有不同含義但卻又相似的名字
+避免使用發音相近的名字
+避免在名字中使用數字, 例如兩個文件, 不應該使用 file1 和 file2 這樣的名字
+避免拼錯單詞
+不要僅靠大小寫來區分變量名(這一點只限於那些對大小寫不敏感的語言)
+避免使用多種自然語言
+避免使用標準類型、變量和子程序的名字(也就是保留字, 沒有哪個程序員會使用這些名字, 即使新手也是, 所以我還是覺得作者在湊字數&hellip;)
+不要使用與變量含義完全無關的名字
+避免在名字中包含易混淆的字符, 如 1/I、o/0 等</p>
+<hr />
+<p>總結</p>
+<p><img alt="" src="http://i58.tinypic.com/xpod1w.jpg" /></p>
+<p>總之, 代碼閱讀的次數遠遠多於編寫的次數, 代碼是寫給人看的, 因此, 確保變量的名字更側重於閱讀方便而不是編寫方便.
+  i</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

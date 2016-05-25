@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>014、堆、栈、方法区</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/014-dui-zhan-fang-fa-qu.html" rel="bookmark"
+        title="Permalink to 014、堆、栈、方法区">014、堆、栈、方法区</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-03T18:00:00+08:00">周四 03 三月 2016
+</h6>
+
+
+    <h2 id="1">1. 基本概念</h2>
+<p>JAVA的JVM的内存可分为3个区: 堆(heap)、栈(stack)和方法区(method).</p>
+<p>堆区:</p>
+<ol>
+<li>存储的全部是对象, 如类的实例、数组等.</li>
+<li>jvm 只有一个堆区(heap)被所有线程共享, 堆中不存放基本类型和对象引用, 只存放对象本身.</li>
+</ol>
+<p>栈区:
+1. 每个线程包含一个栈区, 栈中只保存基础数据类型的对象和自定义对象的引用(不是对象), 对象都存放在堆区中.</p>
+<ol>
+<li>
+<p>每个栈中的数据(原始类型和对象引用)都是私有的, 其他栈不能访问.</p>
+</li>
+<li>
+<p>栈分为3个部分: 基本类型变量区、执行环境上下文、操作指令区(存放操作指令).</p>
+</li>
+</ol>
+<p>方法区:</p>
+<ol>
+<li>又叫静态区, 跟堆一样, 被所有的线程共享, 方法区包含所有的 <strong>class 信息</strong>、<strong>static 变量</strong>以及<strong>方法主体</strong>.</li>
+<li>方法区中包含的都是在整个程序中永远唯一的元素, 如class 信息、 static变量以及方法主体.</li>
+</ol>
+<h2 id="2">2. 堆栈溢出</h2>
+<p>当我们启动一个 Java 进程时, 栈内存默认是 <strong>1 m</strong>, 而堆内存默认是物理机的 <strong>1/4</strong>.</p>
+<p>如果当我们大量调用方法时, 如递归调用方法, 那就可能导致栈溢出;<br>而当我们生成大量的对象时, 就有可能导致堆溢出.</p>
+<p>所以 Java 也提供了一些参数来调用设置 JVM 的堆栈大小:</p>
+<ul>
+<li>java -x => 查看所有的扩展参数</li>
+<li>java -Xmx => 设置 jvm 最大可用堆大小</li>
+<li>java -Xms =>设置 jvm 初始堆大小</li>
+<li>java -Xss =>设置 jvm 栈大小</li>
+</ul>
+<hr />
+<p>补充一些 java 工具:</p>
+<p><strong>jps</strong> 查看所有 java 程序.</p>
+<p><strong>jmap</strong> 查看 java 进程的一些信息.</p>
+<ul>
+<li><strong>jamp -heap pid</strong> 查看进程堆信息.</li>
+</ul>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

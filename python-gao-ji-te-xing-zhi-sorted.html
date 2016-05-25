@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Python 高级特性之 sorted( )</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/python-gao-ji-te-xing-zhi-sorted.html" rel="bookmark"
+        title="Permalink to Python 高级特性之 sorted( )">Python 高级特性之 sorted( )</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-01-26T21:37:00+08:00">周二 26 一月 2016
+</h6>
+
+
+    <p>sorted() 函数接收两个参数, 一个是序列, 一个是函数 (参数顺序和 map/reduce/filter 相反).</p>
+<p>python 内置的 sorted() 函数就可以对 list 进行排序:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">5</span>, <span style="color: #666666">9</span>, <span style="color: #666666">12</span>, <span style="color: #666666">21</span>, <span style="color: #666666">36</span>]
+</pre></div>
+
+
+<p>如果想实现倒序排序, 则可以自己写比较函数, 然后做为 sorted() 的第二个参数.</p>
+<p>通常规定, 对于两个元素 x 和y:</p>
+<ul>
+<li>如果认为 x &lt; y, 则返回 -1</li>
+<li>如果认为 x == y, 则返回 0</li>
+<li>如果认为 x &gt; y, 则返回 1</li>
+</ul>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">reversed_cmp</span>(x, y):
+    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> y:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">-1</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> y:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>
+</pre></div>
+
+
+<p>传入自定义的比较函数 reversed_cmp，就可以实现倒序排序：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"> <span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>], reversed_cmp)
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">36</span>, <span style="color: #666666">21</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">5</span>]
+</pre></div>
+
+
+<p>我们再看一个字符串排序的例子：</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #BB4444">&#39;Credit&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;bob&#39;</span>]
+</pre></div>
+
+
+<p>默认情况下, 对字符串排序, 是按照 ASCII 的大小比较的, 也就是说, 它是区分大小写的, 由于&rsquo;Z&rsquo; &lt; &lsquo;a&rsquo;, 所以大写字母 Z 会排在小写字母 a 的前面.</p>
+<p>现在, 我们提出排序应该忽略大小写, 按照字母序排序, 要实现这个算法, 只要我们定义出忽略大小写的比较函数就可以:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">cmp_ignore_case</span>(s1, s2):
+    u1 <span style="color: #666666">=</span> s1<span style="color: #666666">.</span>upper()
+    u2 <span style="color: #666666">=</span> s2<span style="color: #666666">.</span>upper()
+    <span style="color: #AA22FF; font-weight: bold">if</span> u1 <span style="color: #666666">&lt;</span> u2:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">-1</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> u1 <span style="color: #666666">&gt;</span> u2:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>
+</pre></div>
+
+
+<p>忽略大小写来比较两个字符串, 实际上就是先把字符串都变成大写(或者都变成小写)再比较.</p>
+<p>这样, 我们给 sorted() 传入上述比较函数, 即可实现忽略大小写的排序:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>], cmp_ignore_case)
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>]
+</pre></div>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

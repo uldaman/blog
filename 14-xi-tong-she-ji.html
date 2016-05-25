@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>14、系统设计</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/14-xi-tong-she-ji.html" rel="bookmark"
+        title="Permalink to 14、系统设计">14、系统设计</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-08T12:46:00+08:00">周日 08 五月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 什么是系统设计</a></li>
+<li><a href="#2-grasp-solid">2. GRASP &amp; SOLID</a></li>
+</ul>
+</div>
+<h1 id="1">1. 什么是系统设计</h1>
+<p>到了这一步, 说明你最起码已经迭代过一轮需求分析了, 而系统设计, 就是根据需求分析阶段的产出 (即系统模块、功能要求等), 设计出一个符合 <strong>GRASP</strong> &amp; <strong>SOLID</strong> 的软件架构 (什么是 GRASP &amp; SOLID, 后面再介绍).</p>
+<p>这个阶段的任务是:</p>
+<ul>
+<li>设计软件系统的模块层次结构</li>
+<li>设计数据库的结构</li>
+<li>设计模块的控制流程</li>
+</ul>
+<p>这个阶段又分两个步骤: <strong>概要设计</strong>和<strong>详细设计</strong>.</p>
+<p>概要设计是<strong>黑盒</strong>设计, 解决软件系统的模块划分和模块的层次机构以及数据库设计, 详细设计是<strong>白盒</strong>设计, 解决每个模块的控制流程, 内部算法和数据结构的设计.</p>
+<p>现在有些敏捷开发思想, 不推荐使用<em>详细设计</em>, 将系统设计阶段统称为<strong>架构设计</strong>.<br>
+也就是说, 这个阶段的任务从上面的三条, 变为两条 (即不进行详细设计, 不涉及具体算法、流程):</p>
+<ul>
+<li>设计软件系统的模块层次结构</li>
+<li>设计数据库的结构</li>
+</ul>
+<p>另外要注意, 在需求阶段, 我们用用例图中的__Package__来表达系统、子系统、模块、子模块间的关系, 但这和系统设计阶段的模块层次<strong>不是</strong>一一对应的, 确切的说需求阶段的模块划分表达的是更上层的东西, 即功能模块的划分, 而系统设计阶段的模块划分则是从软件工程角度出发, 应该按 GRASP &amp; SOLID, 是两种完全不同的概念.</p>
+<blockquote>
+<p>关于系统设计, 我在另一篇笔记 <a href="https://www.smallcpp.com/12-wrup-zui-jia-an-li.html#design">12、WRUP 最佳案例</a> 中也提到了一些, 可以去参考下.</p>
+</blockquote>
+<h1 id="2-grasp-solid">2. GRASP &amp; SOLID</h1>
+<p><strong>SOLID</strong>, 这是描述设计原则的一个专业术语, 由我们可爱的代码整洁之道传教者鲍勃 (罗伯特C. 马丁) 大叔提出, 是一组用于指导我们如何写出&rdquo;好代码&rdquo;的原则.</p>
+<p>SOLID 的解释为:</p>
+<ul>
+<li>Single responsibility principle (单一职责原则)</li>
+<li>Open/closed principle (打开/关闭原则)</li>
+<li>Liskov substitution principle (里氏替换原则)</li>
+<li>Interface segregation principle (接口隔离原则)</li>
+<li>Dependency inversion principle (依赖倒置原则)</li>
+</ul>
+<blockquote>
+<p>关于这几个原则的定义, 参考我另一篇笔记: <a href="http://www.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html">六大设计原则</a></p>
+</blockquote>
+<p><strong>GRASP</strong>, 全称为General Responsibility Assignment Software Pattern, 即<strong>通用职责分配软件模式</strong>, 它由《UML 和模式应用》 (Applying UML and Patterns) 一书作者 Craig Larman 提出.</p>
+<p>GRASP 是对象职责分配的基本原则, 其核心思想是<strong>职责分配</strong> (Responsibility Assignment), 用职责设计对象 (Designing Objects with Responsibilities).</p>
+<p>GRASP 包括以下内容:</p>
+<ul>
+<li>Information Expert (信息专家模式)</li>
+<li>Creator (创造者模式)</li>
+<li>Controller (控制器模式)</li>
+<li>Low Coupling (低耦合模式)</li>
+<li>High Cohesion (高内聚模式)</li>
+<li>Polymorphism (多态模式)</li>
+<li>Pure Fabrication (纯虚构模式)</li>
+<li>Indirection (中介模式)</li>
+<li>Protected Variations (受保护变化模式)</li>
+</ul>
+<blockquote>
+<p>关于这几个模式的定义, 参考我另一篇笔记: <a href="http://www.smallcpp.com/3-cshe-ji-mo-shi-yu-grasp.html">设计模式与 GRASP</a></p>
+</blockquote>
+<p>GRASP 与 SOLID 是有相通的地方的:</p>
+<ul>
+<li>Information Expert 与 Single responsibility principle</li>
+<li>Protected Variations 与 Open/closed principle</li>
+</ul>
+<p>GRASP &amp; SOLID 是 GOF (二十三种设计模式) 的基础, GOF 只是在某些情景下对 GRASP &amp; SOLID 的具体实践.</p>
+<p>GRASP 以<strong>职责驱动设计</strong>, 什么是职责呢?</p>
+<p>简单地说, 一个类或构件的职责包括两个方面: 一个是<strong>知道</strong>的事, 对于一个类来说就是他的属性; 一个是<strong>能做</strong>的事, 对于一个类来说就是他的方法.</p>
+<ul>
+<li>&ldquo;知道&rdquo;职责 —— 表示这个类, 它&rdquo;知道&rdquo;些什么<ul>
+<li>了解私有封装数据</li>
+<li>了解关联的对象</li>
+<li>了解能够派生或计算的事物</li>
+</ul>
+</li>
+<li>&ldquo;行为&rdquo;职责 —— 表示这类类, 它可以&rdquo;做&rdquo;什么<ul>
+<li>完成对象初始化</li>
+<li>执行一些控制行为</li>
+</ul>
+</li>
+</ul>
+<p>职责的分配可使用<strong>时序图</strong>或<strong>协作图</strong>来表达, 面向对象设计过程就是将责任分配给类的过程.</p>
+<p><strong>例子:</strong> 在一个销售软件中存在一个交费行为, 此时, 就可将交费识别为一个&rdquo;行为&rdquo;职责.</p>
+<ul>
+<li>&ldquo;行为&rdquo;职责表示交费的行为, 需要创建一个付款记录的对象 Payment</li>
+<li>&ldquo;知道&rdquo;职责必须知道付款记录类 Payment，知道如何记录及计算 Payment 类中的数据</li>
+</ul>
+<p><img alt="" src="http://i67.tinypic.com/nmxmyp.jpg" /></p>
+<ul>
+<li>发现具有交费行为的对象 Sale</li>
+<li>发现了该类还关联另一个类对象 Payment</li>
+</ul>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

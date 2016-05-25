@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        <article>
+            <a href="http://z351522453.github.com/yi-xie-zai-qian-mian-de-hua.html"><h3 class="article-title">(一) 写在前面的话</h3></a>
+<h6 class="subheader" title="2015-06-11T09:53:00+08:00">周四 11 六月 2015
+</h6>
+
+
+<p>Java 很久前其实就学过了(大概两年前吧), 一直没用上, 然后…然后就全还给书本了, 现在是一点都想不起来了;</p>
+<p>这次打算搞一搞安卓, 于是又把 Java 拿起来学上一学, 就当是第一次学吧.</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/yi-xie-zai-qian-mian-de-hua.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html"><h3 class="article-title">19、事件小结及自定义事件</h3></a>
+<h6 class="subheader" title="2015-06-01T04:14:00+08:00">周一 01 六月 2015
+</h6>
+
+
+<p>现在我们可以总结一下 Qt 的事件处理, 实际上是有五个层次:</p>
+<ul>
+<li>第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.</li>
+<li>第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.</li>
+<li>第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.</li>
+<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 ...</li></ul><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/18-qt-zhong-de-shi-jian.html"><h3 class="article-title">18、Qt 中的事件</h3></a>
+<h6 class="subheader" title="2015-05-30T12:23:00+08:00">周六 30 五月 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#qt">初识 Qt 中的事件</a></li>
+<li><a href="#qt_1">深入 Qt 的事件</a></li>
+<li><a href="#event">event() 函数</a></li>
+<li><a href="#_1">事件过滤器</a></li>
+</ul>
+</div>
+<h1 id="qt">初识 Qt 中的事件</h1>
+<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/18-qt-zhong-de-shi-jian.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/hei-ke-ji-er-cha-shu-bian-li.html"><h3 class="article-title">'[黑科技]. 二叉树遍历'</h3></a>
+<h6 class="subheader" title="2015-05-30T03:05:00+08:00">周六 30 五月 2015
+</h6>
+
+
+<p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
+<p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800">#pragma pack (push,1)</span>
+<span style="color: #AA22FF; font-weight: bold">typedef</span> <span style="color: #AA22FF; font-weight: bold">struct</span> _RoleTree {
+    DWORD dwLBase;      <span style="color: #008800; font-style: italic">//+0x0    左树</span>
+    DWORD dwSBase;      <span style="color: #008800; font-style: italic">//+0x4    上一层树的地址</span>
+    DWORD dwRBase;      <span style="color: #008800; font-style: italic">//+0x8    右树</span>
+    <span style="color: #00BB00; font-weight: bold">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/hei-ke-ji-er-cha-shu-bian-li.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/cegui-4-cegui-chu-shi-hua.html"><h3 class="article-title">'[CEGUI]. 4、CEGUI 初始化'</h3></a>
+<h6 class="subheader" title="2015-05-29T16:19:00+08:00">周五 29 五月 2015
+</h6>
+
+
+<p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
+<p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
+    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/cegui-4-cegui-chu-shi-hua.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">'[CEGUI]. 3、VS 环境设置'</h3></a>
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">周五 29 五月 2015
+</h6>
+
+
+<p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
+<p>首先是 Debug 和 Release 版本通用设置:</p>
+<ol>
+<li>[包含目录] 和 [库目录] 的设置
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+</ol>
+<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
+E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/cegui-3-vs-huan-jing-she-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/cegui-2-hook-d3d.html"><h3 class="article-title">'[CEGUI]. 2、HOOK D3D'</h3></a>
+<h6 class="subheader" title="2015-05-27T16:06:00+08:00">周三 27 五月 2015
+</h6>
+
+
+<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
+<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/cegui-2-hook-d3d.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
+<h6 class="subheader" title="2015-05-26T08:25:00+08:00">周二 26 五月 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p>实现代码如下:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Open File&quot;</span>, <span style="color: #AA22FF">NULL</span>, <span style="color: #BB4444">&quot;file (*.*)&quot;</span>);
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file ...</pre></div><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html"><h3 class="article-title">16、通用对话框之 QMessageBox</h3></a>
+<h6 class="subheader" title="2015-05-25T18:05:00+08:00">周一 25 五月 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>Qt 的内置对话框大致分为以下几类;</p>
+<ul>
+<li><code>QColorDialog</code>: 选择颜色;</li>
+<li><code>QFileDialog</code>: 选择文件或者目录;</li>
+<li><code>QFontDialog</code>: 选择字体;</li>
+<li><code>QInputDialog</code>: 允许用户输入一个值, 并将其值返回;</li>
+<li><code>QMessageBox</code>: 模态对话框, 用于显示信息、询问问题等;</li>
+<li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
+<li><code>QPrintDialog</code>: 打印机配置;</li>
+<li><code>QPrintPreviewDialog</code>: 打印预览;</li>
+<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://z351522453.github.com/15-dui-hua-kuang-jian-tong-xin.html"><h3 class="article-title">15、对话框间通信</h3></a>
+<h6 class="subheader" title="2015-05-25T18:00:00+08:00">周一 25 五月 2015
+</h6>
+
+
+<blockquote>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.
+>
+> </blockquote>
+
+<p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
+<p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
+<h1 id="_1">模态对话框</h1>
+<p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
+<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://z351522453.github.com/15-dui-hua-kuang-jian-tong-xin.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 21 of 29</h6>
+
+<p>
+            <a href="http://z351522453.github.com/index20.html">&laquo; Prev</a>
+
+        <a href="http://z351522453.github.com/index22.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

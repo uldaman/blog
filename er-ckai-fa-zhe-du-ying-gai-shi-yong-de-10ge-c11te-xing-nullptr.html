@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(二) C++开发者都应该使用的10个C++11特性 — nullptr</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/er-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-nullptr.html" rel="bookmark"
+        title="Permalink to (二) C++开发者都应该使用的10个C++11特性 — nullptr">(二) C++开发者都应该使用的10个C++11特性 — nullptr</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-03-12T09:22:00+08:00">周四 12 三月 2015
+</h6>
+
+
+    <p>先看下面这两个重载函数.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;);
+</pre></div>
+
+
+<p>C++中用 NULL 来表示空指针, 而 NULL 被定义为 0: #define NULL 0.
+那么 foo(NULL); 语句将会调用 foo(int), 这几乎必定不是程序员想要的, 也不是代码直观上要表达的意图(因为我们实际想要传递的是一个空指针).</p>
+<p>C++11通过引入一个新的关键字 <strong>nullptr</strong> 充当单独的空指针常量来纠正这个问题.
+它的类型是 nullptr_t, 是一个可以隐式转换成<strong>任意类型的指针</strong>或<strong>指向成员的指针</strong>的类型,并且可以和这些类型进行比较.
+但它<strong>不能隐式转换为整型</strong>, 也不能与整型做比较, bool类型除外(可以隐式转换为bool型, 取值为false).
+为了向下兼容,0仍然是一个有效的空指针常量!</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *pc = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;  *pi = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;bool&lt;/span&gt;   b = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK. b is false.&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;    i = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; error&lt;/span&gt;
+&lt;span style=&quot;color: #000000&quot;&gt;
+foo(nullptr);           &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; calls foo(char *), not foo(int);&lt;/span&gt;
+</pre></div>
+
+
+<p>s/0</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

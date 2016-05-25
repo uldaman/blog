@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>04、Mongodb 索引</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/04-mongodb-suo-yin.html" rel="bookmark"
+        title="Permalink to 04、Mongodb 索引">04、Mongodb 索引</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-04-08T18:32:00+08:00">周五 08 四月 2016
+</h6>
+
+
+    <p>本节笔记记录 Mongodb 索引(index) 的设计, 让操作数据库获得更好的性能.</p>
+<div class="toc">
+<ul>
+<li><a href="#_1">创建索引</a></li>
+<li><a href="#_2">查询索引</a></li>
+<li><a href="#_3">删除索引</a></li>
+<li><a href="#explain">explain</a></li>
+<li><a href="#hint">hint</a></li>
+</ul>
+</div>
+<p>索引的重要性可参考字典的设计, 如想要在新华字典中找某一个字, 可以先在字典的索引区找到这个字的页码, 这种功能就相当于数据库中的索引, 可以很方便的让你索引到数据库中的数据.</p>
+<p>所有的 MongoDB 集合默认都有一个唯一索引在字段 <strong>_id</strong> 上, 如果应用程序没有为 <strong>_id</strong> 列定义一个值, MongoDB 将创建一个带有 ObjectId 值的列.</p>
+<h2 id="_1">创建索引</h2>
+<p><strong>ensureIndex()</strong> 方法可以创建一个新的索引.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.COLLECTION_NAME.ensureIndex({KEY: 1})
+</pre></div>
+
+
+<p><br>
+语法中 Key 值为你要创建的索引字段, <strong>1</strong> 为指定按升序创建索引, 如果你想按降序来创建索引指定为 <strong>-1</strong> 即可.</p>
+<p><strong>复合索引</strong></p>
+<p><strong>ensureIndex()</strong> 方法中也可以设置使用多个字段创建索引(关系型数据库中称作复合索引), 如:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.col.ensureIndex({&#39;title&#39;: 1, &#39;description&#39;: -1})
+</pre></div>
+
+
+<p><br>
+该索引被创建后, 基于 <strong>title</strong> 和 <strong>description</strong> 的查询将会用到该索引, 或者是基于 <strong>title</strong> 的查询也会用到该索引, 但是只是基于 <strong>description</strong> 的查询将不会用到该复合索引;<br>
+因此可以说, 如果想用到复合索引, 必须在查询条件中包含复合索引中的前 N 个索引列&hellip;</p>
+<p>ensureIndex() 接收__可选参数__</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>background</td>
+<td>Boolean</td>
+<td>建索引过程会阻塞其它数据库操作, background 可指定以后台方式创建索引, 即增加 &ldquo;background&rdquo; 可选参数.  &ldquo;background&rdquo; 默认值为 false.</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>Boolean</td>
+<td>建立的索引是否唯一. 指定为 true 创建唯一索引. 默认值为 false.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>索引的名称. 如果未指定, MongoDB 会通过连接索引的字段名和排序顺序(1/-1)生成一个索引名称.</td>
+</tr>
+<tr>
+<td>dropDups</td>
+<td>Boolean</td>
+<td>在建立唯一索引时是否删除重复记录, 指定 true 创建唯一索引. 默认值为 false.</td>
+</tr>
+<tr>
+<td>sparse</td>
+<td>Boolean</td>
+<td>对文档中不存在的字段数据不启用索引; 这个参数需要特别注意, 如果设置为 true 的话, 在索引字段中不会查询出不包含对应字段的文档.. 默认值为 false.</td>
+</tr>
+<tr>
+<td>expireAfterSeconds</td>
+<td>integer</td>
+<td>指定一个以秒为单位的数值, 完成 TTL 设定, 设定集合的生存时间.</td>
+</tr>
+<tr>
+<td>v</td>
+<td>index version</td>
+<td>索引的版本号. 默认的索引版本取决于 mongod 创建索引时运行的版本.</td>
+</tr>
+<tr>
+<td>weights</td>
+<td>document</td>
+<td>索引权重值, 数值在 1 到 99,999 之间, 表示该索引相对于其他索引字段的得分权重.</td>
+</tr>
+<tr>
+<td>default_language</td>
+<td>string</td>
+<td>对于文本索引, 该参数决定了停用词及词干和词器的规则的列表.  默认为英语</td>
+</tr>
+<tr>
+<td>language_override</td>
+<td>string</td>
+<td>对于文本索引, 该参数指定了包含在文档中的字段名, 语言覆盖默认的language, 默认值为 language.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">查询索引</h2>
+<p><strong>getIndexes()</strong> 该当可以查询当前已有的索引信息, 以之前创建的 col 集合为例:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.col.getIndexes()
+[
+        {
+                &quot;v&quot; : 1,
+                &quot;key&quot; : {
+                        &quot;_id&quot; : 1
+                },
+                &quot;name&quot; : &quot;_id_&quot;,
+                &quot;ns&quot; : &quot;runoob.col&quot;
+        }
+]
+</pre></div>
+
+
+<p><br></p>
+<p>返回值分析:</p>
+<ul>
+<li>v: 索引的版本号, 暂时发现无叼用</li>
+<li>key: 索引对应的 field, 后面的数字表示排序</li>
+<li>name: 索引的名称, 如果未指定, MongoDB 会通过连接索引的字段名和排序顺序(1/-1)生成一个索引名称</li>
+<li>ns: 索引所属的数据库和集合</li>
+</ul>
+<h2 id="_3">删除索引</h2>
+<p><strong>dropIndex()</strong> 方法用来删除索引</p>
+<ul>
+<li>db.tab.dropIndex(&lt;indexname>) 删除指定索引, 有两种方式<ul>
+<li>db.tab.dropIndex(&lsquo;age_1&rsquo;) age_1 为 getIndexes() 看到的 name</li>
+<li>db.tab.dropIndex({age: 1}) {age: 1} 为创建索引时的参数</li>
+</ul>
+</li>
+<li>db.tab.dropIndexes() 删除所有索引</li>
+</ul>
+<h2 id="explain">explain</h2>
+<p>explain() 方法是一个对查询非常有用的工具, 可以用来查看查询命令的详情, 例如是否使用了索引、消耗了多久, 以及扫描了多少文档才得到结果.</p>
+<p>先看一个没有走索引的例子:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.col.find().explain()
+{
+    <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BasicCursor&quot;</span>,
+    <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [],
+    <span style="color: #BB4444">&quot;nscanned&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;nscannedObjects&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;n&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;millis&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">0</span>,
+    <span style="color: #BB4444">&quot;allPlans&quot;</span><span style="color: #666666">:</span> [
+        {
+            <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BasicCursor&quot;</span>,
+            <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> []
+        }
+    ]
+}
+</pre></div>
+
+
+<p><br>
+重点返回值:</p>
+<ul>
+<li>cursor: BasicCursor, 这个表示没有使用索引, 等下会演示下使用了索引的情形.</li>
+<li>nscanned: 64, 数据库查找了多少个文档</li>
+<li>n: 64, 返回了多个少文档, 即查询结果</li>
+<li>millis: 0, 耗时</li>
+</ul>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.col.find({age<span style="color: #666666">:</span> {$gt<span style="color: #666666">:</span> <span style="color: #666666">20</span>, $lt<span style="color: #666666">:</span> <span style="color: #666666">30</span>}}).explain()
+{
+    <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BtreeCursor age_1&quot;</span>,
+    <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [
+        [
+            {
+                <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">20</span>
+            },
+            {
+                <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">30</span>
+            }
+        ]
+    ],
+    <span style="color: #BB4444">&quot;nscanned&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">14</span>,
+    <span style="color: #BB4444">&quot;nscannedObjects&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">12</span>,
+    <span style="color: #BB4444">&quot;n&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">12</span>,
+    <span style="color: #BB4444">&quot;millis&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">1</span>,
+    <span style="color: #BB4444">&quot;allPlans&quot;</span><span style="color: #666666">:</span> [
+        {
+            <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BtreeCursor age_1&quot;</span>,
+            <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [
+                [
+                    {
+                        <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">20</span>
+                    },
+                    {
+                        <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">30</span>
+                    }
+                ]
+            ]
+        }
+    ]
+}
+</pre></div>
+
+
+<p><br>
+重点返回值:</p>
+<ul>
+<li>cursor: BtreeCursor age_1, 表示使用了索引 age_1</li>
+<li>allPlans: 包含所有可能用到的索引尝试, 这个例子很明确的表示只有 age_1 可用</li>
+</ul>
+<h2 id="hint">hint</h2>
+<p>hint() 方法可以强制查询使用某个索引, 这在需要指定搜索顺序时比较有用.</p>
+<p>假设已有 {&lsquo;username&rsquo;: 1, &lsquo;age&rsquo;: 1} 和 {&lsquo;age&rsquo;: 1, &lsquo;username&rsquo;: 1} 两个索引, 你可以通过 hint() 指定使用哪条索引, 通常 Mongodb 自身会帮你选择.</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

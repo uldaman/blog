@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>12、程序启动界面</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/12-cheng-xu-qi-dong-jie-mian.html" rel="bookmark"
+        title="Permalink to 12、程序启动界面">12、程序启动界面</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-16T14:42:00+08:00">周一 16 五月 2016
+</h6>
+
+
+    <p>当程序的初始化工作比较多, 程序可能启动较长时间后, 窗口才会显示出来, 用户没准会抱怨程序响应的慢.<br>
+为了改善用户体验, 最好在程序初始化这段时间显示 logo, 或者其他信息提示用户程序已启动, QT 提供了 QSplashScreen 类, 其使用方法比较简单.</p>
+<blockquote>
+<p>The QSplashScreen widget provides a splash screen that can be shown during application startup.</p>
+</blockquote>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">PyQt4.QtGui</span> <span style="color: #AA22FF; font-weight: bold">import</span> QApplication, QSplashScreen, QPixmap
+
+app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
+splash <span style="color: #666666">=</span> QSplashScreen(QPixmap(<span style="color: #BB4444">&#39;:/splash.png&#39;</span>))  <span style="color: #008800; font-style: italic"># step1, 创建一个 splash</span>
+splash<span style="color: #666666">.</span>show()  <span style="color: #008800; font-style: italic"># step2, 显示 splash</span>
+app<span style="color: #666666">.</span>processEvents()  <span style="color: #008800; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
+dlg <span style="color: #666666">=</span> Dialog()
+dlg<span style="color: #666666">.</span>show()
+splash<span style="color: #666666">.</span>finish(dlg);  <span style="color: #008800; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
+sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
+</pre></div>
+
+
+<p><br>
+你还可以通过 QSplashScreen 的 showMessage 方法在 splash screen 上打印提示信息:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">showMessage (<span style="color: #AA22FF">self</span>, QString message, <span style="color: #AA22FF">int</span> alignment <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>AlignLeft, QColor color <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>black)
+</pre></div>
+
+
+<p><br></p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

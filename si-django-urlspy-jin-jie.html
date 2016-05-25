@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(四) Django urls.py 进阶</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/si-django-urlspy-jin-jie.html" rel="bookmark"
+        title="Permalink to (四) Django urls.py 进阶">(四) Django urls.py 进阶</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-09-23T06:13:00+08:00">周三 23 九月 2015
+</h6>
+
+
+    <p>原 urls.py:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page
+
+urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, Page),
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;}),
+]&lt;/span&gt;
+</pre></div>
+
+
+<p>更改后:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.conf.urls &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; patterns
+
+urlpatterns &lt;/span&gt;= patterns(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;web.views&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Page&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;),
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Page&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;}), &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;注意这里需要使用单引号&lt;/span&gt;
+)
+</pre></div>
+
+
+<p>可以看到, 引入了 patterns, 并且不再需要 from view import Page, 当需要导入众多函数时, 这将非常有用.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.conf.urls &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; include, url, patterns
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
+
+urlpatterns &lt;/span&gt;= patterns(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;web.views&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Page&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;),
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Page&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;}),
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^add/(?P&lt;name&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Add&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;),
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^dele/(?P&lt;id&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Delete&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;),
+......
+)&lt;/span&gt;
+</pre></div>
+
+
+<p>不用写一长串的 from views import Page, Add, Delete, Update, All, Login, Regist, DoAjax, Search</p>
+<hr />
+<h4 id="urlspy">在 <a href="http://www.smallcpp.com/small_892.php">路由系统</a> 这一章中, 介绍了 urls.py 的其他应用.</h4>
+<p>如,<strong> url 转发</strong>, <strong>正则命名组</strong>, <strong>附带参数</strong> 等.
+nle</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

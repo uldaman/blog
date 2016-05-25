@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[CEGUI]. 3、VS 环境设置'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/cegui-3-vs-huan-jing-she-zhi.html" rel="bookmark"
+        title="Permalink to '[CEGUI]. 3、VS 环境设置'">'[CEGUI]. 3、VS 环境设置'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">周五 29 五月 2015
+</h6>
+
+
+    <p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
+<p>首先是 Debug 和 Release 版本通用设置:</p>
+<ol>
+<li>[包含目录] 和 [库目录] 的设置
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+</ol>
+<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
+E:\Microsoft DirectX SDK (June 2010)\Include;
+E:\cegui-0.8.4\dependencies\include;
+E:\cegui-0.8.4\cegui\include;</p>
+<p>库目录也这么设置:
+E:\Microsoft DirectX SDK (June 2010)\Lib\x86;
+E:\cegui-0.8.4\dependencies\lib;
+E:\cegui-0.8.4\bin;</p>
+<ol>
+<li>
+<p>设置[字符集]
+<img alt="" src="http://i61.tinypic.com/35858j7.jpg" />
+设置成 [使用多字节字符集]</p>
+</li>
+<li>
+<p>设置 C++ 异常
+<img alt="" src="http://i58.tinypic.com/3007ha8.jpg" />
+设置成 [是, 但有 SEH 异常(/EHa)]</p>
+</li>
+<li>
+<p>取消 预编译头
+<img alt="" src="http://i58.tinypic.com/11w3p20.jpg" /></p>
+</li>
+</ol>
+<p>以上是需要 Debug 和 Release 分别设置一次的, 都这么设置一次就可以了, 接下来是<strong>两个版本不同的设置</strong>部分, 即 [<strong>附加依赖项</strong>] 的设置:</p>
+<p><img alt="" src="http://i59.tinypic.com/28vzxfr.jpg" /></p>
+<p><strong>Debug 版本:</strong>
+dynamic\freetype_d.lib
+dynamic\pcre_d.lib
+E:\cegui-0.8.4\lib\CEGUIBase-0_d.lib
+winmm.lib
+DbgHelp.lib
+E:\cegui-0.8.4\lib\CEGUIDirect3D9Renderer-0_d.lib</p>
+<p><strong>Release 版本:</strong>
+dynamic\freetype.lib
+dynamic\pcre.lib
+E:\cegui-0.8.4\lib\CEGUIBase-0.lib
+winmm.lib
+DbgHelp.lib
+E:\cegui-0.8.4\lib\CEGUIDirect3D9Renderer-0.lib</p>
+<p>可以看到, Debug 使用的是 xxx_d.dll, 而 Release 使用的是 xxx.dll.</p>
+<blockquote>
+<p>&ldquo;</p>
+</blockquote>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

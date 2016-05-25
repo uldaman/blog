@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>05、Mongodb Cursor</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/05-mongodb-cursor.html" rel="bookmark"
+        title="Permalink to 05、Mongodb Cursor">05、Mongodb Cursor</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-04-08T22:54:00+08:00">周五 08 四月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">什么是游标?</a></li>
+<li><a href="#_2">游标基础使用</a></li>
+<li><a href="#limit-skip-sort">limit, skip, sort</a></li>
+<li><a href="#foreach">forEach 方法</a></li>
+<li><a href="#map">map 方法</a></li>
+<li><a href="#_3">更多</a></li>
+</ul>
+</div>
+<h2 id="_1">什么是游标?</h2>
+<p>游标是数据库系统为用户开设的一个数据缓冲区, 用户可以逐一从游标中获取记录, 这相当于一种__懒加载__形式, 当通过 <strong>find()</strong> 获取数据时, 并没有真正的去查询数据库, 而是返回一个游标, 只要当用到的时候(也就是遍历游标的时候)才会到数据库中将数据取出来, 其操作方法有点类似__迭代器__.</p>
+<p>游标主要是为了达到延长执行的效果, 客户端通过对游标进行一些设置就能对查询结果进行有效地控制, 如: 可以限制查询得到的结果数量、跳过部分结果、或对结果集按任意键进行排序等!</p>
+<p>直接对一个集合调用 <strong>find()</strong> 方法时, 如果查询结果超过二十条, 只会返回二十条的结果, 这是因为 Mongodb 会自动递归 find() 返回的游标:</p>
+<p><img alt="" src="http://i63.tinypic.com/2uy3a6t.jpg" /></p>
+<h2 id="_2">游标基础使用</h2>
+<p>当使用一个变量来保存 <strong>find()</strong> 的返回值时, 就会获取到该查询动作的 Cursor.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">var cursor = db.num.find()
+</pre></div>
+
+
+<p><br></p>
+<ul>
+<li>cursor.count(): 获取查询到的结果数量</li>
+<li>cursor.hasNext(): 是否还有数据</li>
+<li>cursor.next(): 取得数据</li>
+<li>cursor.objsLeftInBatch(): 还剩多少条结果, 即还可以迭代几次</li>
+<li>cursor.toArray(): 将游标转换成数组, 然后就可以通过下标来访问数据, 如 cursor.toArray()[0]</li>
+</ul>
+<h2 id="limit-skip-sort">limit, skip, sort</h2>
+<p>我们已经知道了 <strong>find()</strong> 方法其实返回的是游标, 所以 limit, skip sort 这些方法其实是操作游标的&hellip;</p>
+<ul>
+<li>limit: 限制游标返回的数量, 指定了上限</li>
+<li>skip: 忽略前面的部分文档, 如果文档总数量小于忽略的数量, 则返回空集合</li>
+<li>sort: 得到的子集合进行排序, 可以按照多个键进行正反排序</li>
+</ul>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">var cursor = db.num.find()
+cursor.sort({&quot;var&quot;: -1})
+
+var cursor = db.num.find()
+cursor.limit(5)
+
+var cursor = db.num.find()
+cursor.limit(5).skip(3)
+</pre></div>
+
+
+<p><br></p>
+<h2 id="foreach">forEach 方法</h2>
+<p><strong>forEach()</strong> 方法用来遍历游标, 并且可以提供一个 <strong>function</strong> 做为回调函数, 在遍历时, 将传入的 function 依次作用到 Cursor 中的每条数据上.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">cursor.forEach(fuction(doc) {print(doc.name)})
+&#39;张三&#39;
+&#39;李四&#39;
+&#39;王五&#39;
+</pre></div>
+
+
+<p><br></p>
+<h2 id="map">map 方法</h2>
+<p><strong>map()</strong> 方法功能与 <strong>forEach()</strong> 一致, 但它可以接受返回值, 并把返回结果放到一个数组中.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">cursor.map(fuction(doc) {return doc.name})
+[&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
+</pre></div>
+
+
+<p><br></p>
+<h2 id="_3">更多</h2>
+<p>关于游标的更多操作, 参考<a href="https://docs.mongodb.org/manual/reference/method/js-cursor/">官方文档</a></p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

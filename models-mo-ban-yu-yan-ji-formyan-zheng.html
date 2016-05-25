@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>models -- 模板语言及Form验证</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/models-mo-ban-yu-yan-ji-formyan-zheng.html" rel="bookmark"
+        title="Permalink to models -- 模板语言及Form验证">models -- 模板语言及Form验证</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-09-06T08:59:00+08:00">周日 06 九月 2015
+</h6>
+
+
+    <p><strong>模板语言</strong></p>
+<p>依赖于 Python, 可以把数据内嵌到 html 中展示.</p>
+<p>eg:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;meta &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;charset&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;UTF-8&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;你好&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;table &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;border&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;1px&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+            {% for item in data %}
+                &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;tr&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{item.id}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{item.hostName}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;td&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+                &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;tr&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+            {% endfor %}
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;table&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;div&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+
+
+
+
+
+
+
+
+
+&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; settings.py&lt;/span&gt;
+TEMPLATE_DIRS =&lt;span style=&quot;color: #000000&quot;&gt; (
+    os.path.join(BASE_DIR, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;web/template&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;),
+)
+
+TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
+    {
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;BACKEND&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;: &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.template.backends.django.DjangoTemplates&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;DIRS&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;: TEMPLATE_DIRS, &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 这里本身是[ ], 需要改成 TEMPLATE_DIRS&lt;/span&gt;
+        &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;APP_DIRS&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: True,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;OPTIONS&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: {
+            &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;context_processors&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: [
+                &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.template.context_processors.debug&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+                &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.template.context_processors.request&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+                &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.auth.context_processors.auth&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+                &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.messages.context_processors.messages&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+            ],
+        },
+    },
+]&lt;/span&gt;
+
+
+
+
+
+
+
+
+
+&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; views.py in web&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request):
+    itemList &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; Asset.objects.all()
+    result &lt;/span&gt;= render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;data&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:itemList})
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; result
+</pre></div>
+
+
+<p>if html 模板</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;{% if xx %}
+    true
+{% else %}
+    假
+{% endif %}&lt;/span&gt;
+</pre></div>
+
+
+<p>需要注意, 没有 elseif 这种语法, 如果想要实现, 就需要在 else 里再使用 if 模板.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;{% ifequal xx &#39;yy&#39; %}
+    true 如果 xx == yy
+{% else %}
+    假
+{% endif %｝&lt;/span&gt;
+</pre></div>
+
+
+<p>模板还有一些帮助方法, 可以快速实现某些功能, 如首字母大写等.</p>
+<p>帮助方法：
+{{ xxx|date:&rdquo;Y-m-d H:i:s&rdquo;}}
+{{ xxx|truncatewords:&rdquo;30&rdquo; }}
+{{ xxx|first|upper }}
+{{ xxx|lower }}
+具体可自行搜索, 另外还可以通过 <strong>simple_tag</strong> 来自定义帮助方法:</p>
+<ol>
+<li>
+<p>在 app 中创建 templatetags 包</p>
+</li>
+<li>
+<p>创建任意 .py 文件，如：xx.py</p>
+<p><span style="color: #008000">#</span><span style="color: #008000">!/usr/bin/env python</span><span style="color: #008000"></p>
+<h1 id="codingutf-8"></span><span style="color: #008000">coding:utf-8</span></h1>
+<p><span style="color: #0000ff">from</span> django <span style="color: #0000ff">import</span><span style="color: #000000"> template
+</span><span style="color: #0000ff">from</span> django.template.base <span style="color: #0000ff">import</span><span style="color: #000000"> resolve_variable, Node, TemplateSyntaxError</p>
+<p>register </span>=<span style="color: #000000"> template.Library()</p>
+<p>@register.simple_tag
+</span><span style="color: #0000ff">def</span><span style="color: #000000"> my_simple_time(v1,v2,v3):
+    </span><span style="color: #0000ff">return</span>  v1 + v2 +<span style="color: #000000"> v3</span></p>
+</li>
+<li>
+<p>在使用自定义 simple_tag 的 html 文件中导入之前创建的 xx.py 文件名(不用带后缀)</p>
+<p>{% load xxx %}</p>
+</li>
+<li>
+<p>使用simple_tag</p>
+<p><span style="color: #000000">{% my_simple_time 1 2 3%}</span></p>
+</li>
+<li>
+<p>在 settings中配置当前 app, 不然 Django 无法找到自定义的 simple_tag</p>
+<p>INSTALLED_APPS =<span style="color: #000000"> (
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.admin</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.auth</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.contenttypes</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.sessions</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.messages</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">django.contrib.staticfiles</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+    </span><span style="color: #800000">&lsquo;</span><span style="color: #800000">web</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">,
+)</span></p>
+</li>
+</ol>
+<hr />
+<p><strong>Form 验证</strong></p>
+<p>Form 测试时, 会遇到一个 CSRF (伪造夸张请求) 的错误, 把 settings.py 里 MIDDLEWARE_CLASSES 中的 &lsquo;django.middleware.csrf.CsrfViewMiddleware&rsquo; 注释掉就可以了.</p>
+<p>Form 验证可以使用 HTML 自带的 input 来发送数据, 也可以使用 Python 的 form(推荐).</p>
+<p><strong>使用 HTML 的 form</strong></p>
+<p>在 template 目录下建立一个 login.html 文件:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;&lt;!--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; HTML &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;--&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;meta &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;charset&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;UTF-8&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;title&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;form &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;action&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; method&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;post&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt; &lt;span style=&quot;color: #008000&quot;&gt;&lt;!--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; action 不写, 就是 Post 当前网址 &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;--&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;First name: &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;input &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; name&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;fname&quot;&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;/&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;Last name: &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;input &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; name&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;lname&quot;&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;/&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;input &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;submit&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; value&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;Submit&quot;&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;/&gt;&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;span&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;{{status}}&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;span&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;form&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;body&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+</pre></div>
+
+
+<p>修改 views.py:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; python&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Login(request):
+    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;print request.method&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; request.method == &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;POST&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+        fname &lt;/span&gt;= request.POST.get(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;fname&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, None) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 第二个参数是默认返回值&lt;/span&gt;
+        lname = request.POST.get(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;lname&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, None)
+        result &lt;/span&gt;= UserInfo.objects.filter(username=fname, password=&lt;span style=&quot;color: #000000&quot;&gt;lname).count()
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; result == 1&lt;span style=&quot;color: #000000&quot;&gt;:
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; HttpResponse(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;登录成功&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;login.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;status&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;用户名或密码错误&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;})
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;login.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;)
+</pre></div>
+
+
+<p>之所以用 filter 而不用 get, 是因为 get 方法如果结果为空时会报异常.</p>
+<p>最后在 urls.py 里做映射, 然后通过 <strong>localhost:8000/web/login/</strong> 就能进入 Login 函数, 然后返回 login.html 开始登录操作.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^login/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, Login),
+]&lt;/span&gt;
+</pre></div>
+
+
+<p><strong>使用 Python 的 form</strong></p>
+<ol>
+<li>
+<p>在 web 下新建一个 forms.py 文件</p>
+<p><span style="color: #008000">#</span><span style="color: #008000">-<em>- coding:utf-8 -</em>-</span></p>
+<p><span style="color: #0000ff">from</span> django <span style="color: #0000ff">import</span><span style="color: #000000"> forms</p>
+<p></span><span style="color: #008000">#</span><span style="color: #008000">#######################################################################</span>
+<span style="color: #0000ff">class</span><span style="color: #000000"> RegisterForm(forms.Form):
+    </span><span style="color: #800000">&ldquo;&rdquo;&ldquo;</span><span style="color: #800000">
+    注册用 Form
+    </span><span style="color: #800000">&ldquo;&rdquo;&ldquo;</span><span style="color: #000000"></p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">userName &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; forms.CharField()
+email &lt;/span&gt;= forms.EmailField(required=True)
+</pre></div>
+
+
+</li>
+<li>
+<p>在 template 目录中 regist.html</p>
+<p><span style="color: #0000ff">&lt;!</span><span style="color: #ff00ff">DOCTYPE html</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">html</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">head </span><span style="color: #ff0000">lang</span><span style="color: #0000ff">=&rdquo;en&rdquo;</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">meta </span><span style="color: #ff0000">charset</span><span style="color: #0000ff">=&rdquo;UTF-8&rdquo;</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">title</span><span style="color: #0000ff">&gt;</</span><span style="color: #800000">title</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff"></</span><span style="color: #800000">head</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">body</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">form </span><span style="color: #ff0000">action</span><span style="color: #0000ff">=&rdquo;&ldquo;</span><span style="color: #ff0000"> method</span><span style="color: #0000ff">=&rdquo;post&rdquo;</span><span style="color: #0000ff">&gt;</span> <span style="color: #008000"><!--</span><span style="color: #008000"> action 不写, 就是 Post 当前网址 </span><span style="color: #008000">--></span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">p</span><span style="color: #0000ff">&gt;</span>账号: {{form.userName}}<span style="color: #0000ff"></</span><span style="color: #800000">p</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">p</span><span style="color: #0000ff">&gt;</span>邮箱: {{form.email}}<span style="color: #0000ff"></</span><span style="color: #800000">p</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">input </span><span style="color: #ff0000">type</span><span style="color: #0000ff">=&rdquo;submit&rdquo;</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">=&rdquo;Submit&rdquo;</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">span</span><span style="color: #0000ff">&gt;</span>{{status}}<span style="color: #0000ff"></</span><span style="color: #800000">span</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff"></</span><span style="color: #800000">form</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff"></</span><span style="color: #800000">body</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff"></</span><span style="color: #800000">html</span><span style="color: #0000ff">&gt;</span></p>
+</li>
+</ol>
+<p>可以看到, 省略了 input 标签, 而改用 {{form.xxx}}.</p>
+<ol>
+<li>
+<p>在 views.py 中添加函数</p>
+<p><span style="color: #0000ff">from</span> forms <span style="color: #0000ff">import</span><span style="color: #000000"> RegisterForm</p>
+<p></span><span style="color: #0000ff">def</span><span style="color: #000000"> Regist(request):
+    </span><span style="color: #008000">#</span><span style="color: #008000">print request.method</span>
+    <span style="color: #0000ff">if</span> request.method == <span style="color: #800000">&lsquo;</span><span style="color: #800000">POST</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">:
+        regist </span>=<span style="color: #000000"> RegisterForm(request.POST)
+        </span><span style="color: #0000ff">if</span> regist.is_valid(): <span style="color: #008000">#</span><span style="color: #008000"> 如果格式满足要求, 例如 邮箱必须是有 @ 的</span>
+            data = regist.cleaned_data <span style="color: #008000">#</span><span style="color: #008000"> 获取数据</span>
+            result = <span style="color: #800000">&lsquo;</span><span style="color: #800000">注册成功, 账号:%s  邮箱:%s</span><span style="color: #800000">&lsquo;</span> % (data[<span style="color: #800000">&lsquo;</span><span style="color: #800000">userName</span><span style="color: #800000">&lsquo;</span>], data[<span style="color: #800000">&lsquo;</span><span style="color: #800000">email</span><span style="color: #800000">&lsquo;</span><span style="color: #000000">])
+            </span><span style="color: #0000ff">return</span><span style="color: #000000"> HttpResponse(result)
+        </span><span style="color: #0000ff">else</span><span style="color: #000000">:
+            </span><span style="color: #008000">#</span><span style="color: #008000"> 验证失败</span>
+            <span style="color: #0000ff">return</span><span style="color: #000000"> HttpResponse(regist.errors.as_json())
+    </span><span style="color: #0000ff">else</span><span style="color: #000000">:
+        regist </span>=<span style="color: #000000"> RegisterForm()
+        </span><span style="color: #0000ff">return</span> render_to_response(<span style="color: #800000">&lsquo;</span><span style="color: #800000">regist.html</span><span style="color: #800000">&lsquo;</span>, {<span style="color: #800000">&lsquo;</span><span style="color: #800000">form</span><span style="color: #800000">&lsquo;</span>:regist})</p>
+</li>
+<li>
+<p>最后在 urls.py 中映射下即可.
+   </p>
+</li>
+</ol>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

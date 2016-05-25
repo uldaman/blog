@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>1、QT基础</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/1-qtji-chu.html" rel="bookmark"
+        title="Permalink to 1、QT基础">1、QT基础</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-15T14:08:00+08:00">周日 15 二月 2015
+</h6>
+
+
+    <h1 id="qt">QT是什么?</h1>
+<ol>
+<li>一个基于C++语言的框架(就是封装了很多类库, 我们可以直接拿来用)</li>
+<li>一个专注于用户图形界面的框架</li>
+<li>一个跨平台的框架</li>
+</ol>
+<p>QT不仅仅是 GUI 组件. 使用 Qt, 在一定程度上你获得的是一个&rdquo;一站式&rdquo;的解决方案: 不再需要研究 STL, 不再需要 C++ 的<string>, 不再需要到处去找解析 XML、连接数据库、访问网络的各种第三方库, 因为 Qt 自己内置了这些技术.</p>
+<h1 id="qt_1">QT的主要工具</h1>
+<p>qmake : 可以把 C++ 的代码文件组织成一个 .pro 文件(QT的工程文件), 继续生成 Makefile 文件(编译文件)</p>
+<p>qmake –v : 查看 qmake 的版本</p>
+<p>qmake –project : 生成 .pro 的命令</p>
+<p>make : 根据生成的 Makefile 文件编译连接, 生成可执行文件</p>
+<p>assistant : Qt 的帮助手册</p>
+<p>designer : 设计器, 用于设计界面, 设计出来的文件以 .ui 为后缀(就是用来拖拽控件的&hellip;)</p>
+<p>uic : 用于把 .ui 文件转换成.h文件</p>
+<p>qtcreator : Qt 的集成开发环境</p>
+<h1 id="qt-vs-qt">编写Qt程序的流程(了解下就行, 我们将使用 vs + Qt 方式编程)</h1>
+<p>编写 .cpp 文件</p>
+<p>使用 qmake –project 生成项目描述文件(.pro)</p>
+<p>使用 qmake 生成 Makefile 文件</p>
+<p>使用 make 生成可执行文件</p>
+<p>注意: 任何一个 Qt 程序都要看作成工程, 放在一个单独的文件夹中.</p>
+<p>当然这是 Qt 本身的编写流程, 我们在 windows 下开发, 可以和 vs 结合起来, 那将方便很多.</p>
+<p>??</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

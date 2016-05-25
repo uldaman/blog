@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>031、容器</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/031-rong-qi.html" rel="bookmark"
+        title="Permalink to 031、容器">031、容器</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-20T23:29:00+08:00">周日 20 三月 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">总览</a></li>
+<li><a href="#collection">Collection</a></li>
+<li><a href="#map">Map 家族</a></li>
+<li><a href="#_2">工具类</a><ul>
+<li><a href="#contains-in-collection">contains in Collection</a></li>
+<li><a href="#contains-in-map">contains in Map</a></li>
+<li><a href="#indexof">indexOf:</a></li>
+<li><a href="#lastindexof">lastIndexOf</a></li>
+</ul>
+</li>
+<li><a href="#collections">Collections</a><ul>
+<li><a href="#collectionssort">Collections.sort()</a></li>
+</ul>
+</li>
+<li><a href="#_3">迭代器</a></li>
+<li><a href="#treemap">TreeMap</a></li>
+<li><a href="#treeset">TreeSet</a></li>
+<li><a href="#hashtable">hashtable</a></li>
+</ul>
+</div>
+<h2 id="_1">总览</h2>
+<p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
+<p>Java 中的容器有两大接口: <strong>Collection</strong> 和 <strong>Map</strong>;</p>
+<p>Collection 又分为三个小接口: <em>List</em>、<em>Queue</em> 和 <em>Set</em>.</p>
+<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
+<p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
+<h2 id="collection">Collection</h2>
+<p>Collection 接口是 List、Set 和 Queue 接口的父接口, 它定义了可用于操作 List、Set 和 Queue 的方法(增、删、改、查).</p>
+<p>List 是元素有序并且可以重复的集合, List 可以精确控制每个元素的插入位置, 或删除某个位置的元素.</p>
+<p>ArrayList 是数组序列, 是 List 接口的一个重要实现类, 它的底层是由数组实现的.</p>
+<p>Set 和 List 类似, 最大的不同就是 List 是可以__有序并且可重复__的, 而 Set 是__无序并且不能重复__的.</p>
+<ul>
+<li>List 适合经常追加数据, 插入, 删除数据, 但随即取数效率比较低.</li>
+<li>Set 适合经常地随即储存, 插入, 删除, 但是在遍历时效率比较低.</li>
+</ul>
+<p>这个其实也没什么好记的了, 有 STL 基础, 学这个太简单, 上一份例子代码(附视频解说):</p>
+<p><a href="http://yunpan.cn/cQsGPx38k4ISg">http://yunpan.cn/cQsGPx38k4ISg</a> 访问密码 8bf2</p>
+<p><a href="http://static.video.qq.com/TPout.swf?vid=d0156knzsv7&amp;auto=0">视频解说</a></p>
+<p>需要注意的是 Java 中的泛型不能是基本数据类型, 必须是其__包装类__, 如, ArrayList&lt;Integer>.</p>
+<h2 id="map">Map 家族</h2>
+<p>Map 接口提供了一种映射关系, 其中的元素以__键值对__(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
+<p>Map 中的键值对以 <strong>Entry</strong> 类型的对象实例形式存在(stl::map 中是 value_type).</p>
+<p>Map 中的键值对中的 key 值是不可重复的, value 值则可以, 这一点 stl::map 也是一样的, 同样的, stl 提供了 multimap 来实现 key 值可重复的 map, Java 也提供了 key 值可以重复的 map, 就是 <strong>IdentityHashMap</strong>.</p>
+<p>Map 插入键值对的方法不同于上一篇中学过的 add 方法, 它使用的是 <strong>put</strong> 方法, 参数为 key 值 和 value 值.</p>
+<p>Map 中常用的方法:</p>
+<ul>
+<li>keySet(): 返回 Map 中包含的键的 Set.</li>
+<li>values(): 返回 Map 中包含的值的 Connection.</li>
+<li>entrySet(): 返回 Map 中包含的映射关系的 Set.</li>
+</ul>
+<p><strong>HashMap</strong> 类是 Map 接口的一个重要实现类, 也是最常用的, 基于哈希表实现.</p>
+<p>HashMap 中的 Entry 对象是无序排列的.</p>
+<p>Key 和 Value 都可以为 null, 但是一个 HashMap 只能有一个 key 为 null 的映射(因为 key 不能重复).</p>
+<p>实例:</p>
+<p>Collection 中的例子是一个学生选课的案例, 已经可以通过 List、Set 来管理备选课程, 现在继续为其添加功能, 通过 Map<String, Student> 进行学生信息管理, Key 为学生 ID, value 为学生对象.</p>
+<p><a href="http://yunpan.cn/cQAGwDcYmtdDP">http://yunpan.cn/cQAGwDcYmtdDP</a>  访问密码 ce09</p>
+<h2 id="_2">工具类</h2>
+<h3 id="contains-in-collection">contains in Collection</h3>
+<ul>
+<li>contains: 判斷 Collection 中是否包含某元素, 包含返回 true</li>
+<li>判斷 Collection 中是否包含指定的所有元素</li>
+</ul>
+<p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題?</p>
+<p>這裡 List 和 Set 的解決方法是不同的:</p>
+<p><strong>先看 List:</strong><br>
+首先要知道 List 中 contains 的原理, contains 內部其實就是遍歷使用 equals 方法, equals 方法比較的是地址, 因此我們只要重寫 equals 方法就能解決這個問題, 之前說過 String 對象可以通過 equals 來判斷字符串值是否相等, 就是因為 String 類重寫了 equals 方法.</p>
+<p><strong>再看 Set:</strong><br>
+Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個 <strong>hashCode()</strong> 方法, 它返回對象的哈希碼值, 當我們調用 HashSet 中的 contains 方法時, 先調用的是 hashCode() 判斷對象哈希碼是否相同, 再調用 equals() 判斷.<br></p>
+<blockquote>
+<p>这里补充下, 经过老师指点, 证明其判断流程应该是 o1.hash == o2.hash &amp;&amp; ((o1 == o2) || (o1.equals(o2)))<br>
+先判断两个对象的 hash, 然后判断两个对象的地址(即 == 号), 然后才是判断 equals</p>
+</blockquote>
+<p>hashCode() 是 jdk 根据对象的地址或者字符串或者数字算出来的 int 类型的数值.<br>
+在 SetMap 中, 由于 key 是不可以重复的, 它在判断 key 是不是重复的时候就判断了 hashcode 这个方法, 而且也用到了 equals 方法, 这里不可以重复是说 equals 和 hashcode 只要有一个不等就可以了!<br>
+所以简单来讲, hashcode 相当于是一个对象的编码, 就好像文件中的 md5, 他和 equals 不同就在于他返回的是 int 型的, 比较起来不直观, 我们一般在覆盖 equals 的同时也要覆盖 hashcode, 让他们的逻辑一致.<br>
+举个例子, 如果一個對象有姓名和性别兩個屬性, 我们想要的是, 如果兩個對象的姓名和性别相等, 就说兩个对象是相等的, 那么我們就要重寫 equals 方法, 讓它判斷姓名和性別, 同時還要重寫 hashcode 方法, 讓它也要返回姓名的 hashcode 值加上性别的 hashcode 值, 这样从逻辑上, equals() 和 hashcode() 就一致了.</p>
+<blockquote>
+<p>Eclipse 提供了快捷重寫 hashCode() 和 equasl() 方法的功能, 在 [編輯] – [源碼] 裡就能找到.</p>
+</blockquote>
+<h3 id="contains-in-map">contains in Map</h3>
+<ul>
+<li>containskey() 用來判斷 Map 中是否包含某個 key 值.</li>
+<li>containsValue() 用來判斷 Map 中是否包含某個 value 值.</li>
+</ul>
+<p>這兩個內部還是調用的 equals 和 hashcode 方法, 如果有特殊需求, 可以重寫這兩個方法.</p>
+<h3 id="indexof">indexOf:</h3>
+<p>獲取 List 中某元素的最先出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
+<h3 id="lastindexof">lastIndexOf</h3>
+<p>獲取 List 中某元素的最後出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
+<h2 id="collections">Collections</h2>
+<p>Collections 是 Java.util 中的一個工具類, 它提供了一個對 Collection 的操作.</p>
+<h3 id="collectionssort">Collections.sort()</h3>
+<p>排序, 默認是升序排序, 如果要對容器進行排序, 那麼容器裡的保存的對象必須實現 Comparable 接口, 具體應用參考 api 幫助.</p>
+<ul>
+<li>Comparable 接口 -- 默認排序規則</li>
+<li>Comparator 接口 -- 臨時比較規則</li>
+</ul>
+<p>Comparable -- 可比较的</p>
+<ul>
+<li>实现该接口表示: 这个类的实例可以比较大小, 可以进行自然排序</li>
+<li>定义了默认的比较规则</li>
+<li>其实现类需实现 compareTo() 方法</li>
+<li>compareTo() 方法返回正数表示大, 负数表示小, 0 表示相等</li>
+</ul>
+<p>Comparator -- 比较工具接口</p>
+<ul>
+<li>用于定义_临时_比较规则, 而不是默认比较规则</li>
+<li>其实现类需要实现 compare() 方法</li>
+<li>Comparator 和 Comparable 都是 Java 集合框架的成员</li>
+</ul>
+<p>關於這兩個接口的用法可以參考網文:<br>
+<a href="http://www.cnblogs.com/gnuhpc/archive/2012/12/17/2822251.html">Comparable接口的实现和使用</a></p>
+<p>到這裡, Java 的集合框架的成員也就學習的差不多了.</p>
+<p><img alt="" src="http://i61.tinypic.com/330wvol.jpg" /></p>
+<h2 id="_3">迭代器</h2>
+<p>迭代器是一个对象, 它的工作是遍历并选择 Collection 中的对象, 而我们不必知道或者关心该 Collection 底层的结构.</p>
+<ul>
+<li>使用 next() 获得序列中的下一个元素<ul>
+<li>迭代器的 next() 方法是自动向下取元素, 要避免出现 NoSuchElementException</li>
+<li>迭代器的 next() 方法返回值类型是 Object, 所以要记得类型换</li>
+</ul>
+</li>
+<li>使用 hasNext() 检查序列中是否还有元素</li>
+<li>使用 remove() 将迭代器新返回的元素删除</li>
+</ul>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.util.*</span><span style="color: #666666">;</span>
+
+<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">SimpleIteration</span> <span style="color: #666666">{</span>
+
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        <span style="color: #008800; font-style: italic">// TODO 自动生成的方法存根</span>
+        ArrayList<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;</span> list <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ArrayList<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;();</span>
+        list<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(0));</span>
+        list<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(1));</span>
+        list<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(2));</span>
+        list<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(3));</span>
+        list<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(4));</span>
+
+        Iterator<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;</span> it <span style="color: #666666">=</span> list<span style="color: #666666">.</span><span style="color: #BB4444">iterator</span><span style="color: #666666">();</span>
+
+        <span style="color: #008800; font-style: italic">// iterator 方式遍历</span>
+        <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #BB4444">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            Integer integer <span style="color: #666666">=</span> it<span style="color: #666666">.</span><span style="color: #BB4444">next</span><span style="color: #666666">();</span>
+            System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">print</span><span style="color: #666666">(</span>integer <span style="color: #666666">+</span> <span style="color: #BB4444">&quot; | &quot;</span><span style="color: #666666">);</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">();</span>
+
+        <span style="color: #008800; font-style: italic">// 泛型 for 遍历</span>
+        <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span>Integer integer <span style="color: #666666">:</span> list<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+            System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">print</span><span style="color: #666666">(</span>integer <span style="color: #666666">+</span> <span style="color: #BB4444">&quot; | &quot;</span><span style="color: #666666">);</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">();</span>
+
+        <span style="color: #008800; font-style: italic">// 删除元素</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>list<span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 输出原始的 list</span>
+        it <span style="color: #666666">=</span> list<span style="color: #666666">.</span><span style="color: #BB4444">iterator</span><span style="color: #666666">();</span> <span style="color: #008800; font-style: italic">// 重新赋值 iterator</span>
+        <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #BB4444">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            it<span style="color: #666666">.</span><span style="color: #BB4444">next</span><span style="color: #666666">();</span>
+            it<span style="color: #666666">.</span><span style="color: #BB4444">remove</span><span style="color: #666666">();</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>list<span style="color: #666666">);</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
+</pre></div>
+
+
+<p>执行结果:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">0 | 1 | 2 | 3 | 4 |
+0 | 1 | 2 | 3 | 4 |
+[0, 1, 2, 3, 4]
+[]
+</pre></div>
+
+
+<blockquote>
+<p>如果只是希望遍历, 而并不打算修改 Collection 对象本身, 那么使用 <strong>foreach</strong> 语法会更简单.</p>
+</blockquote>
+<h2 id="treemap">TreeMap</h2>
+<p>TreeMap 中所有的元素都保持着某种固定的顺序, 如果你需要得到一个有序的结果你就应该使用 TreeMap(HashMap 中元素的排列顺序是不固定的).</p>
+<p>TreeMap 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeMap 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeMap 对象时, 传递实现 Comparator 接口的比较器对象.<br>
+如果我们自己定义的一个类的对象要加入到 TreeSet 当中, 那么这个类必须要实现 Comparable 接口.</p>
+<ul>
+<li>HashMap: 基于__哈希表__实现, 有调优选项</li>
+<li>
+<p>TreeMap: 基于__红黑树__实现, 没有调优选项, 因为该树总处于平衡状态.</p>
+</li>
+<li>
+<p>HashMap: 适用于在 Map 中插入、删除和定位元素</p>
+</li>
+<li>Treemap: 适用于按自然顺序或自定义顺序遍历键(key)</li>
+</ul>
+<blockquote>
+<p>HashMap 通常比 TreeMap 快一点(树和哈希表的数据结构使然), 建议多使用 HashMap, 在需要排序的 Map 时候才用 TreeMap.</p>
+</blockquote>
+<h2 id="treeset">TreeSet</h2>
+<p>TreeSet 是依靠 TreeMap 来实现的.</p>
+<p>所以, 同 TreeMap, TreeSet 也是一个__有序集合__, TreeSet 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeSet 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeSet 对象时, 传递实现 Comparator 接口的比较器对象.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.util.Iterator</span><span style="color: #666666">;</span>
+<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.util.*</span><span style="color: #666666">;</span>
+
+<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">TreeSetTest</span> <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        Set ts <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> TreeSet<span style="color: #666666">();</span>
+        ts<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;abc&quot;</span><span style="color: #666666">);</span>
+        ts<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;xyz&quot;</span><span style="color: #666666">);</span>
+        ts<span style="color: #666666">.</span><span style="color: #BB4444">add</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;rst&quot;</span><span style="color: #666666">);</span>
+        Iterator it <span style="color: #666666">=</span> ts<span style="color: #666666">.</span><span style="color: #BB4444">iterator</span><span style="color: #666666">();</span>
+        <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #BB4444">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #BB4444">next</span><span style="color: #666666">());</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
+</pre></div>
+
+
+<p>执行结果:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">abc
+rst
+xyz
+</pre></div>
+
+
+<p>打印结果不是和先前加入的顺序一样, 它是按照一个字母的排序法进行排序的, 这是因为 String 类实现了 Comparable 接口;<br>
+同样的, 如果自己定义的一个类的对象要加入到 TreeSet 当中, 那么这个类必须要实现 Comparable 接口.</p>
+<h2 id="hashtable">hashtable</h2>
+<p>hashtable 是线程安全的, 而 hashmap 是非线程安全的.</p>
+<p>待完善.</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

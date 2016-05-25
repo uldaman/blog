@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(二十七) Map 和 HashMap</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/er-shi-qi-map-he-hashmap.html" rel="bookmark"
+        title="Permalink to (二十七) Map 和 HashMap">(二十七) Map 和 HashMap</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-14T14:53:00+08:00">周日 14 六月 2015
+</h6>
+
+
+    <p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
+<p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
+<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map 中是 value_type).</p>
+<p>Map 中的键值对中的 key 值是不可重复的, value 值则可以, 这一点 stl::map 也是一样的, 同样的, stl 提供了 multimap 来实现 key 值可重复的 map, Java 也提供了 key 值可以重复的 map, 就是IdentityHashMap.</p>
+<p>Map 插入键值对的方法不同于上一篇中学过的 add 方法, 它使用的是 put 方法, 参数为 key 值 和 value 值.</p>
+<p>Map 中常用的方法:
+keySet(): 返回 Map 中包含的键的 Set.
+values(): 返回 Map 中包含的值的 Connection.
+entrySet(): 返回 Map 中包含的映射关系的 Set.</p>
+<p>HashMap 类是 Map 接口的一个重要实现类, 也是最常用的, 基于哈希表实现.
+HashMap 中的 Entry 对象是无序排列的.
+Key 和 Value 都可以为 null, 但是一个 HashMap 只能有一个 key 为 null 的映射(因为 key 不能重复).</p>
+<hr />
+<p>实例:</p>
+<p>上一篇笔记中做过一个学生选课的案例, 我们已经可以通过 List、Set 来管理备选课程, 现在继续为其添加功能, 通过 Map<String, Student> 进行学生信息管理, Key 为学生 ID, value 为学生对象.</p>
+<p><a href="http://yunpan.cn/cQAGwDcYmtdDP">http://yunpan.cn/cQAGwDcYmtdDP</a>  访问密码 ce09</p>
+<p>增</p>
+<p>刪</p>
+<p>改</p>
+<p>查</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

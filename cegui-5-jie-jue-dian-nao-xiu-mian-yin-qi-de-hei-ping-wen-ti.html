@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html" rel="bookmark"
+        title="Permalink to '[CEGUI]. 5、解决电脑休眠引起的黑屏问题'">'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-13T06:27:00+08:00">周六 13 六月 2015
+</h6>
+
+
+    <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
+<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
+    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+
+    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev<span style="color: #666666">-&gt;</span>Reset(pPresentationParameters);
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
+        m_PresentParam <span style="color: #666666">=</span> <span style="color: #666666">*</span>pPresentationParameters;
+        m_pManager<span style="color: #666666">-&gt;</span>PostReset();
+    }
+
+    <span style="color: #AA22FF; font-weight: bold">return</span> hRet;
+}
+</pre></div>
+
+
+<p>进入游戏初始化 CEGUI 界面, 然后休眠电脑, 再唤醒, 发现 hRet 返回 0x8876086C, 即 Reset 失败;
+如果不初始化 CEGUI 界面, 直接休眠电脑, 再唤醒则是正常的, 于是查阅 CEGUI 源代码, 发现了问题所在, 如果我们使用了 CEGUI, 那么就需要重写 Rest 方法:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
+    CEGUI<span style="color: #666666">::</span>Direct3D9Renderer<span style="color: #666666">*</span> d3d_renderer <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">nullptr</span>;
+    <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
+        CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">*</span> cegui_system <span style="color: #666666">=</span> CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">::</span>getSingletonPtr();
+        d3d_renderer <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">static_cast</span><span style="color: #666666">&lt;</span>CEGUI<span style="color: #666666">::</span>Direct3D9Renderer<span style="color: #666666">*&gt;</span>(cegui_system<span style="color: #666666">-&gt;</span>getRenderer());
+    }
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
+        d3d_renderer<span style="color: #666666">-&gt;</span>preD3DReset();
+    } <span style="color: #AA22FF; font-weight: bold">else</span> {
+        m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+    }
+
+    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev<span style="color: #666666">-&gt;</span>Reset(pPresentationParameters);
+
+    <span style="color: #AA22FF; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
+        m_PresentParam <span style="color: #666666">=</span> <span style="color: #666666">*</span>pPresentationParameters;
+
+        <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
+            d3d_renderer<span style="color: #666666">-&gt;</span>postD3DReset();
+        } <span style="color: #AA22FF; font-weight: bold">else</span> {
+            m_pManager<span style="color: #666666">-&gt;</span>PostReset();
+        }
+    }
+
+    <span style="color: #AA22FF; font-weight: bold">return</span> hRet;
+}
+</pre></div>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

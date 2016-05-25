@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>models -- 数据库表、字段及连表</title>
+
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://z351522453.github.com/theme/css/pygments.css" />	
+    <script src="http://z351522453.github.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://z351522453.github.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://z351522453.github.com/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html" rel="bookmark"
+        title="Permalink to models -- 数据库表、字段及连表">models -- 数据库表、字段及连表</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-09-05T04:30:00+08:00">周六 05 九月 2015
+</h6>
+
+
+    <p>Django 对数据库的操作比较简单, 它已经对数据库进行了封闭, 我们无需去关注数据库的细节(即无需像三层架构那样对数据库进行封闭, Django 已经为我们封装好了).</p>
+<p>首先, 打开工作目录下的 settings.py 文件, 修改 DATABASES:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">DATABASES =&lt;span style=&quot;color: #000000&quot;&gt; {
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;default&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: {
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;ENGINE&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.db.backends.mysql&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;NAME&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;newdjango&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;USER&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;root&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;PASSWORD&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;admin&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;HOST&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+        &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;PORT&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;3306&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    }
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>上面的 NAME 指的是数据库名, 如下图:
+<img alt="" src="http://i62.tinypic.com/28vwrvc.jpg" /></p>
+<p>接下来, 检查下 settings.py 里的 INSTALLED_APPS 是否包含 app:</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">INSTALLED_APPS =&lt;span style=&quot;color: #000000&quot;&gt; (
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.admin&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.auth&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.contenttypes&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.sessions&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.messages&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.staticfiles&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;web&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
+)&lt;/span&gt;
+</pre></div>
+
+
+<p>这里是最后一个 &lsquo;web&rsquo;.</p>
+<p>Django 不能自动为我们创建数据库, 但是可以为自动创建表, 现在在 models.py 中设置表和字段.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.db &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; models
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your models here.&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserInfo(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+    username = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 指定字段&lt;/span&gt;
+    password = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 指定字段&lt;/span&gt;
+</pre></div>
+
+
+<p>然后, 依次执行命令:
+<strong>python manage.py makemigrations</strong> &ndash; 基于当前的 Model 创建新的策略文件
+<strong>python manage.py migrate</strong> &ndash; 让我们在修改 Model 后可以在不影响现有数据的前提下重建表结构
+python manage.py syncdb &ndash; migrate 已具有 syncdb 的功能, 所以无需再执行
+Python 1.7 以下的版本执行 syncdb.</p>
+<p>如果报错: No module named MySQLdb
+那么就是没有安装 MySQL Python 模块, 安装下即可, 用 pip 似乎有点问题, 可以下载<a href="http://yunpan.cn/cm69fkFPDirFu">http://yunpan.cn/cm69fkFPDirFu</a> 访问密码 2f0c 安装即可.</p>
+<p><strong>常用字段
+</strong>
+<table cellpadding="2" width="798" border="0" cellspacing="0" class="table" >
+<tbody >
+<tr ></p>
+<td width="200" valign="top" >models.AutoField
+</td>
+
+<td width="596" valign="top" >`自增列
+```如果没有的话, 默认会生成一个名称为 ``id` `的列, 如果要显示的自定义一个自增列, 必须将给列设置为主键 primary_key``=``True.``
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.CharField
+</td>
+
+<td width="596" valign="top" >字符串字段
+必须指定 max_length 参数.
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.BooleanField
+</td>
+
+<td width="596" valign="top" >`布尔类型``
+`不能为空, Blank``=``True.``
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.ComaSeparatedIntegerField
+</td>
+
+<td width="596" valign="top" >用逗号分割的数字
+继承 CharField, 所以必须指定 max_lenght 参数.
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.DateField
+</td>
+
+<td width="596" valign="top" >日期类型 date
+`对于参数, auto_now ``=` `True` `则每次更新都会更新这个时间; auto_now_add 则只是第一次创建添加, 之后的更新不再改变.`
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.DateTimeField
+</td>
+
+<td width="596" valign="top" >日期类型 datetime
+同DateField的参数.
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.Decimal
+</td>
+
+<td width="596" valign="top" >十进制小数类型
+必须指定整数位 max_digits 和小数位 decimal_places.
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.EmailField
+</td>
+
+<td width="596" valign="top" >字符串类型
+对字符串进行正则表达式.
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.FloatField
+</td>
+
+<td width="596" valign="top" >`浮点类型 ``double`
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.IntegerField
+</td>
+
+<td width="596" valign="top" >整形
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.BigIntegerField
+</td>
+
+<td width="596" valign="top" >长整形
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.SmallIntegerField
+</td>
+
+<td width="596" valign="top" >数字
+`数据库中的字段有: tinyint、smallint、``int``、bigint`
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.PositiveIntegerFiel
+</td>
+
+<td width="596" valign="top" >正 Integer
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.PositiveSmallIntegerField
+</td>
+
+<td width="596" valign="top" >正 SmallInteger
+
+
+
+`integer_field_ranges ``=` `{`
+
+
+```'IntegerField'``: (``-``2147483648``, ``2147483647``),`
+
+
+```'BigIntegerField'``: (``-``9223372036854775808``, ``9223372036854775807``),`
+
+
+```'PositiveSmallIntegerField'``: (``0``, ``32767``),`
+
+
+```'PositiveIntegerField'``: (``0``, ``2147483647``),`
+
+
+`'SmallIntegerField'``: (``-``32768``, ``32767``),`
+
+
+
+
+`}`
+
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.IPAddressField
+</td>
+
+<td width="596" valign="top" >字符串类型（ip4正则表达式）
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.GenericIPAddressField
+</td>
+
+<td width="596" valign="top" >字符串类型（ip4和ip6是可选的）
+
+
+
+`参数 protocol 可以是: both、ipv4、ipv6`
+
+
+`验证时, 会根据设置报错`
+
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.NullBooleanField
+</td>
+
+<td width="596" valign="top" >允许为空的布尔类型
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.SlugField
+</td>
+
+<td width="596" valign="top" >减号、下划线、字母、数字
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.TextField
+</td>
+
+<td width="596" valign="top" >`字符串`` ``longtext`
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.TimeField
+</td>
+
+<td width="596" valign="top" >时间 HH:MM[:ss[.uuuuuu]]
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.URLField
+</td>
+
+<td width="596" valign="top" >字符串, 地址正则表达式
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >models.BinaryField
+</td>
+
+<td width="596" valign="top" >`二进制<br>``23``、models.ImageField
+图片<br>``24``、models.FilePathField 文件`
+</td>
+
+<p></tr></tbody></table></p>
+<p><strong>
+常用参数
+</strong>
+<table cellpadding="2" width="800" border="0" cellspacing="0" class="table" >
+<tbody >
+<tr ></p>
+<td width="200" valign="top" >null = True
+</td>
+
+<td width="598" valign="top" >数据库中字段是否可以为空
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >blank = True
+</td>
+
+<td width="598" valign="top" >django 的 Admin 中添加数据时是否可允许空值
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >primary_key = False
+</td>
+
+<td width="598" valign="top" >主键，对AutoField设置主键后，就会代替原来的自增 id 列
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >auto_now
+</td>
+
+<td width="598" valign="top" >自动创建---无论添加或修改，都是当前操作的时间
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >auto_now_add
+</td>
+
+<td width="598" valign="top" >自动创建---永远是创建时的时间
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >choices
+</td>
+
+<td width="598" valign="top" >
+
+GENDER_CHOICE = (
+(u'M', u'Male'),
+(u'F', u'Female'),
+)
+gender = models.CharField(max_length=2,choices = GENDER_CHOICE)
+
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >max_length
+</td>
+
+<td width="598" valign="top" >
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >default
+</td>
+
+<td width="598" valign="top" >默认值
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >verbose_name
+</td>
+
+<td width="598" valign="top" >Admin 中字段的显示名称
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >name|db_column
+</td>
+
+<td width="598" valign="top" >数据库中的字段名称
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >unique = True
+</td>
+
+<td width="598" valign="top" >不允许重复
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >db_index = True
+</td>
+
+<td width="598" valign="top" >数据库索引
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >editable = True
+</td>
+
+<td width="598" valign="top" >在 Admin 里是否可编辑
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >error_messages = None
+</td>
+
+<td width="598" valign="top" >错误提示
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >auto_created = False
+</td>
+
+<td width="598" valign="top" >自动创建
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >help_text
+</td>
+
+<td width="598" valign="top" >在 Admin 中提示帮助信息
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >validators = []
+</td>
+
+<td width="598" valign="top" >
+</td>
+
+<p></tr>
+<tr ></p>
+<td width="200" valign="top" >upload-to
+</td>
+
+<td width="598" valign="top" >
+</td>
+
+<p></tr></tbody></table></p>
+<p><strong>外键 &ndash; 多对一</strong></p>
+<p>用来形成表表对应, 即让一张表里的某些字段和另一张表里的 ID 字段形成联系.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.db &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; models
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+    name = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
+
+&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your models here.&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserInfo(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+    username = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
+    password = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
+    &lt;span style=&quot;color: #800000&quot;&gt;&#39;&#39;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;
+    建立外键
+    字段名称＋ &quot;_id&quot; 做为数据库中的列名称
+    这里最终数据库中就是 typeId_id
+    &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&#39;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+    typeId &lt;/span&gt;= models.ForeignKey(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;UserType&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;)
+</pre></div>
+
+
+<p><strong>外键 &ndash; 多对多</strong></p>
+<p>要实现多对多, 需要再创建一个&rdquo;中间表&rdquo;, 使用 Django, 它会自动帮我们创建.</p>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;strong&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+    account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+    groupName = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
+    user_relation = models.ManyToManyField(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;User&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 建立关系, Django 会自动建立中间表&lt;/span&gt;&lt;/strong&gt;
+</pre></div>
+
+
+<p><img alt="" src="http://i61.tinypic.com/fbe4pw.jpg" />
+a??</p>
+<p class="subheader">Category: <a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/archives.html">Archives</a>
+            <li><a href="http://z351522453.github.com/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://z351522453.github.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://z351522453.github.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://z351522453.github.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://z351522453.github.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://z351522453.github.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://z351522453.github.com/category/golang.html">Golang</a></li>
+            <li><a href="http://z351522453.github.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://z351522453.github.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://z351522453.github.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://z351522453.github.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://z351522453.github.com/category/linux.html">Linux</a></li>
+            <li><a href="http://z351522453.github.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://z351522453.github.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://z351522453.github.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://z351522453.github.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://z351522453.github.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://z351522453.github.com/category/zai-xue-java.html">再学 JAVA</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
