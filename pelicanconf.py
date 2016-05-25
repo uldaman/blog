@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = u'martin'
 SITENAME = u'Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.'
-SITEURL = 'http://z351522453.github.com/blog'
+SITEURL = 'http://blog.smallcpp.com'
 
 PATH = 'content'
 
