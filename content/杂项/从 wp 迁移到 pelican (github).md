@@ -5,6 +5,8 @@ Summary: 考虑了很久, 终于下定决心把博客从 wordpress 迁移到 git
 
 考虑了很久, 终于下定决心把博客从 wordpress 迁移到 github 上了, 这里作个记录, 方便以后查询.
 
+[TOC]
+
 #1. Pelican 博客搭建
 首先, 要在 github 上建立自己的主页, 方法很简单, 在自己的 github 上 new 一个 repository，名字必须是 **yourname.github.com**, 然后通过 yourname.github.com 就能访问了这个 repository 主干下的 index.html 文件了, 为方便测试, 可以手动添加一个 index.html, 然后随便写上几句话, 然后通过 yourname.github.com 查看效果.
 
@@ -137,6 +139,16 @@ MD_EXTENSIONS = [
   "admonition",
   "codehilite(guess_lang=False,pygments_style=monokai,noclasses=True)"]
 ```
+<br>
+**注意**, MD 语法高亮的设置需要 python 包 `pygments` 支持, 所以, 先安装 `pygments` 吧.
+
+> pygments\_style 可以在 [http://pygments.org/demo/](http://pygments.org/demo/?lang=cpp&sort=) 进行调试<br>
+> Reference:<br>
+> [Introduction to Pelican](http://crunk.io/post/introduction-to-pelican/)<br>
+> [Django 中使用 markdown 和代码高亮](http://fatsoon.com/python/2014/07/26/use-highlite-in-django.html)<br>
+> [Python Markdown v2.6.6 documentation » CodeHilite Extension](https://pythonhosted.org/Markdown/extensions/code_hilite.html)<br>
+> [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
+
 然后再重新用 cmd 进入 myblog 目录, 执行 **make html** + **make serve**, 访问: **http://localhost:8000/**, 看看我们的博客主题是不是已经发生变化啦~~
 
 #3. 迁移 wordpress
@@ -225,5 +237,4 @@ for file in files:
 ```
 @      CNAME        yourname.github.com
 www    CNAME        yourname.github.com
-blog   显性URL      http://www.smallcpp.com/
 ```
