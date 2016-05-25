@@ -1,0 +1,42 @@
+author: Martin
+date: 2015-06-12 10:06
+title: (十三) 封装
+
+封装, 面向对象思想三大特性之一, 概念就不多说了, 可以简单的理解成, 标准的 java 程序中, 应该通过类的方法来操作类的属性, 类的属性不应该设为 public.
+
+不过 Java 和 C++ 不一样, 它提供了 getter/setter 方法用于属性的读写, 直接上例子:
+
+
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span><span style="color: #000000"> HelloWorld {
+         </span><span style="color: #0000ff">private</span><span style="color: #000000"> String name;
+
+         </span><span style="color: #0000ff">public</span><span style="color: #000000"> String getName() {
+             </span><span style="color: #0000ff">return</span><span style="color: #000000"> name;
+         }
+
+         </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> setName(String _name) {
+             name </span>=<span style="color: #000000"> _name;
+         }
+    }</span>
+
+
+
+
+
+可以看到 getter/setter 方法从根本上就是类的普通方法, 不过是名字有特殊规定, 它的好处及作用要在以后使用 java 的一些高级特性时才会体现出来.
+
+
+
+
+使用 Eclipse 还可以自动添加 getter/setter 方法, 步骤如下:
+
+
+
+
+![](http://i60.tinypic.com/10mlulk.jpg)
+
+
+
+
+![](http://i58.tinypic.com/2up68ev.jpg)
+???

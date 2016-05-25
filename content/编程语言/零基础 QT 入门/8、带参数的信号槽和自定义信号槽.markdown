@@ -1,0 +1,209 @@
+author: Martin
+date: 2015-03-08 11:33
+title: 8、带参数的信号槽和自定义信号槽
+
+# 带参数的信号/槽
+
+首先看一个程序
+
+![](http://i59.tinypic.com/4jua0y.jpg)
+
+这个程序的功能是: 拖动滑块动态改变微调框内的数值.
+
+    <font face="M+ 1mn regular">connect(ui.verticalSlider_1, SIGNAL(valueChanged(<span style="color: #0000ff">int</span>)), ui.spinBox_1, SLOT(setValue(<span style="color: #0000ff">int</span>)));</font>
+
+
+
+
+
+
+
+实现功能的就是这句代码, 可以看到带参数的信号/槽要明确的在 connect 函数中**写出参数的类型**.
+
+
+
+
+
+
+
+
+
+
+* * *
+
+
+
+
+
+
+
+
+# 自定义信号槽
+
+
+
+
+
+
+
+Qt 的信号槽机制并不仅仅是使用系统提供的那部分, 还会允许我们自己设计自己的信号和槽.
+
+
+
+
+看下面这段代码, 它实现了一个报纸类 `Newspaper`, 一个订阅者类 Reader, 当 `Newspaper `有了新的内容的时候, Reader 可以立即得到通知.
+
+
+
+
+    <font face="M+ 1mn regular"><span style="color: #008000">//</span><span style="color: #008000">!!! Qt5</span>
+    #include <QObject>
+
+    <span style="color: #808080">/////////</span><span style="color: #008000">/ newspaper.h</span>
+    <span style="color: #0000ff">class</span></font><font face="M+ 1mn regular"><span style="color: #000000"> Newspaper
+        : </span><span style="color: #0000ff">public</span></font><font face="M+ 1mn regular"><span style="color: #000000"> QObject {
+        Q_OBJECT
+    </span><span style="color: #0000ff">public</span></font><font face="M+ 1mn regular"><span style="color: #000000">:
+        Newspaper(</span><span style="color: #0000ff">const</span> QString &</font><font face="M+ 1mn regular"><span style="color: #000000"> name) :
+            m_name(name) {
+        }
+
+        </span><span style="color: #0000ff">void</span></font><font face="M+ 1mn regular"><span style="color: #000000"> send() {
+            emit newPaper(m_name);
+        }
+
+    signals:
+        </span><span style="color: #0000ff">void</span> newPaper(<span style="color: #0000ff">const</span> QString &</font><font face="M+ 1mn regular"><span style="color: #000000">name);
+
+    </span><span style="color: #0000ff">private</span></font><font face="M+ 1mn regular"><span style="color: #000000">:
+        QString m_name;
+    };
+
+    </span><span style="color: #808080">/////////</span><span style="color: #008000">/ reader.h</span>
+    #include <QObject></font><span style="color: #000000">
+    <font face="M+ 1mn regular">#include </font></span><font face="M+ 1mn regular"><QDebug>
+
+    <span style="color: #0000ff">class</span></font><font face="M+ 1mn regular"><span style="color: #000000"> Reader
+        : </span><span style="color: #0000ff">public</span></font><font face="M+ 1mn regular"><span style="color: #000000"> QObject {
+        Q_OBJECT
+    </span><span style="color: #0000ff">public</span></font><font face="M+ 1mn regular"><span style="color: #000000">:
+        Reader() {}
+
+        </span><span style="color: #0000ff">void</span> receiveNewspaper(<span style="color: #0000ff">const</span> QString &</font><font face="M+ 1mn regular"><span style="color: #000000"> name) {
+            qDebug() </span><< <span style="color: #800000">"</span><span style="color: #800000">Receives Newspaper: </span><span style="color: #800000">"</span> <<</font><font face="M+ 1mn regular"><span style="color: #000000"> name;
+        }
+    };
+
+    </span><span style="color: #808080">/////////</span><span style="color: #008000">/ main.cpp</span>
+    #include <QCoreApplication></font><span style="color: #000000">
+
+    <font face="M+ 1mn regular">#include </font></span><font face="M+ 1mn regular"><span style="color: #800000">"</span><span style="color: #800000">newspaper.h</span><span style="color: #800000">"</span></font><span style="color: #000000">
+    <font face="M+ 1mn regular">#include </font></span><font face="M+ 1mn regular"><span style="color: #800000">"</span><span style="color: #800000">reader.h</span><span style="color: #800000">"</span>
+
+    <span style="color: #0000ff">int</span> main(<span style="color: #0000ff">int</span> argc, <span style="color: #0000ff">char</span> *</font><font face="M+ 1mn regular"><span style="color: #000000">argv[]) {
+        QCoreApplication app(argc, argv);
+
+        Newspaper newspaper(</span><span style="color: #800000">"</span><span style="color: #800000">Newspaper A</span><span style="color: #800000">"</span></font><font face="M+ 1mn regular"><span style="color: #000000">);
+        Reader reader;
+        QObject::connect(</span>&newspaper, &Newspaper::newPaper, &reader, &</font><font face="M+ 1mn regular"><span style="color: #000000">Reader::receiveNewspaper);
+
+        newspaper.send();
+
+        </span><span style="color: #0000ff">return</span></font><span style="color: #000000"><font face="M+ 1mn regular"> app.exec();
+    }</font></span>
+
+
+
+
+
+
+
+只有继承了`QObject`类的类, 才具有信号槽的能力.
+
+
+
+
+凡是 `QObject `类(不管是直接子类还是间接子类), 都应该在第一行代码写上 `**Q_OBJECT**`, 不管是不是使用信号槽，都应该添加这个宏, **Q_OBJECT 只能被添加在头文件中**.
+
+
+
+
+这个宏的展开将为我们的类提供信号槽机制、国际化机制以及 Qt 提供的不基于 C++ RTTI 的反射能力.
+
+
+
+
+这个宏将由 moc 做特殊处理(我们会在后面章节中介绍 moc, 这里可以将其理解为一种预处理器, 是比 C++ 预处理器更早执行的预处理器), 不仅仅是宏展开这么简单.
+moc 会读取标记了 Q_OBJECT 的头文件，生成以 moc_ 为前缀的文件，比如 newspaper.h 将生成 moc_newspaper.cpp.
+注意, 由于 moc **只处理头文件中的标记了 Q_OBJECT 的类声明**，不会处理 cpp 文件中的类似声明. 因此, 如果我们把 Newspaper 和 Reader 类的代码直接写于 main.cpp 中, 是无法得到 moc 的处理的.
+
+
+
+
+
+
+
+Newspaper 类的新加了一个 signals 块, 所列出的就是该类的信号.
+信号就是一个返回值是 void 的函数名, 参数是该信号需要传递的数据, 信号函数是不需要函数体的.
+Newspaper 类的 send() 函数比较简单, 只有一个语句 emit newPaper(m_name), emit 是 Qt 对 C++ 的扩展, 是一个关键字(其实也是一个宏), emit 的含义是发出, 也就是发出 newPaper() 信号, 感兴趣的接收者会关注这个信号.
+
+
+
+
+
+Reader 类更简单, 因为这个类需要接受信号, 所以我们将其继承了QObject, 并且添加了Q_OBJECT宏.
+与信号函数不同, 槽函数必须自己完成实现代码, **槽函数就是普通的成员函数**, 因此作为成员函数, 也会受到 public、private 等访问控制符的影响.
+
+
+
+
+
+
+
+
+
+
+* * *
+
+
+
+
+
+
+
+
+
+# 总结一下自定义信号槽需要注意的事项:
+
+
+
+
+
+
+
+发送者和接收者都需要是 QObject的 子类;
+
+
+
+
+
+使用 signals 标记信号函数, 信号是一个函数声明, 返回 void, 不需要实现函数代码;
+
+
+
+
+
+槽函数是普通的成员函数, 作为成员函数, 会受到 public、private、protected 的影响;
+
+
+
+
+
+使用 emit 在恰当的位置发送信号;
+
+
+
+
+
+使用 QObject::connect() 函数连接信号和槽.
+lo0

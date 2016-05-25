@@ -1,0 +1,128 @@
+author: Martin
+date: 2015-02-15 14:20
+title: 5、[C++]策略模式
+
+<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
+
+
+
+
+#### 策略模式
+
+
+回顾下简单工厂模式, 在最后的main函数中, 我们暴露了两个类, Operation类和Factory类.
+能不能对这两个类进行再封装, 使其最暴露一个类就能写完main函数呢?
+那就引入了策略模式.
+
+![策略模式](http://img.blog.csdn.net/20150212125513251)
+
+可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.
+
+
+
+
+
+    <span style="color: #0000ff;">class</span><span style="color: #000000;"> OperContext {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        Operation</span>*<span style="color: #000000;"> m_oper;
+        </span><span style="color: #0000ff;">double</span> m_dNumA = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">double</span> m_dNumB = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
+
+        OperContext(</span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp) {
+            </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                m_oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationAdd();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                m_oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationSub();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                m_oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationMul();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                m_oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationDiv();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+        }
+
+        </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            m_oper</span>->m_dNum_A =<span style="color: #000000;"> m_dNumA;
+            m_oper</span>->m_dNum_B =<span style="color: #000000;"> m_dNumB;
+            </span><span style="color: #0000ff;">return</span> m_oper-><span style="color: #000000;">GetResult();
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入操作符(+ - * / . . .):</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> cOp;
+        OperContext</span>* con = <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperContext(cOp);
+
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第一个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> con-><span style="color: #000000;">m_dNumA;
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第二个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> con-><span style="color: #000000;">m_dNumB;
+
+            </span><span style="color: #0000ff;">double</span> dResult = con-><span style="color: #000000;">GetResult();
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">结果是: </span><span style="color: #800000;">"</span> << dResult <<<span style="color: #000000;"> endl;
+        }
+        </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (...) {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入正确操作数</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        }
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+可以看到我们只暴露了一个OperContext类就能完成整个程序.
+
+所谓的策略模式, 实现的就是Context环境类, 它可以理解成一个锦囊, 是一个装策略的地方, 又是策略的应用场景.
+
+当然上面的策略模式并不是一个原始的策略模式原型, 它还结合了简单工厂模式, 在它的构造函数里通过传进的参数来生成具体的Operation对象.
+而在原始的策略模式中, 这一步是在外面进行的, 在OperContext的构造中只是一个简单的赋值.
+
+
+
+
+
+    <span style="color: #0000ff;">class</span><span style="color: #000000;"> OperContext {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        Operation</span>* m_oper =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">double</span> m_dNumA = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">double</span> m_dNumB = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
+
+        OperContext(Operation</span>*<span style="color: #000000;"> oper) {
+            m_oper </span>=<span style="color: #000000;"> oper;
+        }
+
+        </span><span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            m_oper</span>->m_dNum_A =<span style="color: #000000;"> m_dNumA;
+            m_oper</span>->m_dNum_B =<span style="color: #000000;"> m_dNumB;
+            </span><span style="color: #0000ff;">return</span> m_oper-><span style="color: #000000;">GetResult();
+        }
+    };</span>
+
+
+
+
+
+
+
+#### 解析
+
+
+策略模式是一种定义一系列算法的行为, 从概念上看, 所有这些算法完成的都是相同的工作, 只是实现不同, 它可以用相同的方式调用所有的算法, 减少了各种算法与使用算法类之间的耦合.
+
+另一个策略模式的优点是简化了单元测试, 因为每个算法都有自己的类, 可以通过自己的接口单独测试, 修改其中一个时也不会影响其他的算法.
+
+
+#### 总结
+
+
+策略模式就是用来封装算法的, 在实践中, 只要遇到需要在不同时间应用不同算法的情景, 就可以考虑使用策略模式来处理.
+rot

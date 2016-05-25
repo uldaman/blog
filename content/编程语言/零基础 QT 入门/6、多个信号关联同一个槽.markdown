@@ -1,0 +1,65 @@
+author: Martin
+date: 2015-02-28 09:51
+title: 7、多个信号关联同一个槽
+
+![](http://i62.tinypic.com/16lei6a.jpg)
+
+这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.
+
+如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.
+
+那么问题来了, 窗体怎么知道点击的是哪一个按钮?
+
+当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?
+
+答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.
+
+sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect()的第一个参数).
+
+
+
+新建 Qt 项目, 拖拽界面.
+
+![](http://i59.tinypic.com/nzlmxz.jpg)
+
+将几个按钮和编辑框的对象名分别改成: pushButton_4, pushButton_5, pushButton_6, lineEdit_Out.
+
+返回 VS 中, 在头文件中添加槽函数.
+
+
+
+
+
+    <span style="color: #0000ff;">public</span><span style="color: #000000;"> slots:
+    </span><span style="color: #0000ff;">void</span> On_Out();
+
+
+
+
+
+在.cpp实现文件中, 关联信号/槽, 和实现槽函数.
+
+
+
+
+
+    testCalc::testCalc(QWidget *<span style="color: #000000;">parent)
+        : QMainWindow(parent)
+    {
+        ui.setupUi(</span><span style="color: #0000ff;">this</span><span style="color: #000000;">);
+        connect(ui.pushButton_4, SIGNAL(clicked()), </span><span style="color: #0000ff;">this</span><span style="color: #000000;">, SLOT(On_Out()));
+        connect(ui.pushButton_5, SIGNAL(clicked()), </span><span style="color: #0000ff;">this</span><span style="color: #000000;">, SLOT(On_Out()));
+        connect(ui.pushButton_6, SIGNAL(clicked()), </span><span style="color: #0000ff;">this</span><span style="color: #000000;">, SLOT(On_Out()));
+    }
+
+
+    </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> testCalc::On_Out() {
+        ui.lineEdit_Out</span>->setText(((QPushButton*)sender())-><span style="color: #000000;">text());
+    }</span>
+
+
+
+
+
+可以看到, 在槽函数中, 我们使用了 sender 函数获取了信号来源, 我们知道信号是点击按钮发送过来的, 那么来源是 QpushButton* 类型, 所以强转一下类型, 这样就得到了我们点击的按钮对象指针.
+tsc

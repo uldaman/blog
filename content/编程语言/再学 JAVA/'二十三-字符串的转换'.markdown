@@ -1,0 +1,27 @@
+author: Martin
+date: 2015-06-13 13:28
+title: (二十三) 字符串的转换
+
+Java 提供三种方法实现基本类型向字符串转换:
+*. 使用包装类的 toString() 方法
+*. 使用 String 类的 valueOf() 方法
+*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串
+
+
+    <span style="color: #0000ff">int</span> c = 10<span style="color: #000000">;
+    String str1 </span>=<span style="color: #000000"> Integer.toString(c);
+    String str2 </span>=<span style="color: #000000"> String.valueOf(c);
+    String str3 </span>= c + "";
+
+
+
+
+将字符串转换成基本类型有两种方法:
+*. 调用包装类的 parseXxx 静态方法
+*. 调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱
+
+
+
+    String str = "10"<span style="color: #000000">;
+    </span><span style="color: #0000ff">int</span> d =<span style="color: #000000"> Integer.paseInt(str);
+    </span><span style="color: #0000ff">int</span> e = Integer.valueOf(str);

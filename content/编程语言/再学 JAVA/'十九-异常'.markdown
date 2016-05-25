@@ -1,0 +1,182 @@
+author: Martin
+date: 2015-06-13 11:38
+title: (十九) 异常
+
+Java 把异常当作对象来处理, 并定义一个基类 java.lang.Throwable 作为所有异常的超类(父类), 有两个子类 Error 和 Exception, 分别表示错误和异常.
+
+Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等. 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.
+
+Exception 是程序本身可以处理的异常, 程序中应当尽可能去处理这些异常.
+
+我们主要讨论的是 Exception.
+
+Exception 也分为两大类: 运行异常(RuntimeException)、编译异常.
+
+运行异常都是 RuntimeException 类及其子类异常, 如 NullPointerException、IndexOutOfBoundsException 等, 这些异常是不检查异常, 程序中可以选择捕获处理, 也可以不处理, 这些异常一般是由程序逻辑错误引起的, 程序应该从逻辑角度尽可能避免这类异常的发生.
+
+![](http://i60.tinypic.com/245dm52.jpg)
+
+编译异常是 RuntimeException 以外的异常, 从程序语法角度讲是必须进行处理的异常, 如果不处理, 程序就不能编译通过, 如 IOException、SQLException 等以及用户自定义的 Exception.
+
+* * *
+
+异常的处理
+
+在 Java 中, 使用 try-catch 及 try-catch-finally 来捕获并处理异常.
+
+    <span style="color: #000000">try {
+         </span><span style="color: #008000">//</span><span style="color: #008000"> 一些会抛出异常的方法</span>
+    } <span style="color: #0000ff">catch</span><span style="color: #000000"> (Exception e) {
+         </span><span style="color: #008000">//</span><span style="color: #008000"> 该异常处理代码</span>
+    }
+
+
+
+
+
+
+
+例子:
+
+
+
+    <span style="color: #0000ff">try</span><span style="color: #000000"> {
+        System.out.print(</span>"请输入你的年龄:"<span style="color: #000000">);
+        Scanner input </span>= <span style="color: #0000ff">new</span><span style="color: #000000"> Scanner(System.in);
+        </span><span style="color: #0000ff">int</span> age =<span style="color: #000000"> input.newtInt();
+        System.out.println(</span>"十年后你" + (age + 10) + "岁"<span style="color: #000000">);
+    } </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (InputMismatchException e) {
+        System.out.println(</span>"你应该输入整数!"<span style="color: #000000">);
+    }
+    System.out.println(</span>"程序结束!");
+
+
+
+
+如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println("十年后你" + (age + 10) + "岁") 这包就不会被执行, 程序会跳到 catch 语句中;
+在 try-catch 执行完后, 后续的语句会继续执行.
+
+
+
+
+    <span style="color: #000000">try {
+         </span><span style="color: #008000">//</span><span style="color: #008000"> 一些会抛出异常的方法</span>
+    } <span style="color: #0000ff">catch</span><span style="color: #000000"> (Exception e) {
+         </span><span style="color: #008000">//</span><span style="color: #008000"> 该异常处理代码</span>
+    } <span style="color: #0000ff">finally</span><span style="color: #000000"> {
+         </span><span style="color: #008000">//</span><span style="color: #008000"> 最终要执行的一些代码</span>
+    }
+
+
+
+
+为什么要用 finally?
+先看一个没有 finally 的异常处理 try-catch 语句:
+假设 count 为要使用到的资源, 并且用完要求释放此资源, 那么我们可以把释放资源的语句放到 try-catch 后执行, 当前的程序不管是在执行完 try 语句块还是 catch 语句块, 都会顺序执行到下面释放资源的语句.
+
+
+
+    <span style="color: #0000ff">int</span> count = 0;  <span style="color: #008000">//</span><span style="color: #008000">初始化资源</span>
+    <span style="color: #0000ff">try</span><span style="color: #000000"> {
+        count</span>++<span style="color: #000000">;
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 一些会抛出异常的方法</span>
+    <span style="color: #000000">
+    } </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (Exception e) {
+        </span><span style="color: #008000">//</span><span style="color: #008000"> 异常处理</span>
+    <span style="color: #000000">}
+    count </span>= 0; <span style="color: #008000">//</span><span style="color: #008000">释放资源</span>
+
+
+
+
+
+但是, 如果在 try 或 catch 中有 return 语句, 那么在每条 return 语句之前, 都要先执行释放资源的语句, 这样, 就需要在每一个可能返回的地方, 考虑如何释放资源, 最终将导致代码的复杂和冗余.
+所以, 需要 finally 语句, 把资源释放或状态还原的代码放到 finally 块中, finally 语句是在 return 语句执行之后, return 返回之前(返回到调用函数之前)执行, 此时, 就不需要再考虑各种复杂的资源释放情况.
+
+
+
+
+* * *
+
+
+
+
+
+**throw、throws关键字**
+
+
+
+
+throw 关键字是用于方法体内部, 用来抛出一个 Throwable 类型的异常;
+如果抛出了检查异常, 则还应该在方法头部声明方法可能抛出的异常类型, 该方法的调用者也必须检查处理抛出的异常, 如果所有方法都层层上抛获取的异常, 最终JVM会进行处理, 处理也很简单, 就是打印异常消息和堆栈信息;
+如果抛出的是 Error 或 RuntimeException, 则该方法的调用者可选择处理该异常.
+
+
+
+
+throws 关键字用于方法体外部的方法声明部分, 用来声明方法可能会抛出某些异常, 仅当抛出了检查异常, 该方法的调用者才必须处理或者重新抛出该异常, 当方法的调用者无力处理该异常的时候, 应该继续抛出, 而不是囫囵吞枣, 一般在 catch 块中打印一下堆栈信息做个勉强处理.
+
+
+
+
+下面给出一个简单例子, 看看如何 使用这两个关键字:
+
+
+
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">static</span> <span style="color: #0000ff">void</span> test() <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+         </span><span style="color: #008000">//</span><span style="color: #008000">抛出一个检查异常</span>
+         <span style="color: #0000ff">throw</span> <span style="color: #0000ff">new</span> Exception("方法 test 中的Exception"<span style="color: #000000">);
+    }</span>
+
+
+
+
+
+之前说到: 如果抛出了检查异常, 则该方法的调用者也必须检查处理抛出的异常;
+所以要调用 test() 的方法就必须处理 test() 抛出的异常或者添加 throws 声明将将异常继续上抛.
+
+
+
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"> compute_1() {
+        </span><span style="color: #0000ff">try</span><span style="color: #000000"> {
+            test()
+        } </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (Exception e) {
+            System.out.println(</span>"e.getMessage()"<span style="color: #000000">);
+        }
+    }
+
+    </span><span style="color: #008000">//</span><span style="color: #008000"> 或者添加 throws 声明, 将异常上抛</span>
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span> compute_2() <span style="color: #0000ff">throws</span><span style="color: #000000"> Exception {
+        test()
+    }</span>
+
+
+
+
+
+
+
+
+**Throwable类中的常用方法**
+getCause(): 返回抛出异常的原因, 如果 cause 不存在或未知, 则返回 null;
+getMessage(): 返回异常的消息信息.
+printStackTrace(): 对象的堆栈跟踪输出至错误输出流, 作为字段 System.err 的值.
+
+
+
+
+
+
+
+* * *
+
+
+自定义异常
+
+
+
+    <span style="color: #0000ff">class</span> 自定义异常类 <span style="color: #0000ff">extends</span><span style="color: #000000"> 异常类型 {
+    </span>
+
+    <span style="color: #000000">}</span>
+0a?

@@ -1,0 +1,215 @@
+author: Martin
+date: 2015-09-02 18:48
+title: python 面向对象高级编程
+
+**动态修改类的属性和方法**
+
+和 C++ 的类不同, python 中的类及其实例是可以动态修改的.
+
+    <span style="color: #008000">#</span><span style="color: #008000">动态为实例新增一个属性, 假设存在一个 Student 类</span>
+    s=<span style="color: #000000"> Student()
+    s.name </span>= <span style="color: #800000">"</span><span style="color: #800000">New Attribute</span><span style="color: #800000">"</span>
+
+
+
+
+    <span style="color: #008000">#</span><span style="color: #008000">为实例新增一个方法, 需要引入一个包</span>
+    <span style="color: #0000ff">from</span> types <span style="color: #0000ff">import</span><span style="color: #000000"> MethodType
+    </span><span style="color: #0000ff">def</span> set_age(self, age): <span style="color: #008000">#</span><span style="color: #008000"> 先定义好方法</span>
+        self.age =<span style="color: #000000"> age
+
+    s </span>=<span style="color: #000000"> Student()
+    s.set_age </span>= MethodType(set_age, s, Student) <span style="color: #008000">#</span><span style="color: #008000"> 为实例新增方法.</span>
+
+
+
+
+当然, 以上的方法只能改变实例, 并不能改变类本身, 也就是说这个类的其它实例并没有新增的方法和属性, 为了给所有实例都新增属性和方法, 可以给直接来操作类.
+
+
+
+    form types <span style="color: #0000ff">import</span><span style="color: #000000"> MethodType
+    </span><span style="color: #0000ff">def</span><span style="color: #000000"> set_score(self, score):
+        self.score </span>=<span style="color: #000000"> score
+
+    Student.set_score </span>= MethodType(set_score, None, Student)
+
+
+
+
+* * *
+
+
+
+
+
+##### __slots__
+
+
+
+
+##### 类的 __slots__ 属性用来限制该类所拥有的其它属性, 也就是说只有 __slots__ 定义的属性可以被新增到类上, 另外, __slots__ 只对当前类生效, 它的子类并不继承该属性.
+
+
+
+    <span style="color: #0000ff"><font size="3">class</font></span><font size="3"><span style="color: #000000"> Student(object):
+        </span><span style="color: #800080">__slots__</span> = (<span style="color: #800000">'</span><span style="color: #800000">name</span><span style="color: #800000">'</span>, <span style="color: #800000">'</span><span style="color: #800000">age</span><span style="color: #800000">'</span>) <span style="color: #008000">#</span><span style="color: #008000"> 用tuple定义允许绑定的属性名称</span></font>
+
+
+
+
+
+
+
+
+
+
+    <font size="3">s = Student() <span style="color: #008000">#</span><span style="color: #008000"> 创建新的实例</span>
+    s.name = <span style="color: #800000">'</span><span style="color: #800000">Michael</span><span style="color: #800000">'</span> <span style="color: #008000">#</span><span style="color: #008000"> 绑定属性'name'</span>
+    s.age = 25 <span style="color: #008000">#</span><span style="color: #008000"> 绑定属性'age'</span>
+    s.score = 99 <span style="color: #008000">#</span><span style="color: #008000"> 绑定属性'score'</span>
+    </font><font size="3"><span style="color: #000000">Traceback (most recent call last):
+      File </span><span style="color: #800000">"</span><span style="color: #800000"><stdin></span><span style="color: #800000">"</span>, line 1, <span style="color: #0000ff">in</span> <module></font><span style="color: #000000">
+    <font size="3">AttributeError: </font></span><font size="3"><span style="color: #800000">'</span><span style="color: #800000">Student</span><span style="color: #800000">'</span> object has no attribute <span style="color: #800000">'</span><span style="color: #800000">score</span><span style="color: #800000">'</span></font>
+
+
+
+
+* * *
+
+
+
+
+
+**@property**
+
+
+
+
+这是一个类的内部装饰器, 是负责把一个方法变成属性调用的, 这样就能把在方法里对用户的输入做校验.
+
+
+
+    <span style="color: #0000ff">class</span><span style="color: #000000"> Student(object):
+        @property
+        </span><span style="color: #0000ff">def</span><span style="color: #000000"> score(self):
+            </span><span style="color: #0000ff">return</span><span style="color: #000000"> self._score
+
+        @score.setter
+        </span><span style="color: #0000ff">def</span><span style="color: #000000"> score(self, value):
+            </span><span style="color: #0000ff">if</span> <span style="color: #0000ff">not</span><span style="color: #000000"> isinstance(value, int):
+                </span><span style="color: #0000ff">raise</span> ValueError(<span style="color: #800000">'</span><span style="color: #800000">score must be an integer!</span><span style="color: #800000">'</span><span style="color: #000000">)
+            </span><span style="color: #0000ff">if</span> value < 0 <span style="color: #0000ff">or</span> value > 100<span style="color: #000000">:
+                </span><span style="color: #0000ff">raise</span> ValueError(<span style="color: #800000">'</span><span style="color: #800000">score must between 0 ~ 100!</span><span style="color: #800000">'</span><span style="color: #000000">)
+            self._score </span>= value
+
+
+
+
+把一个 "getter" 方法变成属性, 只需要加上 @property 就可以了, 此时, @property 本身又创建了另一个装饰器 @score.setter, 负责把一个 "setter" 方法变成属性赋值, 于是, 我们就拥有一个可控的属性操作:
+
+
+
+    s =<span style="color: #000000"> Student()
+    s.score </span>= 60 <span style="color: #008000">#</span><span style="color: #008000"> OK，实际转化为s.set_score(60)</span>
+    s.score <span style="color: #008000">#</span><span style="color: #008000"> OK，实际转化为s.get_score()</span>
+    >>>60<span style="color: #000000">
+    s.score </span>= 9999<span style="color: #000000">
+    Traceback (most recent call last):
+      ...
+    ValueError: score must between 0 </span>~ 100!
+
+
+
+
+
+如果不定义 "setter" 方法, 那么这个属性就是一个只读属性...
+
+
+
+
+* * *
+
+
+
+
+
+##### __iter__()/next()
+
+
+
+
+迭代器方法, 如果一个类实现了这个方法, 那么它就能被迭代, 该方法返回一个迭代对象, 然后, for 循环就会不断调用该迭代对象的 `next()`方法拿到循环的下一个值, 直到遇到 StopIteration 错误时退出循环.
+
+
+
+    <span style="color: #0000ff">class</span><span style="color: #000000"> Fib(object):
+        </span><span style="color: #0000ff">def</span> <span style="color: #800080">__init__</span><span style="color: #000000">(self):
+            self.a, self.b </span>= 0, 1 <span style="color: #008000">#</span><span style="color: #008000"> 初始化两个计数器a，b</span>
+
+        <span style="color: #0000ff">def</span> <span style="color: #800080">__iter__</span><span style="color: #000000">(self):
+            </span><span style="color: #0000ff">return</span> self <span style="color: #008000">#</span><span style="color: #008000"> 实例本身就是迭代对象，故返回自己</span>
+
+        <span style="color: #0000ff">def</span><span style="color: #000000"> next(self):
+            self.a, self.b </span>= self.b, self.a + self.b <span style="color: #008000">#</span><span style="color: #008000"> 计算下一个值</span>
+             <span style="color: #0000ff">if</span> self.a > 100000: <span style="color: #008000">#</span><span style="color: #008000"> 退出循环的条件</span>
+                <span style="color: #0000ff">raise</span><span style="color: #000000"> StopIteration();
+            </span><span style="color: #0000ff">return</span> self.a <span style="color: #008000">#</span><span style="color: #008000"> 返回下一个值</span>
+
+
+
+
+* * *
+
+
+
+
+
+##### __getitem__()
+
+
+
+
+虽然使用了 __iter__() 后, 对象实例看起来像个 List, 然而并不能真的像 List 那样取下标值, 要想像 List 那个可以用下标取值, 就得实现 __getitem__() 方法.
+
+
+
+    <span style="color: #0000ff">class</span><span style="color: #000000"> Fib(object):
+        </span><span style="color: #0000ff">def</span> <span style="color: #800080">__getitem__</span><span style="color: #000000">(self, n):
+            a, b </span>= 0, 1
+            <span style="color: #0000ff">for</span> x <span style="color: #0000ff">in</span><span style="color: #000000"> range(n):
+                a, b </span>= b, a +<span style="color: #000000"> b
+            </span><span style="color: #0000ff">return</span> a
+
+
+
+
+当然, 这只是一个例子, 要正确的通过 __getitem__() 来实现一个 list 还有很多工作要做.
+
+
+
+
+
+
+
+* * *
+
+
+
+
+
+
+
+**元类**
+
+
+
+
+元类可以用来控制类的创建行为.
+metaclass 允许你创建类或者修改类, 换句话说, 可以把类看成是 metaclass 创建出来的 "实例".
+
+
+
+
+正常情况下, 不会碰到需要使用 metaclass 的情况, 所以不学也没关系, 因为基本上不会用到, 用到时再看吧...
+  s

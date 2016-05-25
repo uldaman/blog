@@ -1,0 +1,75 @@
+author: Martin
+date: 2015-02-15 14:26
+title: 11、[C++]模板方法模式
+
+<blockquote>在微软的WebCast上, 李建中老师有个设计模式的系列讲座, 其中在讲到模板方法(Template Method)曾说: 如果你只想学习一种设计模式就学习模板方法吧. 由此可见它使用的广泛性.</blockquote>
+
+
+**模板方法模式:** 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.
+
+**模板方法设计模式的意图**
+
+通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.
+
+模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为"模板方法"), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.
+
+[![模板方法模式](http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg)](http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg)
+
+情景分析:
+
+还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别->选择职业->取名->进入游戏, 此时, 我们知道新建角色所需的关键步骤, 但建立不同职业, 不同性别所表现出来的是不同的, 这样, 就可以使用模板方法模式了. 先建立一个模板类, 它有个一个建立角色的公开函数, 还有选择性别/选择职业/取名/进入游戏等几个纯虚函数, 在建立角色的公开函数中, 调用那几个纯虚函数, 然后从这个模板类派生出不同的子类, 子类中实现不同的选择性别/选择职业/取名/进入游戏这些纯虚函数.
+
+[cpp]class AbstractClass {
+protected:
+    virtual void PrimitiveOperation1() = 0; // 抽象行为, 放到子类实现
+    virtual void PrimitiveOperation2() = 0; // 抽象行为, 放到子类实现
+
+public:
+    /************************************************************************
+        模版方法, 给出了逻辑的骨架, 而逻辑的组成是一些相应的抽象操作,
+        它们推迟到子类实现
+    ************************************************************************/
+    void TempletMethod() {
+        PrimitiveOperation1();
+        PrimitiveOperation2();
+    }
+};
+
+class ConCreteClassA
+    : public AbstractClass {
+public:
+    void PrimitiveOperation1() {
+        // 具体的方法1实现
+    }
+
+    void PrimitiveOperation2() {
+        // 具体的方法2实现
+    }
+};
+
+class ConCreteClassB
+    : public AbstractClass {
+public:
+    void PrimitiveOperation1() {
+        // 具体的方法1实现
+    }
+
+    void PrimitiveOperation2() {
+        // 具体的方法2实现
+    }
+};
+
+int _tmain(int argc, _TCHAR* argv[]) {
+    AbstractClass* p_1 = new ConCreteClassA();
+    p_1->TempletMethod();
+
+    AbstractClass* p_2 = new ConCreteClassB();
+    p_2->TempletMethod();
+
+    delete p_1;
+    delete p_2;
+
+    return 0;
+}[/cpp]
+
+08/

@@ -1,0 +1,229 @@
+author: Martin
+date: 2015-02-15 14:22
+title: 7、[C++]装饰者模式
+
+### 装饰者模式
+
+
+从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过**继承**来扩展功能.
+
+然而, 使用继承是**静态**的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.
+
+而装饰者模式可以**动态**地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.
+
+
+<blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
+
+
+装饰模式的UML图:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/131406379952878.png)](http://images.cnitblog.com/blog/723444/201502/131406358542966.png)
+
+●　　**抽象构件(Component)类：**给出一个抽象接口, 以规范准备接收附加责任的对象.
+
+●　　**具体构件(ConcreteComponent)类：**被修饰的者, 是定义了一个具体的对象, 可以给这个对象添加一些职责(也就是装饰它).
+
+●　　**装饰(Decorator)类：**抽象装饰类, 维护一个构件(Component)对象的实例, 定义一个与抽象构件接口一致的接口.
+
+●　　**具体装饰(ConcreteDecorator)类：**具体装饰类, 负责给构件对象"贴上"附加的责任.
+
+它的C++模型如下(技术有限, 可能实现的有问题, 欢迎指正):
+
+
+
+
+
+    <span style="color: #008000;">//</span><span style="color: #008000;"> ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
+    </span><span style="color: #008000;">//
+    </span><span style="color: #000000;">
+    #include </span><span style="color: #800000;">"</span><span style="color: #800000;">stdafx.h</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    #include </span><iostream>
+    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Component {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">char</span>* Operation() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">char</span> m_description[<span style="color: #800080;">256</span><span style="color: #000000;">];
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreateComponent
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Component {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreateComponent() {
+            strcpy_s(m_description, </span><span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;">初始状态</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> m_description;
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Decorator
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Component {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        Decorator(Component</span>*<span style="color: #000000;"> pComponent) {
+            m_pComponent </span>=<span style="color: #000000;"> pComponent;
+        }
+
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">char</span>* Operation() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;">:
+        Component</span>*<span style="color: #000000;"> m_pComponent;
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteDecoratorA
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Decorator {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreteDecoratorA(Component</span>*<span style="color: #000000;"> pComponent)
+            : Decorator(pComponent) {
+            strcat_s(m_pComponent</span>->Operation(), <span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;"> --> 装饰了 A '饰品'</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span> m_pComponent-><span style="color: #000000;">Operation();
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteDecoratorB
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Decorator {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreteDecoratorB(Component</span>*<span style="color: #000000;"> pComponent)
+            : Decorator(pComponent) {
+            strcat_s(m_pComponent</span>->Operation(), <span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;"> --> 装饰了 B '饰品'</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span> m_pComponent-><span style="color: #000000;">Operation();
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        Component</span>* test = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreateComponent();
+        cout </span><< test->Operation() <<<span style="color: #000000;"> endl;
+        Component</span>* test_A = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteDecoratorA(test);
+        cout </span><< test_A->Operation() <<<span style="color: #000000;"> endl;
+        Component</span>* test_A_B = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteDecoratorB(test_A);
+        cout </span><< test_A_B->Operation() <<<span style="color: #000000;"> endl;
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+输出如下:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/131406411049562.png)](http://images.cnitblog.com/blog/723444/201502/131406399951534.png)
+
+看下它的优点:
+
+1、装饰者模式可以提供比继承更多的灵活性
+
+2、可以通过一种动态的方式来扩展一个对象的功能，在运行时选择不同的装饰器，从而实现不同的行为.
+
+3、通过使用不同的具体装饰类以及这些装饰类的排列组合, 可以创造出很多不同行为的组合. 可以使用多个具体装饰类来装饰同一对象，得到功能更为强大的对象.
+
+4、具体构件类与具体装饰类可以独立变化, 用户可以根据需要增加新的具体构件类和具体装饰类, 在使用时再对其进行组合, 原有代码无须改变, 符合"开闭原则".
+
+它的缺点也是一样的明显:
+
+1、会产生很多的小对象, 增加了系统的复杂性
+
+2、这种比继承更加灵活机动的特性, 也同时意味着装饰模式比继承更加易于出错, 排错也很困难, 对于多次装饰的对象, 调试时寻找错误可能需要逐级排查, 较为烦琐.
+
+实际开发情景:星巴克以扩张速度快而闻名, 在里面购买咖啡时, 可以要求在其中加入各种调料, 星巴克会根据所加入的调料收取不同的费用, 也就是说不同的咖啡与调料之间有N多不同的组合方式. 每种咖啡和调料都有不同的收费. 如果他们此时正在急于实现一套由计算机管理的自动化记账系统, 在这个时候我们使用继承方式, 则会陷入无以复加的地步, 这里会有N多个类, 出现“类爆炸”现象.
+
+[![2015-02-13_124810](http://images.cnitblog.com/blog/723444/201502/131406430731760.png)](http://images.cnitblog.com/blog/723444/201502/131406421514674.png)
+
+此时就可以实用我们的装饰者模式:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/131406451205401.png)](http://images.cnitblog.com/blog/723444/201502/131406440587059.png)
+
+具体代码省略, 参考:[http://blog.chinaunix.net/uid-20761674-id-304542.html](http://blog.chinaunix.net/uid-20761674-id-304542.html)
+
+
+### 模式的简化
+
+
+如果只有一个ConcreteComponent类, 那么可以考虑去掉Cpmponent类, 让Decorator直接继承ConcreteComponent类, 重写ConcreteComponent的Operation方法.
+
+同样, 如果只有一个ConreteDecortor类, 那么也可以去掉单独的Decorator类, 把Decorator和ConreteDecortor的合并.
+
+
+
+
+
+    #include <iostream>
+    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreateComponent {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreateComponent() {
+            strcpy_s(m_description, </span><span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;">初始状态</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> m_description;
+        }
+
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">char</span> m_description[<span style="color: #800080;">256</span><span style="color: #000000;">];
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Decorator
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> ConcreateComponent {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        Decorator(ConcreateComponent</span>*<span style="color: #000000;"> pComponent) {
+            m_pComponent </span>=<span style="color: #000000;"> pComponent;
+        }
+
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">char</span>* Operation() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;">:
+        ConcreateComponent</span>*<span style="color: #000000;"> m_pComponent;
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteDecoratorA
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Decorator {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreteDecoratorA(ConcreateComponent</span>*<span style="color: #000000;"> pComponent)
+            : Decorator(pComponent) {
+            strcat_s(m_pComponent</span>->Operation(), <span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;"> --> 装饰了 A '饰品'</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span> m_pComponent-><span style="color: #000000;">Operation();
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteDecoratorB
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Decorator {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        ConcreteDecoratorB(ConcreateComponent</span>*<span style="color: #000000;"> pComponent)
+            : Decorator(pComponent) {
+            strcat_s(m_pComponent</span>->Operation(), <span style="color: #800080;">255</span>, <span style="color: #800000;">"</span><span style="color: #800000;"> --> 装饰了 B '饰品'</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">char</span>*<span style="color: #000000;"> Operation() {
+            </span><span style="color: #0000ff;">return</span> m_pComponent-><span style="color: #000000;">Operation();
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        ConcreateComponent</span>* test = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreateComponent();
+        cout </span><< test->Operation() <<<span style="color: #000000;"> endl;
+        ConcreateComponent</span>* test_A = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteDecoratorA(test);
+        cout </span><< test_A->Operation() <<<span style="color: #000000;"> endl;
+        ConcreateComponent</span>* test_A_B = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteDecoratorB(test_A);
+        cout </span><< test_A_B->Operation() <<<span style="color: #000000;"> endl;
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+  >

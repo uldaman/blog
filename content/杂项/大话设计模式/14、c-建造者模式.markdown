@@ -1,0 +1,169 @@
+author: Martin
+date: 2015-02-23 12:31
+title: 14、[C++] 建造者模式
+
+谈到建造自然会想到楼房.
+
+楼房是千差万别的, 楼房的外形、层数、内部房间的数量、房间的装饰等等都不一样, 但是对于建造者来说, 抽象出来的建筑流程是确定的, 往往建筑一座楼房包括下面的步骤：打桩, 建立基础 –> 建立框架等.
+
+建造者模式的本质和建造楼房是一致的：**即流程不变, 但每个流程实现的具体细节则是经常变化的**.
+
+建造者模式的好处就是保证了流程不会变化, 流程即不会增加、也不会遗漏或者产生流程次序错误, 这是非常重要的.
+
+再想像一下麦当劳和肯得鸡, 为什么它们的食物味道都是一样的?
+
+因为它们产品的味道都是由工作流程决定的, 原料放多少, 加热几分钟都有严格规定; 我们去那里消费, 不用关心他们的工作流程, 如果发现鸡翅烤得焦了, 他们会调整具体的工作流程中的烧烤时间, 如果要新加一种汉堡, 做法都相同, 只是配料不同, 工作流程是不变的, 这也是一种典型的建造者模式.
+
+
+
+[![建造者模式](http://www.smallcpp.com/wp-content/uploads/2015/02/thumb1.jpg)](http://www.smallcpp.com/wp-content/uploads/2015/02/1f2dfcd7b30e.jpg)
+
+
+
+**建造者模式: 将一个复杂对象的构建与它的表示分离, 使得同样的构建过程可以创建不同的表示.**
+
+Product：要创建的复杂对象.
+
+Builder：给出一个抽象接口，以规范产品对象的各个组成成分的建造. 这个接口规定要实现复杂对象的哪些部分的创建，并不涉及具体的对象部件的创建.
+
+ConcreteBuilder：实现Builder接口，针对不同的商业逻辑，具体化复杂对象的各部分的创建.  在建造过程完成后，提供产品的实例.
+
+Director：调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产品的信息，只负责保证对象各部分完整创建或按某种顺序创建.
+
+
+
+
+
+    #include <iostream><span style="color: #000000;">
+    #include </span><vector>
+    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Product {
+    </span><span style="color: #0000ff;">protected</span><span style="color: #000000;">:
+        vector</span><<span style="color: #0000ff;">string</span>><span style="color: #000000;"> m_parts;
+
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">void</span> Add(<span style="color: #0000ff;">string</span><span style="color: #000000;"> part) {
+            m_parts.push_back(part);
+        }
+
+        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> Show() {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">产品 -- --</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">for</span> (unsigned <span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i < m_parts.size(); i++<span style="color: #000000;">) {
+                cout </span><<<span style="color: #000000;"> m_parts[i].c_str();
+            }
+            cout </span><<<span style="color: #000000;"> endl;
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Builder {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">void</span> BuildPartA() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">void</span> BuildPartB() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">virtual</span> Product GetResult() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteBuilder_1
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Builder {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> BuildPartA() {
+            m_product.Add(</span><span style="color: #800000;">"</span><span style="color: #800000;">部件A</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> BuildPartB() {
+            m_product.Add(</span><span style="color: #800000;">"</span><span style="color: #800000;">部件B</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        Product GetResult() {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> m_product;
+        }
+
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;">:
+        Product m_product;
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ConcreteBuilder_2
+        : </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Builder {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> BuildPartA() {
+            m_product.Add(</span><span style="color: #800000;">"</span><span style="color: #800000;">部件X</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> BuildPartB() {
+            m_product.Add(</span><span style="color: #800000;">"</span><span style="color: #800000;">部件Y</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        }
+
+        Product GetResult() {
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> m_product;
+        }
+
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;">:
+        Product m_product;
+    };
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Director {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">void</span> Construct(Builder*<span style="color: #000000;"> builder) {
+            builder</span>-><span style="color: #000000;">BuildPartA();
+            builder</span>-><span style="color: #000000;">BuildPartB();
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        Director director;
+
+        <span style="color: #000000;">Builder</span>* p_b1 = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteBuilder_1();
+        Builder</span>* p_b2 = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ConcreteBuilder_2();
+
+        director.Construct(p_b1);
+        Product p1 </span>= p_b1-><span style="color: #000000;">GetResult();
+        p1.Show();
+
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">**********************************************</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+
+        director.Construct(p_b2);
+        Product p2 </span>= p_b2-><span style="color: #000000;">GetResult();
+        p2.Show();
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span></span>
+
+
+
+
+
+
+
+[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb26.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image26.png)
+
+
+
+关键就在 Direcotr 这个类, 它控制整个的建造过程, 隔离了用户与建造过程的关联.
+
+
+
+
+
+* * *
+
+
+
+
+
+**使用建造者模式的场合和好处**
+
+**使用建造者模式的好处：**
+
+1.使用建造者模式可以使客户端不必知道产品内部组成的细节。
+
+2.具体的建造者类之间是相互独立的，对系统的扩展非常有利。
+
+3.由于具体的建造者是独立的，因此可以对建造过程逐步细化，而不对其他的模块产生任何影响。
+
+**使用建造模式的场合：**
+
+1.创建一些复杂的对象时，这些对象的内部组成构件间的建造顺序是稳定的，但是对象的内部组成构件面临着复杂的变化。
+
+2.要创建的复杂对象的算法，独立于该对象的组成部分，也独立于组成部分的装配方法时。
+or 

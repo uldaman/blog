@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- #
+from __future__ import unicode_literals
+
+AUTHOR = u'martin'
+SITENAME = u'Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.'
+SITEURL = 'http://z351522453.github.com'
+
+PATH = 'content'
+
+TIMEZONE = 'Asia/Shanghai'
+
+DEFAULT_LANG = u'zh'
+
+# Feed generation is usually not desired when developing
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
+
+# Blogroll
+LINKS = (('CSDN', 'http://blog.csdn.net/u010850265'),)
+
+# Social widget
+SOCIAL = (('CSDN', 'http://blog.csdn.net/u010850265'),)
+
+DEFAULT_PAGINATION = 10
+
+THEME = 'pelican-themes/zurb-F5-basic'
+
+USE_FOLDER_AS_CATEGORY = True # 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类
+
+DELETE_OUTPUT_DIRECTORY = True # 编译之前删除 output 目录，这样保证 output 下生成的内容干净
+
+SUMMARY_MAX_LENGTH = 30 # 文章摘要最大字数
+
+MD_EXTENSIONS = [
+  "extra",
+  "toc",
+  "headerid",
+  "meta",
+  "sane_lists",
+  "smarty",
+  "wikilinks",
+  "admonition",
+  "codehilite(guess_lang=False,pygments_style=emacs,noclasses=True)"]
+
+# Uncomment following line if you want document-relative URLs when developing
+#RELATIVE_URLS = True

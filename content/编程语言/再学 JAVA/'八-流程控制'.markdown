@@ -1,0 +1,32 @@
+author: Martin
+date: 2015-06-11 15:49
+title: (八) 流程控制
+
+分支结构
+
+循环结构
+
+Java 中的流程控制和 C/C++ 中一样, 就不多说了.
+
+一个小例子, 输入一个十位以内的数, 求出这个数有多少位:
+
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span><span style="color: #000000"> HelloWorld {
+
+        </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">static</span> <span style="color: #0000ff">void</span><span style="color: #000000"> main(String[] args) {
+            </span><span style="color: #008000">//</span><span style="color: #008000"> TODO 自动生成的方法存根</span>
+            <span style="color: #0000ff">int</span> num = 999<span style="color: #000000">;
+            </span><span style="color: #0000ff">int</span> count = 0<span style="color: #000000">;
+
+            </span><span style="color: #0000ff">if</span> (num >= 0 && num <= 999999999<span style="color: #000000">) {
+                </span><span style="color: #0000ff">while</span> (num != 0<span style="color: #000000">) {
+                    count </span>++<span style="color: #000000">;
+                    num </span>/= 10<span style="color: #000000">;
+                }
+                System.out.println(</span>"它是个"+ count+"位的数！"<span style="color: #000000">);
+            } </span><span style="color: #0000ff">else</span><span style="color: #000000"> {
+                System.out.println(</span>"输入有误！"<span style="color: #000000">);
+            }
+        }
+
+    }</span>
+"x

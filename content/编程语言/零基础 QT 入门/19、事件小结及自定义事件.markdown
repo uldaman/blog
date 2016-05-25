@@ -1,0 +1,124 @@
+author: Martin
+date: 2015-06-01 04:14
+title: 19、事件小结及自定义事件
+
+现在我们可以总结一下 Qt 的事件处理, 实际上是有五个层次:
+
+- 第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.
+- 第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.
+- 第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.
+- 第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题: 只能用在主线程.
+- 第五层丶重写QCoreApplication::notify()函数. 这是最强大的, 和全局事件过滤器一样提供完全控制, 并且不受线程的限制. 但是全局范围内只能有一个被使用（因为QCoreApplication是单例的）.
+
+最后一层, 我们现在还没说, 以后用的上的地方再看, 基本上掌握前四层就足够日常使用了.
+
+* * *
+
+最后来看一下自定义事件
+
+自定义事件在 C/C++ 编程中还是比较常用的, 我们常常会算定义一个事件, 例如: #define WM\_MY WM\_USER+100,  然后在某个时刻, 发送这个事件给界面, 然后在界面线程里对这个线程进行响应.
+
+Qt 中也是有类似的功能, Qt 支持这种自定义事件原因是信号槽总是同步的, 而事件的分发既可以是同步的, 又可以是异步的, 事件的另外一个好处是, 它可以使用过滤器.
+
+Qt 自定义事件很简单, 同其它类库的使用很相似, 都是要继承一个类进行扩展, 这里需要继承的类是 `QEvent`.
+
+大致流程是: 先要子类化 `QEvent`, 然后定义自己的 `QEvent::Type`, 接着重写 `QWidget::event()` 函数, 最后就可以调用 `QCoreApplication::sendEvent()` 或者 `QCoreApplication:;postEvent()` 发送事件就好了.
+
+原理参考: [http://www.devbean.net/2012/10/qt-study-road-2-custom-event/](http://www.devbean.net/2012/10/qt-study-road-2-custom-event/)
+
+代码参考:
+
+```cpp
+#include <QtGui/QApplication>
+#include <QCoreApplication>
+#include <QEvent>
+#include <QObject>
+#include <QDebug>
+
+static const QEvent::Type MyEventType = (QEvent::Type)QEvent::registerEventType(QEvent::User + 100);
+
+//长官
+class MyEvent : public QEvent {
+public:
+    MyEvent(Type MyEventType) :QEvent(MyEventType) {}
+};
+
+//信使
+class MySender : public QCoreApplication {
+public:
+    MySender(int argc, char *argv[]) :QCoreApplication(argc, argv) {}
+
+public:
+    bool notify(QObject *receiver, QEvent *event);
+
+};
+
+bool MySender::notify(QObject *receiver, QEvent *event) {
+    if (event->type() == MyEventType) {
+        qDebug() << "MyEventType is coming!";
+        //return true;
+        /*这里不能 return true,因为重写 notify 就是在事件被向下传递之前截住它，
+        随便搞它，搞完了还得给 QCoreApplication::notify 向下传递，除非在 mySender.notify
+        实现了事件向下传递的那一套. 直接返回的话 myArmy 就收不到这个事件，因为执行完这个
+        mySender.notify 的 return true 后，事件传递被人为的在半截终止了
+        （见 Qt 事件处理的五个层次 http://blog.csdn.net/michealtx/article/details/6865891）
+        ，下面的 myArmy 的安装的过滤器和它自己的 event 都不会收到这个事件，更甭提最后干活
+        的 myEventHandler 了. 所以在主函数中执行完 mySender.sendEvent 把 myEvent
+        交给 mySender.notify 这个败家子儿后，就执行 mySender.exec 进入其它事件的循环了. 这就是
+        问题 http://topic.csdn.net/u/20111012/19/78036d16-c163-40f9-a05c-3b7d6f4e9043.html
+        出现的原因. 感谢 1+1=2 大牛! 非常感谢!
+        */
+    }
+    return QCoreApplication::notify(receiver, event);
+}
+
+//军队
+class MyArmy : public QObject {
+public:
+    void MyEventHandler(QEvent *event);
+    bool event(QEvent *event);
+};
+
+void MyArmy::MyEventHandler(QEvent *event) {
+    qDebug() << "The event is being handled!";
+    event->accept();
+}
+
+bool MyArmy::event(QEvent *event) {
+    if (event->type() == MyEventType) {
+        qDebug() << "event() is dispathing MyEvent";
+        MyEventHandler(event);//调用事件处理函数
+        if ((MyEvent*)event->isAccepted()) {
+            qDebug() << "The event has been handled!";
+            return true;
+        }
+    }
+    return QObject::event(event);
+}
+
+//监控者
+class MyWatcher : public QObject {
+public:
+    bool eventFilter(QObject *watched, QEvent *event);
+};
+
+bool MyWatcher::eventFilter(QObject *watched, QEvent *event) {
+    if (event->type() == MyEventType) {
+        qDebug() << "I don't wanna filter MyEventType";
+        return false;
+    }
+    return QObject::eventFilter(watched, event);
+}
+
+int main(int argc, char *argv[]) {
+    //QCoreApplication a(argc, argv);
+    MySender mySender(argc, argv);
+
+    MyArmy myArmy;
+    MyWatcher myWatcher;
+    myArmy.installEventFilter(&myWatcher);//安装事件过滤器
+    MyEvent myEvent(MyEventType);
+    mySender.sendEvent(&myArmy, &myEvent);
+    return mySender.exec();
+}
+```

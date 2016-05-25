@@ -1,0 +1,80 @@
+author: Martin
+date: 2015-03-08 13:33
+title: 10、UI 对象
+
+在前面的几个例子中已经见到了 UI 对象.
+
+
+<blockquote>Ui::DemoClass ui;
+ui.setupUi(this);
+connect(ui.pushButton_4, SIGNAL(clicked()), this, SLOT(On_Out()));
+connect(ui.pushButton_5, SIGNAL(clicked()), this, SLOT(On_Out()));
+connect(ui.pushButton_6, SIGNAL(clicked()), this, SLOT(On_Out()));</blockquote>
+
+
+
+
+那这个 UI 对象是什么呢?
+
+在 VS + Qt 开发环境中, 通过使用 Qt Designer 编辑 *.ui 文件来设计界面.
+
+![](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png)
+
+设计好界面后, vs 就会把 *.ui 文件转换成对应的头文件, 这个头文件中包含了一个界面类.
+
+
+
+
+
+    <span style="color: #0000ff;">class</span><span style="color: #000000;"> Ui_DemoClass
+    {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        QLabel </span>*<span style="color: #000000;">label;
+
+        </span><span style="color: #0000ff;">void</span> setupUi(QWidget *<span style="color: #000000;">DemoClass)
+        {
+            </span><span style="color: #0000ff;">if</span> (DemoClass-><span style="color: #000000;">objectName().isEmpty())
+                DemoClass</span>->setObjectName(QStringLiteral(<span style="color: #800000;">"</span><span style="color: #800000;">DemoClass</span><span style="color: #800000;">"</span><span style="color: #000000;">));
+            DemoClass</span>->resize(<span style="color: #800080;">275</span>, <span style="color: #800080;">167</span><span style="color: #000000;">);
+            label </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> QLabel(DemoClass);
+            label</span>->setObjectName(QStringLiteral(<span style="color: #800000;">"</span><span style="color: #800000;">label</span><span style="color: #800000;">"</span><span style="color: #000000;">));
+            label</span>->setGeometry(QRect(<span style="color: #800080;">90</span>, <span style="color: #800080;">60</span>, <span style="color: #800080;">71</span>, <span style="color: #800080;">31</span><span style="color: #000000;">));
+
+            retranslateUi(DemoClass);
+
+            QMetaObject::connectSlotsByName(DemoClass);
+        } </span><span style="color: #008000;">//</span><span style="color: #008000;"> setupUi</span>
+
+        <span style="color: #0000ff;">void</span> retranslateUi(QWidget *<span style="color: #000000;">DemoClass)
+        {
+            DemoClass</span>->setWindowTitle(QApplication::translate(<span style="color: #800000;">"</span><span style="color: #800000;">DemoClass</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">Demo</span><span style="color: #800000;">"</span>, <span style="color: #800080;">0</span><span style="color: #000000;">));
+            label</span>->setText(QApplication::translate(<span style="color: #800000;">"</span><span style="color: #800000;">DemoClass</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">Hello Qt!</span><span style="color: #800000;">"</span>, <span style="color: #800080;">0</span><span style="color: #000000;">));
+        } </span><span style="color: #008000;">//</span><span style="color: #008000;"> retranslateUi</span>
+    <span style="color: #000000;">
+    };
+
+    </span><span style="color: #0000ff;">namespace</span><span style="color: #000000;"> Ui {
+        </span><span style="color: #0000ff;">class</span> DemoClass: <span style="color: #0000ff;">public</span><span style="color: #000000;"> Ui_DemoClass {};
+    } </span><span style="color: #008000;">//</span><span style="color: #008000;"> namespace Ui</span><span style="color: #000000;">
+    </span>
+
+
+
+
+
+
+
+看到这里就比较明白了, 这个界面类声明了界面上所用到的控件对象, 通过 setupUi 成员函数来设计界面布局.
+
+使用的时候, 在自定义类里面引用这个界面类, 声明一个UI的成员对象, 调用setUPUi函数.
+
+
+
+
+
+    <span style="color: #000000;">Ui::DemoClass ui;
+    ui.setupUi(</span><span style="color: #0000ff;">this</span>);
+
+
+
+t#2

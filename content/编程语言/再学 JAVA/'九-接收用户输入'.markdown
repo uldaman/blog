@@ -1,0 +1,129 @@
+author: Martin
+date: 2015-06-11 17:20
+title: (九) 接收用户输入
+
+在之前, 我们已经接触到了 Java 的输出函数, 即 System.out.println();
+
+当然使用 System.out.print() 也是可以的, 区别在于 System.out.print() 输出不会换行, 而 System.out.println() 会在输出的内容后自动换行.
+
+Java 中的输入
+
+程序中, 我们往往需要接收用户键盘的输入, 在 C 中, 可以使用 scanf(), C++ 中可以使用 cin();
+而在 Java 中提供了三种方法(推荐第三种, 最简单强大):
+
+第一种: 从控制台接收一个字符.
+
+    System.out.print("Enter a Char:"<span style="color: #000000">);
+
+    </span><span style="color: #0000ff">char</span> i = ' '<span style="color: #000000">;
+    </span><span style="color: #0000ff">try</span><span style="color: #000000"> {
+        i </span>= (<span style="color: #0000ff">char</span><span style="color: #000000">) System.in.read();
+    } </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (IOException e) {
+        </span><span style="color: #008000">//</span><span style="color: #008000"> TODO 自动生成的 catch 块</span>
+    <span style="color: #000000">    e.printStackTrace();
+    }
+
+    System.out.println(</span>"your char is :"+i);
+
+
+
+
+此方法的缺点很明显, 只能接收一个字符, 并且只能是 char, 当我们输入一个数字, 希望得到的也是一个整型变量的时候, 我们还得修改接收变量的类型.
+
+
+
+
+
+
+
+第二种: 使用 BufferedReader 类和 InputStreamReader 类(使用这两个类要导入相应的包).
+
+
+
+
+    <span style="color: #0000ff">public</span> <span style="color: #0000ff">static</span> <span style="color: #0000ff">void</span> main(String[] args) <span style="color: #0000ff">throws</span><span style="color: #000000"> IOException {
+
+        BufferedReader br </span>= <span style="color: #0000ff">new</span> BufferedReader(<span style="color: #0000ff">new</span><span style="color: #000000"> InputStreamReader(System.in));
+
+        String str </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+
+        System.out.println(</span>"Enter your value:"<span style="color: #000000">);
+
+        str </span>=<span style="color: #000000"> br.readLine();
+
+        System.out.println(</span>"your value is :"+<span style="color: #000000">str);
+    }</span>
+
+
+
+
+可以看到, 使用这种方法就能获取输入的字符串.
+
+
+
+
+
+
+
+第三种: 使用 Scanner 工具类, 这是我认为是最简单, 最强大的方法.
+
+
+
+
+这个类位于 java.util 包中, 使用前需导入.
+
+
+
+
+使用 Scanner 的步骤:
+
+
+
+
+*. 导入 java.util.Scanner.
+
+
+
+
+*. 创建 Scanner 对象.
+
+
+
+
+*. 接收并保存用户输入.
+
+
+
+
+    Scanner sc = <span style="color: #0000ff">new</span><span style="color: #000000"> Scanner(System.in);
+
+    System.out.println(</span>"请输入你的姓名："<span style="color: #000000">);
+
+    String name </span>=<span style="color: #000000"> sc.nextLine();
+
+    System.out.println(</span>"请输入你的年龄："<span style="color: #000000">);
+
+    </span><span style="color: #0000ff">int</span> age =<span style="color: #000000"> sc.nextInt();
+
+    System.out.println(</span>"请输入你的工资："<span style="color: #000000">);
+
+    </span><span style="color: #0000ff">float</span> salary =<span style="color: #000000"> sc.nextFloat();
+
+    System.out.println(</span>"你的信息如下："<span style="color: #000000">);
+
+    System.out.println(</span>"姓名："+name+"\n"+"年龄："+age+"\n"+"工资："+<span style="color: #000000">salary);
+
+    sc.close();</span>
+
+
+
+
+
+
+可以看到, Scanner 类不管是对于字符串还是整型数据或者浮点类型的变量, 只需做一点小小的改变, 就能够实现功能, 无须再做多余的动作!
+
+
+
+
+需要注意的是, 创建的对象使用完后要关闭它: sc.close().
+?

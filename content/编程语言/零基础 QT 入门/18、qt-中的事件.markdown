@@ -1,0 +1,181 @@
+author: Martin
+date: 2015-05-30 12:23
+title: 18、Qt 中的事件
+
+> 说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.
+
+[TOC]
+
+# 初识 Qt 中的事件
+事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说, 使用 Qt 组件时, 我们并不会把主要精力放在事件上, 因为在 Qt 中, 我们关心的更多的是事件关联的一个信号.
+
+虽然事件的概念同信号槽类似, 但是它们还是有明显的区别:
+
+- 信号由具体的对象发出, 然后会马上交给由 `connect() `函数连接的槽进行处理, 而对于事件, Qt 同 C/C++ 一样, 也使用一个事件队列对所有发出的事件进行维护
+- 信号一旦发出, 对应的槽函数一定会被执行, 但是, 事件则可以使用 "事件过滤器" 进行过滤, 对于有些事件进行额外的处理, 另外的事件则不关心
+- 另外, 事件还依赖于事先定义的好的事件 ID
+
+那什么时候要使用事件机制呢?<br>
+例如, 要在界面上做一个 QLabel 实时的显示当前鼠标在 QLabel 上的位置;
+
+在所有组件的父类 `QWidget` 中, 定义了很多事件处理的回调函数, 如 `keyPressEvent()`、`keyReleaseEvent()`、`mouseDoubleClickEvent()`、`mouseMoveEvent()`、`mousePressEvent()`、`mouseReleaseEvent()` 等, 这些函数都是 protected virtual 的, 也就是说, 我们可以在子类中重新实现这些函数, 所以, 我们就可以通过重写 QLabel 的 `mouseMoveEvent() 实现上面的功能`.
+
+在贴代码之前, 还要讲一下 Qt 中的事件对象, 当事件发生时, Qt 将创建一个事件对象, 例如 QMouseEvent QKeyEvent 等, 这些事件类都继承于 QEvent, 创建好事件对象后, Qt 会将这个事件对象传递给 QObject 的 `event()` 函数, `event()` 函数并不直接处理事件, 而是按照事件对象的类型分派给特定的事件处理函数.
+
+```cpp
+class EventLabel : public QLabel {
+protected:
+    void mouseMoveEvent(QMouseEvent *event);
+};
+
+void EventLabel::mouseMoveEvent(QMouseEvent *event) {
+    this->setText(QString("Move: (%1, %2)").arg(QString::number(event->x()), QString::number(event->y())));
+}
+```
+<br>
+当然, 我们还需要修改 ui 文件, 让 QLabel 控件从 EventLabel 上创建.
+
+生成应用程序后, 第一次使用, 我们需要在 Label 上按下鼠标后**拖动**一下, QLabel 上就开始显示鼠标坐标, 接下来就就不需要按下鼠标了, 直接移动鼠标就能显示坐标.
+
+![](http://i61.tinypic.com/2z6sh0z.jpg)
+
+为什么第一次需要按下鼠标后拖动一下呢?<br>
+这是因为 `QWidget` 中有一个 `mouseTracking` 属性, 该属性用于设置是否追踪鼠标, 只有鼠标被追踪时, `mouseMoveEvent()` 才会发出, 如果 `mouseTracking` 是 false（默认即是）, 组件在至少一次鼠标点击之后, 才能够被追踪, 也就是能够发出 `mouseMoveEvent()`事件, 为此, 我们可以在 EventLabel 构造函数中 this->setMouseTracking(true), 这样就不需要按下鼠标拖动了.
+
+源码: [http://yunpan.cn/cwq5cbrA45wzX](http://yunpan.cn/cwq5cbrA45wzX) 访问密码 2c32
+
+# 深入 Qt 的事件
+下面继续深入了解 Qt 的事件机制.
+
+回想一下之前学过的知识, 为一个 QPushButton 的 clicked() 信号添加一个槽, 实现什么功能随意, 最简单的就弹出一个 QMessageBox 好了.
+
+重点来了, 如果我们重写 QPushButton 的 mousePressEvent() 事件, 即鼠标按下事件, 过滤下左键按下:
+
+```cpp
+void CustomButton::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        qDebug() << "left";
+    } else {
+        QPushButton::mousePressEvent(event);
+    }
+}
+```
+<br>
+此时, 你会发现, 之前为 clicked() 信号添加的槽将不再被执行…
+
+因此, 可以推断, 父类 `QPushButton` 的 `mousePressEvent()` 函数中肯定发出了 `clicked()` 信号, 否则的话, 我们的槽函数怎么会不执行了呢?<br>
+这暗示我们一个非常重要的细节: **当重写事件回调函数时, 时刻注意是否需要通过调用父类的同名函数来确保原有实现仍能进行!**
+
+实际上, Qt 的事件对象有两个函数: `accept()` 和 `ignore()`, 正如它们的名字一样, 前者用来告诉 Qt, 这个类的事件处理函数想要处理这个事件, 后者则告诉 Qt, 这个类的事件处理函数不想要处理这个事件, Qt 会从其父组件中寻找另外的接受者.
+
+但是, 一般情况下, 我们并不使用这两个函数, 因为这会让代码的逻辑变得很混乱, 至少我是这么认为的…<br>
+除了作为所有组件的父类 `QWidget` 默认调用的是 `ignore()`, 其他的事件对象都 `accept()`.<br>
+换句话说, 如果重写了某个事件处理函数, 因为它默认是 `accept()` 的, 所以它表示这个类将会自己处理这个函数, 如果不主动的调用父类的处理函数, 消息就不会继续传递上去.
+
+但是, 有一种情况这两个函数会变得很有用, 那就是在处理窗口的关闭的事件时, 看下面代码:
+
+```cpp
+void EventLabel::closeEvent(QCloseEvent *event) {
+    bool exit = QMessageBox::question(this,
+        tr("Quit"),
+        tr("Are you sure to quit this application?"),
+        QMessageBox::Yes | QMessageBox::No,
+        QMessageBox::No) == QMessageBox::Yes;
+    if (exit) {
+        event->accept();
+    } else {
+        event->ignore();
+    }
+}
+```
+<br>
+当点击 "YES" 的时候, 调用的是 `event->accept()` 函数, 它表示这个消息我自己会处理, 所以窗口就被关闭了, 如果是 "NO", 调用的就是 `event->ignore()` 函数, 它表示我不想处理这个事件, 它将会被传递给父类中寻找另外的接受者, 因为它自己不想处理这个事件, 所以窗口将不会被关闭…
+
+好吧, 其实我现在已经晕了, 这两个函数让人很难理解, 暂时先这样, 慢慢领悟…
+
+# event() 函数
+之前, 我们提到过 QObject 的 event() 函数, 这个函数用来分发事件, 所以, 如果想在事件分发之前**拦截**事件, 就需要重写这个 event() 函数, 例如我们想拦截下 tab 键按下事件, 就可以用一个类继承 QWidget, 然后重写它的 event() 函数, 接下来用这个子类新建窗口, 这样, 我们创建的窗口就能拦截事件了:
+
+```cpp
+bool NewWidget::event(QEvent *e) {
+    if (e->type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent *>(e);
+        if (keyEvent->key() == Qt::Key_Tab) {
+            qDebug() << "You press tab.";
+        }
+    }
+    return QWidget::event(e);
+}
+```
+<br>
+需要注意的是, 拦截完后, 我们还需要返回给 QWidget::event() 函数, 否则, Qt 将不再分发所有的消息, 例如, 下面这样的代码就会让你的 Qt 会进入一种”无响应”状态…
+
+```cpp
+bool NewWidget::event(QEvent *e) {
+    return true
+}
+```
+<br>
+# 事件过滤器
+有的时候, 我们可能需要在一个界面上的多个对象上拦截事件, 例如, 一个窗口上有 10 个编辑框, 我想要 1 号编辑框拦截 a 键, 2 号编辑框拦截 b 键, 以此类推;
+
+通过之前学到的知识, 虽然也许已经想到可以通过 event() 来实现, 但是这样编辑框很多, 就需要重写很多个 event() 函数, 这相当的麻烦, 还好, Qt 提供了另一种机制来达到目标, 即: **事件过滤器**.
+
+
+`QObject` 有一个 `eventFilter()` 函数, 用于建立事件过滤器, 这个函数的原型如下:<br>
+`virtual bool QObject::eventFilter ( QObject * watched, QEvent * event );`
+
+- 第一个参数是接收事件的目标对象
+- 第二个参数是事件, 事件过滤器的调用时间是目标对象接收到事件对象之前, 这个函数返回一个 bool 类型，如果想将参数 event 过滤出来, 比如, 不想让它继续转发，就返回 true, 表示被过滤, 否则就返回 false.
+
+看一个简单的例子:
+
+```cpp
+class MainWindow : public QMainWindow {
+public:
+    MainWindow();
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
+private:
+    QTextEdit textEdit;
+};
+
+MainWindow::MainWindow() {
+    textEdit = new QTextEdit;
+    setCentralWidget(textEdit);
+
+    textEdit->installEventFilter(this);
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
+    if (obj == textEdit) {
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            qDebug() << "Ate key press" << keyEvent->key();
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        // pass the event on to the parent class
+        return QMainWindow::eventFilter(obj, event);
+    }
+}
+```
+<br>
+简单的说明一下这个代码, 首先定义了一个定义的界面类 `MainWindow`, 然后重写了它的 `eventFilter` 函数, 为了过滤特定组件的事件, 在函数内部, 先判断是对象目标对象是不是 `textEdit`, 然后再判断事件是不是 `KeyPress`, 要使用这个事件过滤器能接收到 `textEdit` 的事件, 还需要做一个非常重要的动作, 就是安装过滤器, 安装过滤器需要调用 `QObject::installEventFilter()` 函数, 这个函数的签名如下: `void QObject::installEventFilter ( QObject * filterObj );` 它有一个 `QObject*` 参数, 传入我们的事件过滤器所在类的指针即可, 这里就是 `this` 了.
+
+事件过滤器的强大之处在于, 我们可以为整个应用程序添加一个事件过滤器.
+
+记得, `installEventFilter()` 函数是 `QObject` 的函数, `QApplication` 或者 `QCoreApplication` 对象都是 `QObject` 的子类, 因此, 我们可以向 `QApplication` 或者 `QCoreApplication` 添加事件过滤器.
+
+ 这种全局的事件过滤器将会在所有其它特性对象的事件过滤器之前调用, 但尽管很强大, 但这种行为会严重降低整个应用程序的事件分发效率.
+
+ 因此, 除非是不得不使用的情况, 否则的话我们不应该这么做.
+
+注意, 如果你在事件过滤器中 `delete` 了某个接收组件, 务必将函数返回值设为 `true`. 否则, Qt 还是会将事件分发给这个接收组件, 从而导致程序崩溃.
+
+注意事项:
+
+- 事件过滤器和被安装过滤器的组件必须在同一线程, 否则, 过滤器将不起作用.
+- 如果在安装过滤器之后, 这两个组件到了不同的线程, 那么, 只有等到二者重新回到同一线程的时候过滤器才会有效.

@@ -1,0 +1,27 @@
+author: Martin
+date: 2015-06-12 10:32
+title: (十四) 包 及 访问修饰符
+
+Java 中包的作用:
+*. 管理 Java 文件
+*. 解决同名文件冲突
+
+包的定义:
+使用关键字 package “包名”来定义(如: package com.martin), 必须放在 Java 源程序第一行.
+
+包命名规范:
+a、所有字母小写;
+b、域名倒过来写，如：com.baidu;
+
+包的使用:
+假设存在一个类 test, 现需要在另一个类中调用它;
+通过 import 关键字可以在代码中使用其它包中的类, 如 import com.martin.test, 这就导入了 test 类, 还可以使用 import com.martin.* 来导入包中所有的类.
+如果两个类在同一个包，调用的时候不需要写全名, 如 test.
+如果两个类不在一个包，调用的时候需要写全名, 如: com.martin.test.
+
+Eclipse 会自动导入同一个包下的所有类.
+
+* * *
+
+![](http://i61.tinypic.com/5p52lf.jpg)
+00l

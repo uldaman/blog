@@ -1,0 +1,204 @@
+author: Martin
+date: 2015-02-26 13:48
+title: 6、信号与槽
+
+在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.
+
+![](http://i62.tinypic.com/309u0k6.jpg)
+
+* * *
+
+
+
+什么是信号/槽先不管, 按步骤做出这个小程序先.
+
+首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.
+
+![](http://i60.tinypic.com/2wnso4j.jpg)
+
+然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.
+
+![](http://i58.tinypic.com/bia5pf.jpg)
+
+鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.
+
+![](http://i62.tinypic.com/2q16oau.jpg)
+
+![](http://i58.tinypic.com/2rnfw5k.jpg)
+
+点击 [显示从 QWidget 继承的信号和槽], 左侧选择 clicket() , 右侧选择 close().
+
+![](http://i58.tinypic.com/2w6w8co.jpg)
+
+点击[OK]后, 保存 Qt Creator, 再到 vs 中编译, 这个程序的小功能就已经做好了.
+
+![](http://i60.tinypic.com/2ytnss2.jpg)
+
+* * *
+
+
+
+以上是通过 Qt Creator 来添加信号/槽, 那什么是信号/槽.
+
+**所谓信号槽**, 实际上类似观察者模式. 当某个事件发生之后, 比如, 按钮检测到自己被点击了一下, 它就会发出一个信号（signal）, 这种发出是没有目的的, 类似广播. 如果有对象对这个信号感兴趣, 它就会用自己的一个函数（成为槽（slot））来处理这个信号. 也就是说, 当信号发出时, 被连接的槽函数会自动被回调. 这就类似观察者模式: 当发生了感兴趣的事件, 某一个操作就会被自动触发.
+
+除了在Qt Creator 中添加信号/槽外, 还可以在.cpp文件中手动添加信号/槽.
+
+拖拽好按钮后, 返回 vs 中, 在.cpp中添加代码:
+
+    Demo::Demo(QWidget *<span style="color: #000000">parent)
+        : QWidget(parent)
+    {
+        ui.setupUi(</span><span style="color: #0000ff">this</span><span style="color: #000000">);
+        <font style="background-color: #ff0000">connect(ui.pushButton_quit, SIGNAL(clicked()), </font></span><span style="color: #0000ff"><font style="background-color: #ff0000">this</font></span><span style="color: #000000"><font style="background-color: #ff0000">, SLOT(close()));
+    </font>}</span>
+
+
+
+
+红底部分是添加的代码.
+
+
+
+
+connect()是 QObject 类的一个静态函数, 功能就是关联信号/槽, QObject 类是 Qt 所有类的基类.
+
+
+
+
+
+
+
+这个函数有五个重载:
+
+
+
+
+    QMetaObject::Connection connect(<span style="color: #0000ff">const</span> QObject *, <span style="color: #0000ff">const</span> <span style="color: #0000ff">char</span> *<span style="color: #000000">, </span><span style="color: #0000ff">const</span> QObject *, <span style="color: #0000ff">const</span> <span style="color: #0000ff">char</span> *<span style="color: #000000">, Qt::ConnectionType = Qt::AutoConnection);
+
+    QMetaObject::Connection connect(</span><span style="color: #0000ff">const</span> QObject *, <span style="color: #0000ff">const</span> QMetaMethod &<span style="color: #000000">, </span><span style="color: #0000ff">const</span> QObject *, <span style="color: #0000ff">const</span> QMetaMethod &<span style="color: #000000">, Qt::ConnectionType = Qt::AutoConnection);
+
+    QMetaObject::Connection connect(</span><span style="color: #0000ff">const</span> QObject *, <span style="color: #0000ff">const</span> <span style="color: #0000ff">char</span> *<span style="color: #000000">, </span><span style="color: #0000ff">const</span> <span style="color: #0000ff">char</span> *<span style="color: #000000">, Qt::ConnectionType = Qt::AutoConnection)</span><span style="color: #000000">;
+
+    QMetaObject::Connection connect(</span><span style="color: #0000ff">const</span> QObject *<span style="color: #000000">, PointerToMemberFunction, </span><span style="color: #0000ff">const</span> QObject *<span style="color: #000000">, PointerToMemberFunction, Qt::ConnectionType = Qt::AutoConnection);
+
+    QMetaObject::Connection connect(</span><span style="color: #0000ff">const</span> QObject *<span style="color: #000000">, PointerToMemberFunction, Functor);</span>
+
+
+
+
+
+
+
+在日常代码中, `connect()`一般会使用前面四个参数, 常用的方式是下面这种:
+
+
+
+
+    <span style="color: #000000">connect(sender, signal, receiver, slot);</span>
+
+
+
+
+参数一: 发出信号的对象
+
+
+
+
+参数二: 发送对象发出的信号
+
+
+
+
+参数三: 接收信号的对象
+
+
+
+
+参数四: 接收对象在接收到信号之后所需要调用的函数;
+
+
+
+
+也就是说, 当 sender 发出了 signal 信号之后会自动调用 receiver 的 slot 函数.
+
+
+
+
+
+
+
+这是最常用的形式, 我们可以套用这个形式去分析上面给出的五个重载.
+
+
+
+
+第一个, sender 类型是`const QObject *`, signal 的类型是`const char *`, receiver 类型是`const QObject *`, slot 类型是`const char *`. 这个函数将 signal 和 slot 作为字符串处理;
+
+
+
+
+第二个, sender 和 receiver 同样是`const QObject *`, 但是 signal 和 slot 都是`const QMetaMethod &`, 我们可以将每个函数看做是 `QMetaMethod `的子类, 因此，这种写法可以使用 `QMetaMethod `进行类型比对;
+
+
+
+
+第三个, sender 同样是`const QObject *`, signal 和 slot 同样是`const char *`, 但是却缺少了 receiver, 这个函数其实是将 this 指针作为 receiver;
+
+
+
+
+第四个, sender 和 receiver 也都存在, 都是`const QObject *`, 但是 signal 和 slot 类型则是 `PointerToMemberFunction`。看这个名字就应该知道，这是指向成员函数的指针;
+
+
+
+
+第五个, 前面两个参数没有什么不同, 最后一个参数是`Functor`类型, 这个类型可以接受 static 函数、全局函数以及 Lambda 表达式.
+
+
+
+
+
+
+
+信号槽要求**信号和槽的参数一致;**
+
+
+
+
+所谓一致, 是参数类型一致, 如果不一致, 允许的情况是: 槽函数的参数可以比信号的少. 即便如此, 槽函数的参数顺序也必须和信号的前面几个一致起来.
+
+
+
+
+
+
+
+我们在上面的例子中, 使用了 `**SIGNAL** `和 `**SLOT** `这两个宏, 这两个宏的功能是将两个函数名转换成了字符串.
+
+
+
+
+    connect(ui.pushButton_quit, SIGNAL(clicked()), <span style="color: #0000ff">this</span>, SLOT(close()));
+
+
+
+
+这句代码匹配的就是第一个重载, 它也可以省略第三个 this 参数, 这样匹配的就是第三个重载.
+
+
+
+
+
+
+
+还可以改成:
+
+
+
+
+    connect(ui.pushButton_quit, &QPushButton::clicked, &QCoreApplication::quit);
+
+
+这就是第五个重载.
+??

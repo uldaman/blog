@@ -1,0 +1,87 @@
+Title: 028、Eclipse
+Author: Martin
+Date: 2016-03-19 22:34
+Summary: Eclipse 是开发 Java 的 IDE (集成开发环境), 这篇笔记记录怎么安装、汉化.
+
+[TOC]
+
+## 安装
+在官网上下载最新版本的 Eclipse, 不过它是英文版的, 我们需要手动下载语言包, Eclipse 有一个语言包项目, 叫 Eclipse Babel Project, 如果需要语言包, 可以联机从这儿下载.
+
+[http://www.eclipse.org/babel/](http://www.eclipse.org/babel/)
+
+找到下载页面后, 还要根据自己使用的 Eclipse 的版本来确定在哪下载.
+
+![](http://i59.tinypic.com/2ibyxyx.jpg)
+
+![](http://i58.tinypic.com/30sfqyb.jpg)
+
+可以看到我的是 Luna 版本.
+
+点击第一张图上的 Luna, 跳转到语言包下载界面, 找到中文包, 下载, 解压, 覆盖即可.
+
+![](http://i57.tinypic.com/fn8sg0.jpg)
+
+再次打开 Eclipse 就是中文的了.
+
+## 使用
+用 Eclipse 编写 Java 程序可以总结为四步:
+
+1. 创建 Java 项目
+2. 创建程序包
+3. 编写 Java 源代码
+4. 运行 Java 程序
+
+### 设置字体
+"窗口" -> "首选项"
+
+然后在左上角的过滤器中输入外观, 选择 "颜色和字体", 在右边选择 "基本" -> "文本字体" -> "编辑"
+
+![](http://i67.tinypic.com/op8do8.jpg)
+
+### 自动提示
+接下来, 设置下 eclipse 的自动提示<br>(你可以在任何时候 alt + / 来触发).
+window –> Preferences –> Java –> Editor –> Content Assist:
+
+![](http://i60.tinypic.com/1zoj2no.jpg)
+
+__abcdefghijklmnopqrstuvwxyz.__(注意后面的点)
+
+### 导航器
+类似 "资源管理器", 它的视图和 "包资源管理器" 有点像, 因为有些文件或文件夹在 "包资源管理器" 看不到, 这时可以到 "导航器" 中查看.
+
+"窗口" -> "显示视图" -> "其他", 在弹出窗中选择 "常规" -> "导航器", 此时 "导航器" 就出现在 IDE 左侧的视图中了.
+
+### 自动构建
+eclipse 的 java 构建器包含了两种构建 java 程序的方法:
+
+- 自动构建
+- 手动构建
+
+其中, 自动构建是 java 构建器默认采用的方式, 即当文件修改后保存或者对整个项目进行刷新时, java 构建器就会对其进行编译.
+
+这显然不是一种我希望的方式, 我希望是我点击 "Run" 或者 "Debug" 时 IDE 再去构建, 而不是保存一下文件就构建一下.
+
+关闭方法很简单, "项目" -> "自动构建", 取消 "自动构建" 前面的选项即可.
+
+### 抽取函数
+快捷键 __Shift + Alt + m__ 能将选中的代码块进行方法抽取.
+
+这是属于 __重构__ 功能的一部分, 可以点击选中的代码块, 选择 "重构" \-\> "抽取方法"
+
+### 设置编码
+统一设置为 __utf-8__ 编码, Window -> Preferences -> General -> Workspace -> Text file encoding -> Other -> UTF-8.
+
+统一设置为 __utf-8__ 编码, Window -> Preferences -> General -> Content Types, 在右面选择 "Text", 在 default encoding 输入 "UTF-8", 点 "update" 按钮更新.
+
+## 常用快捷键
+
+0. Ctrl + 1 (快速修复)
+1. Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件
+1. Ctrl + D (删除当前行)
+2. Ctrl + Alt + ↓ (复制当前行到下一行)
+3. Alt + / 或者说是 Ctrl + 空格 (由于后者与输入法的快捷键冲突, 所以, 我一般都用前者) 作用：快速插入
+4. Alt + Shift + R 重命名非常好用
+5. Ctrl + Q 定位到最后编辑的地方
+6. Ctrl + Shift + O (自动导入包)
+7. Ctrl + / 注释当前行,再按则取消注释

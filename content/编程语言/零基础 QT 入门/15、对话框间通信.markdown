@@ -1,0 +1,84 @@
+author: Martin
+date: 2015-05-25 18:00
+title: 15、对话框间通信
+
+<blockquote>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.
+>
+> </blockquote>
+
+某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.
+
+因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.
+
+# 模态对话框
+
+因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).
+
+使用了`exec()`显示的模态对话框, 可以在`exec()`函数之后通过 QDialog::result() 直接从对话框对象获取到数据值(当然要先在对话框中用 QDialog::setResult() 来设置数据).
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog dialog(</span><span style="color: #0000ff">this</span><span style="color: #000000">);
+        dialog.setWindowTitle(</span><span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">);
+        dialog.exec();
+        qDebug() </span><<<span style="color: #000000"> dialog.result();
+    }</span>
+
+注意使用 Dialog::result() 时, 不能设置 WA_DeleteOnClose 属性, 因为如果设置了这个属性, exec() 返回后, dialog 就会被销毁, 就不可能再获取到数据了.
+当然这里也不可能设置 WA_DeleteOnClose 属性, 因为这是模态对话框, 可以直接在栈上创建, 函数返回, 对话框所分配到的内存会自动释放, WA_DeleteOnClose 只有在堆上创建窗口时才使用, 一般用到非模态对话框上.
+
+
+
+
+另外, `QDialog::exec()也`是有返回值的, 其返回值是 `QDialog::Accepted `或者 `QDialog::Rejected`, 这取决于用户点击的是 “OK”还是 “Cancel”按钮(默认情况下, QDialog 有这两个按钮,“OK”被连接到到 accept() 槽, “Cancel”被连接到 reject() 槽), 一般我们会使用类似下面的代码：
+
+
+
+    QDialog dialog(<span style="color: #0000ff">this</span><span style="color: #000000">);
+    </span><span style="color: #0000ff">if</span> (dialog.exec() ==<span style="color: #000000"> QDialog::Accepted) {
+        </span><span style="color: #008000">//</span><span style="color: #008000"> do something</span>
+    } <span style="color: #0000ff">else</span><span style="color: #000000"> {
+        </span><span style="color: #008000">//</span><span style="color: #008000"> do something else</span>
+    }
+
+
+
+
+#
+
+
+
+
+# 非模态对话框
+
+
+
+
+打开非模态对话框时, 代码是立即返回的, 这也就不可能通过 result() 来获取数据, 要想实现通信, 可以使用信号槽机制.
+
+
+
+
+非模态对话框在关闭时可以调用 `QDialog::accept()`或者 `QDialog::reject()`或者更通用的 `QDialog::done()`函数, 所以就可以在重写这几个函数发出信号;
+另外, 如果找不到合适的信号发出点, 还可以重写 `QDialog::closeEvent()`函数, 在这里发出信号. 在需要接收数据的窗口（这里是主窗口）连接到这个信号即可.
+
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> UserAgeDialog::accept() {
+        emit userAgeChanged(newAge); </span><span style="color: #008000">//</span><span style="color: #008000"> newAge is an int</span>
+    <span style="color: #000000">    QDialog::accept();
+    }
+
+    </span><span style="color: #008000">//</span><span style="color: #008000"> in main window:</span>
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::showUserAgeDialog() {
+        UserAgeDialog </span>*dialog = <span style="color: #0000ff">new</span> UserAgeDialog(<span style="color: #0000ff">this</span><span style="color: #000000">);
+        connect(dialog, </span>&UserAgeDialog::userAgeChanged, <span style="color: #0000ff">this</span>, &<span style="color: #000000">MainWindow::setUserAge);
+        dialog</span>-><span style="color: #000000">show();
+    }
+
+    </span><span style="color: #008000">//</span><span style="color: #008000"> ...</span>
+
+    <span style="color: #0000ff">void</span> MainWindow::setUserAge(<span style="color: #0000ff">int</span><span style="color: #000000"> age) {
+        userAge </span>=<span style="color: #000000"> age;
+    }</span>
+嚍

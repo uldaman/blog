@@ -1,0 +1,159 @@
+author: Martin
+date: 2015-06-12 17:15
+title: (十八) 多态及接口
+
+老生常谈, 参考 C++.
+
+
+# 类型转换
+
+
+需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
+为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.
+
+首先, 我们来看一下向下类型转换的风险.
+
+假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.
+
+
+
+
+
+    Dog dog = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Dog();
+    Animal animal </span>= dog; <span style="color: #008000;">//</span><span style="color: #008000;"> 向上类型转换</span>
+    Dog dog2 = (Dog)animal; <span style="color: #008000;">//</span><span style="color: #008000;"> 向下类型转换</span>
+    Cat cat = (Cat)animal; <span style="color: #008000;">//</span><span style="color: #008000;"> 向下类型转换</span>
+
+
+
+
+
+这样的代码, 在编译时是没有问题的, 但是实际运行时, 就会出错, 出错的原因是第四行代码, 因为 animal 它本身是一个 Dog, 但是强制转换成了 Cat, Dog 和 Cat 明显就是两种物种, 所以会出错, 这就是风险所在.
+
+解决方法是使用 instanceof
+
+
+
+
+
+    <span style="color: #0000ff;">if</span> (animal <span style="color: #0000ff;">instanceof</span><span style="color: #000000;"> Cat) {
+        Cat cat </span>=<span style="color: #000000;"> (Cat)animal;
+    }</span>
+
+
+
+
+
+instanceof 运算符会检查 animal 是否可转换成 Cat, 可以的话返回 true.
+
+在编程中, 如果要使用向下类型转换, 务必配合 instanceof 运算符来解决安全性问题.
+
+
+
+* * *
+
+
+
+
+
+# 抽象类
+
+
+抽象类前使用 abstract 关键字来修饰, 表示一个类是抽象类.
+
+抽象类的目的在于: 限制规定子类必须实现某些方法, 但不关注实现细节.
+
+使用规则:
+*. 使用 abstract 修饰类.
+*. 使用 abstract 修饰类中的方法, 但不需要实现, 声明即可.
+*. 如果一个类中包含了抽象方法, 则这个类必须是抽象类.
+*. 抽象类可以包含普通方法, 也可以没有抽象方法.
+*. 抽象类不能直接实例化, 但可以定义引用, 主要是配合多态使用.
+
+
+
+* * *
+
+
+
+
+
+# 接口
+
+
+接口由全局常量和公共抽象方法所组成.
+
+接口定义了某一批类所需要遵守的规范, 它不关心这些类的内部数据, 也不关心这些类里方法的实现细节, 它只规定这些类中必须提供某些方法, 在这一点上, 可以把接口理解成特殊的抽象类.
+
+接口的定义:
+[修饰符] [abstract] interface 接口名 [extends 父接口名列表]{
+[public] [static] [final] 常量;
+[public] [abstract] 方法;
+}
+
+可以看到, 接口不再使用 class 关键字, 而改用 interface 关键字;
+接口就是用被继承、被实现的, 所以修饰符一般建议为 public;
+[x] 为可选, 不写的话, 也会有个默认值, 例如, 如果常量前不显示的写 final, 它默认也会是 final, 即常量.
+接口名用大写 i 开头.
+**另外, 还有个重要的事项要注意, 类, 只能单继承, 而接口是可以多重继承的.**
+
+
+
+
+
+    <span style="color: #0000ff;">public</span> <span style="color: #0000ff;">interface</span><span style="color: #000000;"> ICalInterface {
+        </span><span style="color: #0000ff;">final</span> <span style="color: #0000ff;">float</span> PI=3.14159f;<span style="color: #008000;">//</span><span style="color: #008000;">定义用于表示圆周率的常量PI  </span>
+        <span style="color: #0000ff;">float</span> getArea(<span style="color: #0000ff;">float</span> r);<span style="color: #008000;">//</span><span style="color: #008000;">定义一个用于计算面积的方法getArea()  </span>
+        <span style="color: #0000ff;">float</span> getCircumference(<span style="color: #0000ff;">float</span> r);<span style="color: #008000;">//</span><span style="color: #008000;">定义一个用于计算周长的方法getCircumference()  </span>
+    }
+
+
+
+
+
+实现接口:
+一个类可以实现一个或多个接口, 实现接口使用 implements 关键字, 其基本格式如下:
+[修饰符] class <类名> [extends 父类名] [implements 接口列表] {
+}
+
+**同抽象类一样, 可以定义接口引用来实现多态.**
+
+接口还经常与匿名内部类配合使用
+假设接口 Interface 中存在一个 method 方法, 我们可以不用子类来实现接口, 而直接使用匿名内部类来实现接口的方法:
+
+
+
+
+
+    Interface i = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Interface() {
+         </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method() {
+              </span><span style="color: #008000;">//</span><span style="color: #008000;"> 匿名内部类实现接口的方法</span>
+    <span style="color: #000000;">     }
+    }
+    i.method();</span>
+
+
+
+
+
+这项特性非常有用, 当某个子类只使用一次时, 我们就不需要再写这个子类, 直接用匿名内部类来实现;
+上面的例子还能像下面这样简化:
+
+
+
+
+
+    <span style="color: #0000ff;">new</span><span style="color: #000000;"> Interface() {
+         </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> method() {
+              </span><span style="color: #008000;">//</span><span style="color: #008000;"> 匿名内部类实现接口的方法</span>
+    <span style="color: #000000;">     }
+    }.method();</span>
+
+
+
+
+
+
+
+Java 接口和 Java 抽象类有太多相似的地方, 又有太多特别的地方, 具体参考网上这篇文章: [Java 接口和抽象类区别](http://blog.csdn.net/xw13106209/article/details/6923556)
+s/y

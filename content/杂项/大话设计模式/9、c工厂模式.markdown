@@ -1,0 +1,182 @@
+author: Martin
+date: 2015-02-15 14:24
+title: 9、[C++]工厂模式
+
+回想一下, 我们之前的简单工厂模式, [http://www.cnblogs.com/hanxiao-martin/p/4289502.html](http://www.cnblogs.com/hanxiao-martin/p/4289502.html)
+
+简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把'+'等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.
+
+但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加'case'的分支条件, 这修改了原有的类, 违背了我们的**"开放-封闭原则",** 于是, 工厂模式就来了...
+
+工厂模式: 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.
+
+[![工厂模式](http://images.cnitblog.com/blog/723444/201502/132041374791953.jpg)](http://images.cnitblog.com/blog/723444/201502/132041357457281.jpg)
+
+[cpp]#include <iostream>
+using namespace std;
+
+class Operation {
+public:
+    virtual double GetResult() = 0;
+
+    double m_dNum_A = 0;
+    double m_dNum_B = 0;
+};
+
+class OperationAdd : public Operation {
+public:
+    virtual double GetResult() {
+        double dResult = m_dNum_A + m_dNum_B;
+        return dResult;
+    }
+};
+
+class OperationSub : public Operation {
+public:
+    virtual double GetResult() {
+        double dResult = m_dNum_A - m_dNum_B;
+        return dResult;
+    }
+};
+
+class OperationMul : public Operation {
+public:
+    virtual double GetResult() {
+        double dResult = m_dNum_A * m_dNum_B;
+        return dResult;
+    }
+};
+
+class OperationDiv : public Operation {
+public:
+    virtual double GetResult() {
+        double dResult = m_dNum_A / m_dNum_B;
+        return dResult;
+    }
+};
+
+class IFactory {
+public:
+    virtual Operation* CreateOperate() = 0;
+};
+
+class AddFactory
+    : public IFactory {
+public:
+    Operation* CreateOperate() {
+        return new OperationAdd();
+    }
+};
+
+class SubFactory
+    : public IFactory {
+public:
+    Operation* CreateOperate() {
+        return new OperationSub();
+    }
+};
+
+class MulFactory
+    : public IFactory {
+public:
+    Operation* CreateOperate() {
+        return new OperationMul();
+    }
+};
+
+class DivFactory
+    : public IFactory {
+public:
+    Operation* CreateOperate() {
+        return new OperationDiv();
+    }
+};
+
+int _tmain(int argc, _TCHAR* argv[]) {
+    IFactory* operFactory = NULL;
+    char cOp;
+    cout << "请输入操作符(+ - * / . . .):" << endl;
+    cin >> cOp;
+
+    switch (cOp) {
+    case '+':
+        operFactory = new AddFactory();
+        break;
+    case '-':
+        operFactory = new SubFactory();
+        break;
+    case '*':
+        operFactory = new MulFactory();
+        break;
+    case '/':
+        operFactory = new DivFactory();
+        break;
+    }
+
+    if (operFactory != NULL) {
+        Operation* pOper = operFactory->CreateOperate();
+        cout << "请输入第一个数:" << endl;
+        cin >> pOper->m_dNum_A;
+        cout << "请输入第二个数:" << endl;
+        cin >> pOper->m_dNum_B;
+
+        try {
+            double dResult = pOper->GetResult();
+            cout << "结果是: " << dResult << endl;
+        } catch (...) {
+            cout << "请输入正确操作数" << endl;
+        }
+    }
+
+    system("PAUSE");
+    return 0;
+}[/cpp]
+
+这是我用C++模拟出来的工厂模式, 这个例子虽然实现出了工厂模式, 它将选择判断的问题丢给了客户端, 使得客户端维护起来变得麻烦, 如果要添加新运算,  本来是改工厂类, 而现在是改客户端, 看起来好像变得更麻烦了, 那为什么还要用工厂模式呢?
+
+**那到底什么时候该用工厂模式呢?**
+
+来看<大话设计模式>中雷锋的例子, 现在有个雷锋类, 它有扫地, 洗衣, 买米三个方法, 现在有三个快毕业的大学生要学习雷锋做好事, 于是他们就要继承雷锋那个类, 这里一开始用简单工厂模式, 有个简单的"雷锋工厂" -- SimpleFactory, 通过传入的参数来实例化对象. 因为学习雷锋出来学生外还是社会志愿者, 所以这个简单工厂类可能像下面这样:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/132041404641207.png)](http://images.cnitblog.com/blog/723444/201502/132041389644465.png)
+
+再来看客户端代码:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/132041432613220.png)](http://images.cnitblog.com/blog/723444/201502/132041416987262.png)
+
+好, 现在需求来了,  这三个学生毕业了, 他们从大学生编程了社区志愿者, 我们需要改原码, 把三名创建"学雷锋的大学生"换成"社区志愿者", 我们需要改动三个地方. 那么就里就会出现重复的操作, 如果改成工厂模式来实现:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/132041508867656.png)](http://images.cnitblog.com/blog/723444/201502/132041489646743.png)
+
+再来看客户端代码:
+
+[![image](http://images.cnitblog.com/blog/723444/201502/132041532293741.png)](http://images.cnitblog.com/blog/723444/201502/132041524176155.png)
+
+此时, 如果我们换成"社区志愿者", 只要修改第一句代码就可以了.
+
+写在最后:
+
+其实什么时候用简单工厂, 什么时候用工厂, 我还没完全弄明白, 下面这段摘自网上的分析:
+
+
+<blockquote>工厂方法模式是为了克服简单工厂模式的缺点（主要是为了满足OCP）而设计出来的。但是，工厂方法模式就一定比简单工厂模式好呢？笔者的答案是不一定。下面笔者将详细比较两种模式。
+
+>
+>
+
+>   1. 结构复杂度 从这个角度比较，显然简单工厂模式要占优。简单工厂模式只需一个工厂类，而工厂方法模式的工厂类随着产品类个数增加而增加，这无疑会使类的个数越来越多，从而增加了结构的复杂程度。
+>
+
+>   2. 代码复杂度 代码复杂度和结构复杂度是一对矛盾，既然简单工厂模式在结构方面相对简洁，那么它在代码方面肯定是比工厂方法模式复杂的了。简单工厂模式的工厂类随着产品类的增加需要增加很多方法（或代码），而工厂方法模式每个具体工厂类只完成单一任务，代码简洁。
+>
+
+>   3. 客户端编程难度 工厂方法模式虽然在工厂类结构中引入了接口从而满足了OCP，但是在客户端编码中需要对工厂类进行实例化。而简单工厂模式的工厂类是个静态类，在客户端无需实例化，这无疑是个吸引人的优点。
+>
+
+>   4. 管理上的难度 这是个关键的问题。 我 们先谈扩展。众所周知，工厂方法模式完全满足OCP，即它有非常良好的扩展性。那是否就说明了简单工厂模式就没有扩展性呢？答案是否定的。简单工厂模式同 样具备良好的扩展性——扩展的时候仅需要修改少量的代码（修改工厂类的代码）就可以满足扩展性的要求了。尽管这没有完全满足OCP，但笔者认为不需要太拘 泥于设计理论，要知道，sun提供的java官方工具包中也有想到多没有满足OCP的例子啊（java.util.Calendar这个抽象类就不满足 OCP，具体原因大家可以分析下）。然后我们从维护性的角度分析下。首先是工厂模式, 假如某个具体产品类需要进行一定的修改，很可能需要修改对应的工厂类。当同时 需要修改多个产品类的时候，对工厂类的修改会变得相当麻烦（对号入座已经是个问题了）。反而简单工厂没有这些麻烦，当多个产品类需要修改是，简单工厂模式 仍然仅仅需要修改唯一的工厂类（无论怎样都能改到满足要求吧？大不了把这个类重写）。
+
+由以上的分析，笔者认为简单工厂模式更好用更方便些。当然这只是笔者的个人看法而已，毕竟公认的，工厂方法模式比简单工厂模式更“先进”。但有时过于先进的东西未必适合自己，这个见仁见智吧。
+>
+
+</blockquote>
+??

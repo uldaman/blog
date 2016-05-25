@@ -1,0 +1,148 @@
+author: Martin
+date: 2015-03-24 16:22
+title: 20、[C++] 观察者模式
+
+观察者模式:
+定义对象间的一种一对多的依赖关系, 当一个对象的状态发生改变时, 所有依赖于它的对象都得到通知并被自动更新.
+
+这句话是什么意思呢?
+拿一个例子来说明会方便理解, 记得小时候的课堂吗? 当老师上课时, 全班同学都要"观察"老师的"状态", 当老师转过身在黑板上写字的时候, 学霸们呢, 自然是开始做笔记了..学渣们嘛..当然是开始做小动作啦...
+
+在这个例子中, 学生就是观察者, 老师是被观察者, 当被观察者(老师)的状态发生改变时, 观察者(学生)就"接受"到通知, 然后..该干嘛就去干嘛..
+这个 [老师--学生] 的模型应该如下:
+
+![](http://i59.tinypic.com/2luz0wy.jpg)
+
+OK, 现在来用 C++ 代码来实现这个模型.
+
+    #include <windows.h><span style="color: #000000">
+    #include </span><tchar.h><span style="color: #000000">
+    #include </span><list><span style="color: #000000">
+    #include </span><span style="color: #800000">"</span><span style="color: #800000">iostream</span><span style="color: #800000">"</span>
+
+    <span style="color: #0000ff">class</span><span style="color: #000000"> Student {
+    </span><span style="color: #0000ff">public</span><span style="color: #000000">:
+        Student() {};
+        </span><span style="color: #0000ff">virtual</span> ~<span style="color: #000000">Student() {};
+
+        </span><span style="color: #0000ff">virtual</span> <span style="color: #0000ff">void</span> Update() = <span style="color: #800080">0</span><span style="color: #000000">;
+
+        </span><span style="color: #0000ff">bool</span> <span style="color: #0000ff">operator</span> == (<span style="color: #0000ff">const</span> Student& stu) { <span style="color: #008000">//</span><span style="color: #008000">用remove要重载==，除非是内置类型</span>
+            <span style="color: #0000ff">if</span> (m_name ==<span style="color: #000000"> stu.m_name) {
+                </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">true</span><span style="color: #000000">;
+            }
+            </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">false</span><span style="color: #000000">;
+        }
+
+    </span><span style="color: #0000ff">protected</span><span style="color: #000000">:
+        std::</span><span style="color: #0000ff">string</span><span style="color: #000000"> m_name;
+        std::</span><span style="color: #0000ff">string</span><span style="color: #000000"> m_studentState;
+    };
+
+    </span><span style="color: #0000ff">class</span><span style="color: #000000"> Teacher {
+    </span><span style="color: #0000ff">public</span><span style="color: #000000">:
+        Teacher() {};
+        </span><span style="color: #0000ff">virtual</span> ~<span style="color: #000000">Teacher() {};
+
+        std::</span><span style="color: #0000ff">string</span><span style="color: #000000"> m_teacherState;
+
+        </span><span style="color: #0000ff">virtual</span> <span style="color: #0000ff">void</span> Attach(Student*<span style="color: #000000"> pStudent) {
+            m_IList.push_back(pStudent);
+        }
+
+        </span><span style="color: #0000ff">virtual</span> <span style="color: #0000ff">void</span> Detack(Student*<span style="color: #000000"> pStudent) {
+            m_IList.remove(pStudent);
+        }
+
+        </span><span style="color: #0000ff">virtual</span> <span style="color: #0000ff">void</span><span style="color: #000000"> Notify() {};
+
+    </span><span style="color: #0000ff">protected</span><span style="color: #000000">:
+        std::list</span><Student*><span style="color: #000000"> m_IList;
+    };
+
+    </span><span style="color: #0000ff">class</span><span style="color: #000000"> XueBa
+        : </span><span style="color: #0000ff">public</span><span style="color: #000000"> Student {
+    </span><span style="color: #0000ff">public</span><span style="color: #000000">:
+        XueBa(Teacher</span>* teacher, std::<span style="color: #0000ff">string</span><span style="color: #000000"> name) {
+            m_pTeacher </span>=<span style="color: #000000"> teacher;
+            m_name </span>=<span style="color: #000000"> name;
+        }
+        </span>~XueBa() <span style="color: #0000ff">override</span><span style="color: #000000"> {}
+
+        </span><span style="color: #0000ff">void</span><span style="color: #000000"> Update() {
+            m_studentState </span>= m_pTeacher-><span style="color: #000000">m_teacherState;
+            std::cout </span><< <span style="color: #800000">"</span><span style="color: #800000">我是学霸 </span><span style="color: #800000">"</span> << m_name.c_str() << <span style="color: #800000">"</span><span style="color: #800000">, </span><span style="color: #800000">"</span> << <span style="color: #800000">"</span><span style="color: #800000">老师在 </span><span style="color: #800000">"</span> << m_studentState.c_str() <<<span style="color: #000000"> std::endl;
+        }
+
+    </span><span style="color: #0000ff">protected</span><span style="color: #000000">:
+        Teacher</span>*<span style="color: #000000"> m_pTeacher;
+    };
+
+    </span><span style="color: #0000ff">class</span><span style="color: #000000"> MathTeacher
+        : </span><span style="color: #0000ff">public</span><span style="color: #000000"> Teacher {
+    </span><span style="color: #0000ff">public</span><span style="color: #000000">:
+        MathTeacher() {};
+        </span>~MathTeacher() <span style="color: #0000ff">override</span><span style="color: #000000"> {};
+
+        </span><span style="color: #0000ff">void</span> Notify() <span style="color: #0000ff">override</span><span style="color: #000000"> {
+            </span><span style="color: #0000ff">for</span><span style="color: #000000"> (auto v : m_IList) {
+                v</span>-><span style="color: #000000">Update();
+            }
+        }
+    };
+
+    </span><span style="color: #0000ff">int</span> _tmain(<span style="color: #0000ff">int</span> argc, _TCHAR*<span style="color: #000000"> argv[]) {
+        MathTeacher teacher;
+
+        XueBa st1(</span>&teacher, <span style="color: #800000">"</span><span style="color: #800000">张三</span><span style="color: #800000">"</span><span style="color: #000000">);
+        XueBa st2(</span>&teacher, <span style="color: #800000">"</span><span style="color: #800000">李四</span><span style="color: #800000">"</span><span style="color: #000000">);
+
+        teacher.Attach(</span>&st1); <span style="color: #008000">//</span><span style="color: #008000"> 张三进入教室</span>
+        teacher.Attach(&st2); <span style="color: #008000">//</span><span style="color: #008000"> 李四进入教室</span>
+        teacher.m_teacherState = <span style="color: #800000">"</span><span style="color: #800000">讲课</span><span style="color: #800000">"</span><span style="color: #000000">;
+        teacher.Notify(); </span><span style="color: #008000">//</span><span style="color: #008000"> 发出通知</span>
+    <span style="color: #000000">
+        printf(</span><span style="color: #800000">"</span><span style="color: #800000">----------------------------------------\r\n</span><span style="color: #800000">"</span><span style="color: #000000">);
+
+        teacher.Detack(</span>&st2); <span style="color: #008000">//</span><span style="color: #008000"> 李四 从后门逃课了..</span>
+        teacher.m_teacherState = <span style="color: #800000">"</span><span style="color: #800000">点名</span><span style="color: #800000">"</span><span style="color: #000000">;
+        teacher.Notify(); </span><span style="color: #008000">//</span><span style="color: #008000"> 发出通知</span>
+    <span style="color: #000000">
+        system(</span><span style="color: #800000">"</span><span style="color: #800000">PAUSE</span><span style="color: #800000">"</span><span style="color: #000000">);
+        </span><span style="color: #0000ff">return</span> <span style="color: #800080">0</span><span style="color: #000000">;
+    }</span>
+
+
+
+
+![](http://i58.tinypic.com/sw72c1.jpg)
+
+
+
+
+原始的观察者模式 UML 图如下:
+
+
+
+
+![](http://i61.tinypic.com/2cdzyva.jpg)
+
+
+
+
+**Subject:** 抽象通知者(被观察者), 它把所有观察者对象的引用保存在一个集合里, 保存一个有关状态信息的属性, 提供三个虚方法来添加、删除、通知观察者对象.
+**ConcreteSubject:** 具体通知者类, 当通知者内部状态发生改变时, 给所有添加过的观察者发出通知. 它可以直接用 Subject 的方法, 也可以重写它们.
+**Observer:** 抽象观察者, 它保存一个状态信息的属性, 以便本身的状态和通知者状态相协调, 有定义一个接口, 在得到通知时更新自己.
+**ConcreteObserver:** 具体观察者, 实现象观察者的更新接口.
+
+
+
+
+# 适用场景
+
+
+
+
+当一个对象的改变需要同时改变其他对象, 而它并不用知道有多少对象待改变时, 应该考虑使用观察者模式.
+观察者模式所做的工作其实就是在解除耦合, 让耦合的双方都依赖于抽象, 而不是依赖于具体, 从而使得各自的变化都不会影响另一边的变化.
+ 0

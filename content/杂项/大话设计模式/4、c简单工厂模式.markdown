@@ -1,0 +1,300 @@
+author: Martin
+date: 2015-02-15 14:19
+title: 4、[C++]简单工厂模式
+
+首先看一下”计算器”程序:
+
+
+
+
+
+    #include <iostream>
+    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> nNum_A, nNum_B;
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第一个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> nNum_A;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第二个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> nNum_B;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入操作符(+ - * /):</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> cOp;
+
+        </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            cout </span><< nNum_A + nNum_B <<<span style="color: #000000;"> endl;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            cout </span><< nNum_A - nNum_B <<<span style="color: #000000;"> endl;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            cout </span><< nNum_A * nNum_B <<<span style="color: #000000;"> endl;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+                cout </span><< nNum_A / nNum_B <<<span style="color: #000000;"> endl;
+            }
+            </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (...) {
+                cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">您的输入有错</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            }
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">default</span><span style="color: #000000;">:
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入正确操作符</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        }
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+
+
+![结果](http://img.blog.csdn.net/20150211232011817)
+
+这个程序表面上看来没有什么问题, 也做了除数为0的处理. 现在用到面向对象的编程思想, 开始考虑通过 **封装/继承/多态** 来优化这个程序. 首先这个程序把所有的功能都放在main函数中, 造成耦合度太低, 不方便维护, 也不容易扩展, 我们现在把这些代码重构, 让计算和显示分开.
+
+
+
+
+
+
+
+    #include <iostream>
+    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">double</span> GetResult(<span style="color: #0000ff;">double</span> dNum_A, <span style="color: #0000ff;">double</span> dNum_B, <span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp) {
+            </span><span style="color: #0000ff;">double</span> dResult = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                dResult </span>= dNum_A +<span style="color: #000000;"> dNum_B;
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                dResult </span>= dNum_A -<span style="color: #000000;"> dNum_B;
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                dResult </span>= dNum_A *<span style="color: #000000;"> dNum_B;
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                dResult </span>= dNum_A /<span style="color: #000000;"> dNum_B;
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> nNum_A, nNum_B;
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第一个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> nNum_A;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第二个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> nNum_B;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入操作符(+ - * /):</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> cOp;
+
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+            </span><span style="color: #0000ff;">double</span> dResult =<span style="color: #000000;"> Operation::GetResult(nNum_A, nNum_B, cOp);
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">结果是: </span><span style="color: #800000;">"</span> << dResult <<<span style="color: #000000;"> endl;
+        }
+        </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (...) {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入正确操作数</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        }
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+
+
+好, 我们已经把计算和显示分开了, 如果这时需要添加一个开方计算, 那该怎么办? 那就要改Operation类, 现在要加一个新计算, 却要 + - * / 的运算都参与编译, 不容易扩展, 打个比方: 如果公司要我为薪资管理系统做维护, 原来只有技术人员, 销售人员, 经理三种薪资计算, 现在要求添加一个临时工的薪资计算, 按我们的程序写法, 公司就必须要把含原三种计算的运算类给我, 如果我不小心改动了那三种运算, 后果可想… 现在重新设计我们的运算类:
+
+
+
+
+
+
+
+    <span style="color: #0000ff;">class</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">double</span> GetResult() = <span style="color: #800080;">0</span><span style="color: #000000;">;
+
+        </span><span style="color: #0000ff;">double</span> m_dNum_A = <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">double</span> m_dNum_B = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    };
+
+    </span><span style="color: #0000ff;">class</span> OperationAdd : <span style="color: #0000ff;">public</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            </span><span style="color: #0000ff;">double</span> dResult = m_dNum_A +<span style="color: #000000;"> m_dNum_B;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span> OperationSub : <span style="color: #0000ff;">public</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            </span><span style="color: #0000ff;">double</span> dResult = m_dNum_A -<span style="color: #000000;"> m_dNum_B;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span> OperationMul : <span style="color: #0000ff;">public</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            </span><span style="color: #0000ff;">double</span> dResult = m_dNum_A *<span style="color: #000000;"> m_dNum_B;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+        }
+    };
+
+    </span><span style="color: #0000ff;">class</span> OperationDiv : <span style="color: #0000ff;">public</span><span style="color: #000000;"> Operation {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">virtual</span> <span style="color: #0000ff;">double</span><span style="color: #000000;"> GetResult() {
+            </span><span style="color: #0000ff;">double</span> dResult = m_dNum_A /<span style="color: #000000;"> m_dNum_B;
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+        }
+    };</span>
+
+
+
+
+
+
+
+这样, 如果我们需要新增一个开方功能, 只要再从Operation继承一个新类就可以了, 现在的问题是, 在我们的main函数中, 怎么调用这个运算类? 也就是说, 怎么让计算器知道我想用哪一个算法?
+
+
+
+
+
+
+
+    #include <span style="color: #800000;">"</span><span style="color: #800000;">stdafx.h</span><span style="color: #800000;">"</span>
+    <span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        Operation</span>* oper =<span style="color: #000000;"> NULL;
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入操作符(+ - * /):</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> cOp;
+        </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationAdd();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationSub();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationMul();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationDiv();
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        }
+
+        </span><span style="color: #0000ff;">if</span> (oper !=<span style="color: #000000;"> NULL) {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第一个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> oper-><span style="color: #000000;">m_dNum_A;
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第二个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> oper-><span style="color: #000000;">m_dNum_B;
+
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+                </span><span style="color: #0000ff;">double</span> dResult = oper-><span style="color: #000000;">GetResult();
+                cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">结果是: </span><span style="color: #800000;">"</span> << dResult <<<span style="color: #000000;"> endl;
+            }
+            </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (...) {
+                cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入正确操作数</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            }
+        }
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+
+
+目前来看, 只能这样使用, 但是这样又犯了一开始的毛病, 首先是如果要添加计算, 还要改main函数, 而且计算和显示又放在了一起, 那怎么解决呢, 这就要引入的简单工厂模式. 什么是简单工厂, 就是根据需要实例化出特定的对象.
+
+![简单工厂](http://img.blog.csdn.net/20150212003743056)
+
+上面就是简单工厂的UML图:
+
+Factory: 工厂类, 它引用了Operation类, 有一个方法, 返回值就是Operation类.
+
+Operation: 运算类, 它是一个抽象类, 提供一两个属性来保存运算数, 还有一个GetResult虚函数, 用来被它的子类实现.
+
+OperationAdd: 实际子类, 它继承于Operation类, 实现了父类的虚函数.
+
+
+
+
+
+
+
+    <span style="color: #0000ff;">class</span><span style="color: #000000;"> Factory {
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">static</span> Operation* CreateOperate(<span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp) {
+            Operation</span>* oper =<span style="color: #000000;"> NULL;
+            </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationAdd();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationSub();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationMul();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                oper </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> OperationDiv();
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+            }
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> oper;
+        }
+    };
+
+    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
+        </span><span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp;
+        cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入操作符(+ - * / . . .):</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+        cin </span>>><span style="color: #000000;"> cOp;
+        Operation</span>* oper =<span style="color: #000000;"> Factory::CreateOperate(cOp);
+
+        </span><span style="color: #0000ff;">if</span> (oper !=<span style="color: #000000;"> NULL) {
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第一个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> oper-><span style="color: #000000;">m_dNum_A;
+            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入第二个数:</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            cin </span>>> oper-><span style="color: #000000;">m_dNum_B;
+
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+                </span><span style="color: #0000ff;">double</span> dResult = oper-><span style="color: #000000;">GetResult();
+                cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">结果是: </span><span style="color: #800000;">"</span> << dResult <<<span style="color: #000000;"> endl;
+            }
+            </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (...) {
+                cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">请输入正确操作数</span><span style="color: #800000;">"</span> <<<span style="color: #000000;"> endl;
+            }
+        }
+
+        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+    }</span>
+
+
+
+
+
+
+
+这样, 如果要添加新的计算方法, 先从Operation继承一个新的子类, 然后在工厂类中添加switch分支点, 而不要改main函数.
+   

@@ -1,0 +1,139 @@
+author: Martin
+date: 2015-05-25 14:41
+title: 14、Qt 中的对话框
+
+Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.
+
+    <span style="color: #0000ff">class</span> MyDialog : <span style="color: #0000ff">public</span><span style="color: #000000"> QDialog {
+        Q_OBJECT
+
+    </span><span style="color: #0000ff">public</span><span style="color: #000000">:
+    }</span>
+
+
+
+
+QDialog 是否为顶层窗口是可选的, 如果创建它时, 它的 parent 为 NULL, 则该对话框会作为一个顶层窗口, 否则就会作为其父组件的子对话框;
+它们的区别在于顶层窗口在任务栏会有自己的位置，而非顶层窗口则会共享其父组件的位置.
+
+
+
+
+* * *
+
+
+
+
+
+# 窗口属性
+
+
+
+
+和 C++ 中一样, QDialog 也有模态与非模态之分, 当我们新建一个窗口后, 通过 exec() 来打开模态窗口, 通过 show() 来打开非模态窗口.
+
+
+
+    <span style="color: #000000">MyDialog dialog;
+    dialog.exec() </span><span style="color: #008000">//</span><span style="color: #008000"> dialog.show()</span>
+
+除此之外 Qt 中的模态窗口还分为应用程序级别的模态和窗口级别的模态.
+
+
+应用程序级别的模态是我们理解的 C/C++ 中的模态, 也就是常规理解中的模态, 一旦开启应用程序级别的模态, 那么整个程序都会被阻断, 直到模态窗口返回.
+
+
+
+
+窗口级别的模态只阻塞与其父窗口的交互, 而不会阻塞与应用程序其他窗口的交互(因此, 使用这种模态要求对话框必须有一个父窗口).
+这种模态在多窗口模式中很有用, Qt 通过 open() 来打开窗口级别的模态.
+
+
+
+
+举例说明一下可能会更好理解, 假定一个程序通过非模态的方式打开了三个非模态窗口: Dialog1、Dialog2、Dialog3, Dialog1 中又需要再打开一个模态窗口, 如果此时打开的是应用程序级别的模态, 那么Dialog1、Dialog2、Dialog3 都会被阻断, 而如果是窗口级别的模态, 那么只有 Dialog1 会被阻断.
+
+
+
+
+在内部, Qt 其实是通过一个窗口属性 windowModality 来设置窗口是哪种类型的模态.
+当窗口被创建出来, `windowModality `会被设置为 `Qt::NonModal`, 因此默认都是非模态的, 在调用 `QDialog::exec()`之后, `windowModality `会被设为 `Qt::ApplicationModal`, 当`exec()`返回后又被设回 `Qt::NonModal`. (`Qt::WindowModal 是窗口级别模态`).
+当然这只需要了解一下就行, 没必要手动去通过修改 windowModality 来设置窗口.
+
+
+
+
+* * *
+
+
+
+
+
+# 使用非模态对话框的注意事项(内存泄漏)
+
+
+
+
+我们已经知道如何打开一个非模态对话框, 我们尝试着编写代码.
+假定我们的程序存在一个主窗口 MainWindow, 我们需要在 MainWindow 中打开一个非模态对话框:
+
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog dialog(</span><span style="color: #0000ff">this</span><span style="color: #000000">);
+        dialog.setWindowTitle(</span><span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">);
+        dialog.show();
+    }</span>
+
+
+
+
+尝试着执行程序就会发现, 我们创建的非模态对话框一闪而过, 这是因为 `show()`函数不会阻塞当前线程, 对话框会显示出来, 然后函数立即返回, 代码继续执行, 而 dialog 是建立在栈上的, `show()`函数返回, `MainWindow::open()`函数结束, dialog 超出作用域被析构, 因此对话框消失了.
+所以在之前<12、对象模型(moc各parent)>中提到 **大胆在堆上创建对象,** 好, 为了解决这个问题, 我们改成在堆上建立:
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog </span>*dialog = <span style="color: #0000ff">new</span><span style="color: #000000"> QDialog;
+        dialog</span>->setWindowTitle(tr(<span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">));
+        dialog</span>-><span style="color: #000000">show();
+    }</span>
+
+现在, 我们可以正常打开非模态对话框了.
+仔细分析代码就会发现, dialog 使用 new 在堆上分配空间, 却一直没有 delete, 如果我们的程序只有一个 MainWindow 主窗口, 也许这没有问题, 因为当主窗口退出了, 应用程序结束, 系统会回收所有分配给应用程序的空间. 但是, 如果我们的程序不只一个 MainWindow 窗口, 即 MainWindow 关闭时, 应用程序还在运行, 此时就会有内存泄露的问题了.
+
+
+解决方法很简单, 只需要将 MainWindow 的指针做为 dialog 的父窗口指针即可, 下面两种方式都是可以的(原理参考<12、对象模型(moc各parent)>):
+
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog </span>*dialog = <span style="color: #0000ff">new</span> QDialog(<span style="color: #0000ff">this</span><span style="color: #000000">);
+        dialog</span>->setWindowTitle(<span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">);
+        dialog</span>-><span style="color: #000000">show();
+    }
+
+    </span><span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog </span>*dialog = <span style="color: #0000ff">new</span><span style="color: #000000"> QDialog;
+        dialog</span>->setWindowTitle(<span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">);
+        dialog</span>->setParent(<span style="color: #0000ff">this</span><span style="color: #000000">);
+        dialog</span>-><span style="color: #000000">show();
+    }</span>
+
+
+
+
+
+但是, 其实这样问题并没有完全解决, 因为只要我们的 MainWindow 不关闭, 那么我们创建的非模态窗口就永远不会被销毁, 我们真实的想法是, 希望 dialog 退出的时候自动销毁对话框.
+值得高兴的是, Qt 中是可以这样做的, 我们只需要设置 dialog 的 WindowAttribute 就能达到目的:
+
+
+
+    <span style="color: #0000ff">void</span><span style="color: #000000"> MainWindow::open() {
+        QDialog </span>*dialog = <span style="color: #0000ff">new</span><span style="color: #000000"> QDialog(<span style="color: #0000ff">this</span><span style="color: #000000">);</span>
+        dialog</span>-><span style="color: #000000">setAttribute(Qt::WA_DeleteOnClose);
+        dialog</span>->setWindowTitle(<span style="color: #800000">"</span><span style="color: #800000">Hello, dialog!</span><span style="color: #800000">"</span><span style="color: #000000">);
+        dialog</span>-><span style="color: #000000">show();
+    }</span>
+
+setAttribute(Qt::WA_DeleteOnClose) 这句代码设置了对话框关闭时，自动销毁对话框.
+0#=

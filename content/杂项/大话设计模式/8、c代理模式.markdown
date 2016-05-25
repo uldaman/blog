@@ -1,0 +1,91 @@
+author: Martin
+date: 2015-02-15 14:23
+title: 8、[C++]代理模式
+
+### 代理模式
+
+
+代理模式: 为其他对象提供一种代理以控制对这个对象的访问.
+
+情景:
+
+1. 有人找公司老总, 但是老总很忙, 于是要找就先找老总的助理, 助理等老总不忙时, 再来告诉老总吧.
+
+2. 想象一下古代大户人家的大小姐与仆人偷情, 有一天仆人想约大小姐出来赏月, 但仆人可能不方便直接见大小姐,  于是先告诉大小姐的丫鬟, 由丫鬟转告大小姐.
+
+上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).
+
+[![代理模式](http://images.cnitblog.com/blog/723444/201502/131615264794717.png)](http://images.cnitblog.com/blog/723444/201502/131615251209230.png)
+
+Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.
+
+RealSubject: 真实实体(老总/大小姐)
+
+Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.
+
+[cpp]#include <iostream>
+using namespace std;
+
+class Subject{
+public:
+    virtual void Request() = 0;
+};
+
+class RealSubject
+    : public Subject {
+public:
+    void Request() {
+        cout << "真实的请求" << endl;
+    }
+};
+
+class Proxy
+    : public Subject {
+public:
+
+    void Request() {
+        if (m_realSubject == NULL) {
+            m_realSubject = new RealSubject();
+        }
+        m_realSubject->Request();
+    }
+
+protected:
+    RealSubject* m_realSubject;
+};
+
+int _tmain(int argc, _TCHAR* argv[]) {
+    Proxy* proxy = new Proxy();
+    proxy->Request();
+
+    system("PAUSE");
+    return 0;
+}[/cpp]
+
+这样, 我们在客户端中, 都是通过代理类来访问真实的实体, 在代理类中, 就可以控制对真实实体的访问.
+
+
+### 应用
+
+
+1. 远程代理, 也就是为一个对象在不同的地址空间提供局部代表, 这样可以隐藏一个对象存在不同地址空间的事实.
+
+
+<blockquote>其实这个我不怎么懂, 我的想法是这样的, R3下没法直接调用R0的代码, 但是可以调用系统封装好的API, 系统的API来跳转到R3下去执行真实的代码.</blockquote>
+
+
+2. 虚拟代理, 是根据需要创建开销很大的对象, 通过它来存放实例化需要很长时间的替补对象
+
+
+<blockquote>像我们平时浏览网页时, 先看到文字, 而图片只是先看到个框框, 然后一张一张的下载, 那些未打开的图片框就是通过虚拟代理替代了真实的图片, 此时代理存储了真实的图片路径和尺寸.</blockquote>
+
+
+3. 安全代理, 用来控制真实对象访问时的权限.
+
+4. 智能指引, 是指当调用真实的对象时, 代理处理另外一些事, 例如控制真实对象的引用次数, 当对象没有引用时, 就释放这个对象.
+
+写在最后:....
+
+
+<blockquote>好吧, 虽然代理模式是个很简单的模式, 但是具体在哪里用....我还真没搞清楚...请原谅我的无知...</blockquote>
+c"a
