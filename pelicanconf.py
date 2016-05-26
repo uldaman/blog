@@ -25,8 +25,6 @@ LINKS = (('CSDN', 'http://blog.csdn.net/u010850265'),)
 # Social widget
 SOCIAL = (('CSDN', 'http://blog.csdn.net/u010850265'),)
 
-STATIC_PATHS = ['images', 'extra']
-
 DEFAULT_PAGINATION = 10
 
 THEME = 'pelican-themes/zurb-F5-basic'
