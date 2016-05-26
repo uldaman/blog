@@ -158,10 +158,10 @@ MD_EXTENSIONS = [
 > [Python Markdown v2.6.6 documentation » CodeHilite Extension](https://pythonhosted.org/Markdown/extensions/code_hilite.html)<br>
 > [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
 
-然后再重新用 cmd 进入 myblog 目录, 执行 **make html** + **make serve**, 访问: **http://localhost:8000/**, 看看我们的博客主题是不是已经发生变化啦~~
+然后再重新用 cmd 进入 myblog 目录, 执行 **make html** + **make serve**, 访问: [http://localhost:8000/](http://localhost:8000/), 看看我们的博客主题是不是已经发生变化啦~~
 
 #3. 解析 GFM
-GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments (py\-markdown 的语法高亮通过 pygments 来支持) 本身并不支持, 要通过第三方扩展来实现.
+GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments 本身并不支持 (py\-markdown 的语法高亮通过 pygments 来支持), 要通过第三方扩展来实现.
 
 首先, 要安装 pymdown  第三方扩展 `pip install pymdown-extensions`, 然后把 `pelicanconf.py` 文件中 `MD_EXTENSIONS` 的 **extra** 替换成 **pymdownx.github**.
 
@@ -171,7 +171,7 @@ Pymdown Extensions Documentation 对 **pymdownx.github** 说明如下:
 For code highlighting, you will also need to load the markdown.extensions.codehilite extension yourself as well with guess_lang=False and your preferred Pygments style (if available or use some other JavaScript highlighter). Though there is no Github style included with this extension, you are most likely able to find a suitable theme online by searching. I do have older Github styles found at the pymdown-styles repo; it contains the original Pygments Github style (github) and the Github 2014 style (github2014) which Github used before they ditched Pygments for their own in-house highlighter.
 ```
 <br>
-简单的说, 就是 **pymdownx.github** 提供了一些功能用来模仿 Github, 但不是全部, 如果想要使用 Github 的代码高亮, 你需要设置 `markdown.extensions.codehilite` 的 `guess_lang=False`, 并且引用一个 `Pygments style` 文件, 虽然该扩展本身并不包含 Github style 文件, 但是你可以去找....然后作者也给了一个 [pymdown-styles repo](https://github.com/z351522453/pymdown-styles) 供使用 (我将它 Fork 回自己的仓库, 做了点更改, 让它更像 Github 的高亮风格).
+简单的说, 就是 **pymdownx.github** 提供了一些功能用来模仿 Github, 但不是全部, 如果想要使用 Github 的代码高亮, 你需要设置 `markdown.extensions.codehilite` 的 `guess_lang=False`, 并且引用一个 `Pygments style` 文件, 虽然该扩展本身并不包含 Github style, 但是你可以去找....然后作者也给了一个 [pymdown-styles repo](https://github.com/z351522453/pymdown-styles) 供使用 (我将它 Fork 回自己的仓库, 做了点更改, 让它更像 Github 的高亮风格).
 
 使用方法比较简单, clone 项目到本地, 执行 `python setup.py install`, 然后修改 `pelicanconf.py` 文件中 `MD_EXTENSIONS` 的 **codehilite**, 最终的 **MD_EXTENSIONS** 如下:
 
@@ -286,7 +286,9 @@ for file in files:
 <br>
 好了, 现在我们的 wp 已经迁移到了本地博客系统, 运行 **make serve** 看看是不是成功了...
 
-#6. 发布到 github
+#6. 发布到 Github
+> 更新: 关于发布到 Github 还是有些东西要说的, 见我另一篇笔记: [迁移 Github Project Page](http://blog.smallcpp.com/qian-yi-github-project-page.html)
+
 这个其实没啥好讲的了, 我是用的 github for windows 工具来管理 github, 每次 **make html** 后, 把 output 下的文件同步到 github 上 page 项目的主干下就行了...
 
 再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 **CNAME** 文件, 里面写上你的顶级域名地址, 例如我的: **www.smallcpp.com**, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:
