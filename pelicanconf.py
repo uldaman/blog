@@ -25,6 +25,8 @@ LINKS = (('CSDN', 'http://blog.csdn.net/u010850265'),)
 # Social widget
 SOCIAL = (('CSDN', 'http://blog.csdn.net/u010850265'),)
 
+STATIC_PATHS = ['images', 'extra']
+
 DEFAULT_PAGINATION = 10
 
 THEME = 'pelican-themes/zurb-F5-basic'
@@ -36,7 +38,7 @@ DELETE_OUTPUT_DIRECTORY = True # 编译之前删除 output 目录，这样保证
 SUMMARY_MAX_LENGTH = 30 # 文章摘要最大字数
 
 MD_EXTENSIONS = [
-  "extra",
+  "pymdownx.github(no_nl2br=True)",
   "toc",
   "headerid",
   "meta",
@@ -44,7 +46,7 @@ MD_EXTENSIONS = [
   "smarty",
   "wikilinks",
   "admonition",
-  "codehilite(guess_lang=False,pygments_style=emacs,noclasses=True)"]
+  "codehilite(guess_lang=False,pygments_style=github2014,noclasses=True)"]
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

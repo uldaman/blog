@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/normalize.css" />
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css" />
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ SITEURL }}/theme/images/favicon.ico" />
     <script src="{{ SITEURL }}/theme/js/modernizr.js"></script>
 </head>
 
@@ -68,12 +69,12 @@
             {% endif %}
         </ul>
 
-        {% if categories %}		
+        {% if categories %}
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
         {% for cat, null in categories %}
             <li><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-        {% endfor %}   
+        {% endfor %}
         </ul>
         {% endif %}
 
@@ -85,7 +86,7 @@
         {% endfor %}
         </ul>
         {% endif %}
-		
+
         {% if SOCIAL %}
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
