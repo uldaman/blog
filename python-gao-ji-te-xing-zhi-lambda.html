@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -53,23 +54,20 @@
 
 
     <p>lambda 函数也叫匿名函数, 即函数没有具体的名称;</p>
-<p>严格来说, lambda 是一个表达式, 也正因为它是表达式, 所以它可以用在某些不能使用 <strong>def</strong> 的场合, 如:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">info <span style="color: #666666">=</span> [<span style="color: #AA22FF; font-weight: bold">lambda</span> a: a <span style="color: #666666">**</span> <span style="color: #666666">3</span>, <span style="color: #AA22FF; font-weight: bold">lambda</span> b: b <span style="color: #666666">**</span> <span style="color: #666666">3</span>] <span style="color: #008800; font-style: italic"># ** 两个乘号表示乘方</span>
+<p>严格来说, lambda 是一个表达式, 也正因为它是表达式, 所以它可以用在某些不能使用 <strong>def</strong> 的场合, 如:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">info</span> <span style="color: #A71D7E">=</span> [<span style="color: #A71D5D">lambda</span> <span style="color: #333333">a</span>: <span style="color: #333333">a</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">3</span>, <span style="color: #A71D5D">lambda</span> <span style="color: #333333">b</span>: <span style="color: #333333">b</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">3</span>] <span style="color: #999988; font-style: italic"># ** 两个乘号表示乘方</span>
 </pre></div>
-
-
-<p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">g <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x : x <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #008800; font-style: italic"># x 的平方</span>
-v <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x,y : x <span style="color: #666666">**</span> y <span style="color: #008800; font-style: italic"># x 的 y 次方</span>
+</p>
+<p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">2</span> <span style="color: #999988; font-style: italic"># x 的平方</span>
+<span style="color: #333333">v</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>,<span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #333333">y</span> <span style="color: #999988; font-style: italic"># x 的 y 次方</span>
 </pre></div>
-
-
-<p>看个例子, 求 1 到 100 的合:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">reduce</span>(<span style="color: #AA22FF; font-weight: bold">lambda</span> x, y : x <span style="color: #666666">+</span> y, <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">101</span>))
-<span style="color: #666666">&gt;&gt;&gt;5050</span>
+</p>
+<p>看个例子, 求 1 到 100 的合:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">reduce</span>(<span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>, <span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>, <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">101</span>))
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">5050</span>
 </pre></div>
-
-
+</p>
 <p><strong>lambda 可以配合 map、reduce、filter、sorted 高效操作列表</strong>.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -90,7 +88,6 @@ v <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -114,14 +111,13 @@ v <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

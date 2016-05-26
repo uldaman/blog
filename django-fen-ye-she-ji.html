@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -56,13 +57,13 @@
 <p>首先, 分页都是通过 get 不同地址来实现的:
 <img alt="" src="http://oi62.tinypic.com/xbwg0y.jpg" /></p>
 <p>分发 url 时, 通过下面这种方法, 使 url 有默认页:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/(?P&lt;p&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, All),
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/(?P&lt;p&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, All),
 url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, All, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;}),
 </pre></div>
 
 
 <p>再来看 All 函数 :</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.utils.safestring &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; mark_safe
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.utils.safestring &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; mark_safe
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):
     currentPage &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; int(p)
@@ -132,7 +133,7 @@ url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt
 <p>All 函数开始, 把页码从 字符串 转化成 数字, 然后计算出每页显示的内容, 即 itemList;
 然后在 HTML 中通过 for 循环模板输出 itemList;</p>
 <p>然后获取总条目数, 并计算以每页显示 5 条内容为阈值的分页数, 即 nPages;</p>
-<p>定义一个 list : pageList 用来存放每页的内容, 并且通过 <strong>mark_safe() </strong>把字符串转换成 HTML 格式(如果不使用这个函数, 那么最终将在浏览器上直接显示未经渲染的 HTML 代码).</p>
+<p>定义一个 list : pageList 用来存放每页的内容, 并且通过 **mark_safe() **把字符串转换成 HTML 格式(如果不使用这个函数, 那么最终将在浏览器上直接显示未经渲染的 HTML 代码).</p>
 <hr />
 <p>接下来, 要解决分页过多的问题, 这个没有写代码了, 很简单, 就是逻辑的问题, 记下思路就好.</p>
 <p>最终效果是显示 (当前页 - 5) + 当前页 + (当前页 + 5) 共 11 个页码.</p>
@@ -159,7 +160,6 @@ rot</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -183,14 +183,13 @@ rot</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

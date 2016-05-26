@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -58,24 +59,23 @@
 <li><a href="#2">2. 语言结构</a></li>
 </ul>
 </div>
-<h1 id="1">1. 语言特性</h1>
+<h1 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 语言特性</h1>
 <p>我觉得吧, 大概有个印象即可, 深入学习并使用一段时间, 然后和 C 及 Python 一比较, 自然就明白了.</p>
 <p><img alt="GO 的特性" src="http://i68.tinypic.com/a1kgh5.jpg" /></p>
-<h1 id="2">2. 语言结构</h1>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">package</span> main
+<h1 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 语言结构</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">package</span> <span style="color: #333333">main</span>
 
-<span style="color: #AA22FF; font-weight: bold">import</span> (
-    <span style="color: #BB4444">&quot;fmt&quot;</span>
+<span style="color: #A71D5D">import</span> (
+    <span style="color: #183691">&quot;fmt&quot;</span>
 )
 
-<span style="color: #AA22FF; font-weight: bold">func</span> main() {
-    <span style="color: #008800; font-style: italic">/* 这是我的第一个简单的程序 */</span>
-    fmt.Println(<span style="color: #BB4444">&quot;Hello World!&quot;</span>)
+<span style="color: #A71D5D">func</span> <span style="color: #333333">main</span>() {
+    <span style="color: #999988; font-style: italic">/* 这是我的第一个简单的程序 */</span>
+    <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;Hello World!&quot;</span>)
 }
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <ul>
 <li>第一行代码 <strong>package main</strong> 定义了包名, 必须在源文件中非注释的第一行指明这个文件属于哪个包. 如：package main.</li>
 </ul>
@@ -93,16 +93,15 @@
 <li>下一行 /*&hellip;*/ 是块注释, 注释方面的方法和 C 一致, // 为行注释, /**/ 为块注释.</li>
 <li>下一行 fmt.Println(&hellip;) 可以将字符串输出到控制台, 并在最后自动增加换行字符 <strong>\n</strong>, 使用 fmt.Print(&ldquo;hello, world\n&rdquo;) 可以得到相同的结果.</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// 一个常规的函数定义包含以下部分:</span>
-<span style="color: #AA22FF; font-weight: bold">func</span> 函数名(参数列表)(返回值列表) {
-    <span style="color: #008800; font-style: italic">// 函数体</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// 一个常规的函数定义包含以下部分:</span>
+<span style="color: #A71D5D">func</span> <span style="color: #333333">函数名</span>(<span style="color: #333333">参数列表</span>)(<span style="color: #333333">返回值列表</span>) {
+    <span style="color: #999988; font-style: italic">// 函数体</span>
 }
 </pre></div>
 
-
-<p><br>
+<br>
 Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必须赋值, 在函数返回时没有被明确赋值的返回值都会被设置为默认值.</p>
-<p>当标识符(包括常量、变量、类型、函数名、结构字段等等)以一个__大写__字母开头, 如：Group1, 那么使用这种形式的标识符的对象就可以被外部包的代码所使用(客户端程序需要先导入这个包), 这被称为<strong>导出</strong>(像面向对象语言中的 <strong>public</strong>);<br>
+<p>当标识符(包括常量、变量、类型、函数名、结构字段等等)以一个__大写__字母开头, 如：Group1, 那么使用这种形式的标识符的对象就可以被外部包的代码所使用(客户端程序需要先导入这个包), 这被称为**导出**(像面向对象语言中的 <strong>public</strong>);<br>
 标识符如果以__小写__字母开头, 则对包外是不可见的, 但是他们在整个包的内部是可见并且可用的(像面向对象语言中的 <strong>private</strong>).</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/golang.html">Golang</a>
 
@@ -123,7 +122,6 @@ Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -147,14 +145,13 @@ Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

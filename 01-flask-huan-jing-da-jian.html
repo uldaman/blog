@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -76,74 +77,66 @@
 </li>
 </ul>
 </div>
-<h1 id="_1">虚拟环境</h1>
-<h2 id="virtualenv">安装 virtualenv</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip install virtualenv
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>虚拟环境</h1>
+<h2 id="virtualenv"><a name="user-content-virtualenv" href="#virtualenv" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装 virtualenv</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip install virtualenv
 </pre></div>
 
-
-<p><br></p>
-<h2 id="venv">创建 venv</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">virtualenv [指定虛擬環境的名稱]
+<br></p>
+<h2 id="venv"><a name="user-content-venv" href="#venv" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>创建 venv</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>virtualenv [指定虛擬環境的名稱]
 </pre></div>
 
-
-<p><br>
+<br>
 使用该命令创建的环境会依赖系统环境中的 site packages, 就是说系统中已经安装好的第三方 package 也会安装在虚拟环境中, 如果不想依赖这些 package, 那么可以加上参数 &ndash;no-site-packages 建立虚拟环境.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">virtualenv --no-site-packages [指定虛擬環境的名稱]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>virtualenv --no-site-packages [指定虛擬環境的名稱]
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p>推荐使用 <strong>&ndash;no-site-packages</strong>, 这样就可以得到干净的 python 环境了.</p>
-<h2 id="venv_1">启动 venv</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">source ./bin/activate (linux)
+<h2 id="venv_1"><a name="user-content-venv_1" href="#venv_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>启动 venv</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>source ./bin/activate (linux)
 Scripts\activate (windows)
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p>如果启动成功, 那么命令行前面就什么多了(<strong>虛擬環境的名稱</strong>)标识, 此时就可以在虚拟环境里进行操作了,
 如安装项目依赖包等.</p>
 <p>通过下面的命令, 可以查看当前已安装了哪些第三方包</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip list
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip list
 或者
 pip freeze
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p>这里我们先安装下 <strong>Flask</strong>:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip install flask
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip install flask
 </pre></div>
 
-
-<p><br></p>
-<h2 id="venv_2">退出 venv</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">bin/deactivate (linux)
+<br></p>
+<h2 id="venv_2"><a name="user-content-venv_2" href="#venv_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>退出 venv</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>bin/deactivate (linux)
 Scripts\deactivate (windows)
 </pre></div>
 
-
-<p><br></p>
-<h2 id="_2">移植环境</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip freeze &gt; requirements.txt 将当前环境的包依赖信息保存在 requirements.txt 文件
+<br></p>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>移植环境</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip freeze &gt; requirements.txt 将当前环境的包依赖信息保存在 requirements.txt 文件
 pip install -r requirements.txt 会自动从网上下载并安装所有包
 </pre></div>
 
-
-<p><br></p>
-<h1 id="eclipse-pydeveclipsehelpinstall-new-software">安装 Eclipse + PyDev打开Eclipse，Help–&gt;Install new software</h1>
-<h2 id="eclipse">安装 Eclipse</h2>
-<p>Eclipse 的安装见 <a href="http://www.smallcpp.com/028-eclipse.html">http://www.smallcpp.com/028-eclipse.html</a></p>
-<h2 id="pydev">安装 PyDev</h2>
+<br></p>
+<h1 id="eclipse-pydeveclipsehelpinstall-new-software"><a name="user-content-eclipse-pydeveclipsehelpinstall-new-software" href="#eclipse-pydeveclipsehelpinstall-new-software" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装 Eclipse + PyDev打开Eclipse，Help–&gt;Install new software</h1>
+<h2 id="eclipse"><a name="user-content-eclipse" href="#eclipse" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装 Eclipse</h2>
+<p>Eclipse 的安装见 <a href="http://www.smallcpp.com/028-eclipse.html"><a href="http://www.smallcpp.com/028-eclipse.html"><a href="http://www.smallcpp.com/028-eclipse.html">http://www.smallcpp.com/028-eclipse.html</a></a></a></p>
+<h2 id="pydev"><a name="user-content-pydev" href="#pydev" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装 PyDev</h2>
 <p>打开 Eclipse, Help –&gt; Install new software</p>
-<p>点击 &ldquo;<strong>Add</strong>&rdquo;, 名字: <strong>PyDev</strong>, 地址: <strong>http://pydev.org/updates</strong> (这个地上好像不行, 然后我用浏览器直接访问这个地址, 它提示: Nothing to see here (this is just a dummy link to be redirected to https://dl.bintray.com/fabioz/pydev/4.5.5), 于是我把地址改成 <strong>https://dl.bintray.com/fabioz/pydev/4.5.5</strong> 就可以了.)</p>
+<p>点击 &ldquo;<strong>Add</strong>&rdquo;, 名字: <strong>PyDev</strong>, 地址: <strong>http://pydev.org/updates</strong> (这个地上好像不行, 然后我用浏览器直接访问这个地址, 它提示: Nothing to see here (this is just a dummy link to be redirected to <a href="https://dl.bintray.com/fabioz/pydev/4.5.5">https://dl.bintray.com/fabioz/pydev/4.5.5</a>), 于是我把地址改成 <strong>https://dl.bintray.com/fabioz/pydev/4.5.5</strong> 就可以了.)</p>
 <p>接下来, Eclipse 列出了两个插件: <strong>PyDev</strong> 和 <strong>PyDev Mylyn Integration</strong>(官网上说是一个任务或者应用程序生命周期管理的工具, 没什么用, 不用安装这个)</p>
 <p>选中 <strong>PyDev</strong> 插件后, 一路下一步.</p>
 <p>最后重启 Eclipse 后, 验证是否安装成功, 打开 Eclipse–>File–>New->Project, 若 <strong>PyDev</strong> 项存在即为可用.</p>
 <p><img alt="" src="http://i66.tinypic.com/a23r4l.jpg" /></p>
-<h2 id="flask">配置 Flask</h2>
+<h2 id="flask"><a name="user-content-flask" href="#flask" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置 Flask</h2>
 <p>配置 Python 解释器来到 virtualenv:<br>
 Window –> Preferences –> PyDev > Interpreters > Python Interpreter</p>
 <p>New –> 选择安装目录</p>
@@ -151,12 +144,12 @@ Window –> Preferences –> PyDev > Interpreters > Python Interpreter</p>
 <p>Eclipse 会自动分析出当前依赖 Libraries.</p>
 <p>最后在 <strong>Forced Builtins</strong> 选项卡中, 新建 <strong>flask.ext</strong> 项即可.</p>
 <p><img alt="" src="http://i65.tinypic.com/acvgat.jpg" /></p>
-<h1 id="flask_1">Flask 项目框架搭建</h1>
-<h2 id="python">新建 Python 项目</h2>
+<h1 id="flask_1"><a name="user-content-flask_1" href="#flask_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Flask 项目框架搭建</h1>
+<h2 id="python"><a name="user-content-python" href="#python" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>新建 Python 项目</h2>
 <p>File -> New -> PyDev Project</p>
-<h2 id="_3">新建架构文件夹</h2>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>新建架构文件夹</h2>
 <p><img alt="" src="http://i66.tinypic.com/xbt6o.jpg" /></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">app – 根目录
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>app – 根目录
 　　static – 静态资源目录，图片，js，css等
 　　templates – 模板
 　　_init_.py – 初始化脚本
@@ -165,35 +158,31 @@ tmp – 临时文件夹
 run.py – 项目启动程序
 </pre></div>
 
-
-<p><br></p>
-<h2 id="hello-world">编写 Hello World</h2>
+<br></p>
+<h2 id="hello-world"><a name="user-content-hello-world" href="#hello-world" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>编写 Hello World</h2>
 <p><strong>_init_.py</strong> 创建 Flask 实例</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">flask</span> <span style="color: #AA22FF; font-weight: bold">import</span> Flask
-app <span style="color: #666666">=</span> Flask(__name__)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">flask</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">Flask</span>
+<span style="color: #333333">app</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Flask</span>(<span style="color: #333333">__name__</span>)
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p><strong>run.py</strong> 创建启动脚本</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">app</span> <span style="color: #AA22FF; font-weight: bold">import</span> app
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">app</span> <span style="color: #AA22FF; font-weight: bold">import</span> views
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">app</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">app</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">app</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">views</span>
 
-app<span style="color: #666666">.</span>run(debug <span style="color: #666666">=</span> <span style="color: #AA22FF">True</span>)
+<span style="color: #333333">app</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>(<span style="color: #333333">debug</span> <span style="color: #A71D7E">=</span> <span style="color: #0086B3">True</span>)
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p><strong>views.py</strong> 编写视图函数</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">from app import app
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>from app import app
 
 @app.route(&quot;/&quot;)
 def index():
     return &quot;hello,world!&quot;
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a>
 
 </p>
@@ -213,7 +202,6 @@ def index():
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -237,14 +225,13 @@ def index():
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

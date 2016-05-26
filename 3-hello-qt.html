@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -55,7 +56,7 @@
     <p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
 <p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;QtWidgets/QApplication&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;argv[])
@@ -70,7 +71,7 @@
 
 <p>对于 Qt 程序来说, <code>main()</code>函数一般以创建 application 对象开始(GUI 程序是<code>QApplication</code>, 非 GUI 程序是<code>QCoreApplication</code>, <code>QApplication</code>实际上是<code>QCoreApplication</code>的子类),后面才是实际业务的代码. 这个对象用于管理 Qt 程序的生命周期、 开启事件循环.</p>
 <p>而 demo.h 里是我们 Qt 程序的界面类, 它继承于 QWidget类, 它是 Qt 程序所有用户界面对象的基类.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;#ifndef DEMO_H
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;#ifndef DEMO_H
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; DEMO_H&lt;span style=&quot;color: #000000&quot;&gt;
 
 #include &lt;/span&gt;&lt;QtWidgets/QWidget&gt;&lt;span style=&quot;color: #000000&quot;&gt;
@@ -190,7 +191,7 @@
 <p>右侧可以设计控件的一些属性, 例如我们把 Label 的文本改成局中显示:</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image20.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb20.png" /></a></p>
 <p>返回我们的 VS 工程, 打开 demo.cpp:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 &lt;font style=&quot;background-color: #ff0000&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;QLabel&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 
 Demo::Demo(QWidget &lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt;parent)
@@ -231,7 +232,6 @@ Demo::&lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo()
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -255,14 +255,13 @@ Demo::&lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo()
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

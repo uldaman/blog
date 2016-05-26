@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -70,17 +71,17 @@
 <li><a href="#_3">小结</a></li>
 </ul>
 </div>
-<h3 id="_1">三层</h3>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>三层</h3>
 <p>三层是从整个应用程序架构的角度来分的三层 (如果程序需要, 还可以分多层).</p>
 <p>三层是为了解决整个应用程序中各个业务操作过程中不同阶段的代码封装的问题, 为了使程序员更加专注的处理某阶段的业务逻辑.</p>
 <p>比如将数据库操作代码封装到一层中, 提供一些方法根据参数直接返回用户需要的相应数据, 这样在处理具体的业务逻辑的时候, 就不用关心数据的存储问题了.</p>
 <p><strong>三层架构是界面层 (UI) 业务逻辑层 (BLL) 和数据访问层 (DAL) 构成的.</strong></p>
-<h3 id="mvc">MVC</h3>
+<h3 id="mvc"><a name="user-content-mvc" href="#mvc" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>MVC</h3>
 <p>MVC 是在应用程序 (BS结构) 的视图层划分出来的不同功能的几个模块.</p>
 <p>MVC 主要是为了解决应用程序用户界面的样式替换问题, 把展示数据的 HTML 页面尽可能的和业务代码分离.</p>
 <p>MVC把纯净的界面展示逻辑 (用户界面) 独立到一些文件中 (Views), 把一些和用户交互的程序逻辑 (Controller) 单独放在一些文件中, 在 Views 和 Controller 中传递数据使用一些专门封装数据的实体对象, 这些对象, 统称为 Models.</p>
 <p><strong>MVC是模型层 (M) 界面层 (View) 和控制层 (Controller) 构成的.</strong></p>
-<h3 id="_2">区别及联系</h3>
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>区别及联系</h3>
 <blockquote>
 <p>三层架构是界面层 (UI) 业务逻辑层 (BLL) 和数据访问层 (DAL) 构成的.<br>
 MVC是模型层 (M) 界面层 (View) 和控制层 (Controller) 构成的.</p>
@@ -92,7 +93,7 @@ MVC是模型层 (M) 界面层 (View) 和控制层 (Controller) 构成的.</p>
 <p>我们所看到的不一样只是表面上的不一样, 核心的东西是一致的, 那么什么是核心？</p>
 <p>答曰：分层, 解耦!</p>
 <p>如果从解耦的角度来看三层架构和MVC其实他们是一致的, 只不过划分的方法不一样罢了, 就像上面的图所示. 从这一点说他们可以说是一个东西, 这就相当于我们看到馒头和面条一样, 表面上看他们不一样 (注意仅仅是表面) 但是他们核心是一致的, 都是面做的……</p>
-<h3 id="_3">小结</h3>
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>小结</h3>
 <p>三层也好, MVC 也罢, 从我的感觉上, 都是对设计模式中六大设计原则的具现形式.</p>
 <p>比如在三层中, 将数据库操作代码封装到一层中, 提供一些方法根据参数直接返回用户需要的相应数据, 这不就是__单一原则__的体现吗?</p>
 <p>只要依照设计原则去开发程序, 不管什么模型, 都能开发出好的程序, 现在网上不流传一篇文章吗 <strong>&lt;&lt;别学框架，学架构>></strong>, 是的, 架构, 这种核心的东西才是值得去探讨的....</p>
@@ -115,7 +116,6 @@ MVC是模型层 (M) 界面层 (View) 和控制层 (Controller) 构成的.</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -139,14 +139,13 @@ MVC是模型层 (M) 界面层 (View) 和控制层 (Controller) 构成的.</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

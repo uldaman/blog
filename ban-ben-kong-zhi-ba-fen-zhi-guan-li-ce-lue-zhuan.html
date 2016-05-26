@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -72,12 +73,12 @@ Git 主分支的名字, 默认叫做Master, 它是自动建立的, 版本库初�
 这个分支可以用来生成代码的最新隔夜版本(nightly), 如果想正式对外发布, 就在Master分支上, 对Develop分支进行”合并”(merge).
 <img alt="" src="http://i62.tinypic.com/2mnodcg.jpg" />
 创建 Develop 分支的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">git checkout -b develop master
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>git checkout -b develop master
 </pre></div>
 
 
 <p>将 Develop 分支发布到 Master 分支的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;# 切换到Master分支
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;# 切换到Master分支
 git checkout master
 # 对Develop分支进行合并
 git merge &lt;/span&gt;--no-ff develop
@@ -92,8 +93,8 @@ git merge &lt;/span&gt;--no-ff develop
 前面讲到版本库的两条主要分支; Master 和 Develop, 前者用于正式发布, 后者用于日常开发.
 其实, 常设分支只需要这两条就够了, 不需要其他了.
 但是, 除了常设分支以外, 还有一些临时性分支, 用于应对一些特定目的的版本开发, 临时性分支主要有三种:
-<em> 功能（feature）分支
-</em> 预发布（release）分支
+* 功能（feature）分支
+* 预发布（release）分支
 * 修补bug（fixbug）分支
 这三种分支都属于临时性需要, 使用完以后, 应该删除, 使得代码库的常设分支始终只有 Master 和 Develop.</p>
 <p><strong>四、 功能分支</strong>
@@ -102,26 +103,26 @@ git merge &lt;/span&gt;--no-ff develop
 功能分支的名字, 可以采用 feature-* 的形式命名.
 <img alt="" src="http://i60.tinypic.com/21ezrs6.jpg" />
 功能分支應該從 Develop 上派生:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">git checkout -b feature-&lt;span style=&quot;color: #000000&quot;&gt;x develop
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>git checkout -b feature-&lt;span style=&quot;color: #000000&quot;&gt;x develop
 git checkout develop
 git merge &lt;/span&gt;--no-ff feature-x
 </pre></div>
 
 
 <p>該分支使用完畢後, 應該刪除它:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">git branch -d feature-x
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>git branch -d feature-x
 </pre></div>
 
 
 <p><strong>五、预发布分支</strong>
 第二种是预发布分支, 它是指发布正式版本之前(即合并到 Master 分支之前), 我们可能需要有一个预发布的版本进行测试.
 预发布分支是从 Develop 分支上面分出来的, 预发布结束以后, 必须合并进 Develop 和 Master 分支, 它的命名, 可以采用 release-* 的形式.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">git checkout -b release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt; develop
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>git checkout -b release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt; develop
 </pre></div>
 
 
 <p>當確認測試沒問題後, 先合并到 Master 分支:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;git checkout master
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;git checkout master
 git merge &lt;/span&gt;--no-ff release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 # 对合并生成的新节点，做一个标签
 git tag &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt;
@@ -129,20 +130,20 @@ git tag &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&g
 
 
 <p>再合併到 Master 分支:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;git checkout develop
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;git checkout develop
 git merge &lt;/span&gt;--no-ff release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt;
 </pre></div>
 
 
 <p>最後刪除预发布分支:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">git branch -d release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>git branch -d release-&lt;span style=&quot;color: #800080&quot;&gt;1.2&lt;/span&gt;
 </pre></div>
 
 
 <p><strong>六、修补bug分支</strong>
 最后一种是修补 bug 分支, 软件正式发布以后, 难免会出现bug, 这时就需要创建一个分支, 进行 bug 修补.
 修补 bug 分支是从 Master 分支上面分出来的, 修补结束以后, 再合并进 Master 和 Develop 分支, 它的命名, 可以采用 fixbug-* 的形式.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;#创建一个修补bug分支
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;#创建一个修补bug分支
 git checkout &lt;/span&gt;-b fixbug-&lt;span style=&quot;color: #800080&quot;&gt;0.1&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; master
 
 #修补结束后，合并到 master 分支
@@ -180,7 +181,6 @@ git branch &lt;/span&gt;-d fixbug-&lt;span style=&quot;color: #800080&quot;&gt;0
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -204,14 +204,13 @@ git branch &lt;/span&gt;-d fixbug-&lt;span style=&quot;color: #800080&quot;&gt;0
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -62,11 +63,11 @@
 <li><a href="#_6">插入时间</a></li>
 </ul>
 </div>
-<h2 id="_1">语法高亮</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>语法高亮</h2>
 <p>Sublime Text 内置 Markdown 文档的语法高亮, 只是默认的太挫了&hellip;</p>
 <p><strong>Monokai Extended</strong> 和 <strong>Markdown Extended</strong> 是一套解决方案.</p>
 <p>安装完两个插件后, 首先在 [首选项] -> [主题方案] 里设置 <em>Monokai Extended</em>, 然后, 打开一个 *.md 文件, 在 Sublime 右下角显示文件语法那里点击选择 [打开具有当前扩展名的] -> [Markdown Extended], 或者在 [查看] -> [语法] -> [打开具有当前扩展名的] -> [Markdown Extended], 这样就将 *.md 文件与 Markdown Extended 关联起来了.</p>
-<h2 id="_2">智能补全</h2>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>智能补全</h2>
 <p><strong>Markdown Editing</strong> 插件</p>
 <p>Markdown Editing 也自带三种配色方案, 不过嘛, 略丑, 还是用 Monokai Extended 和 Markdown Extended 的好.</p>
 <p>Markdown Editing 常用功能如下:</p>
@@ -90,7 +91,7 @@
 <li>Ctrl + 1~6 插入标题</li>
 </ul>
 <p>不过我用反引号时, 都是用三个反引号来指定编程语言, 单反引号貌似不能指定语言, 所以改了下 Markdown Editeing 的快捷键, [首选项] -> [插件设置] -> [Markdown Editing] -> [Key Bindings -- User]</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">    {
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>    {
         &quot;keys&quot;: [&quot;`&quot;], &quot;command&quot;: &quot;insert_snippet&quot;, &quot;args&quot;: {&quot;contents&quot;: &quot;```$0\n```\n&lt;br&gt;&quot;}, &quot;context&quot;:
         [
              { &quot;key&quot;: &quot;setting.auto_match_enabled&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: true },
@@ -112,10 +113,9 @@
     },
 </pre></div>
 
-
-<p><br>
+<br>
 另外, <strong>Shift + Win + K</strong> 插入图片快捷键和输入法有点冲突, 我们改成 <strong>ctrl + super + k</strong>, 一样的打开 [Key Bindings &ndash; User]</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">    {
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>    {
         &quot;keys&quot;: [&quot;ctrl+super+k&quot;], &quot;command&quot;: &quot;reference_new_inline_image&quot;, &quot;context&quot;:
         [
             { &quot;key&quot;: &quot;selector&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: &quot;text.html.markdown&quot;, &quot;match_all&quot;: true }
@@ -123,44 +123,42 @@
     },
 </pre></div>
 
-
-<p><br>
+<br>
 最后, Markdown Editing 默认的粗体和斜体是用下划线控制的, 在 pelican 中转化成貌似有点问题, 所以改成了 *, [首选项] -> [插件设置] -> [Markdown Editing] -> [Bold and Italic Settings -- User]:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span style="color: #008800">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;plist</span> <span style="color: #BB4444">version=&quot;1.0&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;dict&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>name<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>Bold and Italic Markers<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>scope<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>text.html.markdown<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>settings<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;dict&gt;</span>
-        <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>shellVariables<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-        <span style="color: #008000; font-weight: bold">&lt;array&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;dict&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>name<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>MD_BOLD_MARKER<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>value<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>**<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;/dict&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;dict&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>name<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>MD_ITALIC_MARKER<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>value<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-                <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>*<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;/dict&gt;</span>
-        <span style="color: #008000; font-weight: bold">&lt;/array&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;/dict&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;key&gt;</span>uuid<span style="color: #008000; font-weight: bold">&lt;/key&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;string&gt;</span>E3F0F1B0-53C8-11E3-8F96-0800200C9A66<span style="color: #008000; font-weight: bold">&lt;/string&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/dict&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/plist&gt;</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span style="color: #999999; font-weight: bold">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple Computer//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+<span style="color: #000080">&lt;plist</span> <span style="color: #008080">version=</span><span style="color: #183691">&quot;1.0&quot;</span><span style="color: #000080">&gt;</span>
+<span style="color: #000080">&lt;dict&gt;</span>
+    <span style="color: #000080">&lt;key&gt;</span>name<span style="color: #000080">&lt;/key&gt;</span>
+    <span style="color: #000080">&lt;string&gt;</span>Bold and Italic Markers<span style="color: #000080">&lt;/string&gt;</span>
+    <span style="color: #000080">&lt;key&gt;</span>scope<span style="color: #000080">&lt;/key&gt;</span>
+    <span style="color: #000080">&lt;string&gt;</span>text.html.markdown<span style="color: #000080">&lt;/string&gt;</span>
+    <span style="color: #000080">&lt;key&gt;</span>settings<span style="color: #000080">&lt;/key&gt;</span>
+    <span style="color: #000080">&lt;dict&gt;</span>
+        <span style="color: #000080">&lt;key&gt;</span>shellVariables<span style="color: #000080">&lt;/key&gt;</span>
+        <span style="color: #000080">&lt;array&gt;</span>
+            <span style="color: #000080">&lt;dict&gt;</span>
+                <span style="color: #000080">&lt;key&gt;</span>name<span style="color: #000080">&lt;/key&gt;</span>
+                <span style="color: #000080">&lt;string&gt;</span>MD_BOLD_MARKER<span style="color: #000080">&lt;/string&gt;</span>
+                <span style="color: #000080">&lt;key&gt;</span>value<span style="color: #000080">&lt;/key&gt;</span>
+                <span style="color: #000080">&lt;string&gt;</span>**<span style="color: #000080">&lt;/string&gt;</span>
+            <span style="color: #000080">&lt;/dict&gt;</span>
+            <span style="color: #000080">&lt;dict&gt;</span>
+                <span style="color: #000080">&lt;key&gt;</span>name<span style="color: #000080">&lt;/key&gt;</span>
+                <span style="color: #000080">&lt;string&gt;</span>MD_ITALIC_MARKER<span style="color: #000080">&lt;/string&gt;</span>
+                <span style="color: #000080">&lt;key&gt;</span>value<span style="color: #000080">&lt;/key&gt;</span>
+                <span style="color: #000080">&lt;string&gt;</span>*<span style="color: #000080">&lt;/string&gt;</span>
+            <span style="color: #000080">&lt;/dict&gt;</span>
+        <span style="color: #000080">&lt;/array&gt;</span>
+    <span style="color: #000080">&lt;/dict&gt;</span>
+    <span style="color: #000080">&lt;key&gt;</span>uuid<span style="color: #000080">&lt;/key&gt;</span>
+    <span style="color: #000080">&lt;string&gt;</span>E3F0F1B0-53C8-11E3-8F96-0800200C9A66<span style="color: #000080">&lt;/string&gt;</span>
+<span style="color: #000080">&lt;/dict&gt;</span>
+<span style="color: #000080">&lt;/plist&gt;</span>
 </pre></div>
 
-
-<p><br></p>
-<h2 id="_3">表格辅助</h2>
+<br></p>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>表格辅助</h2>
 <p><strong>TableEditor</strong>: Markdown 中的表格书写体验真心不咋样, 所有有人为这个开发了一个插件, 具有较好的自适应性, 会自动对齐.</p>
 <p>首先需要用 <strong>ctrl + shift + p</strong> 打开这个功能:</p>
 <ul>
@@ -169,13 +167,13 @@
 </ul>
 <p>常用方法:</p>
 <p>输入下面的样式</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">| Name | Phone |
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>| Name | Phone |
 |-
 </pre></div>
 
 
 <p>按 tab 键</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">| Name | Phone |
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>| Name | Phone |
 |------|-------|
 | _    |       |
 </pre></div>
@@ -184,12 +182,12 @@
 <p>使用 <strong>tab</strong> 切换字段, 按 <strong>enter</strong> 新建新行</p>
 <hr />
 <p>输入下面的样式</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">|Name|Phone
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>|Name|Phone
 </pre></div>
 
 
 <p>按 ctrl + k, enter (注意是先按 ctrl + k, 按完后再按 enter)</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">| Name | Phone |
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>| Name | Phone |
 |------|-------|
 | _    |       |
 </pre></div>
@@ -203,7 +201,7 @@
 <p><strong>alt + shift + left</strong> 删除当前列</p>
 <p><strong>alt + shift + right</strong> 在当前列左边新建列</p>
 <p><strong>alt + right/left</strong> 左右移动列</p>
-<h2 id="_4">预览</h2>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>预览</h2>
 <p><strong>OmniMarkupPreviwer</strong> 可以实时在浏览器中预览</p>
 <ul>
 <li>Ctrl + Alt + O: Preview Markup in Browser.</li>
@@ -212,13 +210,13 @@
 </ul>
 <p>还有个 <strong>Markdown Preview</strong> 插件也是可以预览 md 文件, 但是需要手动生成 + F5 的, 所以感觉用起来比较麻烦.</p>
 <p>OmniMarkupPreviwer 的默认配置已经满足日常需求了, 不过可以在配置文件中把 <strong>toc</strong> 打开, 这样就可以生成目录了.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&quot;extensions&quot;: [&quot;tables&quot;, &quot;strikeout&quot;, &quot;fenced_code&quot;, &quot;codehilite&quot;, &quot;toc&quot;] // 这是 OmniMarkupPreviwer 配置文件的最后一行
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&quot;extensions&quot;: [&quot;tables&quot;, &quot;strikeout&quot;, &quot;fenced_code&quot;, &quot;codehilite&quot;, &quot;toc&quot;] // 这是 OmniMarkupPreviwer 配置文件的最后一行
 </pre></div>
 
 
-<h2 id="_5">插入文件头</h2>
+<h2 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>插入文件头</h2>
 <p>我们使用 Pelican 时, 要在每个 md 文件中添加文件头, 格式大概如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Title: Git 简明手册
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Title: Git 简明手册
 Author: Martin
 Date: 2016-03-13 13:00
 Summary: Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Github 的用法.
@@ -227,42 +225,42 @@ Summary: Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Gith
 
 <p>使用 sublime 提供的 code snippet 可以方便的完成添加操作.</p>
 <p>&ldquo;工具&rdquo;-&gt;&rdquo;新代码片段&rdquo;:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;snippet&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;content&gt;</span><span style="color: #008800">&lt;![CDATA[</span>
-<span style="color: #008800">Title: ${1}</span>
-<span style="color: #008800">Author: Martin</span>
-<span style="color: #008800">Date: ${2}</span>
-<span style="color: #008800">Summary:</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;snippet&gt;</span>
+    <span style="color: #000080">&lt;content&gt;</span><span style="color: #999999; font-weight: bold">&lt;![CDATA[</span>
+<span style="color: #999999; font-weight: bold">Title: ${1}</span>
+<span style="color: #999999; font-weight: bold">Author: Martin</span>
+<span style="color: #999999; font-weight: bold">Date: ${2}</span>
+<span style="color: #999999; font-weight: bold">Summary:</span>
 
-<span style="color: #008800">${3}</span>
-<span style="color: #008800">]]&gt;</span><span style="color: #008000; font-weight: bold">&lt;/content&gt;</span>
-    <span style="color: #008800; font-style: italic">&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</span>
-    <span style="color: #008000; font-weight: bold">&lt;tabTrigger&gt;</span>md<span style="color: #008000; font-weight: bold">&lt;/tabTrigger&gt;</span>
-    <span style="color: #008800; font-style: italic">&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</span>
-    <span style="color: #008800; font-style: italic">&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;</span>
-<span style="color: #008000; font-weight: bold">&lt;/snippet&gt;</span>
+<span style="color: #999999; font-weight: bold">${3}</span>
+<span style="color: #999999; font-weight: bold">]]&gt;</span><span style="color: #000080">&lt;/content&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</span>
+    <span style="color: #000080">&lt;tabTrigger&gt;</span>md<span style="color: #000080">&lt;/tabTrigger&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;</span>
+<span style="color: #000080">&lt;/snippet&gt;</span>
 </pre></div>
 
 
 <p>保存文件, 取名为 <strong>title-code.sublime-snippet</strong>, 此时, 在文本中, 输入 md, 然后按 tab 键, 就可以直接输入我们的文件头了.</p>
-<h2 id="_6">插入时间</h2>
+<h2 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>插入时间</h2>
 <p>在我们上一步的操作中, 我们还要手写时间, 这也比较麻烦, sublime 也没有提供直接的方法来插入时间, 不过还好, sublime 可以用插件的方式来扩展功能.</p>
 <p>&ldquo;工具&rdquo;-&gt;&rdquo;新插件&rdquo;:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">datetime</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sublime</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">sublime_plugin</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">datetime</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">sublime</span><span style="color: #A71D7E">,</span> <span style="color: #555555">sublime_plugin</span>
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">AddCurrentTimeCommand</span>(sublime_plugin<span style="color: #666666">.</span>TextCommand):
-    <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">run</span>(<span style="color: #AA22FF">self</span>, edit):
-        <span style="color: #AA22FF">self</span><span style="color: #666666">.</span>view<span style="color: #666666">.</span>run_command(<span style="color: #BB4444">&quot;insert_snippet&quot;</span>,
+<span style="color: #A71D5D">class</span> <span style="color: #445588">AddCurrentTimeCommand</span>(<span style="color: #333333">sublime_plugin</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextCommand</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">edit</span>):
+        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">run_command</span>(<span style="color: #183691">&quot;insert_snippet&quot;</span>,
             {
-                <span style="color: #BB4444">&quot;contents&quot;</span>: <span style="color: #BB4444">&quot;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">&quot;</span> <span style="color: #666666">%</span> datetime<span style="color: #666666">.</span>datetime<span style="color: #666666">.</span>now()<span style="color: #666666">.</span>strftime(<span style="color: #BB4444">&quot;%Y-%m-</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BB4444"> %H:%M&quot;</span>)
+                <span style="color: #183691">&quot;contents&quot;</span>: <span style="color: #183691">&quot;%s&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">datetime</span><span style="color: #A71D7E">.</span><span style="color: #333333">datetime</span><span style="color: #A71D7E">.</span><span style="color: #333333">now</span>()<span style="color: #A71D7E">.</span><span style="color: #333333">strftime</span>(<span style="color: #183691">&quot;%Y-%m-%d %H:%M&quot;</span>)
             }
         )
 </pre></div>
 
 
 <p>保存为 <strong>add_current_time.py</strong>, 然后打开用户的按键绑定设置, 在后添加一个新快捷键:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">// 插入时间
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>// 插入时间
 {
     &quot;keys&quot;: [&quot;ctrl+shift+.&quot;], &quot;command&quot;:&quot;add_current_time&quot;,
 },
@@ -286,7 +284,6 @@ Summary: Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Gith
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -310,14 +307,13 @@ Summary: Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Gith
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

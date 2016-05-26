@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -66,10 +67,10 @@ protected:
     virtual void PrimitiveOperation1() = 0; // 抽象行为, 放到子类实现
     virtual void PrimitiveOperation2() = 0; // 抽象行为, 放到子类实现</p>
 <p>public:
-    /<strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong>
+    /************************************************************************
         模版方法, 给出了逻辑的骨架, 而逻辑的组成是一些相应的抽象操作,
         它们推迟到子类实现
-    <strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong><strong><em>*</em></strong></strong>/
+    ************************************************************************/
     void TempletMethod() {
         PrimitiveOperation1();
         PrimitiveOperation2();
@@ -81,7 +82,7 @@ public:
     void PrimitiveOperation1() {
         // 具体的方法1实现
     }</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">void PrimitiveOperation2() {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>void PrimitiveOperation2() {
     // 具体的方法2实现
 }
 </pre></div>
@@ -94,17 +95,17 @@ public:
     void PrimitiveOperation1() {
         // 具体的方法1实现
     }</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">void PrimitiveOperation2() {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>void PrimitiveOperation2() {
     // 具体的方法2实现
 }
 </pre></div>
 
 
 <p>};</p>
-<p>int _tmain(int argc, _TCHAR<em> argv[]) {
-    AbstractClass</em> p_1 = new ConCreteClassA();
+<p>int _tmain(int argc, _TCHAR* argv[]) {
+    AbstractClass* p_1 = new ConCreteClassA();
     p_1-&gt;TempletMethod();</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">AbstractClass* p_2 = new ConCreteClassB();
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>AbstractClass* p_2 = new ConCreteClassB();
 p_2-&gt;TempletMethod();
 
 delete p_1;
@@ -135,7 +136,6 @@ return 0;
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -159,14 +159,13 @@ return 0;
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

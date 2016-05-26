@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -59,13 +60,12 @@
 <li><a href="#_2">引用对象</a></li>
 </ul>
 </div>
-<h2 id="_1">内嵌对象</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>内嵌对象</h2>
 <p>所谓内嵌对象, 就是类似 Dict 那样, 把另一个对象做为 Dict 中某个字段的 value, 如:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{name: &#39;张三&#39;, school: {name: &#39;理工大学&#39;, city: &#39;上海&#39;}}
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{name: &#39;张三&#39;, school: {name: &#39;理工大学&#39;, city: &#39;上海&#39;}}
 </pre></div>
 
-
-<p><br>
+<br>
 内嵌对象的__优点__就是__读取__非常快、方便, 可以一次性把相关的数据都读取出来.</p>
 <p>再说说 内嵌对象 的__缺点__</p>
 <p>就拿上面的 学生 => 学校 的例子来说, 如果存在几千几万个学生呢?<br>
@@ -74,21 +74,20 @@
 <p>另外, 还有些复杂的对象是 内嵌对象 的方式无法表达的</p>
 <p>例如存储 C 盘里所有目录/子目录的数据, 想一想, 如果用 内嵌对象 的方式, 每个目录都是对象, 它里面又包含了子对象, 子对象的里面还有子对象&hellip;这样下去无穷尽了&hellip;</p>
 <p>再例如存储交友信息, 每个人都是对象, 如果用 内嵌对象,  那就会出现这种情况: A 里面有 B, B 里面又有 A&hellip;限入死循环了&hellip;</p>
-<h2 id="_2">引用对象</h2>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>引用对象</h2>
 <p>为了解决 内嵌对象 方式的缺点, 引入了 引用对象 的方式.</p>
 <p>这种方式的做法是, 在对象中只保存另一个对象的 <strong>_id</strong> 字段, 取数据的话先取出 <strong>_id</strong>, 然后根据 <strong>_id</strong> 再去取数据&hellip;</p>
 <p>很明显这种方式的__缺点__就是取数据时要取__多次__(Mongodb 不支持 SQL 中的 Join, 即联合查询).</p>
 <p>除了自己去实现这种引用关系外, Mongodb 也提供了自己的引用设计: <strong>DBRefs</strong></p>
 <p>语法如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{
     $ref:
     $id:
     $db:
  }
 </pre></div>
 
-
-<p><br>
+<br>
 参数说明:</p>
 <ul>
 <li>ref: 集合名称</li>
@@ -96,7 +95,7 @@
 <li>db: 可选, 数据库名称, 默认为当前所在库</li>
 </ul>
 <p>如下面这个实例中用户数据文档中的 <strong>address</strong> 字段使用了 <strong>DBRef</strong>:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{
    &#39;_id&#39;:ObjectId(&#39;53402597d852426020000002&#39;),
    &#39;name&#39;: &#39;Tom Benzamin&#39;
    &#39;address&#39;: {
@@ -107,16 +106,14 @@
 }
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>address DBRef</strong> 字段指定了引用的数据地址是在 <strong>w3cschoolcc</strong> 数据库下的 <strong>address_home</strong> 集合中,  其 <strong>_id</strong> 为 534009e4d852427820000002.</p>
 <p>通过下面这种方式, 可以取出 <strong>address</strong> 数据:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">var user = db.users.findOne({&#39;name&#39;:&#39;Tom Benzamin&#39;})
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>var user = db.users.findOne({&#39;name&#39;:&#39;Tom Benzamin&#39;})
 db[user.address.$ref].findOne({&#39;_id&#39;:(dbRef.$id)})
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>根据官方推荐,  当这种引用关系是建立在同一个集合中时, 就用第一种自己保存 _id 的方式, 如果是夸集合引用, 请使用 DBRef.</strong></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a>
 
@@ -137,7 +134,6 @@ db[user.address.$ref].findOne({&#39;_id&#39;:(dbRef.$id)})
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -161,14 +157,13 @@ db[user.address.$ref].findOne({&#39;_id&#39;:(dbRef.$id)})
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

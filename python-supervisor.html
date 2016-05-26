@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -62,7 +63,7 @@
 <li><a href="#6-web">6. 通过 web 方式查看状态</a></li>
 </ul>
 </div>
-<h1 id="1-supervisor">1. Supervisor 介绍</h1>
+<h1 id="1-supervisor"><a name="user-content-1-supervisor" href="#1-supervisor" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. Supervisor 介绍</h1>
 <p>Supervisor 是用 Python 实现的一款非常实用的进程管理工具, Supervisor 会帮你把应用程序转成 Daemon 程序, 而且可以方便的通过命令开启、关闭、重启等操作, 托管给它管理的进程一旦崩溃也会自动重启, 这样就可以保证程序执行中断后的情况下有自我修复的功能.</p>
 <p>注意事项:</p>
 <ul>
@@ -84,21 +85,20 @@
 <blockquote>
 <p>简单的说就是先使用 <strong>supervisord</strong> 开始 Supervisor 服务, 然后通过 <strong>supervisorctl</strong> 管理 Supervisor 服务</p>
 </blockquote>
-<h1 id="2">2. 安装</h1>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip install supervisor
+<h1 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 安装</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip install supervisor
 </pre></div>
 
-
-<p><br>
+<br>
 可以安装在系统级的 Python 环境下, 也可以安装在 virtualenv 级的 Python 环境下, 建议安装在系统级的 Python 环境, 这样就可以把 supervisor 配成开机启动, 而且 supervisor 也算是通用扩展了&hellip;</p>
-<h1 id="3">3. 配置</h1>
+<h1 id="3"><a name="user-content-3" href="#3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. 配置</h1>
 <p>安装完成后, 使用下面这两种方式创建配置文件:</p>
 <ul>
 <li>创建一个全局配置文件 echo_supervisord_conf > /etc/supervisord.conf</li>
 <li>在当前目录创建配置文件 echo_supervisord_conf > supervisord.conf, 然后使用 <strong>-c</strong> 参数在启动时手动指定配置文件: <code>supervisord -c supervisord.conf</code></li>
 </ul>
 <p>默认配置文件 echo_supervisord_conf 内容:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">; Sample supervisor config file.
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>; Sample supervisor config file.
 ;
 ; For more information on the config file, please see:
 ; http://supervisord.org/configuration.html
@@ -239,11 +239,10 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 ;files = relative/directory/*.ini
 </pre></div>
 
-
-<p><br></p>
-<h1 id="4">4. 添加一个程序</h1>
+<br></p>
+<h1 id="4"><a name="user-content-4" href="#4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. 添加一个程序</h1>
 <p>编辑配置文件 supervisord.conf, 在后面添加新程序:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">[program:test_py]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>[program:test_py]
 command=python /etc/my_pro/test.py
 autorestart=true
 directory=/etc/my_pro
@@ -251,8 +250,7 @@ stdout_logfile=/etc/my_pro/test_stdout.log
 stderr_logfile=/etc/my_pro/test_stderr.log
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <blockquote>
 <p>后来发现在 python 中使用 print 时, test_stdout.log 文件里不输出内容, 原来 print 是输出到缓冲区, 在满足某些条件下才会从缓冲区写出, 使用 <strong>-u</strong> 参数来停用缓冲区, 直接写文件: <code>python -u /etc/my_pro/test.py</code></p>
 </blockquote>
@@ -260,13 +258,12 @@ stderr_logfile=/etc/my_pro/test_stderr.log
 如果配置中的 command 是执行一个 bash, 然后在 bash 里执行了 python 脚本, 那么当使用 supervisor 停止程序时, 只有上层进程被停止(即 bash 被停止了), 但 python 进程没有被停止.</p>
 <p>解决办法:<br>
 在配置文件中设置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">stopasgroup=true
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>stopasgroup=true
 killasgroup=true
 </pre></div>
 
-
-<p><br></p>
-<h1 id="5-supervisor">5. 使用 supervisor 管理程序</h1>
+<br></p>
+<h1 id="5-supervisor"><a name="user-content-5-supervisor" href="#5-supervisor" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5. 使用 supervisor 管理程序</h1>
 <ul>
 <li>使用指定配置文件启动: supervisord -c supervisord.conf</li>
 <li>使用默认配置文件启动: supervisord</li>
@@ -283,14 +280,13 @@ killasgroup=true
 <blockquote>
 <p>可以先键入 supervisorctl 进入交互状态, 再使用 status、start 等命令.</p>
 </blockquote>
-<h1 id="6-web">6. 通过 web 方式查看状态</h1>
+<h1 id="6-web"><a name="user-content-6-web" href="#6-web" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6. 通过 web 方式查看状态</h1>
 <p>配置文件中配置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">[inet_http_server]         ; inet (TCP) server disabled by default
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
 port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
 </pre></div>
 
-
-<p><br>
+<br>
 那么可以从浏览器通过访问 <code>127.0.0.1:9001</code> 来查看进程状态</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -311,7 +307,6 @@ port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -335,14 +330,13 @@ port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

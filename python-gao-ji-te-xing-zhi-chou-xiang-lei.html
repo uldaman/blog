@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -58,29 +59,29 @@
 <li>子类必须实现抽象类 <strong>abstractmethod、abstractproperty</strong> 方法</li>
 <li>Python 中使用抽象功能会增大消耗, 所以大部分情况下都采用更宽松的作法, 即定义成正常的类, 通过编程规范来约束</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">#!coding=utf-8</span>
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">abc</span> <span style="color: #AA22FF; font-weight: bold">import</span> ABCMeta, abstractmethod, abstractproperty
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!coding=utf-8</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">abc</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">ABCMeta</span>, <span style="color: #333333">abstractmethod</span>, <span style="color: #333333">abstractproperty</span>
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Foo</span>:
-  __metaclass__ <span style="color: #666666">=</span> ABCMeta
+<span style="color: #A71D5D">class</span> <span style="color: #445588">Foo</span>:
+  <span style="color: #333333">__metaclass__</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">ABCMeta</span>
 
-  <span style="color: #AA22FF">@abstractmethod</span>
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">spam</span>(<span style="color: #AA22FF">self</span>, a, b):
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #333333">@abstractmethod</span>
+  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">spam</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">a</span>, <span style="color: #333333">b</span>):
+    <span style="color: #A71D5D">pass</span>
 
-  <span style="color: #AA22FF">@abstractproperty</span>
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">name</span>(<span style="color: #AA22FF">self</span>):
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #333333">@abstractproperty</span>
+  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">name</span>(<span style="color: #0086B3">self</span>):
+    <span style="color: #A71D5D">pass</span>
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Bar</span>(Foo):
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">spam</span>(<span style="color: #AA22FF">self</span>, a, b):
-    <span style="color: #AA22FF; font-weight: bold">print</span> a, b
+<span style="color: #A71D5D">class</span> <span style="color: #445588">Bar</span>(<span style="color: #333333">Foo</span>):
+  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">spam</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">a</span>, <span style="color: #333333">b</span>):
+    <span style="color: #A71D5D">print</span> <span style="color: #333333">a</span>, <span style="color: #333333">b</span>
 
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">name</span>():
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">name</span>():
+    <span style="color: #A71D5D">pass</span>
 
-b <span style="color: #666666">=</span> Bar()
-b<span style="color: #666666">.</span>spam(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>)
+<span style="color: #333333">b</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Bar</span>()
+<span style="color: #333333">b</span><span style="color: #A71D7E">.</span><span style="color: #333333">spam</span>(<span style="color: #0086b3">1</span>,<span style="color: #0086b3">2</span>)
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -101,7 +102,6 @@ b<span style="color: #666666">.</span>spam(<span style="color: #666666">1</span>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -125,14 +125,13 @@ b<span style="color: #666666">.</span>spam(<span style="color: #666666">1</span>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

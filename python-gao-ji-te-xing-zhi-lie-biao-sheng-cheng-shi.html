@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,45 +53,40 @@
 </h6>
 
 
-    <p>已经一个列表 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 我们想得到 [1 * 1, 2 * 2, 3 * 3, &hellip;, 10 * 10], 此时, 借助列表生成式可以很方便的实现:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">[x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>)]
+    <p>已经一个列表 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 我们想得到 [1 * 1, 2 * 2, 3 * 3, &hellip;, 10 * 10], 此时, 借助列表生成式可以很方便的实现:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>[<span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">11</span>)]
 </pre></div>
-
-
+</p>
 <p><strong>[x * x for x in range(1, 11)]</strong> 就是一个列表生成式, 它的基础语法是:</p>
-<p><strong>[exp for iter_var in iterable] </strong></p>
+<p>**[exp for iter_var in iterable] **</p>
 <p>首先迭代 <strong>iterable</strong> 里所有内容, 每一次迭代, 都把 <strong>iterable</strong> 里相应内容放到 <strong>iter_var</strong> 中, 再在表达式 <strong>exp</strong> 中应用该 <strong>iter_var</strong> 的内容, 最后用表达式的计算值生成一个新的列表.</p>
-<p>除了基础语法外, 列表生成式还可以使用两层循环:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">L <span style="color: #666666">=</span> [(x, y) <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">2</span>) <span style="color: #AA22FF; font-weight: bold">for</span> y <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">3</span>)]
-<span style="color: #666666">&gt;&gt;</span>[(<span style="color: #666666">0</span>, <span style="color: #666666">0</span>), (<span style="color: #666666">0</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">0</span>, <span style="color: #666666">2</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">0</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">2</span>)]
+<p>除了基础语法外, 列表生成式还可以使用两层循环:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">L</span> <span style="color: #A71D7E">=</span> [(<span style="color: #333333">x</span>, <span style="color: #333333">y</span>) <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">2</span>) <span style="color: #A71D5D">for</span> <span style="color: #333333">y</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">3</span>)]
+<span style="color: #A71D7E">&gt;&gt;</span>[(<span style="color: #0086b3">0</span>, <span style="color: #0086b3">0</span>), (<span style="color: #0086b3">0</span>, <span style="color: #0086b3">1</span>), (<span style="color: #0086b3">0</span>, <span style="color: #0086b3">2</span>), (<span style="color: #0086b3">1</span>, <span style="color: #0086b3">0</span>), (<span style="color: #0086b3">1</span>, <span style="color: #0086b3">1</span>), (<span style="color: #0086b3">1</span>, <span style="color: #0086b3">2</span>)]
 </pre></div>
-
-
-<p>还可以加上判断语句:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">N <span style="color: #666666">=</span> [x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>) <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> <span style="color: #666666">5</span>]
-<span style="color: #666666">&gt;&gt;</span>[<span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+</p>
+<p>还可以加上判断语句:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">N</span> <span style="color: #A71D7E">=</span> [<span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">10</span>) <span style="color: #A71D5D">if</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">5</span>]
+<span style="color: #A71D7E">&gt;&gt;</span>[<span style="color: #0086b3">6</span>, <span style="color: #0086b3">7</span>, <span style="color: #0086b3">8</span>, <span style="color: #0086b3">9</span>]
 </pre></div>
-
-
+</p>
 <hr />
 <p>运用列表生成式, 可以写出非常简洁的代码;</p>
-<p>例如, 把一个 list 中所有的字符串变成小写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">L <span style="color: #666666">=</span> [<span style="color: #BB4444">&#39;Hello&#39;</span>, <span style="color: #BB4444">&#39;World&#39;</span>, <span style="color: #BB4444">&#39;IBM&#39;</span>, <span style="color: #BB4444">&#39;Apple&#39;</span>]
-[s<span style="color: #666666">.</span>lower() <span style="color: #AA22FF; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> L]
-<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BB4444">&#39;hello&#39;</span>, <span style="color: #BB4444">&#39;world&#39;</span>, <span style="color: #BB4444">&#39;ibm&#39;</span>, <span style="color: #BB4444">&#39;apple&#39;</span>]
+<p>例如, 把一个 list 中所有的字符串变成小写:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">L</span> <span style="color: #A71D7E">=</span> [<span style="color: #183691">&#39;Hello&#39;</span>, <span style="color: #183691">&#39;World&#39;</span>, <span style="color: #183691">&#39;IBM&#39;</span>, <span style="color: #183691">&#39;Apple&#39;</span>]
+[<span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">lower</span>() <span style="color: #A71D5D">for</span> <span style="color: #333333">s</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">L</span>]
+<span style="color: #A71D7E">&gt;&gt;&gt;</span> [<span style="color: #183691">&#39;hello&#39;</span>, <span style="color: #183691">&#39;world&#39;</span>, <span style="color: #183691">&#39;ibm&#39;</span>, <span style="color: #183691">&#39;apple&#39;</span>]
 </pre></div>
-
-
+</p>
 <hr />
 <p><strong>注意事项</strong></p>
-<p><strong>1</strong>.  当需要只是执行一个循环的时候尽量使用循环而不是列表解析, 这样更符合python提倡的直观性:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">for</span> item <span style="color: #AA22FF; font-weight: bold">in</span> sequence:
-    process(item)
+<p><strong>1</strong>.  当需要只是执行一个循环的时候尽量使用循环而不是列表解析, 这样更符合python提倡的直观性:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">for</span> <span style="color: #333333">item</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">sequence</span>:
+    <span style="color: #333333">process</span>(<span style="color: #333333">item</span>)
 </pre></div>
-
-
+</p>
 <p><strong>2</strong>.  当有内建的操作或者类型能够以更直接的方式实现的, 不要使用列表解析.
-例如复制一个列表时, 使用; <strong>L1=list(L)</strong> 即可, 不必使用: <strong>L1=[x for x in L] </strong></p>
+例如复制一个列表时, 使用; <strong>L1=list(L)</strong> 即可, 不必使用: **L1=[x for x in L] **</p>
 <p><strong>3</strong>. 如果需要对每个元素都调用并且返回结果时, 应使用 <strong>L1=map(f,L)</strong>, 而不是 <strong>L1=[f(x) for x in L]</strong>.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -111,7 +107,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -135,14 +130,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

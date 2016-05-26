@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,10 +53,10 @@
 </h6>
 
 
-    <h1 id="_1">用户和用户组</h1>
-<p><strong>
-</strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, <strong>用户</strong>指的就是使用操作系统的人;
-而<strong>用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
+    <h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户和用户组</h1>
+<p>**
+<strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, **用户**指的就是使用操作系统的人;
+而**用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
 <p>来看一个例子(借用鸟哥的私房菜).
 假设有一家人, 家里只有三兄弟, 分别是大毛、二毛与三毛. 对于这三人而言, 客厅、厨房、WC等是共同拥有的, 大家都有权限使用.
 由于三人各自拥有自己的房间, 三毛觉得让大毛、二毛进入自己的房间无可厚非, 但是自己写给小丽的情书可不能被他们看见, 于是三毛把情书锁在抽屉里.
@@ -65,8 +66,8 @@
 <p>接着看例子, 假如这三兄弟都是小 P 孩, 而这个家里呢, 还有更高级的存在, 也就是他们的父母啦, 他们的父母拥有家庭里的最高权限, 因此他们可以控制三兄弟的个人空间;
 这个父母对应的就是 Linux 里的 root 用户, 即超级管理员用户.</p>
 <p>前面说过, Linux 下一切内容皆文件, 因此所有的用户和用户组信息也都被保存在一些关键文件中.
-<strong>/etc/group
-</strong>存储当前系统中所有用户组信息.
+**/etc/group
+**存储当前系统中所有用户组信息.
 <img alt="" src="http://i57.tinypic.com/2usa6pf.jpg" />
 每一行都是一个用户组的信息, 信息被分为 4 部分;
 Group : x : 123 : abc,def
@@ -87,7 +88,7 @@ user : x : 123 : 456 : xxxx : /home/martin : /bin/bash
 <img alt="" src="http://i62.tinypic.com/2mzfc6r.jpg" />
 user : asdfasdfasdf… : : : : :
 用户 : 加密的密码 : 好吧, 一些乱七八糟东西, 暂时请无视它…了解一下就好.</p>
-<h1 id="_2">用户及用户组的管理命令</h1>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户及用户组的管理命令</h1>
 <p>[groupadd] [
 </td>
 <td width="72" >
@@ -117,14 +118,14 @@ user : asdfasdfasdf… : : : : :
 <p>[passwd] [-l] [用户名] 锁定用户
 [passwd] [-u] [用户名] 解锁用户
 [passwd] [-d] [用户名] 清除用户密码</p>
-<h1 id="_3">主要组和附属组</h1>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>主要组和附属组</h1>
 <p>Linux 下允许一个用户属于多个用户组, 这时, 只有一个组是用户的主要组, 其它的都是附属组.
 [gpasswd] [-a] [用户名] [组名] 为用户添加附属组, 如果要一次性添加多个附属组, 可以用逗号分隔用户组的名称.
 当用一个属于多个用户组的用户来创建一个文件的时候, 默认创建的文件属于用户的主要组, 如果想以附属组的权限来创建一个文件, 就要临时切换用户组.
 [newgrp] [组名] [组密码] 临时切换用户组(前提是要先切换成登录的用户再使用这条命令).
 [gpasswd] [-d] [用户名] [组名] 将一个用户从它的附属组中删除
 [useradd] [-g] [主用户组] [-G] [附属用户组列表(逗号隔开)] [用户名] 添加用户的时候同时指定主用户组和附属用户组</p>
-<h1 id="_4">其他命令</h1>
+<h1 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他命令</h1>
 <p>[gpasswd] [组名] 为用户组添加密码</p>
 <p>[su] [username] 切换当前用户, 如果不写 username 为切换成 root 用户, 切换的时候需要输入目标用户密码.
 需要注意, Ubuntu 为了系统的安全性, 默认 root 用户为随机密码, 除非手动重设 root 密码, 不过建议不要这么做.
@@ -156,7 +157,6 @@ user : asdfasdfasdf… : : : : :
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -180,14 +180,13 @@ user : asdfasdfasdf… : : : : :
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

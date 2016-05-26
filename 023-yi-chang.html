@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -62,7 +63,7 @@
 <li><a href="#_4">重写的异常</a></li>
 </ul>
 </div>
-<h2 id="_1">异常体系</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>异常体系</h2>
 <p>Java 把异常当作对象来处理, 并定义一个基类 <strong>java.lang.Throwable</strong> 作为所有异常的超类(父类), 有两个子类 <strong>Error</strong> 和 <strong>Exception</strong>, 分别表示错误和异常.</p>
 <ul>
 <li>Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等, 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.</li>
@@ -73,7 +74,7 @@
 <p><strong>运行异常</strong> 都是 RuntimeException 类及其子类异常, 如 NullPointerException、IndexOutOfBoundsException 等, 这些异常是不检查异常, 程序中可以选择捕获处理, 也可以不处理, 这些异常一般是由程序逻辑错误引起的, 程序应该从逻辑角度尽可能避免这类异常的发生.</p>
 <p><strong>编译异常</strong> 是 RuntimeException 以外的异常, 从程序语法角度讲是必须进行处理的异常, 如果不处理, 程序就不能编译通过, 如 IOException、SQLException 等以及用户自定义的 Exception.</p>
 <p><img alt="" src="http://i60.tinypic.com/245dm52.jpg" /></p>
-<h2 id="throwable">Throwable</h2>
+<h2 id="throwable"><a name="user-content-throwable" href="#throwable" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Throwable</h2>
 <p><strong>Throwable 常用方法:</strong></p>
 <p>getCause(): 返回抛出异常的原因, 如果 cause 不存在或未知, 则返回 null;</p>
 <p>getMessage(): 返回异常的消息信息.</p>
@@ -84,51 +85,51 @@
 <p>Throwable(String message): 构造带指定详细消息的新 throwable</p>
 <p>Throwable(Throwable cause): 构造一个带指定 cause 和 (cause==null ? null :cause.toString())（它通常包含类和 cause 的详细消息）的详细消息的新 throwable</p>
 <p>Throwable(String message, Throwable cause): 构造一个带指定详细消息和 cause 的新 throwable</p>
-<h2 id="_2">异常处理</h2>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>异常处理</h2>
 <p>在 Java 中, 使用 <strong>try-catch</strong> 及 <strong>try-catch-finally</strong> 来捕获并处理异常.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 一些会抛出异常的方法</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 该异常处理代码</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 一些会抛出异常的方法</span>
+<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Exception</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 该异常处理代码</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 
 
 <p>例子:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">try</span><span style="color: #666666">&lt;</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">print</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;请输入你的年龄:&quot;</span><span style="color: #666666">);</span>
-    Scanner input <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Scanner<span style="color: #666666">(</span>System<span style="color: #666666">.</span><span style="color: #BB4444">in</span><span style="color: #666666">);</span>
-    <span style="color: #00BB00; font-weight: bold">int</span> age <span style="color: #666666">=</span> input<span style="color: #666666">.</span><span style="color: #BB4444">newtInt</span><span style="color: #666666">();</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;十年后你&quot;</span> <span style="color: #666666">+</span> <span style="color: #666666">(</span>age <span style="color: #666666">+</span> <span style="color: #666666">10)</span> <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;岁&quot;</span><span style="color: #666666">);</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>InputMismatchException e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;你应该输入整数!&quot;</span><span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;程序结束!&quot;</span><span style="color: #666666">);</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">try</span><span style="color: #A71D7E">&lt;</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;请输入你的年龄:&quot;</span><span style="color: #A71D7E">);</span>
+    <span style="color: #333333">Scanner</span> <span style="color: #333333">input</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Scanner</span><span style="color: #A71D7E">(</span><span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">in</span><span style="color: #A71D7E">);</span>
+    <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">age</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">input</span><span style="color: #A71D7E">.</span><span style="color: #008080">newtInt</span><span style="color: #A71D7E">();</span>
+    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;十年后你&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #A71D7E">(</span><span style="color: #333333">age</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;岁&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">InputMismatchException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;你应该输入整数!&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D7E">}</span>
+<span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;程序结束!&quot;</span><span style="color: #A71D7E">);</span>
 </pre></div>
 
 
 <p>如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println(&ldquo;十年后你&rdquo; + (age + 10) + &ldquo;岁&rdquo;) 这包就不会被执行, 程序会跳到 catch 语句中, try-catch 执行完后, 后续的语句会继续执行.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 一些会抛出异常的方法</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 该异常处理代码</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">finally</span> <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 最终要执行的一些代码</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 一些会抛出异常的方法</span>
+<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Exception</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 该异常处理代码</span>
+<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">finally</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 最终要执行的一些代码</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 
 
 <p><strong>何为 finally?</strong></p>
 <p>先看一个没有 finally 的异常处理 try-catch 语句:<br>
 假设 count 为要使用到的资源, 并且用完要求释放此资源, 那么我们可以把释放资源的语句放到 try-catch 后执行, 当前的程序不管是在执行完 try 语句块还是 catch 语句块, 都会顺序执行到下面释放资源的语句.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">int</span> count <span style="color: #666666">=</span> <span style="color: #666666">0;</span> <span style="color: #008800; font-style: italic">// 初始化资源</span>
-<span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-    count<span style="color: #666666">++;</span>
-    <span style="color: #008800; font-style: italic">// 一些会抛出异常的方法</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-    <span style="color: #008800; font-style: italic">// 异常处理</span>
-<span style="color: #666666">}</span>
-count <span style="color: #666666">=</span> <span style="color: #666666">0;</span> <span style="color: #008800; font-style: italic">//释放资源</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">count</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// 初始化资源</span>
+<span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">count</span><span style="color: #A71D7E">++;</span>
+    <span style="color: #999988; font-style: italic">// 一些会抛出异常的方法</span>
+<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Exception</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #999988; font-style: italic">// 异常处理</span>
+<span style="color: #A71D7E">}</span>
+<span style="color: #333333">count</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">//释放资源</span>
 </pre></div>
 
 
@@ -137,18 +138,18 @@ count <span style="color: #666666">=</span> <span style="color: #666666">0;</spa
 <blockquote>
 <p>system.exit() 是唯一可以中断 finally 的命令.</p>
 </blockquote>
-<h2 id="_3">自定义异常</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">自定义异常类</span> <span style="color: #AA22FF; font-weight: bold">extends</span> 异常类型 <span style="color: #666666">{</span>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自定义异常</h2>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">自定义异常类</span> <span style="color: #A71D5D">extends</span> <span style="color: #333333">异常类型</span> <span style="color: #A71D7E">{</span>
 
-    <span style="color: #008800; font-style: italic">// 构造函数</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00A000">自定义异常类</span><span style="color: #666666">(</span>String info<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">super</span><span style="color: #666666">(</span>info<span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 调用 父类(String message): 构造带指定详细消息的新异常</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">// 构造函数</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">自定义异常类</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">info</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #A71D5D">super</span><span style="color: #A71D7E">(</span><span style="color: #333333">info</span><span style="color: #A71D7E">);</span> <span style="color: #999988; font-style: italic">// 调用 父类(String message): 构造带指定详细消息的新异常</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 
 
-<h2 id="throwthrows">throw、throws</h2>
+<h2 id="throwthrows"><a name="user-content-throwthrows" href="#throwthrows" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>throw、throws</h2>
 <p>throw 关键字是用于__方法体内部__, 用来抛出一个 Throwable 类型的异常;</p>
 <ul>
 <li>如果抛出了检查异常, 则还应该在方法头部声明方法可能抛出的异常类型, 该方法的调用者也必须检查处理抛出的异常</li>
@@ -157,32 +158,32 @@ count <span style="color: #666666">=</span> <span style="color: #666666">0;</spa
 </ul>
 <p>throws 关键字用于__方法声明部分__, 用来声明方法可能会抛出某些异常, 仅当抛出了__检查异常__, 该方法的调用者才必须处理或者重新抛出该异常, 当方法的调用者无力处理该异常的时候, 应该继续抛出, 而不是囫囵吞枣, 一般在 catch 块中打印一下堆栈信息做个勉强处理.</p>
 <p>下面给出一个简单例子, 看看如何 使用这两个关键字:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">test</span><span style="color: #666666">()</span> <span style="color: #AA22FF; font-weight: bold">throws</span> Exception <span style="color: #666666">{</span>
-     <span style="color: #008800; font-style: italic">// 抛出一个检查异常</span>
-     <span style="color: #AA22FF; font-weight: bold">throw</span> <span style="color: #AA22FF; font-weight: bold">new</span> Exception<span style="color: #666666">(</span><span style="color: #BB4444">&quot;方法 test 中的Exception&quot;</span><span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">test</span><span style="color: #A71D7E">()</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 抛出一个检查异常</span>
+     <span style="color: #A71D5D">throw</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Exception</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;方法 test 中的Exception&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 
 
 <p>之前说到: 如果抛出了检查异常, 则该方法的调用者也必须检查处理抛出的异常;<br>
 所以要调用 test() 的方法就必须处理 test() 抛出的异常或者添加 throws 声明将将异常继续上抛.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// 处理 test() 抛出的异常</span>
-<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">compute_1</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-        test<span style="color: #666666">()</span>
-    <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;e.getMessage()&quot;</span><span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// 处理 test() 抛出的异常</span>
+<span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">compute_1</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">test</span><span style="color: #A71D7E">()</span>
+    <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Exception</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;e.getMessage()&quot;</span><span style="color: #A71D7E">);</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
 
-<span style="color: #008800; font-style: italic">// 或者添加 throws 声明, 将异常上抛</span>
-<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">compute_2</span><span style="color: #666666">()</span> <span style="color: #AA22FF; font-weight: bold">throws</span> Exception <span style="color: #666666">{</span>
-    test<span style="color: #666666">()</span>
-<span style="color: #666666">}</span>
+<span style="color: #999988; font-style: italic">// 或者添加 throws 声明, 将异常上抛</span>
+<span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">compute_2</span><span style="color: #A71D7E">()</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">test</span><span style="color: #A71D7E">()</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 
 
-<h2 id="_4">重写的异常</h2>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>重写的异常</h2>
 <p>重写方法, 如果也要抛异常, 则只能抛出被覆盖的方法中同样的异常或者异常的子类.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
@@ -203,7 +204,6 @@ count <span style="color: #666666">=</span> <span style="color: #666666">0;</spa
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -227,14 +227,13 @@ count <span style="color: #666666">=</span> <span style="color: #666666">0;</spa
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

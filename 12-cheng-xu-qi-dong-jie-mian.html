@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -57,27 +58,25 @@
 <blockquote>
 <p>The QSplashScreen widget provides a splash screen that can be shown during application startup.</p>
 </blockquote>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">PyQt4.QtGui</span> <span style="color: #AA22FF; font-weight: bold">import</span> QApplication, QSplashScreen, QPixmap
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">sys</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtGui</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">QApplication</span>, <span style="color: #333333">QSplashScreen</span>, <span style="color: #333333">QPixmap</span>
 
-app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
-splash <span style="color: #666666">=</span> QSplashScreen(QPixmap(<span style="color: #BB4444">&#39;:/splash.png&#39;</span>))  <span style="color: #008800; font-style: italic"># step1, 创建一个 splash</span>
-splash<span style="color: #666666">.</span>show()  <span style="color: #008800; font-style: italic"># step2, 显示 splash</span>
-app<span style="color: #666666">.</span>processEvents()  <span style="color: #008800; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
-dlg <span style="color: #666666">=</span> Dialog()
-dlg<span style="color: #666666">.</span>show()
-splash<span style="color: #666666">.</span>finish(dlg);  <span style="color: #008800; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
-sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
+<span style="color: #333333">app</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QApplication</span>(<span style="color: #333333">sys</span><span style="color: #A71D7E">.</span><span style="color: #333333">argv</span>)
+<span style="color: #333333">splash</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QSplashScreen</span>(<span style="color: #333333">QPixmap</span>(<span style="color: #183691">&#39;:/splash.png&#39;</span>))  <span style="color: #999988; font-style: italic"># step1, 创建一个 splash</span>
+<span style="color: #333333">splash</span><span style="color: #A71D7E">.</span><span style="color: #333333">show</span>()  <span style="color: #999988; font-style: italic"># step2, 显示 splash</span>
+<span style="color: #333333">app</span><span style="color: #A71D7E">.</span><span style="color: #333333">processEvents</span>()  <span style="color: #999988; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
+<span style="color: #333333">dlg</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Dialog</span>()
+<span style="color: #333333">dlg</span><span style="color: #A71D7E">.</span><span style="color: #333333">show</span>()
+<span style="color: #333333">splash</span><span style="color: #A71D7E">.</span><span style="color: #333333">finish</span>(<span style="color: #333333">dlg</span>);  <span style="color: #999988; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
+<span style="color: #333333">sys</span><span style="color: #A71D7E">.</span><span style="color: #333333">exit</span>(<span style="color: #333333">app</span><span style="color: #A71D7E">.</span><span style="color: #333333">exec_</span>())
 </pre></div>
 
-
-<p><br>
+<br>
 你还可以通过 QSplashScreen 的 showMessage 方法在 splash screen 上打印提示信息:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">showMessage (<span style="color: #AA22FF">self</span>, QString message, <span style="color: #AA22FF">int</span> alignment <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>AlignLeft, QColor color <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>black)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">showMessage</span> (<span style="color: #0086B3">self</span>, <span style="color: #333333">QString</span> <span style="color: #333333">message</span>, <span style="color: #ED6A43">int</span> <span style="color: #333333">alignment</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Qt</span><span style="color: #A71D7E">.</span><span style="color: #333333">AlignLeft</span>, <span style="color: #333333">QColor</span> <span style="color: #333333">color</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Qt</span><span style="color: #A71D7E">.</span><span style="color: #333333">black</span>)
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a>
 
 </p>
@@ -97,7 +96,6 @@ sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -121,14 +119,13 @@ sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

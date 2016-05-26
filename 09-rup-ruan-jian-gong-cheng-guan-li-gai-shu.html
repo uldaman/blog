@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -72,26 +73,26 @@
 </li>
 </ul>
 </div>
-<h1 id="_1">软件工程模型</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>软件工程模型</h1>
 <ul>
 <li>瀑布式开发</li>
 <li>迭代式开发</li>
 <li>敏捷开发模型</li>
 </ul>
-<h2 id="_2">瀑布式开发</h2>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>瀑布式开发</h2>
 <p>传统的瀑布式开发, 也就是从需求到设计, 从设计到编码, 从编码到测试, 从测试到提交, 大概这样的流程;</p>
 <p>它要求每一个开发阶段都要做到最好, 特别是前期阶段, 设计的越完美, 提交后的成本损失就越少. 以前很多从事的外包项目就是这样的流程.<br>
 但是这里面有个问题, 就是开发途中发现之前的需求不合格、需要重新设计等问题, 都要留到下一个版本的开发中了.</p>
 <p><img alt="" src="http://i63.tinypic.com/29f9e87.jpg" /></p>
 <p>所以, 瀑布式开发的过程中是比较机械化的, 按流程走下来, 要求每一个流程都要按规范走完.<br>
 当然它也有好处的, 从开发者的角度上说, 当你进入开发阶段时, 项目的文档是非常详细的, 像每个按钮点击后, 前台发生什么变化, 后台又怎么处理, 都详细的描述, 开发者只需编码就可以了&hellip;</p>
-<h2 id="_3">迭代式开发</h2>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>迭代式开发</h2>
 <p>迭代式开发适合在一些需求信息不明确的项目中, 它不要求每一个阶段的任务做的都是最完美的, 而是明明知道还有很多不足的地方, 但先可以不去完善它, 而是把主要功能先搭建起来, 以最短的时间, 最少的损失先完成一个&rdquo;不完美的成果物&rdquo;直至提交.</p>
 <p>这样在开发过程中遇到需求的变化时, 所带来的影响要比瀑布式开发小.</p>
 <p>然后再通过客户或用户的反馈信息, 在这个&rdquo;不完美的成果物&rdquo;上逐步进行完善.</p>
 <p>而现在的很多项目中, 需求在项目进行中变化的事儿经常见, 所以显得迭代式开发的优势较瀑布式开发更明显一些.</p>
 <p>目前迭代式开发里面比较出名就是 <strong>RUP</strong>, 称为统一过程.</p>
-<h2 id="_4">敏捷开发模型</h2>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>敏捷开发模型</h2>
 <p>在迭代式开发时, 遇到比较小的项目, 就有人思考, 能不能&rdquo;反应&rdquo;更迅速一点, 文档再少一点, 迭代周期更减少一点&hellip;<br>
 于是敏捷开发模型就应运而生了, 可以说, 它是在迭代式开发的基础上&rdquo;进化&rdquo;而来, 是一种极限迭代, 比较出名的有下面两种开发模型:</p>
 <ul>
@@ -101,14 +102,14 @@
 <blockquote>
 <p>这两个我们后面的笔记会详细介绍.</p>
 </blockquote>
-<h1 id="rup">RUP 软件工程</h1>
-<h2 id="rup_1">RUP 初窥</h2>
+<h1 id="rup"><a name="user-content-rup" href="#rup" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 软件工程</h1>
+<h2 id="rup_1"><a name="user-content-rup_1" href="#rup_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 初窥</h2>
 <p>RUP (统一过程) 是一种以用例驱动、以体系结构为核心、迭代及增量的软件过程模型, 由 UML 方法和工具支持, 广泛应用于各类面向对象项目.</p>
 <p>如下就是一个标准的 RUP 软件工程图 (图__左上角__为原点):</p>
 <p><img alt="" src="http://i66.tinypic.com/bhg0th.jpg" /></p>
 <p><strong>纵轴</strong> 表示了工作流程的静态结构, 共 9 个工作流程, 前 6 个流程就是一个正常的__软件的生命周期__, 称为核心流程, 后面的 3 个流程是辅助流程, 将贯穿项目始终, 也称为支持流程, 像搭建版本控制系统、搭建问题追踪系统、管理开发日志等, 都是属于这个流程.</p>
 <p><strong>横轴</strong> 代表了制定开发过程的时间, 显示 RUP 的动态特征, 通过迭代式软件开发的周期、阶段、迭代和里程碑等动态信息表示, 它将纵轴上的每个工作流程都划分为 4 个阶段, 每个阶段以一个主要里程碑结束, 所以本质上说每个阶段都是两个里程碑之间的时间跨度.</p>
-<h2 id="rup-4">RUP 4 阶段</h2>
+<h2 id="rup-4"><a name="user-content-rup-4" href="#rup-4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 4 阶段</h2>
 <p><strong>初始阶段</strong><br>
 初始阶段的目标是为系统建立商业案例并确定项目的边界.<br>
 为了达到该目的必须识别所有与系统交互的外部实体, 在较高层次上定义交互的特性.<br>
@@ -137,10 +138,10 @@
 在交付阶段的终点是第四个__里程碑__: 产品发布 (Product Release) 里程碑.<br>
 此时, 要确定目标是否实现, 是否应该开始另一个开发周期.<br>
 在一些情况下这个里程碑可能与下一个周期的初始阶段的结束重合.</p>
-<h2 id="rup_2">RUP 周期</h2>
+<h2 id="rup_2"><a name="user-content-rup_2" href="#rup_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 周期</h2>
 <p>RUP 模型采用迭代开发, 通过多次迭代执行开发工作流, 逐步确定__一部分__需求分析和风险, 在设计、实现并确认这部分后, 再去做__下一部分__的需求分析、设计、实现和确认工作, 依次进行下去, 直到整个项目完成, 这样能够在逐步集成中更好的理解需求, 构建一个健壮的体系结构.</p>
 <p><img alt="" src="http://i66.tinypic.com/21bswhz.jpg" /></p>
-<h2 id="_5">软件生命周期</h2>
+<h2 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>软件生命周期</h2>
 <p>1、<strong>问题的定义及规划</strong> (上图中叫业务建模)<br>
 此阶段是软件开发方与需求方共同讨论, 主要确定软件的开发目标及其可行性.</p>
 <p>2、<strong>需求分析</strong><br>
@@ -153,7 +154,7 @@
 在软件设计完成后要经过严密的测试, 以发现软件在整个设计过程中存在的问题并加以纠正. 整个测试过程分单元测试、组装测试以及系统测试三个阶段进行. 测试的方法主要有白盒测试和黑盒测试两种. 在测试过程中需要建立详细的测试计划并严格按照测试计划进行测试, 以减少测试的随意性.</p>
 <p>6、<strong>运行维护</strong><br>
 软件维护是软件生命周期中持续时间最长的阶段. 在软件开发完成并投入使用后, 由于多方面的原因, 软件不能继续适应用户的要求. 要延续软件的使用寿命, 就必须对软件进行维护. 软件的维护包括纠错性维护和改进性维护两个方面.</p>
-<h2 id="rup_3">RUP 中的核心流程</h2>
+<h2 id="rup_3"><a name="user-content-rup_3" href="#rup_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 中的核心流程</h2>
 <p><strong>业务建模工作流</strong><br>
 产生五个工作产品, 即商业逻辑建模 (USE CASE)(ROSE)、业务需求说明书 (MS WORD)、专业词汇表 (英汉对照) (MS WORD)、风险说明 (MS WORD)、复审说明书.</p>
 <p><strong>需求工作流</strong><br>
@@ -171,7 +172,7 @@
 对各个类进行单元测试, 测试工作流包括核实对象之间的交互, 核实软件的所有构件是否正确集成, 核实所有需求是否已经正确实施, 确定缺陷, 确保在部署软件之前将风险降到最低.</p>
 <p><strong>部署工作流</strong><br>
 目的是成功的生成版本并将软件分发给最终用户, 部署工作流描述了那些与确保软件产品对最终用户具有可用性相关的活动, 包括: 软件打包、生成软件本身以外的产品、安装软件、为用户提供帮助, 在有些情况下, 还可能包括计划和进行 beta 测试版、移植现有的软件和数据以及正式验收.</p>
-<h2 id="rup_4">RUP 中的支持工作流</h2>
+<h2 id="rup_4"><a name="user-content-rup_4" href="#rup_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RUP 中的支持工作流</h2>
 <ul>
 <li>团队架构</li>
 <li>里程碑计划</li>
@@ -205,7 +206,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -229,14 +229,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

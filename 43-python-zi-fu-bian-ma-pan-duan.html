@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -53,25 +54,22 @@
 
 
     <p>使用 chardet 可以很方便的实现字符串/文件的编码检测, 尤其是中文网页, 有的页面使用 GBK/GB2312, 有的使用 UTF-8, 如果你需要去爬一些页面, 知道网页编码很重要的.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">chardet</span>
-chardet<span style="color: #666666">.</span>detect(<span style="color: #BB4444">&#39;待检测变量&#39;</span>)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">chardet</span>
+<span style="color: #333333">chardet</span><span style="color: #A71D7E">.</span><span style="color: #333333">detect</span>(<span style="color: #183691">&#39;待检测变量&#39;</span>)
 </pre></div>
 
-
-<p><br>
+<br>
 返回结果:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{<span style="color: #BB4444">&#39;confidence&#39;</span>: <span style="color: #666666">0.98999999999999999</span>, <span style="color: #BB4444">&#39;encoding&#39;</span>: <span style="color: #BB4444">&#39;GB2312&#39;</span>}
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{<span style="color: #183691">&#39;confidence&#39;</span>: <span style="color: #0086b3">0.98999999999999999</span>, <span style="color: #183691">&#39;encoding&#39;</span>: <span style="color: #183691">&#39;GB2312&#39;</span>}
 </pre></div>
 
-
-<p><br>
+<br>
 chardet 可以直接用 detect 函数来检测所给字符的编码, 函数返回值为字典, 有 2 个元素, 一个是检测的可信度, 另外一个就是检测到的编码.</p>
 <p>如果报下面的错误:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Expected a bytes object, not a unicode object
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Expected a bytes object, not a unicode object
 </pre></div>
 
-
-<p><br>
+<br>
 说明待检测变量是一个 unicode 对象, 没有被编码过 (即 <code>u'xxx'</code>) 这种.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -92,7 +90,6 @@ chardet 可以直接用 detect 函数来检测所给字符的编码, 函数返�
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -116,14 +113,13 @@ chardet 可以直接用 detect 函数来检测所给字符的编码, 函数返�
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

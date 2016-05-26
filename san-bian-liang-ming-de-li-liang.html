@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -68,8 +69,8 @@
 短的變量名也不總是不好, 如果把一個變量名取得很短時, 那麼它應該表示這是一個臨時的數據, 它的作用域非常有即, 如 for 語句中的 i 變量.
 不過, 作為一項防禦式編程策略, 一些細心的程序員會避免使用短的變量名.
 對於全局變量, 如果要限制它的作用域, 應該考慮使用名稱空間的方式.</p>
-<p><strong>變量名中的計算值限定詞
-</strong>一些變量可能被用作表達某個計算結果, 如最大值(Max)、最小值(Min)、平均值(Average), 應該把這些限定詞放在名字的最後.
+<p>**變量名中的計算值限定詞
+**一些變量可能被用作表達某個計算結果, 如最大值(Max)、最小值(Min)、平均值(Average), 應該把這些限定詞放在名字的最後.
 不過 Num 限定詞是個例外, 它放在變量名的開始代表一個總數, 放在結束則代表一個序號, 這已經是約定俗成的了. 然而這樣使用可能會帶來麻煩, 因此, 用 Count 或 Total 來代表總數, 而用 Index 來代表序號.</p>
 <p><strong>變量名中的常用對仗詞</strong>
 何為對仗詞? 就像 begin/end、 first/last 這種, 書中列出一些常用的對仗詞
@@ -139,10 +140,10 @@ Color_Blue,
 變量名和對象名以小寫字母開始, 子程序名以大寫字母開始.</p>
 <p><strong>區分類和對象</strong>
 這裡提供幾種方案:
-<em>. 類以大寫字母開始, 對象以小寫字母開始, 如 Widget widget;
-</em>. 類名全部大寫, 如 WIDGET widget;
-<em>. 通過給類型加 t_ 前綴, 如 t_Widget Widget;
-</em>. 通過給對象加 a前綴, 如 Widget aWidget;
+*. 類以大寫字母開始, 對象以小寫字母開始, 如 Widget widget;
+*. 類名全部大寫, 如 WIDGET widget;
+*. 通過給類型加 t_ 前綴, 如 t_Widget Widget;
+*. 通過給對象加 a前綴, 如 Widget aWidget;
 *. 通過對象和類採用更明確意義的名字, 如 Widget employeeWidget.
 (本人使用的是給類加 c 前綴, 給對象加 o 前綴, 如 cWidget oWidget, c 表示這是一個 Class, o 表示這是一個 Object)</p>
 <p><strong>標識全局變量</strong>
@@ -167,8 +168,8 @@ p 是指針
 <hr />
 <p><strong>小結</strong></p>
 <p>上面講了一堆怎麼命名變量, 看上去已經顯得非常複雜了, 其實只要謹記三點就可以:
-<em>. 變量代表的內容
-</em>. 變量的類型
+*. 變量代表的內容
+*. 變量的類型
 *. 變量的作用域</p>
 <hr />
 <p><strong>創建具備可讀性的短名字</strong></p>
@@ -176,24 +177,24 @@ p 是指針
 但是, 如果環境要求你創建簡短的名字, 那麼這提供一些縮寫的技巧.</p>
 <p><strong>縮寫一般原則</strong>
 注意, 其中的一些原則彼此衝突, 所以不要混合應用所有的原則.
-<em>. 使用標準縮寫, 就是讓你查字典..
-</em>. 去掉所有非前置元音, 如 computer 變成 cmptr, screen 變成 scrn
-<em>. 去掉虛詞 and、or、the 等
-</em>. 使用每個單詞的每一個或前幾個字母
-<em>. 統一地在每個單詞的第一、第二或第三個字母後截斷(和上面一條感覺差不多..)
-</em>. 保留每個單詞的第一個和最後一個
-<em>. 使用名字中的每個重要單詞, 最多不超過三個
-</em>. 去除無用的後綴 &ndash; ing、ed 等
-<em>. 保留每個音節中最引人注意的發音
-</em>. 確保不要改變變量的含義
+*. 使用標準縮寫, 就是讓你查字典..
+*. 去掉所有非前置元音, 如 computer 變成 cmptr, screen 變成 scrn
+*. 去掉虛詞 and、or、the 等
+*. 使用每個單詞的每一個或前幾個字母
+*. 統一地在每個單詞的第一、第二或第三個字母後截斷(和上面一條感覺差不多..)
+*. 保留每個單詞的第一個和最後一個
+*. 使用名字中的每個重要單詞, 最多不超過三個
+*. 去除無用的後綴 &ndash; ing、ed 等
+*. 保留每個音節中最引人注意的發音
+*. 確保不要改變變量的含義
 *. 反覆使用上述技術, 直到變量名長度達到要求</p>
 <p><strong>需要注意的地方</strong>
-<em>. 要麼刪除不止一個字符, 要麼就拼寫完整, 也就是說不要用只刪除一個字符的方式來縮寫.
-</em>. 縮寫要一致, 也就是某個單詞如果縮寫了, 那麼就應該全部縮寫
-<em>. 創建你能讀出來的名字, 也就是說, 某個名字用編寫後, 你還是能讀出他的音
-</em>. 避免使用容易看錯或讀錯的字符組合, 例如, 你的變量要表達出 B 結尾的意思, 應該使用 ??EndB, 而不應該是 BEnd.
-<em>. 使用詞典來解決命名沖突, 假如, 你有兩個變量, 分別為 fullRevenueDisbursal 和 fired, 你還有一個縮寫為 frd, 這樣你就無法知道 frd 代表的是 fullRevenueDisbursal 還是 fired, 所以此時, 就可以查詞典, 找一個單詞來代替 fired.
-</em>. 在代碼時用縮寫對照表來解釋極短名稱的含義.
+*. 要麼刪除不止一個字符, 要麼就拼寫完整, 也就是說不要用只刪除一個字符的方式來縮寫.
+*. 縮寫要一致, 也就是某個單詞如果縮寫了, 那麼就應該全部縮寫
+*. 創建你能讀出來的名字, 也就是說, 某個名字用編寫後, 你還是能讀出他的音
+*. 避免使用容易看錯或讀錯的字符組合, 例如, 你的變量要表達出 B 結尾的意思, 應該使用 ??EndB, 而不應該是 BEnd.
+*. 使用詞典來解決命名沖突, 假如, 你有兩個變量, 分別為 fullRevenueDisbursal 和 fired, 你還有一個縮寫為 frd, 這樣你就無法知道 frd 代表的是 fullRevenueDisbursal 還是 fired, 所以此時, 就可以查詞典, 找一個單詞來代替 fired.
+*. 在代碼時用縮寫對照表來解釋極短名稱的含義.
 *. 在一份項目級的文檔中說明所有縮寫(和上面一條差不多)</p>
 <hr />
 <p><strong>應該避免的名字</strong>
@@ -232,7 +233,6 @@ p 是指針
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -256,14 +256,13 @@ p 是指針
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

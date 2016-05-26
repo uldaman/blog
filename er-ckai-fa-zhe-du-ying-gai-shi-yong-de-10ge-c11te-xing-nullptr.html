@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -53,7 +54,7 @@
 
 
     <p>先看下面这两个重载函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;);
 </pre></div>
 
@@ -61,10 +62,10 @@
 <p>C++中用 NULL 来表示空指针, 而 NULL 被定义为 0: #define NULL 0.
 那么 foo(NULL); 语句将会调用 foo(int), 这几乎必定不是程序员想要的, 也不是代码直观上要表达的意图(因为我们实际想要传递的是一个空指针).</p>
 <p>C++11通过引入一个新的关键字 <strong>nullptr</strong> 充当单独的空指针常量来纠正这个问题.
-它的类型是 nullptr_t, 是一个可以隐式转换成<strong>任意类型的指针</strong>或<strong>指向成员的指针</strong>的类型,并且可以和这些类型进行比较.
-但它<strong>不能隐式转换为整型</strong>, 也不能与整型做比较, bool类型除外(可以隐式转换为bool型, 取值为false).
+它的类型是 nullptr_t, 是一个可以隐式转换成**任意类型的指针**或**指向成员的指针**的类型,并且可以和这些类型进行比较.
+但它**不能隐式转换为整型**, 也不能与整型做比较, bool类型除外(可以隐式转换为bool型, 取值为false).
 为了向下兼容,0仍然是一个有效的空指针常量!</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *pc = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *pc = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;  *pi = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;bool&lt;/span&gt;   b = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK. b is false.&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;    i = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; error&lt;/span&gt;
@@ -93,7 +94,6 @@ foo(nullptr);           &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&g
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -117,14 +117,13 @@ foo(nullptr);           &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&g
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

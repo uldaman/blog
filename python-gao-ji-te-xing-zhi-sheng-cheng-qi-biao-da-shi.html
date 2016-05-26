@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -55,49 +56,46 @@
     <p>当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(<strong>generator</strong>)表达式而不是列表解析;</p>
 <p>生成器表达式的语法和列表解析一样, 只不过生成器表达式是被（）括起来的, 而不是[ ], 如下:</p>
 <p><strong>(exp for iter_var in iterable)</strong></p>
-<p><strong>(exp for iter_var in iterable if cond_exp)</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">g <span style="color: #666666">=</span> (x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>))
-<span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">&lt;</span>generator <span style="color: #AA22FF">object</span> <span style="color: #666666">&lt;</span>genexpr<span style="color: #666666">&gt;</span> at <span style="color: #666666">0x1022ef630&gt;</span>
+<p><strong>(exp for iter_var in iterable if cond_exp)</strong>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> (<span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">10</span>))
+<span style="color: #A71D7E">&gt;&gt;&gt;</span> <span style="color: #333333">g</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">generator</span> <span style="color: #ED6A43">object</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">genexpr</span><span style="color: #A71D7E">&gt;</span> <span style="color: #333333">at</span> <span style="color: #0086b3">0x1022ef630</span><span style="color: #A71D7E">&gt;</span>
 </pre></div>
-
-
-<p>如此,  我们得到的就是一个生成器, 如果想要一个一个提取元素出来, 可以通过 <strong>next()</strong> 函数获得 <strong>generator</strong> 的下一个返回值:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">next</span>(g)
-<span style="color: #666666">&gt;&gt;&gt;0</span>
-<span style="color: #AA22FF">next</span>(g)
-<span style="color: #666666">&gt;&gt;&gt;1</span>
-<span style="color: #AA22FF">next</span>(g)
-<span style="color: #666666">&gt;&gt;&gt;4</span>
-<span style="color: #666666">.</span>
-<span style="color: #666666">.</span>
-<span style="color: #666666">.</span>
-<span style="color: #AA22FF">next</span>(g)
-<span style="color: #666666">&gt;&gt;&gt;81</span>
-<span style="color: #AA22FF">next</span>(g)
-Traceback (most recent call last):
-    File <span style="color: #BB4444">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">&lt;</span>module<span style="color: #666666">&gt;</span>
-<span style="color: #D2413A; font-weight: bold">StopIteration</span>
+</p>
+<p>如此,  我们得到的就是一个生成器, 如果想要一个一个提取元素出来, 可以通过 <strong>next()</strong> 函数获得 <strong>generator</strong> 的下一个返回值:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">0</span>
+<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">1</span>
+<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">4</span>
+<span style="color: #A71D7E">.</span>
+<span style="color: #A71D7E">.</span>
+<span style="color: #A71D7E">.</span>
+<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">81</span>
+<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
+<span style="color: #333333">Traceback</span> (<span style="color: #333333">most</span> <span style="color: #333333">recent</span> <span style="color: #333333">call</span> <span style="color: #333333">last</span>):
+    <span style="color: #333333">File</span> <span style="color: #183691">&quot;&lt;stdin&gt;&quot;</span>, <span style="color: #333333">line</span> <span style="color: #0086b3">1</span>, <span style="color: #A71D7E">in</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">module</span><span style="color: #A71D7E">&gt;</span>
+<span style="color: #990000">StopIteration</span>
 </pre></div>
+</p>
+<p>或者使用 <strong>for</strong> 循环遍历, 因为 <strong>generator</strong> 也是可迭代对象:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> (<span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">10</span>))
+<span style="color: #A71D5D">for</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">g</span>:
+    <span style="color: #A71D5D">print</span>(<span style="color: #333333">n</span>)
 
-
-<p>或者使用 <strong>for</strong> 循环遍历, 因为 <strong>generator</strong> 也是可迭代对象:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">g <span style="color: #666666">=</span> (x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>))
-<span style="color: #AA22FF; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> g:
-    <span style="color: #AA22FF; font-weight: bold">print</span>(n)
-
-<span style="color: #666666">0</span>
-<span style="color: #666666">1</span>
-<span style="color: #666666">4</span>
-<span style="color: #666666">9</span>
-<span style="color: #666666">16</span>
-<span style="color: #666666">25</span>
-<span style="color: #666666">36</span>
-<span style="color: #666666">49</span>
-<span style="color: #666666">64</span>
-<span style="color: #666666">81</span>
+<span style="color: #0086b3">0</span>
+<span style="color: #0086b3">1</span>
+<span style="color: #0086b3">4</span>
+<span style="color: #0086b3">9</span>
+<span style="color: #0086b3">16</span>
+<span style="color: #0086b3">25</span>
+<span style="color: #0086b3">36</span>
+<span style="color: #0086b3">49</span>
+<span style="color: #0086b3">64</span>
+<span style="color: #0086b3">81</span>
 </pre></div>
-
-
+</p>
 <p>生成器表达式并不真正创建数字列表, 而是返回一个生成器, 这个生成器在每次计算出一个条目后, 把这个条目“产生”(<strong>yield</strong>)出来;</p>
 <p>生成器表达式使用了“惰性计算”(lazy evaluation, 也有翻译为“延迟求值”, 我以为这种按需调用 call by need 的方式翻译为惰性更好一些), 只有在检索时才被赋值(evaluated), 所以在列表比较长的情况下使用更有效(节省内存).</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
@@ -119,7 +117,6 @@ Traceback (most recent call last):
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -143,14 +140,13 @@ Traceback (most recent call last):
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

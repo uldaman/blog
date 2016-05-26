@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -54,7 +55,7 @@
 
     <p>Django 对数据库的操作比较简单, 它已经对数据库进行了封闭, 我们无需去关注数据库的细节(即无需像三层架构那样对数据库进行封闭, Django 已经为我们封装好了).</p>
 <p>首先, 打开工作目录下的 settings.py 文件, 修改 DATABASES:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">DATABASES =&lt;span style=&quot;color: #000000&quot;&gt; {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>DATABASES =&lt;span style=&quot;color: #000000&quot;&gt; {
     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;default&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: {
         &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;ENGINE&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.db.backends.mysql&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
         &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;NAME&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;newdjango&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
@@ -70,7 +71,7 @@
 <p>上面的 NAME 指的是数据库名, 如下图:
 <img alt="" src="http://i62.tinypic.com/28vwrvc.jpg" /></p>
 <p>接下来, 检查下 settings.py 里的 INSTALLED_APPS 是否包含 app:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">INSTALLED_APPS =&lt;span style=&quot;color: #000000&quot;&gt; (
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>INSTALLED_APPS =&lt;span style=&quot;color: #000000&quot;&gt; (
     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.admin&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.auth&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;django.contrib.contenttypes&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
@@ -84,7 +85,7 @@
 
 <p>这里是最后一个 &lsquo;web&rsquo;.</p>
 <p>Django 不能自动为我们创建数据库, 但是可以为自动创建表, 现在在 models.py 中设置表和字段.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.db &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; models
 
 &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your models here.&lt;/span&gt;
@@ -100,9 +101,9 @@
 python manage.py syncdb &ndash; migrate 已具有 syncdb 的功能, 所以无需再执行
 Python 1.7 以下的版本执行 syncdb.</p>
 <p>如果报错: No module named MySQLdb
-那么就是没有安装 MySQL Python 模块, 安装下即可, 用 pip 似乎有点问题, 可以下载<a href="http://yunpan.cn/cm69fkFPDirFu">http://yunpan.cn/cm69fkFPDirFu</a> 访问密码 2f0c 安装即可.</p>
-<p><strong>常用字段
-</strong>
+那么就是没有安装 MySQL Python 模块, 安装下即可, 用 pip 似乎有点问题, 可以下载<a href="http://yunpan.cn/cm69fkFPDirFu"><a href="http://yunpan.cn/cm69fkFPDirFu"><a href="http://yunpan.cn/cm69fkFPDirFu">http://yunpan.cn/cm69fkFPDirFu</a></a></a> 访问密码 2f0c 安装即可.</p>
+<p>**常用字段
+**
 <table cellpadding="2" width="798" border="0" cellspacing="0" class="table" >
 <tbody >
 <tr ></p>
@@ -324,9 +325,9 @@ Python 1.7 以下的版本执行 syncdb.</p>
 </td>
 
 <p></tr></tbody></table></p>
-<p><strong>
+<p>**
 常用参数
-</strong>
+**
 <table cellpadding="2" width="800" border="0" cellspacing="0" class="table" >
 <tbody >
 <tr ></p>
@@ -482,7 +483,7 @@ gender = models.CharField(max_length=2,choices = GENDER_CHOICE)
 <p></tr></tbody></table></p>
 <p><strong>外键 &ndash; 多对一</strong></p>
 <p>用来形成表表对应, 即让一张表里的某些字段和另一张表里的 ID 字段形成联系.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;-*- coding:utf-8 -*-&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.db &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; models
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
@@ -503,7 +504,7 @@ gender = models.CharField(max_length=2,choices = GENDER_CHOICE)
 
 <p><strong>外键 &ndash; 多对多</strong></p>
 <p>要实现多对多, 需要再创建一个&rdquo;中间表&rdquo;, 使用 Django, 它会自动帮我们创建.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;strong&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;strong&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
@@ -533,7 +534,6 @@ a??</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -557,14 +557,13 @@ a??</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -53,7 +54,7 @@
 <p>2、通过 Javac 命令对该 java 文件进行编译.</p>
 <p>3、通过 java 命令执行生成的 class 文件.</p>
 <p>新建一个 txt 文件, 然后改名为 HelloWorld.java, 用记事本打开该文件, 输写代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;public ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
@@ -142,7 +143,7 @@
 <li><a href="#_1">事件过滤器</a></li>
 </ul>
 </div>
-<h1 id="qt">初识 Qt 中的事件</h1>
+<h1 id="qt"><a name="user-content-qt" href="#qt" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初识 Qt 中的事件</h1>
 <p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
 
 </p>
@@ -161,12 +162,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800">#pragma pack (push,1)</span>
-<span style="color: #AA22FF; font-weight: bold">typedef</span> <span style="color: #AA22FF; font-weight: bold">struct</span> _RoleTree {
-    DWORD dwLBase;      <span style="color: #008800; font-style: italic">//+0x0    左树</span>
-    DWORD dwSBase;      <span style="color: #008800; font-style: italic">//+0x4    上一层树的地址</span>
-    DWORD dwRBase;      <span style="color: #008800; font-style: italic">//+0x8    右树</span>
-    <span style="color: #00BB00; font-weight: bold">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#pragma pack (push,1)</span>
+<span style="color: #A71D5D">typedef</span> <span style="color: #A71D5D">struct</span> <span style="color: #333333">_RoleTree</span> {
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwLBase</span>;      <span style="color: #999988; font-style: italic">//+0x0    左树</span>
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwSBase</span>;      <span style="color: #999988; font-style: italic">//+0x4    上一层树的地址</span>
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwRBase</span>;      <span style="color: #999988; font-style: italic">//+0x8    右树</span>
+    <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">iID ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -184,8 +185,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3D9</span><span style="color: #A71D7E">::</span><span style="color: #333333">CreateDevice</span>(<span style="color: #333333">UINT</span> <span style="color: #333333">Adapter</span>, <span style="color: #333333">D3DDEVTYPE</span> <span style="color: #333333">DeviceType</span>, <span style="color: #333333">HWND</span> <span style="color: #333333">hFocusWindow</span>
+    , <span style="color: #333333">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -249,12 +250,12 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
-    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Open File&quot;</span>, <span style="color: #AA22FF">NULL</span>, <span style="color: #BB4444">&quot;file (*.*)&quot;</span>);
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Qt_Notepad</span><span style="color: #A71D7E">::</span><span style="color: #333333">OpenFile</span>() {
+    <span style="color: #333333">QString</span> <span style="color: #333333">fileName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QFileDialog</span><span style="color: #A71D7E">::</span><span style="color: #333333">getOpenFileName</span>(<span style="color: #A71D5D">this</span>, <span style="color: #183691">&quot;Open File&quot;</span>, <span style="color: #ED6A43">NULL</span>, <span style="color: #183691">&quot;file (*.*)&quot;</span>);
 
-    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
-        QFile file;
-        file ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+    <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
+        <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
+        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
 
 </p>
 
@@ -286,7 +287,6 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -310,14 +310,13 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

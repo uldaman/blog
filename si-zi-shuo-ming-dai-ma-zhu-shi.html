@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -57,12 +58,12 @@
 > </blockquote>
 
 <p><strong>代碼中常見的註釋</strong>
-<em>. 重複代碼: 重複性註釋只是用不同的語言把代碼的工作再描述一次. 這只會增加閱讀量.
-</em>. 解釋代碼: 通常用於解釋複雜的代碼碼. 但通常是因為代碼含糊不清, 才體現出這類註釋的價值, 如果代碼過于複雜而需要解釋, 最好的做法是改進代碼, 而不是添加註釋.
-<em>. 代碼標記: 標記性註釋並非有意留在代碼中, 它用來標記某个代码暂时还存在的问题, 等待完善.
-</em>. 概述代码: 将若干代码行的意思以一两句话表达出来.
-<em>. 代码意图说明: 目的性注释用来指明一段代码的意图, 它指出要解决的问题. 概述代码和代码意图说明并没有明顯的界限.
-</em>. 傳達代碼無法表述的信息: 某些信息不能通過代碼表達, 但又要包含在源代碼中, 這種註釋包括版權聲明等.</p>
+*. 重複代碼: 重複性註釋只是用不同的語言把代碼的工作再描述一次. 這只會增加閱讀量.
+*. 解釋代碼: 通常用於解釋複雜的代碼碼. 但通常是因為代碼含糊不清, 才體現出這類註釋的價值, 如果代碼過于複雜而需要解釋, 最好的做法是改進代碼, 而不是添加註釋.
+*. 代碼標記: 標記性註釋並非有意留在代碼中, 它用來標記某个代码暂时还存在的问题, 等待完善.
+*. 概述代码: 将若干代码行的意思以一两句话表达出来.
+*. 代码意图说明: 目的性注释用来指明一段代码的意图, 它指出要解决的问题. 概述代码和代码意图说明并没有明顯的界限.
+*. 傳達代碼無法表述的信息: 某些信息不能通過代碼表達, 但又要包含在源代碼中, 這種註釋包括版權聲明等.</p>
 <p>對於完工的代碼, 只允許有三種類型註釋: 傳達代碼無法表述的信息、代码意图说明和概述代码.</p>
 <hr />
 <p><strong>高效註釋</strong></p>
@@ -79,27 +80,27 @@
 <hr />
 <p><strong>註釋技術</strong></p>
 <p><strong>如何使用行尾註釋</strong>
-<em>. 避免用註釋&rdquo;重複&rdquo;代碼
-</em>. 不要對多行代碼做行尾註釋(除控制語句塊結尾外)
-<em>. 可用於數據聲明, 如 Int nNumOfStudents; // 學生的數量
-</em>. 避免用行尾註釋存放維護日誌, 維護日誌應該由版本控制程序來處理最好
+*. 避免用註釋&rdquo;重複&rdquo;代碼
+*. 不要對多行代碼做行尾註釋(除控制語句塊結尾外)
+*. 可用於數據聲明, 如 Int nNumOfStudents; // 學生的數量
+*. 避免用行尾註釋存放維護日誌, 維護日誌應該由版本控制程序來處理最好
 *. 可用於標記語句塊尾, 如 while、for 語句等(下面的註釋代碼塊將會說明這點)</p>
 <p><strong>註釋代碼塊(也就是上面一項第二條&ndash;多行代碼)</strong>
-<em>. 註釋應表達代碼的意圖, 而不是對代碼的重複, 例如有五行代碼用來查找字符&rsquo;$&rsquo;, 那麼我們的註釋應該標明這五行代碼的意圖, 也就是為什麼要找個這個字符&rsquo;$&rsquo;(有個很好的技巧來完成這點, 就是如果要給個代碼塊取個函數名, 你會取什麼? 這個函數名再修改一下就是最好的註釋).
-</em>. 註釋應該說明的是&rdquo;為何做&rdquo;而不是&rdquo;怎麼做&rdquo;.
+*. 註釋應表達代碼的意圖, 而不是對代碼的重複, 例如有五行代碼用來查找字符&rsquo;$&rsquo;, 那麼我們的註釋應該標明這五行代碼的意圖, 也就是為什麼要找個這個字符&rsquo;$&rsquo;(有個很好的技巧來完成這點, 就是如果要給個代碼塊取個函數名, 你會取什麼? 這個函數名再修改一下就是最好的註釋).
+*. 註釋應該說明的是&rdquo;為何做&rdquo;而不是&rdquo;怎麼做&rdquo;.
 *. 如果代碼比較複雜或者代碼採用了非常規做法需要提醒閱讀者注意, 則可以在註釋中說明複雜的地方.</p>
 <p><strong>註釋數據聲明</strong>
-<em>. 註釋數據單位
-</em>. 註釋數值的允許範圍
-<em>. 註釋數據的輸入限制
-</em>. 註釋全局數據</p>
+*. 註釋數據單位
+*. 註釋數值的允許範圍
+*. 註釋數據的輸入限制
+*. 註釋全局數據</p>
 <p><strong>註釋控制結構</strong>
 應該在控制語句前加上控制語句的目的, 結尾加上執行結果的總結.</p>
 <p><strong>註釋子程序</strong>
 簡單的說明子程序的意圖, 註釋參數, 註釋返回值.</p>
 <p><strong>註釋類</strong>
-<em>. 說明類的設計方法
-</em>. 說明局限性、用法等
+*. 說明類的設計方法
+*. 說明局限性、用法等
 *. 不要說明實現細節
 ?</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a>
@@ -121,7 +122,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -145,14 +145,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

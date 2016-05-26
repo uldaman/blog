@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,7 +53,7 @@
 </h6>
 
 
-    <h1 id="dos">DOS 命令</h1>
+    <h1 id="dos"><a name="user-content-dos" href="#dos" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOS 命令</h1>
 <table>
 <thead>
 <tr>
@@ -155,7 +156,7 @@
 <p>小贴士:
 目录和路径的区别: 目录其实是我们平时口中的文件夹, 而路径才是指文件的地址.</p>
 </blockquote>
-<h1 id="win">win 快捷键</h1>
+<h1 id="win"><a name="user-content-win" href="#win" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>win 快捷键</h1>
 <table>
 <thead>
 <tr>
@@ -246,8 +247,8 @@
 <p>小贴士:
 在资源管理器的路径栏里直接输 cmd, 可在当前路径打开 cmd.</p>
 </blockquote>
-<h1 id="windows">windows 优化</h1>
-<h3 id="cpu">cpu 亲和力</h3>
+<h1 id="windows"><a name="user-content-windows" href="#windows" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>windows 优化</h1>
+<h3 id="cpu"><a name="user-content-cpu" href="#cpu" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>cpu 亲和力</h3>
 <p>首先通过 cpu-z 查看下自己电脑是几核的, 因为 Intel 有个超线程技术, 可以在一个内核上模拟出两个内核, 所以现在有的电脑是双核四线程, 或者四核八线程, 在任务管理器-&gt;性能里看到的是线程数而不是内核数.<br>
 winodws 的多任务机制本质是时间片切换, 设置程序的 cpu 亲和力, 就是指定某个程序由哪一个或者哪几个内核执行, 而不去占用其他内核的时间片.<br>
 当某个程序的需要的资源非常大时, 用多个内核轮转时间片也无济于事, 结果就是让整个系统挂掉, 所以此时, 我们可以设置这个程序只由某一个或者某几个内核去执行, 这样就空出来了其他的内核, 让系统不至于挂掉.</p>
@@ -259,11 +260,11 @@ winodws 的多任务机制本质是时间片切换, 设置程序的 cpu 亲和�
 <blockquote>
 <p>一般情况下, 我们都会写一个批处理文件来启动程序.</p>
 </blockquote>
-<h3 id="_1">禁用主题</h3>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>禁用主题</h3>
 <p>右键我的电脑-&gt;属性-&gt;高级系统设置-&gt;高级-&gt;性能[设置]-&gt;调整为最佳性能-&gt;勾选<code>平滑屏幕字体边缘</code>-&gt;确定.</p>
-<h3 id="_2">其他优化</h3>
-<p>将以下代码copy到记事本中存为bat文件并以管理员身份运行运行</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">@echo off
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他优化</h3>
+<p>将以下代码copy到记事本中存为bat文件并以管理员身份运行运行
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>@echo off
 sc stop MpsSvc **停止windows firewall服务**
 sc stop WinDefend **停止windows defender服务**
 sc stop TabletInputService **停止tablet pc服务**
@@ -276,10 +277,9 @@ REG ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v Prompt
 echo.&amp; pause
 </pre></div>
 
-
-<p><br><br>
-将以下代码copy到记事本中存为reg文件运行</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Windows Registry Editor Version 5.00
+<br><br>
+将以下代码copy到记事本中存为reg文件运行
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Control Panel\Mouse]
 &quot;MouseHoverTime&quot;=&quot;100&quot;
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg]
@@ -290,8 +290,7 @@ echo.&amp; pause
 &quot;AllowElevatedProcess&quot;=dword:00000001
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <ul>
 <li>运行gpedit.msc：计算机配置-管理模板-系统-关机选项-关闭会阻止或取消关机......：启动此功能</li>
 <li>控制面板&gt;操作中心&gt;更改操作中心设置:将所有钩选的选项全部去掉并将下方客户体验改善计划关闭</li>
@@ -310,7 +309,7 @@ echo.&amp; pause
 <li>计算机属性&gt;高级系统设置&gt;设置(性能)&gt;高级选项卡&gt;更改(虚拟内存):自定义大小，更改后只有按“设置”按钮才能生效【内存 2G（x86）/3G（x64）及以上设为200MB,内存1.5G（x86）/2G（x64）者设为512MB,内存1G（x86）/2G（x64）者 设为1024MB.内存小于等于1G（x86）/1.5G（x64）者进入控制面板&gt;管理工具&gt;服务:禁用superfetch服务】(虚拟 内存最大最小值设成一样是关键。另外，如果提示内存小了可以依据个人情况调大)</li>
 </ul>
 <p>重启计算机(会自动重启两次)</p>
-<h1 id="_3">进制转换</h1>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>进制转换</h1>
 <p>N进制 －－&gt; 十进制<br>
 N进制数abcdef(这是一个6位数)<br>
 转成10进制 －－&gt;a*N^5+b*N^4+c*N^3+d*N^2+e*N^1+f*N^0<br></p>
@@ -411,7 +410,6 @@ N进制数abcdef(这是一个6位数)<br>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -435,14 +433,13 @@ N进制数abcdef(这是一个6位数)<br>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

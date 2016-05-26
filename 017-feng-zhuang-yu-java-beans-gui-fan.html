@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,7 +53,7 @@
 </h6>
 
 
-    <p>JavaBeans 是 Java 中一种特殊的类, 可以将多个对象封装到一个对象（bean）中, 特点是<strong>可序列化</strong>, 提供<strong>无参构造器</strong>, 提供 <strong>getter</strong> 方法和 <strong>setter</strong> 方法访问对象的属性.</p>
+    <p>JavaBeans 是 Java 中一种特殊的类, 可以将多个对象封装到一个对象（bean）中, 特点是**可序列化**, 提供**无参构造器**, 提供 <strong>getter</strong> 方法和 <strong>setter</strong> 方法访问对象的属性.</p>
 <p><strong>Java Beans 规范可以说是体现面向对象封装思想的一种体现.</strong></p>
 <p>要成为 JavaBean 类, 则必须遵循关于命名、构造器、方法的特定规范; 有了这些规范, 才能有可以使用、复用、替代和连接 JavaBeans 的工具.</p>
 <p><strong>规范如下</strong>:</p>
@@ -62,50 +63,50 @@
 <li>可序列化.</li>
 </ul>
 <p>我们编写类的时候, 最好就是按 Java Beans 的规范来定义, 特别是 getter、setter 方法可以很好的控制业务逻辑.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">PersonBean</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">PersonBean</span> <span style="color: #A71D7E">{</span>
 
-    <span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic">     * name 属性(注意大小写)</span>
-<span style="color: #008800; font-style: italic">     */</span>
-    <span style="color: #AA22FF; font-weight: bold">private</span> String name <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
+    <span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic">     * name 属性(注意大小写)</span>
+<span style="color: #999988; font-style: italic">     */</span>
+    <span style="color: #A71D5D">private</span> <span style="color: #333333">String</span> <span style="color: #333333">name</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">null</span><span style="color: #A71D7E">;</span>
 
-    <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">boolean</span> deceased <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
+    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">boolean</span> <span style="color: #333333">deceased</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
 
-    <span style="color: #008800; font-style: italic">/** 无参构造器(没有参数) */</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00A000">PersonBean</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">/** 无参构造器(没有参数) */</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">PersonBean</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #A71D7E">}</span>
 
-    <span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic">     * name 属性的Getter方法</span>
-<span style="color: #008800; font-style: italic">     */</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> String <span style="color: #00A000">getName</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">return</span> name<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic">     * name 属性的Getter方法</span>
+<span style="color: #999988; font-style: italic">     */</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #A71D5D">return</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
 
-    <span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic">     * name 属性的Setter方法</span>
-<span style="color: #008800; font-style: italic">     * @param value</span>
-<span style="color: #008800; font-style: italic">     */</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setName</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">final</span> String value<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        name <span style="color: #666666">=</span> value<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic">     * name 属性的Setter方法</span>
+<span style="color: #999988; font-style: italic">     * @param value</span>
+<span style="color: #999988; font-style: italic">     */</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setName</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">final</span> <span style="color: #333333">String</span> <span style="color: #333333">value</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">name</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">value</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
 
-    <span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic">     * deceased 属性的Getter方法</span>
-<span style="color: #008800; font-style: italic">     * 布尔型属性的Getter方法的不同形式(这里使用了is而非get)</span>
-<span style="color: #008800; font-style: italic">     */</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">boolean</span> <span style="color: #00A000">isDeceased</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">return</span> deceased<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic">     * deceased 属性的Getter方法</span>
+<span style="color: #999988; font-style: italic">     * 布尔型属性的Getter方法的不同形式(这里使用了is而非get)</span>
+<span style="color: #999988; font-style: italic">     */</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">boolean</span> <span style="color: #795DA3">isDeceased</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #A71D5D">return</span> <span style="color: #333333">deceased</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
 
-    <span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic">     * deceased 属性的Setter方法</span>
-<span style="color: #008800; font-style: italic">     * @param value</span>
-<span style="color: #008800; font-style: italic">     */</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setDeceased</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">final</span> <span style="color: #00BB00; font-weight: bold">boolean</span> value<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        deceased <span style="color: #666666">=</span> value<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+    <span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic">     * deceased 属性的Setter方法</span>
+<span style="color: #999988; font-style: italic">     * @param value</span>
+<span style="color: #999988; font-style: italic">     */</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setDeceased</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">final</span> <span style="color: #A71D5D; font-weight: bold">boolean</span> <span style="color: #333333">value</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">deceased</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">value</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
@@ -126,7 +127,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -150,14 +150,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

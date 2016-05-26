@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -50,7 +51,7 @@
 
 <p>原理就是找到 d3d9.dll 的入口, 搜索特征码, 找到 Vtalbe(虚函数表), 查表找到需要 hook 的函数的地址, 然后hook, 這樣就不需要在遊戲啟動時劫持 d3d9.dll 了;</p>
 <p>這裡上傳一份 HOOK Present 的例子, 需要 Hook 其它函数的可以查一下其在虛表中的位置就可以了.</p>
-<p>Hook_Present.zip: <a href="http://yunpan.cn/cQcFqJeFapJue">http://yunpan.cn/cQcFqJeFapJue</a>  访问密码 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<p>Hook_Present.zip: <a href="http://yunpan.cn/cQcFqJeFapJue"><a href="http://yunpan.cn/cQcFqJeFapJue"><a href="http://yunpan.cn/cQcFqJeFapJue">http://yunpan.cn/cQcFqJeFapJue</a></a></a>  访问密码 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -68,10 +69,10 @@
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
+    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -89,12 +90,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800">#pragma pack (push,1)</span>
-<span style="color: #AA22FF; font-weight: bold">typedef</span> <span style="color: #AA22FF; font-weight: bold">struct</span> _RoleTree {
-    DWORD dwLBase;      <span style="color: #008800; font-style: italic">//+0x0    左树</span>
-    DWORD dwSBase;      <span style="color: #008800; font-style: italic">//+0x4    上一层树的地址</span>
-    DWORD dwRBase;      <span style="color: #008800; font-style: italic">//+0x8    右树</span>
-    <span style="color: #00BB00; font-weight: bold">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#pragma pack (push,1)</span>
+<span style="color: #A71D5D">typedef</span> <span style="color: #A71D5D">struct</span> <span style="color: #333333">_RoleTree</span> {
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwLBase</span>;      <span style="color: #999988; font-style: italic">//+0x0    左树</span>
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwSBase</span>;      <span style="color: #999988; font-style: italic">//+0x4    上一层树的地址</span>
+    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwRBase</span>;      <span style="color: #999988; font-style: italic">//+0x8    右树</span>
+    <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">iID ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -112,8 +113,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3D9</span><span style="color: #A71D7E">::</span><span style="color: #333333">CreateDevice</span>(<span style="color: #333333">UINT</span> <span style="color: #333333">Adapter</span>, <span style="color: #333333">D3DDEVTYPE</span> <span style="color: #333333">DeviceType</span>, <span style="color: #333333">HWND</span> <span style="color: #333333">hFocusWindow</span>
+    , <span style="color: #333333">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -205,7 +206,6 @@ Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -229,14 +229,13 @@ Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

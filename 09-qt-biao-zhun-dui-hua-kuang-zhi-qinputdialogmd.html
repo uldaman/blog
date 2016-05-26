@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -73,12 +74,11 @@
 <li>getItem (下拉)</li>
 </ul>
 <p>首先来看看 getText 函数：</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">PyQt4</span> <span style="color: #AA22FF; font-weight: bold">import</span> QtGui
-QtGui<span style="color: #666666">.</span>QInputDialog<span style="color: #666666">.</span>getText(<span style="color: #AA22FF">self</span>, <span style="color: #BB4444">u&#39;提示&#39;</span>, <span style="color: #BB4444">u&#39;输入信息:&#39;</span>, QtGui<span style="color: #666666">.</span>QLineEdit<span style="color: #666666">.</span>Normal, <span style="color: #BB4444">u&quot;请输入你的信息...&quot;</span>)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">QtGui</span>
+<span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QInputDialog</span><span style="color: #A71D7E">.</span><span style="color: #333333">getText</span>(<span style="color: #0086B3">self</span>, <span style="color: #183691">u&#39;提示&#39;</span>, <span style="color: #183691">u&#39;输入信息:&#39;</span>, <span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QLineEdit</span><span style="color: #A71D7E">.</span><span style="color: #333333">Normal</span>, <span style="color: #183691">u&quot;请输入你的信息...&quot;</span>)
 </pre></div>
 
-
-<p><br>
+<br>
 代码比较简单，使用 getText 函数就可以弹出一个可供用户输入的对话框:</p>
 <p><img alt="" src="http://i63.tinypic.com/w1qixt.jpg" /></p>
 <p>另外, 该函数接收两个返回值:</p>
@@ -86,7 +86,7 @@ QtGui<span style="color: #666666">.</span>QInputDialog<span style="color: #66666
 <li>QString 用户输入的信息 (如果用户点击 cancel , 则该值为空)</li>
 <li>bool 用户点击 ok 还是 cancel</li>
 </ul>
-<p>其它静态方法使用类似, 参考文档: <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText">http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText</a></p>
+<p>其它静态方法使用类似, 参考文档: <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText">http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText</a></a></a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a>
 
 </p>
@@ -106,7 +106,6 @@ QtGui<span style="color: #666666">.</span>QInputDialog<span style="color: #66666
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -130,14 +129,13 @@ QtGui<span style="color: #666666">.</span>QInputDialog<span style="color: #66666
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

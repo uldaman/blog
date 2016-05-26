@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -61,16 +62,15 @@
 <li><a href="#4-github">4. 发布到 github</a></li>
 </ul>
 </div>
-<h1 id="1-pelican">1. Pelican 博客搭建</h1>
+<h1 id="1-pelican"><a name="user-content-1-pelican" href="#1-pelican" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. Pelican 博客搭建</h1>
 <p>首先, 要在 github 上建立自己的主页, 方法很简单, 在自己的 github 上 new 一个 repository，名字必须是 <strong>yourname.github.com</strong>, 然后通过 yourname.github.com 就能访问了这个 repository 主干下的 index.html 文件了, 为方便测试, 可以手动添加一个 index.html, 然后随便写上几句话, 然后通过 yourname.github.com 查看效果.</p>
-<p>接下来, 就是搭建本地博客了, 这里使用的是 pelican 系统, why? 因为它是 Python 写的, 而我又刚好懂那么一丢丢 python&hellip;</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">pip install pelican
+<p>接下来, 就是搭建本地博客了, 这里使用的是 pelican 系统, why? 因为它是 Python 写的, 而我又刚好懂那么一丢丢 python&hellip;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pip install pelican
 pip install Markdown
 </pre></div>
 
-
-<p>然后新建一个 myblog 文件夹, 运行 cmd, 进入这个文件夹, 然后执行 <strong>pelican-quickstart</strong>, 运行命令后, 会让做一些选项设置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&gt; Where do you want to create your new web site? [.]
+然后新建一个 myblog 文件夹, 运行 cmd, 进入这个文件夹, 然后执行 <strong>pelican-quickstart</strong>, 运行命令后, 会让做一些选项设置:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt; Where do you want to create your new web site? [.]
 &gt; What will be the title of this web site? SmallCpp
 &gt; Who will be the author of this web site? Martin
 &gt; What will be the default language of this web site? [en] zh
@@ -91,9 +91,8 @@ pip install Markdown
 Done. Your new project is available at C:\Users\Administrator\Desktop\test
 </pre></div>
 
-
-<p>然后, 在当前的 myblog 目录下就有以下文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">myblog/
+然后, 在当前的 myblog 目录下就有以下文件:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>myblog/
 ├── content
 │   └── (pages)
 ├── output
@@ -104,16 +103,15 @@ Done. Your new project is available at C:\Users\Administrator\Desktop\test
 └── publishconf.py       # Settings to use when ready to publish
 </pre></div>
 
-
-<p>content: 这里是放置博文的 md 文件, 例如 hello_python.markdown 文章;</p>
+content: 这里是放置博文的 md 文件, 例如 hello_python.markdown 文章;</p>
 <p>output: 这个目录下放置的就是一会利用 pelican 生成的静态博客内容, 当然是 html 的;</p>
 <p>pelicanconf.py: 是博客的配置文件;</p>
 <p>publishconf.py: 发布配置文件,可有可无;</p>
 <p>Makefile: make 命令的配置文件, 如果你懂 linux 这个就so easy! 不过不懂也没事, 基本用不上;</p>
 <p>develop_server.sh: 本地服务的脚本, 用来测试当前生成的博客的.</p>
 <p>接下来就是写个测试博客~</p>
-<p>到 content 目录下新建个 my_first.markdown 文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Title: 标题
+<p>到 content 目录下新建个 my_first.markdown 文件:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Title: 标题
 Author: 作者
 Date: 2010-12-03 10:20
 Category: 分类
@@ -123,27 +121,26 @@ Summary: 摘要
 
 正文
 </pre></div>
-
-
-<p>保存好后, 用 cmd 进入 myblog 目录, 执行 <strong>make html</strong>, 过一会, output 目录下就生成了博客文件, 再执行 <strong>make serve</strong>, 然后打开浏览器, 访问: <strong>http://localhost:8000/</strong>, 如果不出问题, 应该能够看到我们博客了&hellip;</p>
+</p>
+<p>保存好后, 用 cmd 进入 myblog 目录, 执行 <strong>make html</strong>, 过一会, output 目录下就生成了博客文件, 再执行 <strong>make serve</strong>, 然后打开浏览器, 访问: **<a href="http://localhost:8000/*">http://localhost:8000/*</a>*, 如果不出问题, 应该能够看到我们博客了&hellip;</p>
 <p>pelican 支持很多插件, 这里暂时用不上, 因为我只是用来当一个静态页面而已, 不过换个自己喜欢的主题还是蛮不错的~</p>
-<h1 id="2">2. 更换主题</h1>
-<p>从 <strong>https://github.com/getpelican/pelican-themes.git</strong> 上把项目 clone 下来, 解压文件夹到 myblog 目录下(与 output 同级), 然后在 <strong>pelicanconf.py</strong> 文件里设置要使用的主题: <strong>THEME = &lsquo;pelican-themes/xxx&rsquo;</strong>, 我这里使用的是 THEME = &lsquo;pelican-themes/zurb-F5-basic&rsquo;.</p>
-<p>zurb-F5-basic 主题现在有个 Bug, 那就是第一篇博文竟然是全文显示, 这特么简直就是巨坑&hellip; 不过还好, 机智的我找到了解决方案, 依次打开文件 <strong>myblog/pelican-themes/zurb-F5-basic/templates/index.html</strong>, 更改如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{% extends &quot;base.html&quot; %}
+<h1 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 更换主题</h1>
+<p>从 <strong><a href="https://github.com/getpelican/pelican-themes.git*"><a href="https://github.com/getpelican/pelican-themes.git*">https://github.com/getpelican/pelican-themes.git*</a></a>* 上把项目 clone 下来, 解压文件夹到 myblog 目录下(与 output 同级), 然后在 **pelicanconf.py</strong> 文件里设置要使用的主题: <strong>THEME = &lsquo;pelican-themes/xxx&rsquo;</strong>, 我这里使用的是 THEME = &lsquo;pelican-themes/zurb-F5-basic&rsquo;.</p>
+<p>zurb-F5-basic 主题现在有个 Bug, 那就是第一篇博文竟然是全文显示, 这特么简直就是巨坑&hellip; 不过还好, 机智的我找到了解决方案, 依次打开文件 <strong>myblog/pelican-themes/zurb-F5-basic/templates/index.html</strong>, 更改如下:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
 {% block content_title %}{% endblock %}
 {% block content %}
 {% if articles %}
     {% for article in articles_page.object_list %}
-        <span style="color: #008000; font-weight: bold">&lt;article&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;a</span> <span style="color: #BB4444">href=&quot;{{ SITEURL }}/{{ article.url }}&quot;</span><span style="color: #008000; font-weight: bold">&gt;&lt;h3</span> <span style="color: #BB4444">class=&quot;article-title&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ article.title }}<span style="color: #008000; font-weight: bold">&lt;/h3&gt;&lt;/a&gt;</span>
+        &lt;<span style="color: #000080">article</span>&gt;
+            &lt;<span style="color: #000080">a</span> <span style="color: #008080">href</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;<span style="color: #000080">h3</span> <span style="color: #008080">class</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;article-title&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #000080">h3</span>&gt;&lt;/<span style="color: #000080">a</span>&gt;
             {% include &#39;article_infos.html&#39; %}{{ article.summary }}{% include &#39;article_infos_bottom.html&#39; %}{% include &#39;comments.html&#39; %}
-            <span style="color: #008000; font-weight: bold">&lt;a</span> <span style="color: #BB4444">class=&quot;button radius secondary small right&quot;</span> <span style="color: #BB4444">href=&quot;{{ SITEURL }}/{{ article.url }}&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>Read More<span style="color: #008000; font-weight: bold">&lt;/a&gt;</span>
-            <span style="color: #008000; font-weight: bold">&lt;hr</span>  <span style="color: #BB4444">class=&quot;gradient&quot;</span><span style="color: #008000; font-weight: bold">/&gt;</span>
-        <span style="color: #008000; font-weight: bold">&lt;/article&gt;</span>
+            &lt;<span style="color: #000080">a</span> <span style="color: #008080">class</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;button radius secondary small right&quot;</span> <span style="color: #008080">href</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;Read More&lt;/<span style="color: #000080">a</span>&gt;
+            &lt;<span style="color: #000080">hr</span>  <span style="color: #008080">class</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;gradient&quot;</span>/&gt;
+        &lt;/<span style="color: #000080">article</span>&gt;
 
         {% if loop.last %}
-            <span style="color: #008800; font-style: italic">&lt;!-- /#posts-list --&gt;</span>
+            <span style="color: #999988; font-style: italic">&lt;!-- /#posts-list --&gt;</span>
             {% if loop.last and (articles_page.has_previous() or not articles_page.has_previous() and loop.length &gt; 1) %}
                 {% include &#39;pagination.html&#39; %}
             {% endif %}
@@ -152,18 +149,17 @@ Summary: 摘要
 
 {% else %}
 
-    <span style="color: #008000; font-weight: bold">&lt;h3&gt;</span>Pages<span style="color: #008000; font-weight: bold">&lt;/h3&gt;</span>
+    &lt;<span style="color: #000080">h3</span>&gt;Pages&lt;/<span style="color: #000080">h3</span>&gt;
     {% for page in PAGES %}
-        <span style="color: #008000; font-weight: bold">&lt;li&gt;&lt;a</span> <span style="color: #BB4444">href=&quot;{{ SITEURL }}/{{ page.url }}&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>{{ page.title }}<span style="color: #008000; font-weight: bold">&lt;/a&gt;&lt;/li&gt;</span>
+        &lt;<span style="color: #000080">li</span>&gt;&lt;<span style="color: #000080">a</span> <span style="color: #008080">href</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ SITEURL }}/{{ page.url }}&quot;</span>&gt;{{ page.title }}&lt;/<span style="color: #000080">a</span>&gt;&lt;/<span style="color: #000080">li</span>&gt;
     {% endfor %}
 
 {% endif %}
 {% endblock content %}
 </pre></div>
-
-
-<p>对于 pelicanconf.py, 除了 THEME 外, 还有一些有用的设置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">AUTHOR = u&#39;martin&#39;
+</p>
+<p>对于 pelicanconf.py, 除了 THEME 外, 还有一些有用的设置:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>AUTHOR = u&#39;martin&#39;
 SITENAME = u&#39;Small Cpp&#39;
 SITEURL = &#39;http://z351522453.github.com&#39;
 
@@ -185,100 +181,97 @@ MD_EXTENSIONS = [
   &quot;codehilite(guess_lang=False,pygments_style=monokai,noclasses=True)&quot;]
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>注意</strong>, MD 语法高亮的设置需要 python 包 <code>pygments</code> 支持, 所以, 先安装 <code>pygments</code> 吧.</p>
 <blockquote>
-<p>pygments_style 可以在 <a href="http://pygments.org/demo/?lang=cpp&amp;sort=">http://pygments.org/demo/</a> 进行调试<br>
+<p>pygments_style 可以在 <a href="http://pygments.org/demo/?lang=cpp&amp;sort="><a href="http://pygments.org/demo/"><a href="http://pygments.org/demo/">http://pygments.org/demo/</a></a></a> 进行调试<br>
 Reference:<br>
 <a href="http://crunk.io/post/introduction-to-pelican/">Introduction to Pelican</a><br>
 <a href="http://fatsoon.com/python/2014/07/26/use-highlite-in-django.html">Django 中使用 markdown 和代码高亮</a><br>
 <a href="https://pythonhosted.org/Markdown/extensions/code_hilite.html">Python Markdown v2.6.6 documentation » CodeHilite Extension</a><br>
 <a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a></p>
 </blockquote>
-<p>然后再重新用 cmd 进入 myblog 目录, 执行 <strong>make html</strong> + <strong>make serve</strong>, 访问: <strong>http://localhost:8000/</strong>, 看看我们的博客主题是不是已经发生变化啦~~</p>
-<h1 id="3-wordpress">3. 迁移 wordpress</h1>
+<p>然后再重新用 cmd 进入 myblog 目录, 执行 <strong>make html</strong> + <strong>make serve</strong>, 访问: **<a href="http://localhost:8000/*">http://localhost:8000/*</a>*, 看看我们的博客主题是不是已经发生变化啦~~</p>
+<h1 id="3-wordpress"><a name="user-content-3-wordpress" href="#3-wordpress" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. 迁移 wordpress</h1>
 <p>环境搭建好后, 就是把我们 wordpress(后面简称 wp) 的内容迁移过来啦.</p>
 <p><strong>第一步</strong>, 进入 wp 后台, 工具-&gt;导出, 然后把 &lsquo;全部&rsquo; 和 &lsquo;文章&rsquo; 这两个都导出一份(其实我们导出文章就可以了, 把 &lsquo;全部&rsquo; 也都导出是为了以后可能还有用处, 以防万一嘛), 然后进入我们的主机管理系统(这个我们购买的主机商那就有提供), 把 mysql 数据也导出一份, 然后进入主机空间, 把整个空间都 dump 一份.</p>
-<p><strong>第二步</strong>, 到 https://github.com/thomasf/exitwp.git <strong>clone</strong> 项目到本地, 把刚从 wp 导出的 &lsquo;文章&rsquo; xml 放到 exitwp 目录下的 <strong>wordpress-xml</strong> 子目录里, 然后 cmd 进入 exitwp 目录, 执行 <strong>python exitwp.py</strong>, 稍等片刻, 我们的文章全部都转成 *.md 格式啦(路径: <strong>exitwp/build/jekyll/原 wp 路径/_posts</strong>).</p>
-<p>不过, 这里有个坑, 这个工具导出的 md 文件, 是按文件内容里的 slug 项来命名的, 特么 py 对中文的处理不大好, 导致 md 的文件名都有问题, 于是写了个脚本用来转换用户名.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">当使用 exitwp 生成 md 文件时, 文件名会乱码, 使用该脚本可以修复</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<p><strong>第二步</strong>, 到 <a href="https://github.com/thomasf/exitwp.git">https://github.com/thomasf/exitwp.git</a> <strong>clone</strong> 项目到本地, 把刚从 wp 导出的 &lsquo;文章&rsquo; xml 放到 exitwp 目录下的 <strong>wordpress-xml</strong> 子目录里, 然后 cmd 进入 exitwp 目录, 执行 <strong>python exitwp.py</strong>, 稍等片刻, 我们的文章全部都转成 *.md 格式啦(路径: <strong>exitwp/build/jekyll/原 wp 路径/_posts</strong>).</p>
+<p>不过, 这里有个坑, 这个工具导出的 md 文件, 是按文件内容里的 slug 项来命名的, 特么 py 对中文的处理不大好, 导致 md 的文件名都有问题, 于是写了个脚本用来转换用户名.
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #183691">当使用 exitwp 生成 md 文件时, 文件名会乱码, 使用该脚本可以修复</span>
+<span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">re</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">urllib</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">os</span>
 
 
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts&#39;</span>) <span style="color: #008800; font-style: italic"># 路径自己改</span>
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">u&#39;change_md_file_name.py&#39;</span>:
-        file_object <span style="color: #666666">=</span> <span style="color: #AA22FF">open</span>(<span style="color: #AA22FF">file</span>)
-        all_the_text <span style="color: #666666">=</span> file_object<span style="color: #666666">.</span>read( )
-        header <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;---(.*?)---&#39;&#39;&#39;</span>, all_the_text, re<span style="color: #666666">.</span>S)
-        slug <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;slug: (.*?)title&#39;&#39;&#39;</span>, header<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>), re<span style="color: #666666">.</span>S)
-        new <span style="color: #666666">=</span> urllib<span style="color: #666666">.</span>unquote(slug<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>))<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)
-        file_object<span style="color: #666666">.</span>close()
+<span style="color: #333333">files</span><span style="color: #A71D7E">=</span><span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">listdir</span>(<span style="color: #183691">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts&#39;</span>) <span style="color: #999988; font-style: italic"># 路径自己改</span>
+<span style="color: #A71D5D">for</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">files</span>:
+    <span style="color: #A71D5D">if</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">u&#39;change_md_file_name.py&#39;</span>:
+        <span style="color: #333333">file_object</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">open</span>(<span style="color: #ED6A43">file</span>)
+        <span style="color: #333333">all_the_text</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">file_object</span><span style="color: #A71D7E">.</span><span style="color: #333333">read</span>( )
+        <span style="color: #333333">header</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">search</span>(<span style="color: #183691">&#39;&#39;&#39;---(.*?)---&#39;&#39;&#39;</span>, <span style="color: #333333">all_the_text</span>, <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">S</span>)
+        <span style="color: #333333">slug</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">search</span>(<span style="color: #183691">&#39;&#39;&#39;slug: (.*?)title&#39;&#39;&#39;</span>, <span style="color: #333333">header</span><span style="color: #A71D7E">.</span><span style="color: #333333">group</span>(<span style="color: #0086b3">1</span>), <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">S</span>)
+        <span style="color: #333333">new</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">urllib</span><span style="color: #A71D7E">.</span><span style="color: #333333">unquote</span>(<span style="color: #333333">slug</span><span style="color: #A71D7E">.</span><span style="color: #333333">group</span>(<span style="color: #0086b3">1</span>))<span style="color: #A71D7E">.</span><span style="color: #333333">replace</span>(<span style="color: #183691">&#39;\n&#39;</span>, <span style="color: #183691">&#39;&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>)
+        <span style="color: #333333">file_object</span><span style="color: #A71D7E">.</span><span style="color: #333333">close</span>()
 
-        os<span style="color: #666666">.</span>renames(<span style="color: #AA22FF">file</span>, new <span style="color: #666666">+</span> <span style="color: #BB4444">&#39;.markdown&#39;</span>)
+        <span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">renames</span>(<span style="color: #ED6A43">file</span>, <span style="color: #333333">new</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&#39;.markdown&#39;</span>)
+</pre></div>
+</p>
+<p><strong>第三步</strong>, 有了 md 文件了, 剩下的还不好办吗, 全部拷贝到 myblog/content 目录下, 然而问题又来了, 一堆 md 文件堆在一个文件夹下显然是很乱的, 而且也无法利用 <strong>USE_FOLDER_AS_CATEGORY = True # 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类</strong> 这条设置了, 所以又写了个脚本把文章按类别分类(在运行脚本之前要手动建好文件夹).
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
+<span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #183691">读取文件中的 Category, 然后将文件放到 Category 指定的文件夹</span>
+<span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">re</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">urllib</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">os</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">shutil</span>
+
+
+<span style="color: #333333">files</span><span style="color: #A71D7E">=</span><span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">listdir</span>(<span style="color: #183691">&#39;C:/Users/Administrator/Desktop/content&#39;</span>)
+<span style="color: #A71D5D">for</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">files</span>:
+    <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">file</span><span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;gbk&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">encode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>)
+    <span style="color: #A71D5D">if</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;sss.py&#39;</span>:
+        <span style="color: #333333">file_object</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">open</span>(<span style="color: #ED6A43">file</span><span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">encode</span>(<span style="color: #183691">&#39;gbk&#39;</span>))
+        <span style="color: #333333">lnum</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span>
+        <span style="color: #A71D5D">for</span> <span style="color: #333333">line</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">file_object</span>:
+                <span style="color: #333333">lnum</span> <span style="color: #A71D7E">+=</span> <span style="color: #0086b3">1</span>
+                <span style="color: #A71D5D">if</span> <span style="color: #333333">lnum</span> <span style="color: #A71D7E">==</span> <span style="color: #0086b3">5</span>:
+                    <span style="color: #333333">result</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">search</span>(<span style="color: #183691">&#39;&#39;&#39;Category: (.*?)\n&#39;&#39;&#39;</span>, <span style="color: #333333">line</span>, <span style="color: #333333">re</span><span style="color: #A71D7E">.</span><span style="color: #333333">S</span>)
+                    <span style="color: #333333">tar</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;C:/Users/Administrator/Desktop/field/&#39;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">result</span><span style="color: #A71D7E">.</span><span style="color: #333333">group</span>(<span style="color: #0086b3">1</span>)
+                    <span style="color: #333333">shutil</span><span style="color: #A71D7E">.</span><span style="color: #333333">copy</span>(<span style="color: #ED6A43">file</span><span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">encode</span>(<span style="color: #183691">&#39;gbk&#39;</span>),  <span style="color: #333333">tar</span><span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">encode</span>(<span style="color: #183691">&#39;gbk&#39;</span>))
+                    <span style="color: #A71D5D">break</span>
+        <span style="color: #333333">file_object</span><span style="color: #A71D7E">.</span><span style="color: #333333">close</span>()
+</pre></div>
+</p>
+<p><strong>第四步</strong>, md 按类别整理好后, 就可以用 <strong>make html</strong> 来生成 blog 啦, 不过遗憾的是特么生成的文件名依然是乱码, 于是又写了个脚本修复文件名&hellip;(应该可以改源码的, 暂时没空看源码, 先用这个脚本过度下).
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
+<span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #183691">当使用 make html 生成 html 文件, 文件名乱码, 使用该脚本可以修复</span>
+<span style="color: #183691">&#39;&#39;&#39;</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">re</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">urllib</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">os</span>
+
+
+<span style="color: #333333">files</span><span style="color: #A71D7E">=</span><span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">listdir</span>(<span style="color: #183691">&#39;C:/Users/Administrator/Desktop/123&#39;</span>)
+<span style="color: #A71D5D">for</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">files</span>:
+    <span style="color: #A71D5D">if</span> <span style="color: #ED6A43">file</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;change_hml_file_name.py&#39;</span>:
+        <span style="color: #333333">new</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">urllib</span><span style="color: #A71D7E">.</span><span style="color: #333333">unquote</span>(<span style="color: #ED6A43">file</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">replace</span>(<span style="color: #183691">&#39;\r&#39;</span>, <span style="color: #183691">&#39;&#39;</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">replace</span>(<span style="color: #183691">&#39;\n&#39;</span>, <span style="color: #183691">&#39;&#39;</span>)
+        <span style="color: #A71D5D">print</span> <span style="color: #333333">new</span>
+        <span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">renames</span>(<span style="color: #ED6A43">file</span>, <span style="color: #333333">new</span><span style="color: #A71D7E">.</span><span style="color: #333333">decode</span>(<span style="color: #183691">&#39;utf-8&#39;</span>))
 </pre></div>
 
-
-<p><strong>第三步</strong>, 有了 md 文件了, 剩下的还不好办吗, 全部拷贝到 myblog/content 目录下, 然而问题又来了, 一堆 md 文件堆在一个文件夹下显然是很乱的, 而且也无法利用 <strong>USE_FOLDER_AS_CATEGORY = True # 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类</strong> 这条设置了, 所以又写了个脚本把文章按类别分类(在运行脚本之前要手动建好文件夹).</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">读取文件中的 Category, 然后将文件放到 Category 指定的文件夹</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">shutil</span>
-
-
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/content&#39;</span>)
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF">file</span> <span style="color: #666666">=</span> <span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;gbk&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;sss.py&#39;</span>:
-        file_object <span style="color: #666666">=</span> <span style="color: #AA22FF">open</span>(<span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>))
-        lnum <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> file_object:
-                lnum <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-                <span style="color: #AA22FF; font-weight: bold">if</span> lnum <span style="color: #666666">==</span> <span style="color: #666666">5</span>:
-                    result <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;Category: (.*?)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;&#39;&#39;</span>, line, re<span style="color: #666666">.</span>S)
-                    tar <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/field/&#39;</span> <span style="color: #666666">+</span> result<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>)
-                    shutil<span style="color: #666666">.</span>copy(<span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>),  tar<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>))
-                    <span style="color: #AA22FF; font-weight: bold">break</span>
-        file_object<span style="color: #666666">.</span>close()
-</pre></div>
-
-
-<p><strong>第四步</strong>, md 按类别整理好后, 就可以用 <strong>make html</strong> 来生成 blog 啦, 不过遗憾的是特么生成的文件名依然是乱码, 于是又写了个脚本修复文件名&hellip;(应该可以改源码的, 暂时没空看源码, 先用这个脚本过度下).</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">当使用 make html 生成 html 文件, 文件名乱码, 使用该脚本可以修复</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-
-
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/123&#39;</span>)
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;change_hml_file_name.py&#39;</span>:
-        new <span style="color: #666666">=</span> urllib<span style="color: #666666">.</span>unquote(<span style="color: #AA22FF">file</span>)<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\r</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)
-        <span style="color: #AA22FF; font-weight: bold">print</span> new
-        os<span style="color: #666666">.</span>renames(<span style="color: #AA22FF">file</span>, new<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>))
-</pre></div>
-
-
-<p>好了, 现在我们的 wp 已经迁移到了本地博客系统, 运行 <strong>make serve</strong> 看看是不是成功了&hellip;</p>
-<h1 id="4-github">4. 发布到 github</h1>
+好了, 现在我们的 wp 已经迁移到了本地博客系统, 运行 <strong>make serve</strong> 看看是不是成功了&hellip;</p>
+<h1 id="4-github"><a name="user-content-4-github" href="#4-github" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. 发布到 github</h1>
 <p>这个其实没啥好讲的了, 我是用的 github for windows 工具来管理 github, 每次 <strong>make html</strong> 后, 把 output 下的文件同步到 github 上 page 项目的主干下就行了&hellip;</p>
-<p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: <strong>www.smallcpp.com</strong>, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">@      CNAME        yourname.github.com
+<p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: **<a href="http://www.smallcpp.com*">www.smallcpp.com*</a>*, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>@      CNAME        yourname.github.com
 www    CNAME        yourname.github.com
 </pre></div>
+</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
 
 </p>
@@ -298,7 +291,6 @@ www    CNAME        yourname.github.com
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -322,14 +314,13 @@ www    CNAME        yourname.github.com
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

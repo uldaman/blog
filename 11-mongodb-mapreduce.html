@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -58,96 +59,89 @@
 <li><a href="#2">2. 实例</a></li>
 </ul>
 </div>
-<h1 id="1">1. 概述</h1>
+<h1 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 概述</h1>
 <p>MapReduce 是 Mongodb 中的高级聚合工具, count、distinct、group 能做的事 MapReduce 都能做.</p>
 <p>除此外, 它还可以并行化到多个服务器上.<br>
 它将聚合运算拆分, 再将各个部分发送到不同的服务器上, 让每台服务器都完成一部分, 当所有服务器都完成的时候, 再把结果汇集起来形成最终完整的结果.</p>
 <p>MapReduce 十分强大, 但其代价就是牺牲性能, 所以千万不要用在&rdquo;实时&rdquo;的操作中, 可以作为后台任务来运行 MapReduce, 将结果缓存在另一个集合中, 当&rdquo;实时&rdquo;操作发生时, 我们从这个缓存集合中进行查询.</p>
-<h1 id="2">2. 实例</h1>
+<h1 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 实例</h1>
 <p>MapReduce 直接解释起来可能比较麻烦, 通过一个实例来学习是最好不过了, 这里参考别人的文章, 是的, 这个实例, 我只是个搬运工&hellip;<a href="http://www.cnblogs.com/loogn/archive/2012/02/09/2344054.html">原文传送门</a></p>
 <p>语法:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.runCommand({
-    mapreduce<span style="color: #666666">:</span> <span style="color: #008800; font-style: italic">// 字符串, 集合名,</span>
-    map<span style="color: #666666">:</span> <span style="color: #008800; font-style: italic">// 函数, 映射函数, 具体见下文</span>
-    reduce<span style="color: #666666">:</span> <span style="color: #008800; font-style: italic">// 函数, 简化函数, 具体见下文</span>
-    [query<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 文档, 发往map函数前先给过渡文档</span>
-    [sort<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 文档, 发往map函数前先给文档排序</span>
-    [limit<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 整数, 发往map函数的文档数量上限</span>
-    [out<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 字符串, 统计结果保存的集合</span>
-    [keeptemp<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 布尔值, 链接关闭时临时结果集合是否保存</span>
-    [finalize<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 函数, 将reduce的结果送给这个函数, 做最后的处理</span>
-    [scope<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 文档, js代码中要用到的变量</span>
-    [jsMode<span style="color: #666666">:</span> ] <span style="color: #008800; font-style: italic">// 布尔值, 是否减少执行过程中 BSON 和 JS 的转换, 默认 true</span>
-    <span style="color: #008800; font-style: italic">// 注：</span>
-    <span style="color: #008800; font-style: italic">// false 时 BSON--&gt;JS--&gt;map--&gt;BSON--&gt;JS--&gt;reduce--&gt;BSON, 可处理非常大的 mapreduce</span>
-    <span style="color: #008800; font-style: italic">// true 时 BSON--&gt;js--&gt;map--&gt;reduce--&gt;BSON</span>
-    [verbose<span style="color: #666666">:</span> ] 布尔值, 是否产生更加详细的服务器日志, 默认 <span style="color: #AA22FF; font-weight: bold">true</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">runCommand</span>({
+    <span style="color: #333333">mapreduce</span><span style="color: #A71D7E">:</span> <span style="color: #999988; font-style: italic">// 字符串, 集合名,</span>
+    <span style="color: #333333">map</span><span style="color: #A71D7E">:</span> <span style="color: #999988; font-style: italic">// 函数, 映射函数, 具体见下文</span>
+    <span style="color: #333333">reduce</span><span style="color: #A71D7E">:</span> <span style="color: #999988; font-style: italic">// 函数, 简化函数, 具体见下文</span>
+    [<span style="color: #333333">query</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 文档, 发往map函数前先给过渡文档</span>
+    [<span style="color: #333333">sort</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 文档, 发往map函数前先给文档排序</span>
+    [<span style="color: #333333">limit</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 整数, 发往map函数的文档数量上限</span>
+    [<span style="color: #333333">out</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 字符串, 统计结果保存的集合</span>
+    [<span style="color: #333333">keeptemp</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 布尔值, 链接关闭时临时结果集合是否保存</span>
+    [<span style="color: #333333">finalize</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 函数, 将reduce的结果送给这个函数, 做最后的处理</span>
+    [<span style="color: #333333">scope</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 文档, js代码中要用到的变量</span>
+    [<span style="color: #333333">jsMode</span><span style="color: #A71D7E">:</span> ] <span style="color: #999988; font-style: italic">// 布尔值, 是否减少执行过程中 BSON 和 JS 的转换, 默认 true</span>
+    <span style="color: #999988; font-style: italic">// 注：</span>
+    <span style="color: #999988; font-style: italic">// false 时 BSON--&gt;JS--&gt;map--&gt;BSON--&gt;JS--&gt;reduce--&gt;BSON, 可处理非常大的 mapreduce</span>
+    <span style="color: #999988; font-style: italic">// true 时 BSON--&gt;js--&gt;map--&gt;reduce--&gt;BSON</span>
+    [<span style="color: #333333">verbose</span><span style="color: #A71D7E">:</span> ] <span style="color: #333333">布尔值</span>, <span style="color: #333333">是否产生更加详细的服务器日志</span>, <span style="color: #333333">默认</span> <span style="color: #A71D5D">true</span>
 });
 </pre></div>
 
-
-<p><br>
+<br>
 测试数据:</p>
 <p><img alt="" src="http://i68.tinypic.com/1zd81p2.jpg" /></p>
 <p>现在我要统计同一 <strong>age</strong> 的 <strong>name</strong>, 也就是像如下的结果:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{age<span style="color: #666666">:</span> <span style="color: #666666">0</span>, names<span style="color: #666666">:</span> [<span style="color: #BB4444">&#39;name_6&#39;</span>, <span style="color: #BB4444">&#39;name_12&#39;</span>, <span style="color: #BB4444">&#39;name_18&#39;</span>]}
-{age<span style="color: #666666">:</span> <span style="color: #666666">1</span>, names<span style="color: #666666">:</span> [<span style="color: #BB4444">&#39;name_1&#39;</span>, <span style="color: #BB4444">&#39;name_7&#39;</span>, <span style="color: #BB4444">&#39;name_13&#39;</span>, <span style="color: #BB4444">&#39;name_19&#39;</span>]}
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{<span style="color: #333333">age</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>, <span style="color: #333333">names</span><span style="color: #A71D7E">:</span> [<span style="color: #183691">&#39;name_6&#39;</span>, <span style="color: #183691">&#39;name_12&#39;</span>, <span style="color: #183691">&#39;name_18&#39;</span>]}
+{<span style="color: #333333">age</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>, <span style="color: #333333">names</span><span style="color: #A71D7E">:</span> [<span style="color: #183691">&#39;name_1&#39;</span>, <span style="color: #183691">&#39;name_7&#39;</span>, <span style="color: #183691">&#39;name_13&#39;</span>, <span style="color: #183691">&#39;name_19&#39;</span>]}
 ......
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>第一步__是写 __Map</strong> (映射)函数, 可以简单的理解成分组吧~</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">var</span> m <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span>(){
-    emit(<span style="color: #AA22FF; font-weight: bold">this</span>.age, <span style="color: #AA22FF; font-weight: bold">this</span>.name);
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">var</span> <span style="color: #333333">m</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">function</span>(){
+    <span style="color: #333333">emit</span>(<span style="color: #A71D5D">this</span>.<span style="color: #333333">age</span>, <span style="color: #A71D5D">this</span>.<span style="color: #333333">name</span>);
 }
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>emit</strong> 的第一个参数是 <strong>key</strong>, 就是分组的依据, 参考 <strong>group</strong> 中的 <strong>key</strong> 的功能, 这是自然是 <strong>age</strong> 了, 后面一个是 <strong>value</strong>, 就是要统计的数据, 可以是 JSON 对象. <strong>this</strong> 表示的是对当前文档的引用.</p>
 <p>这样 <strong>m</strong> 就会把送过来的数据根据 <strong>Map</strong> 函数中定义的 <strong>key</strong> 进行分组了, 组中的元素就是 <strong>Map</strong> 函数中定义的 <strong>value</strong>, 可以想象成如下结构:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800; font-style: italic">// 第一组</span>
-{key<span style="color: #666666">:</span> <span style="color: #666666">0</span>, values<span style="color: #666666">:</span> [<span style="color: #BB4444">&#39;name_6&#39;</span>, <span style="color: #BB4444">&#39;name_12&#39;</span>, <span style="color: #BB4444">&#39;name_18&#39;</span>]}
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// 第一组</span>
+{<span style="color: #333333">key</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>, <span style="color: #333333">values</span><span style="color: #A71D7E">:</span> [<span style="color: #183691">&#39;name_6&#39;</span>, <span style="color: #183691">&#39;name_12&#39;</span>, <span style="color: #183691">&#39;name_18&#39;</span>]}
 
-<span style="color: #008800; font-style: italic">// 第二组</span>
-{key<span style="color: #666666">:</span> <span style="color: #666666">1</span>, values<span style="color: #666666">:</span> [<span style="color: #BB4444">&#39;name_1&#39;</span>, <span style="color: #BB4444">&#39;name_7&#39;</span>, <span style="color: #BB4444">&#39;name_13&#39;</span>, <span style="color: #BB4444">&#39;name_19&#39;</span>]}
+<span style="color: #999988; font-style: italic">// 第二组</span>
+{<span style="color: #333333">key</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>, <span style="color: #333333">values</span><span style="color: #A71D7E">:</span> [<span style="color: #183691">&#39;name_1&#39;</span>, <span style="color: #183691">&#39;name_7&#39;</span>, <span style="color: #183691">&#39;name_13&#39;</span>, <span style="color: #183691">&#39;name_19&#39;</span>]}
 </pre></div>
 
-
-<p><br>
+<br>
 组中的 <strong>key</strong> 其实就是 <strong>age</strong> 的值了, <strong>values</strong> 是个数组, 数组内的成员都有相同的 <strong>age</strong> !!</p>
 <p><strong>第二步__就是简化了, 编写 __reduce</strong> 函数:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">var</span> r <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span>(key, values){
-    <span style="color: #AA22FF; font-weight: bold">var</span> ret <span style="color: #666666">=</span> {age<span style="color: #666666">:</span> key, names<span style="color: #666666">:</span> values};
-    <span style="color: #AA22FF; font-weight: bold">return</span> ret;
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">var</span> <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">key</span>, <span style="color: #333333">values</span>){
+    <span style="color: #A71D5D">var</span> <span style="color: #333333">ret</span> <span style="color: #A71D7E">=</span> {<span style="color: #333333">age</span><span style="color: #A71D7E">:</span> <span style="color: #333333">key</span>, <span style="color: #333333">names</span><span style="color: #A71D7E">:</span> <span style="color: #333333">values</span>};
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">ret</span>;
 }
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>reduce</strong> 函数会处理每一个分组, 参数就是我们想像分组里的 <strong>key</strong> 和 <strong>values</strong>.</p>
 <p>这里 <strong>reduce</strong> 函数只是简单的把 <strong>key</strong> 和 <strong>values</strong> 包装了一下, 然后返回一个对象, 对象结构正好和我们想象的相符:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">{age: 对应的 age，names: [名字1，名字2..]}
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{age: 对应的 age，names: [名字1，名字2..]}
 </pre></div>
 
-
-<p><br>
+<br>
 <strong>然后</strong>, 还可以编写 <strong>finalize</strong> 函数对 <strong>reduce</strong> 的返回值做最后处理:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">var</span> f <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">function</span>(key, rval){
-    <span style="color: #AA22FF; font-weight: bold">if</span>(key <span style="color: #666666">==</span> <span style="color: #666666">0</span>){
-        rval.msg <span style="color: #666666">=</span> <span style="color: #BB4444">&quot;A new life, Baby!&quot;</span>;
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">var</span> <span style="color: #333333">f</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">key</span>, <span style="color: #333333">rval</span>){
+    <span style="color: #A71D5D">if</span>(<span style="color: #333333">key</span> <span style="color: #A71D7E">==</span> <span style="color: #0086b3">0</span>){
+        <span style="color: #333333">rval</span>.<span style="color: #333333">msg</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&quot;A new life, Baby!&quot;</span>;
     }
-    <span style="color: #AA22FF; font-weight: bold">return</span> rval;
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">rval</span>;
 }
 </pre></div>
 
-
-<p><br>
+<br>
 这里的 <strong>key</strong> 还是上面的 <strong>key</strong>, 也就是还是 <strong>age</strong>, <strong>rval</strong> 是 <strong>reduce</strong> 的返回值, 所以 <strong>rval</strong> 的一个实例如: <strong>{age: 0, names: [&lsquo;name_6&rsquo;, &lsquo;name_12&rsquo;, &lsquo;name_18&rsquo;]},</strong></p>
 <p>这里判断 <strong>key</strong> 是不是 0, 如果是, 就在 <strong>rval</strong> 对象上加 <strong>msg</strong> 属性, 显然也可以判断 <strong>rval.age == 0</strong>, 因为 <strong>key</strong> 和 <strong>rval.age</strong> 是相等的嘛~~</p>
 <p><strong>最终</strong>, 就是调用 <strong>MpaReduce</strong> 工具了:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">db.runCommand({
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.runCommand({
     mapreduce: &#39;t&#39;,
     map: m,
     reduce: r,
@@ -157,8 +151,7 @@
 )
 </pre></div>
 
-
-<p><br>
+<br>
 最终返回的 <strong>t_age_names</strong> 集合中的文档包含两个键 <strong>_id</strong> 和 <strong>value</strong>:</p>
 <ul>
 <li><strong>_id</strong>, 保存上面的 key, 这个例子中就是 age</li>
@@ -183,7 +176,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -207,14 +199,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

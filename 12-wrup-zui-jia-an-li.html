@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -61,7 +62,7 @@
 </li>
 </ul>
 </div>
-<h1 id="_1">项目结构</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>项目结构</h1>
 <p>首先, Sandy 推荐的项目结构如下图所示:</p>
 <p><img alt="" src="http://i63.tinypic.com/aabv2f.jpg" /></p>
 <ul>
@@ -109,30 +110,30 @@
 </ul>
 </li>
 </ul>
-<p>以上仅为 Sandy 推荐的结构, 实际可按照需要进行<strong>调整</strong>, 例如:</p>
+<p>以上仅为 Sandy 推荐的结构, 实际可按照需要进行**调整**, 例如:</p>
 <ul>
 <li><strong>Help</strong> (使用帮助目录) 可以归纳到 <strong>Publish</strong> (发布目录) 里</li>
-<li><strong>Logs</strong>  (日志目录) 可以归纳到 <strong>Planning</strong> (计划目录) 里, 特别像<em>个人日志</em>和<em>个人日计划</em>完全可以结合, 每天早上先写好昨天的日志, 然后安排好今天的计划</li>
+<li><strong>Logs</strong>  (日志目录) 可以归纳到 <strong>Planning</strong> (计划目录) 里, 特别像*个人日志*和*个人日计划*完全可以结合, 每天早上先写好昨天的日志, 然后安排好今天的计划</li>
 <li>上面列出来的产出 (各种文档、报告) 不是必须的, 根据需要补充, 例如 <strong>Test</strong> (测试目录) 里的 Bug List, 如果你采用 Redmine 或者 Bugzilla 等问题追踪系统, 完全可以去除 Bug List</li>
-<li>如果你有完善的版本控制体系, 要求每天写提交日志, 那么<strong>个人日志</strong>也可以考虑省略, 演变成<strong>个人周报</strong></li>
+<li>如果你有完善的版本控制体系, 要求每天写提交日志, 那么**个人日志**也可以考虑省略, 演变成**个人周报**</li>
 </ul>
-<h3 id="design">Design 设计目录</h3>
+<h3 id="design"><a name="user-content-design" href="#design" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Design 设计目录</h3>
 <p>参考文章:<br>
 <a href="http://www.tuicool.com/articles/FVFFniy">UML在项目实施中的使用心得(概要设计阶段)</a><br>
 <a href="http://www.tuicool.com/articles/ArYzM3V">UML在项目实施中的使用心得(详细设计阶段)</a></p>
 <p><strong>上面两篇文章大概总结为:</strong></p>
-<p>在<strong>概要设计</strong>阶段使用 <strong>Deployment</strong> 图、<strong>Component</strong> 图、<strong>Sequence</strong> 图、<strong>StateMachine</strong> 图、<strong>Activity</strong> 图描述清楚技术架构、部署方式、内外接口、主要流程和数据库结构等等;</p>
-<p>而在<strong>详细设计</strong>阶段使用 <strong>Class</strong> 图、<strong>Sequence</strong> 图、<strong>StateMachine</strong> 图、<strong>Activity</strong> 图与代码设计相结合, 描述实际代码中方法、属性间的关系及协作流程, 甚至需要伪代码.</p>
+<p>在**概要设计**阶段使用 <strong>Deployment</strong> 图、<strong>Component</strong> 图、<strong>Sequence</strong> 图、<strong>StateMachine</strong> 图、<strong>Activity</strong> 图描述清楚技术架构、部署方式、内外接口、主要流程和数据库结构等等;</p>
+<p>而在**详细设计**阶段使用 <strong>Class</strong> 图、<strong>Sequence</strong> 图、<strong>StateMachine</strong> 图、<strong>Activity</strong> 图与代码设计相结合, 描述实际代码中方法、属性间的关系及协作流程, 甚至需要伪代码.</p>
 <p>可以看出来:</p>
 <ul>
-<li><strong>概要设计</strong>是黑盒设计, 体现的是各模块间的关系</li>
-<li><strong>详细设计</strong>是白盒设计, 体现代码中类、实例、方法、属性间的关系</li>
+<li>**概要设计**是黑盒设计, 体现的是各模块间的关系</li>
+<li>**详细设计**是白盒设计, 体现代码中类、实例、方法、属性间的关系</li>
 </ul>
-<p>一些人以为 UML 建模一上来就要画许多很精细的图, 这是<strong>误解</strong> !!<br>
-如今敏捷开发一般<strong>不</strong>推荐<strong>详细设计</strong>, 将系统设计、概要设计、详细设计合并为<strong>架构</strong> (Architecture) 设计, 对系统和架构作出一种初步、稳定的分解，是常见的一种敏捷开发、敏捷建模实践;<br>
+<p>一些人以为 UML 建模一上来就要画许多很精细的图, 这是**误解** !!<br>
+如今敏捷开发一般**不**推荐**详细设计**, 将系统设计、概要设计、详细设计合并为**架构** (Architecture) 设计, 对系统和架构作出一种初步、稳定的分解，是常见的一种敏捷开发、敏捷建模实践;<br>
 而且程序猿个个都有极强的创造精神, 有相当一部分不大喜欢别人把详细设计做的太细, 以便发挥下自己的创造力 (初级设计能力);</p>
 <p>不过仁者见仁, 智者见智, 因为一个初级的程序猿如果先是看别人的设计, 然后再开始自己的设计, 也许学习曲线就不会那么陡峭, 日子也会过的舒服一点儿也未可知.</p>
-<p>所以说, 如果一个团队里的新手较多, 还是推荐使用<strong>详细设计</strong>的, 否则不推荐使用.</p>
+<p>所以说, 如果一个团队里的新手较多, 还是推荐使用**详细设计**的, 否则不推荐使用.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a>
 
 </p>
@@ -152,7 +153,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -176,14 +176,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

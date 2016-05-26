@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -54,8 +55,8 @@
 
     <p>内部类(Inner Class)就是定义在另外一个类里面的类, 与之对应, 包含内部类的类被称为外部类.</p>
 <p>内部类的主要作用:
-<em>. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
-</em>. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
+*. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
+*. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
 *. 内部类所实现的功能使用外部类同样可以实现, 只是有时使用内部类更方便;</p>
 <p>成员内部类
 静态内部类
@@ -63,7 +64,7 @@
 匿名内部类</p>
 <hr />
 <p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Inner {
 
     }
@@ -77,8 +78,8 @@
 <p>4、编译上面的程序后, 会发现产生了两个 .class 文件</p>
 <p><img alt="" src="http://i60.tinypic.com/2wgyirs.jpg" /></p>
 <p>其中，第二个是外部类的 .class 文件, 第一个是内部类的 .class 文件, 即成员内部类的 .class 文件.</p>
-<p>另外:<strong>
-</strong>1、外部类是不能直接使用内部类的成员和方法, 可先创建内部类的对象, 然后通过内部类的对象来访问其成员变量和方法.
+<p>另外:**
+**1、外部类是不能直接使用内部类的成员和方法, 可先创建内部类的对象, 然后通过内部类的对象来访问其成员变量和方法.
 2、如果外部类和内部类具有相同的成员变量或方法, 内部类默认访问自己的成员变量或方, 如果要访问外部类的成员变量, 可以使用 this 关键字. 如：
 <img alt="" src="http://i61.tinypic.com/11blzpy.jpg" /></p>
 <hr />
@@ -86,7 +87,7 @@
 <p>1、静态内部类不能直接访问外部类的非静态成员;
 2、如果外部类的静态成员与内部类的成员名称相同, 可通过“类名.静态成员”访问外部类的静态成员; 如果外部类的静态成员与内部类的成员名称不相同, 则可通过“成员名”直接调用外部类的静态成员;
 3、创建静态内部类的对象时, 不需要外部类的对象, 可以直接创建 **内部类 对象名= new 内部类();</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
 
     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 外部类中的静态变量score&lt;/span&gt;
@@ -118,8 +119,8 @@
 <p>**</p>
 <hr />
 <p>方法内部类就是内部类定义在外部类的方法中, 它只能在该方法内可以使用.</p>
-<p><strong>注意: </strong>由于方法内部类不能在外部类的方法以外的地方使用, 因此方法内部类不能使用访问控制符和 static 修饰符.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
+<p>**注意: **由于方法内部类不能在外部类的方法以外的地方使用, 因此方法内部类不能使用访问控制符和 static 修饰符.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
 
   &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt; String name = &quot;爱慕课&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
@@ -181,7 +182,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -205,14 +205,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

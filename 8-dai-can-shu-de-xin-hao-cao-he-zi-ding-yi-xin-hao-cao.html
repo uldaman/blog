@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,20 +53,20 @@
 </h6>
 
 
-    <h1 id="_1">带参数的信号/槽</h1>
+    <h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>带参数的信号/槽</h1>
 <p>首先看一个程序</p>
 <p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
 <p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)));&lt;/font&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)));&lt;/font&gt;
 </pre></div>
 
 
-<p>实现功能的就是这句代码, 可以看到带参数的信号/槽要明确的在 connect 函数中<strong>写出参数的类型</strong>.</p>
+<p>实现功能的就是这句代码, 可以看到带参数的信号/槽要明确的在 connect 函数中**写出参数的类型**.</p>
 <hr />
-<h1 id="_2">自定义信号槽</h1>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自定义信号槽</h1>
 <p>Qt 的信号槽机制并不仅仅是使用系统提供的那部分, 还会允许我们自己设计自己的信号和槽.</p>
 <p>看下面这段代码, 它实现了一个报纸类 <code>Newspaper</code>, 一个订阅者类 Reader, 当 <code>Newspaper</code>有了新的内容的时候, Reader 可以立即得到通知.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;!!! Qt5&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;!!! Qt5&lt;/span&gt;
 #include &lt;QObject&gt;
 
 &lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ newspaper.h&lt;/span&gt;
@@ -135,7 +136,7 @@ Newspaper 类的 send() 函数比较简单, 只有一个语句 emit newPaper(m_n
 <p>Reader 类更简单, 因为这个类需要接受信号, 所以我们将其继承了QObject, 并且添加了Q_OBJECT宏.
 与信号函数不同, 槽函数必须自己完成实现代码, <strong>槽函数就是普通的成员函数</strong>, 因此作为成员函数, 也会受到 public、private 等访问控制符的影响.</p>
 <hr />
-<h1 id="_3">总结一下自定义信号槽需要注意的事项:</h1>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>总结一下自定义信号槽需要注意的事项:</h1>
 <p>发送者和接收者都需要是 QObject的 子类;</p>
 <p>使用 signals 标记信号函数, 信号是一个函数声明, 返回 void, 不需要实现函数代码;</p>
 <p>槽函数是普通的成员函数, 作为成员函数, 会受到 public、private、protected 的影响;</p>
@@ -161,7 +162,6 @@ lo0</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -185,14 +185,13 @@ lo0</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

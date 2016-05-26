@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -67,99 +68,99 @@
 <p>Qt 中也是有类似的功能, Qt 支持这种自定义事件原因是信号槽总是同步的, 而事件的分发既可以是同步的, 又可以是异步的, 事件的另外一个好处是, 它可以使用过滤器.</p>
 <p>Qt 自定义事件很简单, 同其它类库的使用很相似, 都是要继承一个类进行扩展, 这里需要继承的类是 <code>QEvent</code>.</p>
 <p>大致流程是: 先要子类化 <code>QEvent</code>, 然后定义自己的 <code>QEvent::Type</code>, 接着重写 <code>QWidget::event()</code> 函数, 最后就可以调用 <code>QCoreApplication::sendEvent()</code> 或者 <code>QCoreApplication:;postEvent()</code> 发送事件就好了.</p>
-<p>原理参考: <a href="http://www.devbean.net/2012/10/qt-study-road-2-custom-event/">http://www.devbean.net/2012/10/qt-study-road-2-custom-event/</a></p>
+<p>原理参考: <a href="http://www.devbean.net/2012/10/qt-study-road-2-custom-event/"><a href="http://www.devbean.net/2012/10/qt-study-road-2-custom-event/"><a href="http://www.devbean.net/2012/10/qt-study-road-2-custom-event/">http://www.devbean.net/2012/10/qt-study-road-2-custom-event/</a></a></a></p>
 <p>代码参考:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008800">#include &lt;QtGui/QApplication&gt;</span>
-<span style="color: #008800">#include &lt;QCoreApplication&gt;</span>
-<span style="color: #008800">#include &lt;QEvent&gt;</span>
-<span style="color: #008800">#include &lt;QObject&gt;</span>
-<span style="color: #008800">#include &lt;QDebug&gt;</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#include</span> <span style="color: #999988; font-style: italic">&lt;QtGui/QApplication&gt;</span><span style="color: #999999; font-weight: bold"></span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #999988; font-style: italic">&lt;QCoreApplication&gt;</span><span style="color: #999999; font-weight: bold"></span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #999988; font-style: italic">&lt;QEvent&gt;</span><span style="color: #999999; font-weight: bold"></span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #999988; font-style: italic">&lt;QObject&gt;</span><span style="color: #999999; font-weight: bold"></span>
+<span style="color: #999999; font-weight: bold">#include</span> <span style="color: #999988; font-style: italic">&lt;QDebug&gt;</span><span style="color: #999999; font-weight: bold"></span>
 
-<span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #AA22FF; font-weight: bold">const</span> QEvent<span style="color: #666666">::</span>Type MyEventType <span style="color: #666666">=</span> (QEvent<span style="color: #666666">::</span>Type)QEvent<span style="color: #666666">::</span>registerEventType(QEvent<span style="color: #666666">::</span>User <span style="color: #666666">+</span> <span style="color: #666666">100</span>);
+<span style="color: #A71D5D">static</span> <span style="color: #A71D5D">const</span> <span style="color: #333333">QEvent</span><span style="color: #A71D7E">::</span><span style="color: #333333">Type</span> <span style="color: #333333">MyEventType</span> <span style="color: #A71D7E">=</span> (<span style="color: #333333">QEvent</span><span style="color: #A71D7E">::</span><span style="color: #333333">Type</span>)<span style="color: #333333">QEvent</span><span style="color: #A71D7E">::</span><span style="color: #333333">registerEventType</span>(<span style="color: #333333">QEvent</span><span style="color: #A71D7E">::</span><span style="color: #333333">User</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">100</span>);
 
-<span style="color: #008800; font-style: italic">//长官</span>
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MyEvent</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QEvent {
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
-    MyEvent(Type MyEventType) <span style="color: #666666">:</span>QEvent(MyEventType) {}
+<span style="color: #999988; font-style: italic">//长官</span>
+<span style="color: #A71D5D">class</span> <span style="color: #445588">MyEvent</span> <span style="color: #A71D7E">:</span> <span style="color: #A71D5D">public</span> <span style="color: #333333">QEvent</span> {
+<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
+    <span style="color: #333333">MyEvent</span>(<span style="color: #333333">Type</span> <span style="color: #333333">MyEventType</span>) <span style="color: #A71D7E">:</span><span style="color: #333333">QEvent</span>(<span style="color: #333333">MyEventType</span>) {}
 };
 
-<span style="color: #008800; font-style: italic">//信使</span>
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MySender</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QCoreApplication {
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
-    MySender(<span style="color: #00BB00; font-weight: bold">int</span> argc, <span style="color: #00BB00; font-weight: bold">char</span> <span style="color: #666666">*</span>argv[]) <span style="color: #666666">:</span>QCoreApplication(argc, argv) {}
+<span style="color: #999988; font-style: italic">//信使</span>
+<span style="color: #A71D5D">class</span> <span style="color: #445588">MySender</span> <span style="color: #A71D7E">:</span> <span style="color: #A71D5D">public</span> <span style="color: #333333">QCoreApplication</span> {
+<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
+    <span style="color: #333333">MySender</span>(<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">argc</span>, <span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #A71D7E">*</span><span style="color: #333333">argv</span>[]) <span style="color: #A71D7E">:</span><span style="color: #333333">QCoreApplication</span>(<span style="color: #333333">argc</span>, <span style="color: #333333">argv</span>) {}
 
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
-    <span style="color: #00BB00; font-weight: bold">bool</span> notify(QObject <span style="color: #666666">*</span>receiver, QEvent <span style="color: #666666">*</span>event);
+<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
+    <span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #333333">notify</span>(<span style="color: #333333">QObject</span> <span style="color: #A71D7E">*</span><span style="color: #333333">receiver</span>, <span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>);
 
 };
 
-<span style="color: #00BB00; font-weight: bold">bool</span> MySender<span style="color: #666666">::</span>notify(QObject <span style="color: #666666">*</span>receiver, QEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (event<span style="color: #666666">-&gt;</span>type() <span style="color: #666666">==</span> MyEventType) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;MyEventType is coming!&quot;</span>;
-        <span style="color: #008800; font-style: italic">//return true;</span>
-        <span style="color: #008800; font-style: italic">/*这里不能 return true,因为重写 notify 就是在事件被向下传递之前截住它，</span>
-<span style="color: #008800; font-style: italic">        随便搞它，搞完了还得给 QCoreApplication::notify 向下传递，除非在 mySender.notify</span>
-<span style="color: #008800; font-style: italic">        实现了事件向下传递的那一套. 直接返回的话 myArmy 就收不到这个事件，因为执行完这个</span>
-<span style="color: #008800; font-style: italic">        mySender.notify 的 return true 后，事件传递被人为的在半截终止了</span>
-<span style="color: #008800; font-style: italic">        （见 Qt 事件处理的五个层次 http://blog.csdn.net/michealtx/article/details/6865891）</span>
-<span style="color: #008800; font-style: italic">        ，下面的 myArmy 的安装的过滤器和它自己的 event 都不会收到这个事件，更甭提最后干活</span>
-<span style="color: #008800; font-style: italic">        的 myEventHandler 了. 所以在主函数中执行完 mySender.sendEvent 把 myEvent</span>
-<span style="color: #008800; font-style: italic">        交给 mySender.notify 这个败家子儿后，就执行 mySender.exec 进入其它事件的循环了. 这就是</span>
-<span style="color: #008800; font-style: italic">        问题 http://topic.csdn.net/u/20111012/19/78036d16-c163-40f9-a05c-3b7d6f4e9043.html</span>
-<span style="color: #008800; font-style: italic">        出现的原因. 感谢 1+1=2 大牛! 非常感谢!</span>
-<span style="color: #008800; font-style: italic">        */</span>
+<span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #333333">MySender</span><span style="color: #A71D7E">::</span><span style="color: #333333">notify</span>(<span style="color: #333333">QObject</span> <span style="color: #A71D7E">*</span><span style="color: #333333">receiver</span>, <span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>) {
+    <span style="color: #A71D5D">if</span> (<span style="color: #333333">event</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">type</span>() <span style="color: #A71D7E">==</span> <span style="color: #333333">MyEventType</span>) {
+        <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;MyEventType is coming!&quot;</span>;
+        <span style="color: #999988; font-style: italic">//return true;</span>
+        <span style="color: #999988; font-style: italic">/*这里不能 return true,因为重写 notify 就是在事件被向下传递之前截住它，</span>
+<span style="color: #999988; font-style: italic">        随便搞它，搞完了还得给 QCoreApplication::notify 向下传递，除非在 mySender.notify</span>
+<span style="color: #999988; font-style: italic">        实现了事件向下传递的那一套. 直接返回的话 myArmy 就收不到这个事件，因为执行完这个</span>
+<span style="color: #999988; font-style: italic">        mySender.notify 的 return true 后，事件传递被人为的在半截终止了</span>
+<span style="color: #999988; font-style: italic">        （见 Qt 事件处理的五个层次 http://blog.csdn.net/michealtx/article/details/6865891）</span>
+<span style="color: #999988; font-style: italic">        ，下面的 myArmy 的安装的过滤器和它自己的 event 都不会收到这个事件，更甭提最后干活</span>
+<span style="color: #999988; font-style: italic">        的 myEventHandler 了. 所以在主函数中执行完 mySender.sendEvent 把 myEvent</span>
+<span style="color: #999988; font-style: italic">        交给 mySender.notify 这个败家子儿后，就执行 mySender.exec 进入其它事件的循环了. 这就是</span>
+<span style="color: #999988; font-style: italic">        问题 http://topic.csdn.net/u/20111012/19/78036d16-c163-40f9-a05c-3b7d6f4e9043.html</span>
+<span style="color: #999988; font-style: italic">        出现的原因. 感谢 1+1=2 大牛! 非常感谢!</span>
+<span style="color: #999988; font-style: italic">        */</span>
     }
-    <span style="color: #AA22FF; font-weight: bold">return</span> QCoreApplication<span style="color: #666666">::</span>notify(receiver, event);
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">QCoreApplication</span><span style="color: #A71D7E">::</span><span style="color: #333333">notify</span>(<span style="color: #333333">receiver</span>, <span style="color: #333333">event</span>);
 }
 
-<span style="color: #008800; font-style: italic">//军队</span>
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MyArmy</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QObject {
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
-    <span style="color: #00BB00; font-weight: bold">void</span> MyEventHandler(QEvent <span style="color: #666666">*</span>event);
-    <span style="color: #00BB00; font-weight: bold">bool</span> <span style="color: #00A000">event</span>(QEvent <span style="color: #666666">*</span>event);
+<span style="color: #999988; font-style: italic">//军队</span>
+<span style="color: #A71D5D">class</span> <span style="color: #445588">MyArmy</span> <span style="color: #A71D7E">:</span> <span style="color: #A71D5D">public</span> <span style="color: #333333">QObject</span> {
+<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
+    <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">MyEventHandler</span>(<span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>);
+    <span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #795DA3">event</span>(<span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>);
 };
 
-<span style="color: #00BB00; font-weight: bold">void</span> MyArmy<span style="color: #666666">::</span>MyEventHandler(QEvent <span style="color: #666666">*</span>event) {
-    qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;The event is being handled!&quot;</span>;
-    event<span style="color: #666666">-&gt;</span>accept();
+<span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">MyArmy</span><span style="color: #A71D7E">::</span><span style="color: #333333">MyEventHandler</span>(<span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>) {
+    <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;The event is being handled!&quot;</span>;
+    <span style="color: #333333">event</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">accept</span>();
 }
 
-<span style="color: #00BB00; font-weight: bold">bool</span> MyArmy<span style="color: #666666">::</span>event(QEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (event<span style="color: #666666">-&gt;</span>type() <span style="color: #666666">==</span> MyEventType) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;event() is dispathing MyEvent&quot;</span>;
-        MyEventHandler(event);<span style="color: #008800; font-style: italic">//调用事件处理函数</span>
-        <span style="color: #AA22FF; font-weight: bold">if</span> ((MyEvent<span style="color: #666666">*</span>)event<span style="color: #666666">-&gt;</span>isAccepted()) {
-            qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;The event has been handled!&quot;</span>;
-            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">true</span>;
+<span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #333333">MyArmy</span><span style="color: #A71D7E">::</span><span style="color: #333333">event</span>(<span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>) {
+    <span style="color: #A71D5D">if</span> (<span style="color: #333333">event</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">type</span>() <span style="color: #A71D7E">==</span> <span style="color: #333333">MyEventType</span>) {
+        <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;event() is dispathing MyEvent&quot;</span>;
+        <span style="color: #333333">MyEventHandler</span>(<span style="color: #333333">event</span>);<span style="color: #999988; font-style: italic">//调用事件处理函数</span>
+        <span style="color: #A71D5D">if</span> ((<span style="color: #333333">MyEvent</span><span style="color: #A71D7E">*</span>)<span style="color: #333333">event</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">isAccepted</span>()) {
+            <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;The event has been handled!&quot;</span>;
+            <span style="color: #A71D5D">return</span> <span style="color: #ED6A43">true</span>;
         }
     }
-    <span style="color: #AA22FF; font-weight: bold">return</span> QObject<span style="color: #666666">::</span>event(event);
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">QObject</span><span style="color: #A71D7E">::</span><span style="color: #333333">event</span>(<span style="color: #333333">event</span>);
 }
 
-<span style="color: #008800; font-style: italic">//监控者</span>
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MyWatcher</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QObject {
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
-    <span style="color: #00BB00; font-weight: bold">bool</span> eventFilter(QObject <span style="color: #666666">*</span>watched, QEvent <span style="color: #666666">*</span>event);
+<span style="color: #999988; font-style: italic">//监控者</span>
+<span style="color: #A71D5D">class</span> <span style="color: #445588">MyWatcher</span> <span style="color: #A71D7E">:</span> <span style="color: #A71D5D">public</span> <span style="color: #333333">QObject</span> {
+<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
+    <span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #333333">eventFilter</span>(<span style="color: #333333">QObject</span> <span style="color: #A71D7E">*</span><span style="color: #333333">watched</span>, <span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>);
 };
 
-<span style="color: #00BB00; font-weight: bold">bool</span> MyWatcher<span style="color: #666666">::</span>eventFilter(QObject <span style="color: #666666">*</span>watched, QEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (event<span style="color: #666666">-&gt;</span>type() <span style="color: #666666">==</span> MyEventType) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;I don&#39;t wanna filter MyEventType&quot;</span>;
-        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">false</span>;
+<span style="color: #A71D5D; font-weight: bold">bool</span> <span style="color: #333333">MyWatcher</span><span style="color: #A71D7E">::</span><span style="color: #333333">eventFilter</span>(<span style="color: #333333">QObject</span> <span style="color: #A71D7E">*</span><span style="color: #333333">watched</span>, <span style="color: #333333">QEvent</span> <span style="color: #A71D7E">*</span><span style="color: #333333">event</span>) {
+    <span style="color: #A71D5D">if</span> (<span style="color: #333333">event</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">type</span>() <span style="color: #A71D7E">==</span> <span style="color: #333333">MyEventType</span>) {
+        <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;I don&#39;t wanna filter MyEventType&quot;</span>;
+        <span style="color: #A71D5D">return</span> <span style="color: #ED6A43">false</span>;
     }
-    <span style="color: #AA22FF; font-weight: bold">return</span> QObject<span style="color: #666666">::</span>eventFilter(watched, event);
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">QObject</span><span style="color: #A71D7E">::</span><span style="color: #333333">eventFilter</span>(<span style="color: #333333">watched</span>, <span style="color: #333333">event</span>);
 }
 
-<span style="color: #00BB00; font-weight: bold">int</span> main(<span style="color: #00BB00; font-weight: bold">int</span> argc, <span style="color: #00BB00; font-weight: bold">char</span> <span style="color: #666666">*</span>argv[]) {
-    <span style="color: #008800; font-style: italic">//QCoreApplication a(argc, argv);</span>
-    MySender mySender(argc, argv);
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">main</span>(<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">argc</span>, <span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #A71D7E">*</span><span style="color: #333333">argv</span>[]) {
+    <span style="color: #999988; font-style: italic">//QCoreApplication a(argc, argv);</span>
+    <span style="color: #333333">MySender</span> <span style="color: #333333">mySender</span>(<span style="color: #333333">argc</span>, <span style="color: #333333">argv</span>);
 
-    MyArmy myArmy;
-    MyWatcher myWatcher;
-    myArmy.installEventFilter(<span style="color: #666666">&amp;</span>myWatcher);<span style="color: #008800; font-style: italic">//安装事件过滤器</span>
-    MyEvent <span style="color: #00A000">myEvent</span>(MyEventType);
-    mySender.sendEvent(<span style="color: #666666">&amp;</span>myArmy, <span style="color: #666666">&amp;</span>myEvent);
-    <span style="color: #AA22FF; font-weight: bold">return</span> mySender.exec();
+    <span style="color: #333333">MyArmy</span> <span style="color: #333333">myArmy</span>;
+    <span style="color: #333333">MyWatcher</span> <span style="color: #333333">myWatcher</span>;
+    <span style="color: #333333">myArmy</span>.<span style="color: #333333">installEventFilter</span>(<span style="color: #A71D7E">&amp;</span><span style="color: #333333">myWatcher</span>);<span style="color: #999988; font-style: italic">//安装事件过滤器</span>
+    <span style="color: #333333">MyEvent</span> <span style="color: #795DA3">myEvent</span>(<span style="color: #333333">MyEventType</span>);
+    <span style="color: #333333">mySender</span>.<span style="color: #333333">sendEvent</span>(<span style="color: #A71D7E">&amp;</span><span style="color: #333333">myArmy</span>, <span style="color: #A71D7E">&amp;</span><span style="color: #333333">myEvent</span>);
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">mySender</span>.<span style="color: #333333">exec</span>();
 }
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
@@ -181,7 +182,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -205,14 +205,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

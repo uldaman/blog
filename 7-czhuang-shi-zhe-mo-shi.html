@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,20 +53,20 @@
 </h6>
 
 
-    <h3 id="_1">装饰者模式</h3>
-<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过<strong>继承</strong>来扩展功能.</p>
-<p>然而, 使用继承是<strong>静态</strong>的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
-<p>而装饰者模式可以<strong>动态</strong>地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
+    <h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>装饰者模式</h3>
+<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过**继承**来扩展功能.</p>
+<p>然而, 使用继承是**静态**的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
+<p>而装饰者模式可以**动态**地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
 <blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
 
 <p>装饰模式的UML图:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/131406358542966.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/131406379952878.png" /></a></p>
-<p>●　　<strong>抽象构件(Component)类：</strong>给出一个抽象接口, 以规范准备接收附加责任的对象.</p>
-<p>●　　<strong>具体构件(ConcreteComponent)类：</strong>被修饰的者, 是定义了一个具体的对象, 可以给这个对象添加一些职责(也就是装饰它).</p>
-<p>●　　<strong>装饰(Decorator)类：</strong>抽象装饰类, 维护一个构件(Component)对象的实例, 定义一个与抽象构件接口一致的接口.</p>
-<p>●　　<strong>具体装饰(ConcreteDecorator)类：</strong>具体装饰类, 负责给构件对象&rdquo;贴上&rdquo;附加的责任.</p>
+<p>●　　**抽象构件(Component)类：**给出一个抽象接口, 以规范准备接收附加责任的对象.</p>
+<p>●　　**具体构件(ConcreteComponent)类：**被修饰的者, 是定义了一个具体的对象, 可以给这个对象添加一些职责(也就是装饰它).</p>
+<p>●　　**装饰(Decorator)类：**抽象装饰类, 维护一个构件(Component)对象的实例, 定义一个与抽象构件接口一致的接口.</p>
+<p>●　　**具体装饰(ConcreteDecorator)类：**具体装饰类, 负责给构件对象&rdquo;贴上&rdquo;附加的责任.</p>
 <p>它的C++模型如下(技术有限, 可能实现的有问题, 欢迎指正):</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
 &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//
 &lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
@@ -159,11 +160,11 @@
 <p><a href="http://images.cnitblog.com/blog/723444/201502/131406421514674.png"><img alt="2015-02-13_124810" src="http://images.cnitblog.com/blog/723444/201502/131406430731760.png" /></a></p>
 <p>此时就可以实用我们的装饰者模式:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/131406440587059.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/131406451205401.png" /></a></p>
-<p>具体代码省略, 参考:<a href="http://blog.chinaunix.net/uid-20761674-id-304542.html">http://blog.chinaunix.net/uid-20761674-id-304542.html</a></p>
-<h3 id="_2">模式的简化</h3>
+<p>具体代码省略, 参考:<a href="http://blog.chinaunix.net/uid-20761674-id-304542.html"><a href="http://blog.chinaunix.net/uid-20761674-id-304542.html"><a href="http://blog.chinaunix.net/uid-20761674-id-304542.html">http://blog.chinaunix.net/uid-20761674-id-304542.html</a></a></a></p>
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>模式的简化</h3>
 <p>如果只有一个ConcreteComponent类, 那么可以考虑去掉Cpmponent类, 让Decorator直接继承ConcreteComponent类, 重写ConcreteComponent的Operation方法.</p>
 <p>同样, 如果只有一个ConreteDecortor类, 那么也可以去掉单独的Decorator类, 把Decorator和ConreteDecortor的合并.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">#include &lt;iostream&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreateComponent {
@@ -252,7 +253,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -276,14 +276,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

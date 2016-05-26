@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -55,7 +56,7 @@
     <p>之前笔记介绍了一下连表.</p>
 <p>连表(多对多, 一对多)插入数据的方式一样, 都是通过 <strong>对象1.关联数据.add(对象2)</strong> 的方式来添加; 还可以通过 <strong>对象2.类1(小写)_set.add(对象1)</strong> 来添加.</p>
 <p>如, 一个 多对多 的关系模型:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
@@ -64,9 +65,9 @@
 </pre></div>
 
 
-<p>如果要插入关联, 先要获取一个 Group 对象 g1, 再获取一个 User 对象 u1, 然后使用, <strong>g1.user_relation.add(u1)</strong> 的方式就能插入数据. 或者<strong> u1.group_set.add(g1).</strong></p>
+<p>如果要插入关联, 先要获取一个 Group 对象 g1, 再获取一个 User 对象 u1, 然后使用, <strong>g1.user_relation.add(u1)</strong> 的方式就能插入数据. 或者** u1.group_set.add(g1).**</p>
 <p><strong>一对多</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     name = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your models here.&lt;/span&gt;
@@ -82,14 +83,14 @@
 </pre></div>
 
 
-<p>UserInfo 中的 typeId 其实是一个对象, 通过它可以获取到另一张表的内容, 语法就是<strong> __ (两个下划线)</strong>, 如:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">UserInfo.object.filter(typeId__name = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;王四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 连表访问&lt;/span&gt;
+<p>UserInfo 中的 typeId 其实是一个对象, 通过它可以获取到另一张表的内容, 语法就是** __ (两个下划线)**, 如:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>UserInfo.object.filter(typeId__name = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;王四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 连表访问&lt;/span&gt;
 </pre></div>
 
 
 <p><strong>多对多</strong></p>
 <p>还是上面那个 多对多 模型:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
@@ -98,10 +99,10 @@
 </pre></div>
 
 
-<h1 id="_1">获取数据</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>获取数据</h1>
 <p>group_obj.user_relation.all()
 group_obj.user_relation.all().filter(id=1)</p>
-<h1 id="_2">获取数据</h1>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>获取数据</h1>
 <p>user_obj.group_set.all()
 user_obj.group_set.all().filter(groupName=&rsquo;CEO&rsquo;)
 user_obj.group_set.all().filter(groupName=&rsquo;CTO&rsquo;)
@@ -125,7 +126,6 @@ user_obj.group_set.all().filter(groupName=&rsquo;CTO&rsquo;)
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -149,14 +149,13 @@ user_obj.group_set.all().filter(groupName=&rsquo;CTO&rsquo;)
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

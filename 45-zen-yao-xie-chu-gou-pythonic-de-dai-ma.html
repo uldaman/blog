@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -75,28 +76,27 @@
 <li><a href="#_5">字符串的优化</a></li>
 </ul>
 </div>
-<h1 id="_1">列表生成式</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>列表生成式</h1>
 <p>提供一个可迭代的对象生成一个新列表</p>
 <p><code>[exp for iter_var in iterable]</code></p>
 <p><code>[exp for iter_var in iterable if cond_exp]</code></p>
 <p>首先迭代 iterable 里所有内容, 每一次迭代, 都把 iterable 里相应内容放到 iter_var 中, 再在表达式 exp 中应用该 iter_var 的内容, 最后用表达式的计算值生成一个新的列表.</p>
 <p>例如, 把一个 list 中所有的字符串变成小写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">L <span style="color: #666666">=</span> [<span style="color: #BB4444">&#39;Hello&#39;</span>, <span style="color: #BB4444">&#39;World&#39;</span>, <span style="color: #BB4444">&#39;IBM&#39;</span>, <span style="color: #BB4444">&#39;Apple&#39;</span>]
-[s<span style="color: #666666">.</span>lower() <span style="color: #AA22FF; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> L]
-<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BB4444">&#39;hello&#39;</span>, <span style="color: #BB4444">&#39;world&#39;</span>, <span style="color: #BB4444">&#39;ibm&#39;</span>, <span style="color: #BB4444">&#39;apple&#39;</span>]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">L</span> <span style="color: #A71D7E">=</span> [<span style="color: #183691">&#39;Hello&#39;</span>, <span style="color: #183691">&#39;World&#39;</span>, <span style="color: #183691">&#39;IBM&#39;</span>, <span style="color: #183691">&#39;Apple&#39;</span>]
+[<span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">lower</span>() <span style="color: #A71D5D">for</span> <span style="color: #333333">s</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">L</span>]
+<span style="color: #A71D7E">&gt;&gt;&gt;</span> [<span style="color: #183691">&#39;hello&#39;</span>, <span style="color: #183691">&#39;world&#39;</span>, <span style="color: #183691">&#39;ibm&#39;</span>, <span style="color: #183691">&#39;apple&#39;</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-lie-biao-sheng-cheng-shi.html">Python 高级特性之列表生成式</a></p>
-<h1 id="_2">生成器表达式</h1>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>生成器表达式</h1>
 <p>当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(generator)表达式而不是列表解析;</p>
 <p>生成器表达式的语法和列表解析一样, 只不过生成器表达式是被（）括起来的, 而不是 [ ], 如下:</p>
 <p><code>(exp for iter_var in iterable)</code></p>
 <p><code>(exp for iter_var in iterable if cond_exp)</code></p>
 <p>生成器表达式使用了 &ldquo;惰性计算&rdquo; (lazy evaluation, 也有翻译为 &ldquo;延迟求值&rdquo;, 我以为这种按需调用 call by need 的方式翻译为惰性更好一些), 只有在检索时才被赋值 (evaluated), 所以在列表比较长的情况下使用更有效 (节省内存).</p>
 <p>参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html">Python 高级特性之生成器表达式</a></p>
-<h1 id="sorted">sorted( )</h1>
+<h1 id="sorted"><a name="user-content-sorted" href="#sorted" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sorted( )</h1>
 <p>sorted 语法如下:</p>
 <p><code>sorted(iterable, cmp = None, key = None, reverse = False)</code></p>
 <ul>
@@ -110,19 +110,17 @@
 <p>一般来说, cmp 和 key 可以使用 lambda 表达式</p>
 </blockquote>
 <p>正序:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>])
-<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">5</span>, <span style="color: #666666">9</span>, <span style="color: #666666">12</span>, <span style="color: #666666">21</span>, <span style="color: #666666">36</span>]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">sorted</span>([<span style="color: #0086b3">36</span>, <span style="color: #0086b3">5</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">21</span>])
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[<span style="color: #0086b3">5</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">21</span>, <span style="color: #0086b3">36</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 倒序:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>], reverse <span style="color: #666666">=</span> <span style="color: #AA22FF">True</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">36</span>, <span style="color: #666666">21</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">5</span>]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">sorted</span>([<span style="color: #0086b3">36</span>, <span style="color: #0086b3">5</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">21</span>], <span style="color: #333333">reverse</span> <span style="color: #A71D7E">=</span> <span style="color: #0086B3">True</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[<span style="color: #0086b3">36</span>, <span style="color: #0086b3">21</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">5</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 如果想自己实现倒序排序, 则可以自己写 <strong>cmp</strong> 函数, 然后做为 sorted() 的第二个参数.</p>
 <p>通常规定, 对于两个元素 x 和 y:</p>
 <ul>
@@ -131,119 +129,109 @@
 <li>如果认为 x &gt; y, 则返回 1</li>
 </ul>
 <p>我们来实现倒序:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">reversed_cmp</span>(x, y):
-    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> y:
-        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">-1</span>
-    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> y:
-        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>
-    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">reversed_cmp</span>(<span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
+    <span style="color: #A71D5D">if</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #333333">y</span>:
+        <span style="color: #A71D5D">return</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span>
+    <span style="color: #A71D5D">if</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #333333">y</span>:
+        <span style="color: #A71D5D">return</span> <span style="color: #0086b3">1</span>
+    <span style="color: #A71D5D">return</span> <span style="color: #0086b3">0</span>
 </pre></div>
 
-
-<p><br>
+<br>
 传入自定义的比较函数 reversed_cmp, 就可以实现倒序排序:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>], reversed_cmp)
-<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">36</span>, <span style="color: #666666">21</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">5</span>]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">sorted</span>([<span style="color: #0086b3">36</span>, <span style="color: #0086b3">5</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">21</span>], <span style="color: #333333">reversed_cmp</span>)
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[<span style="color: #0086b3">36</span>, <span style="color: #0086b3">21</span>, <span style="color: #0086b3">12</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">5</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 再来看年 sorted() 的 <strong>key</strong> 参数:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">L <span style="color: #666666">=</span> [(<span style="color: #BB4444">&#39;b&#39;</span>,<span style="color: #666666">2</span>),(<span style="color: #BB4444">&#39;a&#39;</span>,<span style="color: #666666">1</span>),(<span style="color: #BB4444">&#39;c&#39;</span>,<span style="color: #666666">3</span>),(<span style="color: #BB4444">&#39;d&#39;</span>,<span style="color: #666666">4</span>)]
-<span style="color: #AA22FF; font-weight: bold">print</span> <span style="color: #AA22FF">sorted</span>(L, key <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x : x[<span style="color: #666666">1</span>])
-<span style="color: #666666">&gt;&gt;&gt;</span>[(<span style="color: #BB4444">&#39;a&#39;</span>, <span style="color: #666666">1</span>), (<span style="color: #BB4444">&#39;b&#39;</span>, <span style="color: #666666">2</span>), (<span style="color: #BB4444">&#39;c&#39;</span>, <span style="color: #666666">3</span>), (<span style="color: #BB4444">&#39;d&#39;</span>, <span style="color: #666666">4</span>)]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">L</span> <span style="color: #A71D7E">=</span> [(<span style="color: #183691">&#39;b&#39;</span>,<span style="color: #0086b3">2</span>),(<span style="color: #183691">&#39;a&#39;</span>,<span style="color: #0086b3">1</span>),(<span style="color: #183691">&#39;c&#39;</span>,<span style="color: #0086b3">3</span>),(<span style="color: #183691">&#39;d&#39;</span>,<span style="color: #0086b3">4</span>)]
+<span style="color: #A71D5D">print</span> <span style="color: #ED6A43">sorted</span>(<span style="color: #333333">L</span>, <span style="color: #333333">key</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span> : <span style="color: #333333">x</span>[<span style="color: #0086b3">1</span>])
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[(<span style="color: #183691">&#39;a&#39;</span>, <span style="color: #0086b3">1</span>), (<span style="color: #183691">&#39;b&#39;</span>, <span style="color: #0086b3">2</span>), (<span style="color: #183691">&#39;c&#39;</span>, <span style="color: #0086b3">3</span>), (<span style="color: #183691">&#39;d&#39;</span>, <span style="color: #0086b3">4</span>)]
 </pre></div>
 
-
-<p><br>
+<br>
 L 中的元素是一个 tupe, key 参数指定用 <code>tupe[1]</code> 做为依据来比较</p>
 <p>参考链接:<br>
 <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-sorted.html">Python 高级特性之 sorted( )</a><br>
 <a href="http://www.cnblogs.com/woshitianma/p/3222989.html">Python中sorted()方法的用法</a></p>
-<h1 id="map">map( )</h1>
+<h1 id="map"><a name="user-content-map" href="#map" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>map( )</h1>
 <p>map() 函数接收两个参数, 一个是函数, 一个是序列, map() 将传入的函数依次作用到序列的每个元素, 并把结果作为新的 list 返回.</p>
 <p>例子, 求 1 到 10 每个数的乘阶:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">fun</span>(x):
-    <span style="color: #AA22FF; font-weight: bold">return</span> x <span style="color: #666666">*</span> x
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">fun</span>(<span style="color: #333333">x</span>):
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span>
 
-<span style="color: #AA22FF">map</span>(fun, <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>))
-<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">1</span>, <span style="color: #666666">4</span>, <span style="color: #666666">9</span>, <span style="color: #666666">16</span>, <span style="color: #666666">25</span>, <span style="color: #666666">36</span>, <span style="color: #666666">49</span>, <span style="color: #666666">64</span>, <span style="color: #666666">81</span>, <span style="color: #666666">100</span>]
+<span style="color: #ED6A43">map</span>(<span style="color: #333333">fun</span>, <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">11</span>))
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[<span style="color: #0086b3">1</span>, <span style="color: #0086b3">4</span>, <span style="color: #0086b3">9</span>, <span style="color: #0086b3">16</span>, <span style="color: #0086b3">25</span>, <span style="color: #0086b3">36</span>, <span style="color: #0086b3">49</span>, <span style="color: #0086b3">64</span>, <span style="color: #0086b3">81</span>, <span style="color: #0086b3">100</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-map.html">Python 高级特性之 map( )</a></p>
-<h1 id="reduce">reduce( )</h1>
+<h1 id="reduce"><a name="user-content-reduce" href="#reduce" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>reduce( )</h1>
 <p>reduce() 函数接收两个参数, 一个是函数, 一个是序列;</p>
-<p>但传入的这个函数必须接收两个参数, reduce() 会把这个函数运算的结果继续和序列的下一个元素做<strong>累积</strong>运算, 相当于:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">reduce</span>(fun, [x1, x2, x3, x4]) <span style="color: #666666">=</span> fun(fun(fun(x1, x2), x3), x4)
+<p>但传入的这个函数必须接收两个参数, reduce() 会把这个函数运算的结果继续和序列的下一个元素做**累积**运算, 相当于:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">reduce</span>(<span style="color: #333333">fun</span>, [<span style="color: #333333">x1</span>, <span style="color: #333333">x2</span>, <span style="color: #333333">x3</span>, <span style="color: #333333">x4</span>]) <span style="color: #A71D7E">=</span> <span style="color: #333333">fun</span>(<span style="color: #333333">fun</span>(<span style="color: #333333">fun</span>(<span style="color: #333333">x1</span>, <span style="color: #333333">x2</span>), <span style="color: #333333">x3</span>), <span style="color: #333333">x4</span>)
 </pre></div>
 
-
-<p><br>
+<br>
 例子, 对序列求和:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">add</span>(x, y):
-    <span style="color: #AA22FF; font-weight: bold">return</span> x <span style="color: #666666">+</span> y
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
 
-<span style="color: #AA22FF">reduce</span>(add, [<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">9</span>])
-<span style="color: #666666">&gt;&gt;&gt;25</span>
+<span style="color: #ED6A43">reduce</span>(<span style="color: #333333">add</span>, [<span style="color: #0086b3">1</span>, <span style="color: #0086b3">3</span>, <span style="color: #0086b3">5</span>, <span style="color: #0086b3">7</span>, <span style="color: #0086b3">9</span>])
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">25</span>
 </pre></div>
 
-
-<p><br>
+<br>
 参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-reduce.html">Python 高级特性之 reduce( )</a></p>
-<h1 id="filter">filter( )</h1>
+<h1 id="filter"><a name="user-content-filter" href="#filter" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>filter( )</h1>
 <p>filter() 函数接收两个参数, 一个是函数, 一个是序列;</p>
 <p>filter() 把传入的函数依次作用于每个元素, 然后根据返回值是 True 还是 False 决定保留还是丢弃该元素.</p>
 <p>例如, 在一个 list 中, 删掉偶数, 只保留奇数, 可以这么写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">is_odd</span>(n):
-    <span style="color: #AA22FF; font-weight: bold">return</span> n <span style="color: #666666">%</span> <span style="color: #666666">2</span> <span style="color: #666666">==</span> <span style="color: #666666">1</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">is_odd</span>(<span style="color: #333333">n</span>):
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">%</span> <span style="color: #0086b3">2</span> <span style="color: #A71D7E">==</span> <span style="color: #0086b3">1</span>
 
-<span style="color: #AA22FF">filter</span>(is_odd, <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>))
-<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">1</span>, <span style="color: #666666">3</span>, <span style="color: #666666">5</span>, <span style="color: #666666">7</span>, <span style="color: #666666">9</span>]
+<span style="color: #ED6A43">filter</span>(<span style="color: #333333">is_odd</span>, <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">11</span>))
+<span style="color: #A71D7E">&gt;&gt;&gt;</span>[<span style="color: #0086b3">1</span>, <span style="color: #0086b3">3</span>, <span style="color: #0086b3">5</span>, <span style="color: #0086b3">7</span>, <span style="color: #0086b3">9</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-filter.html">Python 高级特性之 filter( )</a></p>
-<h1 id="lambda">lambda 表达式</h1>
+<h1 id="lambda"><a name="user-content-lambda" href="#lambda" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>lambda 表达式</h1>
 <p>当我们在传入函数时, 有些时候, 不需要显式地定义函数, 直接传入匿名函数更方便, 匿名函数也叫 lambda 表达式.</p>
 <p>lambda 因为是一个表达式, 所以不要写 return, 返回值就是该表达式的结果.</p>
 <p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值.</p>
 <p><code>lambda x: x * x</code> 实际上就是:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">f</span>(x):
-    <span style="color: #AA22FF; font-weight: bold">return</span> x <span style="color: #666666">*</span> x
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">f</span>(<span style="color: #333333">x</span>):
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span>
 </pre></div>
 
-
-<p><br>
+<br>
 用 lambda 表达式还有个好处, 因为函数没有名字, 不必担心函数名冲突, 此外, lambda 表达式也是一个函数对象, 也可以把 lambda 表达式赋值给一个变量, 再利用变量来调用该函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">g <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x : x <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #008800; font-style: italic"># x 的平方</span>
-v <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x, y : x <span style="color: #666666">**</span> y <span style="color: #008800; font-style: italic"># x 的 y 次方</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">2</span> <span style="color: #999988; font-style: italic"># x 的平方</span>
+<span style="color: #333333">v</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>, <span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #333333">y</span> <span style="color: #999988; font-style: italic"># x 的 y 次方</span>
 </pre></div>
 
-
-<p><br>
+<br>
 例子, 求 1 到 100 的合:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF">reduce</span>(<span style="color: #AA22FF; font-weight: bold">lambda</span> x, y : x <span style="color: #666666">+</span> y, <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">101</span>))
-<span style="color: #666666">&gt;&gt;&gt;5050</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">reduce</span>(<span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>, <span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>, <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">101</span>))
+<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">5050</span>
 </pre></div>
 
-
-<p><br>
+<br>
 lambda 可以配合 map、reduce、filter、sorted 高效操作列表.</p>
 <p>参考链接: <a href="http://www.smallcpp.com/python-gao-ji-te-xing-zhi-lambda.html">Python 高级特性之 lambda</a></p>
-<h1 id="_3">切片</h1>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>切片</h1>
 <p>对于具有序列结构的数据来说, 切片操作的语法是:</p>
 <p><code>consequence[start_index : end_index : step]</code></p>
-<p><code>注意</code>: 对于序列结构数据来说, <strong>xxx_index</strong>和<strong>step</strong>都具有正负两个值, 分别表示左右两个方向取值.</p>
+<p><code>注意</code>: 对于序列结构数据来说, **xxx_index**和**step**都具有正负两个值, 分别表示左右两个方向取值.</p>
 <ul>
-<li>start_index: 表示切片的起始位置 (<strong>包含</strong>该位置的元素)<ul>
+<li>start_index: 表示切片的起始位置 (**包含**该位置的元素)<ul>
 <li>默认为序列第一个元素, 用正索引表示为 0</li>
 <li>默认为序列第一个元素, 用负索引表示为 <code>-len(consequence)</code></li>
 </ul>
 </li>
-<li>end_index: 表示切片的结束位置 (<strong>不包含</strong>该位置的元素)<ul>
+<li>end_index: 表示切片的结束位置 (**不包含**该位置的元素)<ul>
 <li>默认为序列最后一个元素, 用正索引表示为 <code>len(consequence) - 1</code></li>
 <li>默认为序列最后一个元素, 用负索引表示为 -1</li>
 </ul>
@@ -254,7 +242,7 @@ lambda 可以配合 map、reduce、filter、sorted 高效操作列表.</p>
 </ul>
 </li>
 </ul>
-<p><strong>xxx_index</strong>和<strong>step</strong>并不是必须的, 可以有下面这些组合:</p>
+<p>**xxx_index**和**step**并不是必须的, 可以有下面这些组合:</p>
 <ul>
 <li><code>con[start_index]</code>: 返回索引值为 start_index 的对象, start_index 为 -len(con) 到 len(con) - 1 之间任意整数</li>
 <li><code>con[start_index : end_index]</code>: 返回索引值为 start_index 到 end_index - 1 之间的连续对象</li>
@@ -265,14 +253,13 @@ lambda 可以配合 map、reduce、filter、sorted 高效操作列表.</p>
 <li><code>con[::step]</code>: 缺省 start_index 和 end_index, 表示对序列按 step 正向/反向取值</li>
 </ul>
 <p>例子, 返转字符串</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">reverse_str</span>( s ):
-    <span style="color: #AA22FF; font-weight: bold">return</span> s[::<span style="color: #666666">-1</span>]
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">reverse_str</span>( <span style="color: #333333">s</span> ):
+    <span style="color: #A71D5D">return</span> <span style="color: #333333">s</span>[::<span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span>]
 </pre></div>
 
-
-<p><br>
+<br>
 字符串也是一种序列, 因此利用切片就能极方便地反转字符了, 步长为 -1 即反向、每次递增 1 地从序列中取值.</p>
-<h1 id="_4">用正确的数据结构</h1>
+<h1 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用正确的数据结构</h1>
 <p><strong>字典 (dictionary) 与列表 (list)</strong>:<br>
 Python 字典中使用了 hash table, 因此查找操作的复杂度为 O(1), 而 list 实际是个数组, 在 list 中, 查找需要遍历整个 list, 其复杂度为 O(n), 因此对成员的查找访问等操作字典要比 list 更快.</p>
 <p><strong>集合 (set) 与列表 (list)</strong>:<br>
@@ -282,24 +269,22 @@ set 的 union、ntersection、difference 操作要比 list 的迭代要快, 因�
 <li>set(list1) &amp; set(list2)：包含 list1 和 list2 中共同元素的新集合</li>
 <li>set(list1) - set(list2)：在 list1 中出现但不在 list2 中出现的元素的集合</li>
 </ul>
-<h1 id="_5">字符串的优化</h1>
+<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字符串的优化</h1>
 <p>python 中的字符串对象是不可改变的，因此对任何字符串的操作如拼接，修改等都将产生一个新的字符串对象，而不是基于原字符串，因此这种持续的 copy 会在一定程度上影响 python 的性能.</p>
 <p><code>使用 join 而不是 + 连接字符串</code></p>
 <p>避免类似下面的代码片段:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;&#39;</span>
-<span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> somelist:
-    s <span style="color: #666666">+=</span> x
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;&#39;</span>
+<span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">somelist</span>:
+    <span style="color: #333333">s</span> <span style="color: #A71D7E">+=</span> <span style="color: #333333">x</span>
 </pre></div>
 
-
-<p><br>
+<br>
 而是要使用下面这种:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">s <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;&#39;</span><span style="color: #666666">.</span>join(somelist)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;&#39;</span><span style="color: #A71D7E">.</span><span style="color: #333333">join</span>(<span style="color: #333333">somelist</span>)
 </pre></div>
 
-
-<p><br>
-当对字符串可以使用<strong>正则表达式</strong>或者内置函数来处理的时候，选择内置函数, 如 str.isalpha()、str.isdigit()、str.startswith((&lsquo;x&rsquo;, &lsquo;yz&rsquo;))、str.endswith((&lsquo;x&rsquo;, &lsquo;yz&rsquo;)) 等.</p>
+<br>
+当对字符串可以使用**正则表达式**或者内置函数来处理的时候，选择内置函数, 如 str.isalpha()、str.isdigit()、str.startswith((&lsquo;x&rsquo;, &lsquo;yz&rsquo;))、str.endswith((&lsquo;x&rsquo;, &lsquo;yz&rsquo;)) 等.</p>
 <p>对字符进行格式化比直接串联读取要快，因此要使用:<br>
 <code>out = '&lt;html&gt;%s%s%s%s&lt;/html&gt;'' % (head, prologue, query, tail)</code><br>
 而不是:<br>
@@ -323,7 +308,6 @@ set 的 union、ntersection、difference 操作要比 list 的迭代要快, 因�
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -347,14 +331,13 @@ set 的 union、ntersection、difference 操作要比 list 的迭代要快, 因�
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

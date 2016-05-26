@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -65,7 +66,7 @@
 <li><a href="#combined-fragment">Combined Fragment</a></li>
 </ul>
 </div>
-<h1 id="_1">概述</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>概述</h1>
 <p><strong>何谓时序图</strong>:<br>
 简单的说, 就是描述一个时间段内不同对象之间的业务情况(时间顺序).<br>
 时序图的重点在__消息时序__上, 也就是说, 描述__消息__是如何在对象间发送和接收的, 表示了对象之间传递消息的时间顺序.</p>
@@ -112,20 +113,19 @@
 </tr>
 </tbody>
 </table>
-<h1 id="object">Object</h1>
+<h1 id="object"><a name="user-content-object" href="#object" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Object</h1>
 <p>时序图中 Object 的命令遵循下面的格式:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">实体名 : 类名
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>实体名 : 类名
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <p>大部分情况下, 我们可能只关心__类名__, 所以可以简写成 <strong>: 类名</strong>.</p>
-<h1 id="lifeline-focus-of-control">Lifeline 与 Focus of Control</h1>
+<h1 id="lifeline-focus-of-control"><a name="user-content-lifeline-focus-of-control" href="#lifeline-focus-of-control" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Lifeline 与 Focus of Control</h1>
 <p><strong>生命线__在时序图中表示为从对象图标向下延伸的一条__虚线</strong>, 表示对象存在的时间.</p>
 <p>而__控制焦点__是__生命线__中表示时间段的符号, 在这个时间段内对象将执行相应的操作, 用小矩形表示.</p>
 <p><img alt="" src="http://i63.tinypic.com/2lxi9s1.jpg" /></p>
-<h1 id="stimulus">Stimulus</h1>
-<h2 id="_2">消息类型</h2>
+<h1 id="stimulus"><a name="user-content-stimulus" href="#stimulus" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Stimulus</h1>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>消息类型</h2>
 <p>消息一般分为__同步消息__(Synchronous Message), <strong>异步消息</strong>(Asynchronous Message)和__返回消息__(Return Message).<br>
 如下图所示:</p>
 <p><img alt="" src="http://i66.tinypic.com/euh6hi.jpg" /></p>
@@ -136,12 +136,12 @@
 </ul>
 <p>对于 StarUML 而言, 同步消息的 Stimulus 为 <strong>Call</strong>, 异步消息的 Stimulus 为 <strong>Send</strong>, 返回消息的 Stimulus 为 <strong>Return</strong>.</p>
 <p><img alt="" src="http://i68.tinypic.com/fc06mw.jpg" /></p>
-<h2 id="_3">消息约束</h2>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>消息约束</h2>
 <p>当为对象的交互建模时, 有时候必须满足一个条件消息才会传递给对象.</p>
 <p>为了在一个序列图上画一个约束, 你把约束元件放在约束的消息线上, 消息名字之前.</p>
 <p><img alt="" src="http://i64.tinypic.com/14e9vo6.jpg" /></p>
 <p>注意 Stimulus 上的 <strong>[restraint == true]</strong>.</p>
-<h1 id="combined-fragment">Combined Fragment</h1>
+<h1 id="combined-fragment"><a name="user-content-combined-fragment" href="#combined-fragment" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Combined Fragment</h1>
 <p>Combined Fragment 用来描述一批 Stimulus 的约束, 如上面 <strong>消息约束</strong> 中的 <strong>[restraint == true]</strong>, 如果想要其对多条 Stimulus 生效, 就可以使用 Combined Fragment.</p>
 <p><img alt="" src="http://i68.tinypic.com/b7kubs.jpg" /></p>
 <p>只有当 restraint == true 时, Combined Fragment 里的 Stimulus 才会被触发.</p>
@@ -168,7 +168,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -192,14 +191,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

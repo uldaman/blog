@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -69,11 +70,11 @@
 </h6>
 
 
-<h1 id="_1">带参数的信号/槽</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>带参数的信号/槽</h1>
 <p>首先看一个程序</p>
 <p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
 <p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
 
 </p>
 
@@ -113,7 +114,7 @@
 <p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
 <p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
 <p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
+<p>答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.</p>
 <p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
 
 </p>
@@ -131,7 +132,7 @@
 
 
 <p>先看看驾校里教的方法.</p>
-<h1 id="_1">左轮:</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>左轮:</h1>
 <p>当我们的视线通过左雨刮器突起的结点和地面上的物体重合时, 我们的左轮在行进时就会在该物体处压过.</p>
 <p><img alt="" src="http://i58.tinypic.com/ar3vb.jpg" /></p>
 <p>离中线60公分行驶</p>
@@ -140,7 +141,7 @@
 <p><img alt="" src="http://i61.tinypic.com/24q8hm0.jpg" /></p>
 <p>根据车型不一样, 这里判断可能有误差, 可以适当让白线往车身上让一点.</p>
 <p><img alt="" src="http://i60.tinypic.com/8yavq8.jpg" /></p>
-<h1 id="_2">右轮:</h1>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>右轮:</h1>
 <p>当我们视线通过右雨刮器突起的结点和白线相交时, 轮胎会从白线上压过.</p>
 <p><img alt="" src="http://i58.tinypic.com/i21tuc.jpg" /></p>
 <p>右侧离路边60公分行驶</p>
@@ -218,7 +219,7 @@
 </h6>
 
 
-<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></p>
+<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></a></a></p>
 <p>1、将车停在停车线左侧，右反光镜对准停车位的右线。</p>
 <p><img alt="" src="http://i57.tinypic.com/5zeh3q.jpg" /></p>
 <p>2、左打满，前行。</p>
@@ -244,13 +245,13 @@
 </h6>
 
 
-<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></p>
+<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></a></a></p>
 <p>1、将车停在停车线旁1.5米左右的位置。</p>
 <p><img alt="" src="http://i60.tinypic.com/29f5n36.jpg" /></p>
 <p>2、您所坐的位置，正好处于隔一个车位的中间(是隔一个车位, 不是邻车位)。</p>
 <p><img alt="" src="http://i62.tinypic.com/2r57uvn.jpg" /></p>
 <p>这里还有一个方法是判断后轮的位置.</p>
-<p>对于绝大多数家用轿车来说, 车辆行驶到<strong>后轮超过车位右侧1米左右</strong>的距离比较容易进入车位, 如果右侧车位旁边都是汽车的话, 大概就是右后轮与右侧车辆中间位置对齐.</p>
+<p>对于绝大多数家用轿车来说, 车辆行驶到**后轮超过车位右侧1米左右**的距离比较容易进入车位, 如果右侧车位旁边都是汽车的话, 大概就是右后轮与右侧车辆中间位置对齐.</p>
 <p><img alt="" src="http://i57.tinypic.com/8xk3ue.jpg" /></p>
 <p><img alt="" src="http://i62.tinypic.com/2vmbw4k.jpg" /></p>
 <p>3、然后左打满，开始倒车。</p>
@@ -274,10 +275,10 @@
 
 
 <p>最好用均速靠边, 就是说准备靠边了, 先踩刹车减速到2档速度, 踩离合换2档, 松离合, 这时车子就是2档均速.</p>
-<p><strong>第一步：</strong>先确定靠边停车的位置, 然后打开右转向灯, 向右转动方向盘(角度为90度).</p>
-<p><strong>第二步：</strong>当车头中间与马路牙子重合时, 迅速向左转动方向盘(角度大于180度).</p>
-<p><strong>第三步：</strong>当车头1/3处与马路牙子重合时, 将方向盘回正, 此时如果车子出现偏离, 对车子进行微量调整, 使马路牙子保持在车头1/3处.</p>
-<p><strong>第四步：</strong>当车身与马路牙子平行时, 距离马路牙子10到30厘米处, 停车.</p>
+<p>**第一步：**先确定靠边停车的位置, 然后打开右转向灯, 向右转动方向盘(角度为90度).</p>
+<p>**第二步：**当车头中间与马路牙子重合时, 迅速向左转动方向盘(角度大于180度).</p>
+<p>**第三步：**当车头1/3处与马路牙子重合时, 将方向盘回正, 此时如果车子出现偏离, 对车子进行微量调整, 使马路牙子保持在车头1/3处.</p>
+<p>**第四步：**当车身与马路牙子平行时, 距离马路牙子10到30厘米处, 停车.</p>
 <p>也可以把二三步合在一起, 就是一开始靠边时, 少转点方向盘 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a>
 
 </p>
@@ -310,7 +311,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -334,14 +334,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

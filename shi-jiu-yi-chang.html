@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -63,7 +64,7 @@
 <hr />
 <p>异常的处理</p>
 <p>在 Java 中, 使用 try-catch 及 try-catch-finally 来捕获并处理异常.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;try {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;try {
      &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
 } &lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
      &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 该异常处理代码&lt;/span&gt;
@@ -72,7 +73,7 @@
 
 
 <p>例子:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
     System.out.print(&lt;/span&gt;&quot;请输入你的年龄:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
     Scanner input &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Scanner(System.in);
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; age =&lt;span style=&quot;color: #000000&quot;&gt; input.newtInt();
@@ -86,7 +87,7 @@ System.out.println(&lt;/span&gt;&quot;程序结束!&quot;);
 
 <p>如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println(&ldquo;十年后你&rdquo; + (age + 10) + &ldquo;岁&rdquo;) 这包就不会被执行, 程序会跳到 catch 语句中;
 在 try-catch 执行完后, 后续的语句会继续执行.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;try {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;try {
      &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
 } &lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
      &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 该异常处理代码&lt;/span&gt;
@@ -99,7 +100,7 @@ System.out.println(&lt;/span&gt;&quot;程序结束!&quot;);
 <p>为什么要用 finally?
 先看一个没有 finally 的异常处理 try-catch 语句:
 假设 count 为要使用到的资源, 并且用完要求释放此资源, 那么我们可以把释放资源的语句放到 try-catch 后执行, 当前的程序不管是在执行完 try 语句块还是 catch 语句块, 都会顺序执行到下面释放资源的语句.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; count = 0;  &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;初始化资源&lt;/span&gt;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; count = 0;  &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;初始化资源&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
     count&lt;/span&gt;++&lt;span style=&quot;color: #000000&quot;&gt;;
     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
@@ -120,7 +121,7 @@ count &lt;/span&gt;= 0; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span
 如果抛出的是 Error 或 RuntimeException, 则该方法的调用者可选择处理该异常.</p>
 <p>throws 关键字用于方法体外部的方法声明部分, 用来声明方法可能会抛出某些异常, 仅当抛出了检查异常, 该方法的调用者才必须处理或者重新抛出该异常, 当方法的调用者无力处理该异常的时候, 应该继续抛出, 而不是囫囵吞枣, 一般在 catch 块中打印一下堆栈信息做个勉强处理.</p>
 <p>下面给出一个简单例子, 看看如何 使用这两个关键字:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; test() &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Exception {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; test() &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Exception {
      &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;抛出一个检查异常&lt;/span&gt;
      &lt;span style=&quot;color: #0000ff&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Exception(&quot;方法 test 中的Exception&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 }&lt;/span&gt;
@@ -129,7 +130,7 @@ count &lt;/span&gt;= 0; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span
 
 <p>之前说到: 如果抛出了检查异常, 则该方法的调用者也必须检查处理抛出的异常;
 所以要调用 test() 的方法就必须处理 test() 抛出的异常或者添加 throws 声明将将异常继续上抛.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; compute_1() {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; compute_1() {
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
         test()
     } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
@@ -150,7 +151,7 @@ getMessage(): 返回异常的消息信息.
 printStackTrace(): 对象的堆栈跟踪输出至错误输出流, 作为字段 System.err 的值.</p>
 <hr />
 <p>自定义异常</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; 自定义异常类 &lt;span style=&quot;color: #0000ff&quot;&gt;extends&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 异常类型 {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; 自定义异常类 &lt;span style=&quot;color: #0000ff&quot;&gt;extends&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 异常类型 {
 &lt;/span&gt;
 
 &lt;span style=&quot;color: #000000&quot;&gt;}&lt;/span&gt;
@@ -177,7 +178,6 @@ printStackTrace(): 对象的堆栈跟踪输出至错误输出流, 作为字段 S
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -201,14 +201,13 @@ printStackTrace(): 对象的堆栈跟踪输出至错误输出流, 作为字段 S
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

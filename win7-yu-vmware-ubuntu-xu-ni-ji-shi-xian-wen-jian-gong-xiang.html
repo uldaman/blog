@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -61,27 +62,25 @@
 <li><a href="#_4">第四步</a></li>
 </ul>
 </div>
-<h2 id="_1">第一步</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>第一步</h2>
 <p>当然是安装 VM Tools 啦.</p>
 <ol>
 <li>在 VMware 虚拟机界面, 点 VM -> Install VMware Tools, 之后, 点击 Ubuntu 窗口中主文件按钮, 然后再左边会看见设备里有 VMware tools 文件夹, 右键 -> 解压到这里</li>
 <li>打开 Terminal 终端(ctrl + alt + t), 进入解压的文件夹中, 输入以下命令:</li>
 </ol>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">sudo tar zxf VMwareTools-xxx.tar.gz
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>sudo tar zxf VMwareTools-xxx.tar.gz
 cd /vmware-tools-distrib
 sudo ./vmware-install.pl
 </pre></div>
 
-
-<p><br>
+<br>
 安装过程中一直按 enter 即可, 或者输入 [] 提示 yes 和 no, 直到安装完毕</p>
 <p>最后查看下结果:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">lsmod | grep vmblock
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>lsmod | grep vmblock
 </pre></div>
 
-
-<p><br></p>
-<h2 id="_2">第二步</h2>
+<br></p>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>第二步</h2>
 <p>设置共享文件夹的目录</p>
 <ol>
 <li>将 Ubuntu 关机, 否则不能添加共享文件夹</li>
@@ -90,14 +89,14 @@ sudo ./vmware-install.pl
 <li>在 VM -> Settings -> Options -> Shared Folders 窗口的右边, Folder sharing 栏里选择 Always enabled</li>
 <li>点 OK, 重启 Ubuntu</li>
 </ol>
-<h2 id="_3">第三步</h2>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>第三步</h2>
 <p>在 Ubuntu 虚拟机下挂载共享文件夹</p>
 <ol>
 <li>执行 <code>sudo apt-get install open-vm-dkms</code> (注: 如果安装过, 以后就不用执行这一行)</li>
 <li>执行 <code>sudo mount -t vmhgfs .host:/ /mnt/hgfs</code></li>
 <li>然后去看看效果吧 <code>cd /mnt/hgfs</code></li>
 </ol>
-<h2 id="_4">第四步</h2>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>第四步</h2>
 <p>把挂载共享文件夹加入开机动作</p>
 <p><code>sudo gedit /etc/init.d/rc.local</code>, 打开的文件中加入挂载代码: <code>sudo mount -t vmhgfs .host:/ /mnt/hgfs</code>, 如下图, 保存退出, 重启 Ubuntu, 发现共享文件夹已经成功自动挂载了.</p>
 <p><img alt="" src="http://i68.tinypic.com/2uos3mu.jpg" /></p>
@@ -120,7 +119,6 @@ sudo ./vmware-install.pl
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -144,14 +142,13 @@ sudo ./vmware-install.pl
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

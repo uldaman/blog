@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -52,7 +53,7 @@
 </h6>
 
 
-    <p>转自: <a href="http://www.devbean.net/">http://www.devbean.net/</a></p>
+    <p>转自: <a href="http://www.devbean.net/"><a href="http://www.devbean.net/"><a href="http://www.devbean.net/">http://www.devbean.net/</a></a></a></p>
 <p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C++ 预处理器工作之前，并且 Qt 的 moc 预处理不是递归的。</em>），生成标准 C++ 源代码，然后再使用标准 C++ 编译器进行编译。如果你曾经为信号函数这样的语法感到奇怪（现在我们已经编译过一些 Qt 程序，你应当注意到了，信号函数是不需要编写实现代码的，那怎么可以通过标准 C++ 的编译呢？），这其实就是 moc 进行了处理之后的效果。</p>
 <p>Qt 使用 moc，为标准 C++ 增加了一些特性：</p>
 <p>1.信号槽机制，用于解决对象之间的通讯，这个我们已经了解过了，可以认为是 Qt 最明显的特性之一；</p>
@@ -74,7 +75,7 @@
 <p>Qt 引入对象树的概念，在一定程度上解决了内存问题: 如果指针对象有父对象时, 可以不用显式释放内存, 我们需要显式释放的是那些没有父对象的孤立的指针.</p>
 <p>当一个<code>QObject</code>对象在堆上创建的时候，Qt 会同时为其创建一个对象树。不过，对象树中对象的顺序是没有定义的。这意味着，销毁这些对象的顺序也是未定义的。Qt 保证的是，任何对象树中的 <code>QObject</code>对象 delete 的时候，如果这个对象有 parent，则自动将其从 parent 的<code>children()</code>列表中删除；如果有孩子，则自动 delete 每一个孩子。Qt 保证没有<code>QObject</code>会被 delete 两次，这是由析构顺序决定的。</p>
 <p>如果<code>QObject</code>在栈上创建，Qt 保持同样的行为。正常情况下，这也不会发生什么问题。来看下下面的代码片段：</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000;&quot;&gt;{
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
     QWidget window;
     QPushButton quit(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Quit&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;, &amp;&lt;span style=&quot;color: #000000;&quot;&gt;window);
 }&lt;/span&gt;
@@ -83,7 +84,7 @@
 
 <p>作为父组件的 window 和作为子组件的 quit 都是<code>QObject</code>的子类（事实上，它们都是<code>QWidget</code>的子类，而<code>QWidget</code>是<code>QObject</code>的子类）。这段代码是正确的，quit 的析构函数不会被调用两次，因为标准 C++ （ISO/IEC 14882:2003）要求，局部对象的析构顺序应该按照其创建顺序的相反过程。因此，这段代码在超出作用域时，会先调用 quit 的析构函数，将其从父对象 window 的子对象列表中删除，然后才会再调用 window 的析构函数。</p>
 <p>但是，如果我们使用下面的代码：</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000;&quot;&gt;{
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
     QPushButton quit(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Quit&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     QWidget window;
 
@@ -114,7 +115,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -138,14 +138,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -51,8 +52,8 @@
 <p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
 <p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
 <p>包装类主要提供了两大类方法:
-<em>. 将本类型和其他基本类型进行转换的方法
-</em>. 将字符串和本类型及包装类互相转换的方法</p>
+*. 将本类型和其他基本类型进行转换的方法
+*. 将字符串和本类型及包装类互相转换的方法</p>
 <hr />
 <p>以 Integet 为例, 其它类似</p>
 <p>Integer n1 = new Integer(5);
@@ -60,9 +61,9 @@ Integet n2 = new Integer(“5”);</p>
 <p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
 <hr />
 <p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
-<p><strong>装箱：</strong>把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
+<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
 <img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p><strong>拆箱：</strong>和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
@@ -98,7 +99,7 @@ Integet n2 = new Integer(“5”);</p>
 
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法：</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
 String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
@@ -137,10 +138,10 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
+    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -157,12 +158,12 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 
 <p>老生常谈, 参考 C++.</p>
-<h1 id="_1">类型转换</h1>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类型转换</h1>
 <p>需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
 为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
 <p>首先, 我们来看一下向下类型转换的风险.</p>
 <p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
@@ -204,8 +205,8 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 <p>内部类(Inner Class)就是定义在另外一个类里面的类, 与之对应, 包含内部类的类被称为外部类.</p>
 <p>内部类的主要作用:
-<em>. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
-</em>. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
+*. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
+*. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
 *. 内部类所实现的功能使用外部类同样可以实现, 只是有时使用内部类更方便;</p>
 <p>成员内部类
 静态内部类
@@ -213,7 +214,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 匿名内部类</p>
 <hr />
 <p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
@@ -234,7 +235,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 <p>格式: this();</p>
 <p>我们知道一个类, 可以有多个构造函数, 调用哪个构造函数取决于 this() 里的参数个数及类型;</p>
 <p>this调用构造函数, 必须是构造函数中第一条语句;</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
    System.out.println(&lt;/span&gt;&quot;无参数构造函数&quot;&lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
@@ -252,8 +253,8 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 
 <p>Java 中包的作用:
-<em>. 管理 Java 文件
-</em>. 解决同名文件冲突</p>
+*. 管理 Java 文件
+*. 解决同名文件冲突</p>
 <p>包的定义:
 使用关键字 package “包名”来定义(如: package com.martin), 必须放在 Java 源程序第一行.</p>
 <p>包命名规范:
@@ -292,7 +293,6 @@ b、域名倒过来写，如：com.baidu;</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -316,14 +316,13 @@ b、域名倒过来写，如：com.baidu;</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

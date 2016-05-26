@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -67,34 +68,32 @@
 <p>幸好, 这些底层操作已经由专门的服务器软件实现好了, 它们提供了统一的接口, 让我们专心编写 Web 业务, 这个接口就是 <strong>CGI: Common Gateway Interface</strong>, 而 <strong>WSGI: Web Server Gateway Interface</strong> 可以说是特别为 python 设计的 CGI.</p>
 <p><strong>不过要注意的是, WSGI/CGI 不是服务器, 不是 API, 不是 Python 模块, 更不是什么框架, 而是一种服务器和客户端交互的接口规范! 是规范!!</strong></p>
 <p>对于 wsgi 我们不需要了解太多, 不过一个简单的例子还是有必要的.</p>
-<p>我们新建一个 <strong>hello.py</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">application</span>(environ, start_response):
-    start_response(<span style="color: #BB4444">&#39;200 OK&#39;</span>, [(<span style="color: #BB4444">&#39;Content-Type&#39;</span>, <span style="color: #BB4444">&#39;text/html&#39;</span>)])
-    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #BB4444">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span>
+<p>我们新建一个 <strong>hello.py</strong>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">application</span>(<span style="color: #333333">environ</span>, <span style="color: #333333">start_response</span>):
+    <span style="color: #333333">start_response</span>(<span style="color: #183691">&#39;200 OK&#39;</span>, [(<span style="color: #183691">&#39;Content-Type&#39;</span>, <span style="color: #183691">&#39;text/html&#39;</span>)])
+    <span style="color: #A71D5D">return</span> <span style="color: #183691">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span>
 </pre></div>
 
-
-<p>这个简单的 application() 函数就是一个符合 wsgi 标准的处理函数.</p>
+这个简单的 application() 函数就是一个符合 wsgi 标准的处理函数.</p>
 <ul>
 <li>environ: 一个包含所有 HTTP 请求信息的 dict 对象;</li>
 <li>start_response: 一个发送 HTTP 响应的函数.</li>
 </ul>
 <p>在函数内部, 我们通过调用 start_response() 返回 http header, 通过 return 返回 http body.</p>
 <p>刚才说了, http 的底层操作已经由专门的服务器软件实现好了, 那么这里我们的服务器软件是什么呢?</p>
-<p>Python 内置了一个 WSGI 服务器, 这个模块叫 wsgiref, 它是用纯 Python 编写的 WSGI 服务器的参考实现, 所谓“参考实现”是指该实现完全符合 WSGI 标准, 但是不考虑任何运行效率, 仅供开发和测试使用; 现在新建一个 <strong>server.py</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">wsgiref.simple_server</span> <span style="color: #AA22FF; font-weight: bold">import</span> make_server
-<span style="color: #008800; font-style: italic"># 导入我们自己编写的application函数:</span>
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">hello</span> <span style="color: #AA22FF; font-weight: bold">import</span> application
+<p>Python 内置了一个 WSGI 服务器, 这个模块叫 wsgiref, 它是用纯 Python 编写的 WSGI 服务器的参考实现, 所谓“参考实现”是指该实现完全符合 WSGI 标准, 但是不考虑任何运行效率, 仅供开发和测试使用; 现在新建一个 <strong>server.py</strong>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">wsgiref.simple_server</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">make_server</span>
+<span style="color: #999988; font-style: italic"># 导入我们自己编写的application函数:</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">hello</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">application</span>
 
-<span style="color: #008800; font-style: italic"># 创建一个服务器，IP 地址为空，端口是8000，处理函数是 application:</span>
-httpd <span style="color: #666666">=</span> make_server(<span style="color: #BB4444">&#39;&#39;</span>, <span style="color: #666666">8000</span>, application)
-<span style="color: #AA22FF; font-weight: bold">print</span> <span style="color: #BB4444">&quot;Serving HTTP on port 8000...&quot;</span>
-<span style="color: #008800; font-style: italic"># 开始监听HTTP请求:</span>
-httpd<span style="color: #666666">.</span>serve_forever()
+<span style="color: #999988; font-style: italic"># 创建一个服务器，IP 地址为空，端口是8000，处理函数是 application:</span>
+<span style="color: #333333">httpd</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">make_server</span>(<span style="color: #183691">&#39;&#39;</span>, <span style="color: #0086b3">8000</span>, <span style="color: #333333">application</span>)
+<span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;Serving HTTP on port 8000...&quot;</span>
+<span style="color: #999988; font-style: italic"># 开始监听HTTP请求:</span>
+<span style="color: #333333">httpd</span><span style="color: #A71D7E">.</span><span style="color: #333333">serve_forever</span>()
 </pre></div>
 
-
-<p>然后, 运行 <strong>python server.py</strong> 启动 wsgi 服务器, 打开浏览器, 访问 localhost:8000, 看看是不是出现了什么效果~~</p>
+然后, 运行 <strong>python server.py</strong> 启动 wsgi 服务器, 打开浏览器, 访问 localhost:8000, 看看是不是出现了什么效果~~</p>
 <p>现在已经了解了 WSGI 框架, 我们发现, 其实一个 Web App, 就是写一个个的 wsgi 处理函数, 针对每个 HTTP 请求进行响应;</p>
 <p>但是代码如果按 hello.py 里那样写, 那就要在每个函数内部判断是哪个 url 过来的, 是 get 的还是 post, 一个两个函数没有问题, 如果100 个甚至 1000 个不同的 URL 请求, 那代码会显得非常臃肿, 难以维护, 所以我们要在 wsgi 之上再抽象出 Web 框架, 让函数只处理业务逻辑, 而 url 的分发让 Web 框架来处理.</p>
 <p>现在网上是有一些流行的Web框架:</p>
@@ -123,7 +122,6 @@ httpd<span style="color: #666666">.</span>serve_forever()
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -147,14 +145,13 @@ httpd<span style="color: #666666">.</span>serve_forever()
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

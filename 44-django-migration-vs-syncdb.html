@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -58,10 +59,10 @@
 <li><a href="#migrate_1">二、使用 migrate</a></li>
 </ul>
 </div>
-<h1 id="migrate">一、migrate 概述</h1>
+<h1 id="migrate"><a name="user-content-migrate" href="#migrate" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>一、migrate 概述</h1>
 <p>1.7 版本之前, Django 只支持新增模型到数据库中, 通过 syncdb (migrate 的前身) 命令变更或者删除现存的模型是不可能的.</p>
 <p>1.7 版本之后, Django 引入了迁移机制:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">syncdb is deprecated because of the migration system.
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>syncdb is deprecated because of the migration system.
 
 Now you can log your changes using makemigrations. This transforms your model changes into python code to make them deployable to another databases.
 
@@ -70,8 +71,7 @@ After you created the migrations you have to apply them: migrate.
 So instead of using syncdb you should use makemigrations and then migrate.
 </pre></div>
 
-
-<p><br></p>
+<br></p>
 <blockquote>
 <p>1.9 版本之后, 彻底移除了 syncdb 命令.</p>
 </blockquote>
@@ -80,25 +80,23 @@ So instead of using syncdb you should use makemigrations and then migrate.
 <li>makemigrations, 根据模型的变更创建新的迁移脚本</li>
 <li>migrate, 使迁移生效, 以及未生效时报告它们的状态</li>
 </ul>
-<p>你应该把迁移作为数据库架构的版本<strong>控制系统</strong>.<br>
+<p>你应该把迁移作为数据库架构的版本**控制系统**.<br>
 <code>makemigrations</code> 负责包装模型变更到独立的迁移文件中, 类似于提交代码<br>
 <code>migrate</code> 负责应用到数据库中</p>
 <p>迁移文件存放在每个应用程序的一个 <code>migrations</code> 目录中, 被设计成提交, 并作为发布的一部分到代码库中; 你应该在你的开发机器上使用它们, 然后在你的同事的机器上运行相同的迁移脚本, <code>staging machines</code>, 最终应用在生产机器环境.</p>
 <p>迁移将在相同的数据集上以相同的方法运行并产生一致的结果, 这意味着你将看到在开发阶段、staging 阶段, 在相同的情况下和生产环境上的表现完全一致.</p>
-<h1 id="migrate_1">二、使用 migrate</h1>
+<h1 id="migrate_1"><a name="user-content-migrate_1" href="#migrate_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>二、使用 migrate</h1>
 <p>migrate 的使用非常简单: 修改 model, 比如增加 field, 然后运行</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">python manager<span style="color: #666666">.</span>py makemigrations
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">python</span> <span style="color: #333333">manager</span><span style="color: #A71D7E">.</span><span style="color: #333333">py</span> <span style="color: #333333">makemigrations</span>
 </pre></div>
 
-
-<p><br>
+<br>
 你的 model 会被扫描, 然后与之前的版本作比较, 在 app 的 migrations 目录下生成本次迁移文件.</p>
 <p>我们建议查看一下该迁移文件, 确保没有问题, 然后运行:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">python manager<span style="color: #666666">.</span>py migrate
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">python</span> <span style="color: #333333">manager</span><span style="color: #A71D7E">.</span><span style="color: #333333">py</span> <span style="color: #333333">migrate</span>
 </pre></div>
 
-
-<p><br>
+<br>
 migrate 命令会进行比较, 并应用该迁移.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -119,7 +117,6 @@ migrate 命令会进行比较, 并应用该迁移.</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -143,14 +140,13 @@ migrate 命令会进行比较, 并应用该迁移.</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -54,20 +55,19 @@
 
     <p>对于普通的生成器(参考下面的例子), 第一个 <code>next</code> 调用, 相当于启动生成器, 会从生成器函数的第一行代码开始执行, 直到第一次执行完 <code>yield</code> 语句 (第4行) 后, 跳出生成器函数.<br>
 然后第二个 <code>next</code> 调用, 进入生成器函数后, 从 <code>yield</code> 语句的下一句语句 (第5行) 开始执行, 然后重新运行到 <code>yield</code> 语句, 执行后, 跳出生成器函数，后面再次调用 <code>next</code>, 依次类推.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">consumer</span>():
-    r <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;here&#39;</span>
-    <span style="color: #AA22FF; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">xrange</span>(<span style="color: #666666">3</span>):
-        <span style="color: #AA22FF; font-weight: bold">yield</span> r
-        r <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;200 OK&#39;</span> <span style="color: #666666">+</span> <span style="color: #AA22FF">str</span>(i)
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">consumer</span>():
+    <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;here&#39;</span>
+    <span style="color: #A71D5D">for</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">xrange</span>(<span style="color: #0086b3">3</span>):
+        <span style="color: #A71D5D">yield</span> <span style="color: #333333">r</span>
+        <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;200 OK&#39;</span> <span style="color: #A71D7E">+</span> <span style="color: #ED6A43">str</span>(<span style="color: #333333">i</span>)
 
-c <span style="color: #666666">=</span> consumer()
-n1 <span style="color: #666666">=</span> c<span style="color: #666666">.</span>next()
-n2 <span style="color: #666666">=</span> c<span style="color: #666666">.</span>next()
-n3 <span style="color: #666666">=</span> c<span style="color: #666666">.</span>next()
+<span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">consumer</span>()
+<span style="color: #333333">n1</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">next</span>()
+<span style="color: #333333">n2</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">next</span>()
+<span style="color: #333333">n3</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">next</span>()
 </pre></div>
 
-
-<p><br>
+<br>
 了解了 <code>next()</code> 如何让包含 <code>yield</code> 的函数执行后, 我们再来看另外一个非常重要的函数 <code>send(msg)</code>.</p>
 <p>其实 <code>next()</code> 和 <code>send()</code> 在一定意义上作用是相似的, 区别是 <code>send()</code> 可以传递 <code>yield</code> 表达式的值进去, 而 <code>next()</code> 不能传递特定的值, 只能传递 None 进去.</p>
 <p>因此, 我们可以看做 <code>c.next()</code> 和 <code>c.send(None)</code> 作用是一样的.</p>
@@ -77,47 +77,46 @@ n3 <span style="color: #666666">=</span> c<span style="color: #666666">.</span>n
 <p>下面运行到 <code>send(1)</code> 时, 进入生成器函数, 注意这里与调用 <code>next</code> 的不同, 这里是从第四行开始执行, 把 1 赋值给 n, 但是并不执行 <code>yield</code> 部分.</p>
 <p>下面继续从 <code>yield</code> 的下一语句继续执行, 然后重新运行到 <code>yield</code> 语句, 执行后, 跳出生成器函数.</p>
 <p>即 <code>send</code> 和 <code>next</code> 相比, 只是开始多了一次赋值的动作, 其他运行流程是相同的.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">consumer</span>():
-    r <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;&#39;</span>
-    <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #AA22FF">True</span>:
-        n <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">yield</span> r
-        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF; font-weight: bold">not</span> n:
-            <span style="color: #AA22FF; font-weight: bold">return</span>
-        <span style="color: #AA22FF; font-weight: bold">print</span>(<span style="color: #BB4444">&#39;[CONSUMER] Consuming </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">...&#39;</span> <span style="color: #666666">%</span> n)
-        r <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;200 OK&#39;</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">consumer</span>():
+    <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;&#39;</span>
+    <span style="color: #A71D5D">while</span> <span style="color: #0086B3">True</span>:
+        <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">yield</span> <span style="color: #333333">r</span>
+        <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">not</span> <span style="color: #333333">n</span>:
+            <span style="color: #A71D5D">return</span>
+        <span style="color: #A71D5D">print</span>(<span style="color: #183691">&#39;[CONSUMER] Consuming %s...&#39;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">n</span>)
+        <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;200 OK&#39;</span>
 
-<span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">produce</span>(c):
-    c<span style="color: #666666">.</span>send(<span style="color: #AA22FF">None</span>)
-    n <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-    <span style="color: #AA22FF; font-weight: bold">while</span> n <span style="color: #666666">&lt;</span> <span style="color: #666666">5</span>:
-        n <span style="color: #666666">=</span> n <span style="color: #666666">+</span> <span style="color: #666666">1</span>
-        <span style="color: #AA22FF; font-weight: bold">print</span>(<span style="color: #BB4444">&#39;[PRODUCER] Producing </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">...&#39;</span> <span style="color: #666666">%</span> n)
-        r <span style="color: #666666">=</span> c<span style="color: #666666">.</span>send(n)
-        <span style="color: #AA22FF; font-weight: bold">print</span>(<span style="color: #BB4444">&#39;[PRODUCER] Consumer return: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BB4444">&#39;</span> <span style="color: #666666">%</span> r)
-    c<span style="color: #666666">.</span>close()
+<span style="color: #A71D5D">def</span> <span style="color: #795DA3">produce</span>(<span style="color: #333333">c</span>):
+    <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">send</span>(<span style="color: #0086B3">None</span>)
+    <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span>
+    <span style="color: #A71D5D">while</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">5</span>:
+        <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">1</span>
+        <span style="color: #A71D5D">print</span>(<span style="color: #183691">&#39;[PRODUCER] Producing %s...&#39;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">n</span>)
+        <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">send</span>(<span style="color: #333333">n</span>)
+        <span style="color: #A71D5D">print</span>(<span style="color: #183691">&#39;[PRODUCER] Consumer return: %s&#39;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">r</span>)
+    <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">close</span>()
 
-c <span style="color: #666666">=</span> consumer()
-produce(c)
+<span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">consumer</span>()
+<span style="color: #333333">produce</span>(<span style="color: #333333">c</span>)
 </pre></div>
 
-
-<p><br>
+<br>
 运行结果:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Producing 1...
-<span style="color: #666666">[</span>CONSUMER<span style="color: #666666">]</span> Consuming 1...
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Consumer <span style="color: #AA22FF; font-weight: bold">return</span>: <span style="color: #666666">200</span> OK
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Producing 2...
-<span style="color: #666666">[</span>CONSUMER<span style="color: #666666">]</span> Consuming 2...
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Consumer <span style="color: #AA22FF; font-weight: bold">return</span>: <span style="color: #666666">200</span> OK
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Producing 3...
-<span style="color: #666666">[</span>CONSUMER<span style="color: #666666">]</span> Consuming 3...
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Consumer <span style="color: #AA22FF; font-weight: bold">return</span>: <span style="color: #666666">200</span> OK
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Producing 4...
-<span style="color: #666666">[</span>CONSUMER<span style="color: #666666">]</span> Consuming 4...
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Consumer <span style="color: #AA22FF; font-weight: bold">return</span>: <span style="color: #666666">200</span> OK
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Producing 5...
-<span style="color: #666666">[</span>CONSUMER<span style="color: #666666">]</span> Consuming 5...
-<span style="color: #666666">[</span>PRODUCER<span style="color: #666666">]</span> Consumer <span style="color: #AA22FF; font-weight: bold">return</span>: <span style="color: #666666">200</span> OK
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Producing 1...
+<span style="color: #A71D7E">[</span>CONSUMER<span style="color: #A71D7E">]</span> Consuming 1...
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Consumer <span style="color: #A71D5D">return</span>: <span style="color: #0086b3">200</span> OK
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Producing 2...
+<span style="color: #A71D7E">[</span>CONSUMER<span style="color: #A71D7E">]</span> Consuming 2...
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Consumer <span style="color: #A71D5D">return</span>: <span style="color: #0086b3">200</span> OK
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Producing 3...
+<span style="color: #A71D7E">[</span>CONSUMER<span style="color: #A71D7E">]</span> Consuming 3...
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Consumer <span style="color: #A71D5D">return</span>: <span style="color: #0086b3">200</span> OK
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Producing 4...
+<span style="color: #A71D7E">[</span>CONSUMER<span style="color: #A71D7E">]</span> Consuming 4...
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Consumer <span style="color: #A71D5D">return</span>: <span style="color: #0086b3">200</span> OK
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Producing 5...
+<span style="color: #A71D7E">[</span>CONSUMER<span style="color: #A71D7E">]</span> Consuming 5...
+<span style="color: #A71D7E">[</span>PRODUCER<span style="color: #A71D7E">]</span> Consumer <span style="color: #A71D5D">return</span>: <span style="color: #0086b3">200</span> OK
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
 
@@ -138,7 +137,6 @@ produce(c)
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -162,14 +160,13 @@ produce(c)
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

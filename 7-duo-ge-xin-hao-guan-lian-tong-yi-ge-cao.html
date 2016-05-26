@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -57,19 +58,19 @@
 <p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
 <p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
 <p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
+<p>答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.</p>
 <p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect()的第一个参数).</p>
 <p>新建 Qt 项目, 拖拽界面.</p>
 <p><img alt="" src="http://i59.tinypic.com/nzlmxz.jpg" /></p>
 <p>将几个按钮和编辑框的对象名分别改成: pushButton_4, pushButton_5, pushButton_6, lineEdit_Out.</p>
 <p>返回 VS 中, 在头文件中添加槽函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; slots:
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; slots:
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; On_Out();
 </pre></div>
 
 
 <p>在.cpp实现文件中, 关联信号/槽, 和实现槽函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">testCalc::testCalc(QWidget *&lt;span style=&quot;color: #000000;&quot;&gt;parent)
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>testCalc::testCalc(QWidget *&lt;span style=&quot;color: #000000;&quot;&gt;parent)
     : QMainWindow(parent)
 {
     ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
@@ -106,7 +107,6 @@ tsc</p>
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -130,14 +130,13 @@ tsc</p>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

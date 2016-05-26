@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -61,36 +62,36 @@
 <p><strong>支持的操作:</strong></p>
 <ul>
 <li>列出 <strong>databaseName</strong> 数据库中的 <strong>collectionName</strong> 集合下的所有数据:<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/">http://127.0.0.1:28017/databaseName/collectionName/</a></li>
 </ul>
 </li>
 <li>给上面的数据集添加一个 <strong>limit</strong> 参数限制返回 10 条<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/?limit=-10</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/?limit=-10">http://127.0.0.1:28017/databaseName/collectionName/?limit=-10</a></li>
 </ul>
 </li>
 <li>给上面的数据加上一个 <strong>skip</strong> 参数设定跳过 5 条记录<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/?skip=5</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/?skip=5">http://127.0.0.1:28017/databaseName/collectionName/?skip=5</a></li>
 </ul>
 </li>
 <li>同时加上 <strong>limit</strong> 限制和 <strong>skip</strong> 限制<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/?skip=5&amp;limit=10</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/?skip=5&amp;limit=10">http://127.0.0.1:28017/databaseName/collectionName/?skip=5&amp;limit=10</a></li>
 </ul>
 </li>
 <li>按条件 <strong>{a: 1}</strong> 进行结果筛选 (在关键字 <strong>filter</strong> 后面接上你的字段名)<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1">http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1</a></li>
 </ul>
 </li>
 <li>加条件的同时再加上 <strong>limit</strong> 限制返回条数<ul>
-<li>http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1&amp;limit=-10</li>
+<li><a href="http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1&amp;limit=-10">http://127.0.0.1:28017/databaseName/collectionName/?filter_a=1&amp;limit=-10</a></li>
 </ul>
 </li>
 <li>执行任意命令, 可以通过 <strong>admin/$cmd</strong>, 相当于 <strong>runCommand</strong><ul>
 <li>执行 {listDatabase: 1} 命令:<ul>
-<li>http://localhost:28017/admin/$cmd/?filter_listDatabases=1&amp;limit=1</li>
+<li><a href="http://localhost:28017/admin/$cmd/?filter_listDatabases=1&amp;limit=1">http://localhost:28017/admin/$cmd/?filter_listDatabases=1&amp;limit=1</a></li>
 </ul>
 </li>
 <li>查询集合的记录个数:<ul>
-<li>http://localhost:28017/admin/$cmd/?filter_count=collection&amp;limit=1</li>
+<li><a href="http://localhost:28017/admin/$cmd/?filter_count=collection&amp;limit=1">http://localhost:28017/admin/$cmd/?filter_count=collection&amp;limit=1</a></li>
 </ul>
 </li>
 </ul>
@@ -115,7 +116,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -139,14 +139,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

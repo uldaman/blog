@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -59,12 +60,12 @@
 <li><a href="#_1">字符串&lt;=&gt;基本类型</a></li>
 </ul>
 </div>
-<h2 id="string">String 类</h2>
+<h2 id="string"><a name="user-content-string" href="#string" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>String 类</h2>
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">String si <span style="color: #666666">=</span> <span style="color: #BB4444">&quot;xxx&quot;</span><span style="color: #666666">;</span>
-String s2 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">();</span>
-String s3 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">(</span><span style="color: #BB4444">&quot;xxx&quot;</span><span style="color: #666666">);</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">String</span> <span style="color: #333333">si</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&quot;xxx&quot;</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">String</span> <span style="color: #333333">s2</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">String</span><span style="color: #A71D7E">();</span>
+<span style="color: #333333">String</span> <span style="color: #333333">s3</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">String</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;xxx&quot;</span><span style="color: #A71D7E">);</span>
 </pre></div>
 
 
@@ -84,7 +85,7 @@ String s3 <span style="color: #666666">=</span> <span style="color: #AA22FF; fon
 <li>使用 indexOf 进行字符或字符串查找时, 如果匹配返回位置索引, 如果没有匹配结果, 返回 -1</li>
 <li>使用 substring(beginIndex , endIndex) 进行字符串截取时, 包括 beginIndex 位置的字符, 不包括 endIndex 位置的字符</li>
 </ul>
-<h2 id="stringbuilder-stringbuffer">StringBuilder / StringBuffer</h2>
+<h2 id="stringbuilder-stringbuffer"><a name="user-content-stringbuilder-stringbuffer" href="#stringbuilder-stringbuffer" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>StringBuilder / StringBuffer</h2>
 <p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 <strong>StringBuilder</strong> 类或 <strong>StringBuffer</strong> 类存储字符串.</p>
 <p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.</p>
 <p>至于 StringBuilder 和StringBuffer, 它们基本相似, 不同之处, StringBuffer 是线程安全的, 而 StringBuilder 则没有实现线程安全功能, 所以性能略高.</p>
@@ -95,17 +96,17 @@ String s3 <span style="color: #666666">=</span> <span style="color: #AA22FF; fon
 <p>StringBuilder str2 = new StringBuilder(“xxx”);</p>
 <p>StringBuilder 类也提供了一些方法来操作字符串:</p>
 <p><img alt="" src="http://i59.tinypic.com/2mzb78k.jpg" /></p>
-<h2 id="_1">字符串&lt;=&gt;基本类型</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字符串&lt;=&gt;基本类型</h2>
 <p>Java 提供三种方法实现基本类型向字符串转换:</p>
 <ul>
 <li>使用包装类的 toString() 方法</li>
 <li>使用 String 类的 valueOf() 方法</li>
 <li>用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #00BB00; font-weight: bold">int</span> c <span style="color: #666666">=</span> <span style="color: #666666">10;</span>
-String str1 <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">toString</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
-String str2 <span style="color: #666666">=</span> String<span style="color: #666666">.</span><span style="color: #BB4444">valueOf</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
-String str3 <span style="color: #666666">=</span> c <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;&quot;</span><span style="color: #666666">;</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">String</span> <span style="color: #333333">str1</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Integer</span><span style="color: #A71D7E">.</span><span style="color: #008080">toString</span><span style="color: #A71D7E">(</span><span style="color: #333333">c</span><span style="color: #A71D7E">);</span>
+<span style="color: #333333">String</span> <span style="color: #333333">str2</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">String</span><span style="color: #A71D7E">.</span><span style="color: #008080">valueOf</span><span style="color: #A71D7E">(</span><span style="color: #333333">c</span><span style="color: #A71D7E">);</span>
+<span style="color: #333333">String</span> <span style="color: #333333">str3</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">c</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;&quot;</span><span style="color: #A71D7E">;</span>
 </pre></div>
 
 
@@ -114,9 +115,9 @@ String str3 <span style="color: #666666">=</span> c <span style="color: #666666"
 <li>调用包装类的 parseXxx 静态方法</li>
 <li>调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%">String str <span style="color: #666666">=</span> <span style="color: #BB4444">&quot;10&quot;</span><span style="color: #666666">;</span>
-<span style="color: #00BB00; font-weight: bold">int</span> d <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">paseInt</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
-<span style="color: #00BB00; font-weight: bold">int</span> e <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">valueOf</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">String</span> <span style="color: #333333">str</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&quot;10&quot;</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">d</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Integer</span><span style="color: #A71D7E">.</span><span style="color: #008080">paseInt</span><span style="color: #A71D7E">(</span><span style="color: #333333">str</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">e</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Integer</span><span style="color: #A71D7E">.</span><span style="color: #008080">valueOf</span><span style="color: #A71D7E">(</span><span style="color: #333333">str</span><span style="color: #A71D7E">);</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
@@ -137,7 +138,6 @@ String str3 <span style="color: #666666">=</span> c <span style="color: #666666"
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -161,14 +161,13 @@ String str3 <span style="color: #666666">=</span> c <span style="color: #666666"
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />	
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
     <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
 </head>
 
@@ -58,7 +59,7 @@
 <li><a href="#2-grasp-solid">2. GRASP &amp; SOLID</a></li>
 </ul>
 </div>
-<h1 id="1">1. 什么是系统设计</h1>
+<h1 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 什么是系统设计</h1>
 <p>到了这一步, 说明你最起码已经迭代过一轮需求分析了, 而系统设计, 就是根据需求分析阶段的产出 (即系统模块、功能要求等), 设计出一个符合 <strong>GRASP</strong> &amp; <strong>SOLID</strong> 的软件架构 (什么是 GRASP &amp; SOLID, 后面再介绍).</p>
 <p>这个阶段的任务是:</p>
 <ul>
@@ -66,19 +67,19 @@
 <li>设计数据库的结构</li>
 <li>设计模块的控制流程</li>
 </ul>
-<p>这个阶段又分两个步骤: <strong>概要设计</strong>和<strong>详细设计</strong>.</p>
-<p>概要设计是<strong>黑盒</strong>设计, 解决软件系统的模块划分和模块的层次机构以及数据库设计, 详细设计是<strong>白盒</strong>设计, 解决每个模块的控制流程, 内部算法和数据结构的设计.</p>
-<p>现在有些敏捷开发思想, 不推荐使用<em>详细设计</em>, 将系统设计阶段统称为<strong>架构设计</strong>.<br>
+<p>这个阶段又分两个步骤: <strong>概要设计**和**详细设计</strong>.</p>
+<p>概要设计是**黑盒**设计, 解决软件系统的模块划分和模块的层次机构以及数据库设计, 详细设计是**白盒**设计, 解决每个模块的控制流程, 内部算法和数据结构的设计.</p>
+<p>现在有些敏捷开发思想, 不推荐使用*详细设计*, 将系统设计阶段统称为**架构设计**.<br>
 也就是说, 这个阶段的任务从上面的三条, 变为两条 (即不进行详细设计, 不涉及具体算法、流程):</p>
 <ul>
 <li>设计软件系统的模块层次结构</li>
 <li>设计数据库的结构</li>
 </ul>
-<p>另外要注意, 在需求阶段, 我们用用例图中的__Package__来表达系统、子系统、模块、子模块间的关系, 但这和系统设计阶段的模块层次<strong>不是</strong>一一对应的, 确切的说需求阶段的模块划分表达的是更上层的东西, 即功能模块的划分, 而系统设计阶段的模块划分则是从软件工程角度出发, 应该按 GRASP &amp; SOLID, 是两种完全不同的概念.</p>
+<p>另外要注意, 在需求阶段, 我们用用例图中的__Package__来表达系统、子系统、模块、子模块间的关系, 但这和系统设计阶段的模块层次**不是**一一对应的, 确切的说需求阶段的模块划分表达的是更上层的东西, 即功能模块的划分, 而系统设计阶段的模块划分则是从软件工程角度出发, 应该按 GRASP &amp; SOLID, 是两种完全不同的概念.</p>
 <blockquote>
 <p>关于系统设计, 我在另一篇笔记 <a href="https://www.smallcpp.com/12-wrup-zui-jia-an-li.html#design">12、WRUP 最佳案例</a> 中也提到了一些, 可以去参考下.</p>
 </blockquote>
-<h1 id="2-grasp-solid">2. GRASP &amp; SOLID</h1>
+<h1 id="2-grasp-solid"><a name="user-content-2-grasp-solid" href="#2-grasp-solid" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. GRASP &amp; SOLID</h1>
 <p><strong>SOLID</strong>, 这是描述设计原则的一个专业术语, 由我们可爱的代码整洁之道传教者鲍勃 (罗伯特C. 马丁) 大叔提出, 是一组用于指导我们如何写出&rdquo;好代码&rdquo;的原则.</p>
 <p>SOLID 的解释为:</p>
 <ul>
@@ -91,8 +92,8 @@
 <blockquote>
 <p>关于这几个原则的定义, 参考我另一篇笔记: <a href="http://www.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html">六大设计原则</a></p>
 </blockquote>
-<p><strong>GRASP</strong>, 全称为General Responsibility Assignment Software Pattern, 即<strong>通用职责分配软件模式</strong>, 它由《UML 和模式应用》 (Applying UML and Patterns) 一书作者 Craig Larman 提出.</p>
-<p>GRASP 是对象职责分配的基本原则, 其核心思想是<strong>职责分配</strong> (Responsibility Assignment), 用职责设计对象 (Designing Objects with Responsibilities).</p>
+<p><strong>GRASP</strong>, 全称为General Responsibility Assignment Software Pattern, 即**通用职责分配软件模式**, 它由《UML 和模式应用》 (Applying UML and Patterns) 一书作者 Craig Larman 提出.</p>
+<p>GRASP 是对象职责分配的基本原则, 其核心思想是**职责分配** (Responsibility Assignment), 用职责设计对象 (Designing Objects with Responsibilities).</p>
 <p>GRASP 包括以下内容:</p>
 <ul>
 <li>Information Expert (信息专家模式)</li>
@@ -114,8 +115,8 @@
 <li>Protected Variations 与 Open/closed principle</li>
 </ul>
 <p>GRASP &amp; SOLID 是 GOF (二十三种设计模式) 的基础, GOF 只是在某些情景下对 GRASP &amp; SOLID 的具体实践.</p>
-<p>GRASP 以<strong>职责驱动设计</strong>, 什么是职责呢?</p>
-<p>简单地说, 一个类或构件的职责包括两个方面: 一个是<strong>知道</strong>的事, 对于一个类来说就是他的属性; 一个是<strong>能做</strong>的事, 对于一个类来说就是他的方法.</p>
+<p>GRASP 以**职责驱动设计**, 什么是职责呢?</p>
+<p>简单地说, 一个类或构件的职责包括两个方面: 一个是**知道**的事, 对于一个类来说就是他的属性; 一个是**能做**的事, 对于一个类来说就是他的方法.</p>
 <ul>
 <li>&ldquo;知道&rdquo;职责 —— 表示这个类, 它&rdquo;知道&rdquo;些什么<ul>
 <li>了解私有封装数据</li>
@@ -129,7 +130,7 @@
 </ul>
 </li>
 </ul>
-<p>职责的分配可使用<strong>时序图</strong>或<strong>协作图</strong>来表达, 面向对象设计过程就是将责任分配给类的过程.</p>
+<p>职责的分配可使用**时序图**或**协作图**来表达, 面向对象设计过程就是将责任分配给类的过程.</p>
 <p><strong>例子:</strong> 在一个销售软件中存在一个交费行为, 此时, 就可将交费识别为一个&rdquo;行为&rdquo;职责.</p>
 <ul>
 <li>&ldquo;行为&rdquo;职责表示交费的行为, 需要创建一个付款记录的对象 Payment</li>
@@ -159,7 +160,6 @@
             <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
         </ul>
 
-		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
@@ -183,14 +183,13 @@
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
-   
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
         </ul>
-		
+
         <h5 class="sidebar-title">Social</h5>
         <ul class="side-nav">
             <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
