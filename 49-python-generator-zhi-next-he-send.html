@@ -79,7 +79,7 @@
 <p>即 <code>send</code> 和 <code>next</code> 相比, 只是开始多了一次赋值的动作, 其他运行流程是相同的.</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">consumer</span>():
     <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;&#39;</span>
-    <span style="color: #A71D5D">while</span> <span style="color: #0086B3">True</span>:
+    <span style="color: #A71D5D">while</span> <span style="color: #ed6a43">True</span>:
         <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">yield</span> <span style="color: #333333">r</span>
         <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">not</span> <span style="color: #333333">n</span>:
             <span style="color: #A71D5D">return</span>
@@ -87,7 +87,7 @@
         <span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;200 OK&#39;</span>
 
 <span style="color: #A71D5D">def</span> <span style="color: #795DA3">produce</span>(<span style="color: #333333">c</span>):
-    <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">send</span>(<span style="color: #0086B3">None</span>)
+    <span style="color: #333333">c</span><span style="color: #A71D7E">.</span><span style="color: #333333">send</span>(<span style="color: #ed6a43">None</span>)
     <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span>
     <span style="color: #A71D5D">while</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">5</span>:
         <span style="color: #333333">n</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">1</span>

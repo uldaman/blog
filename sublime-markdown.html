@@ -250,8 +250,8 @@ Summary: Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Gith
 <span style="color: #A71D5D">import</span> <span style="color: #555555">sublime</span><span style="color: #A71D7E">,</span> <span style="color: #555555">sublime_plugin</span>
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">AddCurrentTimeCommand</span>(<span style="color: #333333">sublime_plugin</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextCommand</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">edit</span>):
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">run_command</span>(<span style="color: #183691">&quot;insert_snippet&quot;</span>,
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">edit</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">run_command</span>(<span style="color: #183691">&quot;insert_snippet&quot;</span>,
             {
                 <span style="color: #183691">&quot;contents&quot;</span>: <span style="color: #183691">&quot;%s&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">datetime</span><span style="color: #A71D7E">.</span><span style="color: #333333">datetime</span><span style="color: #A71D7E">.</span><span style="color: #333333">now</span>()<span style="color: #A71D7E">.</span><span style="color: #333333">strftime</span>(<span style="color: #183691">&quot;%Y-%m-%d %H:%M&quot;</span>)
             }

@@ -73,11 +73,11 @@
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">time</span>
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">WorkThread</span>(<span style="color: #333333">QThread</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__int__</span>(<span style="color: #0086B3">self</span>):
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">finished</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">deleteLater</span>)
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">WorkThread</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__int__</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">finished</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">deleteLater</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">WorkThread</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>):
         <span style="color: #333333">time</span><span style="color: #A71D7E">.</span><span style="color: #333333">sleep</span>(<span style="color: #0086b3">10</span>)
 
 <span style="color: #333333">workThread</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">WorkThread</span>()
@@ -87,16 +87,16 @@
 <br>
 需要注意, 如果你在一个类的方法里 start 一个线程, 你需要将线程实例申明为类的属性, 否则, 当你调用完这个 start 线程的类方法后, 由于方法退出, 局部的线程实例被销毁, 就会报错: <code>QThread: Destroyed while thread is still running</code>.</p>
 <p>例如下面这样就会报错:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">word_start</span>(<span style="color: #0086B3">self</span>):
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">word_start</span>(<span style="color: #ed6a43">self</span>):
     <span style="color: #333333">workThread</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">WorkThread</span>()
     <span style="color: #333333">workThread</span><span style="color: #A71D7E">.</span><span style="color: #333333">start</span>()
 </pre></div>
 
 <br>
 要改成:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">word_start</span>(<span style="color: #0086B3">self</span>):
-    <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">workThread</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">WorkThread</span>()
-    <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">workThread</span><span style="color: #A71D7E">.</span><span style="color: #333333">start</span>()
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">word_start</span>(<span style="color: #ed6a43">self</span>):
+    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">workThread</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">WorkThread</span>()
+    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">workThread</span><span style="color: #A71D7E">.</span><span style="color: #333333">start</span>()
 </pre></div>
 
 <br></p>
@@ -108,13 +108,13 @@
 <span style="color: #A71D5D">class</span> <span style="color: #445588">WorkThread</span>(<span style="color: #333333">QThread</span>):
     <span style="color: #333333">sin_out</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()  <span style="color: #999988; font-style: italic"># 定义一个信号</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__int__</span>(<span style="color: #0086B3">self</span>):
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">finished</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">deleteLater</span>)
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">WorkThread</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__int__</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">finished</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">deleteLater</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">WorkThread</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>):
         <span style="color: #333333">time</span><span style="color: #A71D7E">.</span><span style="color: #333333">sleep</span>(<span style="color: #0086b3">10</span>)
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_out</span><span style="color: #A71D7E">.</span><span style="color: #333333">emit</span>()  <span style="color: #999988; font-style: italic"># 发射信号</span>
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_out</span><span style="color: #A71D7E">.</span><span style="color: #333333">emit</span>()  <span style="color: #999988; font-style: italic"># 发射信号</span>
 
 <span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_output</span>():
     <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;线程结束&#39;</span>

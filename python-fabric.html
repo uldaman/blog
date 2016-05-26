@@ -430,7 +430,7 @@ fab 认为 urlopen 也是一个任务.</p>
 <span style="color: #999988; font-style: italic"># 通过继承 Task 类</span>
 <span style="color: #A71D5D">class</span> <span style="color: #445588">MyTask</span>(<span style="color: #333333">Task</span>):
     <span style="color: #333333">name</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&quot;deploy&quot;</span> <span style="color: #999988; font-style: italic"># 任务名为 deploy</span>
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>):
         <span style="color: #333333">run</span>(<span style="color: #183691">&#39;git clone foo&#39;</span>)
         <span style="color: #333333">sudo</span>(<span style="color: #183691">&#39;service apache2 restart&#39;</span>)
 
@@ -443,13 +443,13 @@ fab 认为 urlopen 也是一个任务.</p>
 <span style="color: #A71D5D">from</span> <span style="color: #555555">fabric.tasks</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">Task</span>
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">CustomTask</span>(<span style="color: #333333">Task</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">func</span>, <span style="color: #333333">myarg</span>, <span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>):
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">CustomTask</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>)
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">func</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">func</span>
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">myarg</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">myarg</span>
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">func</span>, <span style="color: #333333">myarg</span>, <span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>):
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">CustomTask</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>)
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">func</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">func</span>
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">myarg</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">myarg</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>, <span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">func</span>(<span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>)
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>, <span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>):
+        <span style="color: #A71D5D">return</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">func</span>(<span style="color: #A71D7E">*</span><span style="color: #333333">args</span>, <span style="color: #A71D7E">**</span><span style="color: #333333">kwargs</span>)
 
 <span style="color: #333333">@task</span>(<span style="color: #333333">task_class</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">CustomTask</span>, <span style="color: #333333">myarg</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;value&#39;</span>, <span style="color: #333333">alias</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;at&#39;</span>)
 <span style="color: #A71D5D">def</span> <span style="color: #795DA3">actual_task</span>():
@@ -497,7 +497,7 @@ fab 认为 urlopen 也是一个任务.</p>
 <span style="color: #A71D5D">def</span> <span style="color: #795DA3">migrate</span>():
     <span style="color: #A71D5D">pass</span>
 
-<span style="color: #333333">@task</span>(<span style="color: #333333">default</span> <span style="color: #A71D7E">=</span> <span style="color: #0086B3">True</span>)
+<span style="color: #333333">@task</span>(<span style="color: #333333">default</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">True</span>)
 <span style="color: #A71D5D">def</span> <span style="color: #795DA3">full_deploy</span>():
     <span style="color: #333333">migrate</span>()
 </pre></div>

@@ -564,21 +564,21 @@ def test_function():
 <span style="color: #183691">    Starts a SublimeREPL, attempting to use project&#39;s specified</span>
 <span style="color: #183691">    python interpreter.</span>
 <span style="color: #183691">    &quot;&quot;&quot;</span>
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">edit</span>, <span style="color: #333333">open_file</span><span style="color: #A71D7E">=</span><span style="color: #183691">&#39;$file&#39;</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">run</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">edit</span>, <span style="color: #333333">open_file</span><span style="color: #A71D7E">=</span><span style="color: #183691">&#39;$file&#39;</span>):
         <span style="color: #183691">&quot;&quot;&quot;Called on project_venv_repl command&quot;&quot;&quot;</span>
-        <span style="color: #333333">cmd_list</span> <span style="color: #A71D7E">=</span> [<span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">get_project_interpreter</span>(), <span style="color: #183691">&#39;-i&#39;</span>, <span style="color: #183691">&#39;-u&#39;</span>]
+        <span style="color: #333333">cmd_list</span> <span style="color: #A71D7E">=</span> [<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">get_project_interpreter</span>(), <span style="color: #183691">&#39;-i&#39;</span>, <span style="color: #183691">&#39;-u&#39;</span>]
         <span style="color: #A71D5D">if</span> <span style="color: #333333">open_file</span>:
             <span style="color: #333333">cmd_list</span><span style="color: #A71D7E">.</span><span style="color: #333333">append</span>(<span style="color: #333333">open_file</span>)
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">repl_open</span>(<span style="color: #333333">cmd_list</span><span style="color: #A71D7E">=</span><span style="color: #333333">cmd_list</span>)
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">repl_open</span>(<span style="color: #333333">cmd_list</span><span style="color: #A71D7E">=</span><span style="color: #333333">cmd_list</span>)
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">get_project_interpreter</span>(<span style="color: #0086B3">self</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">get_project_interpreter</span>(<span style="color: #ed6a43">self</span>):
         <span style="color: #183691">&quot;&quot;&quot;Return the project&#39;s specified python interpreter, if any&quot;&quot;&quot;</span>
-        <span style="color: #333333">settings</span> <span style="color: #A71D7E">=</span> <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">settings</span>()
+        <span style="color: #333333">settings</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">settings</span>()
         <span style="color: #A71D5D">return</span> <span style="color: #333333">settings</span><span style="color: #A71D7E">.</span><span style="color: #333333">get</span>(<span style="color: #183691">&#39;python_interpreter&#39;</span>, <span style="color: #183691">&#39;python&#39;</span>)
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">repl_open</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">cmd_list</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">repl_open</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">cmd_list</span>):
         <span style="color: #183691">&quot;&quot;&quot;Open a SublimeREPL using provided commands&quot;&quot;&quot;</span>
-        <span style="color: #0086B3">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">window</span>()<span style="color: #A71D7E">.</span><span style="color: #333333">run_command</span>(
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">view</span><span style="color: #A71D7E">.</span><span style="color: #333333">window</span>()<span style="color: #A71D7E">.</span><span style="color: #333333">run_command</span>(
             <span style="color: #183691">&#39;repl_open&#39;</span>, {
                 <span style="color: #183691">&#39;encoding&#39;</span>: <span style="color: #183691">&#39;utf8&#39;</span>,
                 <span style="color: #183691">&#39;type&#39;</span>: <span style="color: #183691">&#39;subprocess&#39;</span>,

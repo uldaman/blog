@@ -64,19 +64,19 @@
 <p>Python 多重继承使用 Method Resolution Order 的动态算法来解决一个方法名的调用顺序, mro 其实说来简单, 就是一个深度优先的继承列表, 很易理解, 但随之来的是遇到互不相同的构造器 __init__ 参数的问题.</p>
 <p>Codepad运行结果: <a href="http://codepad.org/qQNiMzBl"><a href="http://codepad.org/qQNiMzBl"><a href="http://codepad.org/qQNiMzBl">http://codepad.org/qQNiMzBl</a></a></a></p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">A</span>(<span style="color: #ED6A43">object</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">arg1</span>
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">A</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">A</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">B</span>(<span style="color: #ED6A43">object</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">B</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">B</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>)
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">C</span>(<span style="color: #333333">B</span>, <span style="color: #333333">A</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">C</span>, <span style="color: #0086B3">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">C</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
         <span style="color: #A71D5D">print</span> <span style="color: #333333">C</span><span style="color: #A71D7E">.</span><span style="color: #333333">__mro__</span>
 
 <span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">C</span>(<span style="color: #183691">&quot;C&#39;s arg1&quot;</span>, <span style="color: #183691">&quot;C&#39;s arg2&quot;</span>)
@@ -98,19 +98,19 @@ init func in A, with arg1 &#39;C&#39;s arg1&#39;
 <h3 id="1-super-mro"><a name="user-content-1-super-mro" href="#1-super-mro" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 使用传统类的方式, 显式调用被继承类的构造器, 避开 super 的 mro 自动化工作.</h3>
 <p>Codepad 看运行效果: <a href="http://codepad.org/XCVdKCPm"><a href="http://codepad.org/XCVdKCPm"><a href="http://codepad.org/XCVdKCPm">http://codepad.org/XCVdKCPm</a></a></a></p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">A</span>(<span style="color: #ED6A43">object</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">arg1</span>
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">B</span>(<span style="color: #ED6A43">object</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
 
 <span style="color: #A71D5D">class</span> <span style="color: #445588">C</span>(<span style="color: #333333">A</span>, <span style="color: #333333">B</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
         <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
         <span style="color: #999988; font-style: italic"># super(C, self).__init__(arg1)  # 这两行</span>
-        <span style="color: #333333">A</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>)  <span style="color: #999988; font-style: italic"># 等价</span>
-        <span style="color: #333333">B</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #0086B3">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #333333">A</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>)  <span style="color: #999988; font-style: italic"># 等价</span>
+        <span style="color: #333333">B</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
         <span style="color: #A71D5D">print</span> <span style="color: #333333">C</span><span style="color: #A71D7E">.</span><span style="color: #333333">__mro__</span>
 
 <span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">C</span>(<span style="color: #183691">&quot;C&#39;s arg1&quot;</span>, <span style="color: #183691">&quot;C&#39;s arg2&quot;</span>)
