@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>3、Hello qt</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/3-hello-qt.html" rel="bookmark"
+        title="Permalink to 3、Hello qt">3、Hello qt</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-15T14:11:00+08:00">Sun 15 February 2015
+</h6>
+
+
+    <p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
+<p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+#include &lt;/span&gt;&lt;QtWidgets/QApplication&gt;
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;argv[])
+{
+    QApplication a(argc, argv);
+    Demo w;
+    w.show();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; a.exec();
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>对于 Qt 程序来说, <code>main()</code>函数一般以创建 application 对象开始(GUI 程序是<code>QApplication</code>, 非 GUI 程序是<code>QCoreApplication</code>, <code>QApplication</code>实际上是<code>QCoreApplication</code>的子类),后面才是实际业务的代码. 这个对象用于管理 Qt 程序的生命周期、 开启事件循环.</p>
+<p>而 demo.h 里是我们 Qt 程序的界面类, 它继承于 QWidget类, 它是 Qt 程序所有用户界面对象的基类.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;#ifndef DEMO_H
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; DEMO_H&lt;span style=&quot;color: #000000&quot;&gt;
+
+#include &lt;/span&gt;&lt;QtWidgets/QWidget&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+#include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;ui_demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Demo : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QWidget
+{
+    Q_OBJECT
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    Demo(QWidget &lt;/span&gt;*parent = &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo();
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    Ui::DemoClass ui;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#endif&lt;/span&gt; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; DEMO_H&lt;/span&gt;
+</pre></div>
+
+
+<p>这里面的代码我们以后再分析, 先写出 Hellp Qt! 出来.</p>
+<p>双击 emo.ui 文件, 就会用 Qt Creator 打开界面.</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image17.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb17.png" /></a></p>
+<p>左侧是 Qt 程序的控件, 我们主要使用的有:</p>
+<table cellpadding="2" cellspacing="0" border="0" width="400" >
+<tbody >
+<tr >
+
+<td width="200" valign="top" >QLabel(可以有超链接和图片)
+</td>
+
+<td width="200" valign="top" >静态文本
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QTabWidget
+</td>
+
+<td width="200" valign="top" >选项卡
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QTextEdit
+</td>
+
+<td width="200" valign="top" >多行文本框
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QLineEdit
+</td>
+
+<td width="200" valign="top" >单行文本框
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QGroupBox
+</td>
+
+<td width="200" valign="top" >分组框
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QSplitLine
+</td>
+
+<td width="200" valign="top" >分隔线
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QTableWidget
+</td>
+
+<td width="200" valign="top" >列表框
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QPushButton
+</td>
+
+<td width="200" valign="top" >按钮
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QCheckBox
+</td>
+
+<td width="200" valign="top" >复选
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QRadioButton
+</td>
+
+<td width="200" valign="top" >单选
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QHBoxLayout
+</td>
+
+<td width="200" valign="top" >水平布局
+</td></tr>
+<tr >
+
+<td width="200" valign="top" >QVBoxLayout
+</td>
+
+<td width="200" valign="top" >垂直布局
+</td></tr></tbody></table>
+
+<p>在左侧找到 Label 控件, 拖拽到中间的窗口界面上</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image18.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb18.png" /></a></p>
+<p>右键选择改变对象名称, 改成我们想要的对象名:</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image19.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb19.png" /></a></p>
+<p>右侧可以设计控件的一些属性, 例如我们把 Label 的文本改成局中显示:</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image20.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb20.png" /></a></p>
+<p>返回我们的 VS 工程, 打开 demo.cpp:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+&lt;font style=&quot;background-color: #ff0000&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;QLabel&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+
+Demo::Demo(QWidget &lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt;parent)
+    : QWidget(parent)
+{
+    ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;font style=&quot;background-color: #ff0000&quot;&gt;ui.label_Hello&lt;/font&gt;&lt;/span&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;-&gt;setText(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello Qt!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;);&lt;/font&gt;
+}
+
+Demo::&lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo()
+{
+
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>红色部分是我们新添加的代码, 功能是设计刚才拖拽的 QLabel 的显示文字.</p>
+<p>注意我们要使用 Qt 的哪个类, 就要添加那个类的头文件.</p>
+<p>编译运行:</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image21.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb21.png" /></a>
+??</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

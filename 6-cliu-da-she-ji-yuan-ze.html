@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>6、[C++]六大设计原则</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html" rel="bookmark"
+        title="Permalink to 6、[C++]六大设计原则">6、[C++]六大设计原则</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-15T14:21:00+08:00">Sun 15 February 2015
+</h6>
+
+
+    <h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>单一职责原则</h3>
+<p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
+<p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了**简单工厂模式**和**策略模式**.</p>
+<p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
+<p><strong>软件设计真正要做的许多内容, 就是发现职责并把那此职责相互分离.</strong></p>
+<p>怎么判断是否应该分离?</p>
+<p>那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离.</p>
+<hr />
+<h3 id="-"><a name="user-content--" href="#-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>开放-封闭原则</h3>
+<p>开放-封闭原则: 软件实体(类 模块 函数等等), 应该是可以扩展但不可修改的.</p>
+<p>也就是说对于扩展是开放的, 对于更改是封闭的, 再换句话说就是**设计软件要容易维护又不容易出问题的最好办法是多扩展少修改.**
+要达到这样的效果就是我们在设计类的时候, 时刻要考虑尽量让这个类是足够好, 写好了就不要去修改了, 如果新需求来, 我们增加一些类就完事了, 原来的代码能不动则不动.</p>
+<p>但是, 无论是多么的”封闭”, 都会存在一些无法对之封闭的变化, 既然不可能完全封闭, 设计人员就必须对于它设计的模块应该对哪种变化封闭做出选择, 他必须先猜测出最有可能发生的变化种类, 然后构造抽象来隔离那些变化.</p>
+<p>再回想一下我们之前的计算器例子, 一开始的时候, 我们把计算的算法都封装在一个类当中:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Operation{
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; GetResult(&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; dNum_A, &lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; dNum_B, &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; cOp) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; dResult = &lt;span style=&quot;color: #800080;&quot;&gt;0.0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;switch&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; (cOp) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;case&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+            dResult &lt;/span&gt;= dNum_A +&lt;span style=&quot;color: #000000;&quot;&gt; dNum_B;
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;break&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;case&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;-&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+            dResult &lt;/span&gt;= dNum_A -&lt;span style=&quot;color: #000000;&quot;&gt; dNum_B;
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;break&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;case&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;*&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+            dResult &lt;/span&gt;= dNum_A *&lt;span style=&quot;color: #000000;&quot;&gt; dNum_B;
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;break&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;case&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;/&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+            dResult &lt;/span&gt;= dNum_A /&lt;span style=&quot;color: #000000;&quot;&gt; dNum_B;
+            &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;break&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+
+        }
+
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; dResult;
+    }
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>而在设计时已经猜测出以后可能会添加其他的运算, 所以我们把运算的算法抽象了出来.</p>
+<p>在一开始设计时, 我们有可能很难预先猜测, 但我们却可以在发生小变化时, 就及早去想办法应对发生大变化的可能. 换句话说:<strong>在我们最初编程时, 假设变化不会发生, 而当变化真实发生时, 我们就创建抽象一隔离以后发生的同种类变化.</strong></p>
+<blockquote>面对需求, 对程序的发动是通过增加新代码进行的, 而不是更改现有的代码.</blockquote>
+
+<p>当然开发人员应该仅对程序中呈现出频繁变化的那部分做出抽象, 然而, 对于应用程序中的每个部分都刻意地进行抽象同样也不是一个好注意, 拒绝不成熟的抽象和抽象本身一样重要.</p>
+<hr />
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>里氏代换原则</h3>
+<p>问题:
+当前有一个鸟类, 有一个飞行方法, 现在要求设计一个大雁类和一个企鹅类, 要怎么设计?</p>
+<p>从生物学上来看大雁和企鹅都属于鸟, 那么是不是可以让大雁类和企鹅类都继承鸟类呢?</p>
+<p>首先继承, 子类将拥有父类的所有成员变量和成员函数(private成员在子类中依然存在，但是却无法访问到), 那么企鹅虽然是鸟, 但它不会飞…如果企鹅继承了鸟类, 那么它就可以飞了…这明显不对, 所以企鹅不能继承鸟类.</p>
+<p>这就是**里氏代换原则**: 子类型必须能够替换掉它们的父类型.
+也就是说, 一个软件实体如果使用的是一个父类的话, 那么一定适用于其子类, 把程序里的父类都替换成它的子类, 程序的行为不会发生变化.</p>
+<p>还是拿之前的计算器(策略模式)说话, 在Context中引用了Operation抽象类, 而在实际使用中, 我们根据需要生成Operation的子类来替换掉Operation抽象类, 而Context本身并不知道发生了什么变化, 它依然调用的是Operation抽象类中的方法.</p>
+<p>正是因为子类可以替换其父类而不影响软件的功能, 父类才能真正被复用, 子类也能在父类的基础上增加新行为, 也才使得无需修改父类就可以扩展它.</p>
+<p>在学习继承时, 我们就知道子类是一种特殊的父类, 子类对象可以当作父类对象使用也就是因为里氏代换原则.</p>
+<hr />
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>依赖倒转原则</h3>
+<p>依赖倒转原则: 抽象不应该依赖细节, 细节应该依赖于抽象, 高层模块不应该依赖低层模块, 都应该依赖抽象.
+说白了, 就是应该针对接口编程而不要对实现编程</p>
+<p>在我们的计算器(策略模式)程序中, Context类依赖于Operation抽象类而不依赖具体的算法类, 具体的算法类也依赖于Operation抽象类, 根据里氏代换原则, 只要接口Operation抽象类是稳定的, 那么任何一个更改都不用担心其他受到影响(我们可以通过实例化新的子类来处理), 这使得无论高层模块还是低层模块都可以很容易地被复用.</p>
+<blockquote>为什么叫倒转? 这是针对面向过程来说的, 在面向过程的开发中, 为了使用常用的代码可以复用, 一般都会把这些常用的代码写成许许多多函数的程序库, 这样我们做新项目的时候, 就去调用这些函数就可以了.
+例如：我们做的项目大多要访问数据库, 所以我们就把数据库的代码写成了函数, 每次做新项目时就去调用这些函数，这也就是高层依赖于低层模块了.</blockquote>
+
+<p>依赖倒转原则其实可以说是面向对象设计的标志, 编程时考虑的都是如何针对抽象编程而不是针对细节编程, 即程序中所有的依赖关系都是终止于抽象类或者接口.</p>
+<hr />
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>迪米特法则</h3>
+<p>迪米特法则也叫最小知识原则, 迪米特法则还有一个更简单的定义：<strong>只与直接的朋友通信.</strong></p>
+<p>对于一个对象，其朋友包括以下几类：</p>
+<p>(1) 以参数形式传入到当前对象方法中的对象</p>
+<p>(2) 当前对象的成员对象</p>
+<p>(3) 如果当前对象的成员对象是一个集合，那么集合中的元素也都是朋友</p>
+<p>(4) 当前对象方法的返回值</p>
+<p>而出现在局部变量中的类(出现在当前类方法内部)则不是直接的朋友. 也就是说, 陌生的类最好不要作为局部变量的形式出现在类的内部.</p>
+<p>要注意的是: 朋友间也是有距离的.</p>
+<p>一个类公开的public属性或方法越多, 修改时涉及的面也就越大, 变更引起的风险扩散也就越大.</p>
+<p>因此, 为了保持朋友类间的距离, 在设计时需要反复衡量: 是否还可以再减少public方法和属性, 是否可以修改为private、protected等访问权限等.</p>
+<p>迪米特法则首先强调的前提就是在类的结构设计上, 每一个类都应当尽量降低成员的访问权限.</p>
+<p>其根本思想是强调了类之间的松耦合, 类之间的耦合越弱, 越有利于复用, 一个处在弱耦合的类被修改, 不会对其他有关系的类造成波及.</p>
+<p>迪米特法则还要求我们在设计时, 应该尽量减少对象之间的交互, 如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用. 简言之, 就是通过引入一个合理的第三者来降低现有对象之间的耦合度.</p>
+<p>要理解这些可能有些难, 我们来看一下例子.</p>
+<p>体育老老师让体委清点全班女生个数, 先上一段有问题的代码:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;list&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Girl {
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; GroupLeader {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;有清查女生的工作&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; countGirls(list&lt;Girl&gt;&lt;span style=&quot;color: #000000;&quot;&gt; listGirls){
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;女生数量是：&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt; listGirls.size() &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Teacher {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;老师对学生发布命令,清一下女生&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; commond(GroupLeader groupLeader) {
+        list&lt;/span&gt;&lt;Girl&gt;&lt;span style=&quot;color: #000000;&quot;&gt; listGirls;
+        &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;初始化女生&lt;/span&gt;
+        &lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;20&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;){
+            listGirls.push_back(Girl());
+        }
+        &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;告诉体育委员开始执行清查任务&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;        groupLeader.countGirls(listGirls);
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
+    Teacher teacher;
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;老师发布命令&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;    teacher.commond(GroupLeader());
+
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>问题出在 Teacher 这个类中, 首先, Girl 类做为 commond 方法的局部变量出现..</p>
+<p>其次, 和体育老师有直接联系的是体委, 而不是全班女生, 体育老师和女生不应该相互作用, 而应该通过体委来跳转(如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用).</p>
+<p>改进后代码如下:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;list&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Girl {
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; GroupLeader {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;有清查女生的工作&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    list&lt;/span&gt;&lt;Girl&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_listGirls;
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;传递全班的女生&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    GroupLeader(list&lt;/span&gt;&lt;Girl&gt;&lt;span style=&quot;color: #000000;&quot;&gt; _listGirls) {
+        m_listGirls &lt;/span&gt;=&lt;span style=&quot;color: #000000;&quot;&gt; _listGirls;
+    }
+
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;有清查女生的工作&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; countGirls(){
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;女生数量是：&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt; m_listGirls.size() &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Teacher {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;老师对学生发布命令,清一下女生&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; commond(GroupLeader groupLeader) {
+        groupLeader.countGirls();
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
+    list&lt;/span&gt;&lt;Girl&gt;&lt;span style=&quot;color: #000000;&quot;&gt; listGirls;
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;初始化女生&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;20&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;){
+        listGirls.push_back(Girl());
+    }
+
+    Teacher teacher;
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;老师发布命令&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;    teacher.commond(GroupLeader(listGirls));
+
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>这样的设计符合迪米特法则.</p>
+<p>在上面的例子中, 我们也可以看出虽然迪米特法则可以避免与非直接的类通信, 但是要通信, 必然会通过一个“中介”来发生联系, 例如本例中, 体育老师就是通过体委这个“中介”来与学生发生联系的. 过分的使用迪米特原则, 会产生大量这样的中介和传递类, 导致系统复杂度变大. 所以在采用迪米特法则时要反复权衡, 既做到结构清晰, 又要高内聚低耦合.</p>
+<p>狭义的迪米特法则的缺点：</p>
+<p>在系统里面造出大量的小方法, 这些方法仅仅是传递间接的调用, 与程序的逻辑无关.</p>
+<p>遵循类之间的迪米特法则会使一个系统的局部设计简化, 因为每一个局部都不会和远距离的对象有之间的关联, 但是, 这也会造成系统的不同模块之间的通信效率降低, 也会使系统的不同模块之间不容易协调.</p>
+<p>广义的迪米特法则在类的设计上的体现：</p>
+<p>优先考虑将一个类设置成不变类；尽量降低一个类的访问权限；尽量降低成员的访问权限。
+   </p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

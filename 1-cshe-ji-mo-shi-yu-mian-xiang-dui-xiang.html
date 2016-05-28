@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>1、[C++]设计模式与面向对象</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html" rel="bookmark"
+        title="Permalink to 1、[C++]设计模式与面向对象">1、[C++]设计模式与面向对象</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-02-15T14:16:00+08:00">Sun 15 February 2015
+</h6>
+
+
+    <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
+
+<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式是否有必要学?</h4>
+<p>答案在我看来是肯定的, 学这些不是考虑将来会不会用到, 而是在学习的过程中进行的思想洗礼, 通过这些模式让我们找到编程的感觉, 从而设计出易维护 易扩展 易复用 灵活性好的程序.</p>
+<blockquote>模式不是设计出来的, 是重构出来的. 好的设计也不是设计出来的，是重构出来的.
+在<大话设计模式>中, 大部分的情况都是小菜先写出一个”垃圾代码”, 然后发现问题, 再对它进行重构.
+
+**设计模式代表了传统的软件开发思想**: 好的设计会产生好的软件, 因此在实际开发之前, 值得花时间去做一个全面而细致的设计.
+**重构代表了敏捷软件开发的浪潮**: 软件并不是在一开始就可以设计得完美无缺的, 因此可以先进行实际开发, 然后通过对代码不断的进行小幅度的修改来改善其设计.
+二者从不同角度阐述了设计的重要性.</blockquote>
+
+<hr />
+<h4 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式四重境界</h4>
+<ol>
+<li>
+<p>一点不懂</p>
+</li>
+<li>
+<p>学了几个模式, 总想着在自己的代码中套用, 常常误用</p>
+</li>
+<li>
+<p>学完全部模式, 感觉都差不多, 无法分清差异</p>
+</li>
+<li>
+<p>灵活应用, 甚至不应用具体的某种模式也能设计出好的代码, 无招胜有招</p>
+</li>
+</ol>
+<hr />
+<blockquote>在学习设计模式之前, 我们先过一下[面向对象]的基本知识</blockquote>
+
+<hr />
+<h4 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类和对象</h4>
+<p><strong>类**和**对象**是面向对象中的两个基本概念
+**类</strong> 指的是一类事物，是一个抽象的概念
+<strong>对象</strong> 指的是属于某个类的一个实体/实例，是一个具体存在的事物</p>
+<ol>
+<li>
+<p>类是一种“模板”，可以通过这种模板创建出不同的对象“实例”</p>
+</li>
+<li>
+<p>对象(“实例”)是类(“模板”)一个具体实现</p>
+</li>
+<li>
+<p>一个类可以有很多对象，而一个对象必然属于某个类</p>
+</li>
+</ol>
+<p><img alt="老虎类" src="http://img.blog.csdn.net/20150211184320315" /></p>
+<p><strong>类</strong> 用于抽象的描述一类事物所特有的属性和行为.
+<strong>对象</strong> 是一个具体的事物，拥有其所属类的所有属性，并且每个属性都有其特有的值.
+如：老虎这个类有体重/食量/性情, 它的每个对象（也就是每只老虎），都有不同的体重，不同食量以及不同的性情</p>
+<p>可以说某一个对象属于某一个类,就像 华南虎属于老虎!
+但是你不能说某一个类属于一个对象, 就像 老虎属于华南虎? 这明显是错的.</p>
+<h5 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>深入理解类</h5>
+<ol>
+<li>
+<p>类不但可以抽象的描述一类事物的属性，也可以抽象的描述一类事物的行为</p>
+</li>
+<li>
+<p>从同一个类细分出来的类不但继承了原有类的属性同时也继承了原有类的行为</p>
+</li>
+<li>
+<p>继承出的新类可以拥有自己特有的属性和行为 属性主要用于描述类的静态特性，行为主要用于描述类的动态特性</p>
+</li>
+</ol>
+<p>如：老虎类的属性有颜色，体重，而行为有捕猎和逃跑，而兔子类的属性也有颜色和体重，但是兔子类的行为没有捕猎，只有逃跑.</p>
+<p>另外，从一个更高的层面看，老虎和兔子都属于动物类，它们都继承了动物类的属性和行为，另外又有自己特定的属性和行为</p>
+<h5 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>深入理解对象</h5>
+<ol>
+<li>
+<p>对象是一个类的实例，所谓实例即一个类中的具体事物</p>
+</li>
+<li>
+<p>一个类可以有多个实例，并且这些实例之间是互不相同的
+如：”人类”中有几十亿个不同的个体，每一个人都是”人类”的一个实例</p>
+</li>
+<li>
+<p>对象和类的关系如同模具和成品的关系，类就是一个模具，利用这个模具可以生成多个不同的成品，而这些成品就是各不相同的对象</p>
+</li>
+<li>
+<p>同一个类的不同对象都有对应的类中的属性和行为，但是这些属性和行为可能不完全相同(即一个实例，拥有其所属类的所有属性，并且每个属性都有其特有的值.)</p>
+</li>
+</ol>
+<h4 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>封装</h4>
+<h5 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>什么是封装</h5>
+<p>类 通常分为以下两个部分:</p>
+<ol>
+<li>
+<p>类的实现细节</p>
+</li>
+<li>
+<p>类的使用方式</p>
+</li>
+</ol>
+<p>每个对象都包含它能进行操作所需要的所有信息, 这个特性称为封装, 因此对象不必依赖其他对象来完成自己的操作.</p>
+<h5 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>封装的好处</h5>
+<ol>
+<li>
+<p>良好的封装能减少耦合</p>
+</li>
+<li>
+<p>类内部的实现可以自由地修改</p>
+</li>
+<li>
+<p>类具有清晰的对外接口</p>
+</li>
+</ol>
+<h4 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>继承</h4>
+<p>对象的继承代表了一种”is-a”的关系, 例如 “猫是哺乳动物”, 就说明了猫与哺乳动物之间是继承与被继承的关系.</p>
+<p>继承还可以理解为对被继承都的特殊化, 因为它除了具备被继承者的特性外, 还具有自己独特的个性.</p>
+<ol>
+<li>
+<p>子类拥有父类的所有成员变量和成员函数</p>
+</li>
+<li>
+<p>子类对象可以当作父类对象使用(因为父类的成员,子类都有)</p>
+</li>
+<li>
+<p>子类可以拥有父类没有的方法和属性</p>
+</li>
+</ol>
+<h5 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>继承与访问级别</h5>
+<p>继承时的访问级别设定会影响到成员的访问级别</p>
+<h6 id="public"><a name="user-content-public" href="#public" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>public继承</h6>
+<p>子类拥有父类的所有成员,父类成员在子类中保持原有访问级别</p>
+<h6 id="private"><a name="user-content-private" href="#private" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>private继承</h6>
+<p>子类拥有父类的所有成员,父类成员在子类中变为private成员</p>
+<h6 id="private_1"><a name="user-content-private_1" href="#private_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>默认的是private继承</h6>
+<p>class Child : Parent {
+等价于:
+class Child : private Parent {</p>
+<p>这样做的结果是:
+子类拥有父类的所有成员,但是private继承使得父类的所有成员在子类中变为private级别的成员.</p>
+<blockquote>private成员在子类中依然存在，但是却无法访问到。</blockquote>
+
+<h4 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>多态</h4>
+<h5 id="_12"><a name="user-content-_12" href="#_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>何为多态</h5>
+<p>C++ 中通过**virtual**关键字对多态进行支持, 使用**virtual**声明的函数被重写后即可展现多态特性, 在C++中, 这种函数就叫做虚函数. 当然它的重写函数为了可读性也要加上**virtual**关键字(不写也没关系).</p>
+<p>虚函数能够根据实际的对象决定函数调用语句的具体调用目标.</p>
+<p>[cpp]class CMaster {
+public:
+    virtual int eightSwordSkill()
+    {
+        return 8;
+    }</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>CMaster(){}
+</pre></div>
+
+
+<p>protected:</p>
+<p>private:
+    CMaster(const CMaster&amp; obj){}
+};</p>
+<p>class NewMaster : public CMaster {
+public:
+    NewMaster(){}</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>virtual int eightSwordSkill()
+{
+    return CMaster::eightSwordSkill() * 2;
+}
+</pre></div>
+
+
+<p>protected:</p>
+<p>private:
+    NewMaster(const NewMaster&amp; obj){}
+};[/cpp]</p>
+<h5 id="_13"><a name="user-content-_13" href="#_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>纯虚函数</h5>
+<p>故意的只声明函数原型, 而不定义函数体的虚函数称为纯虚函数.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Shape {
+public:
+    virtual double area() = 0
+}&lt;/code&gt;
+</pre></div>
+
+
+<p>area是纯虚函数, = 0 是告诉编译器, 这个函数故意只声明不定义</p>
+<h5 id="_14"><a name="user-content-_14" href="#_14" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>抽象类</h5>
+<ol>
+<li>
+<p>拥有纯虚函数的类称为抽象类</p>
+</li>
+<li>
+<p>抽象类是一种只能定义类型, 而不能产生对象的类</p>
+</li>
+<li>
+<p>抽象类只能被继承并重写相关函数, 可以用于定义指针和引用</p>
+</li>
+</ol>
+<h4 id="_15"><a name="user-content-_15" href="#_15" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>接口</h4>
+<h5 id="_16"><a name="user-content-_16" href="#_16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>什么是接口.</h5>
+<p>接口是一个标准，是一个约定，而不是一种实现.
+接口的目的是为了规范实现类，这样就可以不用具体管实现类，因为你不管怎是实现，我只要知道你是实现了这个接口，那么你肯定有那些方法，那么我调用这个接口的方法就肯定没问题.</p>
+<p>举个例子，有一个接口，规定一个方法 int calc(int b);
+这个函数用于计算从1到b的和</p>
+<p>比如有两个类实现了这个接口</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;code&gt;//第一类是这么实现的
+int calc(int b)
+{
+int sum = 0;
+for(int i=1;i&lt;=b;i++)
+sum+=b;
+return sum
+}
+
+//第二个类是这么实现的
+int calc(int b)
+{
+int sum = 0;
+sum = (1+b) * b / 2
+return sum;
+}&lt;/code&gt;
+</pre></div>
+
+
+<p>可见不管哪个类实现了这个接口，我们只要调用calc方法就能计算出sum，而不用管他是怎么实现的.</p>
+<p>而C++在设计时, 接口这种概念还没有提出来, 所以C++中没有直接支持接口的语法, 但是可以使用纯虚函数来实现接口.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Interface {
+public:
+    virtual void func1() = 0;
+    virtual void func2(int t) = 0;
+    virtual void func3(int i, int j) = 0;
+
+protected:
+
+private:
+};&lt;/code&gt;
+</pre></div>
+
+
+<p>接口类中只有函数原型定义, 没有任何数据的定义. 换句话说, 接口类中的函数只是功能说明, 并没有实际意义.</p>
+<p>接口（interface）是抽像类的变体, 抽象类里面可以有非虚函数, 但接口里只能有虚函数.
+&ldquo;=p</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

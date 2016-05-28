@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>07、pyqtSignature 装饰器.md</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/07-pyqtsignature-zhuang-shi-qi-md.html" rel="bookmark"
+        title="Permalink to 07、pyqtSignature 装饰器.md">07、pyqtSignature 装饰器.md</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-14T18:03:00+08:00">Sat 14 May 2016
+</h6>
+
+
+    <p>在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(&ldquo;&rdquo;), 这个装饰器有什么作用呢?</p>
+<p>这货往简单了说就是一个 &ldquo;标识&rdquo;, 标识这个槽函数是和哪个信号函数绑定的&hellip;那么, 为什么要有这个标识呢? 记得以前在用 C++ 开发 Qt 时, 并没有要标识&hellip;</p>
+<blockquote>
+<p>官方说该装饰器在新的 pyqt 中已被 <a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">pyqtSlot</a> 替代</p>
+</blockquote>
+<p>参考官方文档:<br>
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator">http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator</a></a></a><br>
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot</a></a></a></p>
+<p>举个例子:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">QObject</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pushButton</span>, <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">SIGNAL</span>(<span style="color: #333333">_fromUtf8</span>(<span style="color: #183691">&quot;clicked(bool)&quot;</span>)), <span style="color: #ed6a43">self</span>, <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">SLOT</span>(<span style="color: #333333">_fromUtf8</span>(<span style="color: #183691">&quot;on_pushButton(bool)&quot;</span>)))
+
+<span style="color: #333333">@pyqtSignature</span>(<span style="color: #183691">&quot;&quot;</span>)
+<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_pushButton</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">checked</span>):
+    <span style="color: #183691">&quot;&quot;&quot;</span>
+<span style="color: #183691">    Slot documentation goes here.</span>
+<span style="color: #183691">    &quot;&quot;&quot;</span>
+    <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;111&quot;</span>
+</pre></div>
+
+<br>
+我这里手动关联了一个信号槽, 按以前对 C++ 开发 Qt 的理解, 当产生 <code>clicked(bool)</code> 信号时, 会找到 <code>on_pushButton(self, checked)</code> 槽函数&hellip;</p>
+<p>然而, 遗憾的是, pyqt 不具备这样的功能, 如果你不在 <code>@pyqtSignature("")</code> 声明, pyqt 是找不到这个槽函数的&hellip;所以你必须改成 <code>@pyqtSignature("bool")</code>.</p>
+<p>个人理解是, 因为 Python 函数的灵活性 (PyQt4 allows any Python callable to be used as a slot, not just Qt slots), 太灵活了, 所以要被限制 ? ?</p>
+<p>以及 Python 不支持函数重载, 加上个标识, 同名的函数就可以被 Qt 认为是两个不同的函数了 ? ?</p>
+<p>这个标识可以是一个 python 的基本类型, 如 int、bool 等等.</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

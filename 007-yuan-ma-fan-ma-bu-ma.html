@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>007、原码, 反码, 补码</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/007-yuan-ma-fan-ma-bu-ma.html" rel="bookmark"
+        title="Permalink to 007、原码, 反码, 补码">007、原码, 反码, 补码</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-02-26T22:00:00+08:00">Fri 26 February 2016
+</h6>
+
+
+    <blockquote>
+<p>所有整数在计算机中都是以**补码**来存储的</p>
+</blockquote>
+<h2 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 符号位</h2>
+<p>首先搞清楚数值在内存中的存储方式, 对于有符号的整数, 在内存中, 用最高位来存放符号, 正数为0, 负数为1.</p>
+<p>我们以单字节(byte)为例, 它在内存中占 8 位, 那个 0000 0001 表示 +1, 而 1000 0001 则表示 -1, 这就是**原码**的表示方式.</p>
+<h2 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 原码, 反码, 补码</h2>
+<h4 id="21"><a name="user-content-21" href="#21" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.1 原码</h4>
+<p>原码, 刚已经表示过了, 即用最高位来表示符号, 其他位不动, 所以 byte 的取值范围是 <strong>-2^7</strong>(-128)~<strong>2^7-1</strong>(127), 为什么是 -128 到 127 呢?<br>
+因为在计算机中, 0 也属于正数(0000 0000), 所以 -128~-1 为负数区间,共 128 个数,  而 0~127 为正数区间, 也共 128 个数.</p>
+<h4 id="22"><a name="user-content-22" href="#22" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.2 反码</h4>
+<p>反码的表示方法是:<br>
+正数的反码是其本身<br>
+负数的反码是在其原码的基础上, 符号位不变，其余各个位取反.</p>
+<h4 id="23"><a name="user-content-23" href="#23" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.3 补码</h4>
+<p>补码的表示方法是:<br>
+正数的补码就是其本身<br>
+负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1(即在反码的基础上+1).</p>
+<blockquote>
+<p>如果已知补码, 要求原码, 其推算过程和原码-&gt;补码一样, 把补码的符号位不变, 其余各位取反, 最后+1, 得到的即是原码(有名话叫: 补码的补码就是原码).
+另外, 把补码减一再取反也能得到原码, 据说, 二进制中, &ldquo;减一取反&rdquo; 和 &ldquo;取反加一&rdquo; 是一样的, 我还没搞懂为什么&hellip;</p>
+</blockquote>
+<h4 id="24"><a name="user-content-24" href="#24" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.4 为什么要用补码</h4>
+<p>首先, 对于计算机, 加减乘数已经是最基础的运算, 要设计的尽量简单. 计算机辨别&rdquo;符号位&rdquo;显然会让计算机的基础电路设计变得十分复杂! 于是人们想出了将符号位也参与运算的方法.<br>我们知道, 根据运算法则减去一个正数等于加上一个负数, 即: 1-1 = 1 + (-1) = 0 , 所以机器可以只有加法而没有减法, 这样计算机运算的设计就更简单了.
+<br>
+于是人们开始探索 将符号位参与运算, 并且只保留加法的方法. 首先来看原码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<blockquote>
+<p>1 - 1 = 1 + (-1) = [00000001]原 + [10000001]原 = [10000010]原 = -2</p>
+</blockquote>
+<p>如果用原码表示, 让符号位也参与计算, 显然对于减法来说, 结果是不正确的.<br>这也就是为何计算机内部不使用原码表示一个数.
+<br>
+为了解决原码做减法的问题, 出现了反码:</p>
+<p>计算十进制的表达式: 1-1=0</p>
+<blockquote>
+<p>1 - 1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原= [0000 0001]反 + [1111 1110]反 = [1111 1111]反 = [1000 0000]原 = -0</p>
+</blockquote>
+<p>发现用反码计算减法, 结果的真值部分是正确的.<br>而唯一的问题其实就出现在 &ldquo;0&rdquo; 这个特殊的数值上, 虽然数学上 +0 和 -0 是一样的, 但是 0 带符号是没有任何意义的, 而且会有 [0000 0000]原 和 [1000 0000]原 两个编码表示0.
+ <br>
+于是补码的出现, 解决了 0 的符号以及两个编码的问题:</p>
+<blockquote>
+<p>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补 + [1111 1111]补 = [0000 0000]补= [0000 0000]原 = 0</p>
+</blockquote>
+<p>这样 0 用 [0000 0000] 表示, 而以前出现问题的 -0 则可以用来表示-128.</p>
+<h4 id="25-128"><a name="user-content-25-128" href="#25-128" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.5 -128 怎么推算过来</h4>
+<p>我们已经知道, 负数的补码, 是先把正数的补码符号位变为 1, 然后 &ldquo;取反加一&rdquo; , 但是现在根本就没有 128 正数的补码(最高为 127), 该怎么得到 -128 的补码呢?</p>
+<p>其实可以用 (-127) + (-1) 的方式来得到 -128 的补码.</p>
+<blockquote>
+<p>(-1) + (-127) = [1000 0001]原 + [1111 1111]原 = [1111 1111]补 + [1000 0001]补 = [1000 0000]补</p>
+</blockquote>
+<h2 id="3"><a name="user-content-3" href="#3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. 溢出</h2>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">128</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D; font-weight: bold">byte</span> <span style="color: #333333">b</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">)</span><span style="color: #333333">i</span><span style="color: #A71D7E">;</span>
+</pre></div>
+
+请问 b 的值是多少?</p>
+<p>int i = 128;<br>则转成补码应该是:<br>0000 0000 0000 0000 0000 0000 1000 0000</p>
+<p>但如果把 128 强制赋给 byte 型, 即一个字节, 那么高位就被强制去除, 留下 10000000, 它是一个负数 -128, 这就是所谓的溢出.</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

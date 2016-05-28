@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(三) 重新编译 Lua 程序库</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html" rel="bookmark"
+        title="Permalink to (三) 重新编译 Lua 程序库">(三) 重新编译 Lua 程序库</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
+</h6>
+
+
+    <p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
+对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
+不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年, 拷贝好带身边</strong>.
+接下来就开始创建这个程序库.</p>
+<p>同第一篇一样, 采用 VS2013 + lua-5.2.4 来进行编译, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org"><a href="http://www.lua.org"><a href="http://www.lua.org">http://www.lua.org</a></a></a>
+然后修改源码, 使 Lua 支持中文的变量名及函数名.
+接下来打开 VS2013 新建一个 win32 静态链接库 程序, 取名为 LuaLib, 不要勾选预编译头.
+将 src 整个文件夹复制到工作目录下(注意这里是连 src 文件夹一起复制的, 第一篇中是复制的源码), 然后在刚新建的工程中添加**除 luac.c 和 lua.c 外**的其他源代码文件.</p>
+<p><img alt="" src="http://i62.tinypic.com/6r0n79.jpg" /></p>
+<p>打开属性编辑框, 在工程的预处理器设置中添加一行 _CRT_SECURE_NO_WARNINGS, 并且设置当前工程的包含目录.</p>
+<p><img alt="" src="http://i62.tinypic.com/b8nv55.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/awauy1.jpg" /></p>
+<p>将下来为工程创建一个 CLua 类(<a href="https://github.com/z351522453/LuaLib">源码传送门</a>), 该类封装了一部分 Lua API 函数, 隐藏了 Lua 需要的初始化和关闭处理, 它的使用说明及源码分析将在后面进一步说明.</p>
+<p>好, 接下来就开始编译 LuaLib 工程的 Debug 和 Release 版本, 将生成的 .lib 文件分别命名为 LuaLib_Debug.lib 和 LuaLib_Release.lib.</p>
+<p>现在把 CLua.h 单独复制出来, 在文件开头添加如下代码:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;#ifdef _DEBUG
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#else&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Release.lib&quot;)
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#endif&lt;/span&gt;
+</pre></div>
+
+
+<p>好, 现在的 CLua.h 中的代码如下:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; once&lt;span style=&quot;color: #000000;&quot;&gt;
+
+#ifdef _DEBUG
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#else&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Release.lib&quot;)
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#endif&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff;&quot;&gt;struct&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; lua_State;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#define&lt;/span&gt; LuaGlue extern &quot;C&quot; int  &lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 定义 LuaGlue 宏&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff;&quot;&gt;extern&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; { &lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 定义一个 C 方式的 LuaFunctionType 类型函数指针&lt;/span&gt;
+    typedef &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;(*LuaFunctionType)(lua_State *&lt;span style=&quot;color: #000000;&quot;&gt;pLuaState);
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; cLua {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    cLua();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; ~&lt;span style=&quot;color: #000000;&quot;&gt;cLua();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        RunScript(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pFilename);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        RunString(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pCommand);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* GetErrorString(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        AddFunction(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pFunctionName, LuaFunctionType pFunction);
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* GetStringArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* pDefault =&lt;span style=&quot;color: #000000;&quot;&gt; NULL);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;        GetNumberArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; dDefault = &lt;span style=&quot;color: #800080;&quot;&gt;0.0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;         GetIntArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; nDefault = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushString(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pString);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushNumber(&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; value);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushInt(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; value);
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        SetErrorHandler(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;(*pErrHandler)(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pError));
+
+    lua_State&lt;/span&gt;*  GetScriptContext(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt;  m_pScriptContext;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;(*m_pErrorHandler)(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000;&quot;&gt;pError);
+};&lt;/span&gt;
+</pre></div>
+
+
+<p>此时, 我们新的 Lua 程序库就制作完毕了, 使用时只要将 <strong>刚修改的 CLua.h、LuaLib_Debug.lib</strong> 和 <strong>LuaLib_Release.lib</strong> 三份文件复制到工程目录下, 然后在合适的地方导入头文件 #include &ldquo;CLua.h&rdquo; 就可以了.</p>
+<hr />
+<p>接下来使用 CLua 来实现第二篇中的例子.
+打开 VS2013 新创建一个 win32 应用程序 工程, 将 CLua.h、LuaLib_Debug.lib 和 LuaLib_Release.lib 三份文件拷贝过去.
+修改源码如下:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;CLua.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+
+
+LuaGlue LuaGule_Out(lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; L) {
+    printf(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;This is a LuaGule! \r\n&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
+    cLua lua;
+    lua.AddFunction(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;新函数&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, LuaGule_Out);
+    lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C:/Users/Administrator/Desktop/test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>可以看到, 相对第二篇中的程序, 新代码中的主要变化有:
+*. 主程序中不再有初始化和关闭 Lua 环境的代码;
+*. LuaGlue 函数的定义因为使用了 LuaGlue 宏而简化了;
+*. 注册 LuaGlue 函数的 Lua API 被 CLua::AddFunction 代替;
+*. 执行 Lua 脚本的 Lua API 被 CLua::RunScript 代替.
+ ??</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

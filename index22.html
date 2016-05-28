@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        <article>
+            <a href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
+<h6 class="subheader" title="2015-05-26T08:25:00+08:00">Tue 26 May 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p>实现代码如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Qt_Notepad</span><span style="color: #A71D7E">::</span><span style="color: #333333">OpenFile</span>() {
+    <span style="color: #333333">QString</span> <span style="color: #333333">fileName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QFileDialog</span><span style="color: #A71D7E">::</span><span style="color: #333333">getOpenFileName</span>(<span style="color: #A71D5D">this</span>, <span style="color: #183691">&quot;Open File&quot;</span>, <span style="color: #ED6A43">NULL</span>, <span style="color: #183691">&quot;file (*.*)&quot;</span>);
+
+    <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
+        <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
+        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html"><h3 class="article-title">16、通用对话框之 QMessageBox</h3></a>
+<h6 class="subheader" title="2015-05-25T18:05:00+08:00">Mon 25 May 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>Qt 的内置对话框大致分为以下几类;</p>
+<ul>
+<li><code>QColorDialog</code>: 选择颜色;</li>
+<li><code>QFileDialog</code>: 选择文件或者目录;</li>
+<li><code>QFontDialog</code>: 选择字体;</li>
+<li><code>QInputDialog</code>: 允许用户输入一个值, 并将其值返回;</li>
+<li><code>QMessageBox</code>: 模态对话框, 用于显示信息、询问问题等;</li>
+<li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
+<li><code>QPrintDialog</code>: 打印机配置;</li>
+<li><code>QPrintPreviewDialog</code>: 打印预览;</li>
+<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/15-dui-hua-kuang-jian-tong-xin.html"><h3 class="article-title">15、对话框间通信</h3></a>
+<h6 class="subheader" title="2015-05-25T18:00:00+08:00">Mon 25 May 2015
+</h6>
+
+
+<blockquote>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.
+>
+> </blockquote>
+
+<p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
+<p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>模态对话框</h1>
+<p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
+<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/15-dui-hua-kuang-jian-tong-xin.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/14-qt-zhong-de-dui-hua-kuang.html"><h3 class="article-title">14、Qt 中的对话框</h3></a>
+<h6 class="subheader" title="2015-05-25T14:41:00+08:00">Mon 25 May 2015
+</h6>
+
+
+<p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+    Q_OBJECT
+
+&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/14-qt-zhong-de-dui-hua-kuang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-1-jian-jie-ji-bian-yi.html"><h3 class="article-title">'[CEGUI]. 1、简介及编译'</h3></a>
+<h6 class="subheader" title="2015-05-08T10:59:00+08:00">Fri 08 May 2015
+</h6>
+
+
+<p>CEGUI 是一个自由免费的 GUI 库, 基于LGPL协议, 使用C++实现, 完全面向对象设计.
+CEGUI 开发者的目的是希望能够让游戏开发人员从繁琐的 GUI 实现细节中抽身出来, 以便有更多的开发时间可以放在游戏性上.
+CEGUI 的渲染需要 3D 图形 API 的支持，如 OpenGL 或 Direct3D, 另外, 使用更高级的图形库也是可以的, 比如OGRE、Irrlicht和RenderWare等.</p>
+<p><strong>编译:</strong>
+vs2013
+Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-1-jian-jie-ji-bian-yi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/ba-linux-de-quan-xian-kong-zhi.html"><h3 class="article-title">(八)、Linux 的权限控制</h3></a>
+<h6 class="subheader" title="2015-04-03T15:48:00+08:00">Fri 03 April 2015
+</h6>
+
+
+<p>首先,
+Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</p>
+<p><strong>所有者</strong>
+一般让文件的创建者, 谁创建了该文件, 谁就是该文件的所有者.
+用 ls -ahl 可以看到文件的所有者.
+也可以用 chown 用户名 文件名 来修改文件的所有者.</p>
+<p><strong>所在组</strong>
+当某个用户创建了一个文件后, 该文件的所在组就是该用户所在的组.
+用 ls -ahl 可以看到文件的所在组.
+也可以用 chgrp 组名 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ba-linux-de-quan-xian-kong-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/qi-linux-de-yong-hu-guan-li.html"><h3 class="article-title">(七)、Linux 的用户管理</h3></a>
+<h6 class="subheader" title="2015-03-30T13:57:00+08:00">Mon 30 March 2015
+</h6>
+
+
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户和用户组</h1>
+<p>**
+<strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, **用户**指的就是使用操作系统的人;
+而**用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
+<p>来看一个例子(借用鸟哥的私房菜).
+假设有一家人, 家里只有三兄弟, 分别是大毛、二毛与三毛. 对于这三人而言, 客厅、厨房、WC等是共同拥有的, 大家都有权限使用.
+由于三人各自拥有自己的房间, 三毛觉得让大毛、二毛进入自己的房间无可厚非, 但是自己写给小丽的情书可不能被他们看见, 于是三毛把情书锁在抽屉里.
+所以, 大毛、二毛虽然可以进入三毛的房间, 但总不能撬三毛的抽屉吧 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-linux-de-yong-hu-guan-li.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html"><h3 class="article-title">(五) C++开发者都应该使用的10个C++11特性 — move</h3></a>
+<h6 class="subheader" title="2015-03-28T09:17:00+08:00">Sat 28 March 2015
+</h6>
+
+
+<p>在说 move 之前有必要重新再认识下 C++ 98/03 中的 lvalues 和 rvalues, 即左值和右值.</p>
+<p><strong>首先
+对左值和右值的一个最常见的误解是：等号左边的就是左值，等号右边的就是右值;
+这是错误的, 我们应该时刻谨记 lvalue 和 rvalue 都是针对表达式而言.</strong>
+lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
+<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
+<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
+Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
+类似下图:</p>
+<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
+<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
+<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
+<p>**vi 的模式
+**命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
+插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 22 of 29</h6>
+
+<p>
+            <a href="http://blog.smallcpp.com/index21.html">&laquo; Prev</a>
+
+        <a href="http://blog.smallcpp.com/index23.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

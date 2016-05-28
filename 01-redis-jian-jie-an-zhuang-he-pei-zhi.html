@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>01、Redis 简介、安装和配置</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/01-redis-jian-jie-an-zhuang-he-pei-zhi.html" rel="bookmark"
+        title="Permalink to 01、Redis 简介、安装和配置">01、Redis 简介、安装和配置</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-28T12:35:00+08:00">Mon 28 March 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">简介</a></li>
+<li><a href="#_2">安装</a><ul>
+<li><a href="#_3">下载</a></li>
+<li><a href="#redis">redis 生态</a></li>
+</ul>
+</li>
+<li><a href="#redisconf">redis.conf 详解</a><ul>
+<li><a href="#redis_1">配置 redis 的方法</a></li>
+<li><a href="#_4">配置信息</a></li>
+<li><a href="#_5">命令返回值</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>简介</h1>
+<p>Redis 是一款 NoSQL(Not Only Sql 非关系型数据库)</p>
+<ul>
+<li>Redis, Remote Directory Server [远程服务器字典]<ul>
+<li>底层 C 语言实现</li>
+<li>以字典的结构存储数据</li>
+<li>允许通过 TCP 协议读写</li>
+<li>内存存储, 但支持持久化</li>
+<li>支持排序</li>
+<li>MQ (队列系统)</li>
+<li>发布/订阅模式</li>
+</ul>
+</li>
+</ul>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装</h1>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>下载</h2>
+<p>Windows:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>https://github.com/MSOpenTech/redis/releases
+</pre></div>
+
+
+<p>注意下载稳定版.</p>
+<p>下载好后, 直接解压即可.</p>
+<p>另外, 对于 Windows 下, 有一个__桌面化管理工具__: redis-desktop-manager, 也可下载配合使用.</p>
+<p><strong>Redis 命令不区分大小写.</strong></p>
+<h2 id="redis"><a name="user-content-redis" href="#redis" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>redis 生态</h2>
+<ul>
+<li>redis.conf: 配置文件(windows 下可能是叫 redis.windows.conf/redis.windows-service.conf)<ul>
+<li>linux<ul>
+<li>设置 redis.conf 的 <strong>daemonize</strong> 为 yes (默认为 no), 是否以后台 <strong>Daemon</strong>(守护进程) 方式运行 Redis<ul>
+<li>如果为 yes, 那么启动 Redis 后, Redis 将做以后台进程的方式一直运行着</li>
+<li>如果为 no, 那么 Redis 就是运行在 CMD 上, CMD 一关闭, Redis 就关闭了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>windows<ul>
+<li><strong>redis.windows.conf</strong><ul>
+<li>同 linux 中把 daemonize 设为 no, 即为独占一个 cmd 的方式运行 redis</li>
+</ul>
+</li>
+<li><strong>redis.windows-service.conf</strong><ul>
+<li>同 linux 中把 daemonize 设为 yes, 把 redis 做为 windows 的服务启动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>redis-server: Redis 服务器程序<ul>
+<li>启动服务: redis-server, 默认的配置文件是使用 redis.conf (<strong>linux</strong> 下)</li>
+<li>指定配置文件启动服务: redis-server redis.windows.conf (<strong>windows</strong> 下请指定)</li>
+<li>这里有可能会报错, 大意是说 maxheap 没定义, 打开 redis.conf 定义下, maxheap 1024000000</li>
+</ul>
+</li>
+<li>redis-cli: 客户端程序<ul>
+<li>启动客户端: redis-cli</li>
+<li>清空缓存: redis-cli flushdb</li>
+<li>关闭服务器: redis-cli -h 127.0.0.1 -p 6379 shutdown</li>
+</ul>
+</li>
+<li>redis-benchmark: 性能测试工具</li>
+<li>redis-check-aof: AOF 文件修复工具</li>
+<li>redis-check-dump: RDB 文件修复工具</li>
+</ul>
+<h1 id="redisconf"><a name="user-content-redisconf" href="#redisconf" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>redis.conf 详解</h1>
+<h3 id="redis_1"><a name="user-content-redis_1" href="#redis_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置 redis 的方法</h3>
+<p>Redis 服务器的配置, 可以在 redis.conf 设置, 也可以 redis-server 时指定, 还可以 cli 端中动态获取/配置.</p>
+<p>config get xxx, 返回双行字符串</p>
+<ul>
+<li>key</li>
+<li>value</li>
+</ul>
+<p>config set xxx yyy, 设置 config</p>
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置信息</h3>
+<ul>
+<li>port 端口, 默认 6379</li>
+<li>bind 绑定主机地址</li>
+<li>timeout 当客户端多久没有操作后关闭连接, 0 代表没有使用这个功能</li>
+<li>requirepass 身份验证, 设置这项后, 客户端连接时需要输入 requirepass 设置的密码</li>
+<li>loglevel 指定日志级别, 有四个级别<ul>
+<li>debug 调试级别, 很详细的信息, 适合开发测试</li>
+<li>verbos 比 debug 少一些, 但也包含许多无用信息</li>
+<li>notice 比较适合生产环境</li>
+<li>warning 只记录警告信息</li>
+</ul>
+</li>
+<li>logfile 日志记录方式</li>
+<li>database 数据库数量, 默认 16 个(从 0 开始编号, 个人理解就是 mysql 中的表), 通过 select x 可以切换到指定序号的数据库</li>
+<li>持久化相关<ul>
+<li>save 900 1</li>
+<li>save 300 10</li>
+<li>save 60 10000, 这几个选项的意思是 x 秒内有 y 个修改就持久化</li>
+<li>rdbcompression 持久化时, 是否启用压缩</li>
+<li>dbfilename 指定执久化的文件名</li>
+<li>dir 指定执久化文件存放目录</li>
+</ul>
+</li>
+<li>Hash 相关<ul>
+<li>hash-max-ziplist-value 存储的最大字段数目</li>
+<li>hash-max-ziplist-entries 每个数目的最大字节</li>
+<li>关于这两个选项的意义在 <strong>02、Redis 数据类型</strong> Hash 章节中有说明</li>
+</ul>
+</li>
+</ul>
+<h2 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>命令返回值</h2>
+<ul>
+<li>状态回复<ul>
+<li>PONG</li>
+<li>OK</li>
+</ul>
+</li>
+<li>错误回复<ul>
+<li>error 开头</li>
+</ul>
+</li>
+<li>整数回复<ul>
+<li>integer 开头</li>
+</ul>
+</li>
+<li>字符串回复<ul>
+<li>双引号包括</li>
+</ul>
+</li>
+<li>多行字符串回复<ul>
+<li>序号 + 单符串</li>
+</ul>
+</li>
+</ul>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>04、UML 时序图</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/04-uml-shi-xu-tu.html" rel="bookmark"
+        title="Permalink to 04、UML 时序图">04、UML 时序图</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-04-05T15:26:00+08:00">Tue 05 April 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">概述</a></li>
+<li><a href="#object">Object</a></li>
+<li><a href="#lifeline-focus-of-control">Lifeline 与 Focus of Control</a></li>
+<li><a href="#stimulus">Stimulus</a><ul>
+<li><a href="#_2">消息类型</a></li>
+<li><a href="#_3">消息约束</a></li>
+</ul>
+</li>
+<li><a href="#combined-fragment">Combined Fragment</a></li>
+</ul>
+</div>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>概述</h1>
+<p><strong>何谓时序图</strong>:<br>
+简单的说, 就是描述一个时间段内不同对象之间的业务情况(时间顺序).<br>
+时序图的重点在__消息时序__上, 也就是说, 描述__消息__是如何在对象间发送和接收的, 表示了对象之间传递消息的时间顺序.</p>
+<p><strong>时序图与用例图</strong>:<br>
+时序图表示了__系统__与__参与者__互动执行某一个__用例__期间, 系统内部对象间的协作情况.<br>
+对于程序设计来说, 一个用例就对应一个时序图, 时序图是对系统的内部行为进行描述, 用于用例分析和设计阶段.<br>
+在项目的需求阶段, 架构师会根据把__用例图__细化为一个或者更多的时序图.</p>
+<p>虽然在开发者看来, 时序图描述的是模块(类)间的交互, 然而, 现在时序图也常常被__业务人员__用来描述业务的流程.</p>
+<p><strong>在 StarUML 中新建时序图</strong>:<br>
+打开 StarUML, 选择 <strong>Rational Approach</strong>.<br>
+&lt;&lt;<strong>Logical View</strong>>> --> Add Diagram --> Sequence Diagram<br>
+界面左边就出现了 Sequence 工具栏.</p>
+<table>
+<thead>
+<tr>
+<th>StarUML</th>
+<th>翻译</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object</td>
+<td>对象</td>
+</tr>
+<tr>
+<td>Stimulus</td>
+<td>消息传递</td>
+</tr>
+<tr>
+<td>SelfStimulus</td>
+<td>自我消息传递</td>
+</tr>
+<tr>
+<td>Combined Fragment</td>
+<td>组合碎片</td>
+</tr>
+<tr>
+<td>Interaction Operand</td>
+<td>交互操作域</td>
+</tr>
+<tr>
+<td>Frame</td>
+<td>框架</td>
+</tr>
+</tbody>
+</table>
+<h1 id="object"><a name="user-content-object" href="#object" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Object</h1>
+<p>时序图中 Object 的命令遵循下面的格式:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>实体名 : 类名
+</pre></div>
+
+<br></p>
+<p>大部分情况下, 我们可能只关心__类名__, 所以可以简写成 <strong>: 类名</strong>.</p>
+<h1 id="lifeline-focus-of-control"><a name="user-content-lifeline-focus-of-control" href="#lifeline-focus-of-control" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Lifeline 与 Focus of Control</h1>
+<p><strong>生命线__在时序图中表示为从对象图标向下延伸的一条__虚线</strong>, 表示对象存在的时间.</p>
+<p>而__控制焦点__是__生命线__中表示时间段的符号, 在这个时间段内对象将执行相应的操作, 用小矩形表示.</p>
+<p><img alt="" src="http://i63.tinypic.com/2lxi9s1.jpg" /></p>
+<h1 id="stimulus"><a name="user-content-stimulus" href="#stimulus" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Stimulus</h1>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>消息类型</h2>
+<p>消息一般分为__同步消息__(Synchronous Message), <strong>异步消息</strong>(Asynchronous Message)和__返回消息__(Return Message).<br>
+如下图所示:</p>
+<p><img alt="" src="http://i66.tinypic.com/euh6hi.jpg" /></p>
+<ul>
+<li>同步消息: 消息的发送者把控制传递给消息的接收者, 然后停止活动, 等待消息的接收者放弃或者返回控制</li>
+<li>异步消息: 消息发送者通过消息把信号传递给消息的接收者, 然后继续自己的活动, 不等待接受者返回消息或者控制</li>
+<li>返回消息: 返回消息表示从过程调用返回</li>
+</ul>
+<p>对于 StarUML 而言, 同步消息的 Stimulus 为 <strong>Call</strong>, 异步消息的 Stimulus 为 <strong>Send</strong>, 返回消息的 Stimulus 为 <strong>Return</strong>.</p>
+<p><img alt="" src="http://i68.tinypic.com/fc06mw.jpg" /></p>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>消息约束</h2>
+<p>当为对象的交互建模时, 有时候必须满足一个条件消息才会传递给对象.</p>
+<p>为了在一个序列图上画一个约束, 你把约束元件放在约束的消息线上, 消息名字之前.</p>
+<p><img alt="" src="http://i64.tinypic.com/14e9vo6.jpg" /></p>
+<p>注意 Stimulus 上的 <strong>[restraint == true]</strong>.</p>
+<h1 id="combined-fragment"><a name="user-content-combined-fragment" href="#combined-fragment" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Combined Fragment</h1>
+<p>Combined Fragment 用来描述一批 Stimulus 的约束, 如上面 <strong>消息约束</strong> 中的 <strong>[restraint == true]</strong>, 如果想要其对多条 Stimulus 生效, 就可以使用 Combined Fragment.</p>
+<p><img alt="" src="http://i68.tinypic.com/b7kubs.jpg" /></p>
+<p>只有当 restraint == true 时, Combined Fragment 里的 Stimulus 才会被触发.</p>
+<p>Combined Fragment 左上角的 <strong>opt</strong> 表示选择约束, 除了 opt 外, 还有 <strong>loop</strong>(循环), 甚至还支持 <strong>if else</strong> 结构(<strong>alt</strong>).</p>
+<p>不过要使用 <strong>alt</strong>, 就要配合 <strong>Interaction Operand</strong> 了, 把 <strong>Interaction Operand</strong> 拖放到 Combined Fragment 里就可以对 Combined Fragment 进行拆分了, 效果如下:</p>
+<p><img alt="" src="http://i66.tinypic.com/2w7pto8.jpg" /></p>
+<p>如果 restraint == true, 则执行 call_1(), 否则执行 call_2().</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

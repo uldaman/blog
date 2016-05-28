@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>注释模板</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/zhu-shi-mo-ban.html" rel="bookmark"
+        title="Permalink to 注释模板">注释模板</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-03-12T14:20:00+08:00">Thu 12 March 2015
+</h6>
+
+
+    <p><strong>函数注释:</strong></p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;***********************************************************************
+◇  名称:      $SymbolName$
+◇  参数:      $MethodArg$
+◇  返回值:    $SymbolType$
+◇  功能:      $end$
+◇  说明:      $selected$
+***********************************************************************&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+</pre></div>
+
+
+<p>简单版:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 参数: $MethodArg$
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 说明: $end$&lt;/span&gt;
+</pre></div>
+
+
+<p>设置方法:</p>
+<p>&ldquo;VAssistX&rdquo; –&gt; &ldquo;Visual VAssistX Options&rdquo; 然后选择 &ldquo;Suggestions&rdquo;, 再点击 &ldquo;Edit VA Snippets&rdquo;,</p>
+<p>在打开的窗口中选择  &ldquo;Refactoring&rdquo;  –&gt; &ldquo;Document Method&rdquo;</p>
+<p><img alt="" src="http://i58.tinypic.com/nn18p5.jpg" /></p>
+<hr />
+<p><strong>类注释:</strong></p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------------------
+* 类名: $classname$
+* 说明: $end$
+-----------------------------------------------------------------------&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+</pre></div>
+
+
+<p><strong>头文件注释:</strong></p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 文件名:   $FILE_BASE$.$FILE_EXT$
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 说明:     $end$
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 创建时间: $DATE$ $HOUR_02$:$MINUTE$
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 更新日志: &lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+</pre></div>
+
+
+<p>设置方法:</p>
+<p>&ldquo;VAssistX&rdquo; –&gt; &ldquo;Visual VAssistX Options&rdquo; 然后选择 &ldquo;Suggestions&rdquo;, 再点击 &ldquo;Edit VA Snippets&rdquo;,</p>
+<p>在打开的窗口中选择  &ldquo;With Title Only&rdquo; , 然后选择 &ldquo;Class Comment&rdquo; 和 &ldquo;Header Comment&rdquo;, 并修改.</p>
+<p><img alt="" src="http://i57.tinypic.com/zn0d1h.jpg" /></p>
+<hr />
+<p>**头文件 类内部注释:
+**</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    $end$
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------&lt;/span&gt;
+</pre></div>
+
+
+<p>**实现文件 外部注释:
+**</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    $end$&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+</pre></div>
+
+
+<p>设置方法:</p>
+<p>&ldquo;VAssistX&rdquo; –&gt; &ldquo;Visual VAssistX Options&rdquo; 然后选择 &ldquo;Suggestions&rdquo;, 再点击 &ldquo;Edit VA Snippets&rdquo;, 在打开的窗口中选择  &ldquo;All by Title&rdquo; , 然后添加.</p>
+<hr />
+<p>样例</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 文件名:   FindWay.h
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 说明:     实现寻路功能的策略模式
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 创建时间: 2015/03/12 21:27
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 更新日志:
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 2015/03/12 21:31 -- 添加 Straight 策略, 实现直线走路, 目标和角色之间不
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;                     能有障碍.&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; once&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;Windows.h&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;memory&gt;
+
+&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------------------
+ * 类名: CFindWay
+ * 说明: 寻路策略模式中的抽象类
+-----------------------------------------------------------------------&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CFindWay {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    CFindWay();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; ~&lt;span style=&quot;color: #000000;&quot;&gt;CFindWay();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointX;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointY;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; GotoPoint() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------------------
+ * 类名: CExplicit
+ * 说明: 具体寻路策略, 寻路模式
+ -----------------------------------------------------------------------&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CExplicit :
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CFindWay {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    CExplicit();
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;CExplicit();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; GotoPoint();
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------------------
+ * 类名: Straight
+ * 说明: 具体寻路策略, 直线走路模式
+-----------------------------------------------------------------------&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Straight :
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CFindWay {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    Straight();
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;Straight();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; GotoPoint();
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------------------
+ * 类名: CFwContext
+ * 说明: 策略模式的环境类, 维护一个 CFindWay 的引用.
+-----------------------------------------------------------------------&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;*/&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CFwContext {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    CFwContext(std::shared_ptr&lt;/span&gt;&lt;CFindWay&gt;&lt;span style=&quot;color: #000000;&quot;&gt; strategy);
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;CFwContext();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointX;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointY;
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; GotoPoint();
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    通过 shared_ptr(智能指针) 维护一个 CFindWay 的引用.
+    &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;-----------------------------------------------------------&lt;/span&gt;
+    std::shared_ptr&lt;CFindWay&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_strategy;
+};&lt;/span&gt;
+</pre></div>
+
+
+<hr />
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;FindWay.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    CFindWay 基类&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;CFindWay::CFindWay() {
+}
+
+CFindWay::&lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;CFindWay() {
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    CExplicit 策略类&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;
+CExplicit::CExplicit() {
+}
+
+
+CExplicit::&lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;CExplicit() {
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 说明: 寻路模式 寻路到指定的明文坐标点&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CExplicit::GotoPoint() {
+
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    Straight 策略类&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;
+Straight::Straight() {
+}
+
+Straight::&lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;Straight() {
+}
+
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 说明: 直线模式 直线走到指定的明文坐标点, 不能有障碍.&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Straight::GotoPoint() {
+
+}
+
+
+&lt;/span&gt;&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;    CFwContext 环境类&lt;/span&gt;
+&lt;span style=&quot;color: #808080;&quot;&gt;////////////////////////////////////////////////////////////////////////&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;/&lt;/span&gt;
+&lt;span style=&quot;color: #000000;&quot;&gt;
+CFwContext::CFwContext(std::shared_ptr&lt;/span&gt;&lt;CFindWay&gt;&lt;span style=&quot;color: #000000;&quot;&gt; strategy) {
+    m_strategy &lt;/span&gt;=&lt;span style=&quot;color: #000000;&quot;&gt; strategy;
+}
+
+CFwContext::&lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;CFwContext() {
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; CFwContext::GotoPoint() {
+    m_strategy&lt;/span&gt;-&gt;m_dPointX =&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointX;
+    m_strategy&lt;/span&gt;-&gt;m_dPointY =&lt;span style=&quot;color: #000000;&quot;&gt; m_dPointY;
+    m_strategy&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;GotoPoint();
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>  /</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

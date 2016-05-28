@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(七) 事件驱动模型</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/qi-shi-jian-qu-dong-mo-xing.html" rel="bookmark"
+        title="Permalink to (七) 事件驱动模型">(七) 事件驱动模型</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
+</h6>
+
+
+    <p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
+在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
+<p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
+这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 MFC 中的控件 ID).</p>
+<p>那来看看怎么设计这个事件驱动模型.
+首先, 提供一个 LuaGlue 函数来设定在 Lua 脚本中的事件处理程序.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>LuaGlue _RegisterEvent(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
+    g_strEventHandle &lt;/span&gt;= g_lua.GetStringArgument(&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>那么, 再来设计发送事件函数.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (g_strEventHandle != &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buf[&lt;span style=&quot;color: #800080&quot;&gt;256&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;];
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (args) {
+            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d, %s)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId, args);
+        } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId);
+        }
+        g_lua.RunString(buf);
+    }
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>第一个参数是事件ID, 这个很好理解, 那第二个参数是什么?
+因为 Lua 是支持变参系统的, 所以我们可以为每个事件设定不同的参数, 而第二个参数是用来表示那些可变参数的.</p>
+<p>接下来, 看看 Lua 事件处理函数的模板:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; EVENT_SAMPLE = &lt;span style=&quot;color: #800080&quot;&gt;1000&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+
+RegisterEvent(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;EventHandle&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; EventHandle( nId, ... )
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;  nId == EVENT_SAMPLE &lt;span style=&quot;color: #0000ff&quot;&gt;then&lt;/span&gt;
+        &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Sample Event!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; i,v &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;ipairs&lt;/span&gt;{...} &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;
+            &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(v)
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+</pre></div>
+
+
+<p>现在, 我们在 C/C++ 的主程序中发出事件, 看看会输出什么:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000&lt;span style=&quot;color: #000000&quot;&gt;
+cLua g_lua;
+g_lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:\\Users\\Administrator\\Desktop\\test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;\&quot;你好\&quot;, 10&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;);
+</pre></div>
+
+
+<p><img alt="" src="http://i61.tinypic.com/24e8jsh.jpg" /></p>
+<p>看! 一个基于 C/C++ 和 Lua 的事件驱动模型建立起来了.
+这个系统需要注意的地方在于, Lua 代码和 C/C++ 代码需要对事件 ID 和传递的参数的含义保持一致.</p>
+<p>下面是完整的 C/C++ 端代码:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt; g_strEventHandle = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+cLua g_lua;
+
+LuaGlue _RegisterEvent(lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; L) {
+    g_strEventHandle &lt;/span&gt;= g_lua.GetStringArgument(&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (g_strEventHandle != &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buf[&lt;span style=&quot;color: #800080&quot;&gt;256&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;];
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (args) {
+            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d, %s)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId, args);
+        } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId);
+        }
+        g_lua.RunString(buf);
+    }
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000&quot;&gt; argv[]) {
+    g_lua.AddFunction(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;RegisterEvent&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, _RegisterEvent);
+    g_lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:\\Users\\Administrator\\Desktop\\test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;\&quot;你好\&quot;, 10&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>\? </p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

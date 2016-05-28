@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>8、带参数的信号槽和自定义信号槽</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html" rel="bookmark"
+        title="Permalink to 8、带参数的信号槽和自定义信号槽">8、带参数的信号槽和自定义信号槽</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-03-08T11:33:00+08:00">Sun 08 March 2015
+</h6>
+
+
+    <h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>带参数的信号/槽</h1>
+<p>首先看一个程序</p>
+<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
+<p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)));&lt;/font&gt;
+</pre></div>
+
+
+<p>实现功能的就是这句代码, 可以看到带参数的信号/槽要明确的在 connect 函数中**写出参数的类型**.</p>
+<hr />
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自定义信号槽</h1>
+<p>Qt 的信号槽机制并不仅仅是使用系统提供的那部分, 还会允许我们自己设计自己的信号和槽.</p>
+<p>看下面这段代码, 它实现了一个报纸类 <code>Newspaper</code>, 一个订阅者类 Reader, 当 <code>Newspaper</code>有了新的内容的时候, Reader 可以立即得到通知.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;!!! Qt5&lt;/span&gt;
+#include &lt;QObject&gt;
+
+&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ newspaper.h&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; Newspaper
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; QObject {
+    Q_OBJECT
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    Newspaper(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name) :
+        m_name(name) {
+    }
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; send() {
+        emit newPaper(m_name);
+    }
+
+signals:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; newPaper(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;name);
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    QString m_name;
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ reader.h&lt;/span&gt;
+#include &lt;QObject&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;QDebug&gt;
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; Reader
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; QObject {
+    Q_OBJECT
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    Reader() {}
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; receiveNewspaper(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name) {
+        qDebug() &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Receives Newspaper: &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name;
+    }
+};
+
+&lt;/span&gt;&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ main.cpp&lt;/span&gt;
+#include &lt;QCoreApplication&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+
+&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;newspaper.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;reader.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;argv[]) {
+    QCoreApplication app(argc, argv);
+
+    Newspaper newspaper(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Newspaper A&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    Reader reader;
+    QObject::connect(&lt;/span&gt;&amp;newspaper, &amp;Newspaper::newPaper, &amp;reader, &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;Reader::receiveNewspaper);
+
+    newspaper.send();
+
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt; app.exec();
+}&lt;/font&gt;&lt;/span&gt;
+</pre></div>
+
+
+<p>只有继承了<code>QObject</code>类的类, 才具有信号槽的能力.</p>
+<p>凡是 <code>QObject</code>类(不管是直接子类还是间接子类), 都应该在第一行代码写上 <code>**Q_OBJECT**</code>, 不管是不是使用信号槽，都应该添加这个宏, <strong>Q_OBJECT 只能被添加在头文件中</strong>.</p>
+<p>这个宏的展开将为我们的类提供信号槽机制、国际化机制以及 Qt 提供的不基于 C++ RTTI 的反射能力.</p>
+<p>这个宏将由 moc 做特殊处理(我们会在后面章节中介绍 moc, 这里可以将其理解为一种预处理器, 是比 C++ 预处理器更早执行的预处理器), 不仅仅是宏展开这么简单.
+moc 会读取标记了 Q_OBJECT 的头文件，生成以 moc_ 为前缀的文件，比如 newspaper.h 将生成 moc_newspaper.cpp.
+注意, 由于 moc <strong>只处理头文件中的标记了 Q_OBJECT 的类声明</strong>，不会处理 cpp 文件中的类似声明. 因此, 如果我们把 Newspaper 和 Reader 类的代码直接写于 main.cpp 中, 是无法得到 moc 的处理的.</p>
+<p>Newspaper 类的新加了一个 signals 块, 所列出的就是该类的信号.
+信号就是一个返回值是 void 的函数名, 参数是该信号需要传递的数据, 信号函数是不需要函数体的.
+Newspaper 类的 send() 函数比较简单, 只有一个语句 emit newPaper(m_name), emit 是 Qt 对 C++ 的扩展, 是一个关键字(其实也是一个宏), emit 的含义是发出, 也就是发出 newPaper() 信号, 感兴趣的接收者会关注这个信号.</p>
+<p>Reader 类更简单, 因为这个类需要接受信号, 所以我们将其继承了QObject, 并且添加了Q_OBJECT宏.
+与信号函数不同, 槽函数必须自己完成实现代码, <strong>槽函数就是普通的成员函数</strong>, 因此作为成员函数, 也会受到 public、private 等访问控制符的影响.</p>
+<hr />
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>总结一下自定义信号槽需要注意的事项:</h1>
+<p>发送者和接收者都需要是 QObject的 子类;</p>
+<p>使用 signals 标记信号函数, 信号是一个函数声明, 返回 void, 不需要实现函数代码;</p>
+<p>槽函数是普通的成员函数, 作为成员函数, 会受到 public、private、protected 的影响;</p>
+<p>使用 emit 在恰当的位置发送信号;</p>
+<p>使用 QObject::connect() 函数连接信号和槽.
+lo0</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

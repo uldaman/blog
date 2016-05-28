@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>46. python glob 与 shutil</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/46-python-glob-yu-shutil.html" rel="bookmark"
+        title="Permalink to 46. python glob 与 shutil">46. python glob 与 shutil</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-16T19:16:00+08:00">Mon 16 May 2016
+</h6>
+
+
+    <p>glob 模块是最简单的模块之一, 内容非常少, 用它可以查找符合特定规则的文件路径名, 就像在 windows 下使用文件搜索功能一样, 查找文件只用到三个匹配符: <code>*</code>, <code>?</code>, <code>[]</code>, <code>*</code> 匹配 0 个或多个字符, <code>?</code> 匹配单个字符, <code>[]</code> 匹配指定范围内的字符 (如 [0-9]匹配数字).</p>
+<div class="toc">
+<ul>
+<li><a href="#glob">glob</a><ul>
+<li><a href="#globglob">glob.glob</a></li>
+<li><a href="#globiglob">glob.iglob</a></li>
+</ul>
+</li>
+<li><a href="#shutil">shutil</a></li>
+</ul>
+</div>
+<h1 id="glob"><a name="user-content-glob" href="#glob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob</h1>
+<h2 id="globglob"><a name="user-content-globglob" href="#globglob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob.glob</h2>
+<p>返回所有匹配的文件路径列表, 它只有一个参数 pathname, 定义了文件路径匹配规则, 这里可以是绝对路径, 也可以是相对路径, 下面是使用 glob.glob 的例子:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">glob</span>
+
+<span style="color: #999988; font-style: italic"># 获取指定目录下的所有图片</span>
+<span style="color: #A71D5D">print</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">glob</span>(<span style="color: #183691">r&quot;E:\Picture\*\*.jpg&quot;</span>)
+
+<span style="color: #999988; font-style: italic"># 获取上级目录的所有.py文件</span>
+<span style="color: #A71D5D">print</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">glob</span>(<span style="color: #183691">r&#39;../*.py&#39;</span>)  <span style="color: #999988; font-style: italic"># 相对路径</span>
+</pre></div>
+
+<br></p>
+<h2 id="globiglob"><a name="user-content-globiglob" href="#globiglob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob.iglob</h2>
+<p>与 glob.glob 类似, 但它获取的是一个可迭代对象, 使用它可以逐个获取匹配的文件路径名 (类似 rang 与 xrang 的区别).</p>
+<p>下面是一个简单的例子:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">glob</span>
+<span style="color: #999988; font-style: italic"># 父目录中的.py文件</span>
+<span style="color: #333333">f</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">iglob</span>(<span style="color: #183691">r&#39;../*.py&#39;</span>)
+<span style="color: #A71D5D">print</span> <span style="color: #333333">f</span>  <span style="color: #999988; font-style: italic"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
+
+<span style="color: #A71D5D">for</span> <span style="color: #333333">py</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">f</span>:
+    <span style="color: #A71D5D">print</span> <span style="color: #333333">py</span>
+</pre></div>
+
+<br></p>
+<h1 id="shutil"><a name="user-content-shutil" href="#shutil" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>shutil</h1>
+<p>High-level file operations  高级的文件操作模块, 提供了一些易操作的文件**移动**、<strong>复制</strong>、<strong>打包</strong>、<strong>压缩</strong>、**解压**API.</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>copyfileobj(fsrc, fdst[, length=16*1024])</td>
+<td>copy 文件内容到另一个文件, 可以 copy 指定大小的内容</td>
+</tr>
+<tr>
+<td>copyfile(src, dst)</td>
+<td>copy 文件内容, 是不是感觉上面的文件复制很麻烦? 还需要自己手动用 open 函数打开文件, 在这里就不需要了, 事实上, copyfile 调用了 copyfileobj</td>
+</tr>
+<tr>
+<td>copymode(src,dst)</td>
+<td>仅 copy 权限, 不更改文件内容, 组和用户</td>
+</tr>
+<tr>
+<td>copystat(src,dst)</td>
+<td>复制所有的状态信息, 包括权限, 组, 用户, 时间等</td>
+</tr>
+<tr>
+<td>copy(src,dst)</td>
+<td>复制文件的内容以及权限, 先 copyfile 后 copymode</td>
+</tr>
+<tr>
+<td>copy2(src,dst)</td>
+<td>复制文件的内容以及文件的所有状态信息, 先 copyfile 后 copystat</td>
+</tr>
+<tr>
+<td>copytree(src, dst, symlinks=False, ignore=None, copy_function=copy2,ignore_dangling_symlinks=False)</td>
+<td>递归的复制文件内容及状态信息</td>
+</tr>
+<tr>
+<td>rmtree(path, ignore_errors=False, onerror=None)</td>
+<td>递归地删除文件</td>
+</tr>
+<tr>
+<td>move(src, dst)</td>
+<td>递归的移动文件</td>
+</tr>
+<tr>
+<td>make_archive(base_name, format, root_dir=None, base_dir=None, verbose=0, dry_run=0, owner=None, group=None, logger=None)</td>
+<td>压缩打包<br>base_name: 压缩打包后的文件名或者路径名<br>format: 压缩或者打包格式 &ldquo;zip&rdquo;、&rdquo;tar&rdquo;、&rdquo;bztar&rdquo;、&rdquo;gztar&rdquo;<br>root_dir: 将哪个目录或者文件打包 (也就是源文件)</td>
+</tr>
+</tbody>
+</table>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

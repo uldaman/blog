@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>48. python 多重继承</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/48-python-duo-zhong-ji-cheng.html" rel="bookmark"
+        title="Permalink to 48. python 多重继承">48. python 多重继承</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-19T08:42:00+08:00">Thu 19 May 2016
+</h6>
+
+
+    <p>最近在使用 Python 多重继承的时候, 发现没有继承到第二个类的成员, 查了查资料, 还来是 super 搞的鬼&hellip;</p>
+<p>super(TYPE, self).method 调用的是 mro 列表中第一个, 也即继承列表第一个类的方法, 改成 old_style 式的调用父类构造函数问题就解决了, 最终得出个结论:</p>
+<p>如果使用了多重继承, 那么最好使用 old_style, 否则使用 new_style (即 super), 但是不幸的是, 如果你需要在 new_style 中使用多重继承, 那么推荐用 GOF 里的组合模式来代替多重继承.</p>
+<p>参考资料: <a href="http://blog.ptsang.net/constructors_with_different_arguments_in_python_multiinheri_class">Python多重继承的异构构造器</a></p>
+<p>下面为资料原文:</p>
+<h1 id="what"><a name="user-content-what" href="#what" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>What</h1>
+<p>在 Python 里面, 如果你使用上 Qt、SQLAlchemy、Twisted 之类各种大型类库时候, 有时候多重继承 Multiple Inheritance 是个简单的解决方法, 但是多重继承的复杂性总容易造成误解和疑惑.</p>
+<p>一般&rdquo;常识&rdquo;说, 使用 super 访问父类的属性/方法, 这种说法在多重继承里面是不成立的, 多重继承的类并没有父类的概念 (There is no superclass in a MI world). 类似的博客在过去几年被人写了无数遍了, 因为过去版本里面 python 官方文档对 super 的解释非常有限而且有误导解释, 直到 2.6 以后的文档, 才详细说明了 super 在单继承和多继承的两种不同工作方式. 当时苦逼的程序员甚至不得不去翻看 Python 源码才搞清楚是什么回事. 以致几年来很多人对 python 的多重继承保持怀疑态度.</p>
+<p>Python 多重继承使用 Method Resolution Order 的动态算法来解决一个方法名的调用顺序, mro 其实说来简单, 就是一个深度优先的继承列表, 很易理解, 但随之来的是遇到互不相同的构造器 __init__ 参数的问题.</p>
+<p>Codepad运行结果: <a href="http://codepad.org/qQNiMzBl"><a href="http://codepad.org/qQNiMzBl"><a href="http://codepad.org/qQNiMzBl">http://codepad.org/qQNiMzBl</a></a></a></p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">A</span>(<span style="color: #ED6A43">object</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">arg1</span>
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">A</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>()
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">B</span>(<span style="color: #ED6A43">object</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">B</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>)
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">C</span>(<span style="color: #333333">B</span>, <span style="color: #333333">A</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #ED6A43">super</span>(<span style="color: #333333">C</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #A71D5D">print</span> <span style="color: #333333">C</span><span style="color: #A71D7E">.</span><span style="color: #333333">__mro__</span>
+
+<span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">C</span>(<span style="color: #183691">&quot;C&#39;s arg1&quot;</span>, <span style="color: #183691">&quot;C&#39;s arg2&quot;</span>)
+</pre></div>
+
+<br>
+执行结果:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>init func in C, with arg1&#39;C&#39;s arg1&#39;, arg2 &#39;C&#39;s arg2&#39;
+init func in B, with arg1&#39;C&#39;s arg1&#39;, arg2 &#39;C&#39;s arg2&#39;
+init func in A, with arg1 &#39;C&#39;s arg1&#39;
+(&lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;type &#39;object&#39;&gt;)
+</pre></div>
+
+<br>
+可见几个类的构造器的执行顺序正是 mro 列表的顺序. 重点是多重继承的各个类的构造器 __init__ 之所以能够执行, 是因为每个构造器里面都有一句 super()，这个 super 完成 mro 列表中下一个类的构造器的调用.</p>
+<p>这个事实听起来似乎很自然, 但看代码, B 的构造器还得必须知道 A 的构造器的参数？ B 需要知道自己将会被 C 同时继承 A, 并且调用 A 的构造？！！很荒谬, 但不幸的这是 mro 的特点. 代码是可以这么写, 但不应该, 为另一个不知道什么时候会被一起继承的类特地地写代码, 跟面对对象设计的解耦原则相违背.</p>
+<h1 id="how"><a name="user-content-how" href="#how" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>How</h1>
+<p>在 mro 方式的基础上, 这个问题是不可能有效解决的, 只能避免. 概括起来大概有这么两种方式.</p>
+<h3 id="1-super-mro"><a name="user-content-1-super-mro" href="#1-super-mro" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 使用传统类的方式, 显式调用被继承类的构造器, 避开 super 的 mro 自动化工作.</h3>
+<p>Codepad 看运行效果: <a href="http://codepad.org/XCVdKCPm"><a href="http://codepad.org/XCVdKCPm"><a href="http://codepad.org/XCVdKCPm">http://codepad.org/XCVdKCPm</a></a></a></p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">A</span>(<span style="color: #ED6A43">object</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> <span style="color: #333333">arg1</span>
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">B</span>(<span style="color: #ED6A43">object</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">C</span>(<span style="color: #333333">A</span>, <span style="color: #333333">B</span>):
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> <span style="color: #A71D7E">%</span> (<span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #999988; font-style: italic"># super(C, self).__init__(arg1)  # 这两行</span>
+        <span style="color: #333333">A</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>)  <span style="color: #999988; font-style: italic"># 等价</span>
+        <span style="color: #333333">B</span><span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg1</span>, <span style="color: #333333">arg2</span>)
+        <span style="color: #A71D5D">print</span> <span style="color: #333333">C</span><span style="color: #A71D7E">.</span><span style="color: #333333">__mro__</span>
+
+<span style="color: #333333">c</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">C</span>(<span style="color: #183691">&quot;C&#39;s arg1&quot;</span>, <span style="color: #183691">&quot;C&#39;s arg2&quot;</span>)
+</pre></div>
+
+<br>
+注意 C 继承 A, B 的顺序已经改变.</p>
+<p>要排除一个容易产生的误解. Python 文档里面的 super 有个很显著的 Note: super() only works for new-style classes. super 只适用于新类. 但新类并不必须使用 super.</p>
+<p>直接调用被继承类的 __init__ 作为 unbound 方法调用, 需要指定一个实例, 如 self 作为参数, 依次调用各个被继承类. 缺点是如果这几个被继承类也在构造方法里面使用这样调用了同一个上级被继承类, 会出现&rdquo;爷爷类&rdquo;的构造方法被调用多次的情况.</p>
+<p>如果一定使用 super, 要注意继承列表的顺序. super(TYPE, self).method 调用的是 mro 列表中第一个, 也即继承列表第一个类的方法.</p>
+<p>PyQt 里面的类内部一般 (未细究) 都使用 __init__ 的方式来初始化代码, 因而很多 PyQt 的例子代码都是使用 QtGui.QMainWindow.__init__(self) 这样的代码来初始化. 当然在单继承时候和 super 的写法是等价的, 但最好使用统一的原则:</p>
+<ul>
+<li>如果&rdquo;被继承类&rdquo;都使用 __init__，&rdquo;继承类&rdquo;就使用 __init__ 来初始化</li>
+<li>如果&rdquo;被继承类&rdquo;都使用 super，&rdquo;继承类&rdquo;就使用 super 来初始化</li>
+</ul>
+<h3 id="2-composition-association-pattern-is-ahas-a"><a name="user-content-2-composition-association-pattern-is-ahas-a" href="#2-composition-association-pattern-is-ahas-a" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 使用Composition / Association Pattern的设计模式 (即’Is-A’转换成’Has-A’) 来实现相同功能, 避免多重继承.</h3>
+<p>这个方法听起来未免有点让人不快 (破坏了原有设计思维) ，但实际上很可能这是更好的方式, 更清晰的代码, 尤其是要继承的类里面混合了使用 super、__init__ 两种初始化方式的时候.</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

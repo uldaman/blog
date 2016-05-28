@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>(十九) 异常</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/shi-jiu-yi-chang.html" rel="bookmark"
+        title="Permalink to (十九) 异常">(十九) 异常</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-06-13T11:38:00+08:00">Sat 13 June 2015
+</h6>
+
+
+    <p>Java 把异常当作对象来处理, 并定义一个基类 java.lang.Throwable 作为所有异常的超类(父类), 有两个子类 Error 和 Exception, 分别表示错误和异常.</p>
+<p>Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等. 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.</p>
+<p>Exception 是程序本身可以处理的异常, 程序中应当尽可能去处理这些异常.</p>
+<p>我们主要讨论的是 Exception.</p>
+<p>Exception 也分为两大类: 运行异常(RuntimeException)、编译异常.</p>
+<p>运行异常都是 RuntimeException 类及其子类异常, 如 NullPointerException、IndexOutOfBoundsException 等, 这些异常是不检查异常, 程序中可以选择捕获处理, 也可以不处理, 这些异常一般是由程序逻辑错误引起的, 程序应该从逻辑角度尽可能避免这类异常的发生.</p>
+<p><img alt="" src="http://i60.tinypic.com/245dm52.jpg" /></p>
+<p>编译异常是 RuntimeException 以外的异常, 从程序语法角度讲是必须进行处理的异常, 如果不处理, 程序就不能编译通过, 如 IOException、SQLException 等以及用户自定义的 Exception.</p>
+<hr />
+<p>异常的处理</p>
+<p>在 Java 中, 使用 try-catch 及 try-catch-finally 来捕获并处理异常.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;try {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
+} &lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 该异常处理代码&lt;/span&gt;
+}
+</pre></div>
+
+
+<p>例子:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+    System.out.print(&lt;/span&gt;&quot;请输入你的年龄:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+    Scanner input &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Scanner(System.in);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; age =&lt;span style=&quot;color: #000000&quot;&gt; input.newtInt();
+    System.out.println(&lt;/span&gt;&quot;十年后你&quot; + (age + 10) + &quot;岁&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+} &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (InputMismatchException e) {
+    System.out.println(&lt;/span&gt;&quot;你应该输入整数!&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+}
+System.out.println(&lt;/span&gt;&quot;程序结束!&quot;);
+</pre></div>
+
+
+<p>如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println(&ldquo;十年后你&rdquo; + (age + 10) + &ldquo;岁&rdquo;) 这包就不会被执行, 程序会跳到 catch 语句中;
+在 try-catch 执行完后, 后续的语句会继续执行.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;try {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
+} &lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 该异常处理代码&lt;/span&gt;
+} &lt;span style=&quot;color: #0000ff&quot;&gt;finally&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 最终要执行的一些代码&lt;/span&gt;
+}
+</pre></div>
+
+
+<p>为什么要用 finally?
+先看一个没有 finally 的异常处理 try-catch 语句:
+假设 count 为要使用到的资源, 并且用完要求释放此资源, 那么我们可以把释放资源的语句放到 try-catch 后执行, 当前的程序不管是在执行完 try 语句块还是 catch 语句块, 都会顺序执行到下面释放资源的语句.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; count = 0;  &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;初始化资源&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+    count&lt;/span&gt;++&lt;span style=&quot;color: #000000&quot;&gt;;
+    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 一些会抛出异常的方法&lt;/span&gt;
+&lt;span style=&quot;color: #000000&quot;&gt;
+} &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 异常处理&lt;/span&gt;
+&lt;span style=&quot;color: #000000&quot;&gt;}
+count &lt;/span&gt;= 0; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;释放资源&lt;/span&gt;
+</pre></div>
+
+
+<p>但是, 如果在 try 或 catch 中有 return 语句, 那么在每条 return 语句之前, 都要先执行释放资源的语句, 这样, 就需要在每一个可能返回的地方, 考虑如何释放资源, 最终将导致代码的复杂和冗余.
+所以, 需要 finally 语句, 把资源释放或状态还原的代码放到 finally 块中, finally 语句是在 return 语句执行之后, return 返回之前(返回到调用函数之前)执行, 此时, 就不需要再考虑各种复杂的资源释放情况.</p>
+<hr />
+<p><strong>throw、throws关键字</strong></p>
+<p>throw 关键字是用于方法体内部, 用来抛出一个 Throwable 类型的异常;
+如果抛出了检查异常, 则还应该在方法头部声明方法可能抛出的异常类型, 该方法的调用者也必须检查处理抛出的异常, 如果所有方法都层层上抛获取的异常, 最终JVM会进行处理, 处理也很简单, 就是打印异常消息和堆栈信息;
+如果抛出的是 Error 或 RuntimeException, 则该方法的调用者可选择处理该异常.</p>
+<p>throws 关键字用于方法体外部的方法声明部分, 用来声明方法可能会抛出某些异常, 仅当抛出了检查异常, 该方法的调用者才必须处理或者重新抛出该异常, 当方法的调用者无力处理该异常的时候, 应该继续抛出, 而不是囫囵吞枣, 一般在 catch 块中打印一下堆栈信息做个勉强处理.</p>
+<p>下面给出一个简单例子, 看看如何 使用这两个关键字:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; test() &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Exception {
+     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;抛出一个检查异常&lt;/span&gt;
+     &lt;span style=&quot;color: #0000ff&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Exception(&quot;方法 test 中的Exception&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+}&lt;/span&gt;
+</pre></div>
+
+
+<p>之前说到: 如果抛出了检查异常, 则该方法的调用者也必须检查处理抛出的异常;
+所以要调用 test() 的方法就必须处理 test() 抛出的异常或者添加 throws 声明将将异常继续上抛.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; compute_1() {
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+        test()
+    } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (Exception e) {
+        System.out.println(&lt;/span&gt;&quot;e.getMessage()&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+    }
+}
+
+&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 或者添加 throws 声明, 将异常上抛&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; compute_2() &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Exception {
+    test()
+}&lt;/span&gt;
+</pre></div>
+
+
+<p><strong>Throwable类中的常用方法</strong>
+getCause(): 返回抛出异常的原因, 如果 cause 不存在或未知, 则返回 null;
+getMessage(): 返回异常的消息信息.
+printStackTrace(): 对象的堆栈跟踪输出至错误输出流, 作为字段 System.err 的值.</p>
+<hr />
+<p>自定义异常</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; 自定义异常类 &lt;span style=&quot;color: #0000ff&quot;&gt;extends&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 异常类型 {
+&lt;/span&gt;
+
+&lt;span style=&quot;color: #000000&quot;&gt;}&lt;/span&gt;
+</pre></div>
+
+
+<p>0a?</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

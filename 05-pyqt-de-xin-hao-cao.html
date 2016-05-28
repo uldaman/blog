@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>05、PyQt 的信号槽</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/05-pyqt-de-xin-hao-cao.html" rel="bookmark"
+        title="Permalink to 05、PyQt 的信号槽">05、PyQt 的信号槽</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-05-12T00:29:00+08:00">Thu 12 May 2016
+</h6>
+
+
+    <p>关于 Qt 信号槽的基础知识参考我另一个系列笔记: <a href="http://www.smallcpp.com/category/ling-ji-chu-qtru-men2.html">零基础QT入门</a></p>
+<div class="toc">
+<ul>
+<li><a href="#qt">使用 Qt 设计师生成信号槽</a></li>
+<li><a href="#eric">使用 Eric 生成信号槽</a></li>
+<li><a href="#_1">自定义信号槽</a></li>
+<li><a href="#_2">记一次调错</a></li>
+</ul>
+</div>
+<h1 id="qt"><a name="user-content-qt" href="#qt" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 Qt 设计师生成信号槽</h1>
+<p>首先, 在 <code>Qt 设计师</code> 上的信号槽是可以被 Eric 转换的, 也就是说, 以前那种直接在 <code>Qt 设计师</code> 上拖拽来编辑信号槽的方式是被兼容的.</p>
+<p><img alt="" src="http://i67.tinypic.com/2f06h69.jpg" /></p>
+<p>保存好后, 到 eric 中编译窗体, 就会发现 <code>Ui_first_window.py</code> 文件被修改了, 添加了一行信号槽关联代码:</p>
+<p><img alt="" src="http://i68.tinypic.com/264qjw0.jpg" /></p>
+<h1 id="eric"><a name="user-content-eric" href="#eric" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 Eric 生成信号槽</h1>
+<p>然后, eric 强大的地方在于, 它能够快捷的从 <code>Ui_first_window.py</code> 生成信号槽, 而不需要事先在 <code>Qt 设计师</code> 中拖放, 我们先在刚才的窗体上添加一个新按钮, 记住它的 <strong>objectName</strong> 为 pushButton_2, 然后回到 eric 中, 在 <code>first_window.ui</code> 上右键, 选择 &ldquo;生成对话框代码&rdquo;, 我们可以看到 &ldquo;窗体代码产生器&rdquo; 上已经发生了一些变化:</p>
+<p><img alt="" src="http://i64.tinypic.com/2gvr5o4.jpg" /></p>
+<p>红框部分就是 pushButton_2 按钮的信号, 我们勾选 <code>on_pushButton_2_clicked()</code> 后点击保存, 发现 <code>first_window.py</code> 文件已被更改, 多了一个槽处理函数:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">@pyqtSignature</span>(<span style="color: #183691">&quot;&quot;</span>)
+<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_pushButton_2_clicked</span>(<span style="color: #ed6a43">self</span>):
+    <span style="color: #183691">&quot;&quot;&quot;</span>
+<span style="color: #183691">    Slot documentation goes here.</span>
+<span style="color: #183691">    &quot;&quot;&quot;</span>
+    <span style="color: #999988; font-style: italic"># TODO: not implemented yet</span>
+    <span style="color: #A71D5D">raise</span> <span style="color: #990000">NotImplementedError</span>
+</pre></div>
+
+<br>
+这个槽函数会被关联到 pushButton_2 按钮的 clicked 信号, 我们翻阅代码发现并没有找到 Qt 的信号槽关联函数 (connect), 其实它是通过下面这句代码来实现的:</p>
+<p><img alt="" src="http://i66.tinypic.com/2v8pmc0.jpg" /></p>
+<p>这可以说是 eric 给我们定义好的 &ldquo;轮子&rdquo; 了.</p>
+<blockquote>
+<p>这里仅补充一下**信号槽编程**与**事件编程**的差异, 对于从 MFC 转到 Qt 来的我而言, on_pushButton_2_clicked() 函数类似 MFC 中的按钮点击事件, 其实并不然, 底层实现先抛开不说, 就使用上而言, MFC 按钮点击事件需要先定义一个事件 (一串数字), 而信号槽则不需要, 只要两个函数符合条件, 就能通过 Qt 的 connect 函数把它们关联起来.</p>
+</blockquote>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自定义信号槽</h1>
+<p>记得以前在学 Qt 时, 连接信号槽的那个函数难记死了&hellip;而在 PyQt 中, 连接一个信号槽, 简直简单到爆&hellip;并且 PyQt4 allows any Python callable to be used as a slot, not just Qt slots.</p>
+<p>参考官方文档: <a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">new_style_signals_slots</a></p>
+<p>你可以通过 <code>PyQt4.QtCore.pyqtSignal</code> 来定义一个信号, 调用新信号的 <code>connect</code> 方法连接一个槽, 然后在合适的时候调用 新信号的 <code>emit</code> 方法:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtCore</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">pyqtSignal</span>
+
+<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_new_solt</span>():
+    <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;接收到新信号&#39;</span>
+
+<span style="color: #333333">sin_new</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()  <span style="color: #999988; font-style: italic"># 定义新信号</span>
+<span style="color: #333333">sin_new</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #333333">on_new_solt</span>)  <span style="color: #999988; font-style: italic"># 连接信号槽</span>
+<span style="color: #333333">sin_new</span><span style="color: #A71D7E">.</span><span style="color: #333333">emit</span>()  <span style="color: #999988; font-style: italic"># 发出信号</span>
+</pre></div>
+
+
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>记一次调错</h1>
+<p>在开始一个项目的过程中, 遇到一个问题:</p>
+<p>假设存在两个 table widget, 我希望为这两个 table widget 自定一个信号槽, 一开始我是这么写的:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtCore</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">pyqtSignal</span>
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">ClassName</span>(<span style="color: #333333">Ui_Xxx</span>):
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_one</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_one</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_one</span>)
+
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_two</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_two</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_two</span>)
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_one</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第一个 table widget&#39;</span>
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_two</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第二个 table widget&#39;</span>
+</pre></div>
+
+<br>
+发现脚本直接跑不起来.... 经探索发现, 信号必须被定义成<code>类成员</code>, 像下面这样:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtCore</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">pyqtSignal</span>
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">ClassName</span>(<span style="color: #333333">Ui_Xxx</span>):
+   <span style="color: #333333">table_widget_one</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()  <span style="color: #999988; font-style: italic"># 类成员</span>
+   <span style="color: #333333">table_widget_two</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>()  <span style="color: #999988; font-style: italic"># 类成员</span>
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_one</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_one</span>)
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_two</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_two</span>)
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_one</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第一个 table widget&#39;</span>
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_two</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第二个 table widget&#39;</span>
+</pre></div>
+
+<br>
+改过后, 脚本可以跑起来了, 但是发现信号槽关联失败, 再探索发现信号要定义成类的一级成员, 于是我只能再定义个类继承 QTableWedgit:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">QtGui</span>
+<span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtCore</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">pyqtSignal</span>
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">My_Table_Widget</span>(<span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QTableWidget</span>):
+    <span style="color: #333333">sin_update</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pyqtSignal</span>(<span style="color: #ED6A43">dict</span>)
+</pre></div>
+
+<br>
+然后在 Qt 设计师中让 <code>table_widget_one</code> 和 <code>table_widget_two</code> 提升为 <code>My_Table_Widget</code>, 最后改主脚本为:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtCore</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">pyqtSignal</span>
+
+<span style="color: #A71D5D">class</span> <span style="color: #445588">ClassName</span>(<span style="color: #333333">Ui_Xxx</span>):
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">arg</span>):
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_one</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_one</span>)
+        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">table_widget_two</span><span style="color: #A71D7E">.</span><span style="color: #333333">sin_update</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">update_two</span>)
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_one</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第一个 table widget&#39;</span>
+
+    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">update_two</span>(<span style="color: #ed6a43">self</span>):
+        <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;更新第二个 table widget&#39;</span>
+</pre></div>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
