@@ -67,6 +67,20 @@ blog    CNAME        username.github.io
 # 修改 Pelican 配置
 在 Pelican 项目中, `pelicanconf.py` 配置文件中有一项 **SITEURL** 指向的是 `http://username.github.io`, 因此所有的静态文件都是访问 `username.github.io` 下的, 现在要改成 `http://username.github.io/blog`.
 
+# 补充
+**Pelican** 提供了 **fabric** 的方式部署代码, 直接执行 `fab gh_pages` 就能把项目的 output 目录下的文件推送到 `gh-pages` 分支, 不过要修改下 Pelican 默认的 `fabfile.py` (让其自动生成 CNAME):
+
+```python
+def gh_pages():
+    """Publish to GitHub Pages"""
+    rebuild()
+    with lcd('{deploy_path}'.format(**env)):
+        local('echo blog.smallcpp.com > CNAME')
+
+    local("ghp-import -b {github_pages_branch} {deploy_path}".format(**env))
+    local("git push origin {github_pages_branch}".format(**env))
+```
+<br>
 # References
 [GitHub Pages Basics](https://help.github.com/categories/github-pages-basics/)<br>
 [Setting up your pages site repository](https://help.github.com/articles/setting-up-your-pages-site-repository/)<br>
