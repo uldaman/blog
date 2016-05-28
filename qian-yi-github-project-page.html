@@ -63,6 +63,7 @@
 <li><a href="#_1">添加自定义域名</a></li>
 <li><a href="#_2">迁移博客源文件</a></li>
 <li><a href="#pelican">修改 Pelican 配置</a></li>
+<li><a href="#_3">补充</a></li>
 <li><a href="#references">References</a></li>
 </ul>
 </div>
@@ -108,6 +109,19 @@ git rm -rf .
 <p><img alt="" src="http://i63.tinypic.com/xddzia.jpg" /></p>
 <h1 id="pelican"><a name="user-content-pelican" href="#pelican" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>修改 Pelican 配置</h1>
 <p>在 Pelican 项目中, <code>pelicanconf.py</code> 配置文件中有一项 <strong>SITEURL</strong> 指向的是 <code>http://username.github.io</code>, 因此所有的静态文件都是访问 <code>username.github.io</code> 下的, 现在要改成 <code>http://username.github.io/blog</code>.</p>
+<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>补充</h1>
+<p><strong>Pelican</strong> 提供了 <strong>fabric</strong> 的方式部署代码, 直接执行 <code>fab gh_pages</code> 就能把项目的 output 目录下的文件推送到 <code>gh-pages</code> 分支, 不过要修改下 Pelican 默认的 <code>fabfile.py</code> (让其自动生成 CNAME):</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">gh_pages</span>():
+    <span style="color: #183691">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
+    <span style="color: #333333">rebuild</span>()
+    <span style="color: #A71D5D">with</span> <span style="color: #333333">lcd</span>(<span style="color: #183691">&#39;{deploy_path}&#39;</span><span style="color: #A71D7E">.</span><span style="color: #333333">format</span>(<span style="color: #A71D7E">**</span><span style="color: #333333">env</span>)):
+        <span style="color: #333333">local</span>(<span style="color: #183691">&#39;echo blog.smallcpp.com &gt; CNAME&#39;</span>)
+
+    <span style="color: #333333">local</span>(<span style="color: #183691">&quot;ghp-import -b {github_pages_branch} {deploy_path}&quot;</span><span style="color: #A71D7E">.</span><span style="color: #333333">format</span>(<span style="color: #A71D7E">**</span><span style="color: #333333">env</span>))
+    <span style="color: #333333">local</span>(<span style="color: #183691">&quot;git push origin {github_pages_branch}&quot;</span><span style="color: #A71D7E">.</span><span style="color: #333333">format</span>(<span style="color: #A71D7E">**</span><span style="color: #333333">env</span>))
+</pre></div>
+
+<br></p>
 <h1 id="references"><a name="user-content-references" href="#references" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>References</h1>
 <p><a href="https://help.github.com/categories/github-pages-basics/">GitHub Pages Basics</a><br>
 <a href="https://help.github.com/articles/setting-up-your-pages-site-repository/">Setting up your pages site repository</a><br>
