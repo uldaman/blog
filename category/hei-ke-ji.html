@@ -45,7 +45,7 @@
     <div class="large-9 columns">
         <article>
             <a href="http://blog.smallcpp.com/cegui-6-ling-lei-d3dhook.html"><h3 class="article-title">'[CEGUI]. 6、另类 D3DHOOK'</h3></a>
-<h6 class="subheader" title="2015-06-18T15:07:00+08:00">周四 18 六月 2015
+<h6 class="subheader" title="2015-06-18T15:07:00+08:00">Thu 18 June 2015
 </h6>
 
 
@@ -62,71 +62,8 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</h3></a>
-<h6 class="subheader" title="2015-06-13T06:27:00+08:00">周六 13 六月 2015
-</h6>
-
-
-<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
-<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
-    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
-
-    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/hei-ke-ji-er-cha-shu-bian-li.html"><h3 class="article-title">'[黑科技]. 二叉树遍历'</h3></a>
-<h6 class="subheader" title="2015-05-30T03:05:00+08:00">周六 30 五月 2015
-</h6>
-
-
-<p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
-<p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#pragma pack (push,1)</span>
-<span style="color: #A71D5D">typedef</span> <span style="color: #A71D5D">struct</span> <span style="color: #333333">_RoleTree</span> {
-    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwLBase</span>;      <span style="color: #999988; font-style: italic">//+0x0    左树</span>
-    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwSBase</span>;      <span style="color: #999988; font-style: italic">//+0x4    上一层树的地址</span>
-    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwRBase</span>;      <span style="color: #999988; font-style: italic">//+0x8    右树</span>
-    <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">iID ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/hei-ke-ji-er-cha-shu-bian-li.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html"><h3 class="article-title">'[CEGUI]. 4、CEGUI 初始化'</h3></a>
-<h6 class="subheader" title="2015-05-29T16:19:00+08:00">周五 29 五月 2015
-</h6>
-
-
-<p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
-<p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3D9</span><span style="color: #A71D7E">::</span><span style="color: #333333">CreateDevice</span>(<span style="color: #333333">UINT</span> <span style="color: #333333">Adapter</span>, <span style="color: #333333">D3DDEVTYPE</span> <span style="color: #333333">DeviceType</span>, <span style="color: #333333">HWND</span> <span style="color: #333333">hFocusWindow</span>
-    , <span style="color: #333333">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">'[CEGUI]. 3、VS 环境设置'</h3></a>
-<h6 class="subheader" title="2015-05-29T08:05:00+08:00">周五 29 五月 2015
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">Fri 29 May 2015
 </h6>
 
 
@@ -148,26 +85,8 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/cegui-2-hook-d3d.html"><h3 class="article-title">'[CEGUI]. 2、HOOK D3D'</h3></a>
-<h6 class="subheader" title="2015-05-27T16:06:00+08:00">周三 27 五月 2015
-</h6>
-
-
-<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
-<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
-<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-2-hook-d3d.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/cegui-1-jian-jie-ji-bian-yi.html"><h3 class="article-title">'[CEGUI]. 1、简介及编译'</h3></a>
-<h6 class="subheader" title="2015-05-08T10:59:00+08:00">周五 08 五月 2015
+<h6 class="subheader" title="2015-05-08T10:59:00+08:00">Fri 08 May 2015
 </h6>
 
 
@@ -209,22 +128,18 @@ Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
             <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
-            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
