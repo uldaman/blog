@@ -44,179 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/si-yuan-biao-yu-yuan-fang-fa.html"><h3 class="article-title">四、元表與元方法</h3></a>
-<h6 class="subheader" title="2015-06-16T13:34:00+08:00">Tue 16 June 2015
-</h6>
-
-
-<p>直接参考: <a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html"><a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html"><a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html">http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html</a></a></a></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-yuan-biao-yu-yuan-fang-fa.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html"><h3 class="article-title">三、Lua 中的閉包</h3></a>
-<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
-</h6>
-
-
-<p>对于习惯了 C/C++ 这种不可嵌套定义函數的语言来说, 理解闭包真不太容易;</p>
-<p>要解釋閉包就要先理解幾個小知識點:
-Lua 中的函数是带有词法定界（lexical scoping）的第一类值（first-class values）.</p>
-<p><strong>第一类值（first-class values）**是指,</strong> <strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
-正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">二、Lua 中的面向對象</h3></a>
-<h6 class="subheader" title="2015-06-15T19:47:00+08:00">Mon 15 June 2015
-</h6>
-
-
-<p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
-<p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
-People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html"><h3 class="article-title">一、遊戲開發數學基礎(坐标系、向量、矩阵)</h3></a>
-<h6 class="subheader" title="2015-06-15T17:08:00+08:00">Mon 15 June 2015
-</h6>
-
-
-<p><strong>笛卡爾坐標系</strong></p>
-<p>笛卡爾坐標系有 1D、2D、3D 三種, 因為我們要學的 cocos2d-x 是基於 2D 的, 因此, 我們主要討論 2D 笛卡爾坐標系.</p>
-<p>2D 笛卡爾坐標系 就是我們中學學過的 x/y 坐標系, 當然也稍有不同.</p>
-<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html"><h3 class="article-title">(二十九) 容器的一些其他操作</h3></a>
-<h6 class="subheader" title="2015-06-14T16:59:00+08:00">Sun 14 June 2015
-</h6>
-
-
-<p><strong>contains:</strong>
-判斷 Collection 中是否包含某元素, 包含返回 true;</p>
-<p><strong>containsAll:</strong>
-判斷 Collection 中是否包含指定的所有元素.</p>
-<p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題? 這裡 List 和 Set 的解決方法是不同的;</p>
-<p><strong>先看 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
-<h6 class="subheader" title="2015-06-14T15:04:00+08:00">Sun 14 June 2015
-</h6>
-
-
-<p>在寫測試代碼的時候, 發現個問題:
-程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
-<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
-<h6 class="subheader" title="2015-06-14T14:53:00+08:00">Sun 14 June 2015
-</h6>
-
-
-<p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
-<p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
-<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
-<h6 class="subheader" title="2015-06-14T04:53:00+08:00">Sun 14 June 2015
-</h6>
-
-
-<p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
-<p>Java 中的容器有两大接口: Collection 和 Map;</p>
-<p>Collection 又分为三个小接口: List、Queue 和 Set.</p>
-<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
-<p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
-<hr />
-<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
-<h6 class="subheader" title="2015-06-13T15:47:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>Math 类位于 java.lang 包中, 包含用于执行基本数学运算的方法, Math 类的所有方法都是静态方法, 所以使用该类中的方法时, 可以直接使用类名.方法名, 如: Math.round();</p>
-<p>常用的方法:
-<img alt="" src="http://i59.tinypic.com/ofyt8z.jpg" /></p>
-<p>Math 类还提供了许多其他方法, 可自行查阅.
-???</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
 <h6 class="subheader" title="2015-06-13T13:37:00+08:00">Sat 13 June 2015
 </h6>
@@ -235,9 +62,211 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
+<h6 class="subheader" title="2015-06-13T13:28:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>Java 提供三种方法实现基本类型向字符串转换:
+*. 使用包装类的 toString() 方法
+*. 使用 String 类的 valueOf() 方法
+*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
+String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"><h3 class="article-title">(二十二) Java 中的包装类</h3></a>
+<h6 class="subheader" title="2015-06-13T13:20:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
+<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
+<p>包装类主要提供了两大类方法:
+*. 将本类型和其他基本类型进行转换的方法
+*. 将字符串和本类型及包装类互相转换的方法</p>
+<hr />
+<p>以 Integet 为例, 其它类似</p>
+<p>Integer n1 = new Integer(5);
+Integet n2 = new Integer(“5”);</p>
+<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
+<hr />
+<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
+<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
+<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
+<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html"><h3 class="article-title">(二十一) StringBuilder 类</h3></a>
+<h6 class="subheader" title="2015-06-13T12:29:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
+<p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
+至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-java-zhong-de-zi-fu-chuan.html"><h3 class="article-title">(二十) Java 中的字符串</h3></a>
+<h6 class="subheader" title="2015-06-13T12:13:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
+<p>创建 String 对象的方法：</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-java-zhong-de-zi-fu-chuan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-jiu-yi-chang.html"><h3 class="article-title">(十九) 异常</h3></a>
+<h6 class="subheader" title="2015-06-13T11:38:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>Java 把异常当作对象来处理, 并定义一个基类 java.lang.Throwable 作为所有异常的超类(父类), 有两个子类 Error 和 Exception, 分别表示错误和异常.</p>
+<p>Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等. 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.</p>
+<p>Exception 是程序本身可以处理的异常, 程序中应当尽可能去处理这些异常.</p>
+<p>我们主要讨论的是 Exception.</p>
+<p>Exception 也分为两大类 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-jiu-yi-chang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</h3></a>
+<h6 class="subheader" title="2015-06-13T06:27:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
+<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
+    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
+
+    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html"><h3 class="article-title">(十八) 多态及接口</h3></a>
+<h6 class="subheader" title="2015-06-12T17:15:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>老生常谈, 参考 C++.</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类型转换</h1>
+<p>需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
+为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
+<p>首先, 我们来看一下向下类型转换的风险.</p>
+<p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-qi-ji-cheng.html"><h3 class="article-title">(十七) 继承</h3></a>
+<h6 class="subheader" title="2015-06-12T14:43:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>继承的概念都是一样的, 但是 Java 中继承的语法就和 C++ 中不一样了.</p>
+<p>语法: class 子类 extends 父类 { . . . }</p>
+<p>其他的和 C++ 上就差不多了:</p>
+<p>*. 方法重写</p>
+<p>*. 初始化顺序: 先父类再子类</p>
+<p>*. final 关键字 (C++11 中才有)
+这个关键字要说明一下, 它可以修饰类、方法、属性和变量;
+修饰类时, 则该类不可能被继承:
+修饰方法时, 则该方法不允许被覆盖 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-qi-ji-cheng.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-liu-nei-bu-lei.html"><h3 class="article-title">(十六) 内部类</h3></a>
+<h6 class="subheader" title="2015-06-12T10:50:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>内部类(Inner Class)就是定义在另外一个类里面的类, 与之对应, 包含内部类的类被称为外部类.</p>
+<p>内部类的主要作用:
+*. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
+*. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
+*. 内部类所实现的功能使用外部类同样可以实现, 只是有时使用内部类更方便;</p>
+<p>成员内部类
+静态内部类
+方法内部类
+匿名内部类</p>
+<hr />
+<p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-liu-nei-bu-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 18 of 29</h6>
+<h6 class="subheader">Page 18 of 27</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/author/martin17.html">&laquo; Prev</a>
@@ -268,7 +297,6 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>

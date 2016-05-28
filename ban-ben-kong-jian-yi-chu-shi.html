@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>'[版本控件] 一、初識'</title>
+    <title>[版本控件] 一、初識</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -46,21 +46,29 @@
 <article>
     <header>
         <h3 class="article-title"><a href="http://blog.smallcpp.com/ban-ben-kong-jian-yi-chu-shi.html" rel="bookmark"
-        title="Permalink to '[版本控件] 一、初識'">'[版本控件] 一、初識'</a></h3>
+        title="Permalink to [版本控件] 一、初識">[版本控件] 一、初識</a></h3>
     </header>
 
 <h6 class="subheader" title="2015-06-17T14:12:00+08:00">Wed 17 June 2015
 </h6>
 
 
-    <p>版本控制, 這個自己其實一直也在用, 本地的是用 svn, 遠程用的是 github, 但是一直沒怎麼深入, 這次打算系統的好好學一下這方面知識.</p>
-<p>版本控制的發展歷史:
-*. 本地版本控制
-*. 集中版本控制,
-*. 分布式版本控制</p>
+    <div class="toc">
+<ul>
+<li><a href="#_1">集中式版本控制系统</a></li>
+<li><a href="#_2">分布式版本控制</a></li>
+</ul>
+</div>
+<p>版本控制, 這個自己其實一直也在用, 本地的是用 svn, 遠程用的是 github, 但是一直沒怎麼深入, 這次打算系統的好好學一下這方面知識.</p>
+<p>版本控制的發展歷史:</p>
+<ul>
+<li>本地版本控制</li>
+<li>集中版本控制,</li>
+<li>分布式版本控制</li>
+</ul>
 <p>本地版本控制, 這個很好理解, 後面兩個階段需要稍微解釋下.</p>
 <hr />
-<p><strong>集中式版本控制系统</strong></p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>集中式版本控制系统</h1>
 <p>集中式版本控制系统, 版本库是集中存放在中央服务器的, 而干活的时候, 用的都是自己的电脑, 所以要先从中央服务器取得最新的版本, 然后开始干活, 干完活了, 再把自己的活推送给中央服务器, 中央服务器就好比是一个图书馆, 你要改一本书, 必须先从图书馆借出来, 然后回到家自己改, 改完了, 再放回图书馆.</p>
 <p>集中式的版本控制系統其實有三大重點, 即**同步**、<strong>追溯</strong>、以及**檔案的備份**.</p>
 <p>同步是為了讓所有開發者間對檔案所做的變更都能夠同步, 最終得到相同的檔案內容.</p>
@@ -76,7 +84,7 @@
 當然, 或許你會想, 可以等到能聯網之後才提交就好了, 但是, 版本控制中, 我們希望每次提交的變更都是一個不可分割的最小單位, 若因無法連網, 無法將已完成的修改提交出去, 那麼也就無法繼續修改其他的項目, 因為這將會使得, 應該被分為多次提交的內容混在一塊了.</p>
 <p>再者, 由於每個開發者的修改, 時常是反覆持續進行, 即使都在處理同一問題, 也有可能未到穩定、完備到足以提供其他開發者使用的程度, 若是在修改的過程中即提交至集中的檔案庫上, 那麼, 便有可能讓集中檔案庫中的檔案, 處於不穩定、不成熟的狀態. 當然, 也可以讓開發者持續修改至足夠穩定完備後, 再將修改內容提交至檔案庫, 但是, 在這個空窗期裡, 開發者就無法得到版本控制系統的支援, 他沒有辦法將修改過程中的不同階段, 畫分成為多個版本, 使得他仍然可以從版本控制系統中得到好處.</p>
 <hr />
-<p><strong>分布式版本控制</strong></p>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>分布式版本控制</h1>
 <p>基於集中式版本控制的缺點, 分布式的版本控制系統開始興起, 並且普及流行.</p>
 <p>分布式版本控制系统本身是根本没有“中央服务器”這個概念的, <strong>每个人的电脑上都是一个完整的版本库</strong>, 这样, 你工作的时候, 就不需要联网了, 因为版本库就在你自己的电脑上, 任何修改都能**隨時提交**.</p>
 <p>既然每个人电脑上都有一个完整的版本库, 那多个人如何协作呢?
@@ -88,8 +96,7 @@
 也正因為這樣, 所以衍生出多種工作流程, 像是**集中式**（Centralized）、<strong>整合管理者式</strong>（Integration-Manager）、<strong>司令官及副官</strong>（Dictator and Lieutenants）等等.</p>
 <p>集中式就是所有的人共用檔案庫, 都能夠隨意的存取檔案庫;</p>
 <p>整合管理式的工作流程下, 僅有少數的整合管理者, 被授權對檔案庫做推的動作, 其他的開發者僅能利用請求拉（request pull）, 請求整合管理者將其所做修改納入.</p>
-<p>大規模的項目則可採所謂司令官及副官（Dictator and Lieutenants）的工作流程, 在此流程下, 唯一的一名司令官將系統畫分為多個子系統, 分別授權予個別的副官, 去管理各子系統的變更集合, 而司令官則為最上層的整合者, 有權利決定從這些副官的所做的變更拉至中心檔案庫, 接著再推至blessed檔案庫, 以供其他人開發者由此進行複製的動作.
-;)t</p>
+<p>大規模的項目則可採所謂司令官及副官（Dictator and Lieutenants）的工作流程, 在此流程下, 唯一的一名司令官將系統畫分為多個子系統, 分別授權予個別的副官, 去管理各子系統的變更集合, 而司令官則為最上層的整合者, 有權利決定從這些副官的所做的變更拉至中心檔案庫, 接著再推至blessed檔案庫, 以供其他人開發者由此進行複製的動作.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
@@ -120,7 +127,6 @@
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>

@@ -44,49 +44,28 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/redmine-jian-ming-shou-ce.html"><h3 class="article-title">RedMine 简明手册</h3></a>
-<h6 class="subheader" title="2016-04-21T22:41:00+08:00">Thu 21 April 2016
-</h6>
-
-
-<p>Redmine是一个开源的项目管理平台, 用于项目的需求管理和缺陷跟踪, Redmine 可以和多种版本库 (如 Git) 整合, 可以直接通过 Web 界面浏览 Git 提交, 还实现了提交和问题的关联.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/redmine-jian-ming-shou-ce.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/git-jian-ming-shou-ce.html"><h3 class="article-title">Git 简明手册</h3></a>
-<h6 class="subheader" title="2016-03-13T13:00:00+08:00">Sun 13 March 2016
-</h6>
-
-
-<p>Git 学习笔记, 记录一些常用的操作, 以及 SourceTree、Github 的用法.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/git-jian-ming-shou-ce.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-ba-fen-zhi-guan-li-ce-lue-zhuan.html"><h3 class="article-title">'[版本控制] 八、分支管理策略(轉)'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-ba-fen-zhi-guan-li-ce-lue-zhuan.html"><h3 class="article-title">[版本控制] 八、分支管理策略(轉)</h3></a>
 <h6 class="subheader" title="2015-06-20T17:21:00+08:00">Sat 20 June 2015
 </h6>
 
 
-<blockquote>以下內容摘自: [Git分支管理策略](http://www.ruanyifeng.com/blog/2012/07/git.html)
-後面在網上又看到了個更好的文章, 所以不再推薦閱讀上面的鏈接, 閱讀此鏈接更好: [基於 git 的源代碼管理模型](http://www.ituring.com.cn/article/56870).
->
-> </blockquote>
-
-<blockquote>這種分支管理策略將 branch 分成兩個主要分支(master、develop), 三種支援性分支 ...</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<div class="toc">
+<ul>
+<li><a href="#master">一、主分支Master</a></li>
+<li><a href="#develop">二、开发分支Develop</a></li>
+<li><a href="#_1">三、临时性分支</a></li>
+<li><a href="#_2">四、 功能分支</a></li>
+<li><a href="#_3">五、预发布分支</a></li>
+<li><a href="#bug">六、修补bug分支</a></li>
+</ul>
+</div>
+<blockquote>
+<p>以下內容摘自: <a href="http://www.ruanyifeng.com/blog/2012/07/git.html">Git分支管理策略</a>
+後面在網上又看到了個更好的文章, 所以不再推薦閱讀上面的鏈接, 閱讀此鏈接更好: <a href="http://www.ituring.com.cn/article/56870">基於 git 的源代碼管理模型</a>.</p>
+</blockquote>
+<p>這種分支管理策略將 branch 分成兩個主要分支(master、develop), 三種支援性分支(feature、release、hotfixes):</p>
+<p><img alt="" src="http://i59.tinypic.com/fn6xe8.jpg" /></p>
+<p>大部分情況下 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -97,11 +76,14 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-qi-biao-qian-guan-li.html"><h3 class="article-title">'[版本控制] 七、標籤管理'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-qi-biao-qian-guan-li.html"><h3 class="article-title">[版本控制] 七、標籤管理</h3></a>
 <h6 class="subheader" title="2015-06-20T13:29:00+08:00">Sat 20 June 2015
 </h6>
 
 
+<div class="toc">
+<ul></ul>
+</div>
 <p>所谓的標籤, 即 Tag, 就是一个特别的版本, 因为这个版本可能有特别的意义, 例如, Beta 1.0 版、Build 1.0 版本, 发布版本时, 我们通常就可以先在版本库中打一个标签, 这样, 就唯一确定了打标签时刻的版本, 将来无论什么时候, 取某个标签的版本, 就是把那个打标签的时刻的历史版本取出来, 所以, 标签也是版本库的一个快照, Git 的标签虽然是版本库的快照, 但其实它就是指向某个 commit 的指针, 所以, 创建和删除标签都是瞬间完成的 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
@@ -113,18 +95,23 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-liu-fen-zhi-guan-li.html"><h3 class="article-title">'[版本控制] 六、分支管理'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-liu-fen-zhi-guan-li.html"><h3 class="article-title">[版本控制] 六、分支管理</h3></a>
 <h6 class="subheader" title="2015-06-20T12:17:00+08:00">Sat 20 June 2015
 </h6>
 
 
-<p>『git branch 』查看當前分支</p>
-<p>『git branch xx』建立分支</p>
-<p>『git checkout xx』切換分支</p>
-<p>『<code>git checkout』</code>命令加上 –b 参数表示创建并切换, 相当于 branch + checkout.</p>
-<p>『git show-branch』查看當前分支和主分支的差異, 這裡要稍微說明一下.
-<img alt="" src="http://i57.tinypic.com/9zytf7.jpg" />
-输出分为上下两部分, 使用短划线&rdquo;&ndash;&ldquo;分隔, 如果是三個分支則是&rdquo;&mdash;&ldquo;, 以此類推, 這張圖是二個分支, 所以是 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<div class="toc">
+<ul></ul>
+</div>
+<ul>
+<li><code>git branch</code> 查看當前分支</li>
+<li><code>git branch xx</code> 建立分支</li>
+<li><code>git checkout xx</code> 切換分支</li>
+<li><code>git checkout</code> 命令加上 –b 参数表示创建并切换, 相当于 branch + checkout.</li>
+<li><code>git show-branch</code> 查看當前分支和主分支的差異, 這裡要稍微說明一下.</li>
+</ul>
+<p><img alt="" src="http://i57.tinypic.com/9zytf7.jpg" /></p>
+<p>输出分为上下两部分, 使用短划线&rdquo;&ndash;&ldquo;分隔, 如果是三個分支則是&rdquo;&mdash;&ldquo;, 以此類推, 這張圖是二個分支, 所以是 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -135,16 +122,20 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-wu-git-chang-yong-ming-ling.html"><h3 class="article-title">'[版本控制] 五、Git 常用命令'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-wu-git-chang-yong-ming-ling.html"><h3 class="article-title">[版本控制] 五、Git 常用命令</h3></a>
 <h6 class="subheader" title="2015-06-20T08:05:00+08:00">Sat 20 June 2015
 </h6>
 
 
-<blockquote>這裡僅說明下『git status』命令和 Ignore file, 關於 Git 的其它命令參考[廖老師的在線教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000).</blockquote>
+<div class="toc">
+<ul></ul>
+</div>
+<blockquote>這裡僅說明下`git status`命令和 Ignore file, 關於 Git 的其它命令參考[廖老師的在線教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000).</blockquote>
 
 <p><img alt="" src="http://i57.tinypic.com/b7kwgz.jpg" /></p>
-<p><strong>『git status』**命令可以让我们时刻掌握仓库当前的状态, 下面來看看使用該命令出現的提示信息各代表什麼意思:
-**Untracked files:</strong> 未跟蹤文件, 意味著當前的 Git 快照中沒有這些文件, 此時可以使用 『git add』命令來添加跟蹤 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>**<code>git status</code>**命令可以让我们时刻掌握仓库当前的状态, 下面來看看使用該命令出現的提示信息各代表什麼意思:</p>
+<ul>
+<li><strong>Untracked files:</strong> 未跟蹤文件, 意味著當前的 Git 快照中沒有這些文件, 此時可以使用 <code>git add</code> 命令來添加跟蹤 ...</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -155,11 +146,14 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-si-git-de-an-zhuang-windows.html"><h3 class="article-title">'[版本控制] 四、Git 的安裝(Windows)'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-si-git-de-an-zhuang-windows.html"><h3 class="article-title">[版本控制] 四、Git 的安裝(Windows)</h3></a>
 <h6 class="subheader" title="2015-06-19T19:40:00+08:00">Fri 19 June 2015
 </h6>
 
 
+<div class="toc">
+<ul></ul>
+</div>
 <p>最早 Git 是在 Linux 上开发的, 很长一段时间内, Git 也只能在 Linux 和 Unix 系统上跑, 不过, 慢慢地有人把它移植到了 Windows 上, 现在, Git 可以在 Linux、Unix、Mac 和 Windows 这几大平台上正常运行了.
 要使用 Git, 第一步当然是安装Git了, 這裡以 Windows ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
@@ -172,18 +166,21 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-san-git-chu-shi.html"><h3 class="article-title">'[版本控制] 三、Git 初識'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-san-git-chu-shi.html"><h3 class="article-title">[版本控制] 三、Git 初識</h3></a>
 <h6 class="subheader" title="2015-06-18T18:20:00+08:00">Thu 18 June 2015
 </h6>
 
 
+<div class="toc">
+<ul>
+<li><a href="#git">Git 的特點</a></li>
+<li><a href="#git_1">Git 環境變量</a></li>
+<li><a href="#git_2">Git 中的一些基本概念</a></li>
+</ul>
+</div>
 <p>首先推薦一個在線 Gti 學習網站: <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">傳送門</a></p>
 <p>另外, 还有个 Google Code 的声明也可以看看: <a href="http://www.infoq.com/cn/news/2015/03/goodbye-google-code-hello-github">再見, Google Code, 你好, GitHub</a></p>
-<p>還提供一個 Git Book 的中文 PDF: <a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5">http://yunpan.cn/cQF9zES6Zt5d5</a></a></a>  访问密码 7e81</p>
-<hr />
-<p><img alt="" src="http://i59.tinypic.com/2hd0d40.jpg" /></p>
-<p>Git 的開發流程大概如上圖, Git 非常鼓勵大家使用分支來工作.</p>
-<p><strong>Git ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>還提供一個 Git Book 的中文 PDF: <a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5">http://yunpan.cn/cQF9zES6Zt5d5</a></a></a>  访问密码 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -194,21 +191,26 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-er-svn.html"><h3 class="article-title">'[版本控制] 二、SVN'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-er-svn.html"><h3 class="article-title">[版本控制] 二、SVN</h3></a>
 <h6 class="subheader" title="2015-06-17T19:29:00+08:00">Wed 17 June 2015
 </h6>
 
 
-<blockquote>我們這次版本控制主要學的是 Git, 但是 SVN 也是常用的版本控制方式之一, 所以簡單的過一下, 熟悉下它的操作.
->
-> </blockquote>
-
+<div class="toc">
+<ul>
+<li><a href="#_1">服務端安裝</a></li>
+<li><a href="#_2">客戶端使用</a></li>
+<li><a href="#_3">解決衝突</a></li>
+</ul>
+</div>
+<blockquote>
+<p>我們這次版本控制主要學的是 Git, 但是 SVN 也是常用的版本控制方式之一, 所以簡單的過一下, 熟悉下它的操作.</p>
+</blockquote>
 <p><img alt="" src="http://i58.tinypic.com/2qcmu0w.jpg" /></p>
-<hr />
-<p>服務端安裝</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>服務端安裝</h1>
 <p>首先, 你得有台電腦作為服務器… 好吧, 這是廢話~</p>
 <p>這裡以 Windows 系統為例, 別問我為什麼是 Windows, 而不是 Red Hat、Mac 或者 Ubuntu, 屌絲的世界你不懂…</p>
-<p>先去 apache 官網下載 VisualSVN.exe, 即 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>先去 apache 官網下載 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -219,20 +221,28 @@
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-jian-yi-chu-shi.html"><h3 class="article-title">'[版本控件] 一、初識'</h3></a>
+            <a href="http://blog.smallcpp.com/ban-ben-kong-jian-yi-chu-shi.html"><h3 class="article-title">[版本控件] 一、初識</h3></a>
 <h6 class="subheader" title="2015-06-17T14:12:00+08:00">Wed 17 June 2015
 </h6>
 
 
+<div class="toc">
+<ul>
+<li><a href="#_1">集中式版本控制系统</a></li>
+<li><a href="#_2">分布式版本控制</a></li>
+</ul>
+</div>
 <p>版本控制, 這個自己其實一直也在用, 本地的是用 svn, 遠程用的是 github, 但是一直沒怎麼深入, 這次打算系統的好好學一下這方面知識.</p>
-<p>版本控制的發展歷史:
-*. 本地版本控制
-*. 集中版本控制,
-*. 分布式版本控制</p>
+<p>版本控制的發展歷史:</p>
+<ul>
+<li>本地版本控制</li>
+<li>集中版本控制,</li>
+<li>分布式版本控制</li>
+</ul>
 <p>本地版本控制, 這個很好理解, 後面兩個階段需要稍微解釋下.</p>
 <hr />
-<p><strong>集中式版本控制系统</strong></p>
-<p>集中式版本控制系统, 版本库是集中存放在中央服务器的, 而干活的时候, 用的都是自己的电脑, 所以要先从中央服务器取得最新的版本, 然后开始干活, 干完活了, 再把自己的活推送给中央服务器, 中央服务器就好比是一个图书馆, 你要改一本书, 必须先从图书馆借出来, 然后回到家自己改, 改完了, 再放回图书馆 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>集中式版本控制系统</h1>
+<p>集中式版本控制系统, 版本库是集中存放在中央服务器的, 而干活的时候, 用的都是自己的电脑, 所以要先从中央服务器取得最新的版本, 然后开始干活, 干完活了, 再把自己的活推送给中央服务器, 中央服务器就好比是一个图书馆, 你要改一本书, 必须先从图书馆借出来, 然后回到家自己改 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
 
 </p>
 
@@ -273,7 +283,6 @@
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>

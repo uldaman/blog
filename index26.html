@@ -44,254 +44,291 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/10-ui-dui-xiang.html"><h3 class="article-title">10、UI 对象</h3></a>
-<h6 class="subheader" title="2015-03-08T13:33:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html"><h3 class="article-title">'[转]UML 中关系详解以及在visio中的表示'</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在前面的几个例子中已经见到了 UI 对象.</p>
-<blockquote>Ui::DemoClass ui;
-ui.setupUi(this);
-connect(ui.pushButton_4, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_5, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>Uml 关系主要有四大类： 依赖，关联，泛化，实现。</p>
+<p>其中 依赖和关联是事物之间语义上的横向关系，泛化和实现是事物之间的纵向关系。</p>
+<p>一：依赖 Dependency</p>
+<p>图示：- - - - - &gt;</p>
+<p>定义：关系最为松散的，单向的，暂时产生关系的事物之间使用。</p>
+<p>使用图例：在静态图、组件图、部署图中两事物的弱依赖关系用此图示。</p>
+<p>二：关联 Association</p>
+<p>图示：此图为visio中画法（在uml静态结构中,拖动复合图例，然后双击此图例，将出现下图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/10-ui-dui-xiang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/9-qt-ge-mo-kuai-jian-jie.html"><h3 class="article-title">9、Qt 各模块简介</h3></a>
-<h6 class="subheader" title="2015-03-08T12:20:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html"><h3 class="article-title">8、[C++]代理模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:23:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在第2篇笔记里, 当通过 VS 新建 Qt 工程时, 其中有一步会让选择当前工程包含的模块. 见下图:</p>
-<p><img alt="" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image10.png" /></p>
-<p>现在对 Qt 5 的模块进行一个简单的介绍, 以便以后大家需要哪些功能的时候知道到哪个模块去寻找.</p>
-<p>Qt 5 模块分为 Essentials Modules 和 Add-on Modules 两部分.</p>
-<p>前者是基础模块, 在所有平台上都可用; 后者是扩展模块, 建立在基础模块的基础之上, 在能够运行 Qt 的平台之上可以酌情引入.</p>
-<p>Qt ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>代理模式</h3>
+<p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
+<p>情景:</p>
+<ol>
+<li>
+<p>有人找公司老总, 但是老总很忙, 于是要找就先找老总的助理, 助理等老总不忙时, 再来告诉老总吧.</p>
+</li>
+<li>
+<p>想象一下古代大户人家的大小姐与仆人偷情, 有一天仆人想约大小姐出来赏月, 但仆人可能不方便直接见大小姐,  于是先告诉大小姐的丫鬟, 由丫鬟转告大小姐.</p>
+</li>
+</ol>
+<p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png" /></a></p>
+<p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
+<p>RealSubject: 真实实体(老总/大小姐)</p>
+<p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
+<p>[cpp]#include ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/9-qt-ge-mo-kuai-jian-jie.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html"><h3 class="article-title">8、带参数的信号槽和自定义信号槽</h3></a>
-<h6 class="subheader" title="2015-03-08T11:33:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.com/7-czhuang-shi-zhe-mo-shi.html"><h3 class="article-title">7、[C++]装饰者模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:22:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>带参数的信号/槽</h1>
-<p>首先看一个程序</p>
-<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
-<p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>装饰者模式</h3>
+<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过**继承**来扩展功能.</p>
+<p>然而, 使用继承是**静态**的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
+<p>而装饰者模式可以**动态**地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
+<blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
+
+<p>装饰模式的UML图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/7-czhuang-shi-zhe-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/pu-bu-shi-kai-fa-vs-die-dai-shi-kai-fa-zhuan.html"><h3 class="article-title">瀑布式开发 VS 迭代式开发[转]</h3></a>
-<h6 class="subheader" title="2015-03-02T05:48:00+08:00">Mon 02 March 2015
+            <a href="http://blog.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html"><h3 class="article-title">6、[C++]六大设计原则</h3></a>
+<h6 class="subheader" title="2015-02-15T14:21:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>两者都是一种开发模式, 就像设计模式一样, 考虑的角度不一样, 个人感觉谈不到取代一说.</p>
-<p>传统的瀑布式开发, 也就是从需求到设计, 从设计到编码, 从编码到测试, 从测试到提交大概这样的流程, 要求每一个开发阶段都要做到最好. 特别是前期阶段, 设计的越完美, 提交后的成本损失就越少. 我现在从事的外包项目就是这样的流程.</p>
-<p>迭代式开发, 不要求每一个阶段的任务做的都是最完美的, 而是明明知道还有很多不足的地方, 却偏偏不去完善它, 而是把主要功能先搭建起来为目的, 以最短的时间, 最少的损失先完成一个&rdquo;不完美的成果物&rdquo;直至提交. 然后再通过客户或用户的反馈信息, 在这个&rdquo;不完美的成果物&rdquo;上逐步进行完善.</p>
-<p>这两种开发模式都各自具有自己的特点, 迭代式开发适合在一些需求信息不明确的项目中, 这样在开发过程中遇到需求的变化时 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/pu-bu-shi-kai-fa-vs-die-dai-shi-kai-fa-zhuan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
-<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
-</h6>
-
-
-<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
-<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
-<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
-<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
-<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.</p>
-<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/ru-he-pan-duan-che-lun-wei-zhi.html"><h3 class="article-title">如何判断车轮位置</h3></a>
-<h6 class="subheader" title="2015-02-27T06:10:00+08:00">Fri 27 February 2015
-</h6>
-
-
-<p>先看看驾校里教的方法.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>左轮:</h1>
-<p>当我们的视线通过左雨刮器突起的结点和地面上的物体重合时, 我们的左轮在行进时就会在该物体处压过.</p>
-<p><img alt="" src="http://i58.tinypic.com/ar3vb.jpg" /></p>
-<p>离中线60公分行驶</p>
-<p>当我们正常行驶时, 离中心线60公分是比较安全的. 当我们的视线通过车身与A柱的交角和中线重合时, 车身距离中线是60公分.</p>
-<p>所谓的交角是指那下图红点处, 可以看到红点左是A柱(灰颜色), 右是车身(黑颜色).</p>
-<p><img alt="" src="http://i61.tinypic.com/24q8hm0.jpg" /></p>
-<p>根据车型不一样, 这里判断可能有误差, 可以适当让白线往车身上让一点.</p>
-<p><img alt="" src="http://i60.tinypic.com/8yavq8.jpg" /></p>
-<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>右轮:</h1>
-<p>当我们视线通过右雨刮器突起的结点和白线相交时, 轮胎会从白线上压过.</p>
-<p><img alt="" src="http://i58.tinypic.com/i21tuc.jpg" /></p>
-<p>右侧离路边60公分行驶</p>
-<p>当右喷水器和路面边目标重叠时, 车身离路边还有60厘米.</p>
-<p><img alt="" src="http://i60.tinypic.com/2v0df28.jpg" /></p>
-<p>判断右侧车轮距右侧车道线60cm的问题其实并没有统一的标准, 并且不同车辆的参照物也有所不同, 只要保证路面白线在机器盖中央偏右一些位置就没有问题.</p>
-<p><img alt="" src="http://oi60.tinypic.com/300ry47.jpg" /></p>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>单一职责原则</h3>
+<p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
+<p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了**简单工厂模式**和**策略模式**.</p>
+<p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
+<p><strong>软件设计真正要做的许多内容, 就是发现职责并把那此职责相互分离.</strong></p>
+<p>怎么判断是否应该分离?</p>
+<p>那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离.</p>
 <hr />
-<p>通过使用不同车辆验证后发现, 这样的方法有一定的参考性, 但是还不算严谨; 由于每个车的雨刮器位置和大小都不一样 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a>
+<h3 id="-"><a name="user-content--" href="#-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>开放-封闭原则 ...</h3><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ru-he-pan-duan-che-lun-wei-zhi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
-<h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
+            <a href="http://blog.smallcpp.com/5-cce-lue-mo-shi.html"><h3 class="article-title">5、[C++]策略模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:20:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
-<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg" /></p>
-<hr />
-<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
-<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
-<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg" /></p>
-<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
-<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg" /></p>
-<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
-<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg" /></p>
-<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg" /></p>
-<p>点击 [显示从 QWidget ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
+
+<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>策略模式</h4>
+<p>回顾下简单工厂模式, 在最后的main函数中, 我们暴露了两个类, Operation类和Factory类.
+能不能对这两个类进行再封装, 使其最暴露一个类就能写完main函数呢?
+那就引入了策略模式.</p>
+<p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251" /></p>
+<p>可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/6-xin-hao-yu-cao.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-cce-lue-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/wo-de-lian-che-guo-cheng-he-gei-chun-xin-shou-men-de-jian-yi-zhuan.html"><h3 class="article-title">我的练车过程和给纯新手们的建议[转]</h3></a>
-<h6 class="subheader" title="2015-02-26T11:54:00+08:00">Thu 26 February 2015
+            <a href="http://blog.smallcpp.com/4-cjian-dan-gong-han-mo-shi.html"><h3 class="article-title">4、[C++]简单工厂模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:19:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>原文传送门:<a href="http://www.19lou.com/forum-1460-thread-10201332730858530-1-1.html">新手上路之十二：我的练车过程和给纯新手们的建议</a></p>
-<hr />
-<p>**练车目的：</p>
-<p>**&gt; 熟悉新车。即档位离合刹车油门等等的力度，熟悉车身大小和车轮位置（空间感）。</p>
-<blockquote>
-<p>适应速度，快慢都不可紧张。
-增加经验。</p>
-</blockquote>
-<p><strong>熟悉步骤：</strong></p>
-<p>1、熟悉车的档位和方向盘的感觉，脚下3块踏板的位置。灯，喇叭，雨刮器的适用。左右后视镜，内后视镜，座椅的高低调整到合适的感觉 &ndash;&gt;找了个空地方，直行后退，随意转弯，刹车油门的位置。大约1、2档之内切换切换就可以了。</p>
-<p>2、熟悉离合器的位置和油门刹车力度。&ndash;&gt; 找了个空地方 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a>
+<p>首先看一下”计算器”程序:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
+
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wo-de-lian-che-guo-cheng-he-gei-chun-xin-shou-men-de-jian-yi-zhuan.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/4-cjian-dan-gong-han-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/xie-45deg-dao-ku.html"><h3 class="article-title">斜45° 倒库</h3></a>
-<h6 class="subheader" title="2015-02-25T10:22:00+08:00">Wed 25 February 2015
+            <a href="http://blog.smallcpp.com/3-cshe-ji-mo-shi-yu-grasp.html"><h3 class="article-title">3、[C++]设计模式与GRASP</h3></a>
+<h6 class="subheader" title="2015-02-15T14:18:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></a></a></p>
-<p>1、将车停在停车线左侧，右反光镜对准停车位的右线。</p>
-<p><img alt="" src="http://i57.tinypic.com/5zeh3q.jpg" /></p>
-<p>2、左打满，前行。</p>
-<p><img alt="" src="http://i62.tinypic.com/2qimbyb.jpg" /></p>
-<p>3、当车身纵向与停车位成一条直线时，回正方向，开始倒车。</p>
-<p><img alt="" src="http://i61.tinypic.com/21otpx3.jpg" /></p>
-<p>4、入库后停车。</p>
-<p><img alt="" src="http://i59.tinypic.com/fu2cfs.jpg" /></p>
-<p>上面演示的是车在停车位的左侧，如果车在停车位的右侧就是左反光镜对准停车线的左线，右打满前行，剩下都是一样的。
-**?</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a>
+<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
+
+<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式分类</h4>
+<p>一共23种设计模式！</p>
+<p>按照目的来分,设计模式可以分为**创建型模式**、<strong>结构型模式**和**行为型模式</strong>.</p>
+<ol>
+<li>
+<p>创建型模式用来处理对象的创建过程；</p>
+</li>
+<li>
+<p>结构型模式用来处理类或者对象的组合；</p>
+</li>
+<li>
+<p>行为型模式用来对类或对象怎样交互和怎样分配职责进行描述.</p>
+</li>
+</ol>
+<p>创建型模式用来处理对象的创建过程,主要包含以下5种设计模式：</p>
+<ul>
+<li>
+<p>工厂方法模式（Factory Method Pattern）</p>
+</li>
+<li>
+<p>抽象工厂模式（Abstract Factory Pattern）</p>
+</li>
+<li>
+<p>建造者模式（Builder Pattern搜索）</p>
+</li>
+<li>
+<p>原型模式（Prototype Pattern）</p>
+</li>
+<li>
+<p>单例模式 ...</p></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/xie-45deg-dao-ku.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/3-cshe-ji-mo-shi-yu-grasp.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/zheng-xiang-dao-ku-ji-qiao.html"><h3 class="article-title">正向倒库技巧</h3></a>
-<h6 class="subheader" title="2015-02-25T10:11:00+08:00">Wed 25 February 2015
+            <a href="http://blog.smallcpp.com/2-cumllei-tu.html"><h3 class="article-title">2、[C++]UML类图</h3></a>
+<h6 class="subheader" title="2015-02-15T14:17:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>转自<a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml"><a href="http://auto.sohu.com/20120606/n344802809.shtml">http://auto.sohu.com/20120606/n344802809.shtml</a></a></a></p>
-<p>1、将车停在停车线旁1.5米左右的位置。</p>
-<p><img alt="" src="http://i60.tinypic.com/29f5n36.jpg" /></p>
-<p>2、您所坐的位置，正好处于隔一个车位的中间(是隔一个车位, 不是邻车位)。</p>
-<p><img alt="" src="http://i62.tinypic.com/2r57uvn.jpg" /></p>
-<p>这里还有一个方法是判断后轮的位置.</p>
-<p>对于绝大多数家用轿车来说, 车辆行驶到**后轮超过车位右侧1米左右**的距离比较容易进入车位, 如果右侧车位旁边都是汽车的话, 大概就是右后轮与右侧车辆中间位置对齐.</p>
-<p><img alt="" src="http://i57.tinypic.com/8xk3ue.jpg" /></p>
-<p><img alt="" src="http://i62.tinypic.com/2vmbw4k.jpg" /></p>
-<p>3、然后左打满，开始倒车。</p>
-<p><img alt="" src="http://i62.tinypic.com/fn95s7.jpg" /></p>
-<p>4、车正后回正方向，继续往后倒。</p>
-<p><img alt="" src="http://i59.tinypic.com/24nmdev.jpg" /></p>
-<p>5 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a>
+<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料
+>
+> </blockquote>
+
+<p><img alt="UML类图样例" src="http://img.blog.csdn.net/20150211193154259" /></p>
+<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类图和接口图</h4>
+<p>首先**动物**矩形框, 它就代表一个**类图**, 分三层:
+第一层显示类的名称, 如果是**抽象类**, 则用斜体表示
+第二层是类的属性
+第三层是类的方法</p>
+<p>注意前面的符号:
+‘+’ –&gt; public
+‘-’ –&gt; private
+‘#’ –&gt; protected</p>
+<p>左下角的”飞翔”矩形框, 它是一个**接口图**, 它与类图的区别是顶端有**interface**显示, 然后它只有二层, 第二层是接口方法.
+另外接口还有另一种表示法 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/zheng-xiang-dao-ku-ji-qiao.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/2-cumllei-tu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html"><h3 class="article-title">1、[C++]设计模式与面向对象</h3></a>
+<h6 class="subheader" title="2015-02-15T14:16:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
+
+<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式是否有必要学?</h4>
+<p>答案在我看来是肯定的, 学这些不是考虑将来会不会用到, 而是在学习的过程中进行的思想洗礼, 通过这些模式让我们找到编程的感觉, 从而设计出易维护 易扩展 易复用 灵活性好的程序.</p>
+<blockquote>模式不是设计出来的, 是重构出来的. 好的设计也不是设计出来的，是重构出来的.
+在<大话设计模式>中, 大部分的情况都是小菜先写出一个”垃圾代码”, 然后发现问题, 再对它进行重构.
+
+**设计模式代表了传统的软件开发思想**: 好的设计会产生好的软件, 因此在实际开发之前, 值得花时间去做一个全面而细致的设计.
+**重构代表了敏捷软件开发的浪潮**: 软件并不是在一开始就可以设计得完美无缺的, 因此可以先进行实际开发, 然后通过对代码不断的进行小幅度的修改来改善其设计.
+二者从不同角度阐述了设计的重要性 ...</大话设计模式></blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html"><h3 class="article-title">5、QT 中文乱码</h3></a>
+<h6 class="subheader" title="2015-02-15T14:13:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
+<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+QTextCodec::setCodecForCStrings(...)
+QTextCodec::setCodecForLocale(...)
+
+
+
+然后这三句代码是有安全隐患的, 下面的文章都有说明:
+</pre></div>
+
+
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
+<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 26 of 29</h6>
+<h6 class="subheader">Page 26 of 27</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/index25.html">&laquo; Prev</a>
@@ -322,7 +359,6 @@ connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Cat
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/jia-che-bao-dian.html">驾车宝典</a></li>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
