@@ -67,7 +67,7 @@
 <span style="color: #333333">app</span><span style="color: #A71D7E">.</span><span style="color: #333333">processEvents</span>()  <span style="color: #999988; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
 <span style="color: #333333">dlg</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Dialog</span>()
 <span style="color: #333333">dlg</span><span style="color: #A71D7E">.</span><span style="color: #333333">show</span>()
-<span style="color: #333333">splash</span><span style="color: #A71D7E">.</span><span style="color: #333333">finish</span>(<span style="color: #333333">dlg</span>);  <span style="color: #999988; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
+<span style="color: #333333">splash</span><span style="color: #A71D7E">.</span><span style="color: #333333">finish</span>(<span style="color: #333333">dlg</span>)  <span style="color: #999988; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
 <span style="color: #333333">sys</span><span style="color: #A71D7E">.</span><span style="color: #333333">exit</span>(<span style="color: #333333">app</span><span style="color: #A71D7E">.</span><span style="color: #333333">exec_</span>())
 </pre></div>
 
