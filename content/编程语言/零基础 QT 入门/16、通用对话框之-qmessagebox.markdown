@@ -69,7 +69,7 @@ msgBox.setStandardButtons(QMessageBox::Save
                           | QMessageBox::Discard
                           | QMessageBox::Cancel);
 msgBox.setDefaultButton(QMessageBox::Save);
-int</span> ret = msgBox.exec();
+int ret = msgBox.exec();
 switch (ret) {
 case QMessageBox::Save:
     qDebug() << "Save document!";

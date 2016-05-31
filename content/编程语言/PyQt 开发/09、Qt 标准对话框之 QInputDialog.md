@@ -15,7 +15,7 @@ Qt 的内置对话框大致分为以下几类;
 - `QPrintPreviewDialog`: 打印预览;
 - `QProgressDialog`: 显示操作过程.
 
-在学习 Qt 的时候, 已经接触过 [QMessageBox](http://www.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html) 和 [QFileDialog](http://www.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html) 了, 这节笔记学习下 QInputDialog.
+在学习 Qt 的时候, 已经接触过 [QMessageBox](http://blog.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html) 和 [QFileDialog](http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html) 了, 这节笔记学习下 QInputDialog.
 
 QInputDialog 提供了一些简单的 `static` 函数，用于快速的建立一个对话框:
 
