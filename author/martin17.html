@@ -44,22 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/si-yuan-biao-yu-yuan-fang-fa.html"><h3 class="article-title">四、元表與元方法</h3></a>
-<h6 class="subheader" title="2015-06-16T13:34:00+08:00">Tue 16 June 2015
-</h6>
-
-
-<p>直接参考: <a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html"><a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html"><a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html">http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html</a></a></a></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-yuan-biao-yu-yuan-fang-fa.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html"><h3 class="article-title">三、Lua 中的閉包</h3></a>
 <h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
 </h6>
@@ -69,7 +53,7 @@
 <p>要解釋閉包就要先理解幾個小知識點:
 Lua 中的函数是带有词法定界（lexical scoping）的第一类值（first-class values）.</p>
 <p><strong>第一类值（first-class values）**是指,</strong> <strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
-正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
@@ -88,7 +72,7 @@ Lua 中的函数是带有词法定界（lexical scoping）的第一类值（firs
 <p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
 <p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
-People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
@@ -107,7 +91,7 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
 <p><strong>笛卡爾坐標系</strong></p>
 <p>笛卡爾坐標系有 1D、2D、3D 三種, 因為我們要學的 cocos2d-x 是基於 2D 的, 因此, 我們主要討論 2D 笛卡爾坐標系.</p>
 <p>2D 笛卡爾坐標系 就是我們中學學過的 x/y 坐標系, 當然也稍有不同.</p>
-<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a>
+<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
@@ -235,6 +219,27 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
+<h6 class="subheader" title="2015-06-13T13:28:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>Java 提供三种方法实现基本类型向字符串转换:
+*. 使用包装类的 toString() 方法
+*. 使用 String 类的 valueOf() 方法
+*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
+String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 17 of 27</h6>
@@ -260,8 +265,8 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
@@ -271,10 +276,9 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>

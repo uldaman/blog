@@ -55,43 +55,51 @@
 
     <div class="toc">
 <ul>
-<li><a href="#1-file">1. File 类概述和构造方法</a></li>
-<li><a href="#2-file">2. 操作 File 类</a><ul>
-<li><a href="#file">File 类创建功能</a></li>
-<li><a href="#file_1">File 类重命名和删除功能</a></li>
-<li><a href="#file_2">File 类判断功能</a></li>
-<li><a href="#file_3">File 类获取功能</a></li>
-<li><a href="#file_4">File 过滤器</a></li>
+<li><a href="#file">File 类概述和构造方法</a><ul>
+<li><a href="#file_1">操作 File 类</a><ul>
+<li><a href="#file_2">File 类创建功能</a></li>
+<li><a href="#file_3">File 类重命名和删除功能</a></li>
+<li><a href="#file_4">File 类判断功能</a></li>
+<li><a href="#file_5">File 类获取功能</a></li>
+<li><a href="#file_6">File 过滤器</a></li>
 </ul>
 </li>
-<li><a href="#3-io">3. IO 流概述及其分类</a></li>
-<li><a href="#4-fileinputstream">4. FileInputStream</a><ul>
+</ul>
+</li>
+<li><a href="#io">IO 流概述及其分类</a><ul>
+<li><a href="#_1">字节流</a><ul>
+<li><a href="#fileinputstream">FileInputStream</a><ul>
 <li><a href="#read">read()</a></li>
 </ul>
 </li>
-<li><a href="#5-fileoutputstream">5. FileOutputStream</a><ul>
+<li><a href="#fileoutputstream">FileOutputStream</a><ul>
 <li><a href="#write">write()</a></li>
-<li><a href="#_1">追加</a></li>
+<li><a href="#_2">追加</a></li>
 </ul>
 </li>
-<li><a href="#6">6. 文件的拷贝</a><ul>
-<li><a href="#_2">简单粗暴的拷贝</a></li>
-<li><a href="#_3">改良版</a></li>
-<li><a href="#_4">再次改良</a></li>
+<li><a href="#_3">文件的拷贝</a><ul>
+<li><a href="#_4">简单粗暴的拷贝</a></li>
+<li><a href="#_5">改良版</a></li>
+<li><a href="#_6">再次改良</a></li>
 <li><a href="#java">Java 自带的缓冲区式拷贝</a></li>
 <li><a href="#buffered">自改良和 Buffered 哪个更效率</a></li>
 </ul>
 </li>
-<li><a href="#7-flush-close">7. flush 和 close</a></li>
-<li><a href="#8">8. 读写中文</a></li>
-<li><a href="#9">9. 异常处理</a><ul>
+<li><a href="#flush-close">flush 和 close</a></li>
+<li><a href="#_7">读写中文</a></li>
+<li><a href="#_8">异常处理</a><ul>
 <li><a href="#java-16">java 1.6 及以前的版本</a></li>
 <li><a href="#java-17">java 1.7 及以上的版本</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li><a href="#_9">字符流</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<h2 id="1-file"><a name="user-content-1-file" href="#1-file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. File 类概述和构造方法</h2>
+<h1 id="file"><a name="user-content-file" href="#file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类概述和构造方法</h1>
 <ul>
 <li>A: File 类的概述<ul>
 <li>File 更应该叫做一个路径<ul>
@@ -109,8 +117,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-file"><a name="user-content-2-file" href="#2-file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 操作 File 类</h2>
-<h3 id="file"><a name="user-content-file" href="#file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类创建功能</h3>
+<h2 id="file_1"><a name="user-content-file_1" href="#file_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>操作 File 类</h2>
+<h3 id="file_2"><a name="user-content-file_2" href="#file_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类创建功能</h3>
 <ul>
 <li>A: 创建功能<ul>
 <li>public boolean createNewFile(): 创建文件 如果存在这样的文件, 就不创建了</li>
@@ -119,7 +127,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="file_1"><a name="user-content-file_1" href="#file_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类重命名和删除功能</h3>
+<h3 id="file_3"><a name="user-content-file_3" href="#file_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类重命名和删除功能</h3>
 <ul>
 <li>A: 重命名和删除功能<ul>
 <li>public boolean renameTo(File dest): 把文件重命名为指定的文件路径, 还可以当剪切功能使用</li>
@@ -137,7 +145,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="file_2"><a name="user-content-file_2" href="#file_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类判断功能</h3>
+<h3 id="file_4"><a name="user-content-file_4" href="#file_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类判断功能</h3>
 <ul>
 <li>A: 判断功能<ul>
 <li>public boolean isDirectory(): 判断是否是目录</li>
@@ -155,7 +163,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="file_3"><a name="user-content-file_3" href="#file_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类获取功能</h3>
+<h3 id="file_5"><a name="user-content-file_5" href="#file_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类获取功能</h3>
 <ul>
 <li>A: 获取功能<ul>
 <li>public String getAbsolutePath(): 获取绝对路径</li>
@@ -168,7 +176,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="file_4"><a name="user-content-file_4" href="#file_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 过滤器</h3>
+<h3 id="file_6"><a name="user-content-file_6" href="#file_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 过滤器</h3>
 <ul>
 <li>A: 文件名称过滤器的概述<ul>
 <li>public String[] list(FilenameFilter filter)</li>
@@ -184,7 +192,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="3-io"><a name="user-content-3-io" href="#3-io" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. IO 流概述及其分类</h2>
+<h1 id="io"><a name="user-content-io" href="#io" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>IO 流概述及其分类</h1>
 <ul>
 <li>概念<ul>
 <li>IO 流用来处理设备之间的数据传输</li>
@@ -228,14 +236,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="4-fileinputstream"><a name="user-content-4-fileinputstream" href="#4-fileinputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. FileInputStream</h2>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字节流</h2>
+<h3 id="fileinputstream"><a name="user-content-fileinputstream" href="#fileinputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>FileInputStream</h3>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
     <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">InputStream</span>
         <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FileInputStream</span>
 </pre></div>
 
 
-<h3 id="read"><a name="user-content-read" href="#read" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>read()</h3>
+<h4 id="read"><a name="user-content-read" href="#read" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>read()</h4>
 <p>功能: 一次读取一个字节, 返回读到的字节, 如果返回 -1 表示文件结束</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;aaa.txt&quot;</span><span style="color: #A71D7E">);</span>   <span style="color: #999988; font-style: italic">// 创建一个文件输入流对象, 并关联 aaa.txt</span>
 <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">b</span><span style="color: #A71D7E">;</span>                                                  <span style="color: #999988; font-style: italic">// 定义变量, 记录每次读到的字节</span>
@@ -249,14 +258,14 @@
 
 <p>read() 即然是读取字节, 那它的方法返回值为什么是int?</p>
 <p>因为字节输入流可以操作任意类型的文件, 比如图片音频等, 这些文件底层都是以二进制形式的存储的, 如果每次读取都返回 byte, 有可能在读到中间的时候遇到 111111111, 那么这 11111111 是 byte 类型的 -1, 我们的程序是遇到 -1 就会停止不读了, 后面的数据就读不到了, 所以在读取的时候用 int 类型接收, 如果 11111111 会在其前面补上 24 个 0 凑足 4 个字节, 那么 byte 类型的 -1 就变成 int 类型的 255 了, 这样可以保证整个数据读完, 而结束标记的 -1 就是 int 类型</p>
-<h2 id="5-fileoutputstream"><a name="user-content-5-fileoutputstream" href="#5-fileoutputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5. FileOutputStream</h2>
+<h3 id="fileoutputstream"><a name="user-content-fileoutputstream" href="#fileoutputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>FileOutputStream</h3>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
     <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">OutputStream</span>
         <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FileOutputStream</span>
 </pre></div>
 
 
-<h3 id="write"><a name="user-content-write" href="#write" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>write()</h3>
+<h4 id="write"><a name="user-content-write" href="#write" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>write()</h4>
 <p>功能: 一次写入一个字节</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;bbb.txt&quot;</span><span style="color: #A71D7E">);</span> <span style="color: #999988; font-style: italic">// 如果没有 bbb.txt, 会创建出一个</span>
 <span style="color: #999988; font-style: italic">//fos.write(97); //虽然写出的是一个 int 数, 但是在写出的时候会将前面的 24 个 0 去掉,所以写入的一个 byte</span>
@@ -266,7 +275,7 @@
 </pre></div>
 
 
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>追加</h3>
+<h4 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>追加</h4>
 <p>以追加的方式写入文件</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;bbb.txt&quot;</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D">true</span><span style="color: #A71D7E">);</span> <span style="color: #999988; font-style: italic">// 第二个参数传 true 就是以追加的方式写入文件</span>
 <span style="color: #333333">fos</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #0086b3">98</span><span style="color: #A71D7E">);</span>
@@ -275,8 +284,8 @@
 </pre></div>
 
 
-<h2 id="6"><a name="user-content-6" href="#6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6. 文件的拷贝</h2>
-<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>简单粗暴的拷贝</h3>
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>文件的拷贝</h3>
+<h4 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>简单粗暴的拷贝</h4>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;致青春.mp3&quot;</span><span style="color: #A71D7E">);</span>
 <span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;copy.mp3&quot;</span><span style="color: #A71D7E">);</span>
 
@@ -290,7 +299,7 @@
 </pre></div>
 
 
-<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>改良版</h3>
+<h4 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>改良版</h4>
 <p>上面的版本虽然实现了拷贝功能, 然后效率十分低下, 因为它是读一个字节写一个字节, 相当于执行了 <em>(len(致青春.mp3) * 2)</em> 次 IO 操作, 那可不可以一次性把源文件读完, 再去写呢? 也是可以的.</p>
 <ul>
 <li>available(): 获取 FileInputStream 对象的字节大小</li>
@@ -307,7 +316,7 @@
 </pre></div>
 
 
-<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>再次改良</h3>
+<h4 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>再次改良</h4>
 <p>Java 程序是运行在 JVM 上的, 如果使用上面改良版的拷贝功能, 那么就会存在这样的一个问题:<br>
 待拷贝文件非常大时(如 十几二十几个 G 的), 那更本不可能申请那么大的数组&hellip;</p>
 <p>解决方法是使用小数组多次拷贝.</p>
@@ -322,10 +331,10 @@
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;致青春.mp3&quot;</span><span style="color: #A71D7E">);</span>
 <span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;copy.mp3&quot;</span><span style="color: #A71D7E">);</span>
 <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">len</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">arr</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1024</span> <span style="color: #A71D7E">*</span> <span style="color: #0086b3">8</span><span style="color: #A71D7E">];</span>                    <span style="color: #999988; font-style: italic">//自定义字节数组</span>
+<span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">arr</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1024</span> <span style="color: #A71D7E">*</span> <span style="color: #0086b3">8</span><span style="color: #A71D7E">];</span>                    <span style="color: #999988; font-style: italic">// 自定义字节数组</span>
 
 <span style="color: #A71D5D">while</span> <span style="color: #A71D7E">((</span><span style="color: #333333">len</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fis</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">arr</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #333333">fos</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #333333">arr</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">,</span> <span style="color: #333333">len</span><span style="color: #A71D7E">);</span>                         <span style="color: #999988; font-style: italic">//写出字节数组写出有效个字节个数</span>
+    <span style="color: #333333">fos</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #333333">arr</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">,</span> <span style="color: #333333">len</span><span style="color: #A71D7E">);</span>                         <span style="color: #999988; font-style: italic">// 写出字节数组写出有效个字节个数</span>
 <span style="color: #A71D7E">}</span>
 
 <span style="color: #333333">fis</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
@@ -335,7 +344,7 @@
 
 <p>我们来分析下这段代码, 为什么需要使用 <strong>write(byte[] b, int off, int len)</strong> 这种 write?<br>
 假设下, 如果待读文件里面有 3 个字节(abc), 我们申请一个 2 字节的数组, 每次从待读文件里读 2 个字节出来, 那么第一次读出来的是 [ab], 然后写入文件, 第二次读的出来的是 [cb], 为什么会是 [cb] 呢?<br> 因为我们的待读文件里只剩下一个 c 了, 所以只重写了数组第一位, 那这样最后写入文件的就是 [abcb], 明显是不对的, 所以使用 <strong>write(byte[] b, int off, int len)</strong>, 写入的时候只写入我们刚才读出来的__有效__字节.</p>
-<h3 id="java"><a name="user-content-java" href="#java" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Java 自带的缓冲区式拷贝</h3>
+<h4 id="java"><a name="user-content-java" href="#java" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Java 自带的缓冲区式拷贝</h4>
 <ul>
 <li>缓冲思想<ul>
 <li>从上面的几次加强上已经看到:<ul>
@@ -362,16 +371,16 @@
 </ul>
 </li>
 </ul>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>java.lang.Object
-    java.io.InputStream
-        java.io.FilterInputStream
-            java.io.BufferedInputStream
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">InputStream</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FilterInputStream</span>
+            <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">BufferedInputStream</span>
 
 
-java.lang.Object
-    java.io.OutputStream
-        java.io.FilterOutputStream
-            java.io.BufferedOutputStream
+<span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">OutputStream</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FilterOutputStream</span>
+            <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">BufferedOutputStream</span>
 </pre></div>
 
 <br></p>
@@ -391,9 +400,9 @@ java.lang.Object
 </pre></div>
 
 
-<h3 id="buffered"><a name="user-content-buffered" href="#buffered" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自改良和 Buffered 哪个更效率</h3>
+<h4 id="buffered"><a name="user-content-buffered" href="#buffered" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自改良和 Buffered 哪个更效率</h4>
 <p>定义小数组如果是 8192 个字节大小和 Buffered 比较的话, 定义小数组会略胜一筹, 因为读和写操作的是同一个数组, 而 Buffered 操作的是两个数组.</p>
-<h2 id="7-flush-close"><a name="user-content-7-flush-close" href="#7-flush-close" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7. flush 和 close</h2>
+<h3 id="flush-close"><a name="user-content-flush-close" href="#flush-close" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>flush 和 close</h3>
 <p>首先, 先弄明白 BufferedOutputStream 的 IO 流程, 当我们通过 BufferedOutputStream 去写文件时, Java 先向 BufferedOutputStream 的缓冲区中写, 当写满 8192 个字节后, java 才会把缓冲区的内容刷新到硬盘中.</p>
 <p>那么问题来了, 谁也不能保证一个文件正好是 8192 倍数, 那当缓冲区不足 8192 个字节时, 怎么通知 java 去把缓冲区的内容刷新到硬盘中呢? 有两种方法:</p>
 <ul>
@@ -406,7 +415,7 @@ java.lang.Object
 </ul>
 </li>
 </ul>
-<h2 id="8"><a name="user-content-8" href="#8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>8. 读写中文</h2>
+<h3 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>读写中文</h3>
 <ul>
 <li>字节流读取中文的问题<ul>
 <li>字节流在读中文的时候有可能会读到半个中文,造成乱码</li>
@@ -419,8 +428,8 @@ java.lang.Object
 </li>
 </ul>
 <p>总之, 用字节流来读写中文还是有不少问题的&hellip;所以当遇到中文时, 一般使用 <strong>字符流</strong> 来读写, 这个后面再讲.</p>
-<h2 id="9"><a name="user-content-9" href="#9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>9. 异常处理</h2>
-<h3 id="java-16"><a name="user-content-java-16" href="#java-16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java 1.6 及以前的版本</h3>
+<h3 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>异常处理</h3>
+<h4 id="java-16"><a name="user-content-java-16" href="#java-16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java 1.6 及以前的版本</h4>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">null</span><span style="color: #A71D7E">;</span>
 <span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">null</span><span style="color: #A71D7E">;</span>
 <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
@@ -444,8 +453,8 @@ java.lang.Object
 </pre></div>
 
 
-<h3 id="java-17"><a name="user-content-java-17" href="#java-17" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java 1.7 及以上的版本</h3>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">try</span> <span style="color: #A71D7E">(</span>
+<h4 id="java-17"><a name="user-content-java-17" href="#java-17" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>java 1.7 及以上的版本</h4>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">try</span> <span style="color: #A71D7E">(</span>
     <span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;aaa.txt&quot;</span><span style="color: #A71D7E">);</span>
     <span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;bbb.txt&quot;</span><span style="color: #A71D7E">);</span>
 <span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
@@ -456,10 +465,63 @@ java.lang.Object
 <span style="color: #A71D7E">}</span>
 </pre></div>
 
-
-<p>上面的代码, try 后面 {} 里的代码执行完后, 就会自动调用流对象的 close() 方法将流关掉.</p>
+<br>
+上面的代码, try 后面 {} 里的代码执行完后, 就会自动调用流对象的 close() 方法将流关掉 (类似 python 中的 with 语法).</p>
 <p>这是 1.7+ 的异常处理新特性, 在 try() 中创建的对象如果实现了 <strong>AutoCloseable</strong> 这个接口中的 close() 方法(也必须实现, 否则在 try() 中使用会直接报错), 当发生异常或者执行完 {} 里的语句后, 会自动调用我们实现的 close() 方法.<br>
 InputStream 及 OutputStream 都已经实现好了.</p>
+<h2 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字符流</h2>
+<p>字符流专门用来操作文本, 常用的就是 <code>FileReader</code> 与 <code>FileWriter</code>.</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">Reader</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">InputStreamReader</span>
+            <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FileReader</span>
+
+<span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">Writer</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">OutputStreamWriter</span>
+            <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">FileWriter</span>
+</pre></div>
+
+<br>
+写文件:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileWriter</span> <span style="color: #333333">fw</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileWriter</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;test.txt&quot;</span><span style="color: #A71D7E">);</span> <span style="color: #999988; font-style: italic">// 如果没有 test.txt, 会创建出一个</span>
+<span style="color: #333333">fw</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;text&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #333333">fw</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">()</span>
+</pre></div>
+
+<br>
+读文件:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileReader</span> <span style="color: #333333">fr</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileReader</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;text.txt&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">ch</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D">while</span><span style="color: #A71D7E">((</span><span style="color: #333333">ch</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fr</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">())</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">((</span><span style="color: #A71D5D; font-weight: bold">char</span><span style="color: #A71D7E">)</span><span style="color: #333333">ch</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+或者用字符数组:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">FileReader</span> <span style="color: #333333">fr</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileReader</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;text.txt&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D5D; font-weight: bold">char</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">buf</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #A71D5D; font-weight: bold">char</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1024</span><span style="color: #A71D7E">];</span>
+
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">num</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D">while</span><span style="color: #A71D7E">((</span><span style="color: #333333">num</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fr</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">buf</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">String</span><span style="color: #A71D7E">(</span><span style="color: #333333">buf</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">,</span> <span style="color: #333333">num</span><span style="color: #A71D7E">));</span>
+<span style="color: #A71D7E">}</span>
+<span style="color: #333333">fr</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+</pre></div>
+
+<br>
+与字节流相同, 字符流也提供了**缓冲区**的快捷操作类:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">Reader</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">BufferedReader</span>
+
+<span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
+    <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">Writer</span>
+        <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">BufferedWriter</span>
+</pre></div>
+
+<br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
@@ -482,8 +544,8 @@ InputStream 及 OutputStream 都已经实现好了.</p>
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
@@ -493,10 +555,9 @@ InputStream 及 OutputStream 都已经实现好了.</p>
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>

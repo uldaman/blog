@@ -44,28 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">(四)、SecureCRT 的安装和使用</h3></a>
-<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
-</h6>
-
-
-<p>**SecureCRT **是一款支持 SSH（SSH1 和 SSH2）的终端仿真程序, 同时支持 Telnet 和 rlogin 协议; 它可用于连接运行包括 Windows、Unis 和 linux 在内的远程系统.</p>
-<ol>
-<li>
-<p>首先下载 SecureCRT 并安装(网上有中文版本下载, 注意找大网站下载, 别下载了被装后门的版本).</p>
-</li>
-<li>
-<p>去 Ubuntu 中开启 SSH 功能. (SSH ...</p></li></ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/san-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html"><h3 class="article-title">(三)、在 Ubuntu 中安装 Ulipad 编辑器</h3></a>
 <h6 class="subheader" title="2015-03-26T17:04:00+08:00">Thu 26 March 2015
 </h6>
@@ -192,7 +170,7 @@
 <p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
 在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
 <p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
-这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
 
 </p>
 
@@ -210,7 +188,7 @@
 
 <p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
 
 </p>
 
@@ -229,7 +207,7 @@
 <p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
 但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
 <p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
-<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
 
 </p>
 
@@ -251,7 +229,7 @@
 <p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
 <p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
 Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
 
 </p>
 
@@ -269,13 +247,32 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 
 <p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
 对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a>
+不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
 
 </p>
 
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">(二) Lua 与 C/C++ 的第一次亲密接触</h3></a>
+<h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
+</h6>
+
+
+<p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
+<p><strong>Lua 环境(Lua_State)
+**Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.
+对于 C ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
@@ -304,8 +301,8 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
@@ -315,10 +312,9 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>

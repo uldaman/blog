@@ -44,34 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
-<h6 class="subheader" title="2015-05-26T08:25:00+08:00">Tue 26 May 2015
-</h6>
-
-
-<blockquote>
-<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
-</blockquote>
-<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
-<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
-<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
-<p>实现代码如下:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Qt_Notepad</span><span style="color: #A71D7E">::</span><span style="color: #333333">OpenFile</span>() {
-    <span style="color: #333333">QString</span> <span style="color: #333333">fileName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QFileDialog</span><span style="color: #A71D7E">::</span><span style="color: #333333">getOpenFileName</span>(<span style="color: #A71D5D">this</span>, <span style="color: #183691">&quot;Open File&quot;</span>, <span style="color: #ED6A43">NULL</span>, <span style="color: #183691">&quot;file (*.*)&quot;</span>);
-
-    <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
-        <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
-        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html"><h3 class="article-title">16、通用对话框之 QMessageBox</h3></a>
 <h6 class="subheader" title="2015-05-25T18:05:00+08:00">Mon 25 May 2015
 </h6>
@@ -223,7 +195,7 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
 <p><strong>首先
 对左值和右值的一个最常见的误解是：等号左边的就是左值，等号右边的就是右值;
 这是错误的, 我们应该时刻谨记 lvalue 和 rvalue 都是针对表达式而言.</strong>
-lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a>
+lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
 
 </p>
 
@@ -273,6 +245,28 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">(四)、SecureCRT 的安装和使用</h3></a>
+<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
+</h6>
+
+
+<p>**SecureCRT **是一款支持 SSH（SSH1 和 SSH2）的终端仿真程序, 同时支持 Telnet 和 rlogin 协议; 它可用于连接运行包括 Windows、Unis 和 linux 在内的远程系统.</p>
+<ol>
+<li>
+<p>首先下载 SecureCRT 并安装(网上有中文版本下载, 注意找大网站下载, 别下载了被装后门的版本).</p>
+</li>
+<li>
+<p>去 Ubuntu 中开启 SSH 功能. (SSH ...</p></li></ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 21 of 27</h6>
@@ -298,8 +292,8 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11xin-te-xing.html">C++11新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2dyou-xi-kai-fa.html">Cocos2d游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
@@ -309,10 +303,9 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
             <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.com/category/luayou-xi-kai-fa.html">Lua游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-flask.html">深入浅出 Flask</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
             <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
