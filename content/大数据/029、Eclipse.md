@@ -65,9 +65,9 @@ eclipse 的 java 构建器包含了两种构建 java 程序的方法:
 关闭方法很简单, "项目" -> "自动构建", 取消 "自动构建" 前面的选项即可.
 
 ### 抽取函数
-快捷键 __Shift + Alt + m__ 能将选中的代码块进行方法抽取.
+快捷键 `Shift + Alt + M` 能将选中的代码块进行方法抽取.
 
-这是属于 __重构__ 功能的一部分, 可以点击选中的代码块, 选择 "重构" \-\> "抽取方法"
+这是属于 **重构** 功能的一部分, 可以点击选中的代码块, 选择 "重构" \-\> "抽取方法"
 
 ### 设置编码
 统一设置为 __utf-8__ 编码, Window -> Preferences -> General -> Workspace -> Text file encoding -> Other -> UTF-8.
@@ -75,13 +75,13 @@ eclipse 的 java 构建器包含了两种构建 java 程序的方法:
 统一设置为 __utf-8__ 编码, Window -> Preferences -> General -> Content Types, 在右面选择 "Text", 在 default encoding 输入 "UTF-8", 点 "update" 按钮更新.
 
 ## 常用快捷键
-
 0. Ctrl + 1 (快速修复)
 1. Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件
-1. Ctrl + D (删除当前行)
-2. Ctrl + Alt + ↓ (复制当前行到下一行)
-3. Alt + / 或者说是 Ctrl + 空格 (由于后者与输入法的快捷键冲突, 所以, 我一般都用前者) 作用：快速插入
-4. Alt + Shift + R 重命名非常好用
-5. Ctrl + Q 定位到最后编辑的地方
-6. Ctrl + Shift + O (自动导入包)
-7. Ctrl + / 注释当前行,再按则取消注释
+2. Ctrl + Shift + T 查找类文件 (包括源码文件)
+3. Ctrl + D (删除当前行)
+4. Ctrl + Alt + ↓ (复制当前行到下一行)
+5. Alt + / 或者说是 Ctrl + 空格 (由于后者与输入法的快捷键冲突, 所以, 我一般都用前者) 作用：快速插入
+6. Alt + Shift + R 重命名非常好用
+7. Ctrl + Q 定位到最后编辑的地方
+8. Ctrl + Shift + O (自动导入包)
+9. Ctrl + / 注释当前行,再按则取消注释
