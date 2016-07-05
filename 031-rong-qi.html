@@ -61,7 +61,7 @@
 <li><a href="#_2">工具类</a><ul>
 <li><a href="#contains-in-collection">contains in Collection</a></li>
 <li><a href="#contains-in-map">contains in Map</a></li>
-<li><a href="#indexof">indexOf:</a></li>
+<li><a href="#indexof">indexOf</a></li>
 <li><a href="#lastindexof">lastIndexOf</a></li>
 </ul>
 </li>
@@ -85,7 +85,7 @@
 <p>Collection 接口是 List、Set 和 Queue 接口的父接口, 它定义了可用于操作 List、Set 和 Queue 的方法(增、删、改、查).</p>
 <p>List 是元素有序并且可以重复的集合, List 可以精确控制每个元素的插入位置, 或删除某个位置的元素.</p>
 <p>ArrayList 是数组序列, 是 List 接口的一个重要实现类, 它的底层是由数组实现的.</p>
-<p>Set 和 List 类似, 最大的不同就是 List 是可以__有序并且可重复__的, 而 Set 是__无序并且不能重复__的.</p>
+<p>Set 和 List 类似, 最大的不同就是 List 是可以**有序并且可重复**的, 而 Set 是**无序并且不能重复**的.</p>
 <ul>
 <li>List 适合经常追加数据, 插入, 删除数据, 但随即取数效率比较低.</li>
 <li>Set 适合经常地随即储存, 插入, 删除, 但是在遍历时效率比较低.</li>
@@ -93,9 +93,9 @@
 <p>这个其实也没什么好记的了, 有 STL 基础, 学这个太简单, 上一份例子代码(附视频解说):</p>
 <p><a href="http://yunpan.cn/cQsGPx38k4ISg"><a href="http://yunpan.cn/cQsGPx38k4ISg"><a href="http://yunpan.cn/cQsGPx38k4ISg">http://yunpan.cn/cQsGPx38k4ISg</a></a></a> 访问密码 8bf2</p>
 <p><a href="http://static.video.qq.com/TPout.swf?vid=d0156knzsv7&amp;auto=0">视频解说</a></p>
-<p>需要注意的是 Java 中的泛型不能是基本数据类型, 必须是其__包装类__, 如, ArrayList&lt;Integer>.</p>
+<p>需要注意的是 Java 中的泛型不能是基本数据类型, 必须是其**包装类**, 如, ArrayList&lt;Integer>.</p>
 <h2 id="map"><a name="user-content-map" href="#map" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Map 家族</h2>
-<p>Map 接口提供了一种映射关系, 其中的元素以__键值对__(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
+<p>Map 接口提供了一种映射关系, 其中的元素以**键值对**(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
 <p>Map 中的键值对以 <strong>Entry</strong> 类型的对象实例形式存在(stl::map 中是 value_type).</p>
 <p>Map 中的键值对中的 key 值是不可重复的, value 值则可以, 这一点 stl::map 也是一样的, 同样的, stl 提供了 multimap 来实现 key 值可重复的 map, Java 也提供了 key 值可以重复的 map, 就是 <strong>IdentityHashMap</strong>.</p>
 <p>Map 插入键值对的方法不同于上一篇中学过的 add 方法, 它使用的是 <strong>put</strong> 方法, 参数为 key 值 和 value 值.</p>
@@ -140,7 +140,7 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <li>containsValue() 用來判斷 Map 中是否包含某個 value 值.</li>
 </ul>
 <p>這兩個內部還是調用的 equals 和 hashcode 方法, 如果有特殊需求, 可以重寫這兩個方法.</p>
-<h3 id="indexof"><a name="user-content-indexof" href="#indexof" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>indexOf:</h3>
+<h3 id="indexof"><a name="user-content-indexof" href="#indexof" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>indexOf</h3>
 <p>獲取 List 中某元素的最先出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
 <h3 id="lastindexof"><a name="user-content-lastindexof" href="#lastindexof" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>lastIndexOf</h3>
 <p>獲取 List 中某元素的最後出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
@@ -237,9 +237,9 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <p>TreeMap 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeMap 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeMap 对象时, 传递实现 Comparator 接口的比较器对象.<br>
 如果我们自己定义的一个类的对象要加入到 TreeSet 当中, 那么这个类必须要实现 Comparable 接口.</p>
 <ul>
-<li>HashMap: 基于__哈希表__实现, 有调优选项</li>
+<li>HashMap: 基于**哈希表**实现, 有调优选项</li>
 <li>
-<p>TreeMap: 基于__红黑树__实现, 没有调优选项, 因为该树总处于平衡状态.</p>
+<p>TreeMap: 基于**红黑树**实现, 没有调优选项, 因为该树总处于平衡状态.</p>
 </li>
 <li>
 <p>HashMap: 适用于在 Map 中插入、删除和定位元素</p>
@@ -251,7 +251,7 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 </blockquote>
 <h2 id="treeset"><a name="user-content-treeset" href="#treeset" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>TreeSet</h2>
 <p>TreeSet 是依靠 TreeMap 来实现的.</p>
-<p>所以, 同 TreeMap, TreeSet 也是一个__有序集合__, TreeSet 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeSet 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeSet 对象时, 传递实现 Comparator 接口的比较器对象.</p>
+<p>所以, 同 TreeMap, TreeSet 也是一个**有序集合**, TreeSet 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeSet 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeSet 对象时, 传递实现 Comparator 接口的比较器对象.</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.util.Iterator</span><span style="color: #A71D7E">;</span>
 <span style="color: #A71D5D">import</span> <span style="color: #555555">java.util.*</span><span style="color: #A71D7E">;</span>
 

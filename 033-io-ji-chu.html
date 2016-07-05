@@ -196,8 +196,8 @@
 <ul>
 <li>概念<ul>
 <li>IO 流用来处理设备之间的数据传输</li>
-<li>Java 对数据的操作是通过__流__的方式</li>
-<li>Java 用于操作流的类都在 __IO 包__中</li>
+<li>Java 对数据的操作是通过**流**的方式</li>
+<li>Java 用于操作流的类都在 **IO 包**中</li>
 <li>流按流向分为两种<ul>
 <li>输入流</li>
 <li>输出流</li>
@@ -205,24 +205,24 @@
 </li>
 <li>流按操作类型分为两种:<ul>
 <li>字节流<ul>
-<li>字节流可以操作任何数据,因为在计算机中任何数据都是以__字节__的形式存储的</li>
+<li>字节流可以操作任何数据,因为在计算机中任何数据都是以**字节**的形式存储的</li>
 </ul>
 </li>
 <li>字符流<ul>
-<li>字符流只能操作__纯字符__数据, 比较方便</li>
+<li>字符流只能操作**纯字符**数据, 比较方便</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>IO 流常用__抽象__父类<ul>
-<li>字节流的__抽象__父类:<ul>
+<li>IO 流常用**抽象**父类<ul>
+<li>字节流的**抽象**父类:<ul>
 <li>InputStream</li>
 <li>OutputStream</li>
 </ul>
 </li>
-<li>字符流的__抽象__父类:<ul>
+<li>字符流的**抽象**父类:<ul>
 <li>Reader</li>
 <li>Writer</li>
 </ul>
@@ -343,7 +343,7 @@
 
 
 <p>我们来分析下这段代码, 为什么需要使用 <strong>write(byte[] b, int off, int len)</strong> 这种 write?<br>
-假设下, 如果待读文件里面有 3 个字节(abc), 我们申请一个 2 字节的数组, 每次从待读文件里读 2 个字节出来, 那么第一次读出来的是 [ab], 然后写入文件, 第二次读的出来的是 [cb], 为什么会是 [cb] 呢?<br> 因为我们的待读文件里只剩下一个 c 了, 所以只重写了数组第一位, 那这样最后写入文件的就是 [abcb], 明显是不对的, 所以使用 <strong>write(byte[] b, int off, int len)</strong>, 写入的时候只写入我们刚才读出来的__有效__字节.</p>
+假设下, 如果待读文件里面有 3 个字节(abc), 我们申请一个 2 字节的数组, 每次从待读文件里读 2 个字节出来, 那么第一次读出来的是 [ab], 然后写入文件, 第二次读的出来的是 [cb], 为什么会是 [cb] 呢?<br> 因为我们的待读文件里只剩下一个 c 了, 所以只重写了数组第一位, 那这样最后写入文件的就是 [abcb], 明显是不对的, 所以使用 <strong>write(byte[] b, int off, int len)</strong>, 写入的时候只写入我们刚才读出来的**有效**字节.</p>
 <h4 id="java"><a name="user-content-java" href="#java" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Java 自带的缓冲区式拷贝</h4>
 <ul>
 <li>缓冲思想<ul>

@@ -61,7 +61,7 @@
 <p>数组的 size 默认是 16, 获得对象的 hash 后, 与 0xF 进行 &ldquo;与&rdquo; 运算, 找到数组的下标, 然后遍历该下标里的链表, 找到合适的位置插入/读取元素.</p>
 <p>这个数组是可以 resize() 的, 当数组的 threshold 达到 0.75 后就会 resize(), 每次 resize() 是成倍数的增加, 16 -> 32.</p>
 <p><strong>重复的判定条件?</strong><br>
-判断 hashmap/set 中的对象是否为同一个对象是通过__三点__来判断的:<br>
+判断 hashmap/set 中的对象是否为同一个对象是通过**三点**来判断的:<br>
 o1.hash == o2.hash &amp;&amp; ((o1 == o2) || (o1.equals(o2)))</p>
 <ul>
 <li>判断对象的 hash 是否相同</li>
