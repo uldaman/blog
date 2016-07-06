@@ -95,14 +95,17 @@
 </ul>
 </li>
 <li><a href="#_9">字符流</a></li>
-<li><a href="#_10">有无缓冲区性能评测</a></li>
-<li><a href="#_11">字节数组流</a><ul>
+<li><a href="#_10">字节流转字符流(转换流)</a></li>
+<li><a href="#_11">有无缓冲区性能评测</a></li>
+<li><a href="#_12">字节数组流</a><ul>
 <li><a href="#bytearrayinputstream">ByteArrayInputStream</a></li>
 <li><a href="#bytearrayoutputstream">ByteArrayOutputStream</a></li>
 </ul>
 </li>
+<li><a href="#io_1">标准 IO 流</a></li>
 </ul>
 </li>
+<li><a href="#file-io">File 及 IO 小结</a></li>
 </ul>
 </div>
 <h1 id="file"><a name="user-content-file" href="#file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类概述和构造方法</h1>
@@ -528,14 +531,17 @@ InputStream 及 OutputStream 都已经实现好了.</p>
 </pre></div>
 
 <br></p>
-<h2 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>有无缓冲区性能评测</h2>
+<h2 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字节流转字符流(转换流)</h2>
+<p><code>InputStreamReader</code> 和 <code>OutputStreamWriter</code> 可以将字节流转换为字符流, 是字节流通向字符流的桥梁, 因此又叫**转换流**.</p>
+<p>当使用 <code>InputStreamReader</code> 或 <code>OutputStreamWriter</code> 转换字节流后, 尽量使用 <code>BufferedReader</code> 或 <code>BufferedWriter</code> 对其进行包装.</p>
+<h2 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>有无缓冲区性能评测</h2>
 <p>缓冲区 or 非缓冲区的性能与**缓冲区的大小**以及**一次性写入数据的大小**有关.</p>
 <p>理论上, 待写入的总数据越**大**、一次性写入的数据量越**小**, 使用缓冲区的性能越高, 例如在默认 8 K 缓冲区的情况下:</p>
 <ul>
 <li>总共有 1 M 数据需写入, 每次写入 1 K, 那么使用缓冲区的性能高</li>
 <li>总共有 1 M 数据需写入, 每次写入 8 K, 那么使用非缓冲区的性能高</li>
 </ul>
-<h2 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字节数组流</h2>
+<h2 id="_12"><a name="user-content-_12" href="#_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字节数组流</h2>
 <p><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>, 用于以 IO 流的方式来完成对字节数组内容的读写, 来支持类似内存虚拟文件或者内存映射文件的功能.</p>
 <h3 id="bytearrayinputstream"><a name="user-content-bytearrayinputstream" href="#bytearrayinputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ByteArrayInputStream</h3>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
@@ -564,6 +570,64 @@ InputStream 及 OutputStream 都已经实现好了.</p>
 <p><code>OutputStream bOut = new ByteArrayOutputStream();</code></p>
 <p>另一个构造方法创建一个大小为n字节的缓冲区.</p>
 <p><code>OutputStream bOut = new ByteArrayOutputStream(int a);</code></p>
+<h2 id="io_1"><a name="user-content-io_1" href="#io_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>标准 IO 流</h2>
+<p>System 类中的: <strong>in**</strong>、out**</p>
+<ul>
+<li>System.in 的类型是 <code>InputStream</code></li>
+<li>System.in 的默认设备是**键盘**, 可通过 <code>System.setIn</code> 更改</li>
+</ul>
+<p><br></p>
+<ul>
+<li>System.out 的类型是 <code>PrintStream</code><ul>
+<li><code>PrintStream</code> 继承自 <code>FilterOutputStream</code><ul>
+<li><code>FilterOutputStream</code> 继承自 <code>OutputStream</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>System.out 的默认设备是**显示器**, 可通过 <code>System.setOut</code> 更改</li>
+</ul>
+<h1 id="file-io"><a name="user-content-file-io" href="#file-io" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 及 IO 小结</h1>
+<p><img alt="" src="http://i65.tinypic.com/2135a4j.jpg" /></p>
+<p><br></p>
+<p><img alt="" src="http://i65.tinypic.com/9fnrxd.jpg" /></p>
+<p>最后以一个例子小结吧.</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic"> * 复制一个目录及其子目录、文件到另外一个目录</span>
+<span style="color: #999988; font-style: italic"> * @param src</span>
+<span style="color: #999988; font-style: italic"> * @param dest</span>
+<span style="color: #999988; font-style: italic"> * @throws IOException</span>
+<span style="color: #999988; font-style: italic"> */</span>
+<span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">copyFolder</span><span style="color: #A71D7E">(</span><span style="color: #333333">File</span> <span style="color: #333333">src</span><span style="color: #A71D7E">,</span> <span style="color: #333333">File</span> <span style="color: #333333">dest</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">IOException</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">src</span><span style="color: #A71D7E">.</span><span style="color: #008080">isDirectory</span><span style="color: #A71D7E">())</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(!</span><span style="color: #333333">dest</span><span style="color: #A71D7E">.</span><span style="color: #008080">exists</span><span style="color: #A71D7E">())</span> <span style="color: #A71D7E">{</span>
+            <span style="color: #333333">dest</span><span style="color: #A71D7E">.</span><span style="color: #008080">mkdir</span><span style="color: #A71D7E">();</span>
+        <span style="color: #A71D7E">}</span>
+        <span style="color: #333333">String</span> <span style="color: #333333">files</span><span style="color: #A71D7E">[]</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">src</span><span style="color: #A71D7E">.</span><span style="color: #008080">list</span><span style="color: #A71D7E">();</span>
+        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">file</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">files</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+            <span style="color: #333333">File</span> <span style="color: #333333">srcFile</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">File</span><span style="color: #A71D7E">(</span><span style="color: #333333">src</span><span style="color: #A71D7E">,</span> <span style="color: #333333">file</span><span style="color: #A71D7E">);</span>
+            <span style="color: #333333">File</span> <span style="color: #333333">destFile</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">File</span><span style="color: #A71D7E">(</span><span style="color: #333333">dest</span><span style="color: #A71D7E">,</span> <span style="color: #333333">file</span><span style="color: #A71D7E">);</span>
+            <span style="color: #999988; font-style: italic">// 递归复制</span>
+            <span style="color: #333333">copyFolder</span><span style="color: #A71D7E">(</span><span style="color: #333333">srcFile</span><span style="color: #A71D7E">,</span> <span style="color: #333333">destFile</span><span style="color: #A71D7E">);</span>
+        <span style="color: #A71D7E">}</span>
+    <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">else</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">src</span><span style="color: #A71D7E">);</span>
+        <span style="color: #333333">OutputStream</span> <span style="color: #333333">out</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">dest</span><span style="color: #A71D7E">);</span>
+
+        <span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">buffer</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1024</span><span style="color: #A71D7E">];</span>
+
+        <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">length</span><span style="color: #A71D7E">;</span>
+
+        <span style="color: #A71D5D">while</span> <span style="color: #A71D7E">((</span><span style="color: #333333">length</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">in</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">buffer</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+            <span style="color: #333333">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #333333">buffer</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">,</span> <span style="color: #333333">length</span><span style="color: #A71D7E">);</span>
+        <span style="color: #A71D7E">}</span>
+        <span style="color: #333333">in</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+        <span style="color: #333333">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
