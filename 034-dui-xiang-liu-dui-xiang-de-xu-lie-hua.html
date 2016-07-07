@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>034、对象流 (对象的序列化)</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/034-dui-xiang-liu-dui-xiang-de-xu-lie-hua.html" rel="bookmark"
+        title="Permalink to 034、对象流 (对象的序列化)">034、对象流 (对象的序列化)</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-03-22T18:50:00+08:00">Tue 22 March 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#api">序列化 API</a></li>
+<li><a href="#_1">实现序列化的要求</a></li>
+<li><a href="#java">实现 Java 对象序列化与反序列化的方法</a><ul>
+<li><a href="#_2">方法一</a></li>
+<li><a href="#_3">方法二</a></li>
+<li><a href="#_4">方法三</a></li>
+</ul>
+</li>
+<li><a href="#jdk">JDK 类库中序列化的步骤</a></li>
+<li><a href="#jdk_1">JDK 类库中反序列化的步骤</a></li>
+<li><a href="#id">类的版本 ID</a></li>
+<li><a href="#_5">实例</a></li>
+</ul>
+</div>
+<p>Java 序列化与反序列化 (又叫串行化与反串行化)</p>
+<p>Java 序列化是指把 Java 对象转换为字节序列的过程, 而 Java 反序列化是指把字节序列恢复为 Java 对象的过程.</p>
+<h1 id="api"><a name="user-content-api" href="#api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>序列化 API</h1>
+<p><code>java.io.ObjectOutputStream</code>: 表示对象输出流</p>
+<p>它的 <code>writeObject(Object obj)</code> 方法可以对参数指定的 obj 对象进行序列化, 把得到的字节序列写到一个目标输出流中.</p>
+<p><code>java.io.ObjectInputStream</code>: 表示对象输入流</p>
+<p>它的 <code>readObject()</code> 方法源输入流中读取字节序列, 再把它们反序列化成为一个对象, 并将其返回.</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实现序列化的要求</h1>
+<p>只有实现了 <code>Serializable</code> 或 <code>Externalizable</code> 接口的类的对象才能被序列化, 否则抛出异常.</p>
+<h1 id="java"><a name="user-content-java" href="#java" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实现 Java 对象序列化与反序列化的方法</h1>
+<p>假定一个 Student 类, 它的对象需要序列化, 可以有如下三种方法:</p>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法一</h2>
+<p>若 Student 类仅仅实现了 <code>Serializable</code> 接口, 则可以按照以下方式进行序列化和反序列化.</p>
+<p><code>ObjectOutputStream</code> 采用默认的序列化方式, 对 Student 对象的非 <code>transient</code> 的实例变量进行序列化.</p>
+<p><code>ObjcetInputStream</code> 采用默认的反序列化方式, 对 Student 对象的非 <code>transient</code> 的实例变量进行反序列化.</p>
+<blockquote>
+<p>transient 是 Java 语言的关键字, 用来表示一个域不是该对象串行化的一部分, 当一个对象被串行化的时候, transient 型变量的值不包括在串行化的表示中, 然而非 transient 型的变量是被包括进去的.</p>
+</blockquote>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法二</h2>
+<p>若 Student 类仅仅实现了 <code>Serializable</code> 接口, 并且还定义了 <code>readObject(ObjectInputStream in)</code> 和 <code>writeObject(ObjectOutputSteam out)</code>, 则采用以下方式进行序列化与反序列化.</p>
+<p><code>ObjectOutputStream</code> 会调用 Student 对象的 <code>writeObject(ObjectOutputStream out)</code> 的方法进行序列化.</p>
+<p><code>ObjectInputStream</code> 会调用 Student 对象的 <code>readObject(ObjectInputStream in)</code> 的方法进行反序列化.</p>
+<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>方法三</h2>
+<p>若 Student 类实现了 <code>Externalnalizable</code> 接口, 且 <code>Student</code> 类必须实现 <code>readExternal(ObjectInput in)</code> 和 <code>writeExternal(ObjectOutput out)</code> 方法, 则按照以下方式进行序列化与反序列化.</p>
+<p><code>ObjectOutputStream</code> 会调用 Student 对象的 <code>writeExternal(ObjectOutput out)</code> 的方法进行序列化.</p>
+<p><code>ObjectInputStream</code> 会调用 Student 对象的 <code>readExternal(ObjectInput in)</code> 的方法进行反序列化.</p>
+<h1 id="jdk"><a name="user-content-jdk" href="#jdk" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>JDK 类库中序列化的步骤</h1>
+<p>步骤一:<br>
+创建一个对象输出流, 它可以包装一个其它类型的目标输出流, 如文件输出流:</p>
+<p><code>ObjectOutputStream out = new ObjectOutputStream(new fileOutputStream("D:\\objectfile.obj"));</code></p>
+<p>步骤二:<br>
+通过对象输出流的 <code>writeObject()</code> 方法写对象:</p>
+<p><code>out.writeObject("Hello");</code></p>
+<p><code>out.writeObject(new Date());</code></p>
+<h1 id="jdk_1"><a name="user-content-jdk_1" href="#jdk_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>JDK 类库中反序列化的步骤</h1>
+<p>步骤一:<br>
+创建一个对象输入流, 它可以包装一个其它类型输入流, 如文件输入流:</p>
+<p><code>ObjectInputStream in = new ObjectInputStream(new fileInputStream("D:\\objectfile.obj"));</code></p>
+<p>步骤二:<br>
+通过对象输出流的 <code>readObject()</code> 方法读取对象:</p>
+<p><code>String obj1 = (String)in.readObject();</code></p>
+<p><code>Date obj2 = (Date)in.readObject();</code></p>
+<p>说明:<br>
+为了正确读取数据, 完成反序列化, 必须保证向对象输出流写对象的顺序与从对象输入流中读对象的**顺序一致**.</p>
+<h1 id="id"><a name="user-content-id" href="#id" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类的版本 ID</h1>
+<p>考虑一种情况, 假设定义了一个类, 实现了 Serializable, 并且序列化了这个类的实例, 如果这时, 改变了该类的结构, 那么反序列化就会报错, 提供类的版本 ID 不兼容.</p>
+<p>所谓的版本 ID, 就是类的 <code>private static final long serialVersionUID</code> 变量, 如果没有定义这个 <code>serialVersionUID</code>, 类也会自动生成, 但只要改变了类的结构, <code>serialVersionUID</code> 也会跟着改变.</p>
+<p>为此, 我们可以手动为类添加版本 ID: <code>private static final long serialVersionUID = xxxxL;</code></p>
+<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实例</h1>
+<p>为了更好地理解 Java 序列化与反序列化, 选择**方法一**编码实现.</p>
+<p>Student 类定义如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">package</span> <span style="color: #555555">com.jieke.io</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.Serializable</span><span style="color: #A71D7E">;</span>
+
+<span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic"> *Title:学生类</span>
+<span style="color: #999988; font-style: italic"> *Description:实现序列化接口的学生类</span>
+<span style="color: #999988; font-style: italic"> *Copyright: copyright(c) 2012</span>
+<span style="color: #999988; font-style: italic"> *Filename: Student.java</span>
+<span style="color: #999988; font-style: italic"> *@author Wang Luqing</span>
+<span style="color: #999988; font-style: italic"> *@version 1.0</span>
+<span style="color: #999988; font-style: italic"> */</span>
+<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">Student</span> <span style="color: #A71D5D">implements</span> <span style="color: #333333">Serializable</span> <span style="color: #A71D7E">{</span>
+ <span style="color: #A71D5D">private</span> <span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #333333">sex</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">year</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">double</span> <span style="color: #333333">gpa</span><span style="color: #A71D7E">;</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #795DA3">Student</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #795DA3">Student</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">,</span><span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #333333">sex</span><span style="color: #A71D7E">,</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">year</span><span style="color: #A71D7E">,</span><span style="color: #A71D5D; font-weight: bold">double</span> <span style="color: #333333">gpa</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">name</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">sex</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">sex</span><span style="color: #A71D7E">;</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">year</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">year</span><span style="color: #A71D7E">;</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">gpa</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">gpa</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setName</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">name</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setSex</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #333333">sex</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">sex</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">sex</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setYear</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">year</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">year</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">year</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setGpa</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">double</span> <span style="color: #333333">gpa</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">gpa</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">gpa</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">return</span> <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">name</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">char</span> <span style="color: #795DA3">getSex</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">return</span> <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">sex</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #795DA3">getYear</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">return</span> <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">year</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">double</span> <span style="color: #795DA3">getGpa</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #A71D5D">return</span> <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">gpa</span><span style="color: #A71D7E">;</span>
+ <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+把 Student 类的对象序列化到文件 <code>O:\\Java\\com\\jieke\\io\\student.txt</code>, 并从该文件中反序列化, 向 <strong>console</strong> 显示结果. 代码如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.*</span><span style="color: #A71D7E">;</span>
+
+<span style="color: #999988; font-style: italic">/**</span>
+<span style="color: #999988; font-style: italic"> *Title:应用学生类</span>
+<span style="color: #999988; font-style: italic"> *Description:实现学生类实例的序列化与反序列化</span>
+<span style="color: #999988; font-style: italic"> *Copyright: copyright(c) 2012</span>
+<span style="color: #999988; font-style: italic"> *Filename: UseStudent.java</span>
+<span style="color: #999988; font-style: italic"> *@author Wang Luqing</span>
+<span style="color: #999988; font-style: italic"> *@version 1.0</span>
+<span style="color: #999988; font-style: italic"> */</span>
+
+<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">UseStudent</span> <span style="color: #A71D7E">{</span>
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+  <span style="color: #333333">Student</span> <span style="color: #333333">st</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Student</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Tom&quot;</span><span style="color: #A71D7E">,</span><span style="color: #183691">&#39;M&#39;</span><span style="color: #A71D7E">,</span><span style="color: #0086b3">20</span><span style="color: #A71D7E">,</span><span style="color: #0086b3">3.6</span><span style="color: #A71D7E">);</span>
+  <span style="color: #333333">File</span> <span style="color: #333333">file</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">File</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;O:\\Java\\com\\jieke\\io\\student.txt&quot;</span><span style="color: #A71D7E">);</span>
+  <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+   <span style="color: #333333">file</span><span style="color: #A71D7E">.</span><span style="color: #008080">createNewFile</span><span style="color: #A71D7E">();</span>
+  <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span><span style="color: #A71D7E">(</span><span style="color: #333333">IOException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+   <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">printStackTrace</span><span style="color: #A71D7E">();</span>
+  <span style="color: #A71D7E">}</span>
+
+  <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+   <span style="color: #999988; font-style: italic">//Student对象序列化过程</span>
+   <span style="color: #333333">FileOutputStream</span> <span style="color: #333333">fos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">file</span><span style="color: #A71D7E">);</span>
+   <span style="color: #333333">ObjectOutputStream</span> <span style="color: #333333">oos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">ObjectOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">fos</span><span style="color: #A71D7E">);</span>
+   <span style="color: #333333">oos</span><span style="color: #A71D7E">.</span><span style="color: #008080">writeObject</span><span style="color: #A71D7E">(</span><span style="color: #333333">st</span><span style="color: #A71D7E">);</span>
+   <span style="color: #333333">oos</span><span style="color: #A71D7E">.</span><span style="color: #008080">flush</span><span style="color: #A71D7E">();</span>
+   <span style="color: #333333">oos</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+   <span style="color: #333333">fos</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+
+   <span style="color: #999988; font-style: italic">//Student对象反序列化过程</span>
+   <span style="color: #333333">FileInputStream</span> <span style="color: #333333">fis</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">file</span><span style="color: #A71D7E">);</span>
+   <span style="color: #333333">ObjectInputStream</span> <span style="color: #333333">ois</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">ObjectInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">fis</span><span style="color: #A71D7E">);</span>
+   <span style="color: #333333">Student</span> <span style="color: #333333">st1</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Student</span><span style="color: #A71D7E">)</span> <span style="color: #333333">ois</span><span style="color: #A71D7E">.</span><span style="color: #008080">readObject</span><span style="color: #A71D7E">();</span>
+   <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;name = &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">st1</span><span style="color: #A71D7E">.</span><span style="color: #008080">getName</span><span style="color: #A71D7E">());</span>
+   <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;sex = &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">st1</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSex</span><span style="color: #A71D7E">());</span>
+   <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;year = &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">st1</span><span style="color: #A71D7E">.</span><span style="color: #008080">getYear</span><span style="color: #A71D7E">());</span>
+   <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;gpa = &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">st1</span><span style="color: #A71D7E">.</span><span style="color: #008080">getGpa</span><span style="color: #A71D7E">());</span>
+   <span style="color: #333333">ois</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+   <span style="color: #333333">fis</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+  <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span><span style="color: #A71D7E">(</span><span style="color: #333333">ClassNotFoundException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+   <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">printStackTrace</span><span style="color: #A71D7E">();</span>
+  <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">IOException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+   <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">printStackTrace</span><span style="color: #A71D7E">();</span>
+  <span style="color: #A71D7E">}</span>
+ <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+结果如下所示:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>name = Tom
+
+sex = M
+
+year = 20
+
+gpa = 3.6
+</pre></div>
+
+<br>
+总结:</p>
+<ul>
+<li>Java 序列化就是把对象转换成字节序列, 而 Java 反序列化就是把字节序列还原成 Java 对象.</li>
+<li>采用 Java 序列化与反序列化技术,<ul>
+<li>一是可以实现数据的持久化, 在 MVC 模式中很是有用;</li>
+<li>二是可以对象数据的远程通信.</li>
+</ul>
+</li>
+</ul>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
