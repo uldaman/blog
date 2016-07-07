@@ -47,6 +47,74 @@ window –> Preferences –> Java –> Editor –> Content Assist:
 
 __abcdefghijklmnopqrstuvwxyz.__(注意后面的点)
 
+这样改完后会有个问题, 就是当按下 "空格键"、"=" 时会上屏候选列表, 按习惯我们可改成 "Tab"、"Enter" 上屏.
+
+首先, 打开 window \-\> show view, 选择 Plug\-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 `org.eclipse.jface.text`, 右键单击, 选择 import as \-\> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.
+
+![](http://i67.tinypic.com/ok94jt.jpg)
+
+![](http://i67.tinypic.com/2nv79e9.jpg)
+
+![](http://i63.tinypic.com/53nvrd.jpg)
+
+如果你的 Eclipse 里找不到 Plug\-ins, 可以下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):
+
+![](http://i66.tinypic.com/2aeytts.jpg)
+
+打开 `org.eclipse.jface.text.contentassist.CompletionProposalPopup` 文件第 1336 行代码, 具体代码如下:
+
+```java
+if (contains(triggers, key)) {
+                        e.doit= false;
+                        hide();
+                        insertProposal(p, key, e.stateMask, fContentAssistSubjectControlAdapter.getSelectedRange().x);
+                    }
+```
+<br>
+修改之后的代码是:
+
+```java
+if (key != '=' && key != 0x20 && key != ';'  &&  contains(triggers, key)) {
+                        e.doit= false;
+                        hide();
+                        insertProposal(p, key, e.stateMask, fContentAssistSubjectControlAdapter.getSelectedRange().x);
+                    }
+```
+<br>
+如果想要使用 "tab" 键上屏需要修改 1328 行, 具体代码如下:
+
+```java
+case '/t':
+e.doit= false;
+fProposalShell.setFocus();
+return false;
+```
+<br>
+修改之后的代码是:
+
+```java
+case '\t':
+e.doit= false;
+insertSelectedProposalWithMask(e.stateMask);
+break;
+```
+<br>
+修改完成之后需要保存替换原来的 jar 文件:
+
+项目右键 \-\> export
+
+![](http://i67.tinypic.com/2pydoci.jpg)
+
+选择导出方式如下图:
+
+![](http://i64.tinypic.com/2yynhid.jpg)
+
+点击 Next, 选择 Destination 选项卡, 选择 Directory, 选择一个要保存插件的目录, 然后 Finish.
+
+![](http://i63.tinypic.com/2vacpe1.jpg)
+
+然后就会在所选的目录下产生一个新的 plugins 目录, 里面有一个 jar 文件, 用它替换掉 Eclipse/plugins 里面的 (注意版本号可能会不一样), 最后重新启动一下 Eclipse.
+
 ### 导航器
 类似 "资源管理器", 它的视图和 "包资源管理器" 有点像, 因为有些文件或文件夹在 "包资源管理器" 看不到, 这时可以到 "导航器" 中查看.
 
