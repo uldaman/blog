@@ -95,6 +95,55 @@
 window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</p>
 <p><img alt="" src="http://i60.tinypic.com/1zoj2no.jpg" /></p>
 <p><strong>abcdefghijklmnopqrstuvwxyz.</strong>(注意后面的点)</p>
+<p>这样改完后会有个问题, 就是当按下 &ldquo;空格键&rdquo;、&rdquo;=&rdquo; 时会上屏候选列表, 按习惯我们可改成 &ldquo;Tab&rdquo;、&rdquo;Enter&rdquo; 上屏.</p>
+<p>首先, 打开 window -> show view, 选择 Plug-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 <code>org.eclipse.jface.text</code>, 右键单击, 选择 import as -> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.</p>
+<p><img alt="" src="http://i67.tinypic.com/ok94jt.jpg" /></p>
+<p><img alt="" src="http://i67.tinypic.com/2nv79e9.jpg" /></p>
+<p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg" /></p>
+<p>如果你的 Eclipse 里找不到 Plug-ins, 可以下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):</p>
+<p><img alt="" src="http://i66.tinypic.com/2aeytts.jpg" /></p>
+<p>打开 <code>org.eclipse.jface.text.contentassist.CompletionProposalPopup</code> 文件第 1336 行代码, 具体代码如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
+                        <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+                        <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
+                        <span style="color: #333333">insertProposal</span><span style="color: #A71D7E">(</span><span style="color: #333333">p</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">,</span> <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">,</span> <span style="color: #333333">fContentAssistSubjectControlAdapter</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSelectedRange</span><span style="color: #A71D7E">().</span><span style="color: #008080">x</span><span style="color: #A71D7E">);</span>
+                    <span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+修改之后的代码是:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;=&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">0x20</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;;&#39;</span>  <span style="color: #A71D7E">&amp;&amp;</span>  <span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
+                        <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+                        <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
+                        <span style="color: #333333">insertProposal</span><span style="color: #A71D7E">(</span><span style="color: #333333">p</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">,</span> <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">,</span> <span style="color: #333333">fContentAssistSubjectControlAdapter</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSelectedRange</span><span style="color: #A71D7E">().</span><span style="color: #008080">x</span><span style="color: #A71D7E">);</span>
+                    <span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+如果想要使用 &ldquo;tab&rdquo; 键上屏需要修改 1328 行, 具体代码如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">case</span> <span style="color: #a61717; background-color: #e3d2d2">&#39;</span><span style="color: #A71D7E">/</span><span style="color: #333333">t</span><span style="color: #a61717; background-color: #e3d2d2">&#39;</span><span style="color: #A71D7E">:</span>
+<span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">fProposalShell</span><span style="color: #A71D7E">.</span><span style="color: #008080">setFocus</span><span style="color: #A71D7E">();</span>
+<span style="color: #A71D5D">return</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+</pre></div>
+
+<br>
+修改之后的代码是:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">case</span> <span style="color: #183691">&#39;\t&#39;</span><span style="color: #A71D7E">:</span>
+<span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">insertSelectedProposalWithMask</span><span style="color: #A71D7E">(</span><span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
+</pre></div>
+
+<br>
+修改完成之后需要保存替换原来的 jar 文件:</p>
+<p>项目右键 -> export</p>
+<p><img alt="" src="http://i67.tinypic.com/2pydoci.jpg" /></p>
+<p>选择导出方式如下图:</p>
+<p><img alt="" src="http://i64.tinypic.com/2yynhid.jpg" /></p>
+<p>点击 Next, 选择 Destination 选项卡, 选择 Directory, 选择一个要保存插件的目录, 然后 Finish.</p>
+<p><img alt="" src="http://i63.tinypic.com/2vacpe1.jpg" /></p>
+<p>然后就会在所选的目录下产生一个新的 plugins 目录, 里面有一个 jar 文件, 用它替换掉 Eclipse/plugins 里面的 (注意版本号可能会不一样), 最后重新启动一下 Eclipse.</p>
 <h3 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>导航器</h3>
 <p>类似 &ldquo;资源管理器&rdquo;, 它的视图和 &ldquo;包资源管理器&rdquo; 有点像, 因为有些文件或文件夹在 &ldquo;包资源管理器&rdquo; 看不到, 这时可以到 &ldquo;导航器&rdquo; 中查看.</p>
 <p>&ldquo;窗口&rdquo; -&gt; &ldquo;显示视图&rdquo; -&gt; &ldquo;其他&rdquo;, 在弹出窗中选择 &ldquo;常规&rdquo; -&gt; &ldquo;导航器&rdquo;, 此时 &ldquo;导航器&rdquo; 就出现在 IDE 左侧的视图中了.</p>
