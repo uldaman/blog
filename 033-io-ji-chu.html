@@ -106,7 +106,11 @@
 </ul>
 </li>
 <li><a href="#file-io">File 及 IO 小结</a></li>
-<li><a href="#randomaccessfile">RandomAccessFile</a></li>
+<li><a href="#randomaccessfile">RandomAccessFile</a><ul>
+<li><a href="#_13">概述</a></li>
+<li><a href="#randomaccessfile_1">RandomAccessFile 中文乱码</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <h1 id="file"><a name="user-content-file" href="#file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>File 类概述和构造方法</h1>
@@ -543,7 +547,7 @@ InputStream 及 OutputStream 都已经实现好了.</p>
 <li>总共有 1 M 数据需写入, 每次写入 8 K, 那么使用非缓冲区的性能高</li>
 </ul>
 <h2 id="_12"><a name="user-content-_12" href="#_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>字节数组流</h2>
-<p><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>, 用于以 IO 流的方式来完成对字节数组内容的读写, 来支持类似内存虚拟文件或者内存映射文件的功能.</p>
+<p><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>, 用于以 IO 流的方式来完成对字节数组内容的读写, 来支持类似内存虚拟文件或者内存映射文件的功能, 还可以配合对象流来实现对象的**深度拷贝** (关于这点, 请参考 035、利用对象流实现深度复制).</p>
 <h3 id="bytearrayinputstream"><a name="user-content-bytearrayinputstream" href="#bytearrayinputstream" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ByteArrayInputStream</h3>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">lang</span><span style="color: #A71D7E">.</span><span style="color: #008080">Object</span>
     <span style="color: #333333">java</span><span style="color: #A71D7E">.</span><span style="color: #008080">io</span><span style="color: #A71D7E">.</span><span style="color: #008080">InputStream</span>
@@ -630,6 +634,7 @@ InputStream 及 OutputStream 都已经实现好了.</p>
 
 <br></p>
 <h1 id="randomaccessfile"><a name="user-content-randomaccessfile" href="#randomaccessfile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RandomAccessFile</h1>
+<h2 id="_13"><a name="user-content-_13" href="#_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>概述</h2>
 <p><code>RandomAccessFile</code> 是用来读/写文件的, 可以用 <code>seek( )</code> 方法来访问设置的记录, 并进行读写; 这些记录的大小不必相同, 但是其大小和位置必须是可知的, 但是该类**仅限**于操作文件.</p>
 <p><code>RandomAccessFile</code> 不属于 <code>InputStream</code> 和 <code>OutputStream</code> 类系的, 实际上, 除了实现 <code>DataInput</code> 和 <code>DataOutput</code>接口之外，它和这两个类系毫不相干, 甚至不使用 <code>InputStream</code> 和 <code>OutputStream</code> 类中已经存在的任何功能;</p>
 <p>它是一个完全独立的类, 所有方法 (绝大多数都只属于它自己) 都是从零开始写的.</p>
@@ -643,6 +648,13 @@ InputStream 及 OutputStream 都已经实现好了.</p>
 </ul>
 <p>此外, 它的构造函数还要一个表示以只读方式 <code>("r")</code>，还是以读写方式 <code>("rw")</code> 打开文件的参数, 和 C 的 <code>fopen( )</code>一模一样, 它不支持只写文件.</p>
 <p><code>RandomAccessFile</code> 的绝大多数功能, 但不是全部, 已经被 JDK 1.4 的 <strong>NIO</strong> 的 &ldquo;内存映射文件 (memory-mapped files)&rdquo; 给取代了, 你该考虑一下是不是用 &ldquo;内存映射文件&rdquo; 来代替 <code>RandomAccessFile</code> 了.</p>
+<h2 id="randomaccessfile_1"><a name="user-content-randomaccessfile_1" href="#randomaccessfile_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>RandomAccessFile 中文乱码</h2>
+<p>在 <code>RandomAccessFile</code> 下用 <code>readLine</code> 的方式会自动将编码变成 <code>ISO-8859-1</code>,  所以需要做下转换:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">RandomAccessFile</span> <span style="color: #333333">fl</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">RandomAccessFile</span><span style="color: #A71D7E">(</span><span style="color: #333333">file</span><span style="color: #A71D7E">,</span> <span style="color: #183691">&quot;rw&quot;</span><span style="color: #A71D7E">);</span>
+<span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">String</span><span style="color: #A71D7E">(</span><span style="color: #333333">fl</span><span style="color: #A71D7E">.</span><span style="color: #008080">readLine</span><span style="color: #A71D7E">().</span><span style="color: #008080">getBytes</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;ISO-8859-1&quot;</span><span style="color: #A71D7E">),</span> <span style="color: #183691">&quot;gb2312&quot;</span><span style="color: #A71D7E">));</span> <span style="color: #999988; font-style: italic">//gb2312是你文本编码格式</span>
+</pre></div>
+
+<br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>

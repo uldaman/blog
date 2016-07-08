@@ -63,9 +63,14 @@
 <li><a href="#_6">自动构建</a></li>
 <li><a href="#_7">抽取函数</a></li>
 <li><a href="#_8">设置编码</a></li>
+<li><a href="#monokai">设置 Monokai 主题</a><ul>
+<li><a href="#_9">配置黑色框架</a></li>
 </ul>
 </li>
-<li><a href="#_9">常用快捷键</a></li>
+<li><a href="#_10">配置代码编辑区的样式</a></li>
+</ul>
+</li>
+<li><a href="#_11">常用快捷键</a></li>
 </ul>
 </div>
 <h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装</h2>
@@ -96,13 +101,14 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <p><img alt="" src="http://i60.tinypic.com/1zoj2no.jpg" /></p>
 <p><strong>abcdefghijklmnopqrstuvwxyz.</strong>(注意后面的点)</p>
 <p>这样改完后会有个问题, 就是当按下 &ldquo;空格键&rdquo;、&rdquo;=&rdquo; 时会上屏候选列表, 按习惯我们可改成 &ldquo;Tab&rdquo;、&rdquo;Enter&rdquo; 上屏.</p>
-<p>首先, 打开 window -> show view, 选择 Plug-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 <code>org.eclipse.jface.text</code>, 右键单击, 选择 import as -> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.</p>
+<p>首先, 最好下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):</p>
+<p><img alt="" src="http://i66.tinypic.com/2aeytts.jpg" /></p>
+<p>打开 window -> show view, 选择 Plug-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 <code>org.eclipse.jface.text</code>, 右键单击, 选择 import as -> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.</p>
 <p><img alt="" src="http://i67.tinypic.com/ok94jt.jpg" /></p>
 <p><img alt="" src="http://i67.tinypic.com/2nv79e9.jpg" /></p>
 <p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg" /></p>
-<p>如果你的 Eclipse 里找不到 Plug-ins, 可以下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):</p>
-<p><img alt="" src="http://i66.tinypic.com/2aeytts.jpg" /></p>
 <p>打开 <code>org.eclipse.jface.text.contentassist.CompletionProposalPopup</code> 文件第 1336 行代码, 具体代码如下:</p>
+<p><img alt="" src="http://i67.tinypic.com/20rae14.jpg" /></p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
                         <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
                         <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
@@ -112,7 +118,7 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 
 <br>
 修改之后的代码是:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;=&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">0x20</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;;&#39;</span>  <span style="color: #A71D7E">&amp;&amp;</span>  <span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;=&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">0x20</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;;&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
                         <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
                         <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
                         <span style="color: #333333">insertProposal</span><span style="color: #A71D7E">(</span><span style="color: #333333">p</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">,</span> <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">,</span> <span style="color: #333333">fContentAssistSubjectControlAdapter</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSelectedRange</span><span style="color: #A71D7E">().</span><span style="color: #008080">x</span><span style="color: #A71D7E">);</span>
@@ -162,7 +168,19 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <h3 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置编码</h3>
 <p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Workspace -&gt; Text file encoding -&gt; Other -&gt; UTF-8.</p>
 <p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Content Types, 在右面选择 &ldquo;Text&rdquo;, 在 default encoding 输入 &ldquo;UTF-8&rdquo;, 点 &ldquo;update&rdquo; 按钮更新.</p>
-<h2 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>常用快捷键</h2>
+<h3 id="monokai"><a name="user-content-monokai" href="#monokai" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置 Monokai 主题</h3>
+<h4 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置黑色框架</h4>
+<p>Window -> Preferences -> General -> Apperance 选择主题为 Dark, 确认.</p>
+<p><img alt="" src="http://i68.tinypic.com/30hnd45.jpg" /></p>
+<p>完成之后确认, 颜色大概是这个样子:</p>
+<p><img alt="" src="http://i66.tinypic.com/jb74aw.jpg" /></p>
+<p>这肯定不是我们想要的样子, 因为这个主题只是配置了框架的颜色，代码编辑区的样式还需要我们继续配置.</p>
+<h3 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置代码编辑区的样式</h3>
+<p>去 帮助 -> 安装新软件，按下 &ldquo;添加站点进入&rdquo;, 输入 <code>http://eclipse-color-theme.github.io/update</code> 作为网址, 然后点击继续安装.</p>
+<p><img alt="" src="http://i64.tinypic.com/2u7c7ro.jpg" /></p>
+<p>安装完成之后, Window -> Preferences -> General -> Appereance -> Color Theme 选择其中的样式.</p>
+<p><img alt="" src="http://i63.tinypic.com/20ppxrn.jpg" /></p>
+<h2 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>常用快捷键</h2>
 <ol>
 <li>Ctrl + 1 (快速修复)</li>
 <li>Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件</li>
@@ -174,6 +192,8 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <li>Ctrl + Q 定位到最后编辑的地方</li>
 <li>Ctrl + Shift + O (自动导入包)</li>
 <li>Ctrl + / 注释当前行,再按则取消注释</li>
+<li>ALT + F11 切换全屏模式</li>
+<li>Alt + Shift + Y 切换自动换行模式</li>
 </ol>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 

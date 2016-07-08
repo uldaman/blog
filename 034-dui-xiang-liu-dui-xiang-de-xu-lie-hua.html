@@ -49,7 +49,7 @@
         title="Permalink to 034、对象流 (对象的序列化)">034、对象流 (对象的序列化)</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-03-22T18:50:00+08:00">Tue 22 March 2016
+<h6 class="subheader" title="2016-07-07T16:08:00+08:00">Thu 07 July 2016
 </h6>
 
 
@@ -65,8 +65,8 @@
 </li>
 <li><a href="#jdk">JDK 类库中序列化的步骤</a></li>
 <li><a href="#jdk_1">JDK 类库中反序列化的步骤</a></li>
-<li><a href="#id">类的版本 ID</a></li>
-<li><a href="#_5">实例</a></li>
+<li><a href="#_5">类的版本</a></li>
+<li><a href="#_6">实例</a></li>
 </ul>
 </div>
 <p>Java 序列化与反序列化 (又叫串行化与反串行化)</p>
@@ -113,11 +113,11 @@
 <p><code>Date obj2 = (Date)in.readObject();</code></p>
 <p>说明:<br>
 为了正确读取数据, 完成反序列化, 必须保证向对象输出流写对象的顺序与从对象输入流中读对象的**顺序一致**.</p>
-<h1 id="id"><a name="user-content-id" href="#id" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类的版本 ID</h1>
+<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类的版本</h1>
 <p>考虑一种情况, 假设定义了一个类, 实现了 Serializable, 并且序列化了这个类的实例, 如果这时, 改变了该类的结构, 那么反序列化就会报错, 提供类的版本 ID 不兼容.</p>
 <p>所谓的版本 ID, 就是类的 <code>private static final long serialVersionUID</code> 变量, 如果没有定义这个 <code>serialVersionUID</code>, 类也会自动生成, 但只要改变了类的结构, <code>serialVersionUID</code> 也会跟着改变.</p>
 <p>为此, 我们可以手动为类添加版本 ID: <code>private static final long serialVersionUID = xxxxL;</code></p>
-<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实例</h1>
+<h1 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实例</h1>
 <p>为了更好地理解 Java 序列化与反序列化, 选择**方法一**编码实现.</p>
 <p>Student 类定义如下:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">package</span> <span style="color: #555555">com.jieke.io</span><span style="color: #A71D7E">;</span>
