@@ -49,7 +49,11 @@ __abcdefghijklmnopqrstuvwxyz.__(注意后面的点)
 
 这样改完后会有个问题, 就是当按下 "空格键"、"=" 时会上屏候选列表, 按习惯我们可改成 "Tab"、"Enter" 上屏.
 
-首先, 打开 window \-\> show view, 选择 Plug\-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 `org.eclipse.jface.text`, 右键单击, 选择 import as \-\> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.
+首先, 最好下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):
+
+![](http://i66.tinypic.com/2aeytts.jpg)
+
+打开 window \-\> show view, 选择 Plug\-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 `org.eclipse.jface.text`, 右键单击, 选择 import as \-\> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.
 
 ![](http://i67.tinypic.com/ok94jt.jpg)
 
@@ -57,11 +61,9 @@ __abcdefghijklmnopqrstuvwxyz.__(注意后面的点)
 
 ![](http://i63.tinypic.com/53nvrd.jpg)
 
-如果你的 Eclipse 里找不到 Plug\-ins, 可以下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):
-
-![](http://i66.tinypic.com/2aeytts.jpg)
-
 打开 `org.eclipse.jface.text.contentassist.CompletionProposalPopup` 文件第 1336 行代码, 具体代码如下:
+
+![](http://i67.tinypic.com/20rae14.jpg)
 
 ```java
 if (contains(triggers, key)) {
@@ -74,7 +76,7 @@ if (contains(triggers, key)) {
 修改之后的代码是:
 
 ```java
-if (key != '=' && key != 0x20 && key != ';'  &&  contains(triggers, key)) {
+if (key != '=' && key != 0x20 && key != ';' && contains(triggers, key)) {
                         e.doit= false;
                         hide();
                         insertProposal(p, key, e.stateMask, fContentAssistSubjectControlAdapter.getSelectedRange().x);
@@ -142,6 +144,27 @@ eclipse 的 java 构建器包含了两种构建 java 程序的方法:
 
 统一设置为 __utf-8__ 编码, Window -> Preferences -> General -> Content Types, 在右面选择 "Text", 在 default encoding 输入 "UTF-8", 点 "update" 按钮更新.
 
+### 设置 Monokai 主题
+#### 配置黑色框架
+Window \-\> Preferences \-\> General \-\> Apperance 选择主题为 Dark, 确认.
+
+![](http://i68.tinypic.com/30hnd45.jpg)
+
+完成之后确认, 颜色大概是这个样子:
+
+![](http://i66.tinypic.com/jb74aw.jpg)
+
+这肯定不是我们想要的样子, 因为这个主题只是配置了框架的颜色，代码编辑区的样式还需要我们继续配置.
+
+### 配置代码编辑区的样式
+去 帮助 \-\> 安装新软件，按下 "添加站点进入", 输入 `http://eclipse-color-theme.github.io/update` 作为网址, 然后点击继续安装.
+
+![](http://i64.tinypic.com/2u7c7ro.jpg)
+
+安装完成之后, Window \-\> Preferences \-\> General \-\> Appereance \-\> Color Theme 选择其中的样式.
+
+![](http://i63.tinypic.com/20ppxrn.jpg)
+
 ## 常用快捷键
 0. Ctrl + 1 (快速修复)
 1. Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件
@@ -153,3 +176,5 @@ eclipse 的 java 构建器包含了两种构建 java 程序的方法:
 7. Ctrl + Q 定位到最后编辑的地方
 8. Ctrl + Shift + O (自动导入包)
 9. Ctrl + / 注释当前行,再按则取消注释
+10. ALT + F11 切换全屏模式
+11. Alt + Shift + Y 切换自动换行模式
