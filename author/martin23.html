@@ -44,6 +44,62 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/qi-shi-jian-qu-dong-mo-xing.html"><h3 class="article-title">(七) 事件驱动模型</h3></a>
+<h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
+</h6>
+
+
+<p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
+在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
+<p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
+这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-shi-jian-qu-dong-mo-xing.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/liu-52-lua-zhong-de-ke-bian-can-shu.html"><h3 class="article-title">(六) 5.2+ Lua 中的可变参数</h3></a>
+<h6 class="subheader" title="2015-03-16T10:41:00+08:00">Mon 16 March 2015
+</h6>
+
+
+<p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-52-lua-zhong-de-ke-bian-can-shu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">(五) C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
+<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
+</h6>
+
+
+<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
+但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
+<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
+<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
 <h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
 </h6>
@@ -174,95 +230,6 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-ji-yu-fan-wei-de-forxun-huan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-nullptr.html"><h3 class="article-title">(二) C++开发者都应该使用的10个C++11特性 — nullptr</h3></a>
-<h6 class="subheader" title="2015-03-12T09:22:00+08:00">Thu 12 March 2015
-</h6>
-
-
-<p>先看下面这两个重载函数.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-nullptr.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/yi-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-auto.html"><h3 class="article-title">(一) C++开发者都应该使用的10个C++11特性 -- auto</h3></a>
-<h6 class="subheader" title="2015-03-12T09:14:15+08:00">Thu 12 March 2015
-</h6>
-
-
-<p>在C++11之前, auto关键字用来指定存储期, 表明变量具有本地范围, 块范围的变量声明（如for循环体内的变量声明）默认为auto存储类型.
-其实大多普通声明方式声明的变量都是 auto 变量, 他们不需要明确指定auto关键字, 默认就是auto的了, auto变量在离开作用域是会变程序自动释放.</p>
-<p>在新标准中, auto 的功能变为**自动类型推导.
-**auto 通知编译器去根据初始化代码推断所声明变量的真实类型.
-各种作用域内声明变量都可以用到它, 如: 名空间中, 程序块中, 或是for循环的初始化语句中.
-需要注意的是, auto不能用来声明函数的返回值.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>auto i = &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/yi-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-auto.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html"><h3 class="article-title">StarUML 上的一些英文翻译</h3></a>
-<h6 class="subheader" title="2015-03-12T02:42:00+08:00">Thu 12 March 2015
-</h6>
-
-
-<hr />
-<table cellpadding="2" cellspacing="0" border="0" width="400" > <tbody > <tr >
-<td width="200" valign="top" >Association
-</td>
-<td width="200" valign="top" >关联
-</td></tr> <tr >
-<td width="200" valign="top" >DirectedAssociation
-</td>
-<td width="200" valign="top" >直接关联
-</td></tr> <tr >
-<td width="200" valign="top" >Navigable
-</td>
-<td width="200" valign="top" >可导航的(即箭头)
-</td></tr> <tr >
-<td width="200" valign="top" >Aggregation
-</td>
-<td width="200" valign="top" >聚合
-</td></tr> <tr >
-<td width="200" valign="top" >Composition
-</td>
-<td width="200" valign="top" >合成
-</td></tr> <tr >
-<td width="200" valign="top" >Generalization
-</td>
-<td width="200" valign="top" >泛化(继承)
-</td></tr> <tr >
-<td width="200" valign="top" >Dependency
-</td>
-<td width="200" valign="top" >依赖
-</td></tr> <tr >
-<td width="200" valign="top" >Realization
-</td>
-<td width="200" valign="top" >实现接口
-</td></tr></tbody></table><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

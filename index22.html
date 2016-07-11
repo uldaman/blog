@@ -44,6 +44,74 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/ba-linux-de-quan-xian-kong-zhi.html"><h3 class="article-title">(八)、Linux 的权限控制</h3></a>
+<h6 class="subheader" title="2015-04-03T15:48:00+08:00">Fri 03 April 2015
+</h6>
+
+
+<p>首先,
+Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</p>
+<p><strong>所有者</strong>
+一般让文件的创建者, 谁创建了该文件, 谁就是该文件的所有者.
+用 ls -ahl 可以看到文件的所有者.
+也可以用 chown 用户名 文件名 来修改文件的所有者.</p>
+<p><strong>所在组</strong>
+当某个用户创建了一个文件后, 该文件的所在组就是该用户所在的组.
+用 ls -ahl 可以看到文件的所在组.
+也可以用 chgrp 组名 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ba-linux-de-quan-xian-kong-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/qi-linux-de-yong-hu-guan-li.html"><h3 class="article-title">(七)、Linux 的用户管理</h3></a>
+<h6 class="subheader" title="2015-03-30T13:57:00+08:00">Mon 30 March 2015
+</h6>
+
+
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>用户和用户组</h1>
+<p>**
+<strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, **用户**指的就是使用操作系统的人;
+而**用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
+<p>来看一个例子(借用鸟哥的私房菜).
+假设有一家人, 家里只有三兄弟, 分别是大毛、二毛与三毛. 对于这三人而言, 客厅、厨房、WC等是共同拥有的, 大家都有权限使用.
+由于三人各自拥有自己的房间, 三毛觉得让大毛、二毛进入自己的房间无可厚非, 但是自己写给小丽的情书可不能被他们看见, 于是三毛把情书锁在抽屉里.
+所以, 大毛、二毛虽然可以进入三毛的房间, 但总不能撬三毛的抽屉吧 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-linux-de-yong-hu-guan-li.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html"><h3 class="article-title">(五) C++开发者都应该使用的10个C++11特性 — move</h3></a>
+<h6 class="subheader" title="2015-03-28T09:17:00+08:00">Sat 28 March 2015
+</h6>
+
+
+<p>在说 move 之前有必要重新再认识下 C++ 98/03 中的 lvalues 和 rvalues, 即左值和右值.</p>
+<p><strong>首先
+对左值和右值的一个最常见的误解是：等号左边的就是左值，等号右边的就是右值;
+这是错误的, 我们应该时刻谨记 lvalue 和 rvalue 都是针对表达式而言.</strong>
+lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
 <h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
 </h6>
@@ -220,62 +288,6 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/20-c-guan-cha-zhe-mo-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/qi-shi-jian-qu-dong-mo-xing.html"><h3 class="article-title">(七) 事件驱动模型</h3></a>
-<h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
-</h6>
-
-
-<p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
-在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
-<p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
-这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-shi-jian-qu-dong-mo-xing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/liu-52-lua-zhong-de-ke-bian-can-shu.html"><h3 class="article-title">(六) 5.2+ Lua 中的可变参数</h3></a>
-<h6 class="subheader" title="2015-03-16T10:41:00+08:00">Mon 16 March 2015
-</h6>
-
-
-<p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-52-lua-zhong-de-ke-bian-can-shu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">(五) C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
-<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
-但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
-<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
-<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

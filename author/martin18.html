@@ -44,6 +44,64 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
+<h6 class="subheader" title="2015-06-14T15:04:00+08:00">Sun 14 June 2015
+</h6>
+
+
+<p>在寫測試代碼的時候, 發現個問題:
+程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
+<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
+<h6 class="subheader" title="2015-06-14T14:53:00+08:00">Sun 14 June 2015
+</h6>
+
+
+<p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
+<p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
+<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
+<h6 class="subheader" title="2015-06-14T04:53:00+08:00">Sun 14 June 2015
+</h6>
+
+
+<p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
+<p>Java 中的容器有两大接口: Collection 和 Map;</p>
+<p>Collection 又分为三个小接口: List、Queue 和 Set.</p>
+<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
+<p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
+<hr />
+<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
 <h6 class="subheader" title="2015-06-13T15:47:00+08:00">Sat 13 June 2015
 </h6>
@@ -187,73 +245,6 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-jiu-yi-chang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</h3></a>
-<h6 class="subheader" title="2015-06-13T06:27:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
-<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
-    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
-
-    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html"><h3 class="article-title">(十八) 多态及接口</h3></a>
-<h6 class="subheader" title="2015-06-12T17:15:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>老生常谈, 参考 C++.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类型转换</h1>
-<p>需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
-为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
-<p>首先, 我们来看一下向下类型转换的风险.</p>
-<p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-qi-ji-cheng.html"><h3 class="article-title">(十七) 继承</h3></a>
-<h6 class="subheader" title="2015-06-12T14:43:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>继承的概念都是一样的, 但是 Java 中继承的语法就和 C++ 中不一样了.</p>
-<p>语法: class 子类 extends 父类 { . . . }</p>
-<p>其他的和 C++ 上就差不多了:</p>
-<p>*. 方法重写</p>
-<p>*. 初始化顺序: 先父类再子类</p>
-<p>*. final 关键字 (C++11 中才有)
-这个关键字要说明一下, 它可以修饰类、方法、属性和变量;
-修饰类时, 则该类不可能被继承:
-修饰方法时, 则该方法不允许被覆盖 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-qi-ji-cheng.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
