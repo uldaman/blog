@@ -1,170 +1,81 @@
 Title: 041、OSI 与 TCP/IP
 Author: Martin
 Date: 2016-07-12 15:05
-Summary: Runtime 类封装了运行时的环境, 每个 Java 应用程序都有一个 Runtime 类实例, 使应用程序能够与其运行的环境相连接.
+Summary:
 
 [TOC]
 
-Reference: [深入研究 java.lang.Runtime 类](http://lavasoft.blog.51cto.com/62575/15565/)
+Reference: [TCP/IP 详解](http://blog.csdn.net/goodboy1881/article/category/204448)
 
-# 一、概述
-Runtime 类封装了运行时的环境, 每个 Java 应用程序都有一个 Runtime 类实例, 使应用程序能够与其运行的环境相连接.
+# TCP/IP
+TCP/IP 协议 (Transfer Controln Protocol / Internet Protocol) 叫做传输控制/网际协议, 又叫网络通讯协议, 这个协议是 Internet 国际互联网络的基础.
 
-一般不能实例化一个 Runtime 对象, 应用程序也不能创建自己的 Runtime 类实例, 但可以通过 getRuntime 方法获取当前 Runtime 运行时对象的引用.
+什么是协议?
 
-一旦得到了一个当前的 Runtime 对象的引用, 就可以调用 Runtime 对象的方法去控制 Java 虚拟机的状态和行为.
+在世界上各地, 各种各样的电脑运行着各自不同的操作系统为大家服务, 这些电脑在表达同一种信息的时候所使用的方法是千差万别. 就好像圣经中上帝打乱了各地人的口音, 让他们无法合作一样.
 
-# 二、API预览
-- `addShutdownHook(Thread hook)`
-    + 注册新的虚拟机来关闭挂钩
-- `availableProcessors()`
-    + 向 Java 虚拟机返回可用处理器的数目
-- `exec(String command)`
-    + 在单独的进程中执行指定的字符串命令
-- `exec(String[] cmdarray)`
-    + 在单独的进程中执行指定命令和变量
-- `exec(String[] cmdarray, String[] envp)`
-    + 在指定环境的独立进程中执行指定命令和变量
-- `exec(String[] cmdarray, String[] envp, File dir)`
-    + 在指定环境和工作目录的独立进程中执行指定的命令和变量
-- `exec(String command, String[] envp)`
-    + 在指定环境的单独进程中执行指定的字符串命令
-- `exec(String command, String[] envp, File dir)`
-    + 在有指定环境和工作目录的独立进程中执行指定的字符串命令
-- `exit(int status)`
-    + 通过启动虚拟机的关闭序列, 终止当前正在运行的 Java 虚拟机
-- `freeMemory()`
-    + 返回 Java 虚拟机中的空闲内存量
-- `gc()`
-    + 运行垃圾回收器
-- `InputStream getLocalizedInputStream(InputStream in)`
-    + 已过时. 从 JDK 1.1 开始, 将本地编码字节流转换为 Unicode 字符流的首选方法是使用 InputStreamReader 和 BufferedReader 类
-- `OutputStream getLocalizedOutputStream(OutputStream out)`
-    + 已过时. 从 JDK 1.1 开始, 将 Unicode 字符流转换为本地编码字节流的首选方法是使用 OutputStreamWriter、BufferedWriter 和 PrintWriter 类
-- `getRuntime()`
-    + 返回与当前 Java 应用程序相关的运行时对象
-- `halt(int status)`
-    + 强行终止目前正在运行的 Java 虚拟机
-- `load(String filename)`
-    + 加载作为动态库的指定文件名
-- `loadLibrary(String libname)`
-    + 加载具有指定库名的动态库
-- `maxMemory()`
-    + 返回 Java 虚拟机试图使用的最大内存量
-- `removeShutdownHook(Thread hook)`
-    + 取消注册某个先前已注册的虚拟机关闭挂钩
-- `runFinalization()`
-    + 运行挂起 finalization 的所有对象的终止方法
-- `runFinalizersOnExit(value)`
-    + 已过时. 此方法本身具有不安全性. 它可能对正在使用的对象调用终结方法, 而其他线程正在操作这些对象, - 从而导致不正确的行为或死锁
-- `totalMemory()`
-    + 返回 Java 虚拟机中的内存总量
-- `traceInstructions(on)`
-    + 启用／禁用指令跟踪
-- `traceMethodCalls(on)`
-    + 启用／禁用方法调用跟踪
+而协议, 说白了就是定义计算机间通信的通用"语言", 大家都按这种协议来通信.
 
-#三、常见的应用
-## 1、内存管理
-Java 提供了无用单元自动收集机制, 通过 `totalMemory()`和 `freeMemory()` 方法可以知道对象的堆内存有多大, 还剩多少.
+TCP/IP 是网络中使用的基本的通信协议. 虽然从名字上看 TCP/IP 包括两个协议, 传输控制协议 (TCP) 和网际协议 (IP), 但 TCP/IP 实际上是**一组协议** (协议簇), 它包括上百个各种功能的协议: TCP、IP、UDP、ICMP、RIP、TELNETFTP、SMTP、ARP、TFTP 等许多协议, 这些协议一起称为 TCP/IP 协议. 以下是对协议族中一些常用协议英文名称和用途作一介绍:
 
-Java 会周期性的回收垃圾对象 (未使用的对象), 以便释放内存空间. 但是如果想先于收集器的下一次指定周期来收集废弃的对象, 可以通过调用 `gc()` 方法来根据需要运行无用单元收集器.
+- TCP (Transport Control Protocol) 传输控制协议
+- IP (Internetworking Protocol) 网间网协议
+- UDP (User Datagram Protocol) 用户数据报协议
+- ICMP (Internet Control Message Protocol) 互联网控制信息协议
+- SMTP (Simple Mail Transfer Protocol) 简单邮件传输协议
+- SNMP (Simple Network manage Protocol) 简单网络管理协议
+- FTP (File Transfer Protocol) 文件传输协议
+- ARP (Address Resolation Protocol) 地址解析协议
 
-一个很好的试验方法是先调用 `gc()` 方法, 然后调用 `freeMemory()` 方法来查看基本的内存使用情况, 接着执行代码, 然后再次调用 `freeMemory()` 方法看看分配了多少内存.
+# OSI
+最早网络刚刚出现的时候, 很多大型的公司都拥有了网络技术, 公司内部计算机可以相互连接, 可以却不能与其它公司连接, 因为没有一个统一的规范. 计算机之间相互传输的信息对方不能理解, 所以不能互联.
 
-下面的程序演示了这个构想. // 此实例来自《java 核心技术》卷一
+ISO 为了更好的使网络应用更为普及, 就推出了 OSI 参考模型 (Open System Interconnection) 开放系统互联, 其含义就是推荐所有公司使用这个规范来控制网络, 这样所有公司都有相同的规范, 就能互联了.
 
-```java
-class MemoryDemo {
-    public static void main(String args[]) {
-        Runtime r = Runtime.getRuntime();
-        long mem1,mem2;
-        Integer someints[] = new Integer[1000];
-        System.out.println("Total memory is ：" + r.totalMemory());
-        mem1 = r.freeMemory();
-        System.out.println("Initial free is : " + mem1);
-        r.gc();
-        mem1 = r.freeMemory();
-        System.out.println("Free memory after garbage collection : " + mem1);
-        //allocate integers
-        for(int i=0; i<1000; i++) someints[i] = new Integer(i);
-        mem2 = r.freeMemory();
-        System.out.println("Free memory after allocation : " + mem2);
-        System.out.println("Memory used by allocation : " +(mem1-mem2));
-        //discard Intergers
-        for(int i=0; i<1000; i++) someints[i] = null;
-        r.gc(); //request garbage collection
-        mem2 = r.freeMemory();
-        System.out.println("Free memory after collecting " + "discarded integers : " + mem2);
-    }
-}
-```
-<br>
-编译后运行结果如下 (不同的机器不同时间运行的结果也不一定一样):
+- **物理层** \-\-\- 数据表示, 物理层规定了激活、维持、关闭通信端点之间的机械特性、电气特性、功能特性以及过程特性, 该层为上层协议提供了一个传输数据的物理媒体, EIA/TIA、RS-232、EIA/TIA RS\-449、V.35、RJ\-45 等
+- **数据链路层** \-\-\- 主机间通信, 数据链路层在不可靠的物理介质上提供可靠的传输, SDLC、HDLC、PPP、STP、帧中继等
+- 网络层 \-\-\- 端到端的连接, 网络层负责对子网间的数据包进行路由选择, 此外, 网络层还可以实现拥塞控制、网际互连等功能. IP、IPX、RIP、OSPF 等
+- **传输层** \-\-\- 寻址和最短路径, 传输层是第一个端到端, 即主机到主机的层次. 传输层负责将上层数据分段并提供端到端的、可靠的或不可靠的传输, TCP、UDP、SPX 等
+- **会话层** \-\-\- 介质访问, 会话层管理主机之间的会话进程, 即负责建立、管理、终止进程之间的会话. 会话层还利用在数据中插入校验点来实现数据的同步, NetBIOS、ZIP (AppleTalk 区域信息协议) 等
+- **表示层** \-\-\- 二进制传输, 表示层对上层数据或信息进行变换以保证一个主机应用层信息可以被另一个主机的应用程序理解, 表示层的数据转换包括数据的加密、压缩、格式转换等, ASCII、ASN.1、JPEG、MPEG等
+- **应用层** \-\-\- 应用层为操作系统或网络应用程序提供访问网络服务的接口, Telnet、FTP、HTTP、SNMP 等
 
-```
-Total memory is ：2031616
-Initial free is : 1818488
-Free memory after garbage collection : 1888808
-Free memory after allocation : 1872224
-Memory used by allocation : 16584
-Free memory after collecting discarded integers : 1888808
-```
-<br>
-## 2、执行其他程序
-在安全的环境中, 可以在多任务操作系统中使用 Java 去执行其他特别大的进程 (也就是程序).
+# OSI 与 TCP/IP
+首先 TCP/IP 他是一个**协议簇**; 而 OSI (开放系统互联) 则是一个**模型**.
 
-`exec()` 方法有几种形式命名想要运行的程序和它的输入参数.
+TCP/IP 是由一些交互性的模块做成的分层次的协议, 其中每个模块提供特定的功能; OSI 则指定了哪个功能是属于哪一层的.
 
-`exec()` 方法返回一个 Process 对象, 可以使用这个对象控制 Java 程序与新运行的进程进行交互.
+TCP/IP 协议被组织成四个概念层.
 
-`exec()` 方法本质是依赖于环境.
+![](http://i65.tinypic.com/fk6yqq.jpg)
 
-下面的例子是使用 `exec()` 方法启动 windows 的记事本 notepad. / /此实例来自《Java 核心技术》卷一
+| OSI 中的层 |                  功能                  |               TCP/IP 协议族              |
+|------------|----------------------------------------|------------------------------------------|
+| 应用层     | 文件传输, 电子邮件, 文件服务, 虚拟终端 | TFTP, HTTP, SNMP, FTP, SMTP, DNS, Telnet |
+| 表示层     | 数据格式化, 代码转换, 数据加密         | 没有协议                                 |
+| 会话层     | 解除或建立与别的接点的联系             | 没有协议                                 |
+| 传输层     | 提供端对端的接口                       | TCP, UDP                                 |
+| 网络层     | 为数据包选择路由                       | IP, ICMP, RIP, OSPF, BGP, IGMP           |
+| 数据链路层 | 传输有地址的帧以及错误检测功能         | SLIP, CSLIP, PPP, ARP, RARP, MTU         |
+| 物理层     | 以二进制数据形式在物理媒体上传输数据   | ISO2110, IEEE802, IEEE802.2              |
 
-```java
-class ExecDemo {
-    public static void main(String args[]) {
-        Runtime r = Runtime.getRuntime();
-        Process p = null;
-        try {
-            p = r.exec("notepad");
-        } catch (Exception e) {
-            System.out.println("Error executing notepad.");
-        }
-    }
-}
-```
-<br>
-`exec()` 还有其他几种形式, 例子中演示的是最常用的一种.
+# 数据报传输的过程
+数据发送时, 由上层向下层封装.
 
-`exec()` 方法返回 Process 对象后, 在新程序开始运行后就可以使用 Process 的方法了.
+四层, 协议层传输的是数据报文, 主要是协议格式;<br>
+三层, 网络层传输的是数据包, 包含数据报文, 并且增加传输使用的IP地址等三层信息;<br>
+二层, 数据链路层传输的是数据帧, 包含数据包, 并且增加相应MAC地址与二层信息.
 
-可以用 `destory()` 方法杀死子进程, 也可以使用 `waitFor()` 方法等待程序直到子程序结束, `exitValue()` 方法返回子进程结束时返回的值, 如果没有错误, 将返回 0, 否则返回非 0.
+数据接收的时候, 下层向上层解封装.
 
-下面是关于 `exec()``方法的例子的改进版本. 例子被修改为等待, 直到运行的进程退出: // 此实例来自《Java 核心技术》卷一
+**IP 数据报**:
 
-```java
-class ExecDemoFini {
-    public static void main(String args[]) {
-    Runtime r = Runtime.getRuntime();
-    Process p = null;
-    try{
-        p = r.exec("notepad");
-        p.waitFor();
-    } catch (Exception e) {
-        System.out.println("Error executing notepad.");
-    }
-        System.out.println("Notepad returned " + p.exitValue());
-    }
-}
-```
-<br>
-下面是运行的结果 (当关闭记事本后, 会接着运行程序, 打印信息):
+![](http://i67.tinypic.com/5ldlsn.jpg)
 
-```
-Notepad returned 0
-请按任意键继续. . .
-```
-<br>
-当子进程正在运行时, 可以对标准输入输出进行读写, `getOutputStream()` 方法和 `getInPutStream()` 方法返回对子进程的标准输入和输出.
+**TCP 数据报**:
+
+![](http://i66.tinypic.com/dzf5m9.jpg)
+
+**文件传输应用例子**:
+
+![](http://i65.tinypic.com/5caaty.jpg)
