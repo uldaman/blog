@@ -44,6 +44,54 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"><h3 class="article-title">(二十二) Java 中的包装类</h3></a>
+<h6 class="subheader" title="2015-06-13T13:20:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
+<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
+<p>包装类主要提供了两大类方法:
+*. 将本类型和其他基本类型进行转换的方法
+*. 将字符串和本类型及包装类互相转换的方法</p>
+<hr />
+<p>以 Integet 为例, 其它类似</p>
+<p>Integer n1 = new Integer(5);
+Integet n2 = new Integer(“5”);</p>
+<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
+<hr />
+<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
+<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
+<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
+<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html"><h3 class="article-title">(二十一) StringBuilder 类</h3></a>
+<h6 class="subheader" title="2015-06-13T12:29:00+08:00">Sat 13 June 2015
+</h6>
+
+
+<p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
+<p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
+至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/er-shi-java-zhong-de-zi-fu-chuan.html"><h3 class="article-title">(二十) Java 中的字符串</h3></a>
 <h6 class="subheader" title="2015-06-13T12:13:00+08:00">Sat 13 June 2015
 </h6>
@@ -223,54 +271,9 @@ b、域名倒过来写，如：com.baidu;</p>
             <hr  class="gradient"/>
         </article>
 
-        <article>
-            <a href="http://blog.smallcpp.com/shi-san-feng-zhuang.html"><h3 class="article-title">(十三) 封装</h3></a>
-<h6 class="subheader" title="2015-06-12T10:06:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>封装, 面向对象思想三大特性之一, 概念就不多说了, 可以简单的理解成, 标准的 java 程序中, 应该通过类的方法来操作类的属性, 类的属性不应该设为 public.</p>
-<p>不过 Java 和 C++ 不一样, 它提供了 getter/setter 方法用于属性的读写, 直接上例子:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">HelloWorld</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
-
-    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">return ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-san-feng-zhuang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-er-lei.html"><h3 class="article-title">(十二) 类</h3></a>
-<h6 class="subheader" title="2015-06-12T09:46:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>面向对象、类及对象的概念就不多说了, 和 C++ 一样, 直接来看看 Java 中怎么使用类.</p>
-<p>之前讲过: 类是 Java 中的基本单元, 可以在类中定义变量和函数, 同时 Java 也规定了, 所有的变量和函数必须存在于类中.</p>
-<p>定义一个类:
-权限修饰符 class 类名 {
-定义属性(成员变量)
-定义方法(成员函数)
-}</p>
-<p>创建对象: 类名 对象名 = new 类名 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-er-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 19 of 27</h6>
+<h6 class="subheader">Page 19 of 28</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/author/martin18.html">&laquo; Prev</a>

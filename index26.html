@@ -44,6 +44,54 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
+<h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
+</h6>
+
+
+<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
+<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg" /></p>
+<hr />
+<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
+<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
+<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg" /></p>
+<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
+<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg" /></p>
+<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
+<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg" /></p>
+<p>点击 [显示从 QWidget ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/6-xin-hao-yu-cao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/14-c-jian-zao-zhe-mo-shi.html"><h3 class="article-title">14、[C++] 建造者模式</h3></a>
+<h6 class="subheader" title="2015-02-23T12:31:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>谈到建造自然会想到楼房.</p>
+<p>楼房是千差万别的, 楼房的外形、层数、内部房间的数量、房间的装饰等等都不一样, 但是对于建造者来说, 抽象出来的建筑流程是确定的, 往往建筑一座楼房包括下面的步骤：打桩, 建立基础 –&gt; 建立框架等.</p>
+<p>建造者模式的本质和建造楼房是一致的：<strong>即流程不变, 但每个流程实现的具体细节则是经常变化的</strong>.</p>
+<p>建造者模式的好处就是保证了流程不会变化, 流程即不会增加、也不会遗漏或者产生流程次序错误, 这是非常重要的.</p>
+<p>再想像一下麦当劳和肯得鸡, 为什么它们的食物味道都是一样的?</p>
+<p>因为它们产品的味道都是由工作流程决定的, 原料放多少, 加热几分钟都有严格规定; 我们去那里消费, 不用关心他们的工作流程, 如果发现鸡翅烤得焦了, 他们会调整具体的工作流程中的烧烤时间, 如果要新加一种汉堡, 做法都相同 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/14-c-jian-zao-zhe-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/13-c-wai-guan-mo-shi-men-mian-mo-shi.html"><h3 class="article-title">13、[C++] 外观模式/门面模式</h3></a>
 <h6 class="subheader" title="2015-02-23T10:03:00+08:00">Mon 23 February 2015
 </h6>
@@ -241,55 +289,9 @@
             <hr  class="gradient"/>
         </article>
 
-        <article>
-            <a href="http://blog.smallcpp.com/7-czhuang-shi-zhe-mo-shi.html"><h3 class="article-title">7、[C++]装饰者模式</h3></a>
-<h6 class="subheader" title="2015-02-15T14:22:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>装饰者模式</h3>
-<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过**继承**来扩展功能.</p>
-<p>然而, 使用继承是**静态**的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
-<p>而装饰者模式可以**动态**地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
-<blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
-
-<p>装饰模式的UML图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/7-czhuang-shi-zhe-mo-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html"><h3 class="article-title">6、[C++]六大设计原则</h3></a>
-<h6 class="subheader" title="2015-02-15T14:21:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>单一职责原则</h3>
-<p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
-<p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了**简单工厂模式**和**策略模式**.</p>
-<p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
-<p><strong>软件设计真正要做的许多内容, 就是发现职责并把那此职责相互分离.</strong></p>
-<p>怎么判断是否应该分离?</p>
-<p>那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离.</p>
-<hr />
-<h3 id="-"><a name="user-content--" href="#-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>开放-封闭原则 ...</h3><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/6-cliu-da-she-ji-yuan-ze.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 26 of 27</h6>
+<h6 class="subheader">Page 26 of 28</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/index25.html">&laquo; Prev</a>

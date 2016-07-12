@@ -44,6 +44,45 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html"><h3 class="article-title">三、Lua 中的閉包</h3></a>
+<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
+</h6>
+
+
+<p>对于习惯了 C/C++ 这种不可嵌套定义函數的语言来说, 理解闭包真不太容易;</p>
+<p>要解釋閉包就要先理解幾個小知識點:
+Lua 中的函数是带有词法定界（lexical scoping）的第一类值（first-class values）.</p>
+<p><strong>第一类值（first-class values）**是指,</strong> <strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
+正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">二、Lua 中的面向對象</h3></a>
+<h6 class="subheader" title="2015-06-15T19:47:00+08:00">Mon 15 June 2015
+</h6>
+
+
+<p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
+<p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
+People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html"><h3 class="article-title">一、遊戲開發數學基礎(坐标系、向量、矩阵)</h3></a>
 <h6 class="subheader" title="2015-06-15T17:08:00+08:00">Mon 15 June 2015
 </h6>
@@ -201,57 +240,9 @@ String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="su
             <hr  class="gradient"/>
         </article>
 
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"><h3 class="article-title">(二十二) Java 中的包装类</h3></a>
-<h6 class="subheader" title="2015-06-13T13:20:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
-<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
-<p>包装类主要提供了两大类方法:
-*. 将本类型和其他基本类型进行转换的方法
-*. 将字符串和本类型及包装类互相转换的方法</p>
-<hr />
-<p>以 Integet 为例, 其它类似</p>
-<p>Integer n1 = new Integer(5);
-Integet n2 = new Integer(“5”);</p>
-<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
-<hr />
-<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
-<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
-<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html"><h3 class="article-title">(二十一) StringBuilder 类</h3></a>
-<h6 class="subheader" title="2015-06-13T12:29:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
-<p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
-至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 18 of 27</h6>
+<h6 class="subheader">Page 18 of 28</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/author/martin17.html">&laquo; Prev</a>

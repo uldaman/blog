@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - 大数据</title>
+    <title>043、URL 及多线程下载</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -43,64 +43,44 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.com/003-windows-ji-chu.html"><h3 class="article-title">003、Windows 基础</h3></a>
-<h6 class="subheader" title="2016-02-24T22:00:00+08:00">Wed 24 February 2016
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/043-url-ji-duo-xian-cheng-xia-zai.html" rel="bookmark"
+        title="Permalink to 043、URL 及多线程下载">043、URL 及多线程下载</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-07-12T17:22:00+08:00">Tue 12 July 2016
 </h6>
 
 
-<p>介绍下 win 下常用的 DOS 命令及快捷键、windows 优化和进制转换等基础知识.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+    <p>URL: 统一资源定位符 (Uniform Resource Locator)</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">URL</span> <span style="color: #333333">url</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">URL</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;http://blog.smallcpp.com/archives.html&quot;</span><span style="color: #A71D7E">);</span>
+
+<span style="color: #333333">URLConnection</span> <span style="color: #333333">uc</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">url</span><span style="color: #A71D7E">.</span><span style="color: #008080">openConnection</span><span style="color: #A71D7E">();</span>
+<span style="color: #333333">InputStream</span> <span style="color: #333333">is</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">uc</span><span style="color: #A71D7E">.</span><span style="color: #008080">getInputStream</span><span style="color: #A71D7E">();</span>
+<span style="color: #333333">ByteArrayOutputStream</span> <span style="color: #333333">bos</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">ByteArrayOutputStream</span><span style="color: #A71D7E">();</span>
+
+<span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">buffer</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #A71D5D; font-weight: bold">byte</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1024</span> <span style="color: #A71D7E">*</span> <span style="color: #0086b3">8</span><span style="color: #A71D7E">];</span>
+<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">len</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
+<span style="color: #A71D5D">while</span> <span style="color: #A71D7E">((</span><span style="color: #333333">len</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">is</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">buffer</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">bos</span><span style="color: #A71D7E">.</span><span style="color: #008080">write</span><span style="color: #A71D7E">(</span><span style="color: #333333">buffer</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">,</span> <span style="color: #333333">len</span><span style="color: #A71D7E">);</span>
+<span style="color: #A71D7E">}</span>
+<span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #333333">bos</span><span style="color: #A71D7E">.</span><span style="color: #008080">toString</span><span style="color: #A71D7E">());</span>
+<span style="color: #333333">bos</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+<span style="color: #333333">is</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+</pre></div>
+
+<br></p>
+<p>gzip 的问题</p>
+<p>多线程下载</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/003-windows-ji-chu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
 
-        <article>
-            <a href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html"><h3 class="article-title">002、大数据生态圈尝鲜</h3></a>
-<h6 class="subheader" title="2016-02-24T18:00:00+08:00">Wed 24 February 2016
-</h6>
-
-
-<p>先通过几张图对大数据的生态圈有个宏观的认知, 搞清楚有哪些知识点需要掌握, 这些知识点后面都会详细讲解.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html"><h3 class="article-title">001、初识大数据</h3></a>
-<h6 class="subheader" title="2016-02-17T00:00:00+08:00">Wed 17 February 2016
-</h6>
-
-
-<p>大数据的 4 V: 体量大(Volume)、多样化(Variety)、快速化(Velocity)、价值密度低（Value）</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 5 of 5</h6>
-
-<p>
-            <a href="http://blog.smallcpp.com/category/da-shu-ju4.html">&laquo; Prev</a>
-
-</p>
-</div>
-
+</article>
     </div>
     <!-- End Main Content -->
 
