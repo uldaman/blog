@@ -1,7 +1,7 @@
 Title: 041、OSI 与 TCP/IP
 Author: Martin
 Date: 2016-07-12 15:05
-Summary:
+Summary: 谈到网络不能不谈 OSI 参考模型及 TCP/IP, 虽然实际应用意义不是很大, 但其的确对于理解网络协议内部的运作很有帮助, 也为我们学习网络协议提供了一个很好的参考.
 
 [TOC]
 
