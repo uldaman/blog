@@ -44,6 +44,28 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
+<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
+</h6>
+
+
+<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
+<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
+<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
+<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
+<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
+<p>答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.</p>
+<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
 <h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
 </h6>
@@ -254,38 +276,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html"><h3 class="article-title">8、[C++]代理模式</h3></a>
-<h6 class="subheader" title="2015-02-15T14:23:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>代理模式</h3>
-<p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
-<p>情景:</p>
-<ol>
-<li>
-<p>有人找公司老总, 但是老总很忙, 于是要找就先找老总的助理, 助理等老总不忙时, 再来告诉老总吧.</p>
-</li>
-<li>
-<p>想象一下古代大户人家的大小姐与仆人偷情, 有一天仆人想约大小姐出来赏月, 但仆人可能不方便直接见大小姐,  于是先告诉大小姐的丫鬟, 由丫鬟转告大小姐.</p>
-</li>
-</ol>
-<p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png" /></a></p>
-<p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
-<p>RealSubject: 真实实体(老总/大小姐)</p>
-<p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
-<p>[cpp]#include ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

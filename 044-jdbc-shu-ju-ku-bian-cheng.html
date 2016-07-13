@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - 大数据</title>
+    <title>044、JDBC 数据库编程</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -43,80 +43,78 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.com/004-java-an-zhuang-ji-huan-jing-pei-zhi.html"><h3 class="article-title">004、Java 安装及环境配置</h3></a>
-<h6 class="subheader" title="2016-02-25T13:00:00+08:00">Thu 25 February 2016
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/044-jdbc-shu-ju-ku-bian-cheng.html" rel="bookmark"
+        title="Permalink to 044、JDBC 数据库编程">044、JDBC 数据库编程</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-07-13T14:42:00+08:00">Wed 13 July 2016
 </h6>
 
 
-<p>这节课主要说明 JAVA 开发环境的一些核心概念, 然后指导学员安装 JDK, 及配置环境变量.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/004-java-an-zhuang-ji-huan-jing-pei-zhi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/003-windows-ji-chu.html"><h3 class="article-title">003、Windows 基础</h3></a>
-<h6 class="subheader" title="2016-02-24T22:00:00+08:00">Wed 24 February 2016
-</h6>
-
-
-<p>介绍下 win 下常用的 DOS 命令及快捷键、windows 优化和进制转换等基础知识.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/003-windows-ji-chu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html"><h3 class="article-title">002、大数据生态圈尝鲜</h3></a>
-<h6 class="subheader" title="2016-02-24T18:00:00+08:00">Wed 24 February 2016
-</h6>
-
-
-<p>先通过几张图对大数据的生态圈有个宏观的认知, 搞清楚有哪些知识点需要掌握, 这些知识点后面都会详细讲解.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html"><h3 class="article-title">001、初识大数据</h3></a>
-<h6 class="subheader" title="2016-02-17T00:00:00+08:00">Wed 17 February 2016
-</h6>
-
-
-<p>大数据的 4 V: 体量大(Volume)、多样化(Variety)、快速化(Velocity)、价值密度低（Value）</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 5 of 5</h6>
-
-<p>
-            <a href="http://blog.smallcpp.com/category/da-shu-ju4.html">&laquo; Prev</a>
-
-</p>
+    <div class="toc">
+<ul></ul>
 </div>
+<p><a href="http://news.gmw.cn/2016-07/11/content_20906356.htm">http://news.gmw.cn/2016-07/11/content_20906356.htm</a></p>
+<p>RDBMS: relation database manage system (关系型数据库管理系统)</p>
+<p>基础知道补充</p>
+<p>SQL四种语言：DDL,DML,DCL,TCL</p>
+<p>1.DDL（Data Definition Language）数据库定义语言statements are used to define the database structure or schema.</p>
+<p>DDL是SQL语言的四大功能之一。
+用于定义数据库的三级结构，包括外模式、概念模式、内模式及其相互之间的映像，定义数据的完整性、安全控制等约束
+DDL不需要commit.
+CREATE
+ALTER
+DROP
+TRUNCATE
+COMMENT
+RENAME</p>
+<p>2.DML（Data Manipulation Language）数据操纵语言statements are used for managing data within schema objects.</p>
+<p>由DBMS提供，用于让用户或程序员使用，实现对数据库中数据的操作。
+DML分成交互型DML和嵌入型DML两类。
+依据语言的级别，DML又可分成过程性DML和非过程性DML两种。
+需要commit.
+SELECT
+INSERT
+UPDATE
+DELETE
+MERGE
+CALL
+EXPLAIN PLAN
+LOCK TABLE</p>
+<p>3.DCL（Data Control Language）数据库控制语言  授权，角色控制等
+GRANT 授权
+REVOKE 取消授权</p>
+<p>4.TCL（Transaction Control Language）事务控制语言
+SAVEPOINT 设置保存点
+ROLLBACK  回滚
+SET TRANSACTION</p>
+<p>SQL主要分成四部分：
+（1）数据定义。（SQL DDL）用于定义SQL模式、基本表、视图和索引的创建和撤消操作。
+（2）数据操纵。（SQL DML）数据操纵分成数据查询和数据更新两类。数据更新又分成插入、删除、和修改三种操作。
+（3）数据控制。包括对基本表和视图的授权，完整性规则的描述，事务控制等内容。
+（4）嵌入式SQL的使用规定。涉及到SQL语句嵌入在宿主语言程序中使用的规则。</p>
+<hr />
+<p>JDBC: java database connection
+java.sql javax.sql</p>
+<hr />
+<p>java 安装 data 驱动 (mysql-connecter-java)
+项目的 lib 目录
+    右键 -&gt; build path -&gt; add to build path</p>
+<p>注册驱动的三种方式</p>
+<p>Database Development</p>
+<p>事务
+acid  atomic consistent isolate durable</p>
+<p>junit单元测试</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
+</p>
+
+
+
+
+</article>
     </div>
     <!-- End Main Content -->
 
