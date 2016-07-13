@@ -5,75 +5,105 @@ Summary: JDBC 数据库编程
 
 [TOC]
 
-http://news.gmw.cn/2016-07/11/content_20906356.htm
+# 基础知识补充
 
-RDBMS: relation database manage system (关系型数据库管理系统)
+**RDBMS**: Relational Database Management System 关系型数据库管理系统
 
-基础知道补充
+SQL 四种语言: **DDL**、**DML**、**DCL**、**TCL**.
 
-SQL四种语言：DDL,DML,DCL,TCL
+## DDL
+Data Definition Language **数据库定义语言** statements are used to define the database structure or schema.
 
-1.DDL（Data Definition Language）数据库定义语言statements are used to define the database structure or schema.
+DDL 是 SQL 语言的四大功能之一.
 
-DDL是SQL语言的四大功能之一。
-用于定义数据库的三级结构，包括外模式、概念模式、内模式及其相互之间的映像，定义数据的完整性、安全控制等约束
-DDL不需要commit.
-CREATE
-ALTER
-DROP
-TRUNCATE
-COMMENT
-RENAME
+用于定义数据库的三级结构, 包括外模式、概念模式、内模式及其相互之间的映像, 定义数据的完整性、安全控制等约束.
 
-2.DML（Data Manipulation Language）数据操纵语言statements are used for managing data within schema objects.
+DDL 不需要 commit.
 
-由DBMS提供，用于让用户或程序员使用，实现对数据库中数据的操作。
-DML分成交互型DML和嵌入型DML两类。
-依据语言的级别，DML又可分成过程性DML和非过程性DML两种。
-需要commit.
-SELECT
-INSERT
-UPDATE
-DELETE
-MERGE
-CALL
-EXPLAIN PLAN
-LOCK TABLE
+- CREATE
+- ALTER
+- DROP
+- TRUNCATE
+- COMMENT
+- RENAME
 
-3.DCL（Data Control Language）数据库控制语言  授权，角色控制等
-GRANT 授权
-REVOKE 取消授权
+## DML
+Data Manipulation Language **数据操纵语言** statements are used for managing data within schema objects.
 
-4.TCL（Transaction Control Language）事务控制语言
-SAVEPOINT 设置保存点
-ROLLBACK  回滚
-SET TRANSACTION
+由 DBMS 提供, 用于让用户或程序员使用, 实现对数据库中数据的操作.
 
-SQL主要分成四部分：
-（1）数据定义。（SQL DDL）用于定义SQL模式、基本表、视图和索引的创建和撤消操作。
-（2）数据操纵。（SQL DML）数据操纵分成数据查询和数据更新两类。数据更新又分成插入、删除、和修改三种操作。
-（3）数据控制。包括对基本表和视图的授权，完整性规则的描述，事务控制等内容。
-（4）嵌入式SQL的使用规定。涉及到SQL语句嵌入在宿主语言程序中使用的规则。
+DML 分成交互型 DML 和嵌入型 DML 两类.
 
-------------------------
+依据语言的级别, DML 又可分成过程性 DML 和非过程性 DML 两种.
 
-JDBC: java database connection
-java.sql javax.sql
+需要 commit.
 
-------------------------
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+- MERGE
+- CALL
+- EXPLAIN PLAN
+- LOCK TABLE
 
-java 安装 data 驱动 (mysql-connecter-java)
-项目的 lib 目录
-    右键 -> build path -> add to build path
+## DCL
+Data Control Language **数据库控制语言**, 授权, 角色控制等
 
+- GRANT 授权
+- REVOKE 取消授权
 
-注册驱动的三种方式
+## TCL
+Transaction Control Language **事务控制语言**
 
+- SAVEPOINT 设置保存点
+- ROLLBACK  回滚
+- SET TRANSACTION
 
-Database Development
+# JDBC
+## JDBC 配置
+**References**:<br>
+[通过 JDBC 进行简单的增删改查 (以 MySQL 为例)](http://www.cnblogs.com/wuyuegb2312/p/3872607.html)<br>
+[JDBC 快速入门教程](http://www.yiibai.com/jdbc/jdbc_quick_guide.html)
 
-事务
-acid  atomic consistent isolate durable
+Java Database Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.
 
+> JDBC 相关的 API 是 java.sql 及 javax.sql 下
 
-junit单元测试
+应用程序通过 JDBC API 与各数据提供的**驱动程序** "交流", 然后数据库驱动程序再与数据库底层 "交流".
+
+![](http://i67.tinypic.com/vdetrk.jpg)
+
+由此可见, 使用 JDBC 操作数据库的第一步就是安装对应的**数据库驱动**.
+
+所谓的**数据库驱动**其实就是一些对应的第三方 JAR 包, 下载下来导入到项目里就可以了 (例如 Mysql 的驱动: mysql-connecter-java).
+
+一般情况下, 我们会在项目目录下新建一个 **lib** 目录用来存放外来的 JAR 包.
+
+![](http://i65.tinypic.com/xfcdck.jpg)
+
+**新建一个 lib 目录**
+
+![](http://i66.tinypic.com/ztg751.jpg)
+
+**把 jar 包拷贝到 lib 目录下后要添加到编译目录** (就是相当于添加到 classpath 路径)
+
+![](http://i64.tinypic.com/5votwn.jpg)
+
+**添加后就会多出一栏引用的库**
+
+![](http://i66.tinypic.com/2j3pedu.jpg)
+
+其余的 JDBC 操作参考上面的 **References** 即可.
+
+## 事务
+ACID: 数据库事务正确执行的四个基本要素
+
+- 原子性 (Atomicity)
+- 一致性 (Consistency)
+- 隔离性 (Isolation)
+- 持久性 (Durability)
+
+数据库默认事务是自动提交的, 也就是发一条sql它就执行一条。如果想多条sql放在一个事务中执行, 则需要使用如下语句。
+
+以下为我自己的理解, 不知道对不对, JDBC 中执行 `execute` 一条 SQL 语句, 本身就是事务的, 只不过默认的 `execute` 后会自动向数据库 `commit`, 如果关闭这种默认提交方式 (`setAutoCommit(false)`), 一次 `execute` 多条 SQL 语句, 最后手动 `commit`, 这样就把这多条语句定义到一个事务里了.
