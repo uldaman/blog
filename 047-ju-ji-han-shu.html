@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>047、聚集函数</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/047-ju-ji-han-shu.html" rel="bookmark"
+        title="Permalink to 047、聚集函数">047、聚集函数</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-07-25T17:50:00+08:00">Mon 25 July 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#group-by">GROUP BY 用法解析</a></li>
+<li><a href="#where-group-by">将 WHERE 子句与 GROUP BY 子句一起使用</a></li>
+<li><a href="#group-by-having">在 GROUP BY 子句之后使用 HAVING 子句</a></li>
+</ul>
+</div>
+<p>Mysql 聚集函数有 5 个:</p>
+<ul>
+<li>COUNT() 记录个数</li>
+<li>MAX() 最大值</li>
+<li>MIN() 最小值</li>
+<li>AVG() 平均值</li>
+<li>SUM() 求和</li>
+</ul>
+<p>聚集函数常常和分组一起工作.</p>
+<h1 id="group-by"><a name="user-content-group-by" href="#group-by" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>GROUP BY 用法解析</h1>
+<p><code>GROUP BY</code> 语法可以根据给定数据列的每个成员对查询结果进行分组统计, 最终得到一个分组汇总表.</p>
+<p><code>SELECT</code> 子句中的列名必须为分组列或列函数 (列函数对于 <code>GROUP BY</code> 子句定义的每个组各返回一个结果.).</p>
+<p>例子:</p>
+<p>某个员工信息表结构和数据如下:</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>dept</th>
+<th>salary</th>
+<th>edlevel</th>
+<th>hiredate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>张三</td>
+<td>开发部</td>
+<td>2000</td>
+<td>3</td>
+<td>2009-10-11</td>
+</tr>
+<tr>
+<td>2</td>
+<td>李四</td>
+<td>开发部</td>
+<td>2500</td>
+<td>3</td>
+<td>2009-10-01</td>
+</tr>
+<tr>
+<td>3</td>
+<td>王五</td>
+<td>设计部</td>
+<td>2600</td>
+<td>5</td>
+<td>2010-10-02</td>
+</tr>
+<tr>
+<td>4</td>
+<td>王六</td>
+<td>设计部</td>
+<td>2300</td>
+<td>4</td>
+<td>2010-10-03</td>
+</tr>
+<tr>
+<td>5</td>
+<td>马七</td>
+<td>设计部</td>
+<td>2100</td>
+<td>4</td>
+<td>2010-10-06</td>
+</tr>
+<tr>
+<td>6</td>
+<td>赵八</td>
+<td>销售部</td>
+<td>3000</td>
+<td>5</td>
+<td>2010-10-05</td>
+</tr>
+<tr>
+<td>7</td>
+<td>钱九</td>
+<td>销售部</td>
+<td>3100</td>
+<td>7</td>
+<td>2010-10-07</td>
+</tr>
+<tr>
+<td>8</td>
+<td>孙十</td>
+<td>销售部</td>
+<td>3500</td>
+<td>7</td>
+<td>2010-10-06</td>
+</tr>
+</tbody>
+</table>
+<p>例如, 我想列出每个部门最高薪水的结果, sql 语句如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">STAFF</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+</pre></div>
+
+<br>
+查询结果如下:</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>MAXIMUM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发部</td>
+<td>2500</td>
+</tr>
+<tr>
+<td>设计部</td>
+<td>2600</td>
+</tr>
+<tr>
+<td>销售部</td>
+<td>3500</td>
+</tr>
+</tbody>
+</table>
+<p>解释一下这个结果:</p>
+<ul>
+<li>满足 &ldquo;SELECT 子句中的列名必须为分组列或列函数&rdquo;, 因为 <code>SELECT</code> 有 <code>GROUP BY DEPT</code> 中包含的列 DEPT.</li>
+<li>&ldquo;列函数对于 GROUP BY 子句定义的每个组各返回一个结果&rdquo;, 根据部门分组, 对每个部门返回一个结果, 就是每个部门的最高薪水.</li>
+</ul>
+<blockquote>
+<p>注意: 计算的是每个部门 (由 <code>GROUP BY</code> 子句定义的组) 而不是整个公司的 <code>MAX(SALARY)</code>.</p>
+</blockquote>
+<p>例如, 查询每个部门的总的薪水数:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">sum</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">total</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">STAFF</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+</pre></div>
+
+<br>
+查询结果如下:</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>MAXIMUM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开发部</td>
+<td>4500</td>
+</tr>
+<tr>
+<td>设计部</td>
+<td>7000</td>
+</tr>
+<tr>
+<td>销售部</td>
+<td>9600</td>
+</tr>
+</tbody>
+</table>
+<h1 id="where-group-by"><a name="user-content-where-group-by" href="#where-group-by" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>将 WHERE 子句与 GROUP BY 子句一起使用</h1>
+<p>分组查询可以在形成组和计算列函数**之前**使用具有消除非限定行的标准 <code>WHERE</code> 子句 (必须在 <code>GROUP BY</code> 子句之前指定 <code>WHERE</code> 子句).</p>
+<p>例如, 查询公司 2010 年入职的各个部门每个级别里的最高薪水:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">WHERE</span> <span style="color: #333333">HIREDATE</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #183691">&#39;2010-01-01&#39;</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span>
+</pre></div>
+
+<br>
+查询结果如下:</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>EDLEVEL</th>
+<th>MAXIMUM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计部</td>
+<td>4</td>
+<td>2300</td>
+</tr>
+<tr>
+<td>设计部</td>
+<td>5</td>
+<td>2600</td>
+</tr>
+<tr>
+<td>销售部</td>
+<td>5</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>销售部</td>
+<td>7</td>
+<td>3500</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意: 在 <code>SELECT</code> 语句中指定的每个列名也在 <code>GROUP BY</code> 子句中提到(未在这两个地方提到的列名将产生错误).</p>
+</blockquote>
+<p><code>GROUP BY</code> 子句对 <code>DEPT</code> 和 <code>EDLEVEL</code> 的每个**唯一组合**各返回一行.</p>
+<h1 id="group-by-having"><a name="user-content-group-by-having" href="#group-by-having" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>在 GROUP BY 子句之后使用 HAVING 子句</h1>
+<p><code>where</code> 子句的作用是在对查询结果进行分组前, 将不符合 <code>where</code> 条件的行去掉, 即在分组之前过滤数据, 条件中不能包含聚组函数, 使用where条件显示特定的行.</p>
+<p><code>having</code> 子句的作用是筛选满足条件的组, 即在分组之后过滤数据, 条件中经常包含聚集函数, 使用 <code>having</code> 条件显示特定的组, 也可以使用多个分组标准进行分组.</p>
+<p><code>having</code> 子句被限制子已经在SELECT语句中定义的列和聚合表达式上.</p>
+<p>例如: 寻找雇员数超过2个的部门的最高和最低薪水:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span>, <span style="color: #A71D5D">MIN</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MINIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span> <span style="color: #A71D5D">HAVING</span> <span style="color: #A71D5D">COUNT</span>(<span style="color: #A71D7E">*</span>) <span style="color: #A71D7E">&gt;</span><span style="color: #0086b3">2</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+</pre></div>
+
+<br>
+查询结果如下:</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>MAXIMUM</th>
+<th>MINIMUM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计部</td>
+<td>2600</td>
+<td>2100</td>
+</tr>
+<tr>
+<td>销售部</td>
+<td>3500</td>
+<td>3000</td>
+</tr>
+</tbody>
+</table>
+<p>例如: 寻找雇员平均工资大于3000的部门的最高和最低薪水:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span>, <span style="color: #A71D5D">MIN</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MINIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span> <span style="color: #A71D5D">HAVING</span> <span style="color: #A71D5D">AVG</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D7E">&gt;</span><span style="color: #0086b3">3000</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+</pre></div>
+
+<br>
+查询结果如下:</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>MAXIMUM</th>
+<th>MINIMUM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>销售部</td>
+<td>3500</td>
+<td>3000</td>
+</tr>
+</tbody>
+</table>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

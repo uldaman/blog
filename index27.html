@@ -44,6 +44,28 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/10-cyuan-xing-mo-shi.html"><h3 class="article-title">10、[C++]原型模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:25:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>解决的问题：</p>
+<p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象.</p>
+<p>这个其实和C++的拷贝构造函数的作用是一致的, 实际上就是**动态抽取当前对象运行时的状态**(好吧, 其实我还没弄懂两者的区别, 请大牛赐教).</p>
+<p>C++的拷贝构造函数分为浅拷贝和深拷贝.</p>
+<p>浅拷贝：就是给对象中的每个成员变量进行复制, 就是把A1类中的变量直接赋给A2类中变量, 属于值传递, 但是涉及到有指针类型的成为, 它们指向的是同一块内存. 这就出现了问题：当B把内存释放了（如：析构）, 这时A内的指针就是野指针了, 出现运行错误.</p>
+<p>深拷贝：就是不仅使用值传递, 而是要每个变量都有自己一份独立的内存空间, 互不干扰.</p>
+<p>原型模式 UML ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/10-cyuan-xing-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/9-cgong-han-mo-shi.html"><h3 class="article-title">9、[C++]工厂模式</h3></a>
 <h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
 </h6>
@@ -282,31 +304,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/2-cumllei-tu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html"><h3 class="article-title">1、[C++]设计模式与面向对象</h3></a>
-<h6 class="subheader" title="2015-02-15T14:16:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
-
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式是否有必要学?</h4>
-<p>答案在我看来是肯定的, 学这些不是考虑将来会不会用到, 而是在学习的过程中进行的思想洗礼, 通过这些模式让我们找到编程的感觉, 从而设计出易维护 易扩展 易复用 灵活性好的程序.</p>
-<blockquote>模式不是设计出来的, 是重构出来的. 好的设计也不是设计出来的，是重构出来的.
-在<大话设计模式>中, 大部分的情况都是小菜先写出一个”垃圾代码”, 然后发现问题, 再对它进行重构.
-
-**设计模式代表了传统的软件开发思想**: 好的设计会产生好的软件, 因此在实际开发之前, 值得花时间去做一个全面而细致的设计.
-**重构代表了敏捷软件开发的浪潮**: 软件并不是在一开始就可以设计得完美无缺的, 因此可以先进行实际开发, 然后通过对代码不断的进行小幅度的修改来改善其设计.
-二者从不同角度阐述了设计的重要性 ...</大话设计模式></blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
