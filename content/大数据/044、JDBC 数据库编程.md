@@ -66,7 +66,7 @@ Transaction Control Language **事务控制语言**
 [通过 JDBC 进行简单的增删改查 (以 MySQL 为例)](http://www.cnblogs.com/wuyuegb2312/p/3872607.html)<br>
 [JDBC 快速入门教程](http://www.yiibai.com/jdbc/jdbc_quick_guide.html)
 
-Java Database Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.
+Java Data Base Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.
 
 > JDBC 相关的 API 是 java.sql 及 javax.sql 下
 

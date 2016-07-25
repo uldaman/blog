@@ -40,11 +40,8 @@ prepstmt = conn.prepareStatement(String StrSQl); // conn 为 Connection 类型
 rs = prepstmt.executeQuery(); // rs 为 ResultSet 类型
 ```
 <br>
-
 # 一些具体用法
-
 ## 创建 PreparedStatement 对象
-
 以下的代码段 (其中 con 是 Connection 对象) 创建包含带两个 IN 参数占位符的 SQL 语句的 PreparedStatement 对象:
 
 ```java
