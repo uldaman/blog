@@ -1,4 +1,4 @@
-Title: 047、聚集函数
+Title: 047、Mysql 聚集函数
 Author: Martin
 Date: 2016-07-25 17:50
 Summary: 聚集函数和分组
