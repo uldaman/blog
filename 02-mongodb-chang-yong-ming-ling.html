@@ -63,22 +63,23 @@
 <li><a href="#_5">修改数据</a></li>
 <li><a href="#_6">查询数据</a><ul>
 <li><a href="#_7">基础查询</a></li>
-<li><a href="#_8">条件查询</a></li>
-<li><a href="#_9">嵌套条件查询</a></li>
-<li><a href="#_10">不包含字段查询</a></li>
-<li><a href="#_11">复合条件查询</a><ul>
+<li><a href="#_8">过滤返回字段</a></li>
+<li><a href="#_9">条件查询</a></li>
+<li><a href="#_10">嵌套条件查询</a></li>
+<li><a href="#_11">不包含字段查询</a></li>
+<li><a href="#_12">复合条件查询</a><ul>
 <li><a href="#or">OR 条件</a></li>
 <li><a href="#in">IN 条件</a></li>
 <li><a href="#and">AND 条件</a></li>
 <li><a href="#all">ALL 条件</a></li>
-<li><a href="#_12">正则查询</a></li>
-<li><a href="#_13">投影</a></li>
-<li><a href="#_14">分页</a><ul>
+<li><a href="#_13">正则查询</a></li>
+<li><a href="#_14">投影</a></li>
+<li><a href="#_15">分页</a><ul>
 <li><a href="#limit">Limit()</a></li>
 <li><a href="#skip">Skip()</a></li>
 </ul>
 </li>
-<li><a href="#_15">排序</a></li>
+<li><a href="#_16">排序</a></li>
 </ul>
 </li>
 </ul>
@@ -158,14 +159,14 @@ test   0.078GB
 <br></p>
 <h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>插入数据</h2>
 <p><strong>命令格式:</strong><br>
-MongoDB 使用 <strong>insert()</strong> 或 <strong>save()</strong> 方法向__集合__中插入文档:</p>
+MongoDB 使用 <strong>insert()</strong> 或 <strong>save()</strong> 方法向**集合**中插入文档:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.insert(document)
 </pre></div>
 
 <br>
-这里提到一个__集合__ 和 <strong>document</strong> 的概念.</p>
-<p>什么是__集合__?<br>
-用常规的思维来说, <strong>集合__对应的就是数据库中的__表</strong>, 当我们插入数据的时候, 是向&rdquo;表&rdquo;中插入数据.<br>
+这里提到一个**集合** 和 <strong>document</strong> 的概念.</p>
+<p>什么是**集合**?<br>
+用常规的思维来说, <strong>集合**对应的就是数据库中的**表</strong>, 当我们插入数据的时候, 是向&rdquo;表&rdquo;中插入数据.<br>
 现在可以总结出 Mongodb 与 MySQL 对照关系如下:</p>
 <table>
 <thead>
@@ -185,7 +186,7 @@ MongoDB 使用 <strong>insert()</strong> 或 <strong>save()</strong> 方法向__
 </tr>
 </tbody>
 </table>
-<p>OK, 现在知道什么是__集合__了, 那什么是 <strong>document</strong>?</p>
+<p>OK, 现在知道什么是**集合**了, 那什么是 <strong>document</strong>?</p>
 <ul>
 <li>文档的数据结构和 JSON 基本一样</li>
 <li>所有存储在集合中的数据都是 <strong>BSON</strong> 格式<ul>
@@ -210,8 +211,8 @@ runoob
 
 <br>
 <strong>col</strong> 是我们的集合名, 如果该集合不在当前所处的数据库中, MongoDB 会自动创建该集合并插入文档.</p>
-<p>MongoDB 数据中的__字段都是字符串格式的__, 但是 MongoDB 做了优化, 通常我们可以可以省略引号.</p>
-<p>每个已插入的数据, MongoDB 都会为它分配一个 <strong>_id</strong> 字段, 当然, 也可以在插入数据时__显示__的指定 <strong>_id</strong> 字段, 但是要注意, <strong>_id</strong> 字段是不可重复的, 如果使用 <strong>insert()</strong> 插入相同 <strong>_id</strong> 的数据, 会报错, 不过可以使用 <strong>save()</strong> 方法:</p>
+<p>MongoDB 数据中的**字段都是字符串格式的**, 但是 MongoDB 做了优化, 通常我们可以可以省略引号.</p>
+<p>每个已插入的数据, MongoDB 都会为它分配一个 <strong>_id</strong> 字段, 当然, 也可以在插入数据时**显示**的指定 <strong>_id</strong> 字段, 但是要注意, <strong>_id</strong> 字段是不可重复的, 如果使用 <strong>insert()</strong> 插入相同 <strong>_id</strong> 的数据, 会报错, 不过可以使用 <strong>save()</strong> 方法:</p>
 <ul>
 <li>如果不指定 <strong>_id</strong> 字段 save() 方法类似于 insert() 方法</li>
 <li>如果指定 <strong>_id</strong> 字段, 则会更新该 <strong>_id</strong> 的数据<ul>
@@ -219,7 +220,7 @@ runoob
 </ul>
 </li>
 </ul>
-<p>现在可以通过 <strong>find()</strong> 命令查看已插入的数据, 关于__查询__的命令详细用法请继续参考下面的笔记, 这里仅测试下 <strong>_id</strong> 字段&hellip;</p>
+<p>现在可以通过 <strong>find()</strong> 命令查看已插入的数据, 关于**查询**的命令详细用法请继续参考下面的笔记, 这里仅测试下 <strong>_id</strong> 字段&hellip;</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt; db.col.find()
 {&quot;_id&quot;: ObjectId(&quot;56064886ade2f21f36b03134&quot;), &quot;name&quot;: &quot;MongoDB 教程&quot;, &quot;age&quot;: 18}
 &gt;
@@ -301,13 +302,13 @@ runoob
 <h2 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>查询数据</h2>
 <h3 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>基础查询</h3>
 <p><strong>命令格式:</strong><br>
-MongoDB 使用 <strong>find()</strong> 或 <strong>findOne()</strong> 方法从__集合__中插查询数据:</p>
+MongoDB 使用 <strong>find()</strong> 或 <strong>findOne()</strong> 方法从**集合**中插查询数据:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.COLLECTION_NAME.find()
 &gt;db.col.find().pretty()
 </pre></div>
 
 <br>
-find() 方法以__非结构化__的方式来显示所有文档, 如果需要以易读的__结构化__方式来读取数据, 可以使用 <strong>pretty()</strong> 方法.</p>
+find() 方法以**非结构化**的方式来显示所有文档, 如果需要以易读的**结构化**方式来读取数据, 可以使用 <strong>pretty()</strong> 方法.</p>
 <p><strong>实例</strong><br>
 查询 col 集合中的数据:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt; db.col.find().pretty()
@@ -319,8 +320,30 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 </pre></div>
 
 <br>
-细心同学可能已经发现, 上面查询结果中字段都是__字符串__格式(_id、name、age 都用引号包起来了).</p>
-<h3 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>条件查询</h3>
+细心同学可能已经发现, 上面查询结果中字段都是**字符串**格式(_id、name、age 都用引号包起来了).</p>
+<h3 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>过滤返回字段</h3>
+<p>通过 find() 的第二个参数可以指定返回的字段.</p>
+<p>例如, 只想返回 name 字段:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;name&#39;: 1}).pretty()
+{
+        &quot;_id&quot; : ObjectId(&quot;56063f17ade2f21f36b03133&quot;),
+        &quot;name&quot;: &quot;MongoDB 教程&quot;,
+}
+</pre></div>
+
+<br>
+注意, _id 总是返回的.</p>
+<p>或者指定哪些字段不返回:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;_id&#39;: 0}).pretty()
+{
+        &quot;name&quot;: &quot;MongoDB 教程&quot;,
+        &quot;age&quot;: 18
+}
+</pre></div>
+
+<br>
+可以看到, 这种方式可以过滤掉 _id 字段.</p>
+<h3 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>条件查询</h3>
 <p>MongoDB 的 <strong>find()</strong> 和 <strong>findOne()</strong> 都支持条件语句的查询, 它们与 SQL 语句的对应关系如下表:</p>
 <blockquote>
 <p>注意, MongoDB 的条件也是 document 类型(Dict)</p>
@@ -374,8 +397,8 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 </tbody>
 </table>
 <p><br></p>
-<h3 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>嵌套条件查询</h3>
-<p>因为 MongoDB 中存储的数据是 document(Dict), 所以有些 key 中保存的 value 可能是另一个 document(Dict), 此时, 我们可以用__嵌套条件__来查询到嵌套在 value 中的子 document(Dict), 语法格式就是__点号__.</p>
+<h3 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>嵌套条件查询</h3>
+<p>因为 MongoDB 中存储的数据是 document(Dict), 所以有些 key 中保存的 value 可能是另一个 document(Dict), 此时, 我们可以用**嵌套条件**来查询到嵌套在 value 中的子 document(Dict), 语法格式就是**点号**.</p>
 <p>先插入一条嵌套数据:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18, school: {name: &#39;交通大学&#39;, city: &#39;上海&#39;}})
 </pre></div>
@@ -386,8 +409,8 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 </pre></div>
 
 <br></p>
-<h3 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>不包含字段查询</h3>
-<p>这种查询是查询集合中__没有某个字段__的数据.</p>
+<h3 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>不包含字段查询</h3>
+<p>这种查询是查询集合中**没有某个字段**的数据.</p>
 <p>先插入两条数据:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18)
 &gt;db.col.insert({name: &#39;李四&#39;)
@@ -399,7 +422,7 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 </pre></div>
 
 <br></p>
-<h3 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>复合条件查询</h3>
+<h3 id="_12"><a name="user-content-_12" href="#_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>复合条件查询</h3>
 <h4 id="or"><a name="user-content-or" href="#or" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>OR 条件</h4>
 <p>OR 条件语句使用了关键字 <strong>$or</strong>, 语法格式如下:</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
@@ -413,14 +436,14 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 
 <br></p>
 <h4 id="in"><a name="user-content-in" href="#in" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>IN 条件</h4>
-<p>in 条件语句, 也是一种或者逻辑, 使用了关键字 <strong>$in</strong>, 但它与 or 不同, or 是在不同的 field 之间或者, 而 in 是在同一个 field 间或者, 并且支持对__数组__型元素进行查询</p>
+<p>in 条件语句, 也是一种或者逻辑, 使用了关键字 <strong>$in</strong>, 但它与 or 不同, or 是在不同的 field 之间或者, 而 in 是在同一个 field 间或者, 并且支持对**数组**型元素进行查询</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.col.find({key1: {$in: [value1, value2]}}).pretty()
 </pre></div>
 
 <br>
 匹配 key1 的值为 value1 或者 value2 的元素, 或者匹配包含有 value1 / value2 的数组元素.</p>
 <h4 id="and"><a name="user-content-and" href="#and" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>AND 条件</h4>
-<p>OR 条件语句可以使用了关键字 <strong>$and</strong>, 也可以直接在条件 document 中可以传入多个键(key), 每个键(key)以__逗号__隔开.</p>
+<p>OR 条件语句可以使用了关键字 <strong>$and</strong>, 也可以直接在条件 document 中可以传入多个键(key), 每个键(key)以**逗号**隔开.</p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
    {
       $and: [
@@ -442,9 +465,9 @@ find() 方法以__非结构化__的方式来显示所有文档, 如果需要以�
 <br>
 首先, key1 要是个数组, 如 [value1, value2 &hellip;]<br>
 该语句匹配同时包含元素 value1 和 value2 的数组.</p>
-<h4 id="_12"><a name="user-content-_12" href="#_12" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>正则查询</h4>
+<h4 id="_13"><a name="user-content-_13" href="#_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>正则查询</h4>
 <p>MongoDB 的查询也是支持正则的, 但是正则查询的效率是比较低的, 建议只对建立了索引的 field 进行正则.</p>
-<h4 id="_13"><a name="user-content-_13" href="#_13" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>投影</h4>
+<h4 id="_14"><a name="user-content-_14" href="#_14" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>投影</h4>
 <p>投影意思是只查询必要的字段而不是查询所有的字段, 例如一个文档有 5 个字段, 需要显示的只有 3 个, 此时就可以用投影.</p>
 <p>find() 方法的第二个可选参数是要投影的字段列表, 在该参数中设置的字段列表值 1 或 0</p>
 <ul>
@@ -462,7 +485,7 @@ find() 方法具有投影基本语法如下</p>
 </pre></div>
 
 <br></p>
-<h4 id="_14"><a name="user-content-_14" href="#_14" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>分页</h4>
+<h4 id="_15"><a name="user-content-_15" href="#_15" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>分页</h4>
 <p>MongoDB 的分页功能需要用到两个方法: <strong>Limit()</strong> 和 <strong>Skip()</strong></p>
 <h5 id="limit"><a name="user-content-limit" href="#limit" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Limit()</h5>
 <p>limit() 方法接受一个数字参数, 该参数指定读取的记录条数.</p>
@@ -481,14 +504,14 @@ find() 方法具有投影基本语法如下</p>
 </pre></div>
 
 <br></p>
-<h4 id="_15"><a name="user-content-_15" href="#_15" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>排序</h4>
+<h4 id="_16"><a name="user-content-_16" href="#_16" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>排序</h4>
 <p><strong>命令格式:</strong></p>
 <p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().sort({KEY: 1})
 </pre></div>
 
 <br>
 Key 可以设为 1 或者 -1, 1 用于升序排列, 而 -1 用于降序.</p>
-<p><strong>注意:</strong> 排序是一个耗性能的操作, 建议只对建立了__索引__的 key 进行排序.</p>
+<p><strong>注意:</strong> 排序是一个耗性能的操作, 建议只对建立了**索引**的 key 进行排序.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a>
 
 </p>
