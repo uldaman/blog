@@ -44,253 +44,205 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/si-zi-shuo-ming-dai-ma-zhu-shi.html"><h3 class="article-title">四、自說明代碼--註釋</h3></a>
-<h6 class="subheader" title="2015-06-25T17:20:00+08:00">Thu 25 June 2015
+            <a href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html"><h3 class="article-title">三、Lua 中的閉包</h3></a>
+<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
 </h6>
 
 
-<blockquote>關於註釋, 我想我已經養成了習慣, 下面的摘自原文, 供參考
->
-> </blockquote>
-
-<p><strong>代碼中常見的註釋</strong>
-*. 重複代碼: 重複性註釋只是用不同的語言把代碼的工作再描述一次. 這只會增加閱讀量.
-*. 解釋代碼: 通常用於解釋複雜的代碼碼. 但通常是因為代碼含糊不清, 才體現出這類註釋的價值, 如果代碼過于複雜而需要解釋, 最好的做法是改進代碼, 而不是添加註釋.
-*. 代碼標記: 標記性註釋並非有意留在代碼中, 它用來標記某个代码暂时还存在的问题, 等待完善.
-*. 概述代码: 将若干代码行的意思以一两句话表达出来.
-*. 代码意图说明: 目的性注释用来指明一段代码的意图, 它指出要解决的问题. 概述代码和代码意图说明并没有明顯的界限.
-*. 傳達代碼無法表述的信息: 某些信息不能通過代碼表達, 但又要包含在源代碼中, 這種註釋包括版權聲明等.</p>
-<p>對於完工的代碼 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a>
+<p>对于习惯了 C/C++ 这种不可嵌套定义函數的语言来说, 理解闭包真不太容易;</p>
+<p>要解釋閉包就要先理解幾個小知識點:
+Lua 中的函数是带有词法定界（lexical scoping）的第一类值（first-class values）.</p>
+<p><strong>第一类值（first-class values）**是指,</strong> <strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
+正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-zi-shuo-ming-dai-ma-zhu-shi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-lua-zhong-de-bi-bao.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/san-bian-liang-ming-de-li-liang.html"><h3 class="article-title">三、變量名的力量</h3></a>
-<h6 class="subheader" title="2015-06-23T11:45:00+08:00">Tue 23 June 2015
+            <a href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">二、Lua 中的面向對象</h3></a>
+<h6 class="subheader" title="2015-06-15T19:47:00+08:00">Mon 15 June 2015
 </h6>
 
 
-<blockquote>在此之前, 我已習慣匈牙利命名法, 之所以還要讀這個, 是想看看作者在這方面有什麼獨特的見解值得我借鑒.
->
-> </blockquote>
-
-<p><strong>一個好的變量名是可讀的、易記的和恰如其分的.</strong></p>
-<p><strong>最重要的命名事項</strong>
-通常, 對變量的描述就是最佳的變量名, 如表示運動場中坐椅數量的變量可能會命名為: numberOfSeatsInTheStadium.</p>
-<p><strong>以問題為導向</strong>
-一個好記的名字反映的通常是問題, 而不是解決方案, 也就是說, 通常表達的是 what 而不是 how.</p>
-<p><strong>最適當的名字長度</strong>
-變量名的長度應該介於 x ~ maximunNumberOfPointInModernOlympics 之間, 太短的名字無法傳達足夠的信息;
-原文提到, 變量名長度在 10 ~16 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a>
+<p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
+<p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
+People.sayHi &lt;/span&gt;= &lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-bian-liang-ming-de-li-liang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/er-ge-ren-xing-ge.html"><h3 class="article-title">二、個人性格</h3></a>
-<h6 class="subheader" title="2015-06-22T19:35:00+08:00">Mon 22 June 2015
+            <a href="http://blog.smallcpp.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html"><h3 class="article-title">一、遊戲開發數學基礎(坐标系、向量、矩阵)</h3></a>
+<h6 class="subheader" title="2015-06-15T17:08:00+08:00">Mon 15 June 2015
 </h6>
 
 
-<blockquote>人们容易混淆行动与进展, 混淆忙绿与多产, 有效编程中最重要的工作是思考, 而人思考时通常不会看上去很忙.</blockquote>
-
-<p>如同本章開篇所說, 如果想尋求具體的編程技巧, 這章就可以跳過了, 但如果你想獲得更進一步的提高, 這章還是有必要的.</p>
-<p><strong>一些好的性格</strong></p>
-<p><strong>謙虛</strong>
-精通編程的人是那些了解自己頭腦有多大局限性的人, 都很謙虛, 那些編程糟糕的人, 總是拒絕接受自己腦瓜不能勝任工作的事實(也就是自大), 自負使得它們無法成為優秀的程序員;
-<strong>承認智力有限并通過學習來彌補, 你會成為更好的程序員, 你越謙虛, 進步就越快.</strong></p>
-<p><strong>求知欲</strong>
-在成長為高手的過程中, 對技術事物的求知欲具有壓倒一切的重要性(意思是要對陌生、不熟悉的事物抱有求知態度), 作者在下面給出了一些培養求知欲和把學習當做第一要務的方法.
-*. 在軟件開發過程中, 會學習到新的知識、培養自我意識 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a>
+<p><strong>笛卡爾坐標系</strong></p>
+<p>笛卡爾坐標系有 1D、2D、3D 三種, 因為我們要學的 cocos2d-x 是基於 2D 的, 因此, 我們主要討論 2D 笛卡爾坐標系.</p>
+<p>2D 笛卡爾坐標系 就是我們中學學過的 x/y 坐標系, 當然也稍有不同.</p>
+<p>首先, 在 2D 笛卡爾坐標系 中, 根據 x/y ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-ge-ren-xing-ge.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/yi-you-xi-kai-fa-shu-xue-ji-chu-zuo-biao-xi-xiang-liang-ju-zhen.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/yi-xu-zhang.html"><h3 class="article-title">一、序章</h3></a>
-<h6 class="subheader" title="2015-06-22T18:01:00+08:00">Mon 22 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html"><h3 class="article-title">(二十九) 容器的一些其他操作</h3></a>
+<h6 class="subheader" title="2015-06-14T16:59:00+08:00">Sun 14 June 2015
 </h6>
 
 
-<p>首先, &lt;代碼大全&gt; 原名 <code complete>, 它並不是一本實現某些具體功能的代碼大全, 它所講的是軟件構建技術, 確切的說, 就是如何編寫高質量的代碼, 這本書討論了軟件構建活動的方方面面, 比如說軟件的質量, 還有編程思維, 它還會深入闡述構建活動中的重要細節, 如創建一個類的步驟, 使用數據和控制結構時的各種事項, 還有調試、重構、優化等技術.</p>
-<p>此書共七大部分, 35 章, 將近 900 頁…
-嚇尿了有木有&hellip;, 還好, 作者還是不錯滴, 他推薦了一個閱讀建議, 我們可以按這個來:
-初始程序員 &ndash; 先看 18 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a>
+<p><strong>contains:</strong>
+判斷 Collection 中是否包含某元素, 包含返回 true;</p>
+<p><strong>containsAll:</strong>
+判斷 Collection 中是否包含指定的所有元素.</p>
+<p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題? 這裡 List 和 Set 的解決方法是不同的;</p>
+<p><strong>先看 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/yi-xu-zhang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-ba-fen-zhi-guan-li-ce-lue-zhuan.html"><h3 class="article-title">[版本控制] 八、分支管理策略(轉)</h3></a>
-<h6 class="subheader" title="2015-06-20T17:21:00+08:00">Sat 20 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
+<h6 class="subheader" title="2015-06-14T15:04:00+08:00">Sun 14 June 2015
 </h6>
 
 
-<div class="toc">
-<ul>
-<li><a href="#master">一、主分支Master</a></li>
-<li><a href="#develop">二、开发分支Develop</a></li>
-<li><a href="#_1">三、临时性分支</a></li>
-<li><a href="#_2">四、 功能分支</a></li>
-<li><a href="#_3">五、预发布分支</a></li>
-<li><a href="#bug">六、修补bug分支</a></li>
-</ul>
-</div>
-<blockquote>
-<p>以下內容摘自: <a href="http://www.ruanyifeng.com/blog/2012/07/git.html">Git分支管理策略</a>
-後面在網上又看到了個更好的文章, 所以不再推薦閱讀上面的鏈接, 閱讀此鏈接更好: <a href="http://www.ituring.com.cn/article/56870">基於 git 的源代碼管理模型</a>.</p>
-</blockquote>
-<p>這種分支管理策略將 branch 分成兩個主要分支(master、develop), 三種支援性分支(feature、release、hotfixes):</p>
-<p><img alt="" src="http://i59.tinypic.com/fn6xe8.jpg" /></p>
-<p>大部分情況下 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>在寫測試代碼的時候, 發現個問題:
+程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
+<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-ba-fen-zhi-guan-li-ce-lue-zhuan.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-qi-biao-qian-guan-li.html"><h3 class="article-title">[版本控制] 七、標籤管理</h3></a>
-<h6 class="subheader" title="2015-06-20T13:29:00+08:00">Sat 20 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
+<h6 class="subheader" title="2015-06-14T14:53:00+08:00">Sun 14 June 2015
 </h6>
 
 
-<div class="toc">
-<ul></ul>
-</div>
-<p>所谓的標籤, 即 Tag, 就是一个特别的版本, 因为这个版本可能有特别的意义, 例如, Beta 1.0 版、Build 1.0 版本, 发布版本时, 我们通常就可以先在版本库中打一个标签, 这样, 就唯一确定了打标签时刻的版本, 将来无论什么时候, 取某个标签的版本, 就是把那个打标签的时刻的历史版本取出来, 所以, 标签也是版本库的一个快照, Git 的标签虽然是版本库的快照, 但其实它就是指向某个 commit 的指针, 所以, 创建和删除标签都是瞬间完成的 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
+<p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
+<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-qi-biao-qian-guan-li.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-qi-map-he-hashmap.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-liu-fen-zhi-guan-li.html"><h3 class="article-title">[版本控制] 六、分支管理</h3></a>
-<h6 class="subheader" title="2015-06-20T12:17:00+08:00">Sat 20 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
+<h6 class="subheader" title="2015-06-14T04:53:00+08:00">Sun 14 June 2015
 </h6>
 
 
-<div class="toc">
-<ul></ul>
-</div>
-<ul>
-<li><code>git branch</code> 查看當前分支</li>
-<li><code>git branch xx</code> 建立分支</li>
-<li><code>git checkout xx</code> 切換分支</li>
-<li><code>git checkout</code> 命令加上 –b 参数表示创建并切换, 相当于 branch + checkout.</li>
-<li><code>git show-branch</code> 查看當前分支和主分支的差異, 這裡要稍微說明一下.</li>
-</ul>
-<p><img alt="" src="http://i57.tinypic.com/9zytf7.jpg" /></p>
-<p>输出分为上下两部分, 使用短划线&rdquo;&ndash;&ldquo;分隔, 如果是三個分支則是&rdquo;&mdash;&ldquo;, 以此類推, 這張圖是二個分支, 所以是 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
+<p>Java 中的容器有两大接口: Collection 和 Map;</p>
+<p>Collection 又分为三个小接口: List、Queue 和 Set.</p>
+<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
+<p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
+<hr />
+<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-liu-fen-zhi-guan-li.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-wu-git-chang-yong-ming-ling.html"><h3 class="article-title">[版本控制] 五、Git 常用命令</h3></a>
-<h6 class="subheader" title="2015-06-20T08:05:00+08:00">Sat 20 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
+<h6 class="subheader" title="2015-06-13T15:47:00+08:00">Sat 13 June 2015
 </h6>
 
 
-<div class="toc">
-<ul></ul>
-</div>
-<blockquote>這裡僅說明下`git status`命令和 Ignore file, 關於 Git 的其它命令參考[廖老師的在線教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000).</blockquote>
-
-<p><img alt="" src="http://i57.tinypic.com/b7kwgz.jpg" /></p>
-<p>**<code>git status</code>**命令可以让我们时刻掌握仓库当前的状态, 下面來看看使用該命令出現的提示信息各代表什麼意思:</p>
-<ul>
-<li><strong>Untracked files:</strong> 未跟蹤文件, 意味著當前的 Git 快照中沒有這些文件, 此時可以使用 <code>git add</code> 命令來添加跟蹤 ...</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>Math 类位于 java.lang 包中, 包含用于执行基本数学运算的方法, Math 类的所有方法都是静态方法, 所以使用该类中的方法时, 可以直接使用类名.方法名, 如: Math.round();</p>
+<p>常用的方法:
+<img alt="" src="http://i59.tinypic.com/ofyt8z.jpg" /></p>
+<p>Math 类还提供了许多其他方法, 可自行查阅.
+???</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-wu-git-chang-yong-ming-ling.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-si-git-de-an-zhuang-windows.html"><h3 class="article-title">[版本控制] 四、Git 的安裝(Windows)</h3></a>
-<h6 class="subheader" title="2015-06-19T19:40:00+08:00">Fri 19 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
+<h6 class="subheader" title="2015-06-13T13:37:00+08:00">Sat 13 June 2015
 </h6>
 
 
-<div class="toc">
-<ul></ul>
-</div>
-<p>最早 Git 是在 Linux 上开发的, 很长一段时间内, Git 也只能在 Linux 和 Unix 系统上跑, 不过, 慢慢地有人把它移植到了 Windows 上, 现在, Git 可以在 Linux、Unix、Mac 和 Windows 这几大平台上正常运行了.
-要使用 Git, 第一步当然是安装Git了, 這裡以 Windows ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
+这个类最主要的作用就是获取当前时间.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
+&lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-si-git-de-an-zhuang-windows.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-si-shi-jian-de-chu-li.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.com/ban-ben-kong-zhi-san-git-chu-shi.html"><h3 class="article-title">[版本控制] 三、Git 初識</h3></a>
-<h6 class="subheader" title="2015-06-18T18:20:00+08:00">Thu 18 June 2015
+            <a href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
+<h6 class="subheader" title="2015-06-13T13:28:00+08:00">Sat 13 June 2015
 </h6>
 
 
-<div class="toc">
-<ul>
-<li><a href="#git">Git 的特點</a></li>
-<li><a href="#git_1">Git 環境變量</a></li>
-<li><a href="#git_2">Git 中的一些基本概念</a></li>
-</ul>
-</div>
-<p>首先推薦一個在線 Gti 學習網站: <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">傳送門</a></p>
-<p>另外, 还有个 Google Code 的声明也可以看看: <a href="http://www.infoq.com/cn/news/2015/03/goodbye-google-code-hello-github">再見, Google Code, 你好, GitHub</a></p>
-<p>還提供一個 Git Book 的中文 PDF: <a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5"><a href="http://yunpan.cn/cQF9zES6Zt5d5">http://yunpan.cn/cQF9zES6Zt5d5</a></a></a>  访问密码 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a>
+<p>Java 提供三种方法实现基本类型向字符串转换:
+*. 使用包装类的 toString() 方法
+*. 使用 String 类的 valueOf() 方法
+*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
+String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ban-ben-kong-zhi-san-git-chu-shi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 17 of 28</h6>
+<h6 class="subheader">Page 17 of 27</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/index16.html">&laquo; Prev</a>
@@ -321,7 +273,6 @@
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/jia-gou-shi-zhi-lu.html">架构师之路</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
