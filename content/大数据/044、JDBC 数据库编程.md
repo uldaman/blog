@@ -104,6 +104,6 @@ ACID: 数据库事务正确执行的四个基本要素
 - 隔离性 (Isolation)
 - 持久性 (Durability)
 
-数据库默认事务是自动提交的, 也就是发一条sql它就执行一条。如果想多条sql放在一个事务中执行, 则需要使用如下语句。
+数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false.
 
 以下为我自己的理解, 不知道对不对, JDBC 中执行 `execute` 一条 SQL 语句, 本身就是事务的, 只不过默认的 `execute` 后会自动向数据库 `commit`, 如果关闭这种默认提交方式 (`setAutoCommit(false)`), 一次 `execute` 多条 SQL 语句, 最后手动 `commit`, 这样就把这多条语句定义到一个事务里了.
