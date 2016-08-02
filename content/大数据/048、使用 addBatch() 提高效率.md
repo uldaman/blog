@@ -1,6 +1,6 @@
 Title: 048、使用 addBatch() 提高效率
 Author: Martin
-Date: 2016-07-25 17:50
+Date: 2016-07-25 18:50
 Summary: 使用事务及批处理提高 JDBC 效率
 
 [TOC]

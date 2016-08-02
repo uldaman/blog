@@ -66,13 +66,16 @@ Transaction Control Language **事务控制语言**
 [通过 JDBC 进行简单的增删改查 (以 MySQL 为例)](http://www.cnblogs.com/wuyuegb2312/p/3872607.html)<br>
 [JDBC 快速入门教程](http://www.yiibai.com/jdbc/jdbc_quick_guide.html)
 
-Java Data Base Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.
+Java Data Base Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序**接口**, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.
 
 > JDBC 相关的 API 是 java.sql 及 javax.sql 下
 
 应用程序通过 JDBC API 与各数据提供的**驱动程序** "交流", 然后数据库驱动程序再与数据库底层 "交流".
 
 ![](http://i67.tinypic.com/vdetrk.jpg)
+
+- JDBC 是 Java 访问数据库的应用程序**接口**, 是一套 "规范"
+- 驱动程序是各大数据库厂商提供的 JDBC 的具体**实现**
 
 由此可见, 使用 JDBC 操作数据库的第一步就是安装对应的**数据库驱动**.
 
@@ -104,6 +107,6 @@ ACID: 数据库事务正确执行的四个基本要素
 - 隔离性 (Isolation)
 - 持久性 (Durability)
 
-数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false.
+数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false, 或者使用 `start transaction` 命令.
 
-以下为我自己的理解, 不知道对不对, JDBC 中执行 `execute` 一条 SQL 语句, 本身就是事务的, 只不过默认的 `execute` 后会自动向数据库 `commit`, 如果关闭这种默认提交方式 (`setAutoCommit(false)`), 一次 `execute` 多条 SQL 语句, 最后手动 `commit`, 这样就把这多条语句定义到一个事务里了.
+参考 wiki: [mysql transaction 与 autocommit](http://wiki.smallcpp.com/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%20transaction%20%E4%B8%8E%20autocommit.html)
