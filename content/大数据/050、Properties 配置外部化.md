@@ -35,12 +35,12 @@ IcisReport.contextPath=/IcisReport
 # Properties 类
 Java 用 `Properties` 类来操作 Properties 文件, `Properties` 类存在于包 `Java.util` 中, 该类继承自 `Hashtable`.
 
-- `getProperty(String  key)`, 用指定的键在此属性列表中搜索属性. 也就是通过参数 key , 得到 key 所对应的 value.
-- `load(InputStream inStream)`, 从输入流中读取属性列表 (键和元素对) . 通过对指定的文件 (比如说上面的 `test.properties` 文件) 进行装载来获取该文件中的所有 **键\-值** 对. 以供 `getProperty(String  key)` 来搜索.
+- `getProperty(String  key)`, 用指定的键在此属性列表中搜索属性. 也就是通过参数 key , 得到 key 所对应的 value
+- `load(InputStream inStream)`, 从输入流中读取属性列表 (键和元素对) . 通过对指定的文件 (比如说上面的 `test.properties` 文件) 进行装载来获取该文件中的所有 **键\-值** 对. 以供 `getProperty(String  key)` 来搜索
 - `setProperty(String key, String value)`, 调用 `Hashtable` 的方法 `put`. 他通过调用基类的 `put` 方法来设置 **键\-值** 对.
-- `store(OutputStream out, String comments)`, 以适合使用 `load` 方法加载到 `Properties` 表中的格式, 将此 `Properties` 表中的属性列表 (键和元素对) 写入输出流. 与 `load` 方法相反, 该方法将 **键\-值** 对写入到指定的文件中去.
-- `propertyNames()`, 得到配置文件中 key 的 `Enumeration`, 通过 `Enumeration` 的 `hasMoreElements()` 及 `nextElement()` 方法就能遍历整个 Properties.
-- `clear()`, 清除所有装载的 **键\-值** 对. 该方法在基类中提供.
+- `store(OutputStream out, String comments)`, 以适合使用 `load` 方法加载到 `Properties` 表中的格式, 将此 `Properties` 表中的属性列表 (键和元素对) 写入输出流. 与 `load` 方法相反, 该方法将 **键\-值** 对写入到指定的文件中去
+- `propertyNames()`, 得到配置文件中 key 的 `Enumeration`, 通过 `Enumeration` 的 `hasMoreElements()` 及 `nextElement()` 方法就能遍历整个 Properties
+- `clear()`, 清除所有装载的 **键\-值** 对. 该方法在基类中提供
 
 # 读取 Properties 文件
 Java读取 Properties 文件的方法有很多.
