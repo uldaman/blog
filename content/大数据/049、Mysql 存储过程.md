@@ -1,21 +1,21 @@
-Title: 049¡¢Mysql ´æ´¢¹ý³Ì
+Title: 049ã€Mysql å­˜å‚¨è¿‡ç¨‹
 Author: Martin
 Date: 2016-07-28 17:51
-Summary: ´æ´¢¹ý³Ì (procedure), ÀàËÆ mongodb ÉÏµÄ½Å±¾, ¾ÍÊÇ°ÑÒªÖ´ÐÐµÄÒ»×é SQL Óï¾ä·ÅÔÚ mysql ·þÎñÆ÷ÉÏ, ÐèÒªÖ´ÐÐÕâ×é SQL Óï¾äÊ±, Ö»Òª°Ñ²ÎÊý¼°µ÷ÓÃÃüÁî·¢ËÍ¸ø mysql ·þÎñ¾Í¿ÉÒÔÁË, ÕâÑù¾Í´ó´ó½µµÍÁËÍøÂç´«ÊäµÄËðºÄ.
+Summary: å­˜å‚¨è¿‡ç¨‹ (procedure), ç±»ä¼¼ mongodb ä¸Šçš„è„šæœ¬, å°±æ˜¯æŠŠè¦æ‰§è¡Œçš„ä¸€ç»„ SQL è¯­å¥æ”¾åœ¨ mysql æœåŠ¡å™¨ä¸Š, éœ€è¦æ‰§è¡Œè¿™ç»„ SQL è¯­å¥æ—¶, åªè¦æŠŠå‚æ•°åŠè°ƒç”¨å‘½ä»¤å‘é€ç»™ mysql æœåŠ¡å°±å¯ä»¥äº†, è¿™æ ·å°±å¤§å¤§é™ä½Žäº†ç½‘ç»œä¼ è¾“çš„æŸè€—.
 
 [TOC]
 
-´æ´¢¹ý³Ì (procedure), ÀàËÆ mongodb ÉÏµÄ½Å±¾, ¾ÍÊÇ°ÑÒªÖ´ÐÐµÄÒ»×é SQL Óï¾ä·ÅÔÚ mysql ·þÎñÆ÷ÉÏ, ÐèÒªÖ´ÐÐÕâ×é SQL Óï¾äÊ±, Ö»Òª°Ñ²ÎÊý¼°µ÷ÓÃÃüÁî·¢ËÍ¸ø mysql ·þÎñ¾Í¿ÉÒÔÁË, ÕâÑù¾Í´ó´ó½µµÍÁËÍøÂç´«ÊäµÄËðºÄ.
+å­˜å‚¨è¿‡ç¨‹ (procedure), ç±»ä¼¼ mongodb ä¸Šçš„è„šæœ¬, å°±æ˜¯æŠŠè¦æ‰§è¡Œçš„ä¸€ç»„ SQL è¯­å¥æ”¾åœ¨ mysql æœåŠ¡å™¨ä¸Š, éœ€è¦æ‰§è¡Œè¿™ç»„ SQL è¯­å¥æ—¶, åªè¦æŠŠå‚æ•°åŠè°ƒç”¨å‘½ä»¤å‘é€ç»™ mysql æœåŠ¡å°±å¯ä»¥äº†, è¿™æ ·å°±å¤§å¤§é™ä½Žäº†ç½‘ç»œä¼ è¾“çš„æŸè€—.
 
-# MySQL ´æ´¢¹ý³ÌµÄ´´½¨
-MySQL ´æ´¢¹ý³Ì´´½¨µÄ¸ñÊ½:
+# MySQL å­˜å‚¨è¿‡ç¨‹çš„åˆ›å»º
+MySQL å­˜å‚¨è¿‡ç¨‹åˆ›å»ºçš„æ ¼å¼:
 
 ```sql
-CREATE PROCEDURE ¹ý³ÌÃû ([¹ý³Ì²ÎÊý[,...]])
-[ÌØÐÔ ...] ¹ý³ÌÌå
+CREATE PROCEDURE è¿‡ç¨‹å ([è¿‡ç¨‹å‚æ•°[,...]])
+[ç‰¹æ€§ ...] è¿‡ç¨‹ä½“
 ```
 <br>
-Àý×Ó:
+ä¾‹å­:
 
 ```sql
 mysql> DELIMITER //
@@ -27,8 +27,8 @@ mysql> CREATE PROCEDURE proc1(OUT s int)
 mysql> DELIMITER;
 ```
 
-- ÕâÀïÐèÒª×¢ÒâµÄÊÇ `DELIMITER //` ºÍ `DELIMITER ;` Á½¾ä, `DELIMITER` ÊÇ·Ö¸î·ûµÄÒâË¼, ÒòÎª MySQL Ä¬ÈÏÒÔ ";" Îª·Ö¸ô·û, Èç¹ûÎÒÃÇÃ»ÓÐÉùÃ÷·Ö¸î·û, ÄÇÃ´±àÒëÆ÷»á°Ñ´æ´¢¹ý³Ìµ±³É SQL Óï¾ä½øÐÐ´¦Àí, Ôò´æ´¢¹ý³ÌµÄ±àÒë¹ý³Ì»á±¨´í, ËùÒÔÒªÊÂÏÈÓÃ `DELIMITER` ¹Ø¼ü×ÖÉêÃ÷µ±Ç°¶Î·Ö¸ô·û, ÕâÑù MySQL ²Å»á½« ";" µ±×ö´æ´¢¹ý³ÌÖÐµÄ´úÂë, ²»»áÖ´ÐÐÕâÐ©´úÂë, ÓÃÍêÁËÖ®ºóÒª°Ñ·Ö¸ô·û»¹Ô­
-- ´æ´¢¹ý³Ì¸ù¾ÝÐèÒª¿ÉÄÜ»áÓÐ**ÊäÈë** (IN)¡¢**Êä³ö** (OUT)¡¢**ÊäÈëÊä³ö** (INOUT)²ÎÊý, ÕâÀïÓÐÒ»¸öÊä³ö²ÎÊý `s`, ÀàÐÍÊÇ `int` ÐÍ, Èç¹ûÓÐ¶à¸ö²ÎÊýÓÃ "," ·Ö¸î¿ª
-- ¹ý³ÌÌåµÄ¿ªÊ¼Óë½áÊøÊ¹ÓÃ `BEGIN` Óë `END` ½øÐÐ±êÊ¶
+- è¿™é‡Œéœ€è¦æ³¨æ„çš„æ˜¯ `DELIMITER //` å’Œ `DELIMITER ;` ä¸¤å¥, `DELIMITER` æ˜¯åˆ†å‰²ç¬¦çš„æ„æ€, å› ä¸º MySQL é»˜è®¤ä»¥ ";" ä¸ºåˆ†éš”ç¬¦, å¦‚æžœæˆ‘ä»¬æ²¡æœ‰å£°æ˜Žåˆ†å‰²ç¬¦, é‚£ä¹ˆç¼–è¯‘å™¨ä¼šæŠŠå­˜å‚¨è¿‡ç¨‹å½“æˆ SQL è¯­å¥è¿›è¡Œå¤„ç†, åˆ™å­˜å‚¨è¿‡ç¨‹çš„ç¼–è¯‘è¿‡ç¨‹ä¼šæŠ¥é”™, æ‰€ä»¥è¦äº‹å…ˆç”¨ `DELIMITER` å…³é”®å­—ç”³æ˜Žå½“å‰æ®µåˆ†éš”ç¬¦, è¿™æ · MySQL æ‰ä¼šå°† ";" å½“åšå­˜å‚¨è¿‡ç¨‹ä¸­çš„ä»£ç , ä¸ä¼šæ‰§è¡Œè¿™äº›ä»£ç , ç”¨å®Œäº†ä¹‹åŽè¦æŠŠåˆ†éš”ç¬¦è¿˜åŽŸ
+- å­˜å‚¨è¿‡ç¨‹æ ¹æ®éœ€è¦å¯èƒ½ä¼šæœ‰**è¾“å…¥** (IN)ã€**è¾“å‡º** (OUT)ã€**è¾“å…¥è¾“å‡º** (INOUT)å‚æ•°, è¿™é‡Œæœ‰ä¸€ä¸ªè¾“å‡ºå‚æ•° `s`, ç±»åž‹æ˜¯ `int` åž‹, å¦‚æžœæœ‰å¤šä¸ªå‚æ•°ç”¨ "," åˆ†å‰²å¼€
+- è¿‡ç¨‹ä½“çš„å¼€å§‹ä¸Žç»“æŸä½¿ç”¨ `BEGIN` ä¸Ž `END` è¿›è¡Œæ ‡è¯†
 
-´æ´¢¹ý³ÌÊ¹ÓÃÆðÀ´¾ÍÏñÊÇ×¨ÃÅÎª Mysql ¶¨ÒåµÄ½Å±¾ÓïÑÔÒ»Ñù (mongodb Ê¹ÓÃ lua ×öÎª½Å±¾ÓïÑÔ), ¸ü¶àÊ¹ÓÃËµÃ÷²Î¿¼: [mysql ´æ´¢¹ý³ÌÏê½â](http://blog.sina.com.cn/s/blog_52d20fbf0100ofd5.html)
+å­˜å‚¨è¿‡ç¨‹ä½¿ç”¨èµ·æ¥å°±åƒæ˜¯ä¸“é—¨ä¸º Mysql å®šä¹‰çš„è„šæœ¬è¯­è¨€ä¸€æ · (mongodb ä½¿ç”¨ lua åšä¸ºè„šæœ¬è¯­è¨€), æ›´å¤šä½¿ç”¨è¯´æ˜Žå‚è€ƒ: [mysql å­˜å‚¨è¿‡ç¨‹è¯¦è§£](http://blog.sina.com.cn/s/blog_52d20fbf0100ofd5.html)

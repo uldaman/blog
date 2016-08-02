@@ -1,63 +1,63 @@
-Title: 050¡¢Properties ÅäÖÃÍâ²¿»¯
+Title: 050ã€Properties é…ç½®å¤–éƒ¨åŒ–
 Author: Martin
 Date: 2016-08-01 17:27
-Summary: JAVA ÖĞµÄ Properties ÎÄ¼şÊÇÒ»ÖÖÅäÖÃÎÄ¼ş, Ö÷ÒªÓÃÓÚ±í´ïÅäÖÃĞÅÏ¢.
+Summary: JAVA ä¸­çš„ Properties æ–‡ä»¶æ˜¯ä¸€ç§é…ç½®æ–‡ä»¶, ä¸»è¦ç”¨äºè¡¨è¾¾é…ç½®ä¿¡æ¯.
 
 [TOC]
 
-×ª×Ô: [Java ÖĞ Properties ÀàµÄÊ¹ÓÃ](http://www.2cto.com/px/201006/47834.html)
+è½¬è‡ª: [Java ä¸­ Properties ç±»çš„ä½¿ç”¨](http://www.2cto.com/px/201006/47834.html)
 
-Java ÖĞµÄ Properties ÎÄ¼şÊÇÒ»ÖÖÅäÖÃÎÄ¼ş, Ö÷ÒªÓÃÓÚ±í´ïÅäÖÃĞÅÏ¢, ÎÄ¼şÀàĞÍÎª `*.properties`, ¸ñÊ½ÎªÎÄ±¾ÎÄ¼ş, ÎÄ¼şµÄÄÚÈİÊÇ¸ñÊ½ÊÇ "**¼ü=Öµ**" µÄ¸ñÊ½, ÔÚ Properties ÎÄ¼şÖĞ, ¿ÉÒÔÓÃ "**#**" À´×÷×¢ÊÍ, Properties ÎÄ¼şÔÚ Java ±à³ÌÖĞÓÃµ½µÄµØ·½ºÜ¶à, ²Ù×÷ºÜ·½±ã.
+Java ä¸­çš„ Properties æ–‡ä»¶æ˜¯ä¸€ç§é…ç½®æ–‡ä»¶, ä¸»è¦ç”¨äºè¡¨è¾¾é…ç½®ä¿¡æ¯, æ–‡ä»¶ç±»å‹ä¸º `*.properties`, æ ¼å¼ä¸ºæ–‡æœ¬æ–‡ä»¶, æ–‡ä»¶çš„å†…å®¹æ˜¯æ ¼å¼æ˜¯ "**é”®=å€¼**" çš„æ ¼å¼, åœ¨ Properties æ–‡ä»¶ä¸­, å¯ä»¥ç”¨ "**#**" æ¥ä½œæ³¨é‡Š, Properties æ–‡ä»¶åœ¨ Java ç¼–ç¨‹ä¸­ç”¨åˆ°çš„åœ°æ–¹å¾ˆå¤š, æ“ä½œå¾ˆæ–¹ä¾¿.
 
-# Properties ÎÄ¼ş
-Ò»¸ö Properties ÎÄ¼şµÄÀı×Ó: `test.properties`
+# Properties æ–‡ä»¶
+ä¸€ä¸ª Properties æ–‡ä»¶çš„ä¾‹å­: `test.properties`
 
 ```ini
 #################################
-#   ¹¤ÉÌ±¨±íÓ¦ÓÃ IcisReport µÄÅäÖÃÎÄ¼ş #
-#   ÈÕÆÚ: 2006Äê11ÔÂ21ÈÕ #
+#   å·¥å•†æŠ¥è¡¨åº”ç”¨ IcisReport çš„é…ç½®æ–‡ä»¶ #
+#   æ—¥æœŸ: 2006å¹´11æœˆ21æ—¥ #
 #################################
 #
-#   ËµÃ÷:ÒµÎñÏµÍ³ TopIcis ºÍ±¨±íÏµÍ³ IcisReport ÊÇ·ÖÀëµÄ
-#   ¿É·Ö¿ª²¿Êğµ½²»Í¬µÄ·şÎñÆ÷ÉÏ, Ò²¿ÉÒÔ²¿Êğµ½Í¬Ò»¸ö·şÎñ
-#   Æ÷ÉÏ; IcisReprot ×÷Îª¶ÀÁ¢µÄ web Ó¦ÓÃ³ÌĞò¿ÉÒÔÊ¹ÓÃÈÎºÎ
-#   µÄ Servlet ÈİÆ÷»òÕß J2EE ·şÎñÆ÷²¿Êğ²¢µ¥¶ÀÔËĞĞ, Ò²¿ÉÒÔ
-#   Í¨¹ıÒµÎñÏµÍ³µÄ½Ó¿Úµ÷ÓÃ×÷ÎªÒµÎñÏµÍ³µÄÒ»¸ö¿âÀ´Ó¦ÓÃ.
+#   è¯´æ˜:ä¸šåŠ¡ç³»ç»Ÿ TopIcis å’ŒæŠ¥è¡¨ç³»ç»Ÿ IcisReport æ˜¯åˆ†ç¦»çš„
+#   å¯åˆ†å¼€éƒ¨ç½²åˆ°ä¸åŒçš„æœåŠ¡å™¨ä¸Š, ä¹Ÿå¯ä»¥éƒ¨ç½²åˆ°åŒä¸€ä¸ªæœåŠ¡
+#   å™¨ä¸Š; IcisReprot ä½œä¸ºç‹¬ç«‹çš„ web åº”ç”¨ç¨‹åºå¯ä»¥ä½¿ç”¨ä»»ä½•
+#   çš„ Servlet å®¹å™¨æˆ–è€… J2EE æœåŠ¡å™¨éƒ¨ç½²å¹¶å•ç‹¬è¿è¡Œ, ä¹Ÿå¯ä»¥
+#   é€šè¿‡ä¸šåŠ¡ç³»ç»Ÿçš„æ¥å£è°ƒç”¨ä½œä¸ºä¸šåŠ¡ç³»ç»Ÿçš„ä¸€ä¸ªåº“æ¥åº”ç”¨.
 #
-#   IcisReport µÄ ip
+#   IcisReport çš„ ip
 IcisReport.server.ip=192.168.3.143
-#   IcisReport µÄ¶Ë¿Ú
+#   IcisReport çš„ç«¯å£
 IcisReport.server.port=8080
-#   IcisReport µÄÉÏÏÂÎÄÂ·¾¶
+#   IcisReport çš„ä¸Šä¸‹æ–‡è·¯å¾„
 IcisReport.contextPath=/IcisReport
 ```
 <br>
-# Properties Àà
-Java ÓÃ `Properties` ÀàÀ´²Ù×÷ Properties ÎÄ¼ş, `Properties` Àà´æÔÚÓÚ°ü `Java.util` ÖĞ, ¸ÃÀà¼Ì³Ğ×Ô `Hashtable`.
+# Properties ç±»
+Java ç”¨ `Properties` ç±»æ¥æ“ä½œ Properties æ–‡ä»¶, `Properties` ç±»å­˜åœ¨äºåŒ… `Java.util` ä¸­, è¯¥ç±»ç»§æ‰¿è‡ª `Hashtable`.
 
-- `getProperty(String  key)`, ÓÃÖ¸¶¨µÄ¼üÔÚ´ËÊôĞÔÁĞ±íÖĞËÑË÷ÊôĞÔ. Ò²¾ÍÊÇÍ¨¹ı²ÎÊı key , µÃµ½ key Ëù¶ÔÓ¦µÄ value
-- `load(InputStream inStream)`, ´ÓÊäÈëÁ÷ÖĞ¶ÁÈ¡ÊôĞÔÁĞ±í (¼üºÍÔªËØ¶Ô) . Í¨¹ı¶ÔÖ¸¶¨µÄÎÄ¼ş (±ÈÈçËµÉÏÃæµÄ `test.properties` ÎÄ¼ş) ½øĞĞ×°ÔØÀ´»ñÈ¡¸ÃÎÄ¼şÖĞµÄËùÓĞ **¼ü\-Öµ** ¶Ô. ÒÔ¹© `getProperty(String  key)` À´ËÑË÷
-- `setProperty(String key, String value)`, µ÷ÓÃ `Hashtable` µÄ·½·¨ `put`. ËûÍ¨¹ıµ÷ÓÃ»ùÀàµÄ `put` ·½·¨À´ÉèÖÃ **¼ü\-Öµ** ¶Ô.
-- `store(OutputStream out, String comments)`, ÒÔÊÊºÏÊ¹ÓÃ `load` ·½·¨¼ÓÔØµ½ `Properties` ±íÖĞµÄ¸ñÊ½, ½«´Ë `Properties` ±íÖĞµÄÊôĞÔÁĞ±í (¼üºÍÔªËØ¶Ô) Ğ´ÈëÊä³öÁ÷. Óë `load` ·½·¨Ïà·´, ¸Ã·½·¨½« **¼ü\-Öµ** ¶ÔĞ´Èëµ½Ö¸¶¨µÄÎÄ¼şÖĞÈ¥
-- `propertyNames()`, µÃµ½ÅäÖÃÎÄ¼şÖĞ key µÄ `Enumeration`, Í¨¹ı `Enumeration` µÄ `hasMoreElements()` ¼° `nextElement()` ·½·¨¾ÍÄÜ±éÀúÕû¸ö Properties
-- `clear()`, Çå³ıËùÓĞ×°ÔØµÄ **¼ü\-Öµ** ¶Ô. ¸Ã·½·¨ÔÚ»ùÀàÖĞÌá¹©
+- `getProperty(String  key)`, ç”¨æŒ‡å®šçš„é”®åœ¨æ­¤å±æ€§åˆ—è¡¨ä¸­æœç´¢å±æ€§. ä¹Ÿå°±æ˜¯é€šè¿‡å‚æ•° key , å¾—åˆ° key æ‰€å¯¹åº”çš„ value
+- `load(InputStream inStream)`, ä»è¾“å…¥æµä¸­è¯»å–å±æ€§åˆ—è¡¨ (é”®å’Œå…ƒç´ å¯¹) . é€šè¿‡å¯¹æŒ‡å®šçš„æ–‡ä»¶ (æ¯”å¦‚è¯´ä¸Šé¢çš„ `test.properties` æ–‡ä»¶) è¿›è¡Œè£…è½½æ¥è·å–è¯¥æ–‡ä»¶ä¸­çš„æ‰€æœ‰ **é”®\-å€¼** å¯¹. ä»¥ä¾› `getProperty(String  key)` æ¥æœç´¢
+- `setProperty(String key, String value)`, è°ƒç”¨ `Hashtable` çš„æ–¹æ³• `put`. ä»–é€šè¿‡è°ƒç”¨åŸºç±»çš„ `put` æ–¹æ³•æ¥è®¾ç½® **é”®\-å€¼** å¯¹.
+- `store(OutputStream out, String comments)`, ä»¥é€‚åˆä½¿ç”¨ `load` æ–¹æ³•åŠ è½½åˆ° `Properties` è¡¨ä¸­çš„æ ¼å¼, å°†æ­¤ `Properties` è¡¨ä¸­çš„å±æ€§åˆ—è¡¨ (é”®å’Œå…ƒç´ å¯¹) å†™å…¥è¾“å‡ºæµ. ä¸ `load` æ–¹æ³•ç›¸å, è¯¥æ–¹æ³•å°† **é”®\-å€¼** å¯¹å†™å…¥åˆ°æŒ‡å®šçš„æ–‡ä»¶ä¸­å»
+- `propertyNames()`, å¾—åˆ°é…ç½®æ–‡ä»¶ä¸­ key çš„ `Enumeration`, é€šè¿‡ `Enumeration` çš„ `hasMoreElements()` åŠ `nextElement()` æ–¹æ³•å°±èƒ½éå†æ•´ä¸ª Properties
+- `clear()`, æ¸…é™¤æ‰€æœ‰è£…è½½çš„ **é”®\-å€¼** å¯¹. è¯¥æ–¹æ³•åœ¨åŸºç±»ä¸­æä¾›
 
-# ¶ÁÈ¡ Properties ÎÄ¼ş
-Java¶ÁÈ¡ Properties ÎÄ¼şµÄ·½·¨ÓĞºÜ¶à.
+# è¯»å– Properties æ–‡ä»¶
+Javaè¯»å– Properties æ–‡ä»¶çš„æ–¹æ³•æœ‰å¾ˆå¤š.
 
-µ«ÊÇ×î³£ÓÃµÄ»¹ÊÇÍ¨¹ı `java.lang.Class` ÀàµÄ `getResourceAsStream(String name)` ·½·¨À´ÊµÏÖ, ÈçÏÂ¿ÉÒÔÕâÑùµ÷ÓÃ:
+ä½†æ˜¯æœ€å¸¸ç”¨çš„è¿˜æ˜¯é€šè¿‡ `java.lang.Class` ç±»çš„ `getResourceAsStream(String name)` æ–¹æ³•æ¥å®ç°, å¦‚ä¸‹å¯ä»¥è¿™æ ·è°ƒç”¨:
 
-`InputStream in = getClass().getResourceAsStream("×ÊÔ´Name");`
+`InputStream in = getClass().getResourceAsStream("èµ„æºName");`
 
-×÷ÎªÎÒÃÇĞ´³ÌĞòµÄ, ÓÃ´ËÒ»ÖÖ×ã¹»; »òÕßÏÂÃæÕâÖÖÒ²³£ÓÃ:
+ä½œä¸ºæˆ‘ä»¬å†™ç¨‹åºçš„, ç”¨æ­¤ä¸€ç§è¶³å¤Ÿ; æˆ–è€…ä¸‹é¢è¿™ç§ä¹Ÿå¸¸ç”¨:
 
 `InputStream in = new BufferedInputStream(new FileInputStream(filepath));`
 
-# ÊµÀı
+# å®ä¾‹
 ```java
- // ¹ØÓÚ Properties Àà³£ÓÃµÄ²Ù×÷
+ // å…³äº Properties ç±»å¸¸ç”¨çš„æ“ä½œ
  public class TestProperties {
-     // ¸ù¾İ Key ¶ÁÈ¡ Value
+     // æ ¹æ® Key è¯»å– Value
      public static String GetValueByKey(String filePath, String key) {
          Properties pps = new Properties();
          try {
@@ -73,12 +73,12 @@ Java¶ÁÈ¡ Properties ÎÄ¼şµÄ·½·¨ÓĞºÜ¶à.
          }
      }
 
-     // ¶ÁÈ¡ Properties µÄÈ«²¿ĞÅÏ¢
+     // è¯»å– Properties çš„å…¨éƒ¨ä¿¡æ¯
      public static void GetAllProperties(String filePath) throws IOException {
          Properties pps = new Properties();
          InputStream in = new BufferedInputStream(new FileInputStream(filePath));
          pps.load(in);
-         Enumeration en = pps.propertyNames(); // µÃµ½ÅäÖÃÎÄ¼şµÄÃû×Ö
+         Enumeration en = pps.propertyNames(); // å¾—åˆ°é…ç½®æ–‡ä»¶çš„åå­—
 
          while(en.hasMoreElements()) {
              String strKey = (String) en.nextElement();
@@ -88,19 +88,19 @@ Java¶ÁÈ¡ Properties ÎÄ¼şµÄ·½·¨ÓĞºÜ¶à.
 
      }
 
-     // Ğ´Èë Properties ĞÅÏ¢
+     // å†™å…¥ Properties ä¿¡æ¯
      public static void WriteProperties (String filePath, String pKey, String pValue) throws IOException {
          Properties pps = new Properties();
 
          InputStream in = new FileInputStream(filePath);
-         // ´ÓÊäÈëÁ÷ÖĞ¶ÁÈ¡ÊôĞÔÁĞ±í£¨¼üºÍÔªËØ¶Ô£©
+         // ä»è¾“å…¥æµä¸­è¯»å–å±æ€§åˆ—è¡¨ï¼ˆé”®å’Œå…ƒç´ å¯¹ï¼‰
          pps.load(in);
-         // µ÷ÓÃ Hashtable µÄ·½·¨ put, Ê¹ÓÃ getProperty ·½·¨Ìá¹©²¢ĞĞĞÔ.
-         // Ç¿ÖÆÒªÇóÎªÊôĞÔµÄ¼üºÍÖµÊ¹ÓÃ×Ö·û´®. ·µ»ØÖµÊÇ Hashtable µ÷ÓÃ put µÄ½á¹û.
+         // è°ƒç”¨ Hashtable çš„æ–¹æ³• put, ä½¿ç”¨ getProperty æ–¹æ³•æä¾›å¹¶è¡Œæ€§.
+         // å¼ºåˆ¶è¦æ±‚ä¸ºå±æ€§çš„é”®å’Œå€¼ä½¿ç”¨å­—ç¬¦ä¸². è¿”å›å€¼æ˜¯ Hashtable è°ƒç”¨ put çš„ç»“æœ.
          OutputStream out = new FileOutputStream(filePath);
          pps.setProperty(pKey, pValue);
-         // ÒÔÊÊºÏÊ¹ÓÃ load ·½·¨¼ÓÔØµ½ Properties ±íÖĞµÄ¸ñÊ½£¬
-         // ½«´Ë Properties ±íÖĞµÄÊôĞÔÁĞ±í£¨¼üºÍÔªËØ¶Ô£©Ğ´ÈëÊä³öÁ÷
+         // ä»¥é€‚åˆä½¿ç”¨ load æ–¹æ³•åŠ è½½åˆ° Properties è¡¨ä¸­çš„æ ¼å¼ï¼Œ
+         // å°†æ­¤ Properties è¡¨ä¸­çš„å±æ€§åˆ—è¡¨ï¼ˆé”®å’Œå…ƒç´ å¯¹ï¼‰å†™å…¥è¾“å‡ºæµ
          pps.store(out, "Update " + pKey + " name");
      }
 
