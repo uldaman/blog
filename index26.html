@@ -44,6 +44,79 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/9-cgong-han-mo-shi.html"><h3 class="article-title">9、[C++]工厂模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html"><a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html"><a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></a></a></p>
+<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的**&rdquo;开放-封闭原则 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/9-cgong-han-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html"><h3 class="article-title">'[转]UML 中关系详解以及在visio中的表示'</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>Uml 关系主要有四大类： 依赖，关联，泛化，实现。</p>
+<p>其中 依赖和关联是事物之间语义上的横向关系，泛化和实现是事物之间的纵向关系。</p>
+<p>一：依赖 Dependency</p>
+<p>图示：- - - - - &gt;</p>
+<p>定义：关系最为松散的，单向的，暂时产生关系的事物之间使用。</p>
+<p>使用图例：在静态图、组件图、部署图中两事物的弱依赖关系用此图示。</p>
+<p>二：关联 Association</p>
+<p>图示：此图为visio中画法（在uml静态结构中,拖动复合图例，然后双击此图例，将出现下图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html"><h3 class="article-title">8、[C++]代理模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:23:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>代理模式</h3>
+<p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
+<p>情景:</p>
+<ol>
+<li>
+<p>有人找公司老总, 但是老总很忙, 于是要找就先找老总的助理, 助理等老总不忙时, 再来告诉老总吧.</p>
+</li>
+<li>
+<p>想象一下古代大户人家的大小姐与仆人偷情, 有一天仆人想约大小姐出来赏月, 但仆人可能不方便直接见大小姐,  于是先告诉大小姐的丫鬟, 由丫鬟转告大小姐.</p>
+</li>
+</ol>
+<p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png" /></a></p>
+<p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
+<p>RealSubject: 真实实体(老总/大小姐)</p>
+<p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
+<p>[cpp]#include ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/8-cdai-li-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/7-czhuang-shi-zhe-mo-shi.html"><h3 class="article-title">7、[C++]装饰者模式</h3></a>
 <h6 class="subheader" title="2015-02-15T14:22:00+08:00">Sun 15 February 2015
 </h6>
@@ -234,82 +307,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html"><h3 class="article-title">5、QT 中文乱码</h3></a>
-<h6 class="subheader" title="2015-02-15T14:13:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
-<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
-QTextCodec::setCodecForCStrings(...)
-QTextCodec::setCodecForLocale(...)
-
-
-
-然后这三句代码是有安全隐患的, 下面的文章都有说明:
-</pre></div>
-
-
-<p>*</p>
-<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
-<p>*</p>
-<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
-<p>*</p>
-<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
-<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/4-bang-zhu-shou-ce.html"><h3 class="article-title">4、帮助手册</h3></a>
-<h6 class="subheader" title="2015-02-15T14:12:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<p>这个为什么要单独来说, 因为 Qt 的资料相对较少, 很多时候都要借助于 Qt 附带的帮助手册.</p>
-<p>打开方式:</p>
-<p>第一种方式:</p>
-<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb22.png" /></a></p>
-<p>第二种方式:</p>
-<p>进入 Qt 安装目录, 找到 assistant.exe**.**</p>
-<p>D:\Development\Qt5.3.2\5.3\msvc2010_opengl\bin\assistant.exe</p>
-<p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/4-bang-zhu-shou-ce.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/3-hello-qt.html"><h3 class="article-title">3、Hello qt</h3></a>
-<h6 class="subheader" title="2015-02-15T14:11:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
-<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
-<p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/3-hello-qt.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

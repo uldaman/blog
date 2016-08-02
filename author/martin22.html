@@ -44,6 +44,68 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
+<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
+<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
+Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
+类似下图:</p>
+<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
+<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
+<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
+<p>**vi 的模式
+**命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
+插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">(四)、SecureCRT 的安装和使用</h3></a>
+<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
+</h6>
+
+
+<p>**SecureCRT **是一款支持 SSH（SSH1 和 SSH2）的终端仿真程序, 同时支持 Telnet 和 rlogin 协议; 它可用于连接运行包括 Windows、Unis 和 linux 在内的远程系统.</p>
+<ol>
+<li>
+<p>首先下载 SecureCRT 并安装(网上有中文版本下载, 注意找大网站下载, 别下载了被装后门的版本).</p>
+</li>
+<li>
+<p>去 Ubuntu 中开启 SSH 功能. (SSH ...</p></li></ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/san-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html"><h3 class="article-title">(三)、在 Ubuntu 中安装 Ulipad 编辑器</h3></a>
 <h6 class="subheader" title="2015-03-26T17:04:00+08:00">Thu 26 March 2015
 </h6>
@@ -214,65 +276,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">(三) 重新编译 Lua 程序库</h3></a>
-<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">(二) Lua 与 C/C++ 的第一次亲密接触</h3></a>
-<h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
-<p><strong>Lua 环境(Lua_State)
-**Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.
-对于 C ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

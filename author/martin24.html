@@ -44,6 +44,69 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html"><h3 class="article-title">19、[C++]StarUML使用范例 — 接口</h3></a>
+<h6 class="subheader" title="2015-03-11T15:50:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>C++在设计时, 接口这种概念还没有提出来, 所以C++中没有直接支持接口的语法, 但是可以使用抽像类来实现接口.</p>
+<p>接口（interface）是抽像类的变体, 抽象类里面可以有非虚函数, 但接口里只能有虚函数.</p>
+<p>从toolbox中, 选择“Interface”, 并点击图表的某处, 将其改名为 Strategy.</p>
+<p><img alt="" src="http://i59.tinypic.com/30mtlhh.jpg" /></p>
+<p>在顶部工具栏选择 “Stereotype Display” 下拉按钮, 将值改变为“None”, 这将改变默认的圆形形状, 使其变为和普通类一样的长方形.</p>
+<p><img alt="" src="http://i58.tinypic.com/257dllg.jpg" /></p>
+<p>还是在顶部工具栏, 取消选中 &ldquo;Suppress Operations&rdquo; , 这将使我们能够看到接口的方法栏 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html"><h3 class="article-title">18、[C++]StarUML使用范例 — 聚合</h3></a>
+<h6 class="subheader" title="2015-03-11T15:30:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>聚合表示一种弱拥有关系, 即被聚合的类能单独存在.</p>
+<p>用上一篇的方法快速添加一个 Context 类.</p>
+<p><img alt="" src="http://i62.tinypic.com/k4a4j7.jpg" /></p>
+<p>从toolbox中选择表示“Aggregation”的箭头, 并从 Strategy拖拽向 Context, 此时连线是没有箭头指向的, 选中连接线, 在右边的“Properties”框上, 将 &ldquo;End1.IsNavigable&rdquo; 勾选上,箭头就出来了.</p>
+<p><img alt="" src="http://i62.tinypic.com/sz7ww1.jpg" /></p>
+<p>将“End2.Name”一栏改为 Strategy，将“End2.Visibility”改为 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/17-c-starumlshi-yong-fan-li-zi-lei.html"><h3 class="article-title">17、[C++] StarUML使用范例 -- 子类</h3></a>
+<h6 class="subheader" title="2015-03-11T13:36:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>上一篇, 我们添加了一个名为 Strategy 的虚类.</p>
+<p>现在, 为这个虚类快速添加子类.</p>
+<p>在 &ldquo;Model Explorer&rdquo; 面板中点选 Strategy, 按 Ctrl + C 或者 右击选择 Copy 菜单进行复制, 再点选 Model1 按 Ctrl + V 或者 右击选择 Paste 菜单进行粘贴.</p>
+<p><img alt="" src="http://i59.tinypic.com/15dry52.jpg" /> &ndash;&gt; <img alt="" src="http://i60.tinypic.com/2m7dpp3.jpg" /></p>
+<p>点选粘贴出来的新类 Strategy_, 将它的名字改为 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/17-c-starumlshi-yong-fan-li-zi-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/16-c-starumlshi-yong-fan-li-xu-lei.html"><h3 class="article-title">16、[C++] StarUML使用范例 -- 虚类</h3></a>
 <h6 class="subheader" title="2015-03-11T13:09:00+08:00">Wed 11 March 2015
 </h6>
@@ -198,69 +261,6 @@ connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Cat
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/10-ui-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/9-qt-ge-mo-kuai-jian-jie.html"><h3 class="article-title">9、Qt 各模块简介</h3></a>
-<h6 class="subheader" title="2015-03-08T12:20:00+08:00">Sun 08 March 2015
-</h6>
-
-
-<p>在第2篇笔记里, 当通过 VS 新建 Qt 工程时, 其中有一步会让选择当前工程包含的模块. 见下图:</p>
-<p><img alt="" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image10.png" /></p>
-<p>现在对 Qt 5 的模块进行一个简单的介绍, 以便以后大家需要哪些功能的时候知道到哪个模块去寻找.</p>
-<p>Qt 5 模块分为 Essentials Modules 和 Add-on Modules 两部分.</p>
-<p>前者是基础模块, 在所有平台上都可用; 后者是扩展模块, 建立在基础模块的基础之上, 在能够运行 Qt 的平台之上可以酌情引入.</p>
-<p>Qt ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/9-qt-ge-mo-kuai-jian-jie.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html"><h3 class="article-title">8、带参数的信号槽和自定义信号槽</h3></a>
-<h6 class="subheader" title="2015-03-08T11:33:00+08:00">Sun 08 March 2015
-</h6>
-
-
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>带参数的信号/槽</h1>
-<p>首先看一个程序</p>
-<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
-<p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
-<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
-</h6>
-
-
-<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
-<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
-<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
-<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
-<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让**多个信号关联同一个槽, 在这个槽中区分信号来自哪里**.</p>
-<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

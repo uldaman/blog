@@ -44,6 +44,82 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html"><h3 class="article-title">5、QT 中文乱码</h3></a>
+<h6 class="subheader" title="2015-02-15T14:13:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
+<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+QTextCodec::setCodecForCStrings(...)
+QTextCodec::setCodecForLocale(...)
+
+
+
+然后这三句代码是有安全隐患的, 下面的文章都有说明:
+</pre></div>
+
+
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
+<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/4-bang-zhu-shou-ce.html"><h3 class="article-title">4、帮助手册</h3></a>
+<h6 class="subheader" title="2015-02-15T14:12:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>这个为什么要单独来说, 因为 Qt 的资料相对较少, 很多时候都要借助于 Qt 附带的帮助手册.</p>
+<p>打开方式:</p>
+<p>第一种方式:</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb22.png" /></a></p>
+<p>第二种方式:</p>
+<p>进入 Qt 安装目录, 找到 assistant.exe**.**</p>
+<p>D:\Development\Qt5.3.2\5.3\msvc2010_opengl\bin\assistant.exe</p>
+<p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/4-bang-zhu-shou-ce.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/3-hello-qt.html"><h3 class="article-title">3、Hello qt</h3></a>
+<h6 class="subheader" title="2015-02-15T14:11:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
+<p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/3-hello-qt.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/2-da-jian-vs-qt-xiang-mu-huan-jing.html"><h3 class="article-title">2、搭建VS + QT 项目环境</h3></a>
 <h6 class="subheader" title="2015-02-15T14:10:00+08:00">Sun 15 February 2015
 </h6>

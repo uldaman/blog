@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>050、Properties 配置外部化</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/050-properties-pei-zhi-wai-bu-hua.html" rel="bookmark"
+        title="Permalink to 050、Properties 配置外部化">050、Properties 配置外部化</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-08-01T17:27:00+08:00">Mon 01 August 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#properties">Properties 文件</a></li>
+<li><a href="#properties_1">Properties 类</a></li>
+<li><a href="#properties_2">读取 Properties 文件</a></li>
+<li><a href="#_1">实例</a></li>
+</ul>
+</div>
+<p>转自: <a href="http://www.2cto.com/px/201006/47834.html">Java 中 Properties 类的使用</a></p>
+<p>Java 中的 Properties 文件是一种配置文件, 主要用于表达配置信息, 文件类型为 <code>*.properties</code>, 格式为文本文件, 文件的内容是格式是 &ldquo;<strong>键=值</strong>&rdquo; 的格式, 在 Properties 文件中, 可以用 &ldquo;<strong>#</strong>&rdquo; 来作注释, Properties 文件在 Java 编程中用到的地方很多, 操作很方便.</p>
+<h1 id="properties"><a name="user-content-properties" href="#properties" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Properties 文件</h1>
+<p>一个 Properties 文件的例子: <code>test.properties</code></p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#################################</span>
+<span style="color: #999988; font-style: italic">#   工商报表应用 IcisReport 的配置文件 #</span>
+<span style="color: #999988; font-style: italic">#   日期: 2006年11月21日 #</span>
+<span style="color: #999988; font-style: italic">#################################</span>
+<span style="color: #999988; font-style: italic">#</span>
+<span style="color: #999988; font-style: italic">#   说明:业务系统 TopIcis 和报表系统 IcisReport 是分离的</span>
+<span style="color: #999988; font-style: italic">#   可分开部署到不同的服务器上, 也可以部署到同一个服务</span>
+<span style="color: #999988; font-style: italic">#   器上; IcisReprot 作为独立的 web 应用程序可以使用任何</span>
+<span style="color: #999988; font-style: italic">#   的 Servlet 容器或者 J2EE 服务器部署并单独运行, 也可以</span>
+<span style="color: #999988; font-style: italic">#   通过业务系统的接口调用作为业务系统的一个库来应用.</span>
+<span style="color: #999988; font-style: italic">#</span>
+<span style="color: #999988; font-style: italic">#   IcisReport 的 ip</span>
+<span style="color: #008080">IcisReport.server.ip</span><span style="color: #A71D7E">=</span><span style="color: #183691">192.168.3.143</span>
+<span style="color: #999988; font-style: italic">#   IcisReport 的端口</span>
+<span style="color: #008080">IcisReport.server.port</span><span style="color: #A71D7E">=</span><span style="color: #183691">8080</span>
+<span style="color: #999988; font-style: italic">#   IcisReport 的上下文路径</span>
+<span style="color: #008080">IcisReport.contextPath</span><span style="color: #A71D7E">=</span><span style="color: #183691">/IcisReport</span>
+</pre></div>
+
+<br></p>
+<h1 id="properties_1"><a name="user-content-properties_1" href="#properties_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Properties 类</h1>
+<p>Java 用 <code>Properties</code> 类来操作 Properties 文件, <code>Properties</code> 类存在于包 <code>Java.util</code> 中, 该类继承自 <code>Hashtable</code>.</p>
+<ul>
+<li><code>getProperty(String  key)</code>, 用指定的键在此属性列表中搜索属性. 也就是通过参数 key , 得到 key 所对应的 value</li>
+<li><code>load(InputStream inStream)</code>, 从输入流中读取属性列表 (键和元素对) . 通过对指定的文件 (比如说上面的 <code>test.properties</code> 文件) 进行装载来获取该文件中的所有 <strong>键-值</strong> 对. 以供 <code>getProperty(String  key)</code> 来搜索</li>
+<li><code>setProperty(String key, String value)</code>, 调用 <code>Hashtable</code> 的方法 <code>put</code>. 他通过调用基类的 <code>put</code> 方法来设置 <strong>键-值</strong> 对.</li>
+<li><code>store(OutputStream out, String comments)</code>, 以适合使用 <code>load</code> 方法加载到 <code>Properties</code> 表中的格式, 将此 <code>Properties</code> 表中的属性列表 (键和元素对) 写入输出流. 与 <code>load</code> 方法相反, 该方法将 <strong>键-值</strong> 对写入到指定的文件中去</li>
+<li><code>propertyNames()</code>, 得到配置文件中 key 的 <code>Enumeration</code>, 通过 <code>Enumeration</code> 的 <code>hasMoreElements()</code> 及 <code>nextElement()</code> 方法就能遍历整个 Properties</li>
+<li><code>clear()</code>, 清除所有装载的 <strong>键-值</strong> 对. 该方法在基类中提供</li>
+</ul>
+<h1 id="properties_2"><a name="user-content-properties_2" href="#properties_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>读取 Properties 文件</h1>
+<p>Java读取 Properties 文件的方法有很多.</p>
+<p>但是最常用的还是通过 <code>java.lang.Class</code> 类的 <code>getResourceAsStream(String name)</code> 方法来实现, 如下可以这样调用:</p>
+<p><code>InputStream in = getClass().getResourceAsStream("资源Name");</code></p>
+<p>作为我们写程序的, 用此一种足够; 或者下面这种也常用:</p>
+<p><code>InputStream in = new BufferedInputStream(new FileInputStream(filepath));</code></p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>实例</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span> <span style="color: #999988; font-style: italic">// 关于 Properties 类常用的操作</span>
+ <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">TestProperties</span> <span style="color: #A71D7E">{</span>
+     <span style="color: #999988; font-style: italic">// 根据 Key 读取 Value</span>
+     <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #333333">String</span> <span style="color: #795DA3">GetValueByKey</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">filePath</span><span style="color: #A71D7E">,</span> <span style="color: #333333">String</span> <span style="color: #333333">key</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+         <span style="color: #333333">Properties</span> <span style="color: #333333">pps</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Properties</span><span style="color: #A71D7E">();</span>
+         <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
+             <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">BufferedInputStream</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">filePath</span><span style="color: #A71D7E">));</span>
+             <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">load</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">);</span>
+             <span style="color: #333333">String</span> <span style="color: #333333">value</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">getProperty</span><span style="color: #A71D7E">(</span><span style="color: #333333">key</span><span style="color: #A71D7E">);</span>
+             <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #333333">key</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot; = &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">value</span><span style="color: #A71D7E">);</span>
+             <span style="color: #A71D5D">return</span> <span style="color: #333333">value</span><span style="color: #A71D7E">;</span>
+
+         <span style="color: #A71D7E">}</span><span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">IOException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+             <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">printStackTrace</span><span style="color: #A71D7E">();</span>
+             <span style="color: #A71D5D">return</span> <span style="color: #A71D5D">null</span><span style="color: #A71D7E">;</span>
+         <span style="color: #A71D7E">}</span>
+     <span style="color: #A71D7E">}</span>
+
+     <span style="color: #999988; font-style: italic">// 读取 Properties 的全部信息</span>
+     <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">GetAllProperties</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">filePath</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">IOException</span> <span style="color: #A71D7E">{</span>
+         <span style="color: #333333">Properties</span> <span style="color: #333333">pps</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Properties</span><span style="color: #A71D7E">();</span>
+         <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">BufferedInputStream</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">filePath</span><span style="color: #A71D7E">));</span>
+         <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">load</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">);</span>
+         <span style="color: #333333">Enumeration</span> <span style="color: #333333">en</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">propertyNames</span><span style="color: #A71D7E">();</span> <span style="color: #999988; font-style: italic">// 得到配置文件的名字</span>
+
+         <span style="color: #A71D5D">while</span><span style="color: #A71D7E">(</span><span style="color: #333333">en</span><span style="color: #A71D7E">.</span><span style="color: #008080">hasMoreElements</span><span style="color: #A71D7E">())</span> <span style="color: #A71D7E">{</span>
+             <span style="color: #333333">String</span> <span style="color: #333333">strKey</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">)</span> <span style="color: #333333">en</span><span style="color: #A71D7E">.</span><span style="color: #008080">nextElement</span><span style="color: #A71D7E">();</span>
+             <span style="color: #333333">String</span> <span style="color: #333333">strValue</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">getProperty</span><span style="color: #A71D7E">(</span><span style="color: #333333">strKey</span><span style="color: #A71D7E">);</span>
+             <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #333333">strKey</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;=&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">strValue</span><span style="color: #A71D7E">);</span>
+         <span style="color: #A71D7E">}</span>
+
+     <span style="color: #A71D7E">}</span>
+
+     <span style="color: #999988; font-style: italic">// 写入 Properties 信息</span>
+     <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">WriteProperties</span> <span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">filePath</span><span style="color: #A71D7E">,</span> <span style="color: #333333">String</span> <span style="color: #333333">pKey</span><span style="color: #A71D7E">,</span> <span style="color: #333333">String</span> <span style="color: #333333">pValue</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">IOException</span> <span style="color: #A71D7E">{</span>
+         <span style="color: #333333">Properties</span> <span style="color: #333333">pps</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Properties</span><span style="color: #A71D7E">();</span>
+
+         <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">filePath</span><span style="color: #A71D7E">);</span>
+         <span style="color: #999988; font-style: italic">// 从输入流中读取属性列表（键和元素对）</span>
+         <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">load</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">);</span>
+         <span style="color: #999988; font-style: italic">// 调用 Hashtable 的方法 put, 使用 getProperty 方法提供并行性.</span>
+         <span style="color: #999988; font-style: italic">// 强制要求为属性的键和值使用字符串. 返回值是 Hashtable 调用 put 的结果.</span>
+         <span style="color: #333333">OutputStream</span> <span style="color: #333333">out</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">filePath</span><span style="color: #A71D7E">);</span>
+         <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">setProperty</span><span style="color: #A71D7E">(</span><span style="color: #333333">pKey</span><span style="color: #A71D7E">,</span> <span style="color: #333333">pValue</span><span style="color: #A71D7E">);</span>
+         <span style="color: #999988; font-style: italic">// 以适合使用 load 方法加载到 Properties 表中的格式，</span>
+         <span style="color: #999988; font-style: italic">// 将此 Properties 表中的属性列表（键和元素对）写入输出流</span>
+         <span style="color: #333333">pps</span><span style="color: #A71D7E">.</span><span style="color: #008080">store</span><span style="color: #A71D7E">(</span><span style="color: #333333">out</span><span style="color: #A71D7E">,</span> <span style="color: #183691">&quot;Update &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">pKey</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot; name&quot;</span><span style="color: #A71D7E">);</span>
+     <span style="color: #A71D7E">}</span>
+
+     <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">IOException</span><span style="color: #A71D7E">{</span>
+         <span style="color: #999988; font-style: italic">// String value = GetValueByKey(&quot;Test.properties&quot;, &quot;name&quot;);</span>
+         <span style="color: #999988; font-style: italic">// System.out.println(value);</span>
+         <span style="color: #999988; font-style: italic">// GetAllProperties(&quot;Test.properties&quot;);</span>
+         <span style="color: #333333">WriteProperties</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Test.properties&quot;</span><span style="color: #A71D7E">,</span><span style="color: #183691">&quot;long&quot;</span><span style="color: #A71D7E">,</span> <span style="color: #183691">&quot;212&quot;</span><span style="color: #A71D7E">);</span>
+     <span style="color: #A71D7E">}</span>
+ <span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br></p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

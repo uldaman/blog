@@ -44,6 +44,75 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">'[CEGUI]. 3、VS 环境设置'</h3></a>
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">Fri 29 May 2015
+</h6>
+
+
+<p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
+<p>首先是 Debug 和 Release 版本通用设置:</p>
+<ol>
+<li>[包含目录] 和 [库目录] 的设置
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+</ol>
+<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
+E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-2-hook-d3d.html"><h3 class="article-title">'[CEGUI]. 2、HOOK D3D'</h3></a>
+<h6 class="subheader" title="2015-05-27T16:06:00+08:00">Wed 27 May 2015
+</h6>
+
+
+<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
+<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-2-hook-d3d.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
+<h6 class="subheader" title="2015-05-26T08:25:00+08:00">Tue 26 May 2015
+</h6>
+
+
+<blockquote>
+<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p>实现代码如下:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Qt_Notepad</span><span style="color: #A71D7E">::</span><span style="color: #333333">OpenFile</span>() {
+    <span style="color: #333333">QString</span> <span style="color: #333333">fileName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QFileDialog</span><span style="color: #A71D7E">::</span><span style="color: #333333">getOpenFileName</span>(<span style="color: #A71D5D">this</span>, <span style="color: #183691">&quot;Open File&quot;</span>, <span style="color: #ED6A43">NULL</span>, <span style="color: #183691">&quot;file (*.*)&quot;</span>);
+
+    <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
+        <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
+        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html"><h3 class="article-title">16、通用对话框之 QMessageBox</h3></a>
 <h6 class="subheader" title="2015-05-25T18:05:00+08:00">Mon 25 May 2015
 </h6>
@@ -202,68 +271,6 @@ lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例�
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
-<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
-</h6>
-
-
-<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
-<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
-Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
-类似下图:</p>
-<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
-<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
-<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
-</h6>
-
-
-<p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
-<p>**vi 的模式
-**命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
-插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">(四)、SecureCRT 的安装和使用</h3></a>
-<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
-</h6>
-
-
-<p>**SecureCRT **是一款支持 SSH（SSH1 和 SSH2）的终端仿真程序, 同时支持 Telnet 和 rlogin 协议; 它可用于连接运行包括 Windows、Unis 和 linux 在内的远程系统.</p>
-<ol>
-<li>
-<p>首先下载 SecureCRT 并安装(网上有中文版本下载, 注意找大网站下载, 别下载了被装后门的版本).</p>
-</li>
-<li>
-<p>去 Ubuntu 中开启 SSH 功能. (SSH ...</p></li></ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
