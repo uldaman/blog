@@ -119,12 +119,16 @@
 <p><strong>References</strong>:<br>
 <a href="http://www.cnblogs.com/wuyuegb2312/p/3872607.html">通过 JDBC 进行简单的增删改查 (以 MySQL 为例)</a><br>
 <a href="http://www.yiibai.com/jdbc/jdbc_quick_guide.html">JDBC 快速入门教程</a></p>
-<p>Java Data Base Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序接口, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.</p>
+<p>Java Data Base Connectivity 是 Java 语言中用来规范客户端程序如何来访问数据库的应用程序**接口**, 提供了诸如查询和更新数据库中数据的方法, JDBC 也是 Sun Microsystems 的商标, JDBC 是面向关系型数据库的.</p>
 <blockquote>
 <p>JDBC 相关的 API 是 java.sql 及 javax.sql 下</p>
 </blockquote>
 <p>应用程序通过 JDBC API 与各数据提供的**驱动程序** &ldquo;交流&rdquo;, 然后数据库驱动程序再与数据库底层 &ldquo;交流&rdquo;.</p>
 <p><img alt="" src="http://i67.tinypic.com/vdetrk.jpg" /></p>
+<ul>
+<li>JDBC 是 Java 访问数据库的应用程序**接口**, 是一套 &ldquo;规范&rdquo;</li>
+<li>驱动程序是各大数据库厂商提供的 JDBC 的具体**实现**</li>
+</ul>
 <p>由此可见, 使用 JDBC 操作数据库的第一步就是安装对应的**数据库驱动**.</p>
 <p>所谓的**数据库驱动**其实就是一些对应的第三方 JAR 包, 下载下来导入到项目里就可以了 (例如 Mysql 的驱动: mysql-connecter-java).</p>
 <p>一般情况下, 我们会在项目目录下新建一个 <strong>lib</strong> 目录用来存放外来的 JAR 包.</p>
@@ -144,8 +148,8 @@
 <li>隔离性 (Isolation)</li>
 <li>持久性 (Durability)</li>
 </ul>
-<p>数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false.</p>
-<p>以下为我自己的理解, 不知道对不对, JDBC 中执行 <code>execute</code> 一条 SQL 语句, 本身就是事务的, 只不过默认的 <code>execute</code> 后会自动向数据库 <code>commit</code>, 如果关闭这种默认提交方式 (<code>setAutoCommit(false)</code>), 一次 <code>execute</code> 多条 SQL 语句, 最后手动 <code>commit</code>, 这样就把这多条语句定义到一个事务里了.</p>
+<p>数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false, 或者使用 <code>start transaction</code> 命令.</p>
+<p>参考 wiki: <a href="http://wiki.smallcpp.com/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%20transaction%20%E4%B8%8E%20autocommit.html">mysql transaction 与 autocommit</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
