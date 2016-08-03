@@ -1,4 +1,4 @@
-Title: 07、pyqtSignature 装饰器.md
+Title: 07、pyqtSignature 装饰器
 Author: Martin
 Date: 2016-05-14 18:03
 Summary: 在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(""), 这个装饰器有什么作用呢?

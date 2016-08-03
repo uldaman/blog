@@ -1,4 +1,4 @@
-Title: 10、使用 pyqt 帮助文档.md
+Title: 10、使用 pyqt 帮助文档
 Author: Martin
 Date: 2016-05-15 01:18
 Summary: 官方文档永远是最好的学习资料...

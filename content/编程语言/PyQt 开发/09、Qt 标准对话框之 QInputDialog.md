@@ -1,4 +1,4 @@
-Title: 09、Qt 标准对话框之 QInputDialog.md
+Title: 09、Qt 标准对话框之 QInputDialog
 Author: Martin
 Date: 2016-05-14 21:26
 Summary: 所谓标准对话框, 就是 Qt 内置的一些对话框, 比如文件选择、颜色选择等等.
