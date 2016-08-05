@@ -44,66 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html"><h3 class="article-title">'[CEGUI]. 4、CEGUI 初始化'</h3></a>
-<h6 class="subheader" title="2015-05-29T16:19:00+08:00">Fri 29 May 2015
-</h6>
-
-
-<p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
-<p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3D9</span><span style="color: #A71D7E">::</span><span style="color: #333333">CreateDevice</span>(<span style="color: #333333">UINT</span> <span style="color: #333333">Adapter</span>, <span style="color: #333333">D3DDEVTYPE</span> <span style="color: #333333">DeviceType</span>, <span style="color: #333333">HWND</span> <span style="color: #333333">hFocusWindow</span>
-    , <span style="color: #333333">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">'[CEGUI]. 3、VS 环境设置'</h3></a>
-<h6 class="subheader" title="2015-05-29T08:05:00+08:00">Fri 29 May 2015
-</h6>
-
-
-<p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
-<p>首先是 Debug 和 Release 版本通用设置:</p>
-<ol>
-<li>[包含目录] 和 [库目录] 的设置
-<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
-</ol>
-<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
-E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/cegui-2-hook-d3d.html"><h3 class="article-title">'[CEGUI]. 2、HOOK D3D'</h3></a>
-<h6 class="subheader" title="2015-05-27T16:06:00+08:00">Wed 27 May 2015
-</h6>
-
-
-<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
-<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
-<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-2-hook-d3d.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
 <h6 class="subheader" title="2015-05-26T08:25:00+08:00">Tue 26 May 2015
 </h6>
@@ -273,6 +213,66 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html"><h3 class="article-title">(五) C++开发者都应该使用的10个C++11特性 — move</h3></a>
+<h6 class="subheader" title="2015-03-28T09:17:00+08:00">Sat 28 March 2015
+</h6>
+
+
+<p>在说 move 之前有必要重新再认识下 C++ 98/03 中的 lvalues 和 rvalues, 即左值和右值.</p>
+<p><strong>首先
+对左值和右值的一个最常见的误解是：等号左边的就是左值，等号右边的就是右值;
+这是错误的, 我们应该时刻谨记 lvalue 和 rvalue 都是针对表达式而言.</strong>
+lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
+<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
+<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
+Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
+类似下图:</p>
+<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
+<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
+<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
+<p>**vi 的模式
+**命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
+插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 21 of 27</h6>
@@ -302,7 +302,7 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>

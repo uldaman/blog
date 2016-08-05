@@ -44,66 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html"><h3 class="article-title">(五) C++开发者都应该使用的10个C++11特性 — move</h3></a>
-<h6 class="subheader" title="2015-03-28T09:17:00+08:00">Sat 28 March 2015
-</h6>
-
-
-<p>在说 move 之前有必要重新再认识下 C++ 98/03 中的 lvalues 和 rvalues, 即左值和右值.</p>
-<p><strong>首先
-对左值和右值的一个最常见的误解是：等号左边的就是左值，等号右边的就是右值;
-这是错误的, 我们应该时刻谨记 lvalue 和 rvalue 都是针对表达式而言.</strong>
-lvalue 是指那些单一表达式结束之后依然存在的持久对象. 例如: obj, *ptr, prt[index], ++x 等 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-move.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
-<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
-</h6>
-
-
-<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
-<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
-Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
-类似下图:</p>
-<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
-<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
-<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
-</h6>
-
-
-<p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
-<p>**vi 的模式
-**命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
-插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">(四)、SecureCRT 的安装和使用</h3></a>
 <h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
 </h6>
@@ -280,6 +220,65 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">(五) C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
+<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
+</h6>
+
+
+<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
+但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
+<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
+<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
+<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
+</h6>
+
+
+<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
+这种功能通过 Lua 运行时栈来完实现.</p>
+<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
+<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
+<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
+Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
+<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">(三) 重新编译 Lua 程序库</h3></a>
+<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
+</h6>
+
+
+<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
+对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
+不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 22 of 27</h6>
@@ -309,7 +308,7 @@ Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结�
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>

@@ -44,87 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/qi-chang-yong-yun-suan-fu.html"><h3 class="article-title">(七) 常用运算符</h3></a>
-<h6 class="subheader" title="2015-06-11T15:08:00+08:00">Thu 11 June 2015
-</h6>
-
-
-<p>Ø 算术运算符</p>
-<p>Ø 赋值运算符</p>
-<p>Ø 比较运算符</p>
-<p>Ø 逻辑运算符</p>
-<p>Ø 条件运算符</p>
-<p>和C/C++差不多, 这里仅列出有点小区别的部分.</p>
-<p>＋：除了加法，还有连接符的作用，“He”+&rdquo;llo&rdquo; = &ldquo;Hello&rdquo;</p>
-<p>三元运算符: 即 C/C++ 中的三目运算符.
-语法形式: 布尔表达式 ？ 表达式1 ：表达式2;
-如果布尔表达式的值为 true ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-chang-yong-yun-suan-fu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/liu-java-zhong-de-guan-jian-zi-biao-shi-fu-bian-liang-ji-chang-liang.html"><h3 class="article-title">(六) Java 中的关键字、标识符、变量及常量</h3></a>
-<h6 class="subheader" title="2015-06-11T14:29:00+08:00">Thu 11 June 2015
-</h6>
-
-
-<p>1、关键字</p>
-<p>同 C/C++, 被 Java 赋予特殊含义的单词.</p>
-<p>下图列举了一些:</p>
-<p><img alt="" src="http://i60.tinypic.com/5dl0ea.jpg" /></p>
-<hr />
-<p>2、标识符</p>
-<p>在程序中自定义的一些名称, 如变量名、类名、包名等等.</p>
-<p>命名规则什么的参考 C/C++ 就是了…</p>
-<hr />
-<p>3、变量</p>
-<p>概念就不多说了, 同 C/C++ 类似, 用三个元素描述变量: <strong>变量类型、变量名**以及 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-java-zhong-de-guan-jian-zi-biao-shi-fu-bian-liang-ji-chang-liang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/wu-shi-yong-eclipse-bian-xie-hello-world.html"><h3 class="article-title">(五) 使用 Eclipse 编写 Hello World</h3></a>
-<h6 class="subheader" title="2015-06-11T13:44:00+08:00">Thu 11 June 2015
-</h6>
-
-
-<p>用 Eclipse 编写 Java 程序可以总结为四步:</p>
-<ol>
-<li>
-<p>创建 Java 项目</p>
-</li>
-<li>
-<p>创建程序包</p>
-</li>
-<li>
-<p>编写 Java 源代码</p>
-</li>
-<li>
-<p>运行 Java 程序</p>
-</li>
-</ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-shi-yong-eclipse-bian-xie-hello-world.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/si-an-zhuang-eclipse.html"><h3 class="article-title">(四) 安装 Eclipse</h3></a>
 <h6 class="subheader" title="2015-06-11T13:01:00+08:00">Thu 11 June 2015
 </h6>
@@ -281,6 +200,66 @@
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html"><h3 class="article-title">'[CEGUI]. 4、CEGUI 初始化'</h3></a>
+<h6 class="subheader" title="2015-05-29T16:19:00+08:00">Fri 29 May 2015
+</h6>
+
+
+<p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
+<p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3D9</span><span style="color: #A71D7E">::</span><span style="color: #333333">CreateDevice</span>(<span style="color: #333333">UINT</span> <span style="color: #333333">Adapter</span>, <span style="color: #333333">D3DDEVTYPE</span> <span style="color: #333333">DeviceType</span>, <span style="color: #333333">HWND</span> <span style="color: #333333">hFocusWindow</span>
+    , <span style="color: #333333">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-4-cegui-chu-shi-hua.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">'[CEGUI]. 3、VS 环境设置'</h3></a>
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">Fri 29 May 2015
+</h6>
+
+
+<p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
+<p>首先是 Debug 和 Release 版本通用设置:</p>
+<ol>
+<li>[包含目录] 和 [库目录] 的设置
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+</ol>
+<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
+E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-3-vs-huan-jing-she-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/cegui-2-hook-d3d.html"><h3 class="article-title">'[CEGUI]. 2、HOOK D3D'</h3></a>
+<h6 class="subheader" title="2015-05-27T16:06:00+08:00">Wed 27 May 2015
+</h6>
+
+
+<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
+<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-2-hook-d3d.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 20 of 27</h6>
@@ -310,7 +289,7 @@
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>

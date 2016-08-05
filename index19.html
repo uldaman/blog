@@ -44,79 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/shi-qi-ji-cheng.html"><h3 class="article-title">(十七) 继承</h3></a>
-<h6 class="subheader" title="2015-06-12T14:43:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>继承的概念都是一样的, 但是 Java 中继承的语法就和 C++ 中不一样了.</p>
-<p>语法: class 子类 extends 父类 { . . . }</p>
-<p>其他的和 C++ 上就差不多了:</p>
-<p>*. 方法重写</p>
-<p>*. 初始化顺序: 先父类再子类</p>
-<p>*. final 关键字 (C++11 中才有)
-这个关键字要说明一下, 它可以修饰类、方法、属性和变量;
-修饰类时, 则该类不可能被继承:
-修饰方法时, 则该方法不允许被覆盖 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-qi-ji-cheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-liu-nei-bu-lei.html"><h3 class="article-title">(十六) 内部类</h3></a>
-<h6 class="subheader" title="2015-06-12T10:50:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>内部类(Inner Class)就是定义在另外一个类里面的类, 与之对应, 包含内部类的类被称为外部类.</p>
-<p>内部类的主要作用:
-*. 内部类提供了更好的封装, 可以把内部类隐藏在外部类之内, 不允许同一个包中的其他类访问该类;
-*. 内部类的方法可以直接访问外部类的所有数据, 包括私有的数据;
-*. 内部类所实现的功能使用外部类同样可以实现, 只是有时使用内部类更方便;</p>
-<p>成员内部类
-静态内部类
-方法内部类
-匿名内部类</p>
-<hr />
-<p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-liu-nei-bu-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-wu-this-guan-jian-zi.html"><h3 class="article-title">(十五) this 关键字</h3></a>
-<h6 class="subheader" title="2015-06-12T10:42:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>和 C++ 一样, 代表的是就是当前对象本身.</p>
-<p>不过 Java 中还有特殊的作用: this 调用构造函数.</p>
-<p>格式: this();</p>
-<p>我们知道一个类, 可以有多个构造函数, 调用哪个构造函数取决于 this() 里的参数个数及类型;</p>
-<p>this调用构造函数, 必须是构造函数中第一条语句;</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
-   System.out.println(&lt;/span&gt;&quot;无参数构造函数&quot;&lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-wu-this-guan-jian-zi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/shi-si-bao-ji-fang-wen-xiu-shi-fu.html"><h3 class="article-title">(十四) 包 及 访问修饰符</h3></a>
 <h6 class="subheader" title="2015-06-12T10:32:00+08:00">Fri 12 June 2015
 </h6>
@@ -269,6 +196,87 @@ Java 通过 new 关键字生成具体的数组对象, 如 int ...</p><p class="s
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/qi-chang-yong-yun-suan-fu.html"><h3 class="article-title">(七) 常用运算符</h3></a>
+<h6 class="subheader" title="2015-06-11T15:08:00+08:00">Thu 11 June 2015
+</h6>
+
+
+<p>Ø 算术运算符</p>
+<p>Ø 赋值运算符</p>
+<p>Ø 比较运算符</p>
+<p>Ø 逻辑运算符</p>
+<p>Ø 条件运算符</p>
+<p>和C/C++差不多, 这里仅列出有点小区别的部分.</p>
+<p>＋：除了加法，还有连接符的作用，“He”+&rdquo;llo&rdquo; = &ldquo;Hello&rdquo;</p>
+<p>三元运算符: 即 C/C++ 中的三目运算符.
+语法形式: 布尔表达式 ？ 表达式1 ：表达式2;
+如果布尔表达式的值为 true ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/qi-chang-yong-yun-suan-fu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/liu-java-zhong-de-guan-jian-zi-biao-shi-fu-bian-liang-ji-chang-liang.html"><h3 class="article-title">(六) Java 中的关键字、标识符、变量及常量</h3></a>
+<h6 class="subheader" title="2015-06-11T14:29:00+08:00">Thu 11 June 2015
+</h6>
+
+
+<p>1、关键字</p>
+<p>同 C/C++, 被 Java 赋予特殊含义的单词.</p>
+<p>下图列举了一些:</p>
+<p><img alt="" src="http://i60.tinypic.com/5dl0ea.jpg" /></p>
+<hr />
+<p>2、标识符</p>
+<p>在程序中自定义的一些名称, 如变量名、类名、包名等等.</p>
+<p>命名规则什么的参考 C/C++ 就是了…</p>
+<hr />
+<p>3、变量</p>
+<p>概念就不多说了, 同 C/C++ 类似, 用三个元素描述变量: <strong>变量类型、变量名**以及 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-java-zhong-de-guan-jian-zi-biao-shi-fu-bian-liang-ji-chang-liang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/wu-shi-yong-eclipse-bian-xie-hello-world.html"><h3 class="article-title">(五) 使用 Eclipse 编写 Hello World</h3></a>
+<h6 class="subheader" title="2015-06-11T13:44:00+08:00">Thu 11 June 2015
+</h6>
+
+
+<p>用 Eclipse 编写 Java 程序可以总结为四步:</p>
+<ol>
+<li>
+<p>创建 Java 项目</p>
+</li>
+<li>
+<p>创建程序包</p>
+</li>
+<li>
+<p>编写 Java 源代码</p>
+</li>
+<li>
+<p>运行 Java 程序</p>
+</li>
+</ol><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-shi-yong-eclipse-bian-xie-hello-world.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 19 of 27</h6>
@@ -298,7 +306,7 @@ Java 通过 new 关键字生成具体的数组对象, 如 int ...</p><p class="s
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>

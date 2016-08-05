@@ -44,65 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">(五) C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
-<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
-但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
-<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
-<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">(三) 重新编译 Lua 程序库</h3></a>
-<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">(二) Lua 与 C/C++ 的第一次亲密接触</h3></a>
 <h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
 </h6>
@@ -236,6 +177,98 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html"><h3 class="article-title">StarUML 上的一些英文翻译</h3></a>
+<h6 class="subheader" title="2015-03-12T02:42:00+08:00">Thu 12 March 2015
+</h6>
+
+
+<hr />
+<table cellpadding="2" cellspacing="0" border="0" width="400" > <tbody > <tr >
+<td width="200" valign="top" >Association
+</td>
+<td width="200" valign="top" >关联
+</td></tr> <tr >
+<td width="200" valign="top" >DirectedAssociation
+</td>
+<td width="200" valign="top" >直接关联
+</td></tr> <tr >
+<td width="200" valign="top" >Navigable
+</td>
+<td width="200" valign="top" >可导航的(即箭头)
+</td></tr> <tr >
+<td width="200" valign="top" >Aggregation
+</td>
+<td width="200" valign="top" >聚合
+</td></tr> <tr >
+<td width="200" valign="top" >Composition
+</td>
+<td width="200" valign="top" >合成
+</td></tr> <tr >
+<td width="200" valign="top" >Generalization
+</td>
+<td width="200" valign="top" >泛化(继承)
+</td></tr> <tr >
+<td width="200" valign="top" >Dependency
+</td>
+<td width="200" valign="top" >依赖
+</td></tr> <tr >
+<td width="200" valign="top" >Realization
+</td>
+<td width="200" valign="top" >实现接口
+</td></tr></tbody></table><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html"><h3 class="article-title">19、[C++]StarUML使用范例 — 接口</h3></a>
+<h6 class="subheader" title="2015-03-11T15:50:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>C++在设计时, 接口这种概念还没有提出来, 所以C++中没有直接支持接口的语法, 但是可以使用抽像类来实现接口.</p>
+<p>接口（interface）是抽像类的变体, 抽象类里面可以有非虚函数, 但接口里只能有虚函数.</p>
+<p>从toolbox中, 选择“Interface”, 并点击图表的某处, 将其改名为 Strategy.</p>
+<p><img alt="" src="http://i59.tinypic.com/30mtlhh.jpg" /></p>
+<p>在顶部工具栏选择 “Stereotype Display” 下拉按钮, 将值改变为“None”, 这将改变默认的圆形形状, 使其变为和普通类一样的长方形.</p>
+<p><img alt="" src="http://i58.tinypic.com/257dllg.jpg" /></p>
+<p>还是在顶部工具栏, 取消选中 &ldquo;Suppress Operations&rdquo; , 这将使我们能够看到接口的方法栏 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html"><h3 class="article-title">18、[C++]StarUML使用范例 — 聚合</h3></a>
+<h6 class="subheader" title="2015-03-11T15:30:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>聚合表示一种弱拥有关系, 即被聚合的类能单独存在.</p>
+<p>用上一篇的方法快速添加一个 Context 类.</p>
+<p><img alt="" src="http://i62.tinypic.com/k4a4j7.jpg" /></p>
+<p>从toolbox中选择表示“Aggregation”的箭头, 并从 Strategy拖拽向 Context, 此时连线是没有箭头指向的, 选中连接线, 在右边的“Properties”框上, 将 &ldquo;End1.IsNavigable&rdquo; 勾选上,箭头就出来了.</p>
+<p><img alt="" src="http://i62.tinypic.com/sz7ww1.jpg" /></p>
+<p>将“End2.Name”一栏改为 Strategy，将“End2.Visibility”改为 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 23 of 27</h6>
@@ -265,7 +298,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/dai-ma-da-quan.html">代碼大全</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
