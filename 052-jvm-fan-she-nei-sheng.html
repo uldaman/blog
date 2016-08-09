@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>052、JVM、反射、内省</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/052-jvm-fan-she-nei-sheng.html" rel="bookmark"
+        title="Permalink to 052、JVM、反射、内省">052、JVM、反射、内省</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-08-09T15:22:00+08:00">Tue 09 August 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#jvm">JVM 结构</a></li>
+<li><a href="#jvisualvm">JVisualVM</a></li>
+<li><a href="#_1">反射</a></li>
+<li><a href="#_2">内省</a></li>
+</ul>
+</div>
+<h1 id="jvm"><a name="user-content-jvm" href="#jvm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>JVM 结构</h1>
+<ul>
+<li><code>Class File</code><ul>
+<li><code>*.class</code> 文件</li>
+</ul>
+</li>
+<li><code>Class Loader</code> 类加载器</li>
+<li><code>Runtime Data Area</code> 运行时数据区<ul>
+<li><code>Method Area</code> 方法区 (线程共享)<ul>
+<li><code>*.class</code> 文件被加载时会在方法区创建该类的描述符<ul>
+<li>程序将根据方法区的类描述符创建类的实例</li>
+</ul>
+</li>
+<li>类描述符只被创建一次, 当使用完后并不会从方法区移除</li>
+</ul>
+</li>
+<li><code>Heap</code> 堆区 (线程共享)<ul>
+<li>堆内存用来存放由 <code>new</code> 出来的对象, 栈中的变量指向堆内存中的对象地址<ul>
+<li>堆中保存着对象的属性、方法的引用 (方法的主体还是在方法区)</li>
+</ul>
+</li>
+<li>在堆中分配的内存, 由 JVM 的自动垃圾回收器来管理</li>
+</ul>
+</li>
+<li><code>Java Stack</code> 栈区<ul>
+<li>基本类型的变量和引用变量都在栈内存中分配, 当超过变量的作用域后, Java 会自动释放掉为该变量所分配的内存空间</li>
+</ul>
+</li>
+<li><code>Native Method Statck</code> 本地方法栈 (=> 操作系统)</li>
+<li><code>Program Counter Register</code> 程序计数器</li>
+</ul>
+</li>
+<li><code>Execution Engine</code> 执行引擎</li>
+<li><code>Native Interface</code> 本地接口</li>
+<li><code>Native Libraries</code> 本地类库</li>
+</ul>
+<blockquote>
+<p>补充静态代码块:<br>
+使用 <code>Class.forName(" ")</code> 加载类时, 如果指定第二个参数为 <code>false</code>, 则不执行静态代码块, 等下次加载时会再执行静态代码块 (只执行静态代码块, 并不会重新加载类, 类只会被加载一次)</p>
+</blockquote>
+<h1 id="jvisualvm"><a name="user-content-jvisualvm" href="#jvisualvm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>JVisualVM</h1>
+<p>JDK 自带的性能监视工具</p>
+<p>监视 Visual GC</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>反射</h1>
+<p><strong>反射</strong>: 动态访问对象的属性和方法 (通过类描述符得到指定的方法描述符, 然后通过 <code>method.invoke(object, param)</code> 调用方法);</p>
+<ul>
+<li><code>java.lang.Class</code>: 类类, 描述类的类, 类描述符</li>
+<li><code>java.lang.reflect.Method</code>: 方法类, 描述方法的类, 方法描述符</li>
+<li><code>java.lang.reflect.Field</code>: 字段类 (属性类), 描述字段的类, 字段描述符</li>
+<li><code>java.lang.reflect.constructors</code>: 构造器类, 描述构造方法的类, 构造方法描述符</li>
+<li><code>java.lang.reflect.modifier</code>: 修饰符类, 描述修饰符的类, 修饰符描述符</li>
+</ul>
+<p><code>class.getDeclaredMethods</code> 获取类中声明的方法 (不管是 Public 还是 Private, 但不包含继承的父类方法, 因为没有声明), 它的第二个参数是可变参数, 是要获取的方法的参数类型说明, 如 <code>int.class</code>, <code>String.class</code>.</p>
+<p><code>class.getMethods</code> 获取类的所有 public 方法 (包含继承的方法)</p>
+<p><strong>注意</strong>, 反射依然遵守方法修饰符权限的规则 (public, private, protect), 但是通过 <code>method.setAccessible(true)</code> 就能 invoke private or protect methods.</p>
+<p><code>method.getModifiers</code> 获取方法的修饰符, 然后通过 <code>Modifier.isXxxx()</code> 判断是什么类型的修饰符</p>
+<p><code>class.newInstance</code> 要求类有**无参**构造函数, 如果没有的话就会报异常, 解决方法是通过 <code>class.getDeclaredConstructor</code> 获取构造函数, 然后通过 <code>constructor.newInstance</code> 来实例化对象.</p>
+<p><code>class.getDeclaredConstructor</code> 可以获取到所有的构造函数, 而 <code>class.getConstructor</code> 只能获取到 public 的构造函数.</p>
+<p><code>class.getDeclaredField</code> 获取到类的字段描述后, 可以再通过 <code>field.get(object)</code> 来获取到实例的字段值, 依然遵守方法修饰符权限的规则 (public, private, protect), 但通过 <code>method.setAccessible(true)</code> 可以修改它的修饰符权限.</p>
+<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>内省</h1>
+<p>Reference: <a href="http://www.cnblogs.com/peida/archive/2013/06/03/3090842.html">深入理解 Java: 内省 (Introspector)</a></p>
+<p>通过反射的方式访问 JavaBean 的技术, 是 Java 语言对 Bean 类属性、事件的一种缺省处理方法.</p>
+<p>例如类 A 中有属性 name, 那我们可以通过 <code>getName</code>、<code>setName</code> 来得到其值或者设置新的值, 通过 <code>getName/setName</code> 来访问 name 属性, 这就是默认的规则.</p>
+<p>Java 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法, 通过这些 API 可以使你不需要了解这个规则, 这些 API 存放于包 <code>java.beans</code> 中.</p>
+<p>一般的做法是通过类 <code>Introspector</code> 来获取某个对象的 BeanInfo 信息, 然后通过 BeanInfo 来获取属性的描述器 (<strong>PropertyDescriptor</strong>), 通过这个属性描述器就可以获取某个属性对应的 <code>getter/setter</code> 方法, 然后我们就可以通过反射机制来调用这些方法.</p>
+<p>下面我们来看一个例子, 这个例子把某个对象的所有属性名称和值都打印出来:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">importjava</span><span style="color: #A71D7E">.</span><span style="color: #008080">beans</span><span style="color: #A71D7E">.</span><span style="color: #008080">BeanInfo</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">importjava</span><span style="color: #A71D7E">.</span><span style="color: #008080">beans</span><span style="color: #A71D7E">.</span><span style="color: #008080">Introspector</span><span style="color: #A71D7E">;</span>
+<span style="color: #333333">importjava</span><span style="color: #A71D7E">.</span><span style="color: #008080">beans</span><span style="color: #A71D7E">.</span><span style="color: #008080">PropertyDescriptor</span><span style="color: #A71D7E">;</span>
+
+<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">IntrospectorDemo</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span><span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">IntrospectorDemo</span> <span style="color: #333333">demo</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">IntrospectorDemo</span><span style="color: #A71D7E">();</span>
+        <span style="color: #333333">demo</span><span style="color: #A71D7E">.</span><span style="color: #008080">setName</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;WinterLau&quot;</span><span style="color: #A71D7E">);</span>
+
+        <span style="color: #999988; font-style: italic">// 如果不想把父类的属性也列出来的话, 那 getBeanInfo 的第二个参数填写父类的信息</span>
+        <span style="color: #333333">BeanInfo</span> <span style="color: #333333">bi</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Introspector</span><span style="color: #A71D7E">.</span><span style="color: #008080">getBeanInfo</span><span style="color: #A71D7E">(</span><span style="color: #333333">demo</span><span style="color: #A71D7E">.</span><span style="color: #008080">getClass</span><span style="color: #A71D7E">(),</span> <span style="color: #333333">Object</span><span style="color: #A71D7E">.</span><span style="color: #008080">class</span><span style="color: #A71D7E">);</span>
+        <span style="color: #333333">PropertyDescriptor</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">props</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">bi</span><span style="color: #A71D7E">.</span><span style="color: #008080">getPropertyDescriptors</span><span style="color: #A71D7E">();</span>
+
+        <span style="color: #999988; font-style: italic">/*for (int i = 0; i &lt; props.length; i++) {</span>
+<span style="color: #999988; font-style: italic">            System.out.println(props[i].getName() + &quot;=&quot; + props[i].getReadMethod().invoke(demo));</span>
+<span style="color: #999988; font-style: italic">        }*/</span>
+        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #333333">PropertyDescriptor</span> <span style="color: #333333">prop</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">props</span> <span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
+            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #333333">prop</span><span style="color: #A71D7E">.</span><span style="color: #008080">getName</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;=&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">prop</span><span style="color: #A71D7E">.</span><span style="color: #008080">getReadMethod</span><span style="color: #A71D7E">().</span><span style="color: #008080">invoke</span><span style="color: #A71D7E">(</span><span style="color: #333333">demo</span><span style="color: #A71D7E">));</span>
+        <span style="color: #A71D7E">}</span>
+    <span style="color: #A71D7E">}</span>
+
+    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">(){</span>
+        <span style="color: #333333">retur</span> <span style="color: #333333">nname</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
+
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setName</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">){</span>
+        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">name</span><span style="color: #A71D7E">=</span><span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+
+<br>
+另外, 如果已知属性名的话, 是可以直接通过 <code>PropertyDescriptor</code> 类来操作 JavaBean 的.</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">IntrospectorDemo</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span><span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #333333">IntrospectorDemo</span> <span style="color: #333333">demo</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">IntrospectorDemo</span><span style="color: #A71D7E">();</span>
+        <span style="color: #333333">demo</span><span style="color: #A71D7E">.</span><span style="color: #008080">setName</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;WinterLau&quot;</span><span style="color: #A71D7E">);</span>
+
+        <span style="color: #333333">PropertyDescriptor</span> <span style="color: #333333">propDesc</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">PropertyDescriptor</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;name&quot;</span><span style="color: #A71D7E">,</span> <span style="color: #333333">demo</span><span style="color: #A71D7E">);</span>
+        <span style="color: #333333">Method</span> <span style="color: #333333">methodGetName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">proDescriptor</span><span style="color: #A71D7E">.</span><span style="color: #008080">getReadMethod</span><span style="color: #A71D7E">();</span>
+        <span style="color: #333333">Object</span> <span style="color: #333333">objName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">methodGetName</span><span style="color: #A71D7E">.</span><span style="color: #008080">invoke</span><span style="color: #A71D7E">(</span><span style="color: #333333">demo</span><span style="color: #A71D7E">);</span>
+        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;get name:&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">objName</span><span style="color: #A71D7E">.</span><span style="color: #008080">toString</span><span style="color: #A71D7E">());</span>
+    <span style="color: #A71D7E">}</span>
+
+    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">(){</span>
+        <span style="color: #333333">retur</span> <span style="color: #333333">nname</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
+
+    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">setName</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">){</span>
+        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">name</span><span style="color: #A71D7E">=</span><span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+    <span style="color: #A71D7E">}</span>
+<span style="color: #A71D7E">}</span>
+</pre></div>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
