@@ -44,6 +44,40 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html"><h3 class="article-title">5、QT 中文乱码</h3></a>
+<h6 class="subheader" title="2015-02-15T14:13:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
+<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+QTextCodec::setCodecForCStrings(...)
+QTextCodec::setCodecForLocale(...)
+
+
+
+然后这三句代码是有安全隐患的, 下面的文章都有说明:
+</pre></div>
+
+
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
+<p>*</p>
+<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
+<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/4-bang-zhu-shou-ce.html"><h3 class="article-title">4、帮助手册</h3></a>
 <h6 class="subheader" title="2015-02-15T14:12:00+08:00">Sun 15 February 2015
 </h6>

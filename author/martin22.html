@@ -44,6 +44,27 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html"><h3 class="article-title">(六)、Linux 的目录结构</h3></a>
+<h6 class="subheader" title="2015-03-27T14:45:00+08:00">Fri 27 March 2015
+</h6>
+
+
+<p>Linux 的目录结构之前也提了一下, 但总感觉理解的不是很清晰, 所以单独的拿出来再做一篇笔记.</p>
+<p>在向下看之前, 先忘记 Linux 的分区和挂载点(文件系统), 就单独的来理解目录结构…
+Linux 的文件系统是采用**级层式**的**树状**目录结构, 在此结构中的最上层是根目录**”/”,** 然后在根目录下再创建出其他的目录.
+类似下图:</p>
+<p><img alt="" src="http://i57.tinypic.com/13zy794.jpg" /></p>
+<p>当 Linux 安装好后, 它就会自动分配了一个**根目录, <strong>根目录下又包括:</strong> root目录、home目录、bin目录、sbin目录、mnt目录 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/liu-linux-de-mu-lu-jie-gou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/wu-vi-kuai-su-ru-men.html"><h3 class="article-title">(五)、vi 快速入门</h3></a>
 <h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
 </h6>
@@ -255,28 +276,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
