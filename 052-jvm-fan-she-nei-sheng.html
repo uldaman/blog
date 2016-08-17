@@ -56,7 +56,6 @@
     <div class="toc">
 <ul>
 <li><a href="#jvm">JVM 结构</a></li>
-<li><a href="#jvisualvm">JVisualVM</a></li>
 <li><a href="#_1">反射</a></li>
 <li><a href="#_2">内省</a></li>
 </ul>
@@ -102,9 +101,6 @@
 <p>补充静态代码块:<br>
 使用 <code>Class.forName(" ")</code> 加载类时, 如果指定第二个参数为 <code>false</code>, 则不执行静态代码块, 等下次加载时会再执行静态代码块 (只执行静态代码块, 并不会重新加载类, 类只会被加载一次)</p>
 </blockquote>
-<h1 id="jvisualvm"><a name="user-content-jvisualvm" href="#jvisualvm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>JVisualVM</h1>
-<p>JDK 自带的性能监视工具</p>
-<p>监视 Visual GC</p>
 <h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>反射</h1>
 <p><strong>反射</strong>: 动态访问对象的属性和方法 (通过类描述符得到指定的方法描述符, 然后通过 <code>method.invoke(object, param)</code> 调用方法);</p>
 <ul>
