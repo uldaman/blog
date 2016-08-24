@@ -160,6 +160,59 @@ MD_EXTENSIONS = [
 
 然后再重新用 cmd 进入 myblog 目录, 执行 **make html** + **make serve**, 访问: [http://localhost:8000/](http://localhost:8000/), 看看我们的博客主题是不是已经发生变化啦~~
 
+## 2.1 添加评论系统
+pelican 原生支持 DISQUS 评论系统, 然而坑爹的 GFW . . .
+
+所以我改用了国内的[多说评论系统](http://duoshuo.com/) (来必力也是一个不错的评论系统, 可以去试试), 首先去[多说官网](http://duoshuo.com/)注册一个账号, 然后为我们的 blog 添加一个站点.
+
+![](http://i66.tinypic.com/t0p00h.jpg)
+
+添加好后, 在管理页面会看到如下信息:
+
+![](http://i67.tinypic.com/2cg2dxy.jpg)
+
+打开 pelican 主题目录下的 `article.html` 文件, 在 `</article>` 上面添加上图中的代码, 我这里改成了:
+
+```html
+{% extends "base.html" %}
+{% block title %}{{ article.title|striptags }}{% endblock %}
+{% block content %}
+<article>
+    <header>
+        <h3 class="article-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+        title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h3>
+        {% include 'twitter.html' %}
+    </header>
+
+    {% include 'article_infos.html' %}
+    {{ article.content }}
+    {% include 'article_infos_bottom.html' %}
+
+<!--     {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+    <h4>Comments</h4>
+    {% include 'disqus_script.html' %}
+    {% endif %} -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="{{ article.slug }}" data-title="{{ article.title }}" data-url="{{ SITEURL }}/{{ article.url }}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+{% endblock %}
+```
+<br>
 #3. 解析 GFM
 GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments 本身并不支持 (py\-markdown 的语法高亮通过 pygments 来支持), 要通过第三方扩展来实现.
 
