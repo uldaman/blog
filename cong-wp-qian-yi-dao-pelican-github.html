@@ -57,7 +57,10 @@
 <div class="toc">
 <ul>
 <li><a href="#1-pelican">1. Pelican 博客搭建</a></li>
-<li><a href="#2">2. 更换主题</a></li>
+<li><a href="#2">2. 更换主题</a><ul>
+<li><a href="#21">2.1 添加评论系统</a></li>
+</ul>
+</li>
 <li><a href="#3-gfm">3. 解析 GFM</a></li>
 <li><a href="#4">4. 添加网站图标</a></li>
 <li><a href="#5-wordpress">5. 迁移 wordpress</a></li>
@@ -199,6 +202,53 @@ Reference:<br>
 <a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a></p>
 </blockquote>
 <p>然后再重新用 cmd 进入 myblog 目录, 执行 <strong>make html</strong> + <strong>make serve</strong>, 访问: <a href="http://localhost:8000/"><a href="http://localhost:8000/"><a href="http://localhost:8000/">http://localhost:8000/</a></a></a>, 看看我们的博客主题是不是已经发生变化啦~~</p>
+<h2 id="21"><a name="user-content-21" href="#21" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.1 添加评论系统</h2>
+<p>pelican 原生支持 DISQUS 评论系统, 然而坑爹的 GFW . . .</p>
+<p>所以我改用了国内的<a href="http://duoshuo.com/">多说评论系统</a> (来必力也是一个不错的评论系统, 可以去试试), 首先去<a href="http://duoshuo.com/">多说官网</a>注册一个账号, 然后为我们的 blog 添加一个站点.</p>
+<p><img alt="" src="http://i66.tinypic.com/t0p00h.jpg" /></p>
+<p>添加好后, 在管理页面会看到如下信息:</p>
+<p><img alt="" src="http://i67.tinypic.com/2cg2dxy.jpg" /></p>
+<p>打开 pelican 主题目录下的 <code>article.html</code> 文件, 在 <code>&lt;/article&gt;</code> 上面添加上图中的代码, 我这里改成了:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
+{% block title %}{{ article.title|striptags }}{% endblock %}
+{% block content %}
+&lt;<span style="color: #000080">article</span>&gt;
+    &lt;<span style="color: #000080">header</span>&gt;
+        &lt;<span style="color: #000080">h3</span> <span style="color: #008080">class</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;article-title&quot;</span>&gt;&lt;<span style="color: #000080">a</span> <span style="color: #008080">href</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span> <span style="color: #008080">rel</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;bookmark&quot;</span>
+        <span style="color: #008080">title</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;Permalink to {{ article.title|striptags }}&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #000080">a</span>&gt;&lt;/<span style="color: #000080">h3</span>&gt;
+        {% include &#39;twitter.html&#39; %}
+    &lt;/<span style="color: #000080">header</span>&gt;
+
+    {% include &#39;article_infos.html&#39; %}
+    {{ article.content }}
+    {% include &#39;article_infos_bottom.html&#39; %}
+
+<span style="color: #999988; font-style: italic">&lt;!--     {% if DISQUS_SITENAME and SITEURL and article.status != &quot;draft&quot; %}</span>
+<span style="color: #999988; font-style: italic">    &lt;h4&gt;Comments&lt;/h4&gt;</span>
+<span style="color: #999988; font-style: italic">    {% include &#39;disqus_script.html&#39; %}</span>
+<span style="color: #999988; font-style: italic">    {% endif %} --&gt;</span>
+
+    <span style="color: #999988; font-style: italic">&lt;!-- 多说评论框 start --&gt;</span>
+    &lt;<span style="color: #000080">h4</span>&gt;Comments !&lt;/<span style="color: #000080">h4</span>&gt;
+    &lt;<span style="color: #000080">div</span> <span style="color: #008080">class</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;ds-thread&quot;</span> <span style="color: #008080">data-thread-key</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ article.slug }}&quot;</span> <span style="color: #008080">data-title</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ article.title }}&quot;</span> <span style="color: #008080">data-url</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;/<span style="color: #000080">div</span>&gt;
+    <span style="color: #999988; font-style: italic">&lt;!-- 多说评论框 end --&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+    &lt;<span style="color: #000080">script</span> <span style="color: #008080">type</span><span style="color: #A71D7E">=</span><span style="color: #183691">&quot;text/javascript&quot;</span>&gt;
+        <span style="color: #A71D5D">var</span> <span style="color: #333333">duoshuoQuery</span> <span style="color: #A71D7E">=</span> {<span style="color: #333333">short_name</span><span style="color: #A71D7E">:</span><span style="color: #183691">&quot;smallcpp&quot;</span>};
+            (<span style="color: #A71D5D">function</span>() {
+                <span style="color: #A71D5D">var</span> <span style="color: #333333">ds</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">document</span>.<span style="color: #333333">createElement</span>(<span style="color: #183691">&#39;script&#39;</span>);
+                <span style="color: #333333">ds</span>.<span style="color: #333333">type</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;text/javascript&#39;</span>;<span style="color: #333333">ds</span>.<span style="color: #333333">async</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">true</span>;
+                <span style="color: #333333">ds</span>.<span style="color: #333333">src</span> <span style="color: #A71D7E">=</span> (<span style="color: #ED6A43">document</span>.<span style="color: #333333">location</span>.<span style="color: #333333">protocol</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;https:&#39;</span> <span style="color: #A71D7E">?</span> <span style="color: #183691">&#39;https:&#39;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;http:&#39;</span>) <span style="color: #A71D7E">+</span> <span style="color: #183691">&#39;//static.duoshuo.com/embed.js&#39;</span>;
+                <span style="color: #333333">ds</span>.<span style="color: #333333">charset</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;UTF-8&#39;</span>;
+                (<span style="color: #ED6A43">document</span>.<span style="color: #333333">getElementsByTagName</span>(<span style="color: #183691">&#39;head&#39;</span>)[<span style="color: #0086b3">0</span>] <span style="color: #A71D7E">||</span> <span style="color: #ED6A43">document</span>.<span style="color: #333333">getElementsByTagName</span>(<span style="color: #183691">&#39;body&#39;</span>)[<span style="color: #0086b3">0</span>]).<span style="color: #333333">appendChild</span>(<span style="color: #333333">ds</span>);
+            })();
+    &lt;/<span style="color: #000080">script</span>&gt;
+    <span style="color: #999988; font-style: italic">&lt;!-- 多说公共JS代码 end --&gt;</span>
+&lt;/<span style="color: #000080">article</span>&gt;
+{% endblock %}
+</pre></div>
+
+<br></p>
 <h1 id="3-gfm"><a name="user-content-3-gfm" href="#3-gfm" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. 解析 GFM</h1>
 <p>GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments 本身并不支持 (py-markdown 的语法高亮通过 pygments 来支持), 要通过第三方扩展来实现.</p>
 <p>首先, 要安装 pymdown  第三方扩展 <code>pip install pymdown-extensions</code>, 然后把 <code>pelicanconf.py</code> 文件中 <code>MD_EXTENSIONS</code> 的 <strong>extra</strong> 替换成 <strong>pymdownx.github</strong>.</p>
