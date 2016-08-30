@@ -3,8 +3,6 @@ date: 2015-02-15 14:21
 title: 6、[C++]六大设计原则
 
 ### 单一职责原则
-
-
 单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.
 
 日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了**简单工厂模式**和**策略模式**.
@@ -17,20 +15,9 @@ title: 6、[C++]六大设计原则
 
 那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离.
 
-
-
-
-
 * * *
 
-
-
-
-
-
 ### 开放-封闭原则
-
-
 开放-封闭原则: 软件实体(类 模块 函数等等), 应该是可以扩展但不可修改的.
 
 也就是说对于扩展是开放的, 对于更改是封闭的, 再换句话说就是**设计软件要容易维护又不容易出问题的最好办法是多扩展少修改.**
@@ -40,62 +27,43 @@ title: 6、[C++]六大设计原则
 
 再回想一下我们之前的计算器例子, 一开始的时候, 我们把计算的算法都封装在一个类当中:
 
-
-
-
-
-    <span style="color: #0000ff;">class</span><span style="color: #000000;"> Operation{
-    </span><span style="color: #0000ff;">public</span><span style="color: #000000;">:
-        </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">double</span> GetResult(<span style="color: #0000ff;">double</span> dNum_A, <span style="color: #0000ff;">double</span> dNum_B, <span style="color: #0000ff;">char</span><span style="color: #000000;"> cOp) {
-            </span><span style="color: #0000ff;">double</span> dResult = <span style="color: #800080;">0.0</span><span style="color: #000000;">;
-            </span><span style="color: #0000ff;">switch</span><span style="color: #000000;"> (cOp) {
-            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">+</span><span style="color: #800000;">'</span><span style="color: #000000;">:
-                dResult </span>= dNum_A +<span style="color: #000000;"> dNum_B;
-                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
-            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span><span style="color: #000000;">:
-                dResult </span>= dNum_A -<span style="color: #000000;"> dNum_B;
-                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
-            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">*</span><span style="color: #800000;">'</span><span style="color: #000000;">:
-                dResult </span>= dNum_A *<span style="color: #000000;"> dNum_B;
-                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
-            </span><span style="color: #0000ff;">case</span> <span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">:
-                dResult </span>= dNum_A /<span style="color: #000000;"> dNum_B;
-                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
-
-            }
-
-            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> dResult;
+```java
+class Operation {
+public:
+    static double GetResult(double dNum_A, double dNum_B, char cOp) {
+        double dResult = 0.0;
+        switch (cOp) {
+        case '+':
+            dResult = dNum_A + dNum_B;
+            break;
+        case '-':
+            dResult = dNum_A - dNum_B;
+            break;
+        case '*':
+            dResult = dNum_A * dNum_B;
+            break;
+        case '/':
+            dResult = dNum_A / dNum_B;
+            break;
         }
-    }</span>
 
-
-
-
-
+        return dResult;
+    }
+}
+```
+<br>
 而在设计时已经猜测出以后可能会添加其他的运算, 所以我们把运算的算法抽象了出来.
 
 在一开始设计时, 我们有可能很难预先猜测, 但我们却可以在发生小变化时, 就及早去想办法应对发生大变化的可能. 换句话说:**在我们最初编程时, 假设变化不会发生, 而当变化真实发生时, 我们就创建抽象一隔离以后发生的同种类变化.**
 
-
-<blockquote>面对需求, 对程序的发动是通过增加新代码进行的, 而不是更改现有的代码.</blockquote>
-
+> 面对需求, 对程序的发动是通过增加新代码进行的, 而不是更改现有的代码.
 
 当然开发人员应该仅对程序中呈现出频繁变化的那部分做出抽象, 然而, 对于应用程序中的每个部分都刻意地进行抽象同样也不是一个好注意, 拒绝不成熟的抽象和抽象本身一样重要.
 
-
-
-
-
 * * *
 
-
-
-
-
 ### 里氏代换原则
-
-
-问题:
+问题:<br>
 当前有一个鸟类, 有一个飞行方法, 现在要求设计一个大雁类和一个企鹅类, 要怎么设计?
 
 从生物学上来看大雁和企鹅都属于鸟, 那么是不是可以让大雁类和企鹅类都继承鸟类呢?
@@ -111,47 +79,25 @@ title: 6、[C++]六大设计原则
 
 在学习继承时, 我们就知道子类是一种特殊的父类, 子类对象可以当作父类对象使用也就是因为里氏代换原则.
 
-
-
-
-
 * * *
 
-
-
-
-
 ### 依赖倒转原则
-
-
 依赖倒转原则: 抽象不应该依赖细节, 细节应该依赖于抽象, 高层模块不应该依赖低层模块, 都应该依赖抽象.
 说白了, 就是应该针对接口编程而不要对实现编程
 
 在我们的计算器(策略模式)程序中, Context类依赖于Operation抽象类而不依赖具体的算法类, 具体的算法类也依赖于Operation抽象类, 根据里氏代换原则, 只要接口Operation抽象类是稳定的, 那么任何一个更改都不用担心其他受到影响(我们可以通过实例化新的子类来处理), 这使得无论高层模块还是低层模块都可以很容易地被复用.
 
-
-<blockquote>为什么叫倒转? 这是针对面向过程来说的, 在面向过程的开发中, 为了使用常用的代码可以复用, 一般都会把这些常用的代码写成许许多多函数的程序库, 这样我们做新项目的时候, 就去调用这些函数就可以了.
-例如：我们做的项目大多要访问数据库, 所以我们就把数据库的代码写成了函数, 每次做新项目时就去调用这些函数，这也就是高层依赖于低层模块了.</blockquote>
-
+> 为什么叫倒转? 这是针对面向过程来说的, 在面向过程的开发中, 为了使用常用的代码可以复用, 一般都会把这些常用的代码写成许许多多函数的程序库, 这样我们做新项目的时候, 就去调用这些函数就可以了.<br>
+> 例如: 我们做的项目大多要访问数据库, 所以我们就把数据库的代码写成了函数, 每次做新项目时就去调用这些函数，这也就是高层依赖于低层模块了.
 
 依赖倒转原则其实可以说是面向对象设计的标志, 编程时考虑的都是如何针对抽象编程而不是针对细节编程, 即程序中所有的依赖关系都是终止于抽象类或者接口.
 
-
-
-
-
 * * *
 
-
-
-
-
 ### 迪米特法则
+迪米特法则也叫最小知识原则, 迪米特法则还有一个更简单的定义: **只与直接的朋友通信.**
 
-
-迪米特法则也叫最小知识原则, 迪米特法则还有一个更简单的定义：**只与直接的朋友通信.**
-
-对于一个对象，其朋友包括以下几类：
+对于一个对象，其朋友包括以下几类:
 
 (1) 以参数形式传入到当前对象方法中的对象
 
@@ -180,124 +126,112 @@ title: 6、[C++]六大设计原则
 体育老老师让体委清点全班女生个数, 先上一段有问题的代码:
 
 
+```java
+#include <list>
+#include <iostream>
+using namespace std;
 
+class Girl {
+};
 
+class GroupLeader {
+    //有清查女生的工作
+public:
+    void countGirls(list<Girl> listGirls){
+        cout << "女生数量是: " << listGirls.size() << endl;
+    }
+};
 
-    #include <list><span style="color: #000000;">
-    #include </span><iostream>
-    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
-
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Girl {
-    };
-
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> GroupLeader {
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">有清查女生的工作</span>
-    <span style="color: #0000ff;">public</span><span style="color: #000000;">:
-        </span><span style="color: #0000ff;">void</span> countGirls(list<Girl><span style="color: #000000;"> listGirls){
-            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">女生数量是：</span><span style="color: #800000;">"</span> << listGirls.size() <<<span style="color: #000000;"> endl;
+class Teacher {
+    //老师对学生发布命令,清一下女生
+public:
+    void commond(GroupLeader groupLeader) {
+        list<Girl> listGirls;
+        //初始化女生
+        for (int i = 0; i < 20; i++){
+            listGirls.push_back(Girl());
         }
-    };
+        //告诉体育委员开始执行清查任务
+        groupLeader.countGirls(listGirls);
+    }
+};
 
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Teacher {
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">老师对学生发布命令,清一下女生</span>
-    <span style="color: #0000ff;">public</span><span style="color: #000000;">:
-        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> commond(GroupLeader groupLeader) {
-            list</span><Girl><span style="color: #000000;"> listGirls;
-            </span><span style="color: #008000;">//</span><span style="color: #008000;">初始化女生</span>
-            <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i < <span style="color: #800080;">20</span>; i++<span style="color: #000000;">){
-                listGirls.push_back(Girl());
-            }
-            </span><span style="color: #008000;">//</span><span style="color: #008000;">告诉体育委员开始执行清查任务</span>
-    <span style="color: #000000;">        groupLeader.countGirls(listGirls);
-        }
-    };
+int _tmain(int argc, _TCHAR* argv[]) {
+    Teacher teacher;
+    //老师发布命令
+    teacher.commond(GroupLeader());
 
-    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
-        Teacher teacher;
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">老师发布命令</span>
-    <span style="color: #000000;">    teacher.commond(GroupLeader());
-
-        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
-        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
-    }</span>
-
-
-
-
-
+    system("PAUSE");
+    return 0;
+}
+```
+<br>
 问题出在 Teacher 这个类中, 首先, Girl 类做为 commond 方法的局部变量出现..
 
 其次, 和体育老师有直接联系的是体委, 而不是全班女生, 体育老师和女生不应该相互作用, 而应该通过体委来跳转(如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用).
 
 改进后代码如下:
 
+```java
+#include "stdafx.h"
+#include <list>
+#include <iostream>
+using namespace std;
 
+class Girl {
+};
 
+class GroupLeader {
+    //有清查女生的工作
+private:
+    list<Girl> m_listGirls;
+    //传递全班的女生
 
+public:
+    GroupLeader(list<Girl> _listGirls) {
+        m_listGirls = _listGirls;
+    }
 
-    #include <span style="color: #800000;">"</span><span style="color: #800000;">stdafx.h</span><span style="color: #800000;">"</span><span style="color: #000000;">
-    #include </span><list><span style="color: #000000;">
-    #include </span><iostream>
-    <span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span><span style="color: #000000;"> std;
+    //有清查女生的工作
+    void countGirls(){
+        cout << "女生数量是: " << m_listGirls.size() << endl;
+    }
+};
 
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Girl {
-    };
+class Teacher {
+    //老师对学生发布命令,清一下女生
+public:
+    void commond(GroupLeader groupLeader) {
+        groupLeader.countGirls();
+    }
+};
 
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> GroupLeader {
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">有清查女生的工作</span>
-    <span style="color: #0000ff;">private</span><span style="color: #000000;">:
-        list</span><Girl><span style="color: #000000;"> m_listGirls;
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">传递全班的女生</span>
+int _tmain(int argc, _TCHAR* argv[]) {
+    list<Girl> listGirls;
+    //初始化女生
+    for (int i = 0; i < 20; i++){
+        listGirls.push_back(Girl());
+    }
 
-    <span style="color: #0000ff;">public</span><span style="color: #000000;">:
-        GroupLeader(list</span><Girl><span style="color: #000000;"> _listGirls) {
-            m_listGirls </span>=<span style="color: #000000;"> _listGirls;
-        }
+    Teacher teacher;
+    //老师发布命令
+    teacher.commond(GroupLeader(listGirls));
 
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">有清查女生的工作</span>
-        <span style="color: #0000ff;">void</span><span style="color: #000000;"> countGirls(){
-            cout </span><< <span style="color: #800000;">"</span><span style="color: #800000;">女生数量是：</span><span style="color: #800000;">"</span> << m_listGirls.size() <<<span style="color: #000000;"> endl;
-        }
-    };
-
-    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Teacher {
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">老师对学生发布命令,清一下女生</span>
-    <span style="color: #0000ff;">public</span><span style="color: #000000;">:
-        </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> commond(GroupLeader groupLeader) {
-            groupLeader.countGirls();
-        }
-    };
-
-    </span><span style="color: #0000ff;">int</span> _tmain(<span style="color: #0000ff;">int</span> argc, _TCHAR*<span style="color: #000000;"> argv[]) {
-        list</span><Girl><span style="color: #000000;"> listGirls;
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">初始化女生</span>
-        <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i < <span style="color: #800080;">20</span>; i++<span style="color: #000000;">){
-            listGirls.push_back(Girl());
-        }
-
-        Teacher teacher;
-        </span><span style="color: #008000;">//</span><span style="color: #008000;">老师发布命令</span>
-    <span style="color: #000000;">    teacher.commond(GroupLeader(listGirls));
-
-        system(</span><span style="color: #800000;">"</span><span style="color: #800000;">PAUSE</span><span style="color: #800000;">"</span><span style="color: #000000;">);
-        </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
-    }</span>
-
-
-
-
-
+    system("PAUSE");
+    return 0;
+}
+```
+<br>
 这样的设计符合迪米特法则.
 
 在上面的例子中, 我们也可以看出虽然迪米特法则可以避免与非直接的类通信, 但是要通信, 必然会通过一个“中介”来发生联系, 例如本例中, 体育老师就是通过体委这个“中介”来与学生发生联系的. 过分的使用迪米特原则, 会产生大量这样的中介和传递类, 导致系统复杂度变大. 所以在采用迪米特法则时要反复权衡, 既做到结构清晰, 又要高内聚低耦合.
 
-狭义的迪米特法则的缺点：
+狭义的迪米特法则的缺点:
 
 在系统里面造出大量的小方法, 这些方法仅仅是传递间接的调用, 与程序的逻辑无关.
 
 遵循类之间的迪米特法则会使一个系统的局部设计简化, 因为每一个局部都不会和远距离的对象有之间的关联, 但是, 这也会造成系统的不同模块之间的通信效率降低, 也会使系统的不同模块之间不容易协调.
 
-广义的迪米特法则在类的设计上的体现：
+广义的迪米特法则在类的设计上的体现:
 
-优先考虑将一个类设置成不变类；尽量降低一个类的访问权限；尽量降低成员的访问权限。
-   
+优先考虑将一个类设置成不变类; 尽量降低一个类的访问权限; 尽量降低成员的访问权限.
