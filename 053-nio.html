@@ -61,7 +61,10 @@
 <li><a href="#bytebuffer">ByteBuffer</a></li>
 </ul>
 </li>
-<li><a href="#channel">Channel</a></li>
+<li><a href="#channel">Channel</a><ul>
+<li><a href="#memory-mapped">Memory Mapped</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <p>Reference: <a href="http://ifeve.com/java-nio-all/">Java NIO 系列教程</a></p>
@@ -185,6 +188,14 @@
 <li>把 position 设置为 0</li>
 </ul>
 <p>然后处理的数据就是从 position 到 limit 直接的数据, 也就是刚刚读取过来的数据.</p>
+<h2 id="memory-mapped"><a name="user-content-memory-mapped" href="#memory-mapped" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Memory Mapped</h2>
+<p>虚拟内存映射: 把文件的某一段(磁盘/硬盘上)直接映射到内存中去; 一旦文件被映射, 访问文件就会非常快, 不用通过系统的 <code>read()</code> 或 <code>write()</code>.</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">MappedByteBuffer</span> <span style="color: #333333">FileChannel</span><span style="color: #A71D7E">.</span><span style="color: #008080">map</span><span style="color: #A71D7E">(</span><span style="color: #333333">MapMode</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D; font-weight: bold">long</span> <span style="color: #333333">position</span><span style="color: #A71D7E">,</span> <span style="color: #333333">longsize</span><span style="color: #A71D7E">)</span>
+<span style="color: #999988; font-style: italic">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
+</pre></div>
+
+<br>
+通过 <code>FileChannel</code> 可以将文件映射到内存中, 取得一个 <code>MappedByteBuffer</code>.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
