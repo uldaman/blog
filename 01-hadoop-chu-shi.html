@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>01. Hadoop 初识</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/01-hadoop-chu-shi.html" rel="bookmark"
+        title="Permalink to 01. Hadoop 初识">01. Hadoop 初识</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-10-16T23:32:00+08:00">Sun 16 October 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 预备</a></li>
+<li><a href="#2">2. 实验环境</a></li>
+<li><a href="#3-hadoop">3. Hadoop 生态圈</a></li>
+<li><a href="#4-hadoop">4. Hadoop 进程</a><ul>
+<li><a href="#41-namenode">4.1 NameNode</a></li>
+<li><a href="#42-secondary-namenode">4.2 Secondary NameNode</a></li>
+<li><a href="#43-datenode">4.3 DateNode</a></li>
+<li><a href="#44-jobtracker">4.4 JobTracker</a></li>
+<li><a href="#45-tasktracker">4.5 TaskTracker</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 预备</h1>
+<p>使用 Hadoop 需要具体一些预备知识: Linux 和 Java;</p>
+<p>Linux 可以去看看《鸟哥的私房菜》, Java 不需要太过深入, 看看张孝祥的 《Java 就业培训》就好了.</p>
+<p><strong>OLTP</strong>: 联机事务处理, 是传统的关系型数据库的主要应用, 主要是基本的、日常的事务处理, 例如银行交易.</p>
+<p><strong>OLAP</strong>: 联机分析处理, 是数据仓库系统的主要应用, 支持复杂的分析操作, 侧重决策支持, 并且提供直观易懂的查询结果.</p>
+<p>Hadoop 是一个由 Apache 基金会所开发的**分布式系统基础架构**, 由一套*分布式文件系统*和一套*计算框架*构成, 它是一套**生态圈**, 而不是一个数据库应用.</p>
+<p>Hadoop 做的是**离线数据**分析 (OLAP), 例如像淘宝数据魔方那样统计历史数据; 也正如此 Hadoop 使用的 HDFS 文件系统是个**半只读**系统, 只支持增加, 不支持修改, 因为历史数据产生了就是产生了, 不需要被修改; 但也有特殊情况存在, 所以 Hadoop 推出了 <strong>HBase</strong> 这个子项目.</p>
+<p><strong>去 IEO</strong>: 它是阿里巴巴造出的概念, 其本意是, 在阿里巴巴的 IT 架构中, 去掉 IBM 的小型机、Oracle 数据库、EMC 存储设备, 代之以自己在开源软件基础上开发的系统;</p>
+<p>使用 Hadoop 也推崇这个概念, 毕竟 IEO 价格昂贵, 而 Hadoop 可以运行在廉价的 PC 机上.</p>
+<p>Hadoop 生产环境选型:</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop初识/集群选择.png" /></p>
+<p>Hadoop 的大多思想都来源于 Google;</p>
+<p>Google 技术有三宝: <strong>GFS</strong>、<strong>MapReduce</strong> 和 <strong>BigTable</strong>! HDFS 的灵感就来自 GFS, 而 HBase 的灵感就是 BigTable, 当然也少不了 MapReduce.</p>
+<p><a href="http://blog.jobbole.com/71431/">Page Rank &ndash; 给每个网页评分</a>, 曾是 Google 发家致富的法宝, 是一套非常复杂的算法, 当 Google 收集的网页数量变得非常巨大后, 单台的服务器已经无法完成这个算法的运算, 于是 Google 推出了 <strong>Map-Reduce</strong> 的方法, 这套方法的中心思想就按某个依据将巨大/复杂的任务拆分、映射到多个服务器进行分布式计算, 最终将各个服务器的运算结果进行汇总.</p>
+<p><a href="http://blog.csdn.net/hguisu/article/details/7962350">倒排索引 &ndash; 解决全文搜索的问题</a></p>
+<h1 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 实验环境</h1>
+<p>2.1. 条件允许, 可以搞台服务器, 装上 <strong>ESXI</strong>, 虚拟出几个服务器, 再通过 VMware Client 对其进行管理.</p>
+<p>2.2. 如果条件不允许, 可以在本机上用 VMware Workstation (或者 Virtualbox), 推荐虚拟出 3 台服务器, 一台用作 NameNode, 另两台用作 DataNode.</p>
+<p>2.3. 还可以在 Windows 上用 <strong>cygwin</strong> 虚拟出类 UNIX 环境, 不过不推荐这样做&hellip;</p>
+<p>我们使用 2.2 来进行实验, 参考我的一篇 wiki: <a href="http://wiki.smallcpp.com/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/%E6%90%AD%E5%BB%BA%20Hadoop%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.html">搭建 Hadoop 分布式实验环境</a></p>
+<blockquote>
+<p>如果使用 2.2 的话, 要去主板的 BIOS 中开启 VT 功能, 能很大的提高虚拟机性能.</p>
+</blockquote>
+<h1 id="3-hadoop"><a name="user-content-3-hadoop" href="#3-hadoop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. Hadoop 生态圈</h1>
+<p>这里仅介绍下几个重要的 Hadoop 子项目;</p>
+<ul>
+<li>Pig, 一种脚本语言, 它的目标是为了简化 MR 的编写</li>
+<li>Hive, 提供一种类 SQL 语句来操作 MR, 也是为了简化 MR 的编写</li>
+<li>HBase, 这是一个真实的 NoSQL 数据库, 它是为了解决 Hadoop 半只读的问题</li>
+</ul>
+<p>像 Pig 和 Hive 都是为了增强 Hadoop 的 OLAP 能力, 而 HBase 是为了增强 Hadoop 的 OLTP 能力.</p>
+<blockquote>
+<p>以上仅为我个人理解, 现在对 Hadoop 接触不深, 可能理解有误, 以后再改进.</p>
+</blockquote>
+<h1 id="4-hadoop"><a name="user-content-4-hadoop" href="#4-hadoop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. Hadoop 进程</h1>
+<p>当 Hadoop 集群跑起来后, 它们产生一些守护进程 (就像在 Windows 系统下的服务一样), Hadoop 是 Java 开发的, 所以这些进程都是 Java 进程, 可以通过 <code>JPS</code> 查看.</p>
+<p>Hadoop 集群逻辑上分为两个节点: <strong>主节点 (Master)**和**从节点 (Slave)</strong>;</p>
+<p>Master 节点为运行着 <strong>NameNode</strong>、<strong>Secondary NameNode</strong> 及 <strong>JobTracker</strong> (<strong>ResourceManager</strong>) 节点的统称.</p>
+<p>Slave 节点为运行着 <strong>DataNode</strong> 及 <strong>TaskTracker</strong> (<strong>NodeManager</strong>) 节点的统称.</p>
+<p>以下先简单介绍, 有个印象, 后续还会单独进行讲解.</p>
+<h2 id="41-namenode"><a name="user-content-41-namenode" href="#41-namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.1 NameNode</h2>
+<ul>
+<li>HDFS 的守护程序 (总控), 保存 Hadoop 集群的元数据.</li>
+<li>记录文件是怎么分块保存的.</li>
+<li>对内存和 I/O 进行集中管理.</li>
+</ul>
+<p>总之就是一个 &ldquo;老大&rdquo; 的角色, 在 Hadoop 1.x 中, NameNode 是**单点**的, 也就是说故障后则整个集群崩溃, 就算有 Secondary NameNode 做为替补, 但也要人工操作, 不能自动替换 (听说在 Hadoop 2.x 中已经支持自动切换了, 暂时没接触过, 还不敢确定).</p>
+<h2 id="42-secondary-namenode"><a name="user-content-42-secondary-namenode" href="#42-secondary-namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.2 Secondary NameNode</h2>
+<p>就是个 NameNode 的辅助程序, 或者说替补程序, 保存着 NameNode 元数据的快照, 当 NameNode 故障时, 可以用 Secondary NameNode 进行备用.</p>
+<h2 id="43-datenode"><a name="user-content-43-datenode" href="#43-datenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.3 DateNode</h2>
+<p>数据节点守护程序, 简单的说就是 HDFS 保存数据的地方.</p>
+<h2 id="44-jobtracker"><a name="user-content-44-jobtracker" href="#44-jobtracker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4 JobTracker</h2>
+<p>位于 Master 上, 是MR 作业主处理程序, 负责拆分、映射作业到 TaskTracker.</p>
+<p>同 NameNode 一样, 它也是个**单点**进程.</p>
+<blockquote>
+<p>仅为 Hadoop 1.x 上的概念, Hadoop 2.x 上用 ResourceManager 替代了.</p>
+</blockquote>
+<h2 id="45-tasktracker"><a name="user-content-45-tasktracker" href="#45-tasktracker" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.5 TaskTracker</h2>
+<p>位于 Slave 节点上, 管理各自的 Task.</p>
+<blockquote>
+<p>仅为 Hadoop 1.x 上的概念, Hadoop 2.x 上用 NodeManager 替代了.</p>
+</blockquote>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="01-hadoop-chu-shi" data-title="01. Hadoop 初识" data-url="http://blog.smallcpp.com/01-hadoop-chu-shi.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

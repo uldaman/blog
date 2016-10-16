@@ -44,6 +44,29 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/13-c-wai-guan-mo-shi-men-mian-mo-shi.html"><h3 class="article-title">13、[C++] 外观模式/门面模式</h3></a>
+<h6 class="subheader" title="2015-02-23T10:03:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>外观模式: 即为子系统中的一组接口提供一个一致的界面, 此模式定义了一个高层接口, 这个接口使得这一子系统更加容易使用.</p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/b77d9bedff80.jpg"><img alt="外观模式" src="http://www.smallcpp.com/wp-content/uploads/2015/02/thumb.jpg" /></a></p>
+<p>Facade: 外观类, 他知道子类系统类负责处理的请求, 将客户的请求给适当的子系统对象.</p>
+<p>SubSystemXxx: 子系统类, 他们实现子系统的功能, 处理外观类指派的任务.</p>
+<p>我们大家最容易理解和知道的外观模式就是，使用的API接口的封装，我们将第三方的API接口引入到我们的项目中的时候，我们需要对这些接口进行包装，将具体调用过程进行包装成外观类的形式，通过外观类来进行统一的调用。</p>
+<p>C++模拟代码如下:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/13-c-wai-guan-mo-shi-men-mian-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/12-c-2014-xiao-jie.html"><h3 class="article-title">12、[C++] 2014 小结</h3></a>
 <h6 class="subheader" title="2015-02-23T05:05:00+08:00">Mon 23 February 2015
 </h6>
@@ -270,31 +293,6 @@
             <hr  class="gradient"/>
         </article>
 
-        <article>
-            <a href="http://blog.smallcpp.com/5-cce-lue-mo-shi.html"><h3 class="article-title">5、[C++]策略模式</h3></a>
-<h6 class="subheader" title="2015-02-15T14:20:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
-
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>策略模式</h4>
-<p>回顾下简单工厂模式, 在最后的main函数中, 我们暴露了两个类, Operation类和Factory类.
-能不能对这两个类进行再封装, 使其最暴露一个类就能写完main函数呢?
-那就引入了策略模式.</p>
-<p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251" /></p>
-<p>可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-cce-lue-mo-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 26 of 27</h6>
@@ -328,6 +326,7 @@
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
             <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
