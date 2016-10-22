@@ -20,4 +20,3 @@ Eclipse 是开发 Java 的 IDE (集成开发环境).
 ![](http://i57.tinypic.com/fn8sg0.jpg)
 
 再次打开 Eclipse 就是中文的了.
-嬜
