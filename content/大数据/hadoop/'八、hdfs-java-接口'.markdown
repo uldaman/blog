@@ -25,6 +25,7 @@ title: (八)、HDFS Java 接口
 abcdefghijklmnopqrstuvwxyz.
 
 接下来直接上源码好了:
+
 ```java
 package cn.itcast.hadoop.hdfs;
 
