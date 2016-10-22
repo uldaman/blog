@@ -174,9 +174,10 @@
 <br>
 这里的数据是用来标识集群、节点唯一性的.</p>
 <h2 id="secondary-namenode"><a name="user-content-secondary-namenode" href="#secondary-namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Secondary NameNode</h2>
-<p>HA 解决方案 (高可靠)</p>
+<p>HA 解决方案 (高可用)</p>
 <p><strong>工作模式</strong>:</p>
 <p>从 NameNode 下载元数据信息 (<strong>fsimage</strong>, <strong>edits</strong>), 然后合并二者, 生成新的 <strong>fsimage</strong>, 在本地保存一份后推送到 NameNode, 替换旧的 <strong>fsimage</strong>.</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hdfs简介/SecondaryNameNode.jpg" /></p>
 <p><strong>什么时候同步?</strong></p>
 <ul>
 <li><code>fs.checkpoint.period</code> 指定两次 checkpoint 的最大时间间隔, 默认 3600 秒</li>
