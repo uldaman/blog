@@ -88,7 +88,7 @@
 瓶颈.</p>
 <p>HDFS 联邦中, 每个 <strong>NameNode</strong> 都是独立的, 不需要和其它 <strong>NameNode</strong> 协调合作, 但是 DataNode 作为统一的块存储设备被所有 NameNode 共享.</p>
 <p>每一个 <strong>DataNode</strong> 都在所有的 <strong>NameNode</strong> 进行注册, DataNode 发送心跳信息、块报告到所有的 NameNode 上, 同时呢, 也执行所有 NameNode 发来的命令, 而 NameNode 通过 <strong>Block Pools</strong> (块池) 对其进行管理.</p>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.jpg" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.png" /></p>
 <h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>块池</h2>
 <p>**块池**是逻辑上的概念, 就是属于单个命名空间的一组块, 同一个 DataNode 中可以存在着属于多个 Block Pool 的多个块, Block Pool 允许一个 NameNode 在不通知其他 NameNode 的情况下为一个新的 Block 创建 Block ID, 一个 NameNode 失效不会影响其下的 DataNode 为其他 NameNode 的服务.</p>
 <p>当向集群存储数据时, 集群先为其分配 NameNode 创建命名空间, 然后 Block Pools 从 DataNode 上寻找空闲 Block 加入当前 NameNode 所管辖下的块池, 最后 NameNode 将数据存放进这些 Block.</p>
@@ -132,7 +132,7 @@
 </ul>
 </li>
 </ul>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/快照.jpg" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/快照.png" /></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a>
 
 </p>
