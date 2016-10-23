@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>03. Hadoop 2.x 新特性</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/03-hadoop-2x-xin-te-xing.html" rel="bookmark"
+        title="Permalink to 03. Hadoop 2.x 新特性">03. Hadoop 2.x 新特性</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-10-23T19:21:00+08:00">Sun 23 October 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#hadoop-1x">Hadoop 1.x 问题</a></li>
+<li><a href="#hadoop-2x">Hadoop 2.x 解决方案</a><ul>
+<li><a href="#_1">联邦</a></li>
+<li><a href="#_2">块池</a></li>
+<li><a href="#_3">启用联邦</a><ul>
+<li><a href="#_4">设置配置文件</a></li>
+<li><a href="#namenode">格式化 NameNode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#hdfs">HDFS 快照</a></li>
+</ul>
+</div>
+<h1 id="hadoop-1x"><a name="user-content-hadoop-1x" href="#hadoop-1x" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hadoop 1.x 问题</h1>
+<p>主要就是 NameNode 单点问题.</p>
+<p>Hadoop 1.x 中, 一个集群就只有一个 NameNode, 这种架构虽然实现简单, 但会产生**单点**、<strong>内存**瓶颈、**性能</strong>
+瓶颈等限制.</p>
+<p><strong>首先</strong>, 整个 Hadoop 集群的命名空间都归一个 NameNode 管理, 这样 HDFS 所能存储的文件数量会受到 NameNode 容量的限制;</p>
+<p><strong>其次</strong>, 当集群进行复杂运算时, 也只有一个 NameNode 在运作, 集群的运算性能也会受到 NameNode 的限制.</p>
+<p><strong>最后</strong>, 虽然集群有 Second NameNode 作为辅助节点, 但并不会完成自动切换, 当 NameNode 宕掉时, 还是需要人工去处理.</p>
+<p>虽然仅仅在像 Yahoo 和 Facebook 返种规模的大公司才会面对这样的限制问题, 但在 Hadoop 2.x 中, 官方还是给出了解决方案.</p>
+<h1 id="hadoop-2x"><a name="user-content-hadoop-2x" href="#hadoop-2x" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hadoop 2.x 解决方案</h1>
+<p>Hadoop 2.x 提出了两个新特性用以解决以上问题:</p>
+<ul>
+<li>HDFS 联邦</li>
+<li>HDFS HA (要用到 zookeeper 等，留在后面再讲)</li>
+</ul>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>联邦</h2>
+<p>HDFS 联邦提供了 Hadoop 集群多 NameNode 的能力, 让集群可以水平扩展, 一定程度解决了单 NameNode 的**内存**瓶颈和**性能**
+瓶颈.</p>
+<p>HDFS 联邦中, 每个 <strong>NameNode</strong> 都是独立的, 不需要和其它 <strong>NameNode</strong> 协调合作, 但是 DataNode 作为统一的块存储设备被所有 NameNode 共享.</p>
+<p>每一个 <strong>DataNode</strong> 都在所有的 <strong>NameNode</strong> 进行注册, DataNode 发送心跳信息、块报告到所有的 NameNode 上, 同时呢, 也执行所有 NameNode 发来的命令, 而 NameNode 通过 <strong>Block Pools</strong> (块池) 对其进行管理.</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.jpg" /></p>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>块池</h2>
+<p>**块池**是逻辑上的概念, 就是属于单个命名空间的一组块, 同一个 DataNode 中可以存在着属于多个 Block Pool 的多个块, Block Pool 允许一个 NameNode 在不通知其他 NameNode 的情况下为一个新的 Block 创建 Block ID, 一个 NameNode 失效不会影响其下的 DataNode 为其他 NameNode 的服务.</p>
+<p>当向集群存储数据时, 集群先为其分配 NameNode 创建命名空间, 然后 Block Pools 从 DataNode 上寻找空闲 Block 加入当前 NameNode 所管辖下的块池, 最后 NameNode 将数据存放进这些 Block.</p>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>启用联邦</h2>
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置配置文件</h3>
+<p>要使用 HDFS 联邦, 只需在 <code>hdfs-site.xml</code> 中修改如下选项即可:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;property&gt;</span>
+    <span style="color: #000080">&lt;name&gt;</span>dfs.nameservices<span style="color: #000080">&lt;/name&gt;</span>
+    <span style="color: #000080">&lt;value&gt;</span>namenode1,namenode2<span style="color: #000080">&lt;/value&gt;</span>
+<span style="color: #000080">&lt;/property&gt;</span>
+</pre></div>
+
+<br></p>
+<h3 id="namenode"><a name="user-content-namenode" href="#namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>格式化 NameNode</h3>
+<p>第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
+<h1 id="hdfs"><a name="user-content-hdfs" href="#hdfs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>HDFS 快照</h1>
+<p>在 2.x 终于实现了快照.</p>
+<ul>
+<li>设置一个目录为可快照:<ul>
+<li><code>hdfs dfsadmin -allowSnapshot &lt;path&gt;</code></li>
+</ul>
+</li>
+<li>取消目录可快照:<ul>
+<li><code>hdfs dfsadmin -disallowSnapshot &lt;path&gt;</code></li>
+</ul>
+</li>
+<li>生成快照:<ul>
+<li><code>hdfs dfs -createSnapshot &lt;path&gt; [&lt;snapshotName&gt;]</code></li>
+</ul>
+</li>
+<li>删除快照:<ul>
+<li><code>hdfs dfs -deleteSnapshot &lt;path&gt; &lt;snapshotName&gt;</code></li>
+</ul>
+</li>
+<li>列出所有可快照目录:<ul>
+<li><code>hdfs lsSnapshottableDir</code></li>
+</ul>
+</li>
+<li>比较快照之间的差异:<ul>
+<li><code>hdfs snapshotDiff &lt;path&gt; &lt;fromSnapshot&gt; &lt;toSnapshot&gt;</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/快照.jpg" /></p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="03-hadoop-2x-xin-te-xing" data-title="03. Hadoop 2.x 新特性" data-url="http://blog.smallcpp.com/03-hadoop-2x-xin-te-xing.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
+            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
+            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
