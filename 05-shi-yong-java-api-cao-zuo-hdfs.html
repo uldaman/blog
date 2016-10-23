@@ -58,6 +58,7 @@
 <li><a href="#_1">环境变量</a></li>
 <li><a href="#hadoop">Hadoop 类目录</a></li>
 <li><a href="#_2">编译源码</a></li>
+<li><a href="#ant">ant</a></li>
 <li><a href="#_3">其他例子</a><ul>
 <li><a href="#1">例 1</a></li>
 <li><a href="#2">例 2</a></li>
@@ -141,6 +142,9 @@ mkdir myclass
 <br>
 然后 <code>/usr/itcast/hadoop-2.7.3/myclass</code> 下就多了个 <code>FileSystemCat.class</code> 文件.</p>
 <p>这时执行 <code>hdfs FileSystemCat /xxx</code> 就能查看到 <code>xxx</code> 文件的内容啦, 类似 linux 的 <code>cat</code> 命令.</p>
+<h1 id="ant"><a name="user-content-ant" href="#ant" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ant</h1>
+<p>由于编译源码时需要指定 Hadoop 的 jar 包, 当引入的 jar 包多时, 这样就特别麻烦, 我们可以借用 ant 工具来编译源码, ant 可以在 <code>bulid.xml</code> 中设定 jar 包的所在目录, 这样就比较方便了.</p>
+<p>这里仅作介绍, 因为我是使用 Eclipse 进行开发的, 导入 jar 包相对于说, 还是比较方便的.</p>
 <h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他例子</h1>
 <h2 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>例 1</h2>
 <p>读入本地文件系统一个大约一百多字节的文本文件, 并将其第 101-120 字节的内容写入 HDFS 成为一个新文件.</p>
