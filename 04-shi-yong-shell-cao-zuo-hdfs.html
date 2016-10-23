@@ -54,9 +54,73 @@
 
 
     <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#_1">基本用法</a></li>
+</ul>
 </div>
-<p>占位</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>基本用法</h1>
+<p>执行一个 HDFS 命令, 有下面两种写法:</p>
+<ul>
+<li>hadoop 1.x <code>hadoop fs -???</code></li>
+<li>hadoop 2.x <code>hdfs dfs -???</code></li>
+</ul>
+<p>后面的 <code>???</code> 是一个具体的文件系统命令, 和 Linux 的文件系统命令很相似, 如查看当前 HDFS 文件系统中的文件:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>HDFS dfs -ls hdfs://itcast01:9000/
+</pre></div>
+
+<br>
+这里要注意下 HDFS 文件系统和本地文件系统的区别, 由于 HDFS 是分布式文件系统, 是通过网络共享, 因此需要个协议, 类似网络共享的 <code>http</code>、<code>ftp</code> 协议等, 这里就是 <code>HDFS</code> 协议, 所以上面的 HDFS 由三部分组成:</p>
+<table>
+<thead>
+<tr>
+<th>HDFS://</th>
+<th>itcast01:9000</th>
+<th>/</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>协议</td>
+<td>主机地址端口</td>
+<td>目录结构 (这里是根结点)</td>
+</tr>
+</tbody>
+</table>
+<p>如果在 <code>core-site.xml</code> 里指定了 <code>defaultFS</code>, 那上面地址中的 协议 和 主机地址端口 可以省略, 简写个目录结构就可以了:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>HDFS dfs -ls /
+</pre></div>
+
+<br>
+如果连目录结构都省略 <code>HDFS dfs -ls</code>, 这样默认访问的是 <code>hdfs://itcast01:9000/user/&lt;current user&gt;</code> 目录.</p>
+<p><code>ls</code> 命令的结果由 7 部分组成:</p>
+<table>
+<thead>
+<tr>
+<th>-rw-r&ndash;r&ndash;</th>
+<th>2</th>
+<th>martin</th>
+<th>supergroup</th>
+<th>59</th>
+<th>2016-10-16 21:30</th>
+<th>/words.txt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>权限</td>
+<td>副本 (如果是目录则为 - )</td>
+<td>创建者</td>
+<td>所在组</td>
+<td>大小</td>
+<td>最后访问时间</td>
+<td>文件路径</td>
+</tr>
+</tbody>
+</table>
+<p><strong>当前目录?</strong></p>
+<p>在 HDFS 提供的命令中, 是没有当前目录的概念的, 更没有 <code>cd</code> 命令.</p>
+<p><strong>数据存在哪?</strong></p>
+<p>从 OS 的角度, 数据被放在 DataNode 的 <code>/tmp/dfs/data/current/</code> 目录下, 当然从 OS 的角度, 是看不懂这里面的文件的, 打开后都是些二进制.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a>
 
 </p>
