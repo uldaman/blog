@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-06-15 19:47
-title: 二、Lua 中的面向對象
+title: 02. Lua 中的面向對象
 
 在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.
 

@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-06-18 15:07
-title: '[CEGUI]. 6、另类 D3DHOOK'
+title: [CEGUI]. 6、另类 D3DHOOK
 
 原理就是找到 d3d9.dll 的入口, 搜索特征码, 找到 Vtalbe(虚函数表), 查表找到需要 hook 的函数的地址, 然后hook, 這樣就不需要在遊戲啟動時劫持 d3d9.dll 了;
 

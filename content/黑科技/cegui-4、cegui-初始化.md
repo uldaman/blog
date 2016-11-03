@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-05-29 16:19
-title: '[CEGUI]. 4、CEGUI 初始化'
+title: [CEGUI]. 4、CEGUI 初始化
 
 环境搭建好, Device 也取得后就开始初始化 CEGUI 了.
 

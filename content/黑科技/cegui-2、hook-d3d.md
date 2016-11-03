@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-05-27 16:06
-title: '[CEGUI]. 2、HOOK D3D'
+title: [CEGUI]. 2、HOOK D3D
 
 使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: [cegui渲染入门](http://blog.csdn.net/bluekane/article/details/3738376)
 
