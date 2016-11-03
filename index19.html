@@ -44,176 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
-<h6 class="subheader" title="2015-06-13T13:37:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
-这个类最主要的作用就是获取当前时间.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
-&lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-si-shi-jian-de-chu-li.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
-<h6 class="subheader" title="2015-06-13T13:28:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>Java 提供三种方法实现基本类型向字符串转换:
-*. 使用包装类的 toString() 方法
-*. 使用 String 类的 valueOf() 方法
-*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
-String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"><h3 class="article-title">(二十二) Java 中的包装类</h3></a>
-<h6 class="subheader" title="2015-06-13T13:20:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
-<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
-<p>包装类主要提供了两大类方法:
-*. 将本类型和其他基本类型进行转换的方法
-*. 将字符串和本类型及包装类互相转换的方法</p>
-<hr />
-<p>以 Integet 为例, 其它类似</p>
-<p>Integer n1 = new Integer(5);
-Integet n2 = new Integer(“5”);</p>
-<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
-<hr />
-<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
-<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
-<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html"><h3 class="article-title">(二十一) StringBuilder 类</h3></a>
-<h6 class="subheader" title="2015-06-13T12:29:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
-<p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
-至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-yi-stringbuilder-lei.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-shi-java-zhong-de-zi-fu-chuan.html"><h3 class="article-title">(二十) Java 中的字符串</h3></a>
-<h6 class="subheader" title="2015-06-13T12:13:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
-<p>创建 String 对象的方法：</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
-String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-shi-java-zhong-de-zi-fu-chuan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-jiu-yi-chang.html"><h3 class="article-title">(十九) 异常</h3></a>
-<h6 class="subheader" title="2015-06-13T11:38:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>Java 把异常当作对象来处理, 并定义一个基类 java.lang.Throwable 作为所有异常的超类(父类), 有两个子类 Error 和 Exception, 分别表示错误和异常.</p>
-<p>Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等. 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.</p>
-<p>Exception 是程序本身可以处理的异常, 程序中应当尽可能去处理这些异常.</p>
-<p>我们主要讨论的是 Exception.</p>
-<p>Exception 也分为两大类 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-jiu-yi-chang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">'[CEGUI]. 5、解决电脑休眠引起的黑屏问题'</h3></a>
-<h6 class="subheader" title="2015-06-13T06:27:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
-<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">HRESULT</span> <span style="color: #333333">APIENTRY</span> <span style="color: #333333">hkIDirect3DDevice9</span><span style="color: #A71D7E">::</span><span style="color: #333333">Reset</span>(<span style="color: #333333">D3DPRESENT_PARAMETERS</span> <span style="color: #A71D7E">*</span><span style="color: #333333">pPresentationParameters</span>) {
-    <span style="color: #333333">m_pManager</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">PreReset</span>();
-
-    <span style="color: #333333">HRESULT</span> <span style="color: #333333">hRet</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html"><h3 class="article-title">(十八) 多态及接口</h3></a>
-<h6 class="subheader" title="2015-06-12T17:15:00+08:00">Fri 12 June 2015
-</h6>
-
-
-<p>老生常谈, 参考 C++.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类型转换</h1>
-<p>需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
-为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
-<p>首先, 我们来看一下向下类型转换的风险.</p>
-<p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-ba-duo-tai-ji-jie-kou.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/shi-qi-ji-cheng.html"><h3 class="article-title">(十七) 继承</h3></a>
 <h6 class="subheader" title="2015-06-12T14:43:00+08:00">Fri 12 June 2015
 </h6>
@@ -264,9 +94,184 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/shi-wu-this-guan-jian-zi.html"><h3 class="article-title">(十五) this 关键字</h3></a>
+<h6 class="subheader" title="2015-06-12T10:42:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>和 C++ 一样, 代表的是就是当前对象本身.</p>
+<p>不过 Java 中还有特殊的作用: this 调用构造函数.</p>
+<p>格式: this();</p>
+<p>我们知道一个类, 可以有多个构造函数, 调用哪个构造函数取决于 this() 里的参数个数及类型;</p>
+<p>this调用构造函数, 必须是构造函数中第一条语句;</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
+   System.out.println(&lt;/span&gt;&quot;无参数构造函数&quot;&lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-wu-this-guan-jian-zi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-si-bao-ji-fang-wen-xiu-shi-fu.html"><h3 class="article-title">(十四) 包 及 访问修饰符</h3></a>
+<h6 class="subheader" title="2015-06-12T10:32:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>Java 中包的作用:
+*. 管理 Java 文件
+*. 解决同名文件冲突</p>
+<p>包的定义:
+使用关键字 package “包名”来定义(如: package com.martin), 必须放在 Java 源程序第一行.</p>
+<p>包命名规范:
+a、所有字母小写;
+b、域名倒过来写，如：com.baidu;</p>
+<p>包的使用:
+假设存在一个类 test, 现需要在另一个类中调用它 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-si-bao-ji-fang-wen-xiu-shi-fu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-san-feng-zhuang.html"><h3 class="article-title">(十三) 封装</h3></a>
+<h6 class="subheader" title="2015-06-12T10:06:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>封装, 面向对象思想三大特性之一, 概念就不多说了, 可以简单的理解成, 标准的 java 程序中, 应该通过类的方法来操作类的属性, 类的属性不应该设为 public.</p>
+<p>不过 Java 和 C++ 不一样, 它提供了 getter/setter 方法用于属性的读写, 直接上例子:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">HelloWorld</span> <span style="color: #A71D7E">{</span>
+    <span style="color: #A71D5D">private</span> <span style="color: #333333">String</span> <span style="color: #333333">name</span><span style="color: #A71D7E">;</span>
+
+    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">getName</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
+        <span style="color: #A71D5D">return ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-san-feng-zhuang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-er-lei.html"><h3 class="article-title">(十二) 类</h3></a>
+<h6 class="subheader" title="2015-06-12T09:46:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>面向对象、类及对象的概念就不多说了, 和 C++ 一样, 直接来看看 Java 中怎么使用类.</p>
+<p>之前讲过: 类是 Java 中的基本单元, 可以在类中定义变量和函数, 同时 Java 也规定了, 所有的变量和函数必须存在于类中.</p>
+<p>定义一个类:
+权限修饰符 class 类名 {
+定义属性(成员变量)
+定义方法(成员函数)
+}</p>
+<p>创建对象: 类名 对象名 = new 类名 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-er-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-yi-java-zhong-de-fang-fa.html"><h3 class="article-title">(十一) Java 中的方法</h3></a>
+<h6 class="subheader" title="2015-06-12T08:04:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>和 C++ 类中的方法是差不多的东西.</p>
+<p>定义方法:
+访问修饰符 返回值类型 方法名(参数列表) {
+方法主体
+}</p>
+<p>*、 访问修饰符: 方法允许被访问的权限范围, 可以是 public、protected、private 甚至可以省略.</p>
+<p>*、 方法修饰符: 用于说明该方法的使用方式, 可以是 static 或者 省略, static 表示这是一个静态方法.</p>
+<p>*、 返回值类型: 方法返回值的类型, 如果方法不返回任何值, 则返回值类型指定为 void; 如果方法具有返回值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-yi-java-zhong-de-fang-fa.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/shi-java-zhong-de-shu-zu.html"><h3 class="article-title">(十) Java 中的数组</h3></a>
+<h6 class="subheader" title="2015-06-12T07:51:00+08:00">Fri 12 June 2015
+</h6>
+
+
+<p>Java 中的数组和 C 中数组在使用上可能看不出什么区别, 实际上也的确差不多;
+但是它们在内存中还是有很大区别的, Java 中的数组不像 C 语言中那样是连续的内存块, 它是一个对象;</p>
+<p>Java 通过 数据类型标示符 + 数组符号[] 来声明一个数组对象的引用. 如 int[] n = null, String[] str = null 等等;
+Java 通过 new 关键字生成具体的数组对象, 如 int ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/shi-java-zhong-de-shu-zu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/jiu-jie-shou-yong-hu-shu-ru.html"><h3 class="article-title">(九) 接收用户输入</h3></a>
+<h6 class="subheader" title="2015-06-11T17:20:00+08:00">Thu 11 June 2015
+</h6>
+
+
+<p>在之前, 我们已经接触到了 Java 的输出函数, 即 System.out.println();</p>
+<p>当然使用 System.out.print() 也是可以的, 区别在于 System.out.print() 输出不会换行, 而 System.out.println() 会在输出的内容后自动换行.</p>
+<p>Java 中的输入</p>
+<p>程序中, 我们往往需要接收用户键盘的输入, 在 C 中 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/jiu-jie-shou-yong-hu-shu-ru.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/ba-liu-cheng-kong-zhi.html"><h3 class="article-title">(八) 流程控制</h3></a>
+<h6 class="subheader" title="2015-06-11T15:49:00+08:00">Thu 11 June 2015
+</h6>
+
+
+<p>分支结构</p>
+<p>循环结构</p>
+<p>Java 中的流程控制和 C/C++ 中一样, 就不多说了.</p>
+<p>一个小例子, 输入一个十位以内的数, 求出这个数有多少位:</p>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
+
+    &lt;/span&gt;&lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/ba-liu-cheng-kong-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 19 of 28</h6>
+<h6 class="subheader">Page 19 of 27</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/index18.html">&laquo; Prev</a>
@@ -292,19 +297,18 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
             <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-hadoop.html">大数据 Hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
             <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
         </ul>

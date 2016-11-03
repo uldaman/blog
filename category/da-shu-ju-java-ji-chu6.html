@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>(四)、解决"复制出来的虚拟机不能启动 DataNode"</title>
+    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - 大数据 Java 基础</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -43,47 +43,80 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/si-jie-jue-fu-zhi-chu-lai-de-xu-ni-ji-bu-neng-qi-dong-datanode.html" rel="bookmark"
-        title="Permalink to (四)、解决"复制出来的虚拟机不能启动 DataNode"">(四)、解决"复制出来的虚拟机不能启动 DataNode"</a></h3>
-    </header>
-
-<h6 class="subheader" title="2016-01-19T21:03:00+08:00">Tue 19 January 2016
+        <article>
+            <a href="http://blog.smallcpp.com/004-java-an-zhuang-ji-huan-jing-pei-zhi.html"><h3 class="article-title">004、Java 安装及环境配置</h3></a>
+<h6 class="subheader" title="2016-02-25T13:00:00+08:00">Thu 25 February 2016
 </h6>
 
 
-    <p>今天因测试需要, 需要第二台 hadoop 虚拟机, 于是就从 itcast01 克隆了一份, 命名为 itcast02.</p>
-<p>对第二台主机设置了 主机名、静态IP、 HOSTS、hadoop 配置(就是把一些配置文件里的 ip 和 主机名修改下), 重启虚拟机, 然后重新格式化 hdfs, 启动 Hadoop 服务…</p>
-<p>JPS 后发现, DataNode 并没有被启动…查资料发现问题原因.</p>
-<p>原因是每次 format 都会重新创建一个 id, 而生成的 tmp(这是在配置文件中指定的名字, 可以修改) 目录包含了上次 format 时的 id, format 会清空 namenode 下的数据, 但是并不清空 datanode 下的数据, 导致启动时失败, 所要做的就是每次 fotmat 前, 清空 tmp 下的所有目录.</p>
-<p>删除 tmp 文件夹 (rm -rf tmp) <br>重新格式化 hdfs (hdfs namenode -format) <br>必须要删除 tmp 后再格式化, 不然会启动不了 DataNode.</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a>
+<p>这节课主要说明 JAVA 开发环境的一些核心概念, 然后指导学员安装 JDK, 及配置环境变量.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 
 </p>
 
 
 
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/004-java-an-zhuang-ji-huan-jing-pei-zhi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
 
-<!--      -->
+        <article>
+            <a href="http://blog.smallcpp.com/003-windows-ji-chu.html"><h3 class="article-title">003、Windows 基础</h3></a>
+<h6 class="subheader" title="2016-02-24T22:00:00+08:00">Wed 24 February 2016
+</h6>
 
-    <!-- 多说评论框 start -->
-    <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="si-jie-jue-fu-zhi-chu-lai-de-xu-ni-ji-bu-neng-qi-dong-datanode" data-title="(四)、解决"复制出来的虚拟机不能启动 DataNode"" data-url="http://blog.smallcpp.com/si-jie-jue-fu-zhi-chu-lai-de-xu-ni-ji-bu-neng-qi-dong-datanode.html"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"smallcpp"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</article>
+
+<p>介绍下 win 下常用的 DOS 命令及快捷键、windows 优化和进制转换等基础知识.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/003-windows-ji-chu.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html"><h3 class="article-title">002、大数据生态圈尝鲜</h3></a>
+<h6 class="subheader" title="2016-02-24T18:00:00+08:00">Wed 24 February 2016
+</h6>
+
+
+<p>先通过几张图对大数据的生态圈有个宏观的认知, 搞清楚有哪些知识点需要掌握, 这些知识点后面都会详细讲解.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/002-da-shu-ju-sheng-tai-quan-chang-xian.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html"><h3 class="article-title">001、初识大数据</h3></a>
+<h6 class="subheader" title="2016-02-17T00:00:00+08:00">Wed 17 February 2016
+</h6>
+
+
+<p>大数据的 4 V: 体量大(Volume)、多样化(Variety)、快速化(Velocity)、价值密度低（Value）</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/001-chu-shi-da-shu-ju.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 6 of 6</h6>
+
+<p>
+            <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu5.html">&laquo; Prev</a>
+
+</p>
+</div>
+
     </div>
     <!-- End Main Content -->
 
@@ -101,19 +134,18 @@
             <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-hadoop.html">大数据 Hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
             <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
         </ul>

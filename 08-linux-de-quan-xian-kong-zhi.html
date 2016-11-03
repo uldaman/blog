@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>(四)、SecureCRT 的安装和使用</title>
+    <title>08. Linux 的权限控制</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -45,52 +45,48 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html" rel="bookmark"
-        title="Permalink to (四)、SecureCRT 的安装和使用">(四)、SecureCRT 的安装和使用</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/08-linux-de-quan-xian-kong-zhi.html" rel="bookmark"
+        title="Permalink to 08. Linux 的权限控制">08. Linux 的权限控制</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
+<h6 class="subheader" title="2015-04-03T15:48:00+08:00">Fri 03 April 2015
 </h6>
 
 
-    <p>**SecureCRT **是一款支持 SSH（SSH1 和 SSH2）的终端仿真程序, 同时支持 Telnet 和 rlogin 协议; 它可用于连接运行包括 Windows、Unis 和 linux 在内的远程系统.</p>
-<ol>
-<li>
-<p>首先下载 SecureCRT 并安装(网上有中文版本下载, 注意找大网站下载, 别下载了被装后门的版本).</p>
-</li>
-<li>
-<p>去 Ubuntu 中开启 SSH 功能. (SSH 为 Secure Shell 的缩写, 即安全外壳协议, 它是由 IETF 的网络工作小组（Network Working Group）所制定; SSH 是建立在应用层和传输层基础上的安全协议; 它专为远程登录会话和其他网络服务提供安全性的协议.)
-在 Ubuntu 中开启 SSH 功能只需要一句命令: sudo apt-get install openssh-server openssh-client</p>
-</li>
-<li>
-<p>查看 Ubuntu 的 ip, 在终端输入命令: ifconfig(注意不是 ipconfig).</p>
-</li>
-</ol>
-<p><img alt="" src="http://i62.tinypic.com/fvfr40.jpg" /></p>
-<p>记录下 ip 地址.</p>
-<ol>
-<li>返回 SecureCRT 中, 选择 快速连接.</li>
-</ol>
-<p><img alt="" src="http://i61.tinypic.com/33lfmt1.jpg" /></p>
-<p>输入 Ubuntu 的 ip 地址和用户名.</p>
-<p><img alt="" src="http://i60.tinypic.com/15zo868.jpg" /></p>
-<p>点击连接, 会弹出对话框让输入密码, 输入确定即可.</p>
-<p><img alt="" src="http://i57.tinypic.com/6dyec6.jpg" /></p>
-<p><img alt="" src="http://i60.tinypic.com/1zoj2hc.jpg" /></p>
-<ol>
-<li>此时输入中文可能会显示乱码, 这是因为 Ubuntu 的 ssh 默认编码是 utf-8, 而 SecureCRT 却不是, 所以只要把 SecureCRT 的编码改成 utf-8 就可以了.</li>
-</ol>
-<p><img alt="" src="http://i60.tinypic.com/344qskp.jpg" /></p>
-<p><img alt="" src="http://i58.tinypic.com/30u3j46.jpg" /></p>
-<ol>
-<li>SecureCRT连接后如果稍长时间不用就会掉线, 往往会造成工作状态的丢失, 如下设置可以始终保持 SecureCRT 的连接:</li>
-</ol>
-<p><img alt="" src="http://i62.tinypic.com/2uhr0h3.jpg" /></p>
-<p><img alt="" src="http://i61.tinypic.com/wl7m88.jpg" /></p>
-<p>现在远程操作环境就搭建好了, 可以在 SecureCRT 中像 Ubuntu 终端那样使用.</p>
-<p><img alt="" src="http://i58.tinypic.com/ics9dd.jpg" />
-&lt;d0</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/linux.html">Linux</a>
+    <p>首先,
+Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</p>
+<p><strong>所有者</strong>
+一般让文件的创建者, 谁创建了该文件, 谁就是该文件的所有者.
+用 ls -ahl 可以看到文件的所有者.
+也可以用 chown 用户名 文件名 来修改文件的所有者.</p>
+<p><strong>所在组</strong>
+当某个用户创建了一个文件后, 该文件的所在组就是该用户所在的组.
+用 ls -ahl 可以看到文件的所在组.
+也可以用 chgrp 组名 文件名 来修改文件的所在组.</p>
+<p><strong>其它组</strong>
+除开文件的所有者和所在组的用户外, 系统的其它用户都文件的其它组.</p>
+<p>usermod -g 组名 用户名 指定用户某个组中.
+usermod -d 目录名 用户名 改变该用户登陆的初始目录.</p>
+<p>在终端输入 ls –l 查看当前目录详情:
+<img alt="" src="http://i59.tinypic.com/2d165c9.jpg" /></p>
+<p>每行前面的第一段(例如:drwxr-xr-x)就是文件权限的描述.</p>
+<p>拿 drwxr-xr-x 这段做例子, 它实际被分为 4 部分.
+<a href="http://www.smallcpp.com/wp-content/uploads/2015/04/image.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/04/image_thumb.png" /></a>
+不过在说这个之前, 先说一下 r w x 的意思:
+r 表示 read 权限
+w 表示 write 权限
+x 表示 可执行 权限</p>
+<p>第一个 d, 表示文件的类型, 如果是 d 表示目录, - 表示文件;</p>
+<p>第二个 rwx, 表示所有者的权限;</p>
+<p>第三个 r-x, 表示所在组的权限;</p>
+<p>第四个 r-x, 表示其它组的权限.</p>
+<p>使用 chmod 命令可以更改指定文件的权限(chmod 权限 文件名).
+不过需要注意的是, 在 chmod 中权限是用数字来表示的, r 是 4, w 是 2, x 是 1.
+rwx : 4+2+1 = 7
+r-x : 4+1 = 5
+r-x : 4+1 = 5
+ap&lt;</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
 
 </p>
 
@@ -101,7 +97,7 @@
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="si-securecrt-de-an-zhuang-he-shi-yong" data-title="(四)、SecureCRT 的安装和使用" data-url="http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html"></div>
+    <div class="ds-thread" data-thread-key="08-linux-de-quan-xian-kong-zhi" data-title="08. Linux 的权限控制" data-url="http://blog.smallcpp.com/08-linux-de-quan-xian-kong-zhi.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -133,19 +129,18 @@
             <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
             <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-hadoop.html">大数据 Hadoop</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
             <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hadoop.html">hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lian-shu-cheng-jin-hadoop.html">炼数成金 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://blog.smallcpp.com/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
             <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-mongodb.html">深入浅出 Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.com/category/shen-ru-qian-chu-redis.html">深入浅出 Redis</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
             <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
         </ul>
