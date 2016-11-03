@@ -44,159 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">(五) C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
-<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
-但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
-<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State *L, const char *str);</strong></p>
-<p>现在新建一个 Lua ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/wu-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">(四) LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg" /></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">(三) 重新编译 Lua 程序库</h3></a>
-<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">(二) Lua 与 C/C++ 的第一次亲密接触</h3></a>
-<h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
-<p><strong>Lua 环境(Lua_State)
-**Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.
-对于 C ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/er-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/yi-windows-da-jian-xia-lua-kai-fa-huan-jing.html"><h3 class="article-title">(一) Windows 搭建下 Lua 开发环境</h3></a>
-<h6 class="subheader" title="2015-03-14T13:02:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Windows 搭建 Lua 环境包含3部分内容：**编译lua的库文件(<em>.lib), 编译lua解释器(lua.exe), 编译lua编译器(luac.exe)*</em>.
-我们采用 VS2013 + lua-5.2.4 来进行编译.</p>
-<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org"><a href="http://www.lua.org"><a href="http://www.lua.org">http://www.lua.org</a></a></a>
-我这里下载的是 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/yi-windows-da-jian-xia-lua-kai-fa-huan-jing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/si-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-override-he-final.html"><h3 class="article-title">(四) C++开发者都应该使用的10个C++11特性 — Override 和 final</h3></a>
-<h6 class="subheader" title="2015-03-13T17:56:00+08:00">Fri 13 March 2015
-</h6>
-
-
-<p>在 国嵌C++ 中曾分析过重载与重写.
-看下面这个例子:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; CParent {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    &lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/si-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-override-he-final.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/duan-qi-chong-dian-ji-hua.html"><h3 class="article-title">短期充电计划</h3></a>
-<h6 class="subheader" title="2015-03-13T13:25:00+08:00">Fri 13 March 2015
-</h6>
-
-
-<p><img alt="" src="http://i61.tinypic.com/x6lde9.jpg" /></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/duan-qi-chong-dian-ji-hua.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/san-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-ji-yu-fan-wei-de-forxun-huan.html"><h3 class="article-title">(三) C++开发者都应该使用的10个C++11特性 — 基于范围的for循环</h3></a>
-<h6 class="subheader" title="2015-03-12T11:06:00+08:00">Thu 12 March 2015
-</h6>
-
-
-<p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持&rdquo;糖块句法&rdquo;, 允许程序通过一个简单的&rdquo;foreach&rdquo;语句自动遍历list中的元素.
-C++11增加了一个类似的特性, for语句可以简单地遍历列表中的元素.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">my_array</span>[<span style="color: #0086b3">5</span>] <span style="color: #A71D7E">=</span> {<span style="color: #0086b3">1</span>, <span style="color: #0086b3">2</span>, <span style="color: #0086b3">3</span>, <span style="color: #0086b3">4</span>, <span style="color: #0086b3">5</span>};
-<span style="color: #999988; font-style: italic">// double the value of each element in my_array:</span>
-<span style="color: #A71D5D">for</span> (<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #A71D7E">&amp;</span><span style="color: #333333">x</span> : <span style="color: #333333">my_array ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/san-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-ji-yu-fan-wei-de-forxun-huan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.com/er-ckai-fa-zhe-du-ying-gai-shi-yong-de-10ge-c11te-xing-nullptr.html"><h3 class="article-title">(二) C++开发者都应该使用的10个C++11特性 — nullptr</h3></a>
 <h6 class="subheader" title="2015-03-12T09:22:00+08:00">Thu 12 March 2015
 </h6>
@@ -204,7 +51,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
 <p>先看下面这两个重载函数.</p>
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
 </p>
 
@@ -226,7 +73,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 **auto 通知编译器去根据初始化代码推断所声明变量的真实类型.
 各种作用域内声明变量都可以用到它, 如: 名空间中, 程序块中, 或是for循环的初始化语句中.
 需要注意的是, auto不能用来声明函数的返回值.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>auto i = &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a>
+<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>auto i = &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
 </p>
 
@@ -236,9 +83,220 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html"><h3 class="article-title">StarUML 上的一些英文翻译</h3></a>
+<h6 class="subheader" title="2015-03-12T02:42:00+08:00">Thu 12 March 2015
+</h6>
+
+
+<hr />
+<table cellpadding="2" cellspacing="0" border="0" width="400" > <tbody > <tr >
+<td width="200" valign="top" >Association
+</td>
+<td width="200" valign="top" >关联
+</td></tr> <tr >
+<td width="200" valign="top" >DirectedAssociation
+</td>
+<td width="200" valign="top" >直接关联
+</td></tr> <tr >
+<td width="200" valign="top" >Navigable
+</td>
+<td width="200" valign="top" >可导航的(即箭头)
+</td></tr> <tr >
+<td width="200" valign="top" >Aggregation
+</td>
+<td width="200" valign="top" >聚合
+</td></tr> <tr >
+<td width="200" valign="top" >Composition
+</td>
+<td width="200" valign="top" >合成
+</td></tr> <tr >
+<td width="200" valign="top" >Generalization
+</td>
+<td width="200" valign="top" >泛化(继承)
+</td></tr> <tr >
+<td width="200" valign="top" >Dependency
+</td>
+<td width="200" valign="top" >依赖
+</td></tr> <tr >
+<td width="200" valign="top" >Realization
+</td>
+<td width="200" valign="top" >实现接口
+</td></tr></tbody></table><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/staruml-shang-de-yi-xie-ying-wen-fan-yi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html"><h3 class="article-title">19、[C++]StarUML使用范例 — 接口</h3></a>
+<h6 class="subheader" title="2015-03-11T15:50:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>C++在设计时, 接口这种概念还没有提出来, 所以C++中没有直接支持接口的语法, 但是可以使用抽像类来实现接口.</p>
+<p>接口（interface）是抽像类的变体, 抽象类里面可以有非虚函数, 但接口里只能有虚函数.</p>
+<p>从toolbox中, 选择“Interface”, 并点击图表的某处, 将其改名为 Strategy.</p>
+<p><img alt="" src="http://i59.tinypic.com/30mtlhh.jpg" /></p>
+<p>在顶部工具栏选择 “Stereotype Display” 下拉按钮, 将值改变为“None”, 这将改变默认的圆形形状, 使其变为和普通类一样的长方形.</p>
+<p><img alt="" src="http://i58.tinypic.com/257dllg.jpg" /></p>
+<p>还是在顶部工具栏, 取消选中 &ldquo;Suppress Operations&rdquo; , 这将使我们能够看到接口的方法栏 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/19-cstarumlshi-yong-fan-li-jie-kou.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html"><h3 class="article-title">18、[C++]StarUML使用范例 — 聚合</h3></a>
+<h6 class="subheader" title="2015-03-11T15:30:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>聚合表示一种弱拥有关系, 即被聚合的类能单独存在.</p>
+<p>用上一篇的方法快速添加一个 Context 类.</p>
+<p><img alt="" src="http://i62.tinypic.com/k4a4j7.jpg" /></p>
+<p>从toolbox中选择表示“Aggregation”的箭头, 并从 Strategy拖拽向 Context, 此时连线是没有箭头指向的, 选中连接线, 在右边的“Properties”框上, 将 &ldquo;End1.IsNavigable&rdquo; 勾选上,箭头就出来了.</p>
+<p><img alt="" src="http://i62.tinypic.com/sz7ww1.jpg" /></p>
+<p>将“End2.Name”一栏改为 Strategy，将“End2.Visibility”改为 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/18-cstarumlshi-yong-fan-li-ju-he.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/17-c-starumlshi-yong-fan-li-zi-lei.html"><h3 class="article-title">17、[C++] StarUML使用范例 -- 子类</h3></a>
+<h6 class="subheader" title="2015-03-11T13:36:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>上一篇, 我们添加了一个名为 Strategy 的虚类.</p>
+<p>现在, 为这个虚类快速添加子类.</p>
+<p>在 &ldquo;Model Explorer&rdquo; 面板中点选 Strategy, 按 Ctrl + C 或者 右击选择 Copy 菜单进行复制, 再点选 Model1 按 Ctrl + V 或者 右击选择 Paste 菜单进行粘贴.</p>
+<p><img alt="" src="http://i59.tinypic.com/15dry52.jpg" /> &ndash;&gt; <img alt="" src="http://i60.tinypic.com/2m7dpp3.jpg" /></p>
+<p>点选粘贴出来的新类 Strategy_, 将它的名字改为 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/17-c-starumlshi-yong-fan-li-zi-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/16-c-starumlshi-yong-fan-li-xu-lei.html"><h3 class="article-title">16、[C++] StarUML使用范例 -- 虚类</h3></a>
+<h6 class="subheader" title="2015-03-11T13:09:00+08:00">Wed 11 March 2015
+</h6>
+
+
+<p>启动StarUML，弹“New Project By Approach”对话框, 选择“Empty Project”新建项目.</p>
+<p><img alt="" src="http://i57.tinypic.com/wqvy2x.jpg" /></p>
+<p>在右边的“Model Explorer”面板中可以看到新建的“Untitled”工程, 工程的属性可以在下方的Properties面板中修改（工程名、作者等）.</p>
+<p><img alt="" src="http://i58.tinypic.com/dncz6s.jpg" /></p>
+<p>通过“Model”主菜单, 或者在 Model Explorer 面板的工程上右击, 依次 Add — Model ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/16-c-starumlshi-yong-fan-li-xu-lei.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/xmind-si-wei-dao-tu-zhi-zuo-ruan-jian-ling-ji-chu-jiao-cheng.html"><h3 class="article-title">XMind (思维导图制作软件) 零基础教程</h3></a>
+<h6 class="subheader" title="2015-03-10T02:38:00+08:00">Tue 10 March 2015
+</h6>
+
+
+<p>工欲善其事, 必先利其器. 这里推荐一款很不错的思维导图编辑软件 – XMind, <a href="http://www.dayanzai.me/xmind.html">下载传送门</a>.</p>
+<h1 id="xmind"><strong>XMind界面简介</strong></h1>
+<p><img alt="" src="http://i60.tinypic.com/e8anhz.jpg" /></p>
+<p>XMind有五种不同类型的主题，如下：</p>
+<p><img alt="" src="http://i60.tinypic.com/2ms0m89.jpg" /></p>
+<p>**中心主题：**每一张思维图有且仅有一个中心主题. 这个主题在新建图的时候会被自动创建并安排在图的中心的位置. 当保存这个新建图的时候, 中心主题的内容会默认设置为保存文件的名字.</p>
+<p>**分支主题：**中心主题周围发散的第一层主题即分支主题.</p>
+<p>**子主题：**分支主题和自由主题后面添加的主题都被称为子主题.</p>
+<p>**自由主题：**通常总还会有些关键的, 但是临时缺少合适位置的信息, 这些信息将以自由主题的形式存在. Xmind 中有种不同的自由主题, 用户可以按需选用.</p>
+<h1 id="_1"><strong>添加主题</strong></h1>
+<p><strong>分支主题:</strong> 点选 [中心主题] , 右键-插入-主题.</p>
+<p><img alt="" src="http://i58.tinypic.com/2agoh1x.jpg" /></p>
+<p><strong>子主题 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/xmind-si-wei-dao-tu-zhi-zuo-ruan-jian-ling-ji-chu-jiao-cheng.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/15-c-zheng-que-bian-xi-lei-tu-de-liang-chong-cun-zai-xing-shi-zhuan.html"><h3 class="article-title">15、[C++] 正确辨析类图的两种存在形式[转]</h3></a>
+<h6 class="subheader" title="2015-03-10T00:12:00+08:00">Tue 10 March 2015
+</h6>
+
+
+<p><strong>摘要</strong></p>
+<p>本文通过对一个“学生选课系统”示例的简要分析与设计，说明UML图之一 (类图)的两种作用及存在形式，以期借此澄清有些朋友可能对类图存在的误解与困惑。</p>
+<p><strong>前言**</strong>
+**      在OOA与OOD大行其道的今天，UML在系统分析与设计中得到了广泛的采用。而在UML的9种图中，类图是最重要也是使用最普遍的图之一。但是，在与一些朋友，特别是初学者的聊天当中，我发现很多朋友对类图的作用及使用方法存在一定的误解和困惑。于是我写下这篇文章，希望本文能在一定程度上帮助这些朋友更好的认识和使用类图。当然，由于我对UML的认识并不很深刻，所以在文章中有错误和疏漏之处，恳请大家批评指正。</p>
+<p><strong>A vs D</strong>
+      要想正确认识与使用类图，我们首先要正确认识两个概念——“A”和 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/15-c-zheng-que-bian-xi-lei-tu-de-liang-chong-cun-zai-xing-shi-zhuan.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.com/13-zi-yuan-wen-jian-ji-action.html"><h3 class="article-title">13、资源文件及 Action</h3></a>
+<h6 class="subheader" title="2015-03-09T05:35:00+08:00">Mon 09 March 2015
+</h6>
+
+
+<div class="toc">
+<ul>
+<li><a href="#_1">添加资源</a></li>
+<li><a href="#action">添加 Action</a></li>
+</ul>
+</div>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加资源</h1>
+<p>Qt 资源系统是一个跨平台的资源机制, 用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部. 如果你的程序需要加载特定的资源(图标、文本翻译等), 那么, 将其放置在资源文件中, 就再也不需要担心这些文件的丢失. 也就是说, 如果你将资源以资源文件形式存储, 它是会编译到可执行文件内部.</p>
+<p>双击打VS项目文件中的.qrc文件打开资源编辑器.</p>
+<p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg" /></p>
+<p><img alt="" src="http://i62.tinypic.com/15f20s1.jpg" /></p>
+<p>Add Prefix 添加前缀, 即上图的 /Demo .</p>
+<p>Add File 添加资源文件.</p>
+<p><img alt="" src="http://i60.tinypic.com/29vat06.jpg" /></p>
+<p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/13-zi-yuan-wen-jian-ji-action.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 23 of 27</h6>
+<h6 class="subheader">Page 23 of 26</h6>
 
 <p>
             <a href="http://blog.smallcpp.com/author/martin22.html">&laquo; Prev</a>
@@ -260,9 +318,8 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju-hadoop.html">大数据 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
@@ -272,12 +329,12 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
             <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
-            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
         </ul>
 
         <h5 class="sidebar-title">Links</h5>

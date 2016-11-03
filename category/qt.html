@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - 零基础 QT 入门</title>
+    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - QT</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -54,7 +54,7 @@
 <li>第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.</li>
 <li>第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.</li>
 <li>第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.</li>
-<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 ...</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 ...</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -82,7 +82,7 @@
 </ul>
 </div>
 <h1 id="qt"><a name="user-content-qt" href="#qt" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初识 Qt 中的事件</h1>
-<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -110,7 +110,7 @@
 
     <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
         <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
-        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -139,7 +139,7 @@
 <li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
 <li><code>QPrintDialog</code>: 打印机配置;</li>
 <li><code>QPrintPreviewDialog</code>: 打印预览;</li>
-<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -163,7 +163,7 @@
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
 <h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
-<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -183,7 +183,7 @@
 <div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
     Q_OBJECT
 
-&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -213,7 +213,7 @@
 <p>Add Prefix 添加前缀, 即上图的 /Demo .</p>
 <p>Add File 添加资源文件.</p>
 <p><img alt="" src="http://i60.tinypic.com/29vat06.jpg" /></p>
-<p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -230,7 +230,7 @@
 
 
 <p>转自: <a href="http://www.devbean.net/"><a href="http://www.devbean.net/"><a href="http://www.devbean.net/">http://www.devbean.net/</a></a></a></p>
-<p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C ...</em></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C ...</em></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -251,7 +251,7 @@
 <p>QWidget 类是所有用户界面对象的基类.</p>
 <p>QMainWindow 类提供一个有菜单条、锚接窗口(例如工具条)和一个状态条的主应用程序窗口.</p>
 <p>QDialog 类是对话框窗口.</p>
-<p>从创建出来的样式上来看 QWidget 和 Qdialog 基本一样. 而 QMainWindow 就稍微有区别.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+<p>从创建出来的样式上来看 QWidget 和 Qdialog 基本一样. 而 QMainWindow 就稍微有区别.</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -272,7 +272,7 @@
 ui.setupUi(this);
 connect(ui.pushButton_4, SIGNAL(clicked()), this, SLOT(On_Out()));
 connect(ui.pushButton_5, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a>
+connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -288,7 +288,7 @@ connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Cat
 
 <p>
 
-        <a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men2.html">Next &raquo;</a>
+        <a href="http://blog.smallcpp.com/category/qt2.html">Next &raquo;</a>
 </p>
 </div>
 
@@ -305,9 +305,8 @@ connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Cat
 
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/category/ban-ben-kong-zhi.html">版本控制</a></li>
-            <li><a href="http://blog.smallcpp.com/category/c11-xin-te-xing.html">C++11 新特性</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2d-you-xi-kai-fa.html">Cocos2d 游戏开发</a></li>
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju-hadoop.html">大数据 Hadoop</a></li>
             <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
@@ -317,12 +316,12 @@ connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Cat
             <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/ling-ji-chu-qt-ru-men.html">零基础 QT 入门</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lua-you-xi-kai-fa.html">Lua 游戏开发</a></li>
-            <li><a href="http://blog.smallcpp.com/category/pyqt-kai-fa.html">PyQt 开发</a></li>
-            <li><a href="http://blog.smallcpp.com/category/python-cong-ru-men-dao-fang-qi.html">Python 从入门到放弃</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
             <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
-            <li><a href="http://blog.smallcpp.com/category/zai-xue-java.html">再学 JAVA</a></li>
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
