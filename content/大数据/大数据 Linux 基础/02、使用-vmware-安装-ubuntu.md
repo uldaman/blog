@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-03-26 08:51
-title: (二)、使用 VMware 安装 Ubuntu  、VM Tools 和 Fcitx 输入法
+title: 02. 使用 VMware 安装 Ubuntu  、VM Tools 和 Fcitx 输入法
 
 安装环境说明:
 本机系统: WIN7　64

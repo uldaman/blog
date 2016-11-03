@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-04-03 15:48
-title: (八)、Linux 的权限控制
+title: 08. Linux 的权限控制
 
 首先,
 Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.

@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-03-26 17:04
-title: (三)、在 Ubuntu 中安装 Ulipad 编辑器
+title: 03. 在 Ubuntu 中安装 Ulipad 编辑器
 
 Ulipad 是一个国人编写的专业 Python 编辑器, 它基于 wxpython 开发的GUI(图形化界面).
 好吧, 有人说 vim, 我承认它确实是神器, 但上手实在是有点蛋疼…以后有机会使用的时候再学吧…

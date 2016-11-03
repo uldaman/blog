@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-03-30 13:57
-title: (七)、Linux 的用户管理
+title: 07. Linux 的用户管理
 
 # 用户和用户组
 
