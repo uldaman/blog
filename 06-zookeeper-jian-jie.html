@@ -113,23 +113,24 @@
 <p>在 get/ls 时注册 <strong>watch</strong>, <strong>watch</strong> 只生效一次, 被触发后就失效了.</p>
 <h1 id="java-api"><a name="user-content-java-api" href="#java-api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Java Api</h1>
 <p>连接 zookeeper 集群:<br>
-<code>zookeeper(zk 集群的 ip:port, timeout, new Watcher(){})</code> (zookeeper 会开启个守护线程保持和 zk 的长链接).</p>
+<code>zk_obj=zookeeper(zk 集群的 ip:port, timeout, new Watcher(){})</code> (zookeeper 会开启个守护线程保持和 zk 的长链接).</p>
 <p>在 Watcher 里监听事件并处理 (回调)</p>
 <ul>
 <li>event.getType</li>
 <li>event.getPath</li>
 </ul>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>路径=obj.create(路径, 数据, 权限, 节点模式)
+<p>需要注意一下, 有时我们拿到 zk_obj 后, 由于 zk 环境还是准备后, 会导致后续的操作失败, 所以我们拿到 zk_obj 后可以通过 zk_obj.getState() 来判断下当前集群的状态, 当它为 CONNECTED 时才继续操作.</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>路径=zk_obj.create(路径, 数据, 权限, 节点模式)
 
-obj.getChildren(路径, 监听器)
+zk_obj.getChildren(路径, 监听器)
 
-节点元数据=obj.exists(路径, 监听器)
+节点元数据=zk_obj.exists(路径, 监听器)
 
-obj.getdata(路径, 监听器, null)
+zk_obj.getdata(路径, 监听器, null)
 
-obj.delete(路径, -1) 参数2 指定要删除指定版本, -1 表示删除所有版本
+zk_obj.delete(路径, -1) 参数2 指定要删除指定版本, -1 表示删除所有版本
 
-obj.setData(路径, 数据, -1) 参数3 同上
+zk_obj.setData(路径, 数据, -1) 参数3 同上
 </pre></div>
 
 <br></p>
