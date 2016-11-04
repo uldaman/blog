@@ -129,7 +129,7 @@ MongoDB Client 中还可以运行一些简单的算术运算:
 可以用以下三种方法来关闭已启动的 Mongodb 服务器:
 
 - 最暴力, 直接 kill mongodb process
-- 打开个 CMD, mogod \-\-shutdown \-\-dbpath
+- 打开个 CMD, mogod \-\-shutdown \-\-dbpath xxx (好像新版的 mongodb 已经去除这个命令了)
 - 用 Client 连上服务器, 然后切换到 admin 数据库, 使用 db.shutdownServer()
     + use admin
     + db.shutdownServer()
