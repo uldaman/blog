@@ -61,8 +61,8 @@
 <li><a href="#namenode">NameNode</a></li>
 <li><a href="#secondary-namenode">Secondary NameNode</a></li>
 <li><a href="#datanode">DataNode</a></li>
-<li><a href="#_3">读取数据流程</a></li>
-<li><a href="#_4">写入数据流程</a></li>
+<li><a href="#block">读取数据流程 (以 block 为单位)</a></li>
+<li><a href="#block_1">写入数据流程 (以 block 为单位)</a></li>
 </ul>
 </li>
 </ul>
@@ -188,7 +188,7 @@
 <p>文件块(block): 最基本存储单位, hp 1.0 默认 64M, hp 2.0 默认 128M, 从文件的 0 编号开始, 按指定大小, 顺序对文件进行划分并编号.</p>
 <p>HDFS 中, 如果一个文件小于一个数据块的大小 , 并不占用整个数据块 (这些文件最终被保存在 tmp/dfs/data/current/&hellip;/finalized/ 中).</p>
 <p>默认 3 个副本 (如果已存在一份存储好的文件(3个副本), 突然有一个小弟挂掉了, NameNode 会再安排另一个小弟重新备份这个文件, 这是基于心跳包机制的).</p>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>读取数据流程</h2>
+<h2 id="block"><a name="user-content-block" href="#block" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>读取数据流程 (以 block 为单位)</h2>
 <ul>
 <li>客户端要访问 HDFS 中的一个文件</li>
 <li>首先从 NameNode 获得组成返个文件的数据块位置列表</li>
@@ -196,7 +196,7 @@
 <li>访问 DataNode 获取数据</li>
 <li>NameNode 并不参不数据实际传输</li>
 </ul>
-<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>写入数据流程</h2>
+<h2 id="block_1"><a name="user-content-block_1" href="#block_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>写入数据流程 (以 block 为单位)</h2>
 <ul>
 <li>客户端请求 NameNode 创建新文件</li>
 <li>客户端将数据写入 DFSOutputStream</li>
