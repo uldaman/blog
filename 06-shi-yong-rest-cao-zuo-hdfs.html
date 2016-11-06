@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>06. 使用 Rest 操作 HDFS</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/06-shi-yong-rest-cao-zuo-hdfs.html" rel="bookmark"
+        title="Permalink to 06. 使用 Rest 操作 HDFS">06. 使用 Rest 操作 HDFS</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-10-22T22:08:00+08:00">Sat 22 October 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#vim-httpfs-envsh">vim httpfs-env.sh</a></li>
+<li><a href="#vim-core-sitexml">vim core-site.xml</a></li>
+<li><a href="#hdfs-sitexml">hdfs-site.xml</a></li>
+<li><a href="#namenode">重启 NameNode</a></li>
+<li><a href="#_1">测试</a></li>
+</ul>
+</div>
+<p>要使用 rest 操作 HDFS, 需要先开启集群的 rest 服务.</p>
+<h1 id="vim-httpfs-envsh"><a name="user-content-vim-httpfs-envsh" href="#vim-httpfs-envsh" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>vim httpfs-env.sh</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">export</span> <span style="color: #008080">HTTPFS_HTTP_PORT</span><span style="color: #A71D7E">=</span>14000
+</pre></div>
+
+<br></p>
+<h1 id="vim-core-sitexml"><a name="user-content-vim-core-sitexml" href="#vim-core-sitexml" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>vim core-site.xml</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;property&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!--可使用节点--&gt;</span>
+    <span style="color: #000080">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #000080">&lt;/name&gt;</span>
+    <span style="color: #000080">&lt;value&gt;</span>*<span style="color: #000080">&lt;/value&gt;</span>
+<span style="color: #000080">&lt;/property&gt;</span>
+<span style="color: #000080">&lt;property&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!--可使用用户组--&gt;</span>
+    <span style="color: #000080">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #000080">&lt;/name&gt;</span>
+    <span style="color: #000080">&lt;value&gt;</span>*<span style="color: #000080">&lt;/value&gt;</span>
+<span style="color: #000080">&lt;/property&gt;</span>
+</pre></div>
+
+<br></p>
+<h1 id="hdfs-sitexml"><a name="user-content-hdfs-sitexml" href="#hdfs-sitexml" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>hdfs-site.xml</h1>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;property&gt;</span>
+    <span style="color: #999988; font-style: italic">&lt;!--启动 webhdfs--&gt;</span>
+    <span style="color: #000080">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #000080">&lt;/name&gt;</span>
+    <span style="color: #000080">&lt;value&gt;</span>true<span style="color: #000080">&lt;/value&gt;</span>
+<span style="color: #000080">&lt;/property&gt;</span>
+</pre></div>
+
+<br></p>
+<h1 id="namenode"><a name="user-content-namenode" href="#namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>重启 NameNode</h1>
+<p>修改好配置文件后, 重新启动 NameNode:</p>
+<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>./stop-all.sh
+./start-all.sh
+./httpfs.sh start
+</pre></div>
+
+<br>
+最后一行就是启动集群的 rest 服务器.</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>测试</h1>
+<p>执行命令 <code>curl -i "http://192.168.1.213:14000/webhdfs/v1?user.name=root&amp;op=LISTSTATUS"</code></p>
+<blockquote>
+<p>-i 表示显示 http response 的头信息, 连同网页代码一起.</p>
+</blockquote>
+<ul>
+<li>api: <code>http://&lt;HOST&gt;:&lt;PORT&gt;/webhdfs/v1/&lt;PATH&gt;</code></li>
+<li>参数:<ul>
+<li>user.name 操作者</li>
+<li>op 操作内容</li>
+</ul>
+</li>
+<li>返回 json 格式</li>
+</ul>
+<p>更多命令参考 <a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html"><a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html"><a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html">http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html</a></a></a></p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="06-shi-yong-rest-cao-zuo-hdfs" data-title="06. 使用 Rest 操作 HDFS" data-url="http://blog.smallcpp.com/06-shi-yong-rest-cao-zuo-hdfs.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
