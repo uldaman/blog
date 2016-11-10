@@ -214,6 +214,8 @@ pelican 原生支持 DISQUS 评论系统, 然而坑爹的 GFW . . .
 ```
 <br>
 #3. 解析 GFM
+> 使用 GFM 后, 有些 markdown 样式渲染不出来, 不再推荐使用~ 仅了解下就好.
+
 GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments 本身并不支持 (py\-markdown 的语法高亮通过 pygments 来支持), 要通过第三方扩展来实现.
 
 首先, 要安装 pymdown  第三方扩展 `pip install pymdown-extensions`, 然后把 `pelicanconf.py` 文件中 `MD_EXTENSIONS` 的 **extra** 替换成 **pymdownx.github**.
