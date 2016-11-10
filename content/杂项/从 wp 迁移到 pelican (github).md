@@ -154,7 +154,7 @@ MD_EXTENSIONS = [
 > pygments\_style 可以在 [http://pygments.org/demo/](http://pygments.org/demo/?lang=cpp&sort=) 进行调试<br>
 > Reference:<br>
 > [Introduction to Pelican](http://crunk.io/post/introduction-to-pelican/)<br>
-> [Django 中使用 markdown 和代码高亮](http://fatsoon.com/python/2014/07/26/use-highlite-in-django.html)<br>
+> [Django 中使用 markdown 和代码高亮](http://fatsoon.com/2014/07/26/2014-07-26-use-highlite-in-django/)<br>
 > [Python Markdown v2.6.6 documentation » CodeHilite Extension](https://pythonhosted.org/Markdown/extensions/code_hilite.html)<br>
 > [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
 

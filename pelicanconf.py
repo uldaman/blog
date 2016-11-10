@@ -44,7 +44,7 @@ MD_EXTENSIONS = [
   "smarty",
   "wikilinks",
   "admonition",
-  "codehilite(guess_lang=False,pygments_style=monokai,noclasses=True)"]
+  "codehilite(guess_lang=False,pygments_style=friendly,noclasses=True)"]
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
