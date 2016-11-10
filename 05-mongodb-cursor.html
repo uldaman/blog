@@ -70,7 +70,7 @@
 <p><img alt="" src="http://i63.tinypic.com/2uy3a6t.jpg" /></p>
 <h2 id="_2">游标基础使用</h2>
 <p>当使用一个变量来保存 <strong>find()</strong> 的返回值时, 就会获取到该查询动作的 Cursor.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>var cursor = db.num.find()
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>var cursor = db.num.find()
 </pre></div>
 
 
@@ -89,7 +89,7 @@
 <li>skip: 忽略前面的部分文档, 如果文档总数量小于忽略的数量, 则返回空集合</li>
 <li>sort: 得到的子集合进行排序, 可以按照多个键进行正反排序</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>var cursor = db.num.find()
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>var cursor = db.num.find()
 cursor.sort({&quot;var&quot;: -1})
 
 var cursor = db.num.find()
@@ -103,7 +103,7 @@ cursor.limit(5).skip(3)
 <p><br></p>
 <h2 id="foreach">forEach 方法</h2>
 <p><strong>forEach()</strong> 方法用来遍历游标, 并且可以提供一个 <strong>function</strong> 做为回调函数, 在遍历时, 将传入的 function 依次作用到 Cursor 中的每条数据上.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>cursor.forEach(fuction(doc) {print(doc.name)})
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>cursor.forEach(fuction(doc) {print(doc.name)})
 &#39;张三&#39;
 &#39;李四&#39;
 &#39;王五&#39;
@@ -113,7 +113,7 @@ cursor.limit(5).skip(3)
 <p><br></p>
 <h2 id="map">map 方法</h2>
 <p><strong>map()</strong> 方法功能与 <strong>forEach()</strong> 一致, 但它可以接受返回值, 并把返回结果放到一个数组中.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>cursor.map(fuction(doc) {return doc.name})
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>cursor.map(fuction(doc) {return doc.name})
 [&#39;张三&#39;, &#39;李四&#39;, &#39;王五&#39;]
 </pre></div>
 

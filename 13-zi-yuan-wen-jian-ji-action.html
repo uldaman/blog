@@ -87,12 +87,12 @@
 <p>很简单, 直接拖拽动作编辑器中的icon到工具栏或菜单项里就可以了.</p>
 <p><img alt="" src="http://i62.tinypic.com/dh915h.jpg" /></p>
 <p>接下来就要为这个 Action 关联操作代码了, 即连接信号和槽.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Demo<span style="color: #666666">::</span>Demo(QWidget <span style="color: #666666">*</span>parent)
-    <span style="color: #666666">:</span> QMainWindow(parent)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Demo::Demo(QWidget *parent)
+    : QMainWindow(parent)
 {
-    ui.setupUi(<span style="color: #AA22FF; font-weight: bold">this</span>);
-    connect(ui.action_New, <span style="color: #666666">&amp;</span>QAction<span style="color: #666666">::</span>triggered, [](<span style="color: #00BB00; font-weight: bold">bool</span>) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;This is a Demo&quot;</span>;
+    ui.setupUi(<span style="color: #8B008B; font-weight: bold">this</span>);
+    connect(ui.action_New, &amp;QAction::triggered, [](<span style="color: #a7a7a7; font-weight: bold">bool</span>) {
+        qDebug() &lt;&lt; <span style="color: #CD5555">&quot;This is a Demo&quot;</span>;
     });
 }
 </pre></div>

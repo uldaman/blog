@@ -58,23 +58,23 @@
 <blockquote>
 <p>The QSplashScreen widget provides a splash screen that can be shown during application startup.</p>
 </blockquote>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">PyQt4.QtGui</span> <span style="color: #AA22FF; font-weight: bold">import</span> QApplication, QSplashScreen, QPixmap
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">sys</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">PyQt4.QtGui</span> <span style="color: #8B008B; font-weight: bold">import</span> QApplication, QSplashScreen, QPixmap
 
-app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
-splash <span style="color: #666666">=</span> QSplashScreen(QPixmap(<span style="color: #BB4444">&#39;:/splash.png&#39;</span>))  <span style="color: #008800; font-style: italic"># step1, 创建一个 splash</span>
-splash<span style="color: #666666">.</span>show()  <span style="color: #008800; font-style: italic"># step2, 显示 splash</span>
-app<span style="color: #666666">.</span>processEvents()  <span style="color: #008800; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
-dlg <span style="color: #666666">=</span> Dialog()
-dlg<span style="color: #666666">.</span>show()
-splash<span style="color: #666666">.</span>finish(dlg)  <span style="color: #008800; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
-sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
+app = QApplication(sys.argv)
+splash = QSplashScreen(QPixmap(<span style="color: #CD5555">&#39;:/splash.png&#39;</span>))  <span style="color: #228B22"># step1, 创建一个 splash</span>
+splash.show()  <span style="color: #228B22"># step2, 显示 splash</span>
+app.processEvents()  <span style="color: #228B22"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
+dlg = Dialog()
+dlg.show()
+splash.finish(dlg)  <span style="color: #228B22"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
+sys.exit(app.exec_())
 </pre></div>
 
 
 <p><br>
 你还可以通过 QSplashScreen 的 showMessage 方法在 splash screen 上打印提示信息:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>showMessage (<span style="color: #AA22FF">self</span>, QString message, <span style="color: #AA22FF">int</span> alignment <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>AlignLeft, QColor color <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>black)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>showMessage (<span style="color: #658b00">self</span>, QString message, <span style="color: #658b00">int</span> alignment = Qt.AlignLeft, QColor color = Qt.black)
 </pre></div>
 
 

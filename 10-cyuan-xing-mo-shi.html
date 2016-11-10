@@ -77,7 +77,7 @@ class Prototype
 public :
     Prototype(){}
     virtual ~Prototype(){}</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>virtual Prototype * Clone() = 0;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>virtual Prototype * Clone() = 0;
 </pre></div>
 
 
@@ -88,7 +88,7 @@ class ConcretePrototype : public Prototype
 public :
     ConcretePrototype():m_counter(0){}
     virtual ~ConcretePrototype(){}</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>//拷贝构造函数
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>//拷贝构造函数
 ConcretePrototype( const ConcretePrototype &amp; rhs)
 {
     m_counter = rhs .m_counter;
@@ -110,7 +110,7 @@ virtual ConcretePrototype * Clone()
 {
     //生成对像
     ConcretePrototype * conProA = new ConcretePrototype ();</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>//复制自身
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>//复制自身
 ConcretePrototype * conProB = conProA-&gt;Clone();
 
 delete conProA;

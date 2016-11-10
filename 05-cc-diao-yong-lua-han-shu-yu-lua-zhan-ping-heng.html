@@ -57,20 +57,20 @@
 但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
 <p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State <em>L, const char </em>str);</strong></p>
 <p>现在新建一个 Lua 脚本, 脚本代码如下 :</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Add(x, y)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Add(x, y)
    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; x +&lt;span style=&quot;color: #000000;&quot;&gt; y;
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>我们在 C/C++ 中可以这样调用 Add 函数:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>luaL_dostring(m_pState, &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Add(11, 12)&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>luaL_dostring(m_pState, &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Add(11, 12)&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;);
 </pre></div>
 
 
 <p>但是现在有个问题, Add 函数返回一个整型值, 但是使用 LuaL_dostring 方法不能获取到这个返回值.
 我们通过 <strong>lua_gettop()</strong> (返回目前栈里元素的个数) 这个 Lua API 来证明这点, 编写代码如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>luaL_dofile(m_pState, &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C:/Users/Administrator/Desktop/test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>luaL_dofile(m_pState, &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C:/Users/Administrator/Desktop/test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
 luaL_dostring(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Add(11, 12)&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; nOut =&lt;span style=&quot;color: #000000;&quot;&gt; lua_gettop(m_pState);
 printf(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;当前栈元素数量 = %d.\n&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;, nOut);
@@ -81,7 +81,7 @@ printf(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/spa
 可以看到返回值并没有被保存在 Lua 栈上, 因为 Lua 虚拟机有垃圾回收功能, 它负责 Lua 脚本中的内存管理, 定期释放脚本中无引用数据.
 luaL_dostring(m_pState, &ldquo;Add(11, 12)&rdquo;); 这句代码的功能就是用 Lua 虚拟机来执行这句 Add(11, 12) 脚本代码, 当它执行完毕后, 其所占用的栈内存就被 Lua 虚拟机回收了.</p>
 <p>那怎么才能在 C/C++ 中获取到 Lua 函数的返回值呢? 看下面的代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>lua_State* m_pState =&lt;span style=&quot;color: #000000;&quot;&gt; luaL_newstate();
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>lua_State* m_pState =&lt;span style=&quot;color: #000000;&quot;&gt; luaL_newstate();
 luaL_openlibs(m_pState);
 
 luaL_dofile(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C:/Users/Administrator/Desktop/test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
@@ -108,7 +108,7 @@ lua_close(m_pState);&lt;/span&gt;
 而上面代码中是手动通过 lua_pcall() 来直接进入函数主体的, 进入函数主体后, 程序再将控制权交给 Lua 虚拟机, 之后 Lua 虚拟机取出两个参数进行运算并将结果压回栈顶, 接下来函数开始返回, Lua 虚拟机清空参数栈保留返回值栈后就将程序的控制权还给 C/C++ 端了.
 换句话说, LuaL_dostring 方式中是通过 Lua 虚拟机进入的函数主体, 因此函数返回时 Lua 虚拟机会进行“扫尾”操作, 而 lua_pcall 方式是通过 C/C++ 代码进入函数主体的, 那么栈顶的返回值如果不进行特殊处理会一直被保存.</p>
 <p>那么问题又来了, 如果这个返回值会被一直保存, 那多次通过这种方式调用 Lua 函数后, Lua 栈不是会爆掉? 答案是肯定的, 看下面代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
     lua_getglobal(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Add&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     lua_pushnumber(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;11&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     lua_pushnumber(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;12&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
@@ -124,7 +124,7 @@ lua_close(m_pState);&lt;/span&gt;
 <p>可以看到 Lua 栈在不断的增大, 那怎么办呢?
 别担心, Lua 提供了<strong> lua_Pushxxx</strong> 及<strong> lua_Popxxx</strong> 系列 Lua API 供 C/C++ 端来管理 Lua 栈(在上一篇笔记中已经接触到了一部分 lua_Pushxxx 系列的 Lua API).
 再看下面的代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; &lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;; i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
     lua_getglobal(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Add&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     lua_pushnumber(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;11&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     lua_pushnumber(m_pState, &lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;12&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);

@@ -57,67 +57,67 @@
 <h2 id="_1">三元运算符</h2>
 <p>expression1 <strong>?</strong> expression2 <strong>:</strong> expression3</p>
 <p>等同于:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>expression1<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-    expression2<span style="color: #666666">;</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">else</span> <span style="color: #666666">{</span>
-    expression3<span style="color: #666666">;</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> (expression1) {
+    expression2;
+} <span style="color: #8B008B; font-weight: bold">else</span> {
+    expression3;
+}
 </pre></div>
 
 
 <h2 id="_2">流程控制的例子</h2>
 <p>判断季度</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">QuarterDemo1</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #00BB00; font-weight: bold">int</span> nMonth <span style="color: #666666">=</span> <span style="color: #666666">5;</span>
-        <span style="color: #AA22FF; font-weight: bold">switch</span> <span style="color: #666666">(</span>nMonth<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">1:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">2:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">3:</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;First Quarter&quot;</span><span style="color: #666666">);</span>
-                <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">4:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">5:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">6:</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Second  Quarter&quot;</span><span style="color: #666666">);</span>
-                <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">7:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">8:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">9:</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Third Quarter&quot;</span><span style="color: #666666">);</span>
-                <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">10:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">11:</span>
-            <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #666666">12:</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Fourth Quarter&quot;</span><span style="color: #666666">);</span>
-                <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">QuarterDemo1</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        <span style="color: #a7a7a7; font-weight: bold">int</span> nMonth = <span style="color: #B452CD">5</span>;
+        <span style="color: #8B008B; font-weight: bold">switch</span> (nMonth) {
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">1</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">2</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">3</span>:
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;First Quarter&quot;</span>);
+                <span style="color: #8B008B; font-weight: bold">break</span>;
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">4</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">5</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">6</span>:
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Second  Quarter&quot;</span>);
+                <span style="color: #8B008B; font-weight: bold">break</span>;
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">7</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">8</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">9</span>:
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Third Quarter&quot;</span>);
+                <span style="color: #8B008B; font-weight: bold">break</span>;
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">10</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">11</span>:
+            <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #B452CD">12</span>:
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Fourth Quarter&quot;</span>);
+                <span style="color: #8B008B; font-weight: bold">break</span>;
+        }
+    }
+}
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">QuarterDemo2</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #00BB00; font-weight: bold">int</span> nMonth <span style="color: #666666">=</span> <span style="color: #666666">3;</span>
-        <span style="color: #00BB00; font-weight: bold">int</span> nQuarter <span style="color: #666666">=</span> <span style="color: #666666">(</span>nMonth <span style="color: #666666">-</span> <span style="color: #666666">1)</span> <span style="color: #666666">/</span> <span style="color: #666666">3</span> <span style="color: #666666">+</span> <span style="color: #666666">1;</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>nQuarter <span style="color: #666666">+</span> <span style="color: #BB4444">&quot; &quot;</span> <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;Quarter&quot;</span><span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">QuarterDemo2</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        <span style="color: #a7a7a7; font-weight: bold">int</span> nMonth = <span style="color: #B452CD">3</span>;
+        <span style="color: #a7a7a7; font-weight: bold">int</span> nQuarter = (nMonth - <span style="color: #B452CD">1</span>) / <span style="color: #B452CD">3</span> + <span style="color: #B452CD">1</span>;
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(nQuarter + <span style="color: #CD5555">&quot; &quot;</span> + <span style="color: #CD5555">&quot;Quarter&quot;</span>);
+    }
+}
 </pre></div>
 
 
 <p><br></p>
 <p>9 * 9 乘法表</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MultiplyDemo</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1;</span> i <span style="color: #666666">&lt;=</span> <span style="color: #666666">9;</span> i<span style="color: #666666">++)</span> <span style="color: #666666">{</span>
-            <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">1;</span> j <span style="color: #666666">&lt;=</span> i<span style="color: #666666">;</span> j<span style="color: #666666">++)</span> <span style="color: #666666">{</span>
-                <span style="color: #008800; font-style: italic">// 下面两种方式都是用来对齐打印的</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">print</span><span style="color: #666666">(</span>i <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;*&quot;</span> <span style="color: #666666">+</span> j <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;=&quot;</span> <span style="color: #666666">+</span> <span style="color: #666666">(</span>i <span style="color: #666666">*</span> j<span style="color: #666666">)</span> <span style="color: #666666">+</span> <span style="color: #BB4444">&#39;\t&#39;</span><span style="color: #666666">);</span>
-                System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">printf</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;%d * %d = %-5d&quot;</span><span style="color: #666666">,</span> i<span style="color: #666666">,</span> j<span style="color: #666666">,</span> <span style="color: #666666">(</span>i <span style="color: #666666">*</span> j<span style="color: #666666">));</span>
-            <span style="color: #666666">}</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MultiplyDemo</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">1</span>; i &lt;= <span style="color: #B452CD">9</span>; i++) {
+            <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> j = <span style="color: #B452CD">1</span>; j &lt;= i; j++) {
+                <span style="color: #228B22">// 下面两种方式都是用来对齐打印的</span>
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>(i + <span style="color: #CD5555">&quot;*&quot;</span> + j + <span style="color: #CD5555">&quot;=&quot;</span> + (i * j) + <span style="color: #CD5555">&#39;\t&#39;</span>);
+                System.<span style="color: #658b00">out</span>.<span style="color: #658b00">printf</span>(<span style="color: #CD5555">&quot;%d * %d = %-5d&quot;</span>, i, j, (i * j));
+            }
+        }
+    }
+}
 </pre></div>
 
 

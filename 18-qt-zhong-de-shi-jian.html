@@ -76,13 +76,13 @@
 例如, 要在界面上做一个 QLabel 实时的显示当前鼠标在 QLabel 上的位置;</p>
 <p>在所有组件的父类 <code>QWidget</code> 中, 定义了很多事件处理的回调函数, 如 <code>keyPressEvent()</code>、<code>keyReleaseEvent()</code>、<code>mouseDoubleClickEvent()</code>、<code>mouseMoveEvent()</code>、<code>mousePressEvent()</code>、<code>mouseReleaseEvent()</code> 等, 这些函数都是 protected virtual 的, 也就是说, 我们可以在子类中重新实现这些函数, 所以, 我们就可以通过重写 QLabel 的 <code>mouseMoveEvent() 实现上面的功能</code>.</p>
 <p>在贴代码之前, 还要讲一下 Qt 中的事件对象, 当事件发生时, Qt 将创建一个事件对象, 例如 QMouseEvent QKeyEvent 等, 这些事件类都继承于 QEvent, 创建好事件对象后, Qt 会将这个事件对象传递给 QObject 的 <code>event()</code> 函数, <code>event()</code> 函数并不直接处理事件, 而是按照事件对象的类型分派给特定的事件处理函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">EventLabel</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QLabel {
-<span style="color: #AA22FF; font-weight: bold">protected</span><span style="color: #666666">:</span>
-    <span style="color: #00BB00; font-weight: bold">void</span> mouseMoveEvent(QMouseEvent <span style="color: #666666">*</span>event);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">EventLabel</span> : <span style="color: #8B008B; font-weight: bold">public</span> QLabel {
+<span style="color: #8B008B; font-weight: bold">protected</span>:
+    <span style="color: #a7a7a7; font-weight: bold">void</span> mouseMoveEvent(QMouseEvent *event);
 };
 
-<span style="color: #00BB00; font-weight: bold">void</span> EventLabel<span style="color: #666666">::</span>mouseMoveEvent(QMouseEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">-&gt;</span>setText(QString(<span style="color: #BB4444">&quot;Move: (%1, %2)&quot;</span>).arg(QString<span style="color: #666666">::</span>number(event<span style="color: #666666">-&gt;</span>x()), QString<span style="color: #666666">::</span>number(event<span style="color: #666666">-&gt;</span>y())));
+<span style="color: #a7a7a7; font-weight: bold">void</span> EventLabel::mouseMoveEvent(QMouseEvent *event) {
+    <span style="color: #8B008B; font-weight: bold">this</span>-&gt;setText(QString(<span style="color: #CD5555">&quot;Move: (%1, %2)&quot;</span>).arg(QString::number(event-&gt;x()), QString::number(event-&gt;y())));
 }
 </pre></div>
 
@@ -98,11 +98,11 @@
 <p>下面继续深入了解 Qt 的事件机制.</p>
 <p>回想一下之前学过的知识, 为一个 QPushButton 的 clicked() 信号添加一个槽, 实现什么功能随意, 最简单的就弹出一个 QMessageBox 好了.</p>
 <p>重点来了, 如果我们重写 QPushButton 的 mousePressEvent() 事件, 即鼠标按下事件, 过滤下左键按下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">void</span> CustomButton<span style="color: #666666">::</span>mousePressEvent(QMouseEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (event<span style="color: #666666">-&gt;</span>button() <span style="color: #666666">==</span> Qt<span style="color: #666666">::</span>LeftButton) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;left&quot;</span>;
-    } <span style="color: #AA22FF; font-weight: bold">else</span> {
-        QPushButton<span style="color: #666666">::</span>mousePressEvent(event);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">void</span> CustomButton::mousePressEvent(QMouseEvent *event) {
+    <span style="color: #8B008B; font-weight: bold">if</span> (event-&gt;button() == Qt::LeftButton) {
+        qDebug() &lt;&lt; <span style="color: #CD5555">&quot;left&quot;</span>;
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        QPushButton::mousePressEvent(event);
     }
 }
 </pre></div>
@@ -117,16 +117,16 @@
 除了作为所有组件的父类 <code>QWidget</code> 默认调用的是 <code>ignore()</code>, 其他的事件对象都 <code>accept()</code>.<br>
 换句话说, 如果重写了某个事件处理函数, 因为它默认是 <code>accept()</code> 的, 所以它表示这个类将会自己处理这个函数, 如果不主动的调用父类的处理函数, 消息就不会继续传递上去.</p>
 <p>但是, 有一种情况这两个函数会变得很有用, 那就是在处理窗口的关闭的事件时, 看下面代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">void</span> EventLabel<span style="color: #666666">::</span>closeEvent(QCloseEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #00BB00; font-weight: bold">bool</span> exit <span style="color: #666666">=</span> QMessageBox<span style="color: #666666">::</span>question(<span style="color: #AA22FF; font-weight: bold">this</span>,
-        tr(<span style="color: #BB4444">&quot;Quit&quot;</span>),
-        tr(<span style="color: #BB4444">&quot;Are you sure to quit this application?&quot;</span>),
-        QMessageBox<span style="color: #666666">::</span>Yes <span style="color: #666666">|</span> QMessageBox<span style="color: #666666">::</span>No,
-        QMessageBox<span style="color: #666666">::</span>No) <span style="color: #666666">==</span> QMessageBox<span style="color: #666666">::</span>Yes;
-    <span style="color: #AA22FF; font-weight: bold">if</span> (exit) {
-        event<span style="color: #666666">-&gt;</span>accept();
-    } <span style="color: #AA22FF; font-weight: bold">else</span> {
-        event<span style="color: #666666">-&gt;</span>ignore();
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">void</span> EventLabel::closeEvent(QCloseEvent *event) {
+    <span style="color: #a7a7a7; font-weight: bold">bool</span> exit = QMessageBox::question(<span style="color: #8B008B; font-weight: bold">this</span>,
+        tr(<span style="color: #CD5555">&quot;Quit&quot;</span>),
+        tr(<span style="color: #CD5555">&quot;Are you sure to quit this application?&quot;</span>),
+        QMessageBox::Yes | QMessageBox::No,
+        QMessageBox::No) == QMessageBox::Yes;
+    <span style="color: #8B008B; font-weight: bold">if</span> (exit) {
+        event-&gt;accept();
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        event-&gt;ignore();
     }
 }
 </pre></div>
@@ -137,22 +137,22 @@
 <p>好吧, 其实我现在已经晕了, 这两个函数让人很难理解, 暂时先这样, 慢慢领悟…</p>
 <h1 id="event">event() 函数</h1>
 <p>之前, 我们提到过 QObject 的 event() 函数, 这个函数用来分发事件, 所以, 如果想在事件分发之前<strong>拦截</strong>事件, 就需要重写这个 event() 函数, 例如我们想拦截下 tab 键按下事件, 就可以用一个类继承 QWidget, 然后重写它的 event() 函数, 接下来用这个子类新建窗口, 这样, 我们创建的窗口就能拦截事件了:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">bool</span> NewWidget<span style="color: #666666">::</span>event(QEvent <span style="color: #666666">*</span>e) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (e<span style="color: #666666">-&gt;</span>type() <span style="color: #666666">==</span> QEvent<span style="color: #666666">::</span>KeyPress) {
-        QKeyEvent <span style="color: #666666">*</span>keyEvent <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">static_cast</span><span style="color: #666666">&lt;</span>QKeyEvent <span style="color: #666666">*&gt;</span>(e);
-        <span style="color: #AA22FF; font-weight: bold">if</span> (keyEvent<span style="color: #666666">-&gt;</span>key() <span style="color: #666666">==</span> Qt<span style="color: #666666">::</span>Key_Tab) {
-            qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;You press tab.&quot;</span>;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">bool</span> NewWidget::event(QEvent *e) {
+    <span style="color: #8B008B; font-weight: bold">if</span> (e-&gt;type() == QEvent::KeyPress) {
+        QKeyEvent *keyEvent = <span style="color: #8B008B; font-weight: bold">static_cast</span>&lt;QKeyEvent *&gt;(e);
+        <span style="color: #8B008B; font-weight: bold">if</span> (keyEvent-&gt;key() == Qt::Key_Tab) {
+            qDebug() &lt;&lt; <span style="color: #CD5555">&quot;You press tab.&quot;</span>;
         }
     }
-    <span style="color: #AA22FF; font-weight: bold">return</span> QWidget<span style="color: #666666">::</span>event(e);
+    <span style="color: #8B008B; font-weight: bold">return</span> QWidget::event(e);
 }
 </pre></div>
 
 
 <p><br>
 需要注意的是, 拦截完后, 我们还需要返回给 QWidget::event() 函数, 否则, Qt 将不再分发所有的消息, 例如, 下面这样的代码就会让你的 Qt 会进入一种”无响应”状态…</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">bool</span> NewWidget<span style="color: #666666">::</span>event(QEvent <span style="color: #666666">*</span>e) {
-    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">true</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">bool</span> NewWidget::event(QEvent *e) {
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">true</span>
 }
 </pre></div>
 
@@ -168,34 +168,34 @@
 <li>第二个参数是事件, 事件过滤器的调用时间是目标对象接收到事件对象之前, 这个函数返回一个 bool 类型，如果想将参数 event 过滤出来, 比如, 不想让它继续转发，就返回 true, 表示被过滤, 否则就返回 false.</li>
 </ul>
 <p>看一个简单的例子:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MainWindow</span> <span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">public</span> QMainWindow {
-<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainWindow</span> : <span style="color: #8B008B; font-weight: bold">public</span> QMainWindow {
+<span style="color: #8B008B; font-weight: bold">public</span>:
     MainWindow();
-<span style="color: #AA22FF; font-weight: bold">protected</span><span style="color: #666666">:</span>
-    <span style="color: #00BB00; font-weight: bold">bool</span> eventFilter(QObject <span style="color: #666666">*</span>obj, QEvent <span style="color: #666666">*</span>event);
-<span style="color: #AA22FF; font-weight: bold">private</span><span style="color: #666666">:</span>
+<span style="color: #8B008B; font-weight: bold">protected</span>:
+    <span style="color: #a7a7a7; font-weight: bold">bool</span> eventFilter(QObject *obj, QEvent *event);
+<span style="color: #8B008B; font-weight: bold">private</span>:
     QTextEdit textEdit;
 };
 
-MainWindow<span style="color: #666666">::</span>MainWindow() {
-    textEdit <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> QTextEdit;
+MainWindow::MainWindow() {
+    textEdit = <span style="color: #8B008B; font-weight: bold">new</span> QTextEdit;
     setCentralWidget(textEdit);
 
-    textEdit<span style="color: #666666">-&gt;</span>installEventFilter(<span style="color: #AA22FF; font-weight: bold">this</span>);
+    textEdit-&gt;installEventFilter(<span style="color: #8B008B; font-weight: bold">this</span>);
 }
 
-<span style="color: #00BB00; font-weight: bold">bool</span> MainWindow<span style="color: #666666">::</span>eventFilter(QObject <span style="color: #666666">*</span>obj, QEvent <span style="color: #666666">*</span>event) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (obj <span style="color: #666666">==</span> textEdit) {
-        <span style="color: #AA22FF; font-weight: bold">if</span> (event<span style="color: #666666">-&gt;</span>type() <span style="color: #666666">==</span> QEvent<span style="color: #666666">::</span>KeyPress) {
-            QKeyEvent <span style="color: #666666">*</span>keyEvent <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">static_cast</span><span style="color: #666666">&lt;</span>QKeyEvent <span style="color: #666666">*&gt;</span>(event);
-            qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;Ate key press&quot;</span> <span style="color: #666666">&lt;&lt;</span> keyEvent<span style="color: #666666">-&gt;</span>key();
-            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">true</span>;
-        } <span style="color: #AA22FF; font-weight: bold">else</span> {
-            <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF">false</span>;
+<span style="color: #a7a7a7; font-weight: bold">bool</span> MainWindow::eventFilter(QObject *obj, QEvent *event) {
+    <span style="color: #8B008B; font-weight: bold">if</span> (obj == textEdit) {
+        <span style="color: #8B008B; font-weight: bold">if</span> (event-&gt;type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = <span style="color: #8B008B; font-weight: bold">static_cast</span>&lt;QKeyEvent *&gt;(event);
+            qDebug() &lt;&lt; <span style="color: #CD5555">&quot;Ate key press&quot;</span> &lt;&lt; keyEvent-&gt;key();
+            <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">true</span>;
+        } <span style="color: #8B008B; font-weight: bold">else</span> {
+            <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">false</span>;
         }
-    } <span style="color: #AA22FF; font-weight: bold">else</span> {
-        <span style="color: #008800; font-style: italic">// pass the event on to the parent class</span>
-        <span style="color: #AA22FF; font-weight: bold">return</span> QMainWindow<span style="color: #666666">::</span>eventFilter(obj, event);
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        <span style="color: #228B22">// pass the event on to the parent class</span>
+        <span style="color: #8B008B; font-weight: bold">return</span> QMainWindow::eventFilter(obj, event);
     }
 }
 </pre></div>

@@ -123,11 +123,11 @@
 </li>
 </ul>
 <p>ByteBuffer 无法用于<strong>数组传输</strong>, 一般的做法是将 ByteBuffer 转换成对应类型的 Buffer, 然后向其中写入数据, 例如在当前位置向 ByteBuffer 中写入 float[]:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">float</span><span style="color: #666666">[]</span> array<span style="color: #666666">;</span>
-<span style="color: #008800; font-style: italic">// ... 其它代码</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">float</span>[] array;
+<span style="color: #228B22">// ... 其它代码</span>
 
-FloarBuffer floatBuf <span style="color: #666666">=</span> byteBuffer<span style="color: #666666">.</span><span style="color: #BB4444">asFloatBuffer</span><span style="color: #666666">();</span>
-floatBuf<span style="color: #666666">.</span><span style="color: #BB4444">put</span><span style="color: #666666">(</span>array<span style="color: #666666">);</span>
+FloarBuffer floatBuf = byteBuffer.<span style="color: #658b00">asFloatBuffer</span>();
+floatBuf.<span style="color: #658b00">put</span>(array);
 </pre></div>
 
 
@@ -167,24 +167,24 @@ floatBuf<span style="color: #666666">.</span><span style="color: #BB4444">put</s
 </li>
 </ul>
 <p>下面是一个使用 FileChannel 读取数据到 Buffer 中的示例:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>RandomAccessFile aFile <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> RandomAccessFile<span style="color: #666666">(</span><span style="color: #BB4444">&quot;data/nio-data.txt&quot;</span><span style="color: #666666">,</span> <span style="color: #BB4444">&quot;rw&quot;</span><span style="color: #666666">);</span>
-FileChannel inChannel <span style="color: #666666">=</span> aFile<span style="color: #666666">.</span><span style="color: #BB4444">getChannel</span><span style="color: #666666">();</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>RandomAccessFile aFile = <span style="color: #8B008B; font-weight: bold">new</span> RandomAccessFile(<span style="color: #CD5555">&quot;data/nio-data.txt&quot;</span>, <span style="color: #CD5555">&quot;rw&quot;</span>);
+FileChannel inChannel = aFile.<span style="color: #658b00">getChannel</span>();
 
-ByteBuffer buf <span style="color: #666666">=</span> ByteBuffer<span style="color: #666666">.</span><span style="color: #BB4444">allocate</span><span style="color: #666666">(48);</span>
+ByteBuffer buf = ByteBuffer.<span style="color: #658b00">allocate</span>(<span style="color: #B452CD">48</span>);
 
-<span style="color: #00BB00; font-weight: bold">int</span> bytesRead <span style="color: #666666">=</span> inChannel<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>buf<span style="color: #666666">);</span>
-<span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">(</span>bytesRead <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Read &quot;</span> <span style="color: #666666">+</span> bytesRead<span style="color: #666666">);</span>
-    buf<span style="color: #666666">.</span><span style="color: #BB4444">flip</span><span style="color: #666666">();</span>
+<span style="color: #a7a7a7; font-weight: bold">int</span> bytesRead = inChannel.<span style="color: #658b00">read</span>(buf);
+<span style="color: #8B008B; font-weight: bold">while</span> (bytesRead != -<span style="color: #B452CD">1</span>) {
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Read &quot;</span> + bytesRead);
+    buf.<span style="color: #658b00">flip</span>();
 
-    <span style="color: #AA22FF; font-weight: bold">while</span><span style="color: #666666">(</span>buf<span style="color: #666666">.</span><span style="color: #BB4444">hasRemaining</span><span style="color: #666666">()){</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">print</span><span style="color: #666666">((</span><span style="color: #00BB00; font-weight: bold">char</span><span style="color: #666666">)</span>buf<span style="color: #666666">.</span><span style="color: #BB4444">get</span><span style="color: #666666">());</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #8B008B; font-weight: bold">while</span>(buf.<span style="color: #658b00">hasRemaining</span>()){
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>((<span style="color: #a7a7a7; font-weight: bold">char</span>)buf.<span style="color: #658b00">get</span>());
+    }
 
-    buf<span style="color: #666666">.</span><span style="color: #BB4444">clear</span><span style="color: #666666">();</span>
-    bytesRead <span style="color: #666666">=</span> inChannel<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>buf<span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
-aFile<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+    buf.<span style="color: #658b00">clear</span>();
+    bytesRead = inChannel.<span style="color: #658b00">read</span>(buf);
+}
+aFile.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
@@ -197,8 +197,8 @@ aFile<span style="color: #666666">.</span><span style="color: #BB4444">close</sp
 <p>然后处理的数据就是从 position 到 limit 直接的数据, 也就是刚刚读取过来的数据.</p>
 <h2 id="memory-mapped">Memory Mapped</h2>
 <p>虚拟内存映射: 把文件的某一段(磁盘/硬盘上)直接映射到内存中去; 一旦文件被映射, 访问文件就会非常快, 不用通过系统的 <code>read()</code> 或 <code>write()</code>.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>MappedByteBuffer FileChannel<span style="color: #666666">.</span><span style="color: #BB4444">map</span><span style="color: #666666">(</span>MapMode<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">long</span> position<span style="color: #666666">,</span> longsize<span style="color: #666666">)</span>
-<span style="color: #008800; font-style: italic">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>MappedByteBuffer FileChannel.<span style="color: #658b00">map</span>(MapMode, <span style="color: #a7a7a7; font-weight: bold">long</span> position, longsize)
+<span style="color: #228B22">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
 </pre></div>
 
 

@@ -54,7 +54,7 @@
 
 
     <p>已经一个列表 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 我们想得到 [1 * 1, 2 * 2, 3 * 3, &hellip;, 10 * 10], 此时, 借助列表生成式可以很方便的实现:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>[x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">11</span>)]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[x * x <span style="color: #8B008B; font-weight: bold">for</span> x <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">11</span>)]
 </pre></div>
 
 
@@ -62,30 +62,30 @@
 <p><strong>[exp for iter_var in iterable] </strong></p>
 <p>首先迭代 <strong>iterable</strong> 里所有内容, 每一次迭代, 都把 <strong>iterable</strong> 里相应内容放到 <strong>iter_var</strong> 中, 再在表达式 <strong>exp</strong> 中应用该 <strong>iter_var</strong> 的内容, 最后用表达式的计算值生成一个新的列表.</p>
 <p>除了基础语法外, 列表生成式还可以使用两层循环:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>L <span style="color: #666666">=</span> [(x, y) <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">2</span>) <span style="color: #AA22FF; font-weight: bold">for</span> y <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">3</span>)]
-<span style="color: #666666">&gt;&gt;</span>[(<span style="color: #666666">0</span>, <span style="color: #666666">0</span>), (<span style="color: #666666">0</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">0</span>, <span style="color: #666666">2</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">0</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">1</span>), (<span style="color: #666666">1</span>, <span style="color: #666666">2</span>)]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>L = [(x, y) <span style="color: #8B008B; font-weight: bold">for</span> x <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">2</span>) <span style="color: #8B008B; font-weight: bold">for</span> y <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">3</span>)]
+&gt;&gt;[(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">0</span>), (<span style="color: #B452CD">0</span>, <span style="color: #B452CD">1</span>), (<span style="color: #B452CD">0</span>, <span style="color: #B452CD">2</span>), (<span style="color: #B452CD">1</span>, <span style="color: #B452CD">0</span>), (<span style="color: #B452CD">1</span>, <span style="color: #B452CD">1</span>), (<span style="color: #B452CD">1</span>, <span style="color: #B452CD">2</span>)]
 </pre></div>
 
 
 <p>还可以加上判断语句:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>N <span style="color: #666666">=</span> [x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>) <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> <span style="color: #666666">5</span>]
-<span style="color: #666666">&gt;&gt;</span>[<span style="color: #666666">6</span>, <span style="color: #666666">7</span>, <span style="color: #666666">8</span>, <span style="color: #666666">9</span>]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>N = [x <span style="color: #8B008B; font-weight: bold">for</span> x <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">10</span>) <span style="color: #8B008B; font-weight: bold">if</span> x &gt; <span style="color: #B452CD">5</span>]
+&gt;&gt;[<span style="color: #B452CD">6</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">8</span>, <span style="color: #B452CD">9</span>]
 </pre></div>
 
 
 <hr />
 <p>运用列表生成式, 可以写出非常简洁的代码;</p>
 <p>例如, 把一个 list 中所有的字符串变成小写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>L <span style="color: #666666">=</span> [<span style="color: #BB4444">&#39;Hello&#39;</span>, <span style="color: #BB4444">&#39;World&#39;</span>, <span style="color: #BB4444">&#39;IBM&#39;</span>, <span style="color: #BB4444">&#39;Apple&#39;</span>]
-[s<span style="color: #666666">.</span>lower() <span style="color: #AA22FF; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> L]
-<span style="color: #666666">&gt;&gt;&gt;</span> [<span style="color: #BB4444">&#39;hello&#39;</span>, <span style="color: #BB4444">&#39;world&#39;</span>, <span style="color: #BB4444">&#39;ibm&#39;</span>, <span style="color: #BB4444">&#39;apple&#39;</span>]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>L = [<span style="color: #CD5555">&#39;Hello&#39;</span>, <span style="color: #CD5555">&#39;World&#39;</span>, <span style="color: #CD5555">&#39;IBM&#39;</span>, <span style="color: #CD5555">&#39;Apple&#39;</span>]
+[s.lower() <span style="color: #8B008B; font-weight: bold">for</span> s <span style="color: #8B008B">in</span> L]
+&gt;&gt;&gt; [<span style="color: #CD5555">&#39;hello&#39;</span>, <span style="color: #CD5555">&#39;world&#39;</span>, <span style="color: #CD5555">&#39;ibm&#39;</span>, <span style="color: #CD5555">&#39;apple&#39;</span>]
 </pre></div>
 
 
 <hr />
 <p><strong>注意事项</strong></p>
 <p><strong>1</strong>.  当需要只是执行一个循环的时候尽量使用循环而不是列表解析, 这样更符合python提倡的直观性:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">for</span> item <span style="color: #AA22FF; font-weight: bold">in</span> sequence:
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">for</span> item <span style="color: #8B008B">in</span> sequence:
     process(item)
 </pre></div>
 

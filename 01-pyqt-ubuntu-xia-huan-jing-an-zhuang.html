@@ -73,7 +73,7 @@
 <p>下载: <a href="http://share.weiyun.com/97b8d2b831fec5c13cccb2880490b050">qt-everywhere-opensource-src-4.8.7.tar.gz</a></p>
 <p>这个版本的 Qt 貌似从官网上下不到了, 官网上的是 qt-everywhere-enterprise-src-4.8.7.tar.gz, 这个版本安装时需要一个 Licenses &hellip; 我试了下还是有点问题, 所以网上找了个开源版本共享在我的云盘上.</p>
 <p>下载下来后, 解压并在 Shell 中进入该文件夹, 依次执行下面的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>~/Downloads/qt-everywhere-opensource-src-4.8.7$ sudo ./configure
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>~/Downloads/qt-everywhere-opensource-src-4.8.7$ sudo ./configure
 ~/Downloads/qt-everywhere-opensource-src-4.8.7$ sudo make
 ~/Downloads/qt-everywhere-opensource-src-4.8.7$ sudo make install
 </pre></div>
@@ -83,13 +83,13 @@
 安装好后, Qt 的默认路径是 <code>/usr/local/Trolltech/Qt-4.8.7/</code>, 可以在执行第一条命令时指定安装目录 <code>./configure --prefix=/usr/local</code></p>
 <p>过程是漫长的, 耐心等待&hellip;</p>
 <p>接下来配置__环境变量__:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo vi ~/.bashrc
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo vi ~/.bashrc
 </pre></div>
 
 
 <p><br>
 打开文件后, 在结尾处添加以下内容:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>export QTDIR=/usr/local/Trolltech/Qt-4.8.7
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>export QTDIR=/usr/local/Trolltech/Qt-4.8.7
 export LD_LIBRARY_PATH=${QTDIR}/lib:${LD_LIBRARY_PATH}
 export PATH=${QTDIR}/bin:${PATH}
 </pre></div>
@@ -97,13 +97,13 @@ export PATH=${QTDIR}/bin:${PATH}
 
 <p><br>
 然后刷新下 bashrc:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">source</span> ~/.bashrc
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">source</span> ~/.bashrc
 </pre></div>
 
 
 <p><br>
 测试是否安装成功:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>qmake -v
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>qmake -v
 QMake version 2.01a
 Using Qt version 4.8.7 in /usr/local/Trolltech/Qt-4.8.7/lib
 </pre></div>
@@ -116,20 +116,20 @@ Using Qt version 4.8.7 in /usr/local/Trolltech/Qt-4.8.7/lib
 <p>PyQt 编译时使用的 SIP 版本__必须__与 python 默认调用的 SIP 保持一致!<br>
 否则 python 中是无法调用 PyQt 的, 测试方法如下:</p>
 <p>分别在终端输入:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sip -V
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sip -V
 </pre></div>
 
 
 <p><br>
 在python3环境输入：</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sip</span>
-<span style="color: #AA22FF; font-weight: bold">print</span>(sip<span style="color: #666666">.</span>SIP_VERSION_STR)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">sip</span>
+<span style="color: #8B008B; font-weight: bold">print</span>(sip.SIP_VERSION_STR)
 </pre></div>
 
 
 <p><br>
 查看二者显示的版本是否一致, 如不一致, 删除 python 的 dist-packages 目录下 sip 的相关文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo rm -rf /usr/lib/python2.7/dist-packages/sip*
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo rm -rf /usr/lib/python2.7/dist-packages/sip*
 </pre></div>
 
 
@@ -137,7 +137,7 @@ Using Qt version 4.8.7 in /usr/local/Trolltech/Qt-4.8.7/lib
 然后再开始开安装.</p>
 <p>首先去 <a href="https://www.riverbankcomputing.com/software/sip/download">Riverbank Computing</a> 下载 SIP 安装包.</p>
 <p>下载下来后, 解压并在 Shell 中进入该文件夹, 依次执行下面的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo python configure.py
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo python configure.py
 sudo make
 sudo make install
 </pre></div>
@@ -148,7 +148,7 @@ sudo make install
 <h1 id="pyqt-411">PyQt 4.11</h1>
 <p>先去下载安装包 <a href="https://www.riverbankcomputing.com/software/pyqt/download">Riverbank Computing</a></p>
 <p>下载下来后, 解压并在 Shell 中进入该文件夹, 依次执行下面的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo python configure.py
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo python configure.py
 sudo make
 sudo make install
 </pre></div>
@@ -156,13 +156,13 @@ sudo make install
 
 <p><br>
 如果 <code>sudo python configure.py</code> 时提示找不到 qmake 编译器, 可以用面这条命令来指定 qmake:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo python configure.py -q /usr/local/Trolltech/Qt-4.8.7/bin/qmake
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo python configure.py -q /usr/local/Trolltech/Qt-4.8.7/bin/qmake
 </pre></div>
 
 
 <p><br>
 安装完后测试下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>import PyQt4
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>import PyQt4
 </pre></div>
 
 
@@ -172,7 +172,7 @@ sudo make install
 <p>QScintilla 是连接编译器和 Python 的接口, 是 <strong>Eric</strong> 的必需前置组件.</p>
 <p>先去下载安装包 <a href="https://www.riverbankcomputing.com/software/qscintilla/download">Riverbank Computing</a></p>
 <p>下载下来后, 解压并在 Shell 中进入该文件夹, 依次执行下面的命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>cd QScintilla-gpl-2.9.2
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>cd QScintilla-gpl-2.9.2
 
 cd Qt4Qt5
 qmake qscintilla.pro
@@ -199,24 +199,24 @@ sudo make install
 <li>eric6-i18n-zh_CN-6.1.4.tar.gz</li>
 </ul>
 <p>下载好后都解压下, 依次执行:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">cd</span> ic6-6.1.4
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">cd</span> ic6-6.1.4
 sudo python install.py
 
-<span style="color: #AA22FF">cd</span> ../eric6-i18n-zh_CN-6.1.4
+<span style="color: #658b00">cd</span> ../eric6-i18n-zh_CN-6.1.4
 sudo python3 install-i18n.py
 </pre></div>
 
 
 <p><br>
 安装好后, 运行 eric6:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo eric6
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo eric6
 </pre></div>
 
 
 <p><br>
 <strong>注意:</strong> 为避免 Eric6 写入配置文件时权限不足, 要用 <code>sudo</code> 来运行 eric6.</p>
 <p>也可以将当前用户的 eric6 目录权限设置为可读写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sudo chmod a+w -R ~/.eric6
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sudo chmod a+w -R ~/.eric6
 sudo chmod a+w -R ～/.config/Eric6
 </pre></div>
 

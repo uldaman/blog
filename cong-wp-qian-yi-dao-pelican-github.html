@@ -70,14 +70,14 @@
 <h1 id="1-pelican">1. Pelican 博客搭建</h1>
 <p>首先, 要在 github 上建立自己的主页, 方法很简单, 在自己的 github 上 new 一个 repository，名字必须是 <strong>yourname.github.com</strong>, 然后通过 yourname.github.com 就能访问了这个 repository 主干下的 index.html 文件了, 为方便测试, 可以手动添加一个 index.html, 然后随便写上几句话, 然后通过 yourname.github.com 查看效果.</p>
 <p>接下来, 就是搭建本地博客了, 这里使用的是 pelican 系统, why? 因为它是 Python 写的, 而我又刚好懂那么一丢丢 python&hellip;</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>pip install pelican
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pip install pelican
 pip install Markdown
 </pre></div>
 
 
 <p><br>
 然后新建一个 myblog 文件夹, 运行 cmd, 进入这个文件夹, 然后执行 <strong>pelican-quickstart</strong>, 运行命令后, 会让做一些选项设置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; Where do you want to create your new web site? [.]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt; Where do you want to create your new web site? [.]
 &gt; What will be the title of this web site? SmallCpp
 &gt; Who will be the author of this web site? Martin
 &gt; What will be the default language of this web site? [en] zh
@@ -101,7 +101,7 @@ Done. Your new project is available at C:\Users\Administrator\Desktop\test
 
 <p><br>
 然后, 在当前的 myblog 目录下就有以下文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>myblog/
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>myblog/
 ├── content
 │   └── (pages)
 ├── output
@@ -122,7 +122,7 @@ content: 这里是放置博文的 md 文件, 例如 hello_python.markdown 文章
 <p>develop_server.sh: 本地服务的脚本, 用来测试当前生成的博客的.</p>
 <p>接下来就是写个测试博客~</p>
 <p>到 content 目录下新建个 my_first.markdown 文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Title: 标题
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Title: 标题
 Author: 作者
 Date: 2010-12-03 10:20
 Category: 分类
@@ -140,20 +140,20 @@ Summary: 摘要
 <h1 id="2">2. 更换主题</h1>
 <p>从 <strong>https://github.com/getpelican/pelican-themes.git</strong> 上把项目 clone 下来, 解压文件夹到 myblog 目录下(与 output 同级), 然后在 <strong>pelicanconf.py</strong> 文件里设置要使用的主题: <strong>THEME = &lsquo;pelican-themes/xxx&rsquo;</strong>, 我这里使用的是 THEME = &lsquo;pelican-themes/zurb-F5-basic&rsquo;.</p>
 <p>zurb-F5-basic 主题现在有个 Bug, 那就是第一篇博文竟然是全文显示, 这特么简直就是巨坑&hellip; 不过还好, 机智的我找到了解决方案, 依次打开文件 <strong>myblog/pelican-themes/zurb-F5-basic/templates/index.html</strong>, 更改如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
 {% block content_title %}{% endblock %}
 {% block content %}
 {% if articles %}
     {% for article in articles_page.object_list %}
-        &lt;<span style="color: #008000; font-weight: bold">article</span>&gt;
-            &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #BB4444">href</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;<span style="color: #008000; font-weight: bold">h3</span> <span style="color: #BB4444">class</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;article-title&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #008000; font-weight: bold">h3</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
+        &lt;<span style="color: #8B008B; font-weight: bold">article</span>&gt;
+            &lt;<span style="color: #8B008B; font-weight: bold">a</span> <span style="color: #658b00">href</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;<span style="color: #8B008B; font-weight: bold">h3</span> <span style="color: #658b00">class</span>=<span style="color: #CD5555">&quot;article-title&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #8B008B; font-weight: bold">h3</span>&gt;&lt;/<span style="color: #8B008B; font-weight: bold">a</span>&gt;
             {% include &#39;article_infos.html&#39; %}{{ article.summary }}{% include &#39;article_infos_bottom.html&#39; %}{% include &#39;comments.html&#39; %}
-            &lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #BB4444">class</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;button radius secondary small right&quot;</span> <span style="color: #BB4444">href</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;Read More&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;
-            &lt;<span style="color: #008000; font-weight: bold">hr</span>  <span style="color: #BB4444">class</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;gradient&quot;</span>/&gt;
-        &lt;/<span style="color: #008000; font-weight: bold">article</span>&gt;
+            &lt;<span style="color: #8B008B; font-weight: bold">a</span> <span style="color: #658b00">class</span>=<span style="color: #CD5555">&quot;button radius secondary small right&quot;</span> <span style="color: #658b00">href</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;Read More&lt;/<span style="color: #8B008B; font-weight: bold">a</span>&gt;
+            &lt;<span style="color: #8B008B; font-weight: bold">hr</span>  <span style="color: #658b00">class</span>=<span style="color: #CD5555">&quot;gradient&quot;</span>/&gt;
+        &lt;/<span style="color: #8B008B; font-weight: bold">article</span>&gt;
 
         {% if loop.last %}
-            <span style="color: #008800; font-style: italic">&lt;!-- /#posts-list --&gt;</span>
+            <span style="color: #228B22">&lt;!-- /#posts-list --&gt;</span>
             {% if loop.last and (articles_page.has_previous() or not articles_page.has_previous() and loop.length &gt; 1) %}
                 {% include &#39;pagination.html&#39; %}
             {% endif %}
@@ -162,9 +162,9 @@ Summary: 摘要
 
 {% else %}
 
-    &lt;<span style="color: #008000; font-weight: bold">h3</span>&gt;Pages&lt;/<span style="color: #008000; font-weight: bold">h3</span>&gt;
+    &lt;<span style="color: #8B008B; font-weight: bold">h3</span>&gt;Pages&lt;/<span style="color: #8B008B; font-weight: bold">h3</span>&gt;
     {% for page in PAGES %}
-        &lt;<span style="color: #008000; font-weight: bold">li</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #BB4444">href</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/{{ page.url }}&quot;</span>&gt;{{ page.title }}&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">li</span>&gt;
+        &lt;<span style="color: #8B008B; font-weight: bold">li</span>&gt;&lt;<span style="color: #8B008B; font-weight: bold">a</span> <span style="color: #658b00">href</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/{{ page.url }}&quot;</span>&gt;{{ page.title }}&lt;/<span style="color: #8B008B; font-weight: bold">a</span>&gt;&lt;/<span style="color: #8B008B; font-weight: bold">li</span>&gt;
     {% endfor %}
 
 {% endif %}
@@ -174,26 +174,26 @@ Summary: 摘要
 
 <p><br>
 对于 <code>pelicanconf.py</code>, 除了 THEME 外, 还有一些有用的设置:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>AUTHOR <span style="color: #666666">=</span> <span style="color: #BB4444">u&#39;martin&#39;</span>
-SITENAME <span style="color: #666666">=</span> <span style="color: #BB4444">u&#39;Small Cpp&#39;</span>
-SITEURL <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;http://z351522453.github.com&#39;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>AUTHOR = <span style="color: #CD5555">u&#39;martin&#39;</span>
+SITENAME = <span style="color: #CD5555">u&#39;Small Cpp&#39;</span>
+SITEURL = <span style="color: #CD5555">&#39;http://z351522453.github.com&#39;</span>
 
-THEME <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;pelican-themes/zurb-F5-basic&#39;</span>
-USE_FOLDER_AS_CATEGORY <span style="color: #666666">=</span> <span style="color: #AA22FF">True</span> <span style="color: #008800; font-style: italic"># 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类</span>
-DELETE_OUTPUT_DIRECTORY <span style="color: #666666">=</span> <span style="color: #AA22FF">True</span> <span style="color: #008800; font-style: italic"># 编译之前删除 output 目录，这样保证 output 下生成的内容干净</span>
-SUMMARY_MAX_LENGTH <span style="color: #666666">=</span> <span style="color: #666666">30</span> <span style="color: #008800; font-style: italic"># 文章摘要最大字数</span>
+THEME = <span style="color: #CD5555">&#39;pelican-themes/zurb-F5-basic&#39;</span>
+USE_FOLDER_AS_CATEGORY = <span style="color: #658b00">True</span> <span style="color: #228B22"># 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类</span>
+DELETE_OUTPUT_DIRECTORY = <span style="color: #658b00">True</span> <span style="color: #228B22"># 编译之前删除 output 目录，这样保证 output 下生成的内容干净</span>
+SUMMARY_MAX_LENGTH = <span style="color: #B452CD">30</span> <span style="color: #228B22"># 文章摘要最大字数</span>
 
-<span style="color: #008800; font-style: italic"># 设置 MD 语法高亮</span>
-MD_EXTENSIONS <span style="color: #666666">=</span> [
-  <span style="color: #BB4444">&quot;extra&quot;</span>,
-  <span style="color: #BB4444">&quot;toc&quot;</span>,
-  <span style="color: #BB4444">&quot;headerid&quot;</span>,
-  <span style="color: #BB4444">&quot;meta&quot;</span>,
-  <span style="color: #BB4444">&quot;sane_lists&quot;</span>,
-  <span style="color: #BB4444">&quot;smarty&quot;</span>,
-  <span style="color: #BB4444">&quot;wikilinks&quot;</span>,
-  <span style="color: #BB4444">&quot;admonition&quot;</span>,
-  <span style="color: #BB4444">&quot;codehilite(guess_lang=False,pygments_style=monokai,noclasses=True)&quot;</span>]
+<span style="color: #228B22"># 设置 MD 语法高亮</span>
+MD_EXTENSIONS = [
+  <span style="color: #CD5555">&quot;extra&quot;</span>,
+  <span style="color: #CD5555">&quot;toc&quot;</span>,
+  <span style="color: #CD5555">&quot;headerid&quot;</span>,
+  <span style="color: #CD5555">&quot;meta&quot;</span>,
+  <span style="color: #CD5555">&quot;sane_lists&quot;</span>,
+  <span style="color: #CD5555">&quot;smarty&quot;</span>,
+  <span style="color: #CD5555">&quot;wikilinks&quot;</span>,
+  <span style="color: #CD5555">&quot;admonition&quot;</span>,
+  <span style="color: #CD5555">&quot;codehilite(guess_lang=False,pygments_style=monokai,noclasses=True)&quot;</span>]
 </pre></div>
 
 
@@ -215,42 +215,42 @@ Reference:<br>
 <p>添加好后, 在管理页面会看到如下信息:</p>
 <p><img alt="" src="http://i67.tinypic.com/2cg2dxy.jpg" /></p>
 <p>打开 pelican 主题目录下的 <code>article.html</code> 文件, 在 <code>&lt;/article&gt;</code> 上面添加上图中的代码, 我这里改成了:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>{% extends &quot;base.html&quot; %}
 {% block title %}{{ article.title|striptags }}{% endblock %}
 {% block content %}
-&lt;<span style="color: #008000; font-weight: bold">article</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">header</span>&gt;
-        &lt;<span style="color: #008000; font-weight: bold">h3</span> <span style="color: #BB4444">class</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;article-title&quot;</span>&gt;&lt;<span style="color: #008000; font-weight: bold">a</span> <span style="color: #BB4444">href</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span> <span style="color: #BB4444">rel</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;bookmark&quot;</span>
-        <span style="color: #BB4444">title</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;Permalink to {{ article.title|striptags }}&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #008000; font-weight: bold">a</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">h3</span>&gt;
+&lt;<span style="color: #8B008B; font-weight: bold">article</span>&gt;
+    &lt;<span style="color: #8B008B; font-weight: bold">header</span>&gt;
+        &lt;<span style="color: #8B008B; font-weight: bold">h3</span> <span style="color: #658b00">class</span>=<span style="color: #CD5555">&quot;article-title&quot;</span>&gt;&lt;<span style="color: #8B008B; font-weight: bold">a</span> <span style="color: #658b00">href</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span> <span style="color: #658b00">rel</span>=<span style="color: #CD5555">&quot;bookmark&quot;</span>
+        <span style="color: #658b00">title</span>=<span style="color: #CD5555">&quot;Permalink to {{ article.title|striptags }}&quot;</span>&gt;{{ article.title }}&lt;/<span style="color: #8B008B; font-weight: bold">a</span>&gt;&lt;/<span style="color: #8B008B; font-weight: bold">h3</span>&gt;
         {% include &#39;twitter.html&#39; %}
-    &lt;/<span style="color: #008000; font-weight: bold">header</span>&gt;
+    &lt;/<span style="color: #8B008B; font-weight: bold">header</span>&gt;
 
     {% include &#39;article_infos.html&#39; %}
     {{ article.content }}
     {% include &#39;article_infos_bottom.html&#39; %}
 
-<span style="color: #008800; font-style: italic">&lt;!--     {% if DISQUS_SITENAME and SITEURL and article.status != &quot;draft&quot; %}</span>
-<span style="color: #008800; font-style: italic">    &lt;h4&gt;Comments&lt;/h4&gt;</span>
-<span style="color: #008800; font-style: italic">    {% include &#39;disqus_script.html&#39; %}</span>
-<span style="color: #008800; font-style: italic">    {% endif %} --&gt;</span>
+<span style="color: #228B22">&lt;!--     {% if DISQUS_SITENAME and SITEURL and article.status != &quot;draft&quot; %}</span>
+<span style="color: #228B22">    &lt;h4&gt;Comments&lt;/h4&gt;</span>
+<span style="color: #228B22">    {% include &#39;disqus_script.html&#39; %}</span>
+<span style="color: #228B22">    {% endif %} --&gt;</span>
 
-    <span style="color: #008800; font-style: italic">&lt;!-- 多说评论框 start --&gt;</span>
-    &lt;<span style="color: #008000; font-weight: bold">h4</span>&gt;Comments !&lt;/<span style="color: #008000; font-weight: bold">h4</span>&gt;
-    &lt;<span style="color: #008000; font-weight: bold">div</span> <span style="color: #BB4444">class</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;ds-thread&quot;</span> <span style="color: #BB4444">data-thread-key</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ article.slug }}&quot;</span> <span style="color: #BB4444">data-title</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ article.title }}&quot;</span> <span style="color: #BB4444">data-url</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;/<span style="color: #008000; font-weight: bold">div</span>&gt;
-    <span style="color: #008800; font-style: italic">&lt;!-- 多说评论框 end --&gt;</span>
-    <span style="color: #008800; font-style: italic">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
-    &lt;<span style="color: #008000; font-weight: bold">script</span> <span style="color: #BB4444">type</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;text/javascript&quot;</span>&gt;
-        <span style="color: #AA22FF; font-weight: bold">var</span> duoshuoQuery <span style="color: #666666">=</span> {short_name<span style="color: #666666">:</span><span style="color: #BB4444">&quot;smallcpp&quot;</span>};
-            (<span style="color: #AA22FF; font-weight: bold">function</span>() {
-                <span style="color: #AA22FF; font-weight: bold">var</span> ds <span style="color: #666666">=</span> <span style="color: #AA22FF">document</span>.createElement(<span style="color: #BB4444">&#39;script&#39;</span>);
-                ds.type <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;text/javascript&#39;</span>;ds.async <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">true</span>;
-                ds.src <span style="color: #666666">=</span> (<span style="color: #AA22FF">document</span>.location.protocol <span style="color: #666666">==</span> <span style="color: #BB4444">&#39;https:&#39;</span> <span style="color: #666666">?</span> <span style="color: #BB4444">&#39;https:&#39;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&#39;http:&#39;</span>) <span style="color: #666666">+</span> <span style="color: #BB4444">&#39;//static.duoshuo.com/embed.js&#39;</span>;
-                ds.charset <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;UTF-8&#39;</span>;
-                (<span style="color: #AA22FF">document</span>.getElementsByTagName(<span style="color: #BB4444">&#39;head&#39;</span>)[<span style="color: #666666">0</span>] <span style="color: #666666">||</span> <span style="color: #AA22FF">document</span>.getElementsByTagName(<span style="color: #BB4444">&#39;body&#39;</span>)[<span style="color: #666666">0</span>]).appendChild(ds);
+    <span style="color: #228B22">&lt;!-- 多说评论框 start --&gt;</span>
+    &lt;<span style="color: #8B008B; font-weight: bold">h4</span>&gt;Comments !&lt;/<span style="color: #8B008B; font-weight: bold">h4</span>&gt;
+    &lt;<span style="color: #8B008B; font-weight: bold">div</span> <span style="color: #658b00">class</span>=<span style="color: #CD5555">&quot;ds-thread&quot;</span> <span style="color: #658b00">data-thread-key</span>=<span style="color: #CD5555">&quot;{{ article.slug }}&quot;</span> <span style="color: #658b00">data-title</span>=<span style="color: #CD5555">&quot;{{ article.title }}&quot;</span> <span style="color: #658b00">data-url</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span>&gt;&lt;/<span style="color: #8B008B; font-weight: bold">div</span>&gt;
+    <span style="color: #228B22">&lt;!-- 多说评论框 end --&gt;</span>
+    <span style="color: #228B22">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span>
+    &lt;<span style="color: #8B008B; font-weight: bold">script</span> <span style="color: #658b00">type</span>=<span style="color: #CD5555">&quot;text/javascript&quot;</span>&gt;
+        <span style="color: #8B008B; font-weight: bold">var</span> duoshuoQuery = {short_name:<span style="color: #CD5555">&quot;smallcpp&quot;</span>};
+            (<span style="color: #8B008B; font-weight: bold">function</span>() {
+                <span style="color: #8B008B; font-weight: bold">var</span> ds = <span style="color: #658b00">document</span>.createElement(<span style="color: #CD5555">&#39;script&#39;</span>);
+                ds.type = <span style="color: #CD5555">&#39;text/javascript&#39;</span>;ds.async = <span style="color: #8B008B; font-weight: bold">true</span>;
+                ds.src = (<span style="color: #658b00">document</span>.location.protocol == <span style="color: #CD5555">&#39;https:&#39;</span> ? <span style="color: #CD5555">&#39;https:&#39;</span> : <span style="color: #CD5555">&#39;http:&#39;</span>) + <span style="color: #CD5555">&#39;//static.duoshuo.com/embed.js&#39;</span>;
+                ds.charset = <span style="color: #CD5555">&#39;UTF-8&#39;</span>;
+                (<span style="color: #658b00">document</span>.getElementsByTagName(<span style="color: #CD5555">&#39;head&#39;</span>)[<span style="color: #B452CD">0</span>] || <span style="color: #658b00">document</span>.getElementsByTagName(<span style="color: #CD5555">&#39;body&#39;</span>)[<span style="color: #B452CD">0</span>]).appendChild(ds);
             })();
-    &lt;/<span style="color: #008000; font-weight: bold">script</span>&gt;
-    <span style="color: #008800; font-style: italic">&lt;!-- 多说公共JS代码 end --&gt;</span>
-&lt;/<span style="color: #008000; font-weight: bold">article</span>&gt;
+    &lt;/<span style="color: #8B008B; font-weight: bold">script</span>&gt;
+    <span style="color: #228B22">&lt;!-- 多说公共JS代码 end --&gt;</span>
+&lt;/<span style="color: #8B008B; font-weight: bold">article</span>&gt;
 {% endblock %}
 </pre></div>
 
@@ -260,23 +260,23 @@ Reference:<br>
 <p>GFM 即 Github Flavored Mardown, 它是现在比较受欢迎的一种 Markdown 风格, 但 pygments 本身并不支持 (py-markdown 的语法高亮通过 pygments 来支持), 要通过第三方扩展来实现.</p>
 <p>首先, 要安装 pymdown  第三方扩展 <code>pip install pymdown-extensions</code>, 然后把 <code>pelicanconf.py</code> 文件中 <code>MD_EXTENSIONS</code> 的 <strong>extra</strong> 替换成 <strong>pymdownx.github</strong>.</p>
 <p>Pymdown Extensions Documentation 对 <strong>pymdownx.github</strong> 说明如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>For code highlighting, you will also need to load the markdown.extensions.codehilite extension yourself as well with guess_lang=False and your preferred Pygments style (if available or use some other JavaScript highlighter). Though there is no Github style included with this extension, you are most likely able to find a suitable theme online by searching. I do have older Github styles found at the pymdown-styles repo; it contains the original Pygments Github style (github) and the Github 2014 style (github2014) which Github used before they ditched Pygments for their own in-house highlighter.
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>For code highlighting, you will also need to load the markdown.extensions.codehilite extension yourself as well with guess_lang=False and your preferred Pygments style (if available or use some other JavaScript highlighter). Though there is no Github style included with this extension, you are most likely able to find a suitable theme online by searching. I do have older Github styles found at the pymdown-styles repo; it contains the original Pygments Github style (github) and the Github 2014 style (github2014) which Github used before they ditched Pygments for their own in-house highlighter.
 </pre></div>
 
 
 <p><br>
 简单的说, 就是 <strong>pymdownx.github</strong> 提供了一些功能用来模仿 Github, 但不是全部, 如果想要使用 Github 的代码高亮, 你需要设置 <code>markdown.extensions.codehilite</code> 的 <code>guess_lang=False</code>, 并且引用一个 <code>Pygments style</code> 文件, 虽然该扩展本身并不包含 Github style, 但是你可以去找....然后作者也给了一个 <a href="https://github.com/z351522453/pymdown-styles">pymdown-styles repo</a> 供使用 (我将它 Fork 回自己的仓库, 做了点更改, 让它更像 Github 的高亮风格).</p>
 <p>使用方法比较简单, clone 项目到本地, 执行 <code>python setup.py install</code>, 然后修改 <code>pelicanconf.py</code> 文件中 <code>MD_EXTENSIONS</code> 的 <strong>codehilite</strong>, 最终的 <strong>MD_EXTENSIONS</strong> 如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>MD_EXTENSIONS <span style="color: #666666">=</span> [
-  <span style="color: #BB4444">&quot;pymdownx.github(no_nl2br=True)&quot;</span>,
-  <span style="color: #BB4444">&quot;toc&quot;</span>,
-  <span style="color: #BB4444">&quot;headerid&quot;</span>,
-  <span style="color: #BB4444">&quot;meta&quot;</span>,
-  <span style="color: #BB4444">&quot;sane_lists&quot;</span>,
-  <span style="color: #BB4444">&quot;smarty&quot;</span>,
-  <span style="color: #BB4444">&quot;wikilinks&quot;</span>,
-  <span style="color: #BB4444">&quot;admonition&quot;</span>,
-  <span style="color: #BB4444">&quot;codehilite(guess_lang=False,pygments_style=github2014,noclasses=True)&quot;</span>]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>MD_EXTENSIONS = [
+  <span style="color: #CD5555">&quot;pymdownx.github(no_nl2br=True)&quot;</span>,
+  <span style="color: #CD5555">&quot;toc&quot;</span>,
+  <span style="color: #CD5555">&quot;headerid&quot;</span>,
+  <span style="color: #CD5555">&quot;meta&quot;</span>,
+  <span style="color: #CD5555">&quot;sane_lists&quot;</span>,
+  <span style="color: #CD5555">&quot;smarty&quot;</span>,
+  <span style="color: #CD5555">&quot;wikilinks&quot;</span>,
+  <span style="color: #CD5555">&quot;admonition&quot;</span>,
+  <span style="color: #CD5555">&quot;codehilite(guess_lang=False,pygments_style=github2014,noclasses=True)&quot;</span>]
 </pre></div>
 
 
@@ -288,7 +288,7 @@ References:<br>
 <h1 id="4">4. 添加网站图标</h1>
 <p>不同的 pelican 主题添加方法不一样, 我这里用的是 <code>zurb-F5-basic</code> 主题, 就以它为例说明下.</p>
 <p>首先准备好 <code>ico</code> 文件如 <code>favicon.ico</code>, 放到主题的静态图标目录下 (<code>~\pelican-themes\zurb-F5-basic\static\images\icons</code>), 然后打开文件 <strong>~/pelican-themes/zurb-F5-basic/templates/base.html</strong>, 在 <code>head</code> 标签中添加一行:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #008000; font-weight: bold">link</span> <span style="color: #BB4444">rel</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;shortcut icon&quot;</span> <span style="color: #BB4444">type</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;image/x-icon&quot;</span> <span style="color: #BB4444">href</span><span style="color: #666666">=</span><span style="color: #BB4444">&quot;{{ SITEURL }}/theme/images/favicon.ico&quot;</span> /&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #8B008B; font-weight: bold">link</span> <span style="color: #658b00">rel</span>=<span style="color: #CD5555">&quot;shortcut icon&quot;</span> <span style="color: #658b00">type</span>=<span style="color: #CD5555">&quot;image/x-icon&quot;</span> <span style="color: #658b00">href</span>=<span style="color: #CD5555">&quot;{{ SITEURL }}/theme/images/favicon.ico&quot;</span> /&gt;
 </pre></div>
 
 
@@ -298,75 +298,75 @@ References:<br>
 <p><strong>第一步</strong>, 进入 wp 后台, 工具-&gt;导出, 然后把 &lsquo;全部&rsquo; 和 &lsquo;文章&rsquo; 这两个都导出一份(其实我们导出文章就可以了, 把 &lsquo;全部&rsquo; 也都导出是为了以后可能还有用处, 以防万一嘛), 然后进入我们的主机管理系统(这个我们购买的主机商那就有提供), 把 mysql 数据也导出一份, 然后进入主机空间, 把整个空间都 dump 一份.</p>
 <p><strong>第二步</strong>, 到 https://github.com/thomasf/exitwp.git <strong>clone</strong> 项目到本地, 把刚从 wp 导出的 &lsquo;文章&rsquo; xml 放到 exitwp 目录下的 <strong>wordpress-xml</strong> 子目录里, 然后 cmd 进入 exitwp 目录, 执行 <strong>python exitwp.py</strong>, 稍等片刻, 我们的文章全部都转成 *.md 格式啦(路径: <strong>exitwp/build/jekyll/原 wp 路径/_posts</strong>).</p>
 <p>不过, 这里有个坑, 这个工具导出的 md 文件, 是按文件内容里的 slug 项来命名的, 特么 py 对中文的处理不大好, 导致 md 的文件名都有问题, 于是写了个脚本用来转换用户名.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">当使用 exitwp 生成 md 文件时, 文件名会乱码, 使用该脚本可以修复</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #CD5555">当使用 exitwp 生成 md 文件时, 文件名会乱码, 使用该脚本可以修复</span>
 
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #228B22"># -*- coding: utf-8 -*-</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">re</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">urllib</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
 
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts&#39;</span>) <span style="color: #008800; font-style: italic"># 路径自己改</span>
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">u&#39;change_md_file_name.py&#39;</span>:
-        file_object <span style="color: #666666">=</span> <span style="color: #AA22FF">open</span>(<span style="color: #AA22FF">file</span>)
-        all_the_text <span style="color: #666666">=</span> file_object<span style="color: #666666">.</span>read( )
-        header <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;---(.*?)---&#39;&#39;&#39;</span>, all_the_text, re<span style="color: #666666">.</span>S)
-        slug <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;slug: (.*?)title&#39;&#39;&#39;</span>, header<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>), re<span style="color: #666666">.</span>S)
-        new <span style="color: #666666">=</span> urllib<span style="color: #666666">.</span>unquote(slug<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>))<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)
-        file_object<span style="color: #666666">.</span>close()
+files=os.listdir(<span style="color: #CD5555">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts&#39;</span>) <span style="color: #228B22"># 路径自己改</span>
+<span style="color: #8B008B; font-weight: bold">for</span> <span style="color: #658b00">file</span> <span style="color: #8B008B">in</span> files:
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">file</span> != <span style="color: #CD5555">u&#39;change_md_file_name.py&#39;</span>:
+        file_object = <span style="color: #658b00">open</span>(<span style="color: #658b00">file</span>)
+        all_the_text = file_object.read( )
+        header = re.search(<span style="color: #CD5555">&#39;&#39;&#39;---(.*?)---&#39;&#39;&#39;</span>, all_the_text, re.S)
+        slug = re.search(<span style="color: #CD5555">&#39;&#39;&#39;slug: (.*?)title&#39;&#39;&#39;</span>, header.group(<span style="color: #B452CD">1</span>), re.S)
+        new = urllib.unquote(slug.group(<span style="color: #B452CD">1</span>)).replace(<span style="color: #CD5555">&#39;\n&#39;</span>, <span style="color: #CD5555">&#39;&#39;</span>).decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
+        file_object.close()
 
-        os<span style="color: #666666">.</span>renames(<span style="color: #AA22FF">file</span>, new <span style="color: #666666">+</span> <span style="color: #BB4444">&#39;.markdown&#39;</span>)
+        os.renames(<span style="color: #658b00">file</span>, new + <span style="color: #CD5555">&#39;.markdown&#39;</span>)
 </pre></div>
 
 
 <p><br>
 <strong>第三步</strong>, 有了 md 文件了, 剩下的还不好办吗, 全部拷贝到 myblog/content 目录下, 然而问题又来了, 一堆 md 文件堆在一个文件夹下显然是很乱的, 而且也无法利用 <strong>USE_FOLDER_AS_CATEGORY = True # 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类</strong> 这条设置了, 所以又写了个脚本把文章按类别分类(在运行脚本之前要手动建好文件夹).</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">读取文件中的 Category, 然后将文件放到 Category 指定的文件夹</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">shutil</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># -*- coding: utf-8 -*-</span>
+<span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #CD5555">读取文件中的 Category, 然后将文件放到 Category 指定的文件夹</span>
+<span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">re</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">urllib</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">shutil</span>
 
 
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/content&#39;</span>)
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF">file</span> <span style="color: #666666">=</span> <span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;gbk&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;sss.py&#39;</span>:
-        file_object <span style="color: #666666">=</span> <span style="color: #AA22FF">open</span>(<span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>))
-        lnum <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> file_object:
-                lnum <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
-                <span style="color: #AA22FF; font-weight: bold">if</span> lnum <span style="color: #666666">==</span> <span style="color: #666666">5</span>:
-                    result <span style="color: #666666">=</span> re<span style="color: #666666">.</span>search(<span style="color: #BB4444">&#39;&#39;&#39;Category: (.*?)</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;&#39;&#39;</span>, line, re<span style="color: #666666">.</span>S)
-                    tar <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/field/&#39;</span> <span style="color: #666666">+</span> result<span style="color: #666666">.</span>group(<span style="color: #666666">1</span>)
-                    shutil<span style="color: #666666">.</span>copy(<span style="color: #AA22FF">file</span><span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>),  tar<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>)<span style="color: #666666">.</span>encode(<span style="color: #BB4444">&#39;gbk&#39;</span>))
-                    <span style="color: #AA22FF; font-weight: bold">break</span>
-        file_object<span style="color: #666666">.</span>close()
+files=os.listdir(<span style="color: #CD5555">&#39;C:/Users/Administrator/Desktop/content&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">for</span> <span style="color: #658b00">file</span> <span style="color: #8B008B">in</span> files:
+    <span style="color: #658b00">file</span> = <span style="color: #658b00">file</span>.decode(<span style="color: #CD5555">&#39;gbk&#39;</span>).encode(<span style="color: #CD5555">&#39;utf-8&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">file</span> != <span style="color: #CD5555">&#39;sss.py&#39;</span>:
+        file_object = <span style="color: #658b00">open</span>(<span style="color: #658b00">file</span>.decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>).encode(<span style="color: #CD5555">&#39;gbk&#39;</span>))
+        lnum = <span style="color: #B452CD">0</span>
+        <span style="color: #8B008B; font-weight: bold">for</span> line <span style="color: #8B008B">in</span> file_object:
+                lnum += <span style="color: #B452CD">1</span>
+                <span style="color: #8B008B; font-weight: bold">if</span> lnum == <span style="color: #B452CD">5</span>:
+                    result = re.search(<span style="color: #CD5555">&#39;&#39;&#39;Category: (.*?)\n&#39;&#39;&#39;</span>, line, re.S)
+                    tar = <span style="color: #CD5555">&#39;C:/Users/Administrator/Desktop/field/&#39;</span> + result.group(<span style="color: #B452CD">1</span>)
+                    shutil.copy(<span style="color: #658b00">file</span>.decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>).encode(<span style="color: #CD5555">&#39;gbk&#39;</span>),  tar.decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>).encode(<span style="color: #CD5555">&#39;gbk&#39;</span>))
+                    <span style="color: #8B008B; font-weight: bold">break</span>
+        file_object.close()
 </pre></div>
 
 
 <p><br>
 <strong>第四步</strong>, md 按类别整理好后, 就可以用 <strong>make html</strong> 来生成 blog 啦, 不过遗憾的是特么生成的文件名依然是乱码, 于是又写了个脚本修复文件名&hellip;(应该可以改源码的, 暂时没空看源码, 先用这个脚本过度下).</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #BB4444; font-style: italic">当使用 make html 生成 html 文件, 文件名乱码, 使用该脚本可以修复</span>
-<span style="color: #BB4444; font-style: italic">&#39;&#39;&#39;</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">re</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">urllib</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">os</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># -*- coding: utf-8 -*-</span>
+<span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #CD5555">当使用 make html 生成 html 文件, 文件名乱码, 使用该脚本可以修复</span>
+<span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">re</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">urllib</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
 
 
-files<span style="color: #666666">=</span>os<span style="color: #666666">.</span>listdir(<span style="color: #BB4444">&#39;C:/Users/Administrator/Desktop/123&#39;</span>)
-<span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #AA22FF">file</span> <span style="color: #AA22FF; font-weight: bold">in</span> files:
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #AA22FF">file</span> <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;change_hml_file_name.py&#39;</span>:
-        new <span style="color: #666666">=</span> urllib<span style="color: #666666">.</span>unquote(<span style="color: #AA22FF">file</span>)<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\r</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)<span style="color: #666666">.</span>replace(<span style="color: #BB4444">&#39;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BB4444">&#39;</span>, <span style="color: #BB4444">&#39;&#39;</span>)
-        <span style="color: #AA22FF; font-weight: bold">print</span> new
-        os<span style="color: #666666">.</span>renames(<span style="color: #AA22FF">file</span>, new<span style="color: #666666">.</span>decode(<span style="color: #BB4444">&#39;utf-8&#39;</span>))
+files=os.listdir(<span style="color: #CD5555">&#39;C:/Users/Administrator/Desktop/123&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">for</span> <span style="color: #658b00">file</span> <span style="color: #8B008B">in</span> files:
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">file</span> != <span style="color: #CD5555">&#39;change_hml_file_name.py&#39;</span>:
+        new = urllib.unquote(<span style="color: #658b00">file</span>).replace(<span style="color: #CD5555">&#39;\r&#39;</span>, <span style="color: #CD5555">&#39;&#39;</span>).replace(<span style="color: #CD5555">&#39;\n&#39;</span>, <span style="color: #CD5555">&#39;&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">print</span> new
+        os.renames(<span style="color: #658b00">file</span>, new.decode(<span style="color: #CD5555">&#39;utf-8&#39;</span>))
 </pre></div>
 
 
@@ -378,7 +378,7 @@ files<span style="color: #666666">=</span>os<span style="color: #666666">.</span
 </blockquote>
 <p>这个其实没啥好讲的了, 我是用的 github for windows 工具来管理 github, 每次 <strong>make html</strong> 后, 把 output 下的文件同步到 github 上 page 项目的主干下就行了&hellip;</p>
 <p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: <strong>www.smallcpp.com</strong>, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>@      CNAME        yourname.github.com
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>@      CNAME        yourname.github.com
 www    CNAME        yourname.github.com
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>

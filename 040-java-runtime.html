@@ -174,35 +174,35 @@
 <p>Java 会周期性的回收垃圾对象 (未使用的对象), 以便释放内存空间. 但是如果想先于收集器的下一次指定周期来收集废弃的对象, 可以通过调用 <code>gc()</code> 方法来根据需要运行无用单元收集器.</p>
 <p>一个很好的试验方法是先调用 <code>gc()</code> 方法, 然后调用 <code>freeMemory()</code> 方法来查看基本的内存使用情况, 接着执行代码, 然后再次调用 <code>freeMemory()</code> 方法看看分配了多少内存.</p>
 <p>下面的程序演示了这个构想. // 此实例来自《java 核心技术》卷一</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MemoryDemo</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String args<span style="color: #666666">[])</span> <span style="color: #666666">{</span>
-        Runtime r <span style="color: #666666">=</span> Runtime<span style="color: #666666">.</span><span style="color: #BB4444">getRuntime</span><span style="color: #666666">();</span>
-        <span style="color: #00BB00; font-weight: bold">long</span> mem1<span style="color: #666666">,</span>mem2<span style="color: #666666">;</span>
-        Integer someints<span style="color: #666666">[]</span> <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">[1000];</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Total memory is ：&quot;</span> <span style="color: #666666">+</span> r<span style="color: #666666">.</span><span style="color: #BB4444">totalMemory</span><span style="color: #666666">());</span>
-        mem1 <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">freeMemory</span><span style="color: #666666">();</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Initial free is : &quot;</span> <span style="color: #666666">+</span> mem1<span style="color: #666666">);</span>
-        r<span style="color: #666666">.</span><span style="color: #BB4444">gc</span><span style="color: #666666">();</span>
-        mem1 <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">freeMemory</span><span style="color: #666666">();</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Free memory after garbage collection : &quot;</span> <span style="color: #666666">+</span> mem1<span style="color: #666666">);</span>
-        <span style="color: #008800; font-style: italic">//allocate integers</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> i<span style="color: #666666">=0;</span> i<span style="color: #666666">&lt;1000;</span> i<span style="color: #666666">++)</span> someints<span style="color: #666666">[</span>i<span style="color: #666666">]</span> <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Integer<span style="color: #666666">(</span>i<span style="color: #666666">);</span>
-        mem2 <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">freeMemory</span><span style="color: #666666">();</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Free memory after allocation : &quot;</span> <span style="color: #666666">+</span> mem2<span style="color: #666666">);</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Memory used by allocation : &quot;</span> <span style="color: #666666">+(</span>mem1<span style="color: #666666">-</span>mem2<span style="color: #666666">));</span>
-        <span style="color: #008800; font-style: italic">//discard Intergers</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> i<span style="color: #666666">=0;</span> i<span style="color: #666666">&lt;1000;</span> i<span style="color: #666666">++)</span> someints<span style="color: #666666">[</span>i<span style="color: #666666">]</span> <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
-        r<span style="color: #666666">.</span><span style="color: #BB4444">gc</span><span style="color: #666666">();</span> <span style="color: #008800; font-style: italic">//request garbage collection</span>
-        mem2 <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">freeMemory</span><span style="color: #666666">();</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Free memory after collecting &quot;</span> <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;discarded integers : &quot;</span> <span style="color: #666666">+</span> mem2<span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MemoryDemo</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String args[]) {
+        Runtime r = Runtime.<span style="color: #658b00">getRuntime</span>();
+        <span style="color: #a7a7a7; font-weight: bold">long</span> mem1,mem2;
+        Integer someints[] = <span style="color: #8B008B; font-weight: bold">new</span> Integer[<span style="color: #B452CD">1000</span>];
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Total memory is ：&quot;</span> + r.<span style="color: #658b00">totalMemory</span>());
+        mem1 = r.<span style="color: #658b00">freeMemory</span>();
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Initial free is : &quot;</span> + mem1);
+        r.<span style="color: #658b00">gc</span>();
+        mem1 = r.<span style="color: #658b00">freeMemory</span>();
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Free memory after garbage collection : &quot;</span> + mem1);
+        <span style="color: #228B22">//allocate integers</span>
+        <span style="color: #8B008B; font-weight: bold">for</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> i=<span style="color: #B452CD">0</span>; i&lt;<span style="color: #B452CD">1000</span>; i++) someints[i] = <span style="color: #8B008B; font-weight: bold">new</span> Integer(i);
+        mem2 = r.<span style="color: #658b00">freeMemory</span>();
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Free memory after allocation : &quot;</span> + mem2);
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Memory used by allocation : &quot;</span> +(mem1-mem2));
+        <span style="color: #228B22">//discard Intergers</span>
+        <span style="color: #8B008B; font-weight: bold">for</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> i=<span style="color: #B452CD">0</span>; i&lt;<span style="color: #B452CD">1000</span>; i++) someints[i] = <span style="color: #8B008B; font-weight: bold">null</span>;
+        r.<span style="color: #658b00">gc</span>(); <span style="color: #228B22">//request garbage collection</span>
+        mem2 = r.<span style="color: #658b00">freeMemory</span>();
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Free memory after collecting &quot;</span> + <span style="color: #CD5555">&quot;discarded integers : &quot;</span> + mem2);
+    }
+}
 </pre></div>
 
 
 <p><br>
 编译后运行结果如下 (不同的机器不同时间运行的结果也不一定一样):</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Total memory is ：2031616
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Total memory is ：2031616
 Initial free is : 1818488
 Free memory after garbage collection : 1888808
 Free memory after allocation : 1872224
@@ -218,17 +218,17 @@ Free memory after collecting discarded integers : 1888808
 <p><code>exec()</code> 方法返回一个 Process 对象, 可以使用这个对象控制 Java 程序与新运行的进程进行交互.</p>
 <p><code>exec()</code> 方法本质是依赖于环境.</p>
 <p>下面的例子是使用 <code>exec()</code> 方法启动 windows 的记事本 notepad. / /此实例来自《Java 核心技术》卷一</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">ExecDemo</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String args<span style="color: #666666">[])</span> <span style="color: #666666">{</span>
-        Runtime r <span style="color: #666666">=</span> Runtime<span style="color: #666666">.</span><span style="color: #BB4444">getRuntime</span><span style="color: #666666">();</span>
-        Process p <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
-        <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-            p <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">exec</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;notepad&quot;</span><span style="color: #666666">);</span>
-        <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-            System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Error executing notepad.&quot;</span><span style="color: #666666">);</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">ExecDemo</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String args[]) {
+        Runtime r = Runtime.<span style="color: #658b00">getRuntime</span>();
+        Process p = <span style="color: #8B008B; font-weight: bold">null</span>;
+        <span style="color: #8B008B; font-weight: bold">try</span> {
+            p = r.<span style="color: #658b00">exec</span>(<span style="color: #CD5555">&quot;notepad&quot;</span>);
+        } <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
+            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Error executing notepad.&quot;</span>);
+        }
+    }
+}
 </pre></div>
 
 
@@ -237,25 +237,25 @@ Free memory after collecting discarded integers : 1888808
 <p><code>exec()</code> 方法返回 Process 对象后, 在新程序开始运行后就可以使用 Process 的方法了.</p>
 <p>可以用 <code>destory()</code> 方法杀死子进程, 也可以使用 <code>waitFor()</code> 方法等待程序直到子程序结束, <code>exitValue()</code> 方法返回子进程结束时返回的值, 如果没有错误, 将返回 0, 否则返回非 0.</p>
 <p>下面是关于 `exec()``方法的例子的改进版本. 例子被修改为等待, 直到运行的进程退出: // 此实例来自《Java 核心技术》卷一</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">ExecDemoFini</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String args<span style="color: #666666">[])</span> <span style="color: #666666">{</span>
-    Runtime r <span style="color: #666666">=</span> Runtime<span style="color: #666666">.</span><span style="color: #BB4444">getRuntime</span><span style="color: #666666">();</span>
-    Process p <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
-    <span style="color: #AA22FF; font-weight: bold">try</span><span style="color: #666666">{</span>
-        p <span style="color: #666666">=</span> r<span style="color: #666666">.</span><span style="color: #BB4444">exec</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;notepad&quot;</span><span style="color: #666666">);</span>
-        p<span style="color: #666666">.</span><span style="color: #BB4444">waitFor</span><span style="color: #666666">();</span>
-    <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>Exception e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Error executing notepad.&quot;</span><span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;Notepad returned &quot;</span> <span style="color: #666666">+</span> p<span style="color: #666666">.</span><span style="color: #BB4444">exitValue</span><span style="color: #666666">());</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">ExecDemoFini</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String args[]) {
+    Runtime r = Runtime.<span style="color: #658b00">getRuntime</span>();
+    Process p = <span style="color: #8B008B; font-weight: bold">null</span>;
+    <span style="color: #8B008B; font-weight: bold">try</span>{
+        p = r.<span style="color: #658b00">exec</span>(<span style="color: #CD5555">&quot;notepad&quot;</span>);
+        p.<span style="color: #658b00">waitFor</span>();
+    } <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Error executing notepad.&quot;</span>);
+    }
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Notepad returned &quot;</span> + p.<span style="color: #658b00">exitValue</span>());
+    }
+}
 </pre></div>
 
 
 <p><br>
 下面是运行的结果 (当关闭记事本后, 会接着运行程序, 打印信息):</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Notepad returned 0
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Notepad returned 0
 请按任意键继续. . .
 </pre></div>
 

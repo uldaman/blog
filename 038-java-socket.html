@@ -84,17 +84,17 @@
 <h1 id="java-socket">Java Socket</h1>
 <p>在 Java 环境下, Socket 主要是指基于 TCP/IP 协议的网络编程 (UDP 用的是另一套).</p>
 <p>在包 java.net 中提供了两个类 <code>Socket</code> 和 <code>ServerSocket</code>, 分别用来表示双向连接的客户端和服务端, 这是两个封装得非常好的类, 使用很方便, 其<strong>构造方法</strong>如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Socket<span style="color: #666666">(</span>InetAddress address<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">);</span>
-Socket<span style="color: #666666">(</span>InetAddress address<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">boolean</span> stream<span style="color: #666666">);</span>
-Socket<span style="color: #666666">(</span>String host<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> prot<span style="color: #666666">);</span>
-Socket<span style="color: #666666">(</span>String host<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> prot<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">boolean</span> stream<span style="color: #666666">);</span>
-Socket<span style="color: #666666">(</span>SocketImpl impl<span style="color: #666666">)</span>
-Socket<span style="color: #666666">(</span>String host<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">,</span> InetAddress localAddr<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> localPort<span style="color: #666666">)</span>
-Socket<span style="color: #666666">(</span>InetAddress address<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">,</span> InetAddress localAddr<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> localPort<span style="color: #666666">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port);
+Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">boolean</span> stream);
+Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> prot);
+Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> prot, <span style="color: #a7a7a7; font-weight: bold">boolean</span> stream);
+Socket(SocketImpl impl)
+Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> port, InetAddress localAddr, <span style="color: #a7a7a7; font-weight: bold">int</span> localPort)
+Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port, InetAddress localAddr, <span style="color: #a7a7a7; font-weight: bold">int</span> localPort)
 
-ServerSocket<span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">);</span>
-ServerSocket<span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> backlog<span style="color: #666666">);</span>
-ServerSocket<span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> port<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">int</span> backlog<span style="color: #666666">,</span> InetAddress bindAddr<span style="color: #666666">)</span>
+ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port);
+ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">int</span> backlog);
+ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">int</span> backlog, InetAddress bindAddr)
 </pre></div>
 
 
@@ -111,88 +111,88 @@ ServerSocket<span style="color: #666666">(</span><span style="color: #00BB00; fo
 <p>0~1023 的端口号为系统所保留, 例如 http 服务的端口号为 80, telnet 服务的端口号为 21, ftp 服务的端口号为 23, 所以在选择端口号时, 最好选择一个大于 1023 的数以防止发生冲突.</p>
 <p>在创建 socket 时如果发生错误, 将产生 IOException, 在程序中必须对之作出处理, 所以在创建 Socket 或 ServerSocket 是必须捕获或抛出例外.</p>
 <p><strong>Socket 方法</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>getInetAddress<span style="color: #666666">();</span>   <span style="color: #008800; font-style: italic">//远程服务端的 IP 地址</span>
-getPort<span style="color: #666666">();</span>          <span style="color: #008800; font-style: italic">//远程服务端的端口</span>
-getLocalAddress<span style="color: #666666">();</span>  <span style="color: #008800; font-style: italic">//本地客户端的 IP 地址</span>
-getLocalPort<span style="color: #666666">();</span>     <span style="color: #008800; font-style: italic">//本地客户端的端口</span>
-getInputStream<span style="color: #666666">();</span>   <span style="color: #008800; font-style: italic">//获得输入流</span>
-getOutStream<span style="color: #666666">();</span>     <span style="color: #008800; font-style: italic">//获得输出流</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>getInetAddress();   <span style="color: #228B22">//远程服务端的 IP 地址</span>
+getPort();          <span style="color: #228B22">//远程服务端的端口</span>
+getLocalAddress();  <span style="color: #228B22">//本地客户端的 IP 地址</span>
+getLocalPort();     <span style="color: #228B22">//本地客户端的端口</span>
+getInputStream();   <span style="color: #228B22">//获得输入流</span>
+getOutStream();     <span style="color: #228B22">//获得输出流</span>
 </pre></div>
 
 
 <p><br>
 值得注意的是, 在这些方法里面, 最重要的就是 <code>getInputStream()</code> 和 <code>getOutputStream()</code>了.</p>
 <p><strong>Socket 状态</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>isClosed<span style="color: #666666">();</span>     <span style="color: #008800; font-style: italic">//连接是否已关闭, 若关闭, 返回 true；否则返回 false</span>
-isConnect<span style="color: #666666">();</span>    <span style="color: #008800; font-style: italic">//如果曾经连接过, 返回 true；否则返回 false</span>
-isBound<span style="color: #666666">();</span>      <span style="color: #008800; font-style: italic">//如果 Socket 已经与本地一个端口绑定, 返回 true；否则返回 false</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>isClosed();     <span style="color: #228B22">//连接是否已关闭, 若关闭, 返回 true；否则返回 false</span>
+isConnect();    <span style="color: #228B22">//如果曾经连接过, 返回 true；否则返回 false</span>
+isBound();      <span style="color: #228B22">//如果 Socket 已经与本地一个端口绑定, 返回 true；否则返回 false</span>
 </pre></div>
 
 
 <p><br>
 如果要确认 Socket 的状态是否处于连接中, 下面语句是很好的判断方式:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">boolean</span> isConnection<span style="color: #666666">=</span>socket<span style="color: #666666">.</span><span style="color: #BB4444">isConnected</span><span style="color: #666666">()</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>socket<span style="color: #666666">.</span><span style="color: #BB4444">isClosed</span><span style="color: #666666">();</span>   <span style="color: #008800; font-style: italic">//判断当前是否处于连接</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">boolean</span> isConnection=socket.<span style="color: #658b00">isConnected</span>() &amp;&amp; !socket.<span style="color: #658b00">isClosed</span>();   <span style="color: #228B22">//判断当前是否处于连接</span>
 </pre></div>
 
 
 <p><br></p>
 <h1 id="_1">代码片段</h1>
 <p>客户端</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Socket socket <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Socket<span style="color: #666666">(</span><span style="color: #BB4444">&quot;127.0.0.1&quot;</span><span style="color: #666666">,</span> <span style="color: #666666">9999);</span>  <span style="color: #008800; font-style: italic">//创建 Socket 指定 ip 地址和端口号</span>
-InputStream is <span style="color: #666666">=</span> socket<span style="color: #666666">.</span><span style="color: #BB4444">getInputStream</span><span style="color: #666666">();</span>   <span style="color: #008800; font-style: italic">//获取输入流</span>
-OutputStream os <span style="color: #666666">=</span> socket<span style="color: #666666">.</span><span style="color: #BB4444">getOutputStream</span><span style="color: #666666">();</span> <span style="color: #008800; font-style: italic">//获取输出流</span>
-BufferedReader br <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> BufferedReader<span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> InputStreamReader<span style="color: #666666">(</span>is<span style="color: #666666">));</span>
-PrintStream ps <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> PrintStream<span style="color: #666666">(</span>os<span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Socket socket = <span style="color: #8B008B; font-weight: bold">new</span> Socket(<span style="color: #CD5555">&quot;127.0.0.1&quot;</span>, <span style="color: #B452CD">9999</span>);  <span style="color: #228B22">//创建 Socket 指定 ip 地址和端口号</span>
+InputStream is = socket.<span style="color: #658b00">getInputStream</span>();   <span style="color: #228B22">//获取输入流</span>
+OutputStream os = socket.<span style="color: #658b00">getOutputStream</span>(); <span style="color: #228B22">//获取输出流</span>
+BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(is));
+PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(os);
 
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;我想报名就业班&quot;</span><span style="color: #666666">);</span>
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;爷不学了&quot;</span><span style="color: #666666">);</span>
-socket<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;我想报名就业班&quot;</span>);
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;爷不学了&quot;</span>);
+socket.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br>
 服务端</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>ServerSocket server <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ServerSocket<span style="color: #666666">(9999);</span>   <span style="color: #008800; font-style: italic">//创建服务器</span>
-Socket socket <span style="color: #666666">=</span> server<span style="color: #666666">.</span><span style="color: #BB4444">accept</span><span style="color: #666666">();</span>            <span style="color: #008800; font-style: italic">//接受客户端的请求</span>
-InputStream is <span style="color: #666666">=</span> socket<span style="color: #666666">.</span><span style="color: #BB4444">getInputStream</span><span style="color: #666666">();</span>   <span style="color: #008800; font-style: italic">//获取输入流</span>
-OutputStream os <span style="color: #666666">=</span> socket<span style="color: #666666">.</span><span style="color: #BB4444">getOutputStream</span><span style="color: #666666">();</span> <span style="color: #008800; font-style: italic">//获取输出流</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ServerSocket server = <span style="color: #8B008B; font-weight: bold">new</span> ServerSocket(<span style="color: #B452CD">9999</span>);   <span style="color: #228B22">//创建服务器</span>
+Socket socket = server.<span style="color: #658b00">accept</span>();            <span style="color: #228B22">//接受客户端的请求</span>
+InputStream is = socket.<span style="color: #658b00">getInputStream</span>();   <span style="color: #228B22">//获取输入流</span>
+OutputStream os = socket.<span style="color: #658b00">getOutputStream</span>(); <span style="color: #228B22">//获取输出流</span>
 
-BufferedReader br <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> BufferedReader<span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> InputStreamReader<span style="color: #666666">(</span>is<span style="color: #666666">));</span>
-PrintStream ps <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> PrintStream<span style="color: #666666">(</span>os<span style="color: #666666">);</span>
+BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(is));
+PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(os);
 
-ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;欢迎咨询 Java 培训班&quot;</span><span style="color: #666666">);</span>
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;班满了, 请报下一期吧&quot;</span><span style="color: #666666">);</span>
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-server<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-socket<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;欢迎咨询 Java 培训班&quot;</span>);
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;班满了, 请报下一期吧&quot;</span>);
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+server.<span style="color: #658b00">close</span>();
+socket.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br>
 多线程版服务端</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>ServerSocket server <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ServerSocket<span style="color: #666666">(9999);</span>   <span style="color: #008800; font-style: italic">//创建服务器</span>
-    <span style="color: #AA22FF; font-weight: bold">while</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">true</span><span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">final</span> Socket socket <span style="color: #666666">=</span> server<span style="color: #666666">.</span><span style="color: #BB4444">accept</span><span style="color: #666666">();</span>  <span style="color: #008800; font-style: italic">//接受客户端的请求</span>
-        <span style="color: #AA22FF; font-weight: bold">new</span> Thread<span style="color: #666666">()</span> <span style="color: #666666">{</span>
-            <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">run</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-                <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-                    BufferedReader br <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> BufferedReader<span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> InputStreamReader<span style="color: #666666">(</span>socket<span style="color: #666666">.</span><span style="color: #BB4444">getInputStream</span><span style="color: #666666">()));</span>
-                    PrintStream ps <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> PrintStream<span style="color: #666666">(</span>socket<span style="color: #666666">.</span><span style="color: #BB4444">getOutputStream</span><span style="color: #666666">());</span>
-                    ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;欢迎咨询 Java 培训班&quot;</span><span style="color: #666666">);</span>
-                    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-                    ps<span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;班满了, 请报下一期吧&quot;</span><span style="color: #666666">);</span>
-                    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>br<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">());</span>
-                    socket<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-                <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>IOException e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-                    e<span style="color: #666666">.</span><span style="color: #BB4444">printStackTrace</span><span style="color: #666666">();</span>
-                <span style="color: #666666">}</span>
-            <span style="color: #666666">}</span>
-        <span style="color: #666666">}.</span><span style="color: #BB4444">start</span><span style="color: #666666">();</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ServerSocket server = <span style="color: #8B008B; font-weight: bold">new</span> ServerSocket(<span style="color: #B452CD">9999</span>);   <span style="color: #228B22">//创建服务器</span>
+    <span style="color: #8B008B; font-weight: bold">while</span>(<span style="color: #8B008B; font-weight: bold">true</span>) {
+        <span style="color: #8B008B; font-weight: bold">final</span> Socket socket = server.<span style="color: #658b00">accept</span>();  <span style="color: #228B22">//接受客户端的请求</span>
+        <span style="color: #8B008B; font-weight: bold">new</span> Thread() {
+            <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">run</span>() {
+                <span style="color: #8B008B; font-weight: bold">try</span> {
+                    BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(socket.<span style="color: #658b00">getInputStream</span>()));
+                    PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(socket.<span style="color: #658b00">getOutputStream</span>());
+                    ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;欢迎咨询 Java 培训班&quot;</span>);
+                    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+                    ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;班满了, 请报下一期吧&quot;</span>);
+                    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
+                    socket.<span style="color: #658b00">close</span>();
+                } <span style="color: #8B008B; font-weight: bold">catch</span> (IOException e) {
+                    e.<span style="color: #658b00">printStackTrace</span>();
+                }
+            }
+        }.<span style="color: #658b00">start</span>();
+    }
+}
 </pre></div>
 
 

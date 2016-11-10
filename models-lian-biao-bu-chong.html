@@ -56,7 +56,7 @@
     <p>之前笔记介绍了一下连表.</p>
 <p>连表(多对多, 一对多)插入数据的方式一样, 都是通过 <strong>对象1.关联数据.add(对象2)</strong> 的方式来添加; 还可以通过 <strong>对象2.类1(小写)_set.add(对象1)</strong> 来添加.</p>
 <p>如, 一个 多对多 的关系模型:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
@@ -67,7 +67,7 @@
 
 <p>如果要插入关联, 先要获取一个 Group 对象 g1, 再获取一个 User 对象 u1, 然后使用, <strong>g1.user_relation.add(u1)</strong> 的方式就能插入数据. 或者<strong> u1.group_set.add(g1).</strong></p>
 <p><strong>一对多</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; UserType(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     name = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your models here.&lt;/span&gt;
@@ -84,13 +84,13 @@
 
 
 <p>UserInfo 中的 typeId 其实是一个对象, 通过它可以获取到另一张表的内容, 语法就是<strong> __ (两个下划线)</strong>, 如:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>UserInfo.object.filter(typeId__name = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;王四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 连表访问&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>UserInfo.object.filter(typeId__name = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;王四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 连表访问&lt;/span&gt;
 </pre></div>
 
 
 <p><strong>多对多</strong></p>
 <p>还是上面那个 多对多 模型:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; User(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;
     account = models.CharField(max_length=50) &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 字段&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Group(models.Model): &lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 表名&lt;/span&gt;

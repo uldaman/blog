@@ -55,39 +55,39 @@
 
     <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD BehaviorFlags, D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters
-    , IDirect3DDevice9 <span style="color: #666666">**</span>ppReturnedDeviceInterface) {
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Dint<span style="color: #666666">-&gt;</span>CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
+    , DWORD BehaviorFlags, D3DPRESENT_PARAMETERS *pPresentationParameters
+    , IDirect3DDevice9 **ppReturnedDeviceInterface) {
+    HRESULT hRet = m_pD3Dint-&gt;CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags
                         , pPresentationParameters, ppReturnedDeviceInterface);
-    <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">int</span> nCount <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
-    <span style="color: #AA22FF; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
-        theApp.m_pDevice <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> hkIDirect3DDevice9(ppReturnedDeviceInterface, pPresentationParameters, <span style="color: #AA22FF; font-weight: bold">this</span>);
-        martin<span style="color: #666666">-&gt;</span>add_log(<span style="color: #BB4444">&quot;Hooked Direct3D9 device: 0x%x -&gt; 0x%x&quot;</span>
-            , ((hkIDirect3DDevice9<span style="color: #666666">*</span>)theApp.m_pDevice)<span style="color: #666666">-&gt;</span>m_pD3Ddev, theApp.m_pDevice);
-        <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">++</span>nCount <span style="color: #666666">==</span> <span style="color: #666666">3</span>) {
+    <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">int</span> nCount = <span style="color: #B452CD">0</span>;
+    <span style="color: #8B008B; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
+        theApp.m_pDevice = <span style="color: #8B008B; font-weight: bold">new</span> hkIDirect3DDevice9(ppReturnedDeviceInterface, pPresentationParameters, <span style="color: #8B008B; font-weight: bold">this</span>);
+        martin-&gt;add_log(<span style="color: #CD5555">&quot;Hooked Direct3D9 device: 0x%x -&gt; 0x%x&quot;</span>
+            , ((hkIDirect3DDevice9*)theApp.m_pDevice)-&gt;m_pD3Ddev, theApp.m_pDevice);
+        <span style="color: #8B008B; font-weight: bold">if</span> (++nCount == <span style="color: #B452CD">3</span>) {
             theApp.initGui();
-            <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_OrgWndProc <span style="color: #666666">==</span> <span style="color: #666666">0</span>) {
-                theApp.m_hGWnd <span style="color: #666666">=</span> hFocusWindow;
-                theApp.m_OrgWndProc <span style="color: #666666">=</span> <span style="color: #666666">::</span>GetWindowLong(theApp.m_hGWnd, GWL_WNDPROC);
-                <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_OrgWndProc) {
-                    <span style="color: #666666">::</span>SetWindowLong(theApp.m_hGWnd, GWL_WNDPROC, (LONG)<span style="color: #666666">&amp;</span>FilterWndProc);
-                } <span style="color: #AA22FF; font-weight: bold">else</span> {
-                    martin<span style="color: #666666">-&gt;</span>add_log(<span style="color: #BB4444">&quot;GetWindowLong() Failed.&quot;</span>);
-                    <span style="color: #666666">::</span>ExitProcess(<span style="color: #666666">-1</span>);
+            <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_OrgWndProc == <span style="color: #B452CD">0</span>) {
+                theApp.m_hGWnd = hFocusWindow;
+                theApp.m_OrgWndProc = ::GetWindowLong(theApp.m_hGWnd, GWL_WNDPROC);
+                <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_OrgWndProc) {
+                    ::SetWindowLong(theApp.m_hGWnd, GWL_WNDPROC, (LONG)&amp;FilterWndProc);
+                } <span style="color: #8B008B; font-weight: bold">else</span> {
+                    martin-&gt;add_log(<span style="color: #CD5555">&quot;GetWindowLong() Failed.&quot;</span>);
+                    ::ExitProcess(-<span style="color: #B452CD">1</span>);
                 }
             }
         }
     }
 
-    <span style="color: #AA22FF; font-weight: bold">return</span> hRet;
+    <span style="color: #8B008B; font-weight: bold">return</span> hRet;
 }
 </pre></div>
 
 
 <p>可以看到, 这里加了个 nCount 计数, 当游戏第三次 CreateDevice() 时才初始化 CEGUI;
 后面的代码等下再说, 先看看如何初始化 CEGUI, 也就是 initGui() 函数.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>CEGUI::Direct3D9Renderer::bootstrapSystem(theApp.m_pDevice);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>CEGUI::Direct3D9Renderer::bootstrapSystem(theApp.m_pDevice);
 //-----------------------------------------------------------
 //    此行等同于下面两行, 即初始化 Direct3D9Renderer
 //    Direct3D9Renderer *myRenderer = &amp;CEGUI::Direct3D9Renderer::create(pDevice);
@@ -165,7 +165,7 @@ m_bInit = true;
 
 <p>代码也没什么好说的, 标准的初始化 CEGUI 代码, 适用版本 8.0+ .</p>
 <p>接下来就是要游戏的画面上绘画我们刚初始化好的界面了, 我们只需要 HOOK IDevice 的 Present 虚函数即可:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Present(CONST RECT *pSourceRect, CONST RECT *pDestRect
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Present(CONST RECT *pSourceRect, CONST RECT *pDestRect
                 , HWND hDestWindowOverride, CONST RGNDATA *pDirtyRegion) {
     if (theApp.m_bInit) {
         CEGUI::System::getSingleton().renderAllGUIContexts();
@@ -177,19 +177,19 @@ m_bInit = true;
 
 
 <p>此时, CEGUI 已经初始化完毕了, 当然前提是你还需要准备 .layout 文件, 启动游戏并注入我们的 DLL 后, 暂时还是看不到我们的画面的, 因为上面的代码中倒数第三行 m_root-&gt;setVisible(false); 将窗体隐藏了, 为此, 我们可以 HOOK 游戏的窗口过程(HOOK 的代码就在上面 CreateDevice() 中), 然后给一个快捷键, 例如 HOME, 按下后, 就显示窗体.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #A0A000">WM_KEYDOWN</span>:
-<span style="color: #AA22FF; font-weight: bold">switch</span> (wParam) {
-<span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #A0A000">VK_HOME</span>:
-    <span style="color: #AA22FF; font-weight: bold">if</span> (m_bInit) {
-    <span style="color: #AA22FF; font-weight: bold">if</span> (m_root<span style="color: #666666">-&gt;</span>isVisible()) {
-        m_root<span style="color: #666666">-&gt;</span>setVisible(<span style="color: #AA22FF">false</span>);
-    } <span style="color: #AA22FF; font-weight: bold">else</span> {
-        m_root<span style="color: #666666">-&gt;</span>setVisible(<span style="color: #AA22FF">true</span>);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">case</span> WM_KEYDOWN:
+<span style="color: #8B008B; font-weight: bold">switch</span> (wParam) {
+<span style="color: #8B008B; font-weight: bold">case</span> VK_HOME:
+    <span style="color: #8B008B; font-weight: bold">if</span> (m_bInit) {
+    <span style="color: #8B008B; font-weight: bold">if</span> (m_root-&gt;isVisible()) {
+        m_root-&gt;setVisible(<span style="color: #658b00">false</span>);
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        m_root-&gt;setVisible(<span style="color: #658b00">true</span>);
     }
     }
-    <span style="color: #AA22FF; font-weight: bold">break</span>;
+    <span style="color: #8B008B; font-weight: bold">break</span>;
 }
-<span style="color: #AA22FF; font-weight: bold">break</span>;
+<span style="color: #8B008B; font-weight: bold">break</span>;
 }
 </pre></div>
 
@@ -197,21 +197,21 @@ m_bInit = true;
 <p>但是我们 HOOK 窗口过程可并不只是因为这个需求;</p>
 <p>现在显示出来 CEGUI 窗体后, 你会发现, 窗体是静态的, 点击它, 拖动它, 完全不响应, 这是因为现在并没有把鼠标, 键盘等消息传递给 CEGUI, 也就是说, CEGUI 现在并不知道你点击了什么或者你拖动什么等等消息.
 我们 HOOK 游戏的窗口过程就是为了把这些消息传递给 CEGUI, 好让 CEGUI 去响应.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">if</span> (m_bInit) {
-    <span style="color: #AA22FF; font-weight: bold">switch</span> (message) {
-    <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #A0A000">WM_MOUSEMOVE</span>:
-        <span style="color: #008800; font-style: italic">//ShowCursor(true);</span>
-        <span style="color: #AA22FF; font-weight: bold">if</span> (CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">::</span>getSingleton().getDefaultGUIContext().injectMousePosition((<span style="color: #00BB00; font-weight: bold">float</span>)(LOWORD(lparam))
-    , (<span style="color: #00BB00; font-weight: bold">float</span>)(HIWORD(lparam)))) {
-        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> (m_bInit) {
+    <span style="color: #8B008B; font-weight: bold">switch</span> (message) {
+    <span style="color: #8B008B; font-weight: bold">case</span> WM_MOUSEMOVE:
+        <span style="color: #228B22">//ShowCursor(true);</span>
+        <span style="color: #8B008B; font-weight: bold">if</span> (CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition((<span style="color: #a7a7a7; font-weight: bold">float</span>)(LOWORD(lparam))
+    , (<span style="color: #a7a7a7; font-weight: bold">float</span>)(HIWORD(lparam)))) {
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
         }
-        <span style="color: #AA22FF; font-weight: bold">break</span>;
+        <span style="color: #8B008B; font-weight: bold">break</span>;
 
-    <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #A0A000">WM_LBUTTONDOWN</span>:
-        <span style="color: #AA22FF; font-weight: bold">if</span> (CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">::</span>getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI<span style="color: #666666">::</span>LeftButton)) {
-        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+    <span style="color: #8B008B; font-weight: bold">case</span> WM_LBUTTONDOWN:
+        <span style="color: #8B008B; font-weight: bold">if</span> (CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton)) {
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
         }
-        <span style="color: #AA22FF; font-weight: bold">break</span>;
+        <span style="color: #8B008B; font-weight: bold">break</span>;
     }
 }
 </pre></div>

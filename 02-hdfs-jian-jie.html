@@ -161,14 +161,14 @@
 <p>当有操作发生时, NameNode 首先向写操作日志到磁盘, 即向 <strong>edits</strong> 文件中写日志, 成功返回后, 才会修改内存, 并且向客户端返回.</p>
 <p>Hadoop 会维护一个 <strong>fsimage</strong> 文件, 也就是 NameNode 中 MetaData 的硬盘镜像, 但是 <strong>fsimage</strong> 不会随时与 NameNode 内存中的 MetaData 保持一致, 而是每隔一段时间通过合并 <strong>edits</strong> 文件来更新内容 (仅限 1.0 和 伪分布式, 2.0 集群是实时的), <strong>edits</strong> 合并后就会进行一次清空. Secondary NameNode 就是用来合并 <strong>fsimage</strong> 和 <strong>edits</strong> 文件来更新 NameNode 的 MetaData 的.</p>
 <p>在 <code>/tmp/dfs/name/current</code> 目录下, 除了那三个文件外, 还有个 <strong>VERSION</strong> 文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>martin@itcast01:/usr/itcast/hadoop-2.7.3/tmp/dfs/name/current$ cat VERSION
-<span style="color: #008800; font-style: italic">#Sun Oct 16 17:28:41 CST 2016</span>
-<span style="color: #B8860B">namespaceID</span><span style="color: #666666">=</span>1526300018
-<span style="color: #B8860B">clusterID</span><span style="color: #666666">=</span>CID-cc6f47f9-4021-4f9b-87a6-ad7ad82b7af7
-<span style="color: #B8860B">cTime</span><span style="color: #666666">=</span>0
-<span style="color: #B8860B">storageType</span><span style="color: #666666">=</span>NAME_NODE
-<span style="color: #B8860B">blockpoolID</span><span style="color: #666666">=</span>BP-1803451175-192.168.142.155-1476610121875
-<span style="color: #B8860B">layoutVersion</span><span style="color: #666666">=</span>-63
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>martin@itcast01:/usr/itcast/hadoop-2.7.3/tmp/dfs/name/current$ cat VERSION
+<span style="color: #228B22">#Sun Oct 16 17:28:41 CST 2016</span>
+<span style="color: #00688B">namespaceID</span>=1526300018
+<span style="color: #00688B">clusterID</span>=CID-cc6f47f9-4021-4f9b-87a6-ad7ad82b7af7
+<span style="color: #00688B">cTime</span>=0
+<span style="color: #00688B">storageType</span>=NAME_NODE
+<span style="color: #00688B">blockpoolID</span>=BP-1803451175-192.168.142.155-1476610121875
+<span style="color: #00688B">layoutVersion</span>=-63
 </pre></div>
 
 

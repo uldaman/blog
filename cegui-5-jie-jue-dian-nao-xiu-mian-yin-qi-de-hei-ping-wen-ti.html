@@ -55,49 +55,49 @@
 
     <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
+    m_pManager-&gt;PreReset();
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev<span style="color: #666666">-&gt;</span>Reset(pPresentationParameters);
+    HRESULT hRet = m_pD3Ddev-&gt;Reset(pPresentationParameters);
 
-    <span style="color: #AA22FF; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
-        m_PresentParam <span style="color: #666666">=</span> <span style="color: #666666">*</span>pPresentationParameters;
-        m_pManager<span style="color: #666666">-&gt;</span>PostReset();
+    <span style="color: #8B008B; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
+        m_PresentParam = *pPresentationParameters;
+        m_pManager-&gt;PostReset();
     }
 
-    <span style="color: #AA22FF; font-weight: bold">return</span> hRet;
+    <span style="color: #8B008B; font-weight: bold">return</span> hRet;
 }
 </pre></div>
 
 
 <p>进入游戏初始化 CEGUI 界面, 然后休眠电脑, 再唤醒, 发现 hRet 返回 0x8876086C, 即 Reset 失败;
 如果不初始化 CEGUI 界面, 直接休眠电脑, 再唤醒则是正常的, 于是查阅 CEGUI 源代码, 发现了问题所在, 如果我们使用了 CEGUI, 那么就需要重写 Rest 方法:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    CEGUI<span style="color: #666666">::</span>Direct3D9Renderer<span style="color: #666666">*</span> d3d_renderer <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">nullptr</span>;
-    <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
-        CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">*</span> cegui_system <span style="color: #666666">=</span> CEGUI<span style="color: #666666">::</span>System<span style="color: #666666">::</span>getSingletonPtr();
-        d3d_renderer <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">static_cast</span><span style="color: #666666">&lt;</span>CEGUI<span style="color: #666666">::</span>Direct3D9Renderer<span style="color: #666666">*&gt;</span>(cegui_system<span style="color: #666666">-&gt;</span>getRenderer());
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
+    CEGUI::Direct3D9Renderer* d3d_renderer = <span style="color: #8B008B; font-weight: bold">nullptr</span>;
+    <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_bInit) {
+        CEGUI::System* cegui_system = CEGUI::System::getSingletonPtr();
+        d3d_renderer = <span style="color: #8B008B; font-weight: bold">static_cast</span>&lt;CEGUI::Direct3D9Renderer*&gt;(cegui_system-&gt;getRenderer());
     }
 
-    <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
-        d3d_renderer<span style="color: #666666">-&gt;</span>preD3DReset();
-    } <span style="color: #AA22FF; font-weight: bold">else</span> {
-        m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+    <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_bInit) {
+        d3d_renderer-&gt;preD3DReset();
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        m_pManager-&gt;PreReset();
     }
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev<span style="color: #666666">-&gt;</span>Reset(pPresentationParameters);
+    HRESULT hRet = m_pD3Ddev-&gt;Reset(pPresentationParameters);
 
-    <span style="color: #AA22FF; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
-        m_PresentParam <span style="color: #666666">=</span> <span style="color: #666666">*</span>pPresentationParameters;
+    <span style="color: #8B008B; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
+        m_PresentParam = *pPresentationParameters;
 
-        <span style="color: #AA22FF; font-weight: bold">if</span> (theApp.m_bInit) {
-            d3d_renderer<span style="color: #666666">-&gt;</span>postD3DReset();
-        } <span style="color: #AA22FF; font-weight: bold">else</span> {
-            m_pManager<span style="color: #666666">-&gt;</span>PostReset();
+        <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_bInit) {
+            d3d_renderer-&gt;postD3DReset();
+        } <span style="color: #8B008B; font-weight: bold">else</span> {
+            m_pManager-&gt;PostReset();
         }
     }
 
-    <span style="color: #AA22FF; font-weight: bold">return</span> hRet;
+    <span style="color: #8B008B; font-weight: bold">return</span> hRet;
 }
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>

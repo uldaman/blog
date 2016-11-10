@@ -98,15 +98,15 @@
 <strong>事务同命令一样, 都是 Redis 的最小执行单位</strong></p>
 <p>而管道, 它也可以一次性发送多条命令, 并在执行完后一次性将结果返回, 管道通过减少客户端与 Redis 的通信次数来实现降低往返时延, <strong>但它不具备原子性</strong>.</p>
 <p>Redis 本身没有提供 pipelining 相关的命令, 它由使用 Redis 的客户端程序决定, 如 <strong>redis-py</strong></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">redis</span>
-r <span style="color: #666666">=</span> redis<span style="color: #666666">.</span>StrictRedis(host <span style="color: #666666">=</span> <span style="color: #BB4444">&#39;127.0.0.1&#39;</span>, port <span style="color: #666666">=</span> <span style="color: #666666">6379</span>, db <span style="color: #666666">=</span> <span style="color: #666666">0</span>)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">redis</span>
+r = redis.StrictRedis(host = <span style="color: #CD5555">&#39;127.0.0.1&#39;</span>, port = <span style="color: #B452CD">6379</span>, db = <span style="color: #B452CD">0</span>)
 
-pipe <span style="color: #666666">=</span> r<span style="color: #666666">.</span>pipeline() <span style="color: #008800; font-style: italic"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
-pipe<span style="color: #666666">.</span>set(<span style="color: #BB4444">&#39;foo&#39;</span>, <span style="color: #BB4444">&#39;bar&#39;</span>)
-pipe<span style="color: #666666">.</span>get(<span style="color: #BB4444">&#39;foo&#39;</span>)
-result <span style="color: #666666">=</span> pipe<span style="color: #666666">.</span>execute()
+pipe = r.pipeline() <span style="color: #228B22"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
+pipe.set(<span style="color: #CD5555">&#39;foo&#39;</span>, <span style="color: #CD5555">&#39;bar&#39;</span>)
+pipe.get(<span style="color: #CD5555">&#39;foo&#39;</span>)
+result = pipe.execute()
 
-<span style="color: #AA22FF; font-weight: bold">print</span> result <span style="color: #008800; font-style: italic"># [True, &#39;bar&#39;]</span>
+<span style="color: #8B008B; font-weight: bold">print</span> result <span style="color: #228B22"># [True, &#39;bar&#39;]</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a>
 

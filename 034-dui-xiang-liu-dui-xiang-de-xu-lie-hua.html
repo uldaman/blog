@@ -120,124 +120,124 @@
 <h1 id="_6">实例</h1>
 <p>为了更好地理解 Java 序列化与反序列化, 选择<strong>方法一</strong>编码实现.</p>
 <p>Student 类定义如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">package</span> <span style="color: #0000FF; font-weight: bold">com.jieke.io</span><span style="color: #666666">;</span>
-<span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.io.Serializable</span><span style="color: #666666">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">package</span> <span style="color: #008b45; text-decoration: underline">com.jieke.io</span>;
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.io.Serializable</span>;
 
-<span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic"> *Title:学生类</span>
-<span style="color: #008800; font-style: italic"> *Description:实现序列化接口的学生类</span>
-<span style="color: #008800; font-style: italic"> *Copyright: copyright(c) 2012</span>
-<span style="color: #008800; font-style: italic"> *Filename: Student.java</span>
-<span style="color: #008800; font-style: italic"> *@author Wang Luqing</span>
-<span style="color: #008800; font-style: italic"> *@version 1.0</span>
-<span style="color: #008800; font-style: italic"> */</span>
-<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Student</span> <span style="color: #AA22FF; font-weight: bold">implements</span> Serializable <span style="color: #666666">{</span>
- <span style="color: #AA22FF; font-weight: bold">private</span> String name<span style="color: #666666">;</span>
- <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">char</span> sex<span style="color: #666666">;</span>
- <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">int</span> year<span style="color: #666666">;</span>
- <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">double</span> gpa<span style="color: #666666">;</span>
+<span style="color: #228B22">/**</span>
+<span style="color: #228B22"> *Title:学生类</span>
+<span style="color: #228B22"> *Description:实现序列化接口的学生类</span>
+<span style="color: #228B22"> *Copyright: copyright(c) 2012</span>
+<span style="color: #228B22"> *Filename: Student.java</span>
+<span style="color: #228B22"> *@author Wang Luqing</span>
+<span style="color: #228B22"> *@version 1.0</span>
+<span style="color: #228B22"> */</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span> <span style="color: #8B008B; font-weight: bold">implements</span> Serializable {
+ <span style="color: #8B008B; font-weight: bold">private</span> String name;
+ <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">char</span> sex;
+ <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">int</span> year;
+ <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">double</span> gpa;
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00A000">Student</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">Student</span>() {
 
- <span style="color: #666666">}</span>
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00A000">Student</span><span style="color: #666666">(</span>String name<span style="color: #666666">,</span><span style="color: #00BB00; font-weight: bold">char</span> sex<span style="color: #666666">,</span><span style="color: #00BB00; font-weight: bold">int</span> year<span style="color: #666666">,</span><span style="color: #00BB00; font-weight: bold">double</span> gpa<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">name</span> <span style="color: #666666">=</span> name<span style="color: #666666">;</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">sex</span> <span style="color: #666666">=</span> sex<span style="color: #666666">;</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">year</span> <span style="color: #666666">=</span> year<span style="color: #666666">;</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">gpa</span> <span style="color: #666666">=</span> gpa<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">Student</span>(String name,<span style="color: #a7a7a7; font-weight: bold">char</span> sex,<span style="color: #a7a7a7; font-weight: bold">int</span> year,<span style="color: #a7a7a7; font-weight: bold">double</span> gpa) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">name</span> = name;
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">sex</span> = sex;
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">year</span> = year;
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">gpa</span> = gpa;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setName</span><span style="color: #666666">(</span>String name<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">name</span> <span style="color: #666666">=</span> name<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">setName</span>(String name) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">name</span> = name;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setSex</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">char</span> sex<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">sex</span> <span style="color: #666666">=</span> sex<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">setSex</span>(<span style="color: #a7a7a7; font-weight: bold">char</span> sex) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">sex</span> = sex;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setYear</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> year<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">year</span> <span style="color: #666666">=</span> year<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">setYear</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> year) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">year</span> = year;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">setGpa</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">double</span> gpa<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">gpa</span> <span style="color: #666666">=</span> gpa<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">setGpa</span>(<span style="color: #a7a7a7; font-weight: bold">double</span> gpa) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">gpa</span> = gpa;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> String <span style="color: #00A000">getName</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">name</span><span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> String <span style="color: #008b45">getName</span>() {
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">name</span>;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">char</span> <span style="color: #00A000">getSex</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">sex</span><span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">char</span> <span style="color: #008b45">getSex</span>() {
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">sex</span>;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #00A000">getYear</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">year</span><span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">int</span> <span style="color: #008b45">getYear</span>() {
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">year</span>;
+ }
 
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">double</span> <span style="color: #00A000">getGpa</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-  <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #BB4444">gpa</span><span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">double</span> <span style="color: #008b45">getGpa</span>() {
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">gpa</span>;
+ }
+}
 </pre></div>
 
 
 <p><br>
 把 Student 类的对象序列化到文件 <code>O:\\Java\\com\\jieke\\io\\student.txt</code>, 并从该文件中反序列化, 向 <strong>console</strong> 显示结果. 代码如下:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.io.*</span><span style="color: #666666">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.io.*</span>;
 
-<span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic"> *Title:应用学生类</span>
-<span style="color: #008800; font-style: italic"> *Description:实现学生类实例的序列化与反序列化</span>
-<span style="color: #008800; font-style: italic"> *Copyright: copyright(c) 2012</span>
-<span style="color: #008800; font-style: italic"> *Filename: UseStudent.java</span>
-<span style="color: #008800; font-style: italic"> *@author Wang Luqing</span>
-<span style="color: #008800; font-style: italic"> *@version 1.0</span>
-<span style="color: #008800; font-style: italic"> */</span>
+<span style="color: #228B22">/**</span>
+<span style="color: #228B22"> *Title:应用学生类</span>
+<span style="color: #228B22"> *Description:实现学生类实例的序列化与反序列化</span>
+<span style="color: #228B22"> *Copyright: copyright(c) 2012</span>
+<span style="color: #228B22"> *Filename: UseStudent.java</span>
+<span style="color: #228B22"> *@author Wang Luqing</span>
+<span style="color: #228B22"> *@version 1.0</span>
+<span style="color: #228B22"> */</span>
 
-<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">UseStudent</span> <span style="color: #666666">{</span>
- <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  Student st <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Student<span style="color: #666666">(</span><span style="color: #BB4444">&quot;Tom&quot;</span><span style="color: #666666">,</span><span style="color: #BB4444">&#39;M&#39;</span><span style="color: #666666">,20,3.6);</span>
-  File file <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> File<span style="color: #666666">(</span><span style="color: #BB4444">&quot;O:\\Java\\com\\jieke\\io\\student.txt&quot;</span><span style="color: #666666">);</span>
-  <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-   file<span style="color: #666666">.</span><span style="color: #BB4444">createNewFile</span><span style="color: #666666">();</span>
-  <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span><span style="color: #666666">(</span>IOException e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-   e<span style="color: #666666">.</span><span style="color: #BB4444">printStackTrace</span><span style="color: #666666">();</span>
-  <span style="color: #666666">}</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">UseStudent</span> {
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+  Student st = <span style="color: #8B008B; font-weight: bold">new</span> Student(<span style="color: #CD5555">&quot;Tom&quot;</span>,<span style="color: #CD5555">&#39;M&#39;</span>,<span style="color: #B452CD">20</span>,<span style="color: #B452CD">3.6</span>);
+  File file = <span style="color: #8B008B; font-weight: bold">new</span> File(<span style="color: #CD5555">&quot;O:\\Java\\com\\jieke\\io\\student.txt&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">try</span> {
+   file.<span style="color: #658b00">createNewFile</span>();
+  } <span style="color: #8B008B; font-weight: bold">catch</span>(IOException e) {
+   e.<span style="color: #658b00">printStackTrace</span>();
+  }
 
-  <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-   <span style="color: #008800; font-style: italic">//Student对象序列化过程</span>
-   FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span>file<span style="color: #666666">);</span>
-   ObjectOutputStream oos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ObjectOutputStream<span style="color: #666666">(</span>fos<span style="color: #666666">);</span>
-   oos<span style="color: #666666">.</span><span style="color: #BB4444">writeObject</span><span style="color: #666666">(</span>st<span style="color: #666666">);</span>
-   oos<span style="color: #666666">.</span><span style="color: #BB4444">flush</span><span style="color: #666666">();</span>
-   oos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-   fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+  <span style="color: #8B008B; font-weight: bold">try</span> {
+   <span style="color: #228B22">//Student对象序列化过程</span>
+   FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(file);
+   ObjectOutputStream oos = <span style="color: #8B008B; font-weight: bold">new</span> ObjectOutputStream(fos);
+   oos.<span style="color: #658b00">writeObject</span>(st);
+   oos.<span style="color: #658b00">flush</span>();
+   oos.<span style="color: #658b00">close</span>();
+   fos.<span style="color: #658b00">close</span>();
 
-   <span style="color: #008800; font-style: italic">//Student对象反序列化过程</span>
-   FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span>file<span style="color: #666666">);</span>
-   ObjectInputStream ois <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ObjectInputStream<span style="color: #666666">(</span>fis<span style="color: #666666">);</span>
-   Student st1 <span style="color: #666666">=</span> <span style="color: #666666">(</span>Student<span style="color: #666666">)</span> ois<span style="color: #666666">.</span><span style="color: #BB4444">readObject</span><span style="color: #666666">();</span>
-   System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;name = &quot;</span> <span style="color: #666666">+</span> st1<span style="color: #666666">.</span><span style="color: #BB4444">getName</span><span style="color: #666666">());</span>
-   System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;sex = &quot;</span> <span style="color: #666666">+</span> st1<span style="color: #666666">.</span><span style="color: #BB4444">getSex</span><span style="color: #666666">());</span>
-   System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;year = &quot;</span> <span style="color: #666666">+</span> st1<span style="color: #666666">.</span><span style="color: #BB4444">getYear</span><span style="color: #666666">());</span>
-   System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;gpa = &quot;</span> <span style="color: #666666">+</span> st1<span style="color: #666666">.</span><span style="color: #BB4444">getGpa</span><span style="color: #666666">());</span>
-   ois<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-   fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-  <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span><span style="color: #666666">(</span>ClassNotFoundException e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-   e<span style="color: #666666">.</span><span style="color: #BB4444">printStackTrace</span><span style="color: #666666">();</span>
-  <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">catch</span> <span style="color: #666666">(</span>IOException e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-   e<span style="color: #666666">.</span><span style="color: #BB4444">printStackTrace</span><span style="color: #666666">();</span>
-  <span style="color: #666666">}</span>
- <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+   <span style="color: #228B22">//Student对象反序列化过程</span>
+   FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(file);
+   ObjectInputStream ois = <span style="color: #8B008B; font-weight: bold">new</span> ObjectInputStream(fis);
+   Student st1 = (Student) ois.<span style="color: #658b00">readObject</span>();
+   System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;name = &quot;</span> + st1.<span style="color: #658b00">getName</span>());
+   System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;sex = &quot;</span> + st1.<span style="color: #658b00">getSex</span>());
+   System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;year = &quot;</span> + st1.<span style="color: #658b00">getYear</span>());
+   System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;gpa = &quot;</span> + st1.<span style="color: #658b00">getGpa</span>());
+   ois.<span style="color: #658b00">close</span>();
+   fis.<span style="color: #658b00">close</span>();
+  } <span style="color: #8B008B; font-weight: bold">catch</span>(ClassNotFoundException e) {
+   e.<span style="color: #658b00">printStackTrace</span>();
+  } <span style="color: #8B008B; font-weight: bold">catch</span> (IOException e) {
+   e.<span style="color: #658b00">printStackTrace</span>();
+  }
+ }
+}
 </pre></div>
 
 
 <p><br>
 结果如下所示:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>name = Tom
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>name = Tom
 
 sex = M
 

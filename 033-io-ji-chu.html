@@ -252,22 +252,22 @@
 </ul>
 <h2 id="_1">字节流</h2>
 <h3 id="fileinputstream">FileInputStream</h3>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">InputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FileInputStream</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">InputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FileInputStream</span>
 </pre></div>
 
 
 <p><br></p>
 <h4 id="read">read()</h4>
 <p>功能: 一次读取一个字节, 返回读到的字节, 如果返回 -1 表示文件结束</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;aaa.txt&quot;</span><span style="color: #666666">);</span>   <span style="color: #008800; font-style: italic">// 创建一个文件输入流对象, 并关联 aaa.txt</span>
-<span style="color: #00BB00; font-weight: bold">int</span> b<span style="color: #666666">;</span>                                                  <span style="color: #008800; font-style: italic">// 定义变量, 记录每次读到的字节</span>
-<span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>b <span style="color: #666666">=</span> fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>                         <span style="color: #008800; font-style: italic">// 将每次读到的字节赋值给 b 并判断是否是 -1</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>b<span style="color: #666666">);</span>                              <span style="color: #008800; font-style: italic">// 打印每一个字节</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;aaa.txt&quot;</span>);   <span style="color: #228B22">// 创建一个文件输入流对象, 并关联 aaa.txt</span>
+<span style="color: #a7a7a7; font-weight: bold">int</span> b;                                                  <span style="color: #228B22">// 定义变量, 记录每次读到的字节</span>
+<span style="color: #8B008B; font-weight: bold">while</span> ((b = fis.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {                         <span style="color: #228B22">// 将每次读到的字节赋值给 b 并判断是否是 -1</span>
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(b);                              <span style="color: #228B22">// 打印每一个字节</span>
+}
 
-fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>                                            <span style="color: #008800; font-style: italic">// 关闭流释放资源</span>
+fis.<span style="color: #658b00">close</span>();                                            <span style="color: #228B22">// 关闭流释放资源</span>
 </pre></div>
 
 
@@ -275,46 +275,46 @@ fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span
 read() 即然是读取字节, 那它的方法返回值为什么是int?</p>
 <p>因为字节输入流可以操作任意类型的文件, 比如图片音频等, 这些文件底层都是以二进制形式的存储的, 如果每次读取都返回 byte, 有可能在读到中间的时候遇到 111111111, 那么这 11111111 是 byte 类型的 -1, 我们的程序是遇到 -1 就会停止不读了, 后面的数据就读不到了, 所以在读取的时候用 int 类型接收, 如果 11111111 会在其前面补上 24 个 0 凑足 4 个字节, 那么 byte 类型的 -1 就变成 int 类型的 255 了, 这样可以保证整个数据读完, 而结束标记的 -1 就是 int 类型</p>
 <h3 id="fileoutputstream">FileOutputStream</h3>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">OutputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FileOutputStream</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">OutputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FileOutputStream</span>
 </pre></div>
 
 
 <p><br></p>
 <h4 id="write">write()</h4>
 <p>功能: 一次写入一个字节</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;bbb.txt&quot;</span><span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 如果没有 bbb.txt, 会创建出一个</span>
-<span style="color: #008800; font-style: italic">//fos.write(97); //虽然写出的是一个 int 数, 但是在写出的时候会将前面的 24 个 0 去掉,所以写入的一个 byte</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(98);</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(99);</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;bbb.txt&quot;</span>); <span style="color: #228B22">// 如果没有 bbb.txt, 会创建出一个</span>
+<span style="color: #228B22">//fos.write(97); //虽然写出的是一个 int 数, 但是在写出的时候会将前面的 24 个 0 去掉,所以写入的一个 byte</span>
+fos.<span style="color: #658b00">write</span>(<span style="color: #B452CD">98</span>);
+fos.<span style="color: #658b00">write</span>(<span style="color: #B452CD">99</span>);
+fos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br></p>
 <h4 id="_2">追加</h4>
 <p>以追加的方式写入文件</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;bbb.txt&quot;</span><span style="color: #666666">,</span> <span style="color: #AA22FF; font-weight: bold">true</span><span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 第二个参数传 true 就是以追加的方式写入文件</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(98);</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(99);</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;bbb.txt&quot;</span>, <span style="color: #8B008B; font-weight: bold">true</span>); <span style="color: #228B22">// 第二个参数传 true 就是以追加的方式写入文件</span>
+fos.<span style="color: #658b00">write</span>(<span style="color: #B452CD">98</span>);
+fos.<span style="color: #658b00">write</span>(<span style="color: #B452CD">99</span>);
+fos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br></p>
 <h3 id="_3">文件的拷贝</h3>
 <h4 id="_4">简单粗暴的拷贝</h4>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;致青春.mp3&quot;</span><span style="color: #666666">);</span>
-FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;copy.mp3&quot;</span><span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;致青春.mp3&quot;</span>);
+FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;copy.mp3&quot;</span>);
 
-<span style="color: #00BB00; font-weight: bold">int</span> b<span style="color: #666666">;</span>
-<span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>b <span style="color: #666666">=</span> fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>b<span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
+<span style="color: #a7a7a7; font-weight: bold">int</span> b;
+<span style="color: #8B008B; font-weight: bold">while</span> ((b = fis.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {
+    fos.<span style="color: #658b00">write</span>(b);
+}
 
-fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+fis.<span style="color: #658b00">close</span>();
+fos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
@@ -324,15 +324,15 @@ fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span
 <ul>
 <li>available(): 获取 FileInputStream 对象的字节大小</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;致青春.mp3&quot;</span><span style="color: #666666">);</span>
-FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;copy.mp3&quot;</span><span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;致青春.mp3&quot;</span>);
+FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;copy.mp3&quot;</span>);
 
-<span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[]</span> arr <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[</span>fis<span style="color: #666666">.</span><span style="color: #BB4444">available</span><span style="color: #666666">()];</span>                 <span style="color: #008800; font-style: italic">// 根据文件大小做一个字节数组</span>
-fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>arr<span style="color: #666666">);</span>                                          <span style="color: #008800; font-style: italic">// 将文件上的所有字节读取到数组中</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>arr<span style="color: #666666">);</span>                                         <span style="color: #008800; font-style: italic">// 将数组中的所有字节一次写到了文件上</span>
+<span style="color: #a7a7a7; font-weight: bold">byte</span>[] arr = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #a7a7a7; font-weight: bold">byte</span>[fis.<span style="color: #658b00">available</span>()];                 <span style="color: #228B22">// 根据文件大小做一个字节数组</span>
+fis.<span style="color: #658b00">read</span>(arr);                                          <span style="color: #228B22">// 将文件上的所有字节读取到数组中</span>
+fos.<span style="color: #658b00">write</span>(arr);                                         <span style="color: #228B22">// 将数组中的所有字节一次写到了文件上</span>
 
-fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+fis.<span style="color: #658b00">close</span>();
+fos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
@@ -349,17 +349,17 @@ fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;致青春.mp3&quot;</span><span style="color: #666666">);</span>
-FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;copy.mp3&quot;</span><span style="color: #666666">);</span>
-<span style="color: #00BB00; font-weight: bold">int</span> len<span style="color: #666666">;</span>
-<span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[]</span> arr <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[1024</span> <span style="color: #666666">*</span> <span style="color: #666666">8];</span>                    <span style="color: #008800; font-style: italic">// 自定义字节数组</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;致青春.mp3&quot;</span>);
+FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;copy.mp3&quot;</span>);
+<span style="color: #a7a7a7; font-weight: bold">int</span> len;
+<span style="color: #a7a7a7; font-weight: bold">byte</span>[] arr = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #a7a7a7; font-weight: bold">byte</span>[<span style="color: #B452CD">1024</span> * <span style="color: #B452CD">8</span>];                    <span style="color: #228B22">// 自定义字节数组</span>
 
-<span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>len <span style="color: #666666">=</span> fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>arr<span style="color: #666666">))</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>arr<span style="color: #666666">,</span> <span style="color: #666666">0,</span> len<span style="color: #666666">);</span>                         <span style="color: #008800; font-style: italic">// 写出字节数组写出有效个字节个数</span>
-<span style="color: #666666">}</span>
+<span style="color: #8B008B; font-weight: bold">while</span> ((len = fis.<span style="color: #658b00">read</span>(arr)) != -<span style="color: #B452CD">1</span>) {
+    fos.<span style="color: #658b00">write</span>(arr, <span style="color: #B452CD">0</span>, len);                         <span style="color: #228B22">// 写出字节数组写出有效个字节个数</span>
+}
 
-fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+fis.<span style="color: #658b00">close</span>();
+fos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
@@ -393,33 +393,33 @@ fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">InputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FilterInputStream</span>
-            java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">BufferedInputStream</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">InputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FilterInputStream</span>
+            java.<span style="color: #658b00">io</span>.<span style="color: #658b00">BufferedInputStream</span>
 
 
-java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">OutputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FilterOutputStream</span>
-            java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">BufferedOutputStream</span>
+java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">OutputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FilterOutputStream</span>
+            java.<span style="color: #658b00">io</span>.<span style="color: #658b00">BufferedOutputStream</span>
 </pre></div>
 
 
 <p><br></p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;致青春.mp3&quot;</span><span style="color: #666666">);</span>        <span style="color: #008800; font-style: italic">// 创建文件输入流对象,关联致青春.mp3</span>
-FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;copy.mp3&quot;</span><span style="color: #666666">);</span>        <span style="color: #008800; font-style: italic">// 创建输出流对象,关联 copy.mp3</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;致青春.mp3&quot;</span>);        <span style="color: #228B22">// 创建文件输入流对象,关联致青春.mp3</span>
+FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;copy.mp3&quot;</span>);        <span style="color: #228B22">// 创建输出流对象,关联 copy.mp3</span>
 
-BufferedInputStream bis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> BufferedInputStream<span style="color: #666666">(</span>fis<span style="color: #666666">);</span>         <span style="color: #008800; font-style: italic">// 创建缓冲区对 fis 装饰</span>
-BufferedOutputStream bos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> BufferedOutputStream<span style="color: #666666">(</span>fos<span style="color: #666666">);</span>       <span style="color: #008800; font-style: italic">// 创建缓冲区对 fos 装饰</span>
+BufferedInputStream bis = <span style="color: #8B008B; font-weight: bold">new</span> BufferedInputStream(fis);         <span style="color: #228B22">// 创建缓冲区对 fis 装饰</span>
+BufferedOutputStream bos = <span style="color: #8B008B; font-weight: bold">new</span> BufferedOutputStream(fos);       <span style="color: #228B22">// 创建缓冲区对 fos 装饰</span>
 
-<span style="color: #00BB00; font-weight: bold">int</span> b<span style="color: #666666">;</span>
-<span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>b <span style="color: #666666">=</span> bis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    bos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>b<span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
+<span style="color: #a7a7a7; font-weight: bold">int</span> b;
+<span style="color: #8B008B; font-weight: bold">while</span> ((b = bis.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {
+    bos.<span style="color: #658b00">write</span>(b);
+}
 
-bis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>                        <span style="color: #008800; font-style: italic">// 只关装饰后的对象即可</span>
-bos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+bis.<span style="color: #658b00">close</span>();                        <span style="color: #228B22">// 只关装饰后的对象即可</span>
+bos.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
@@ -454,40 +454,40 @@ bos<span style="color: #666666">.</span><span style="color: #BB4444">close</span
 <p>总之, 用字节流来读写中文还是有不少问题的&hellip;所以当遇到中文时, 一般使用 <strong>字符流</strong> 来读写, 这个后面再讲.</p>
 <h3 id="_8">异常处理</h3>
 <h4 id="java-16">java 1.6 及以前的版本</h4>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
-FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">;</span>
-<span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-    fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;aaa.txt&quot;</span><span style="color: #666666">);</span>
-    fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;bbb.txt&quot;</span><span style="color: #666666">);</span>
-    <span style="color: #00BB00; font-weight: bold">int</span> b<span style="color: #666666">;</span>
-    <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>b <span style="color: #666666">=</span> fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-        fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>b<span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">finally</span> <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>fis <span style="color: #666666">!=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">)</span> <span style="color: #666666">{</span>
-            fis<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">finally</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 能关一下尽量关一个</span>
-        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>fos <span style="color: #666666">!=</span> <span style="color: #AA22FF; font-weight: bold">null</span><span style="color: #666666">)</span> <span style="color: #666666">{</span>
-            fos<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileInputStream fis = <span style="color: #8B008B; font-weight: bold">null</span>;
+FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">null</span>;
+<span style="color: #8B008B; font-weight: bold">try</span> {
+    fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;aaa.txt&quot;</span>);
+    fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;bbb.txt&quot;</span>);
+    <span style="color: #a7a7a7; font-weight: bold">int</span> b;
+    <span style="color: #8B008B; font-weight: bold">while</span> ((b = fis.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {
+        fos.<span style="color: #658b00">write</span>(b);
+    }
+} <span style="color: #8B008B; font-weight: bold">finally</span> {
+    <span style="color: #8B008B; font-weight: bold">try</span> {
+        <span style="color: #8B008B; font-weight: bold">if</span> (fis != <span style="color: #8B008B; font-weight: bold">null</span>) {
+            fis.<span style="color: #658b00">close</span>();
+        }
+    } <span style="color: #8B008B; font-weight: bold">finally</span> { <span style="color: #228B22">// 能关一下尽量关一个</span>
+        <span style="color: #8B008B; font-weight: bold">if</span> (fos != <span style="color: #8B008B; font-weight: bold">null</span>) {
+            fos.<span style="color: #658b00">close</span>();
+        }
+    }
+}
 </pre></div>
 
 
 <p><br></p>
 <h4 id="java-17">java 1.7 及以上的版本</h4>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">(</span>
-    FileInputStream fis <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;aaa.txt&quot;</span><span style="color: #666666">);</span>
-    FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span><span style="color: #BB4444">&quot;bbb.txt&quot;</span><span style="color: #666666">);</span>
-<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-    <span style="color: #00BB00; font-weight: bold">int</span> b<span style="color: #666666">;</span>
-    <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>b <span style="color: #666666">=</span> fis<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-        fos<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>b<span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">try</span> (
+    FileInputStream fis = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(<span style="color: #CD5555">&quot;aaa.txt&quot;</span>);
+    FileOutputStream fos = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(<span style="color: #CD5555">&quot;bbb.txt&quot;</span>);
+) {
+    <span style="color: #a7a7a7; font-weight: bold">int</span> b;
+    <span style="color: #8B008B; font-weight: bold">while</span> ((b = fis.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {
+        fos.<span style="color: #658b00">write</span>(b);
+    }
+}
 </pre></div>
 
 
@@ -497,58 +497,58 @@ FileOutputStream fos <span style="color: #666666">=</span> <span style="color: #
 InputStream 及 OutputStream 都已经实现好了.</p>
 <h2 id="_9">字符流</h2>
 <p>字符流专门用来操作文本, 常用的就是 <code>FileReader</code> 与 <code>FileWriter</code>.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">Reader</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">InputStreamReader</span>
-            java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FileReader</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">Reader</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">InputStreamReader</span>
+            java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FileReader</span>
 
-java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">Writer</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">OutputStreamWriter</span>
-            java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">FileWriter</span>
+java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">Writer</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">OutputStreamWriter</span>
+            java.<span style="color: #658b00">io</span>.<span style="color: #658b00">FileWriter</span>
 </pre></div>
 
 
 <p><br>
 写文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileWriter fw <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileWriter<span style="color: #666666">(</span><span style="color: #BB4444">&quot;test.txt&quot;</span><span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 如果没有 test.txt, 会创建出一个</span>
-fw<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;text&quot;</span><span style="color: #666666">);</span>
-fw<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">()</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileWriter fw = <span style="color: #8B008B; font-weight: bold">new</span> FileWriter(<span style="color: #CD5555">&quot;test.txt&quot;</span>); <span style="color: #228B22">// 如果没有 test.txt, 会创建出一个</span>
+fw.<span style="color: #658b00">write</span>(<span style="color: #CD5555">&quot;text&quot;</span>);
+fw.<span style="color: #658b00">close</span>()
 </pre></div>
 
 
 <p><br>
 读文件:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileReader fr <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileReader<span style="color: #666666">(</span><span style="color: #BB4444">&quot;text.txt&quot;</span><span style="color: #666666">);</span>
-<span style="color: #00BB00; font-weight: bold">int</span> ch <span style="color: #666666">=</span> <span style="color: #666666">0;</span>
-<span style="color: #AA22FF; font-weight: bold">while</span><span style="color: #666666">((</span>ch <span style="color: #666666">=</span> fr<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">())</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">((</span><span style="color: #00BB00; font-weight: bold">char</span><span style="color: #666666">)</span>ch<span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileReader fr = <span style="color: #8B008B; font-weight: bold">new</span> FileReader(<span style="color: #CD5555">&quot;text.txt&quot;</span>);
+<span style="color: #a7a7a7; font-weight: bold">int</span> ch = <span style="color: #B452CD">0</span>;
+<span style="color: #8B008B; font-weight: bold">while</span>((ch = fr.<span style="color: #658b00">read</span>()) != -<span style="color: #B452CD">1</span>) {
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>((<span style="color: #a7a7a7; font-weight: bold">char</span>)ch);
+}
 </pre></div>
 
 
 <p><br>
 或者用字符数组:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>FileReader fr <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileReader<span style="color: #666666">(</span><span style="color: #BB4444">&quot;text.txt&quot;</span><span style="color: #666666">);</span>
-<span style="color: #00BB00; font-weight: bold">char</span><span style="color: #666666">[]</span> buf <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #00BB00; font-weight: bold">char</span><span style="color: #666666">[1024];</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>FileReader fr = <span style="color: #8B008B; font-weight: bold">new</span> FileReader(<span style="color: #CD5555">&quot;text.txt&quot;</span>);
+<span style="color: #a7a7a7; font-weight: bold">char</span>[] buf = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #a7a7a7; font-weight: bold">char</span>[<span style="color: #B452CD">1024</span>];
 
-<span style="color: #00BB00; font-weight: bold">int</span> num <span style="color: #666666">=</span> <span style="color: #666666">0;</span>
-<span style="color: #AA22FF; font-weight: bold">while</span><span style="color: #666666">((</span>num <span style="color: #666666">=</span> fr<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>buf<span style="color: #666666">))</span> <span style="color: #666666">!=</span> <span style="color: #666666">-1)</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">(</span>buf<span style="color: #666666">,</span> <span style="color: #666666">0,</span> num<span style="color: #666666">));</span>
-<span style="color: #666666">}</span>
-fr<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
+<span style="color: #a7a7a7; font-weight: bold">int</span> num = <span style="color: #B452CD">0</span>;
+<span style="color: #8B008B; font-weight: bold">while</span>((num = fr.<span style="color: #658b00">read</span>(buf)) != -<span style="color: #B452CD">1</span>) {
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #8B008B; font-weight: bold">new</span> String(buf, <span style="color: #B452CD">0</span>, num));
+}
+fr.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br>
 与字节流相同, 字符流也提供了<strong>缓冲区</strong>的快捷操作类:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">Reader</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">BufferedReader</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">Reader</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">BufferedReader</span>
 
-java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">Writer</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">BufferedWriter</span>
+java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">Writer</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">BufferedWriter</span>
 </pre></div>
 
 
@@ -566,9 +566,9 @@ java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span
 <h2 id="_12">字节数组流</h2>
 <p><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>, 用于以 IO 流的方式来完成对字节数组内容的读写, 来支持类似内存虚拟文件或者内存映射文件的功能, 还可以配合对象流来实现对象的<strong>深度拷贝</strong> (关于这点, 请参考 035、利用对象流实现深度复制).</p>
 <h3 id="bytearrayinputstream">ByteArrayInputStream</h3>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">InputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">ByteArrayInputStream</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">InputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">ByteArrayInputStream</span>
 </pre></div>
 
 
@@ -576,17 +576,17 @@ java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span
 接收字节数组作为参数创建:</p>
 <p><code>ByteArrayInputStream bArray = new ByteArrayInputStream(byte [] a);</code></p>
 <p>另一种创建方式是接收一个字节数组, 和两个整形变量 off、len, off表示第一个读取的字节, len表示读取字节的长度.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>ByteArrayInputStream bArray <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ByteArrayInputStream<span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">byte</span> <span style="color: #666666">[]</span>a<span style="color: #666666">,</span>
-                                                       <span style="color: #00BB00; font-weight: bold">int</span> off<span style="color: #666666">,</span>
-                                                       <span style="color: #00BB00; font-weight: bold">int</span> len<span style="color: #666666">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ByteArrayInputStream bArray = <span style="color: #8B008B; font-weight: bold">new</span> ByteArrayInputStream(<span style="color: #a7a7a7; font-weight: bold">byte</span> []a,
+                                                       <span style="color: #a7a7a7; font-weight: bold">int</span> off,
+                                                       <span style="color: #a7a7a7; font-weight: bold">int</span> len)
 </pre></div>
 
 
 <p><br></p>
 <h3 id="bytearrayoutputstream">ByteArrayOutputStream</h3>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span><span style="color: #666666">.</span><span style="color: #BB4444">Object</span>
-    java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">OutputStream</span>
-        java<span style="color: #666666">.</span><span style="color: #BB4444">io</span><span style="color: #666666">.</span><span style="color: #BB4444">ByteArrayOutputStream</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java.<span style="color: #658b00">lang</span>.<span style="color: #658b00">Object</span>
+    java.<span style="color: #658b00">io</span>.<span style="color: #658b00">OutputStream</span>
+        java.<span style="color: #658b00">io</span>.<span style="color: #658b00">ByteArrayOutputStream</span>
 </pre></div>
 
 
@@ -617,39 +617,39 @@ java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span
 <p><br></p>
 <p><img alt="" src="http://i65.tinypic.com/9fnrxd.jpg" /></p>
 <p>最后以一个例子小结吧.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic">/**</span>
-<span style="color: #008800; font-style: italic"> * 复制一个目录及其子目录、文件到另外一个目录</span>
-<span style="color: #008800; font-style: italic"> * @param src</span>
-<span style="color: #008800; font-style: italic"> * @param dest</span>
-<span style="color: #008800; font-style: italic"> * @throws IOException</span>
-<span style="color: #008800; font-style: italic"> */</span>
-<span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">copyFolder</span><span style="color: #666666">(</span>File src<span style="color: #666666">,</span> File dest<span style="color: #666666">)</span> <span style="color: #AA22FF; font-weight: bold">throws</span> IOException <span style="color: #666666">{</span>
-    <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>src<span style="color: #666666">.</span><span style="color: #BB4444">isDirectory</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
-        <span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(!</span>dest<span style="color: #666666">.</span><span style="color: #BB4444">exists</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
-            dest<span style="color: #666666">.</span><span style="color: #BB4444">mkdir</span><span style="color: #666666">();</span>
-        <span style="color: #666666">}</span>
-        String files<span style="color: #666666">[]</span> <span style="color: #666666">=</span> src<span style="color: #666666">.</span><span style="color: #BB4444">list</span><span style="color: #666666">();</span>
-        <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span>String file <span style="color: #666666">:</span> files<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-            File srcFile <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> File<span style="color: #666666">(</span>src<span style="color: #666666">,</span> file<span style="color: #666666">);</span>
-            File destFile <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> File<span style="color: #666666">(</span>dest<span style="color: #666666">,</span> file<span style="color: #666666">);</span>
-            <span style="color: #008800; font-style: italic">// 递归复制</span>
-            copyFolder<span style="color: #666666">(</span>srcFile<span style="color: #666666">,</span> destFile<span style="color: #666666">);</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">else</span> <span style="color: #666666">{</span>
-        InputStream in <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileInputStream<span style="color: #666666">(</span>src<span style="color: #666666">);</span>
-        OutputStream out <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> FileOutputStream<span style="color: #666666">(</span>dest<span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">/**</span>
+<span style="color: #228B22"> * 复制一个目录及其子目录、文件到另外一个目录</span>
+<span style="color: #228B22"> * @param src</span>
+<span style="color: #228B22"> * @param dest</span>
+<span style="color: #228B22"> * @throws IOException</span>
+<span style="color: #228B22"> */</span>
+<span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">copyFolder</span>(File src, File dest) <span style="color: #8B008B; font-weight: bold">throws</span> IOException {
+    <span style="color: #8B008B; font-weight: bold">if</span> (src.<span style="color: #658b00">isDirectory</span>()) {
+        <span style="color: #8B008B; font-weight: bold">if</span> (!dest.<span style="color: #658b00">exists</span>()) {
+            dest.<span style="color: #658b00">mkdir</span>();
+        }
+        String files[] = src.<span style="color: #658b00">list</span>();
+        <span style="color: #8B008B; font-weight: bold">for</span> (String file : files) {
+            File srcFile = <span style="color: #8B008B; font-weight: bold">new</span> File(src, file);
+            File destFile = <span style="color: #8B008B; font-weight: bold">new</span> File(dest, file);
+            <span style="color: #228B22">// 递归复制</span>
+            copyFolder(srcFile, destFile);
+        }
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+        InputStream in = <span style="color: #8B008B; font-weight: bold">new</span> FileInputStream(src);
+        OutputStream out = <span style="color: #8B008B; font-weight: bold">new</span> FileOutputStream(dest);
 
-        <span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[]</span> buffer <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> <span style="color: #00BB00; font-weight: bold">byte</span><span style="color: #666666">[1024];</span>
+        <span style="color: #a7a7a7; font-weight: bold">byte</span>[] buffer = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #a7a7a7; font-weight: bold">byte</span>[<span style="color: #B452CD">1024</span>];
 
-        <span style="color: #00BB00; font-weight: bold">int</span> length<span style="color: #666666">;</span>
+        <span style="color: #a7a7a7; font-weight: bold">int</span> length;
 
-        <span style="color: #AA22FF; font-weight: bold">while</span> <span style="color: #666666">((</span>length <span style="color: #666666">=</span> in<span style="color: #666666">.</span><span style="color: #BB4444">read</span><span style="color: #666666">(</span>buffer<span style="color: #666666">))</span> <span style="color: #666666">&gt;</span> <span style="color: #666666">0)</span> <span style="color: #666666">{</span>
-            out<span style="color: #666666">.</span><span style="color: #BB4444">write</span><span style="color: #666666">(</span>buffer<span style="color: #666666">,</span> <span style="color: #666666">0,</span> length<span style="color: #666666">);</span>
-        <span style="color: #666666">}</span>
-        in<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-        out<span style="color: #666666">.</span><span style="color: #BB4444">close</span><span style="color: #666666">();</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+        <span style="color: #8B008B; font-weight: bold">while</span> ((length = in.<span style="color: #658b00">read</span>(buffer)) &gt; <span style="color: #B452CD">0</span>) {
+            out.<span style="color: #658b00">write</span>(buffer, <span style="color: #B452CD">0</span>, length);
+        }
+        in.<span style="color: #658b00">close</span>();
+        out.<span style="color: #658b00">close</span>();
+    }
+}
 </pre></div>
 
 
@@ -677,8 +677,8 @@ java<span style="color: #666666">.</span><span style="color: #BB4444">lang</span
 <p><img alt="" src="http://i64.tinypic.com/2012gz5.jpg" /></p>
 <p>再来分析下 <code>RandomAccessFile</code> 下的 <code>readLine</code> 方法.</p>
 <p>该方法先从文本文件中读取一行字符编码 (也就是字节数组), 然后以 <code>ISO-8859-1</code> 的方式对该字节数组进行解码 (也就是去 &ldquo;查字典&rdquo;), 但是很遗憾, 它查的 &ldquo;字典&rdquo; 不对 (一般都不是以 <code>ISO-8859-1</code> 码表编码的), 所以显示出来的就是乱码了, 应该要按原始文本文件的编码格式进行解码才对, 我们做下转换就好了:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>RandomAccessFile fl <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> RandomAccessFile<span style="color: #666666">(</span>file<span style="color: #666666">,</span> <span style="color: #BB4444">&quot;rw&quot;</span><span style="color: #666666">);</span>
-System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">(</span>fl<span style="color: #666666">.</span><span style="color: #BB4444">readLine</span><span style="color: #666666">().</span><span style="color: #BB4444">getBytes</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;ISO-8859-1&quot;</span><span style="color: #666666">),</span> <span style="color: #BB4444">&quot;gb2312&quot;</span><span style="color: #666666">));</span> <span style="color: #008800; font-style: italic">// gb2312 是你文本文件的编码格式</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>RandomAccessFile fl = <span style="color: #8B008B; font-weight: bold">new</span> RandomAccessFile(file, <span style="color: #CD5555">&quot;rw&quot;</span>);
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #8B008B; font-weight: bold">new</span> String(fl.<span style="color: #658b00">readLine</span>().<span style="color: #658b00">getBytes</span>(<span style="color: #CD5555">&quot;ISO-8859-1&quot;</span>), <span style="color: #CD5555">&quot;gb2312&quot;</span>)); <span style="color: #228B22">// gb2312 是你文本文件的编码格式</span>
 </pre></div>
 
 

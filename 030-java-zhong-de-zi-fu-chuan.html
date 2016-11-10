@@ -63,9 +63,9 @@
 <h2 id="string">String 类</h2>
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>String si <span style="color: #666666">=</span> <span style="color: #BB4444">&quot;xxx&quot;</span><span style="color: #666666">;</span>
-String s2 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">();</span>
-String s3 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> String<span style="color: #666666">(</span><span style="color: #BB4444">&quot;xxx&quot;</span><span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String si = <span style="color: #CD5555">&quot;xxx&quot;</span>;
+String s2 = <span style="color: #8B008B; font-weight: bold">new</span> String();
+String s3 = <span style="color: #8B008B; font-weight: bold">new</span> String(<span style="color: #CD5555">&quot;xxx&quot;</span>);
 </pre></div>
 
 
@@ -103,10 +103,10 @@ String s3 <span style="color: #666666">=</span> <span style="color: #AA22FF; fon
 <li>使用 String 类的 valueOf() 方法</li>
 <li>用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">int</span> c <span style="color: #666666">=</span> <span style="color: #666666">10;</span>
-String str1 <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">toString</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
-String str2 <span style="color: #666666">=</span> String<span style="color: #666666">.</span><span style="color: #BB4444">valueOf</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
-String str3 <span style="color: #666666">=</span> c <span style="color: #666666">+</span> <span style="color: #BB4444">&quot;&quot;</span><span style="color: #666666">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">int</span> c = <span style="color: #B452CD">10</span>;
+String str1 = Integer.<span style="color: #658b00">toString</span>(c);
+String str2 = String.<span style="color: #658b00">valueOf</span>(c);
+String str3 = c + <span style="color: #CD5555">&quot;&quot;</span>;
 </pre></div>
 
 
@@ -115,9 +115,9 @@ String str3 <span style="color: #666666">=</span> c <span style="color: #666666"
 <li>调用包装类的 parseXxx 静态方法</li>
 <li>调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>String str <span style="color: #666666">=</span> <span style="color: #BB4444">&quot;10&quot;</span><span style="color: #666666">;</span>
-<span style="color: #00BB00; font-weight: bold">int</span> d <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">paseInt</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
-<span style="color: #00BB00; font-weight: bold">int</span> e <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #BB4444">valueOf</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String str = <span style="color: #CD5555">&quot;10&quot;</span>;
+<span style="color: #a7a7a7; font-weight: bold">int</span> d = Integer.<span style="color: #658b00">paseInt</span>(str);
+<span style="color: #a7a7a7; font-weight: bold">int</span> e = Integer.<span style="color: #658b00">valueOf</span>(str);
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

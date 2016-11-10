@@ -75,7 +75,7 @@
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>redis&gt; LPUSH today_cost 30 1.5 10 8
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>redis&gt; LPUSH today_cost 30 1.5 10 8
 (integer) 4
 redis&gt; SORT today_cost
 1) &quot;1.5&quot;
@@ -146,7 +146,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>redis 127.0.0.1:6379&gt; sort uid by user_level_* get user_name_*
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>redis 127.0.0.1:6379&gt; sort uid by user_level_* get user_name_*
 1) &quot;jack&quot;       # level = 10
 2) &quot;peter&quot;      # level = 25
 3) &quot;mary&quot;       # level = 70
@@ -176,7 +176,7 @@ redis&gt; SORT today_cost
 <h3 id="getby-hash">get/by hash</h3>
 <p>上面介绍的 get 和 by 参数, 其外部 key 还可以是 hash, 其语法类似指针.</p>
 <p>假设 user_1、user_2、user_3 都保存的是 hash, 该 hash 中的 field 是 level, 现在想根据 hash 中的 level 来排序, 可以这么写:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>sort uid by user_*-&gt;level
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sort uid by user_*-&gt;level
 </pre></div>
 
 

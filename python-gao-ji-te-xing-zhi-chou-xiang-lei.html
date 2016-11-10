@@ -59,29 +59,29 @@
 <li>子类必须实现抽象类 <strong>abstractmethod、abstractproperty</strong> 方法</li>
 <li>Python 中使用抽象功能会增大消耗, 所以大部分情况下都采用更宽松的作法, 即定义成正常的类, 通过编程规范来约束</li>
 </ul>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic">#!coding=utf-8</span>
-<span style="color: #AA22FF; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">abc</span> <span style="color: #AA22FF; font-weight: bold">import</span> ABCMeta, abstractmethod, abstractproperty
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">#!coding=utf-8</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">abc</span> <span style="color: #8B008B; font-weight: bold">import</span> ABCMeta, abstractmethod, abstractproperty
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Foo</span>:
-  __metaclass__ <span style="color: #666666">=</span> ABCMeta
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Foo</span>:
+  __metaclass__ = ABCMeta
 
-  <span style="color: #AA22FF">@abstractmethod</span>
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">spam</span>(<span style="color: #AA22FF">self</span>, a, b):
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #707a7c">@abstractmethod</span>
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">spam</span>(<span style="color: #658b00">self</span>, a, b):
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 
-  <span style="color: #AA22FF">@abstractproperty</span>
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">name</span>(<span style="color: #AA22FF">self</span>):
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #707a7c">@abstractproperty</span>
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">name</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 
-<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Bar</span>(Foo):
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">spam</span>(<span style="color: #AA22FF">self</span>, a, b):
-    <span style="color: #AA22FF; font-weight: bold">print</span> a, b
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Bar</span>(Foo):
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">spam</span>(<span style="color: #658b00">self</span>, a, b):
+    <span style="color: #8B008B; font-weight: bold">print</span> a, b
 
-  <span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">name</span>():
-    <span style="color: #AA22FF; font-weight: bold">pass</span>
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">name</span>():
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 
-b <span style="color: #666666">=</span> Bar()
-b<span style="color: #666666">.</span>spam(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>)
+b = Bar()
+b.spam(<span style="color: #B452CD">1</span>,<span style="color: #B452CD">2</span>)
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

@@ -64,17 +64,17 @@
 <h2 id="1">1. 概述</h2>
 <p>Mongodb Profile 用于记录慢查询, 默认记录在 system.profile 中.</p>
 <p>但 system.profile 是固定大小的 collection, 默认大小是 1M, 如果要修改该大小， 用下面的方法:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.setProfilingLevel(<span style="color: #666666">0</span>)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.setProfilingLevel(<span style="color: #B452CD">0</span>)
 db.system.profile.drop()
-db.createCollection( <span style="color: #BB4444">&quot;system.profile&quot;</span>, { capped<span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span>, size<span style="color: #666666">:4096000</span> } )
-db.setProfilingLevel(<span style="color: #666666">1</span>)
+db.createCollection( <span style="color: #CD5555">&quot;system.profile&quot;</span>, { capped: <span style="color: #8B008B; font-weight: bold">true</span>, size:<span style="color: #B452CD">4096000</span> } )
+db.setProfilingLevel(<span style="color: #B452CD">1</span>)
 </pre></div>
 
 
 <p><br></p>
 <h2 id="2-profile">2. 查看当前 Profile</h2>
 <p>查看当前是否开启 Profile 功能用命令:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.getProfilingLevel()
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.getProfilingLevel()
 </pre></div>
 
 
@@ -86,8 +86,8 @@ db.setProfilingLevel(<span style="color: #666666">1</span>)
 <li>2 记录全部</li>
 </ul>
 <h2 id="3profiling">3.开启profiling功能</h2>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.setProfilingLevel(<span style="color: #666666">1</span>,<span style="color: #666666">1000</span>)
-{ <span style="color: #BB4444">&quot;was&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span>, <span style="color: #BB4444">&quot;slowms&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">20</span>, <span style="color: #BB4444">&quot;ok&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">1</span> }
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.setProfilingLevel(<span style="color: #B452CD">1</span>,<span style="color: #B452CD">1000</span>)
+{ <span style="color: #CD5555">&quot;was&quot;</span> : <span style="color: #B452CD">0</span>, <span style="color: #CD5555">&quot;slowms&quot;</span> : <span style="color: #B452CD">20</span>, <span style="color: #CD5555">&quot;ok&quot;</span> : <span style="color: #B452CD">1</span> }
 </pre></div>
 
 
@@ -95,11 +95,11 @@ db.setProfilingLevel(<span style="color: #666666">1</span>)
 第一个参数表示 Profile 的级别, 第二个参数是定义慢查询的阈值</p>
 <h2 id="4-systemprofile">4. system.profile</h2>
 <p>通过 db.system.profile.find() 查看当前的监控日志.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.system.profile.find()
-{ <span style="color: #BB4444">&quot;ts&quot;</span> <span style="color: #666666">:</span> ISODate(<span style="color: #BB4444">&quot;2014-05-05T02:45:10.359Z&quot;</span>), <span style="color: #BB4444">&quot;info&quot;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&quot;query test.system.profile reslen:36 nscanned:0  \nquery: {}  nreturned:0 bytes:20&quot;</span>, <span style="color: #BB4444">&quot;millis&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span> }
-{ <span style="color: #BB4444">&quot;ts&quot;</span> <span style="color: #666666">:</span> ISODate(<span style="color: #BB4444">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #BB4444">&quot;info&quot;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&quot;query test.$cmd ntoreturn:1 command: { count: \&quot;system.profile\&quot;, query: {}, fields: {} } reslen:64 bytes:48&quot;</span>, <span style="color: #BB4444">&quot;millis&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span> }
-{ <span style="color: #BB4444">&quot;ts&quot;</span> <span style="color: #666666">:</span> ISODate(<span style="color: #BB4444">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #BB4444">&quot;info&quot;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&quot;query test.system.profile ntoreturn:5 reslen:36 nscanned:2  \nquery: { query: { millis: { $gt: 0.0 } }, orderby: { $natural: -1.0 } }  nreturned:0 bytes:20&quot;</span>, <span style="color: #BB4444">&quot;millis&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span> }
-{ <span style="color: #BB4444">&quot;ts&quot;</span> <span style="color: #666666">:</span> ISODate(<span style="color: #BB4444">&quot;2014-05-05T02:45:17.171Z&quot;</span>), <span style="color: #BB4444">&quot;info&quot;</span> <span style="color: #666666">:</span> <span style="color: #BB4444">&quot;query test.emp reslen:261 nscanned:5  \nquery: {}  nreturned:5 bytes:245&quot;</span>, <span style="color: #BB4444">&quot;millis&quot;</span> <span style="color: #666666">:</span> <span style="color: #666666">0</span> }
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.system.profile.find()
+{ <span style="color: #CD5555">&quot;ts&quot;</span> : ISODate(<span style="color: #CD5555">&quot;2014-05-05T02:45:10.359Z&quot;</span>), <span style="color: #CD5555">&quot;info&quot;</span> : <span style="color: #CD5555">&quot;query test.system.profile reslen:36 nscanned:0  \nquery: {}  nreturned:0 bytes:20&quot;</span>, <span style="color: #CD5555">&quot;millis&quot;</span> : <span style="color: #B452CD">0</span> }
+{ <span style="color: #CD5555">&quot;ts&quot;</span> : ISODate(<span style="color: #CD5555">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #CD5555">&quot;info&quot;</span> : <span style="color: #CD5555">&quot;query test.$cmd ntoreturn:1 command: { count: \&quot;system.profile\&quot;, query: {}, fields: {} } reslen:64 bytes:48&quot;</span>, <span style="color: #CD5555">&quot;millis&quot;</span> : <span style="color: #B452CD">0</span> }
+{ <span style="color: #CD5555">&quot;ts&quot;</span> : ISODate(<span style="color: #CD5555">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #CD5555">&quot;info&quot;</span> : <span style="color: #CD5555">&quot;query test.system.profile ntoreturn:5 reslen:36 nscanned:2  \nquery: { query: { millis: { $gt: 0.0 } }, orderby: { $natural: -1.0 } }  nreturned:0 bytes:20&quot;</span>, <span style="color: #CD5555">&quot;millis&quot;</span> : <span style="color: #B452CD">0</span> }
+{ <span style="color: #CD5555">&quot;ts&quot;</span> : ISODate(<span style="color: #CD5555">&quot;2014-05-05T02:45:17.171Z&quot;</span>), <span style="color: #CD5555">&quot;info&quot;</span> : <span style="color: #CD5555">&quot;query test.emp reslen:261 nscanned:5  \nquery: {}  nreturned:5 bytes:245&quot;</span>, <span style="color: #CD5555">&quot;millis&quot;</span> : <span style="color: #B452CD">0</span> }
 </pre></div>
 
 

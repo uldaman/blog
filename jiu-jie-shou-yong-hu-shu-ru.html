@@ -59,7 +59,7 @@
 <p>程序中, 我们往往需要接收用户键盘的输入, 在 C 中, 可以使用 scanf(), C++ 中可以使用 cin();
 而在 Java 中提供了三种方法(推荐第三种, 最简单强大):</p>
 <p>第一种: 从控制台接收一个字符.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>System.out.print(&quot;Enter a Char:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>System.out.print(&quot;Enter a Char:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; i = &#39; &#39;&lt;span style=&quot;color: #000000&quot;&gt;;
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
@@ -75,7 +75,7 @@ System.out.println(&lt;/span&gt;&quot;your char is :&quot;+i);
 
 <p>此方法的缺点很明显, 只能接收一个字符, 并且只能是 char, 当我们输入一个数字, 希望得到的也是一个整型变量的时候, 我们还得修改接收变量的类型.</p>
 <p>第二种: 使用 BufferedReader 类和 InputStreamReader 类(使用这两个类要导入相应的包).</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; main(String[] args) &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; IOException {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; main(String[] args) &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; IOException {
 
     BufferedReader br &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; InputStreamReader(System.in));
 
@@ -97,7 +97,7 @@ System.out.println(&lt;/span&gt;&quot;your char is :&quot;+i);
 <p>*. 导入 java.util.Scanner.</p>
 <p>*. 创建 Scanner 对象.</p>
 <p>*. 接收并保存用户输入.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>Scanner sc = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Scanner(System.in);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Scanner sc = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Scanner(System.in);
 
 System.out.println(&lt;/span&gt;&quot;请输入你的姓名：&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 

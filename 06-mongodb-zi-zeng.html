@@ -65,10 +65,10 @@
 </div>
 <h2 id="use-counters-collection">Use Counters Collection</h2>
 <p>1. Insert into the counters collection, the initial value for the userid:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.counters.insert(
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.counters.insert(
    {
-      _id<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;userid&quot;</span>,
-      seq<span style="color: #666666">:</span> <span style="color: #666666">0</span>
+      _id: <span style="color: #CD5555">&quot;userid&quot;</span>,
+      seq: <span style="color: #B452CD">0</span>
    }
 )
 </pre></div>
@@ -76,33 +76,33 @@
 
 <p><br></p>
 <p>2. Create a <strong>getNextSequence</strong> function that accepts a name of the sequence. The function uses the findAndModify() method to atomically increment the seq value and return this new value:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">function</span> getNextSequence(name) {
-   <span style="color: #AA22FF; font-weight: bold">var</span> ret <span style="color: #666666">=</span> db.counters.findAndModify(
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> getNextSequence(name) {
+   <span style="color: #8B008B; font-weight: bold">var</span> ret = db.counters.findAndModify(
           {
-            query<span style="color: #666666">:</span> { _id<span style="color: #666666">:</span> name },
-            update<span style="color: #666666">:</span> { $inc<span style="color: #666666">:</span> { seq<span style="color: #666666">:</span> <span style="color: #666666">1</span> } },
-            <span style="color: #AA22FF; font-weight: bold">new</span><span style="color: #666666">:</span> <span style="color: #AA22FF; font-weight: bold">true</span> <span style="color: #008800; font-style: italic">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
+            query: { _id: name },
+            update: { $inc: { seq: <span style="color: #B452CD">1</span> } },
+            <span style="color: #8B008B; font-weight: bold">new</span>: <span style="color: #8B008B; font-weight: bold">true</span> <span style="color: #228B22">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
           }
    );
 
-   <span style="color: #AA22FF; font-weight: bold">return</span> ret.seq;
+   <span style="color: #8B008B; font-weight: bold">return</span> ret.seq;
 }
 </pre></div>
 
 
 <p><br></p>
 <p>3. Use this <strong>getNextSequence()</strong> function during insert().</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.users.insert(
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.users.insert(
    {
-     _id<span style="color: #666666">:</span> getNextSequence(<span style="color: #BB4444">&quot;userid&quot;</span>),
-     name<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Sarah C.&quot;</span>
+     _id: getNextSequence(<span style="color: #CD5555">&quot;userid&quot;</span>),
+     name: <span style="color: #CD5555">&quot;Sarah C.&quot;</span>
    }
 )
 
 db.users.insert(
    {
-     _id<span style="color: #666666">:</span> getNextSequence(<span style="color: #BB4444">&quot;userid&quot;</span>),
-     name<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Bob D.&quot;</span>
+     _id: getNextSequence(<span style="color: #CD5555">&quot;userid&quot;</span>),
+     name: <span style="color: #CD5555">&quot;Bob D.&quot;</span>
    }
 )
 </pre></div>
@@ -111,26 +111,26 @@ db.users.insert(
 <p><br></p>
 <h2 id="optimistic-loop">Optimistic Loop</h2>
 <p>1. Create a function named <strong>insertDocument</strong> that performs the &ldquo;insert if not present&rdquo; loop. The function wraps the insert() method and takes a <strong>doc</strong> and a <strong>targetCollection</strong> arguments.</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">function</span> insertDocument(doc, targetCollection) {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> insertDocument(doc, targetCollection) {
 
-    <span style="color: #AA22FF; font-weight: bold">while</span> (<span style="color: #666666">1</span>) {
+    <span style="color: #8B008B; font-weight: bold">while</span> (<span style="color: #B452CD">1</span>) {
 
-        <span style="color: #AA22FF; font-weight: bold">var</span> cursor <span style="color: #666666">=</span> targetCollection.find( {}, { _id<span style="color: #666666">:</span> <span style="color: #666666">1</span> } ).sort( { _id<span style="color: #666666">:</span> <span style="color: #666666">-1</span> } ).limit(<span style="color: #666666">1</span>);
+        <span style="color: #8B008B; font-weight: bold">var</span> cursor = targetCollection.find( {}, { _id: <span style="color: #B452CD">1</span> } ).sort( { _id: -<span style="color: #B452CD">1</span> } ).limit(<span style="color: #B452CD">1</span>);
 
-        <span style="color: #AA22FF; font-weight: bold">var</span> seq <span style="color: #666666">=</span> cursor.hasNext() <span style="color: #666666">?</span> cursor.next()._id <span style="color: #666666">+</span> <span style="color: #666666">1</span> <span style="color: #666666">:</span> <span style="color: #666666">1</span>;
+        <span style="color: #8B008B; font-weight: bold">var</span> seq = cursor.hasNext() ? cursor.next()._id + <span style="color: #B452CD">1</span> : <span style="color: #B452CD">1</span>;
 
-        doc._id <span style="color: #666666">=</span> seq;
+        doc._id = seq;
 
-        <span style="color: #AA22FF; font-weight: bold">var</span> results <span style="color: #666666">=</span> targetCollection.insert(doc);
+        <span style="color: #8B008B; font-weight: bold">var</span> results = targetCollection.insert(doc);
 
-        <span style="color: #AA22FF; font-weight: bold">if</span>( results.hasWriteError() ) {
-            <span style="color: #AA22FF; font-weight: bold">if</span>( results.writeError.code <span style="color: #666666">==</span> <span style="color: #666666">11000</span> <span style="color: #008800; font-style: italic">/* dup key */</span> )
-                <span style="color: #AA22FF; font-weight: bold">continue</span>;
-            <span style="color: #AA22FF; font-weight: bold">else</span>
-                print( <span style="color: #BB4444">&quot;unexpected error inserting data: &quot;</span> <span style="color: #666666">+</span> tojson( results ) );
+        <span style="color: #8B008B; font-weight: bold">if</span>( results.hasWriteError() ) {
+            <span style="color: #8B008B; font-weight: bold">if</span>( results.writeError.code == <span style="color: #B452CD">11000</span> <span style="color: #228B22">/* dup key */</span> )
+                <span style="color: #8B008B; font-weight: bold">continue</span>;
+            <span style="color: #8B008B; font-weight: bold">else</span>
+                print( <span style="color: #CD5555">&quot;unexpected error inserting data: &quot;</span> + tojson( results ) );
         }
 
-        <span style="color: #AA22FF; font-weight: bold">break</span>;
+        <span style="color: #8B008B; font-weight: bold">break</span>;
     }
 }
 </pre></div>
@@ -138,18 +138,18 @@ db.users.insert(
 
 <p><br></p>
 <p>2. Use the <strong>insertDocument()</strong> function to perform an insert:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">var</span> myCollection <span style="color: #666666">=</span> db.users2;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">var</span> myCollection = db.users2;
 
 insertDocument(
    {
-     name<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Grace H.&quot;</span>
+     name: <span style="color: #CD5555">&quot;Grace H.&quot;</span>
    },
    myCollection
 );
 
 insertDocument(
    {
-     name<span style="color: #666666">:</span> <span style="color: #BB4444">&quot;Ted R.&quot;</span>
+     name: <span style="color: #CD5555">&quot;Ted R.&quot;</span>
    },
    myCollection
 )

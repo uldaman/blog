@@ -63,7 +63,7 @@
 <p>cookies 一般要 server 端和 ui 端配合展示, 例如, 可以在 html 中设置 cookie, 然后在 django 中获取、判断、使用, 也可以在 django 中设置, 然后在 html 中获取、判断、使用.</p>
 <p><strong>上案例:</strong></p>
 <p>Django 端:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):
     loginDict &lt;/span&gt;= request.session.get(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;is_login&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, None)
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; loginDict :
         currentPage &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; int(p)
@@ -103,7 +103,7 @@
 
 
 <p>HTML 端:</p>
-<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
     &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;meta &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;charset&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;UTF-8&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
