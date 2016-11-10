@@ -99,7 +99,7 @@ Integet n2 = new Integer(“5”);</p>
 
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
 String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
@@ -138,10 +138,10 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">HRESULT</span> <span style="color: #cccccc">APIENTRY</span> <span style="color: #cccccc">hkIDirect3DDevice9</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Reset(D3DPRESENT_PARAMETERS</span> <span style="color: #3399cc">*</span><span style="color: #cccccc">pPresentationParameters)</span> <span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">m_pManager</span><span style="color: #3399cc">-&gt;</span><span style="color: #cccccc">PreReset();</span>
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+    <span style="color: #cccccc">HRESULT</span> <span style="color: #cccccc">hRet</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -163,7 +163,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
 <p>首先, 我们来看一下向下类型转换的风险.</p>
 <p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -214,7 +214,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 匿名内部类</p>
 <hr />
 <p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -235,7 +235,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 <p>格式: this();</p>
 <p>我们知道一个类, 可以有多个构造函数, 调用哪个构造函数取决于 this() 里的参数个数及类型;</p>
 <p>this调用构造函数, 必须是构造函数中第一条语句;</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;Person()  {
    System.out.println(&lt;/span&gt;&quot;无参数构造函数&quot;&lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>

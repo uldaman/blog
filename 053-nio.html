@@ -123,11 +123,11 @@
 </li>
 </ul>
 <p>ByteBuffer 无法用于<strong>数组传输</strong>, 一般的做法是将 ByteBuffer 转换成对应类型的 Buffer, 然后向其中写入数据, 例如在当前位置向 ByteBuffer 中写入 float[]:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">float</span><span style="color: #666666">[]</span> array<span style="color: #666666">;</span>
-<span style="color: #60a0b0; font-style: italic">// ... 其它代码</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">float</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">array</span><span style="color: #3399cc">;</span>
+<span style="color: #000080">// ... 其它代码</span>
 
-FloarBuffer floatBuf <span style="color: #666666">=</span> byteBuffer<span style="color: #666666">.</span><span style="color: #4070a0">asFloatBuffer</span><span style="color: #666666">();</span>
-floatBuf<span style="color: #666666">.</span><span style="color: #4070a0">put</span><span style="color: #666666">(</span>array<span style="color: #666666">);</span>
+<span style="color: #cccccc">FloarBuffer</span> <span style="color: #cccccc">floatBuf</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">byteBuffer</span><span style="color: #3399cc">.</span><span style="color: #cccccc">asFloatBuffer</span><span style="color: #3399cc">();</span>
+<span style="color: #cccccc">floatBuf</span><span style="color: #3399cc">.</span><span style="color: #cccccc">put</span><span style="color: #3399cc">(</span><span style="color: #cccccc">array</span><span style="color: #3399cc">);</span>
 </pre></div>
 
 
@@ -167,24 +167,24 @@ floatBuf<span style="color: #666666">.</span><span style="color: #4070a0">put</s
 </li>
 </ul>
 <p>下面是一个使用 FileChannel 读取数据到 Buffer 中的示例:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>RandomAccessFile aFile <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> RandomAccessFile<span style="color: #666666">(</span><span style="color: #4070a0">&quot;data/nio-data.txt&quot;</span><span style="color: #666666">,</span> <span style="color: #4070a0">&quot;rw&quot;</span><span style="color: #666666">);</span>
-FileChannel inChannel <span style="color: #666666">=</span> aFile<span style="color: #666666">.</span><span style="color: #4070a0">getChannel</span><span style="color: #666666">();</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">RandomAccessFile</span> <span style="color: #cccccc">aFile</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">RandomAccessFile</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;data/nio-data.txt&quot;</span><span style="color: #3399cc">,</span> <span style="color: #cd0000">&quot;rw&quot;</span><span style="color: #3399cc">);</span>
+<span style="color: #cccccc">FileChannel</span> <span style="color: #cccccc">inChannel</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">aFile</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getChannel</span><span style="color: #3399cc">();</span>
 
-ByteBuffer buf <span style="color: #666666">=</span> ByteBuffer<span style="color: #666666">.</span><span style="color: #4070a0">allocate</span><span style="color: #666666">(</span><span style="color: #40a070">48</span><span style="color: #666666">);</span>
+<span style="color: #cccccc">ByteBuffer</span> <span style="color: #cccccc">buf</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">ByteBuffer</span><span style="color: #3399cc">.</span><span style="color: #cccccc">allocate</span><span style="color: #3399cc">(</span><span style="color: #cd00cd">48</span><span style="color: #3399cc">);</span>
 
-<span style="color: #902000">int</span> bytesRead <span style="color: #666666">=</span> inChannel<span style="color: #666666">.</span><span style="color: #4070a0">read</span><span style="color: #666666">(</span>buf<span style="color: #666666">);</span>
-<span style="color: #007020; font-weight: bold">while</span> <span style="color: #666666">(</span>bytesRead <span style="color: #666666">!=</span> <span style="color: #666666">-</span><span style="color: #40a070">1</span><span style="color: #666666">)</span> <span style="color: #666666">{</span>
-    System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;Read &quot;</span> <span style="color: #666666">+</span> bytesRead<span style="color: #666666">);</span>
-    buf<span style="color: #666666">.</span><span style="color: #4070a0">flip</span><span style="color: #666666">();</span>
+<span style="color: #00cd00">int</span> <span style="color: #cccccc">bytesRead</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">inChannel</span><span style="color: #3399cc">.</span><span style="color: #cccccc">read</span><span style="color: #3399cc">(</span><span style="color: #cccccc">buf</span><span style="color: #3399cc">);</span>
+<span style="color: #cdcd00">while</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">bytesRead</span> <span style="color: #3399cc">!=</span> <span style="color: #3399cc">-</span><span style="color: #cd00cd">1</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
+    <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;Read &quot;</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">bytesRead</span><span style="color: #3399cc">);</span>
+    <span style="color: #cccccc">buf</span><span style="color: #3399cc">.</span><span style="color: #cccccc">flip</span><span style="color: #3399cc">();</span>
 
-    <span style="color: #007020; font-weight: bold">while</span><span style="color: #666666">(</span>buf<span style="color: #666666">.</span><span style="color: #4070a0">hasRemaining</span><span style="color: #666666">()){</span>
-        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">print</span><span style="color: #666666">((</span><span style="color: #902000">char</span><span style="color: #666666">)</span>buf<span style="color: #666666">.</span><span style="color: #4070a0">get</span><span style="color: #666666">());</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #cdcd00">while</span><span style="color: #3399cc">(</span><span style="color: #cccccc">buf</span><span style="color: #3399cc">.</span><span style="color: #cccccc">hasRemaining</span><span style="color: #3399cc">()){</span>
+        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">print</span><span style="color: #3399cc">((</span><span style="color: #00cd00">char</span><span style="color: #3399cc">)</span><span style="color: #cccccc">buf</span><span style="color: #3399cc">.</span><span style="color: #cccccc">get</span><span style="color: #3399cc">());</span>
+    <span style="color: #3399cc">}</span>
 
-    buf<span style="color: #666666">.</span><span style="color: #4070a0">clear</span><span style="color: #666666">();</span>
-    bytesRead <span style="color: #666666">=</span> inChannel<span style="color: #666666">.</span><span style="color: #4070a0">read</span><span style="color: #666666">(</span>buf<span style="color: #666666">);</span>
-<span style="color: #666666">}</span>
-aFile<span style="color: #666666">.</span><span style="color: #4070a0">close</span><span style="color: #666666">();</span>
+    <span style="color: #cccccc">buf</span><span style="color: #3399cc">.</span><span style="color: #cccccc">clear</span><span style="color: #3399cc">();</span>
+    <span style="color: #cccccc">bytesRead</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">inChannel</span><span style="color: #3399cc">.</span><span style="color: #cccccc">read</span><span style="color: #3399cc">(</span><span style="color: #cccccc">buf</span><span style="color: #3399cc">);</span>
+<span style="color: #3399cc">}</span>
+<span style="color: #cccccc">aFile</span><span style="color: #3399cc">.</span><span style="color: #cccccc">close</span><span style="color: #3399cc">();</span>
 </pre></div>
 
 
@@ -197,8 +197,8 @@ aFile<span style="color: #666666">.</span><span style="color: #4070a0">close</sp
 <p>然后处理的数据就是从 position 到 limit 直接的数据, 也就是刚刚读取过来的数据.</p>
 <h2 id="memory-mapped">Memory Mapped</h2>
 <p>虚拟内存映射: 把文件的某一段(磁盘/硬盘上)直接映射到内存中去; 一旦文件被映射, 访问文件就会非常快, 不用通过系统的 <code>read()</code> 或 <code>write()</code>.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>MappedByteBuffer FileChannel<span style="color: #666666">.</span><span style="color: #4070a0">map</span><span style="color: #666666">(</span>MapMode<span style="color: #666666">,</span> <span style="color: #902000">long</span> position<span style="color: #666666">,</span> longsize<span style="color: #666666">)</span>
-<span style="color: #60a0b0; font-style: italic">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">MappedByteBuffer</span> <span style="color: #cccccc">FileChannel</span><span style="color: #3399cc">.</span><span style="color: #cccccc">map</span><span style="color: #3399cc">(</span><span style="color: #cccccc">MapMode</span><span style="color: #3399cc">,</span> <span style="color: #00cd00">long</span> <span style="color: #cccccc">position</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">longsize</span><span style="color: #3399cc">)</span>
+<span style="color: #000080">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
 </pre></div>
 
 

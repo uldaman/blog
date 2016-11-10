@@ -86,7 +86,7 @@
 <p>简单的说就是先使用 <strong>supervisord</strong> 开始 Supervisor 服务, 然后通过 <strong>supervisorctl</strong> 管理 Supervisor 服务</p>
 </blockquote>
 <h1 id="2">2. 安装</h1>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>pip install supervisor
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>pip install supervisor
 </pre></div>
 
 
@@ -99,7 +99,7 @@
 <li>在当前目录创建配置文件 echo_supervisord_conf > supervisord.conf, 然后使用 <strong>-c</strong> 参数在启动时手动指定配置文件: <code>supervisord -c supervisord.conf</code></li>
 </ul>
 <p>默认配置文件 echo_supervisord_conf 内容:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>; Sample supervisor config file.
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>; Sample supervisor config file.
 ;
 ; For more information on the config file, please see:
 ; http://supervisord.org/configuration.html
@@ -244,7 +244,7 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 <p><br></p>
 <h1 id="4">4. 添加一个程序</h1>
 <p>编辑配置文件 supervisord.conf, 在后面添加新程序:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>[program:test_py]
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>[program:test_py]
 command=python /etc/my_pro/test.py
 autorestart=true
 directory=/etc/my_pro
@@ -261,7 +261,7 @@ stderr_logfile=/etc/my_pro/test_stderr.log
 如果配置中的 command 是执行一个 bash, 然后在 bash 里执行了 python 脚本, 那么当使用 supervisor 停止程序时, 只有上层进程被停止(即 bash 被停止了), 但 python 进程没有被停止.</p>
 <p>解决办法:<br>
 在配置文件中设置:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>stopasgroup=true
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>stopasgroup=true
 killasgroup=true
 </pre></div>
 
@@ -286,7 +286,7 @@ killasgroup=true
 </blockquote>
 <h1 id="6-web">6. 通过 web 方式查看状态</h1>
 <p>配置文件中配置:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
 port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
 </pre></div>
 

@@ -63,7 +63,7 @@
 <p>OK, 现在我们来修改源码, <strong>使 Lua 支持中文的变量名及函数名</strong>.
 打开 src 文件夹下的 <strong>llex.c</strong> 文件, 定位到 <strong>static int llex (LexState <em>ls, SemInfo </em>seminfo)</strong> 函数处.
 这个函数的主体是 switch 结构, 我们向下翻找到它的 <strong>default</strong> 部分.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;default&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;default&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;: {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (lislalpha(ls-&gt;current)) {  &lt;span style=&quot;color: #008000&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; identifier or reserved word? &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;*/&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
   TString &lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt;ts;
   &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
@@ -90,7 +90,7 @@
 打开属性编辑框, 在工程的预处理器设置中添加一行 <strong>_CRT_SECURE_NO_WARNINGS</strong> (屏蔽 C4996 错误).</p>
 <p><img alt="" src="http://i60.tinypic.com/332qpgg.jpg" /></p>
 <p>最好也设置下程序语言集, 因为 Lua 的源代码都是基于 ASCII 的, 例如:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buff[&lt;span style=&quot;color: #800080&quot;&gt;4&lt;/span&gt;*&lt;span style=&quot;color: #0000ff&quot;&gt;sizeof&lt;/span&gt;(&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; *) + &lt;span style=&quot;color: #800080&quot;&gt;8&lt;/span&gt;]; &lt;span style=&quot;color: #008000&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; should be enough space for a &#39;%p&#39; &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;*/&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buff[&lt;span style=&quot;color: #800080&quot;&gt;4&lt;/span&gt;*&lt;span style=&quot;color: #0000ff&quot;&gt;sizeof&lt;/span&gt;(&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; *) + &lt;span style=&quot;color: #800080&quot;&gt;8&lt;/span&gt;]; &lt;span style=&quot;color: #008000&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; should be enough space for a &#39;%p&#39; &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;*/&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; l = sprintf(buff, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%p&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;, va_arg(argp, &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; *));
 </pre></div>
 
@@ -114,7 +114,7 @@
 <p>将下来<strong>设置 Sublime Text, 让它可以运行 lua 命令.</strong></p>
 <p><a href="http://hrtsea.com/2014/09/14/sublime-text/">Sublime Text 优化版本下载</a></p>
 <p>Tool(工具)-&gt;Build System(编译系统) -&gt; New Build System(新编译系统), 添加如下代码:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{
  &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;cmd&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;: [&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:/Users/Administrator/Desktop/lua/Release/lua.exe&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;$file&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;],
  &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;file_regex&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;: &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^(?:lua:)?[\t](...*?):([0-9]*):?([0-9]*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
  &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;selector&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;: &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;source.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
@@ -130,7 +130,7 @@
 <p>为了方便以后 C 与 Lua 交互, 整合一下交互开发环境.</p>
 <p>建立文件夹 LuaScript, 在 LuaScript 中再创建文件夹 lib 和 include, 将刚才编译的 Lua_Debug.lib 和 Lua_Release.lib 文件添加到 lib 文件夹下, 将 src 文件夹下的<strong> lauxlib.h、lua.h、<strong><em>*luaconf</em></strong>*.h、lualib.h </strong>四个头文件加入到 include 文件夹下.
 在 LuaScript 文件夹里再创建一个 LuaEx.h 文件, 添加以下代码:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#pragma&lt;/span&gt; once
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#pragma&lt;/span&gt; once
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;extern&lt;/span&gt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;lua.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;

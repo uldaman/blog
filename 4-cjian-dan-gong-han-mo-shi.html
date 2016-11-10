@@ -54,7 +54,7 @@
 
 
     <p>首先看一下”计算器”程序:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
@@ -97,7 +97,7 @@
 
 <p><img alt="结果" src="http://img.blog.csdn.net/20150211232011817" /></p>
 <p>这个程序表面上看来没有什么问题, 也做了除数为0的处理. 现在用到面向对象的编程思想, 开始考虑通过 <strong>封装/继承/多态</strong> 来优化这个程序. 首先这个程序把所有的功能都放在main函数中, 造成耦合度太低, 不方便维护, 也不容易扩展, 我们现在把这些代码重构, 让计算和显示分开.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Operation {
@@ -148,7 +148,7 @@
 
 
 <p>好, 我们已经把计算和显示分开了, 如果这时需要添加一个开方计算, 那该怎么办? 那就要改Operation类, 现在要加一个新计算, 却要 + - * / 的运算都参与编译, 不容易扩展, 打个比方: 如果公司要我为薪资管理系统做维护, 原来只有技术人员, 销售人员, 经理三种薪资计算, 现在要求添加一个临时工的薪资计算, 按我们的程序写法, 公司就必须要把含原三种计算的运算类给我, 如果我不小心改动了那三种运算, 后果可想… 现在重新设计我们的运算类:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Operation {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Operation {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; GetResult() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
 
@@ -191,7 +191,7 @@
 
 
 <p>这样, 如果我们需要新增一个开方功能, 只要再从Operation继承一个新类就可以了, 现在的问题是, 在我们的main函数中, 怎么调用这个运算类? 也就是说, 怎么让计算器知道我想用哪一个算法?</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
     Operation&lt;/span&gt;* oper =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; cOp;
@@ -239,7 +239,7 @@
 <p>Factory: 工厂类, 它引用了Operation类, 有一个方法, 返回值就是Operation类.</p>
 <p>Operation: 运算类, 它是一个抽象类, 提供一两个属性来保存运算数, 还有一个GetResult虚函数, 用来被它的子类实现.</p>
 <p>OperationAdd: 实际子类, 它继承于Operation类, 实现了父类的虚函数.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Factory {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Factory {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;static&lt;/span&gt; Operation* CreateOperate(&lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; cOp) {
         Operation&lt;/span&gt;* oper =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;

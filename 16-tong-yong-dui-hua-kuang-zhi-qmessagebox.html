@@ -84,15 +84,15 @@ QMessageBox::question() 函数与 QMessageBox::critical() 类似, 不同之处�
 <p><code>StandardButton warning(QWidget * parent, const QString &amp; title, const QString &amp; text, StandardButtons buttons = Ok, StandardButton defaultButton = NoButton)</code>:<br>
 QMessageBox::warning() 函数与 QMessageBox::critical() 类似, 不同之处在于这个对话框提供一个黄色叹号图标.</p>
 <p>我们可以看到大部分 static func 函数有个 StandardButton 返回值, 我们可以根据这个返回值来判断用户点击了 QMessageBox 的哪个按钮, 一般是 QMessageBox::Ok、QMessageBox::Cancel、QMessageBox::Yes、QMessageBox::No 等.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">if</span> (QMessageBox<span style="color: #666666">::</span>Yes <span style="color: #666666">==</span> QMessageBox<span style="color: #666666">::</span>question(<span style="color: #007020; font-weight: bold">this</span>,
-                                              <span style="color: #4070a0">&quot;Question&quot;</span>,
-                                              <span style="color: #4070a0">&quot;Are you OK?&quot;</span>,
-                                              QMessageBox<span style="color: #666666">::</span>Yes <span style="color: #666666">|</span> QMessageBox<span style="color: #666666">::</span>No,
-                                              QMessageBox<span style="color: #666666">::</span>Yes)) {
-    QMessageBox<span style="color: #666666">::</span>information(<span style="color: #007020; font-weight: bold">this</span>, <span style="color: #4070a0">&quot;Hmmm...&quot;</span>, <span style="color: #4070a0">&quot;I&#39;m glad to hear that!&quot;</span>);
-} <span style="color: #007020; font-weight: bold">else</span> {
-    QMessageBox<span style="color: #666666">::</span>information(<span style="color: #007020; font-weight: bold">this</span>, <span style="color: #4070a0">&quot;Hmmm...&quot;</span>, <span style="color: #4070a0">&quot;I&#39;m sorry!&quot;</span>);
-}
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">if</span> <span style="color: #cccccc">(QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Yes</span> <span style="color: #3399cc">==</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">question(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span>
+                                              <span style="color: #cd0000">&quot;Question&quot;</span><span style="color: #cccccc">,</span>
+                                              <span style="color: #cd0000">&quot;Are you OK?&quot;</span><span style="color: #cccccc">,</span>
+                                              <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Yes</span> <span style="color: #3399cc">|</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">No,</span>
+                                              <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Yes))</span> <span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">information(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Hmmm...&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;I&#39;m glad to hear that!&quot;</span><span style="color: #cccccc">);</span>
+<span style="color: #cccccc">}</span> <span style="color: #cdcd00">else</span> <span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">information(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Hmmm...&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;I&#39;m sorry!&quot;</span><span style="color: #cccccc">);</span>
+<span style="color: #cccccc">}</span>
 </pre></div>
 
 
@@ -100,26 +100,26 @@ QMessageBox::warning() 函数与 QMessageBox::critical() 类似, 不同之处在
 当然这些 static func 可以满足我们大部分的项目需求, 然而, 有时, 我们需要显示一个特殊的 QMessageBox, 此时, 我们就要使用 QMessageBox 的属性设置 API 来达到目的, 例如我们想弹出下面这种 QMessageBox.</p>
 <p><img alt="" src="http://i58.tinypic.com/1zydo2o.jpg" /></p>
 <p>实现这个 QMessageBox 的代码如下:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>QMessageBox msgBox;
-msgBox.setText(tr(<span style="color: #4070a0">&quot;The document has been modified.&quot;</span>));
-msgBox.setInformativeText(tr(<span style="color: #4070a0">&quot;Do you want to save your changes?&quot;</span>));
-msgBox.setDetailedText(tr(<span style="color: #4070a0">&quot;Differences here...&quot;</span>));
-msgBox.setStandardButtons(QMessageBox<span style="color: #666666">::</span>Save
-                          <span style="color: #666666">|</span> QMessageBox<span style="color: #666666">::</span>Discard
-                          <span style="color: #666666">|</span> QMessageBox<span style="color: #666666">::</span>Cancel);
-msgBox.setDefaultButton(QMessageBox<span style="color: #666666">::</span>Save);
-<span style="color: #902000">int</span> ret <span style="color: #666666">=</span> msgBox.exec();
-<span style="color: #007020; font-weight: bold">switch</span> (ret) {
-<span style="color: #007020; font-weight: bold">case</span> QMessageBox<span style="color: #666666">::</span><span style="color: #002070; font-weight: bold">Save</span>:
-    qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #4070a0">&quot;Save document!&quot;</span>;
-    <span style="color: #007020; font-weight: bold">break</span>;
-<span style="color: #007020; font-weight: bold">case</span> QMessageBox<span style="color: #666666">::</span><span style="color: #002070; font-weight: bold">Discard</span>:
-    qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #4070a0">&quot;Discard changes!&quot;</span>;
-    <span style="color: #007020; font-weight: bold">break</span>;
-<span style="color: #007020; font-weight: bold">case</span> QMessageBox<span style="color: #666666">::</span><span style="color: #002070; font-weight: bold">Cancel</span>:
-    qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #4070a0">&quot;Close document!&quot;</span>;
-    <span style="color: #007020; font-weight: bold">break</span>;
-}
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">QMessageBox</span> <span style="color: #cccccc">msgBox;</span>
+<span style="color: #cccccc">msgBox.setText(tr(</span><span style="color: #cd0000">&quot;The document has been modified.&quot;</span><span style="color: #cccccc">));</span>
+<span style="color: #cccccc">msgBox.setInformativeText(tr(</span><span style="color: #cd0000">&quot;Do you want to save your changes?&quot;</span><span style="color: #cccccc">));</span>
+<span style="color: #cccccc">msgBox.setDetailedText(tr(</span><span style="color: #cd0000">&quot;Differences here...&quot;</span><span style="color: #cccccc">));</span>
+<span style="color: #cccccc">msgBox.setStandardButtons(QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Save</span>
+                          <span style="color: #3399cc">|</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Discard</span>
+                          <span style="color: #3399cc">|</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Cancel);</span>
+<span style="color: #cccccc">msgBox.setDefaultButton(QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Save);</span>
+<span style="color: #00cd00">int</span> <span style="color: #cccccc">ret</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">msgBox.exec();</span>
+<span style="color: #cdcd00">switch</span> <span style="color: #cccccc">(ret)</span> <span style="color: #cccccc">{</span>
+<span style="color: #cdcd00">case</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Save:</span>
+    <span style="color: #cccccc">qDebug()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;Save document!&quot;</span><span style="color: #cccccc">;</span>
+    <span style="color: #cdcd00">break</span><span style="color: #cccccc">;</span>
+<span style="color: #cdcd00">case</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Discard:</span>
+    <span style="color: #cccccc">qDebug()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;Discard changes!&quot;</span><span style="color: #cccccc">;</span>
+    <span style="color: #cdcd00">break</span><span style="color: #cccccc">;</span>
+<span style="color: #cdcd00">case</span> <span style="color: #cccccc">QMessageBox</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Cancel:</span>
+    <span style="color: #cccccc">qDebug()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;Close document!&quot;</span><span style="color: #cccccc">;</span>
+    <span style="color: #cdcd00">break</span><span style="color: #cccccc">;</span>
+<span style="color: #cccccc">}</span>
 </pre></div>
 
 

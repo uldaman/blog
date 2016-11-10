@@ -120,7 +120,7 @@
 <li>event.getPath</li>
 </ul>
 <p>需要注意一下, 有时我们拿到 zk_obj 后, 由于 zk 环境还是准备后, 会导致后续的操作失败, 所以我们拿到 zk_obj 后可以通过 zk_obj.getState() 来判断下当前集群的状态, 当它为 CONNECTED 时才继续操作.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>路径=zk_obj.create(路径, 数据, 权限, 节点模式)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>路径=zk_obj.create(路径, 数据, 权限, 节点模式)
 
 zk_obj.getChildren(路径, 监听器)
 

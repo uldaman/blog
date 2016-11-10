@@ -54,7 +54,7 @@
 
 
     <p>先看下面这两个重载函数.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;);
 </pre></div>
 
@@ -65,7 +65,7 @@
 它的类型是 nullptr_t, 是一个可以隐式转换成<strong>任意类型的指针</strong>或<strong>指向成员的指针</strong>的类型,并且可以和这些类型进行比较.
 但它<strong>不能隐式转换为整型</strong>, 也不能与整型做比较, bool类型除外(可以隐式转换为bool型, 取值为false).
 为了向下兼容,0仍然是一个有效的空指针常量!</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *pc = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *pc = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;  *pi = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;bool&lt;/span&gt;   b = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; OK. b is false.&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;    i = nullptr;     &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; error&lt;/span&gt;

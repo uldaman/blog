@@ -72,9 +72,9 @@
 </ul>
 <h1 id="namedtuple">namedtuple</h1>
 <p>如果看到一个 tuple <code>(1, 2)</code>, 很难看出这是用来表示一个坐标的, 这时, <code>namedtuple</code> 就派上了用场：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">collections</span> <span style="color: #007020; font-weight: bold">import</span> namedtuple
-Point <span style="color: #666666">=</span> namedtuple(<span style="color: #4070a0">&#39;Point&#39;</span>, [<span style="color: #4070a0">&#39;x&#39;</span>, <span style="color: #4070a0">&#39;y&#39;</span>])
-p <span style="color: #666666">=</span> Point(<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">from</span> <span style="color: #cccccc">collections</span> <span style="color: #cd00cd">import</span> <span style="color: #cccccc">namedtuple</span>
+<span style="color: #cccccc">Point</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">namedtuple(</span><span style="color: #cd0000">&#39;Point&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cccccc">[</span><span style="color: #cd0000">&#39;x&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;y&#39;</span><span style="color: #cccccc">])</span>
+<span style="color: #cccccc">p</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Point(</span><span style="color: #cd00cd">1</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">2</span><span style="color: #cccccc">)</span>
 </pre></div>
 
 
@@ -82,7 +82,7 @@ p <span style="color: #666666">=</span> Point(<span style="color: #40a070">1</sp
 <code>namedtuple</code> 是一个函数, 它用来创建一个自定义的 tuple 对象, 并且规定了 tuple 元素的个数, 并可以用<strong>名称</strong>而不是索引来引用 tuple 的某个元素.</p>
 <p>这样一来, 我们用 <code>namedtuple</code> 可以很方便地定义一种数据类型, 它具备 tuple 的不变性, 又可以根据属性来引用, 使用十分方便.</p>
 <p>可以验证创建的 Point 对象是 tuple 的一种子类：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; isinstance(p, Point)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; isinstance(p, Point)
 True
 &gt;&gt;&gt; isinstance(p, tuple)
 True
@@ -96,16 +96,16 @@ True
 <p>关于 <code>deque</code> 和 <code>list</code> 的差别参考 wiki: <a href="http://wiki.smallcpp.com/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/vector%E3%80%81deque%E3%80%81list%20%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB.html">vector、deque、list 三者的区别</a></p>
 <h1 id="counter">Counter</h1>
 <p><code>Counter</code> 是一个简单的计数器, 例如, 统计字符出现的个数：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">collections</span> <span style="color: #007020; font-weight: bold">import</span> Counter
-c <span style="color: #666666">=</span> Counter()
-<span style="color: #007020; font-weight: bold">for</span> ch <span style="color: #007020; font-weight: bold">in</span> <span style="color: #4070a0">&#39;programming&#39;</span>:
-    c[ch] <span style="color: #666666">=</span> c[ch] <span style="color: #666666">+</span> <span style="color: #40a070">1</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">from</span> <span style="color: #cccccc">collections</span> <span style="color: #cd00cd">import</span> <span style="color: #cccccc">Counter</span>
+<span style="color: #cccccc">c</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Counter()</span>
+<span style="color: #cdcd00">for</span> <span style="color: #cccccc">ch</span> <span style="color: #cdcd00">in</span> <span style="color: #cd0000">&#39;programming&#39;</span><span style="color: #cccccc">:</span>
+    <span style="color: #cccccc">c[ch]</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">c[ch]</span> <span style="color: #3399cc">+</span> <span style="color: #cd00cd">1</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; c
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; c
 Counter({&#39;g&#39;: 2, &#39;m&#39;: 2, &#39;r&#39;: 2, &#39;a&#39;: 1, &#39;i&#39;: 1, &#39;o&#39;: 1, &#39;n&#39;: 1, &#39;p&#39;: 1})
 </pre></div>
 
@@ -114,27 +114,27 @@ Counter({&#39;g&#39;: 2, &#39;m&#39;: 2, &#39;r&#39;: 2, &#39;a&#39;: 1, &#39;i&
 <code>Counter</code> 实际上也是 <code>dict</code> 的一个子类, 上面的结果可以看出, 字符 &lsquo;g&rsquo;、&rsquo;m&rsquo;、&rsquo;r&rsquo; 各出现了两次, 其他字符各出现了一次.</p>
 <h1 id="ordereddict">OrderedDict</h1>
 <p>在 Python 中, <code>dict</code> 这个数据结构由于 hash 的特性, 是无序的, 这在有的时候会给我们带来一些麻烦,  幸运的是, collections 模块为我们提供了 <code>OrderedDict</code>, 当你要获得一个有序的字典对象时, 用它就对了.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">collections</span> <span style="color: #007020; font-weight: bold">import</span> OrderedDict
-d <span style="color: #666666">=</span> <span style="color: #007020">dict</span>([(<span style="color: #4070a0">&#39;a&#39;</span>, <span style="color: #40a070">1</span>), (<span style="color: #4070a0">&#39;b&#39;</span>, <span style="color: #40a070">2</span>), (<span style="color: #4070a0">&#39;c&#39;</span>, <span style="color: #40a070">3</span>)])
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">from</span> <span style="color: #cccccc">collections</span> <span style="color: #cd00cd">import</span> <span style="color: #cccccc">OrderedDict</span>
+<span style="color: #cccccc">d</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">dict</span><span style="color: #cccccc">([(</span><span style="color: #cd0000">&#39;a&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">1</span><span style="color: #cccccc">),</span> <span style="color: #cccccc">(</span><span style="color: #cd0000">&#39;b&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">2</span><span style="color: #cccccc">),</span> <span style="color: #cccccc">(</span><span style="color: #cd0000">&#39;c&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">3</span><span style="color: #cccccc">)])</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>d # dict 的Key是无序的
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>d # dict 的Key是无序的
 {&#39;a&#39;: 1, &#39;c&#39;: 3, &#39;b&#39;: 2}
 </pre></div>
 
 
 <p><br>
 改用 OrderedDict:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>od <span style="color: #666666">=</span> OrderedDict([(<span style="color: #4070a0">&#39;a&#39;</span>, <span style="color: #40a070">1</span>), (<span style="color: #4070a0">&#39;b&#39;</span>, <span style="color: #40a070">2</span>), (<span style="color: #4070a0">&#39;c&#39;</span>, <span style="color: #40a070">3</span>)])
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">od</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">OrderedDict([(</span><span style="color: #cd0000">&#39;a&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">1</span><span style="color: #cccccc">),</span> <span style="color: #cccccc">(</span><span style="color: #cd0000">&#39;b&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">2</span><span style="color: #cccccc">),</span> <span style="color: #cccccc">(</span><span style="color: #cd0000">&#39;c&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">3</span><span style="color: #cccccc">)])</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>od # OrderedDict的Key是有序的
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>od # OrderedDict的Key是有序的
 OrderedDict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3)])
 </pre></div>
 
@@ -143,15 +143,15 @@ OrderedDict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3)])
 注意, OrderedDict 的 Key 会按照<strong>插入的顺序</strong>排列, 不是Key本身排序.</p>
 <h1 id="defaultdict">defaultdict</h1>
 <p>使用 <code>dict</code> 时, 如果引用的 Key 不存在, 就会抛出 KeyError. 如果希望 key 不存在时, 返回一个默认值, 就可以用 <code>defaultdict</code>:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">collections</span> <span style="color: #007020; font-weight: bold">import</span> defaultdict
-dd <span style="color: #666666">=</span> defaultdict(<span style="color: #007020; font-weight: bold">lambda</span>: <span style="color: #4070a0">&#39;N/A&#39;</span>)
-dd[<span style="color: #4070a0">&#39;key1&#39;</span>] <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;abc&#39;</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">from</span> <span style="color: #cccccc">collections</span> <span style="color: #cd00cd">import</span> <span style="color: #cccccc">defaultdict</span>
+<span style="color: #cccccc">dd</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">defaultdict(</span><span style="color: #cdcd00">lambda</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;N/A&#39;</span><span style="color: #cccccc">)</span>
+<span style="color: #cccccc">dd[</span><span style="color: #cd0000">&#39;key1&#39;</span><span style="color: #cccccc">]</span> <span style="color: #3399cc">=</span> <span style="color: #cd0000">&#39;abc&#39;</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>dd[&#39;key1&#39;] # key1 存在
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>dd[&#39;key1&#39;] # key1 存在
 &#39;abc&#39;
 
 dd[&#39;key2&#39;] # key2不存在, 返回默认值

@@ -58,23 +58,23 @@
 <blockquote>
 <p>The QSplashScreen widget provides a splash screen that can be shown during application startup.</p>
 </blockquote>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">sys</span>
-<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">PyQt4.QtGui</span> <span style="color: #007020; font-weight: bold">import</span> QApplication, QSplashScreen, QPixmap
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">import</span> <span style="color: #cccccc">sys</span>
+<span style="color: #cd00cd">from</span> <span style="color: #cccccc">PyQt4.QtGui</span> <span style="color: #cd00cd">import</span> <span style="color: #cccccc">QApplication,</span> <span style="color: #cccccc">QSplashScreen,</span> <span style="color: #cccccc">QPixmap</span>
 
-app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
-splash <span style="color: #666666">=</span> QSplashScreen(QPixmap(<span style="color: #4070a0">&#39;:/splash.png&#39;</span>))  <span style="color: #60a0b0; font-style: italic"># step1, 创建一个 splash</span>
-splash<span style="color: #666666">.</span>show()  <span style="color: #60a0b0; font-style: italic"># step2, 显示 splash</span>
-app<span style="color: #666666">.</span>processEvents()  <span style="color: #60a0b0; font-style: italic"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
-dlg <span style="color: #666666">=</span> Dialog()
-dlg<span style="color: #666666">.</span>show()
-splash<span style="color: #666666">.</span>finish(dlg)  <span style="color: #60a0b0; font-style: italic"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
-sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
+<span style="color: #cccccc">app</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QApplication(sys</span><span style="color: #3399cc">.</span><span style="color: #cccccc">argv)</span>
+<span style="color: #cccccc">splash</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QSplashScreen(QPixmap(</span><span style="color: #cd0000">&#39;:/splash.png&#39;</span><span style="color: #cccccc">))</span>  <span style="color: #000080"># step1, 创建一个 splash</span>
+<span style="color: #cccccc">splash</span><span style="color: #3399cc">.</span><span style="color: #cccccc">show()</span>  <span style="color: #000080"># step2, 显示 splash</span>
+<span style="color: #cccccc">app</span><span style="color: #3399cc">.</span><span style="color: #cccccc">processEvents()</span>  <span style="color: #000080"># step3, processEvents() 的调用防止 splash 阻塞事件 (you can hide the splash screen by clicking on it with the mouse)</span>
+<span style="color: #cccccc">dlg</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Dialog()</span>
+<span style="color: #cccccc">dlg</span><span style="color: #3399cc">.</span><span style="color: #cccccc">show()</span>
+<span style="color: #cccccc">splash</span><span style="color: #3399cc">.</span><span style="color: #cccccc">finish(dlg)</span>  <span style="color: #000080"># step4, 等待 dlg 显示之后关闭 splash (Makes the splash screen wait until the widget mainWin is displayed before calling close() on itself)</span>
+<span style="color: #cccccc">sys</span><span style="color: #3399cc">.</span><span style="color: #cccccc">exit(app</span><span style="color: #3399cc">.</span><span style="color: #cccccc">exec_())</span>
 </pre></div>
 
 
 <p><br>
 你还可以通过 QSplashScreen 的 showMessage 方法在 splash screen 上打印提示信息:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>showMessage (<span style="color: #007020">self</span>, QString message, <span style="color: #007020">int</span> alignment <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>AlignLeft, QColor color <span style="color: #666666">=</span> Qt<span style="color: #666666">.</span>black)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">showMessage</span> <span style="color: #cccccc">(</span><span style="color: #cd00cd">self</span><span style="color: #cccccc">,</span> <span style="color: #cccccc">QString</span> <span style="color: #cccccc">message,</span> <span style="color: #cd00cd">int</span> <span style="color: #cccccc">alignment</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Qt</span><span style="color: #3399cc">.</span><span style="color: #cccccc">AlignLeft,</span> <span style="color: #cccccc">QColor</span> <span style="color: #cccccc">color</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Qt</span><span style="color: #3399cc">.</span><span style="color: #cccccc">black)</span>
 </pre></div>
 
 

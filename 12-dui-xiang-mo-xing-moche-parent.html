@@ -75,7 +75,7 @@
 <p>Qt 引入对象树的概念，在一定程度上解决了内存问题: 如果指针对象有父对象时, 可以不用显式释放内存, 我们需要显式释放的是那些没有父对象的孤立的指针.</p>
 <p>当一个<code>QObject</code>对象在堆上创建的时候，Qt 会同时为其创建一个对象树。不过，对象树中对象的顺序是没有定义的。这意味着，销毁这些对象的顺序也是未定义的。Qt 保证的是，任何对象树中的 <code>QObject</code>对象 delete 的时候，如果这个对象有 parent，则自动将其从 parent 的<code>children()</code>列表中删除；如果有孩子，则自动 delete 每一个孩子。Qt 保证没有<code>QObject</code>会被 delete 两次，这是由析构顺序决定的。</p>
 <p>如果<code>QObject</code>在栈上创建，Qt 保持同样的行为。正常情况下，这也不会发生什么问题。来看下下面的代码片段：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
     QWidget window;
     QPushButton quit(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Quit&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;, &amp;&lt;span style=&quot;color: #000000;&quot;&gt;window);
 }&lt;/span&gt;
@@ -84,7 +84,7 @@
 
 <p>作为父组件的 window 和作为子组件的 quit 都是<code>QObject</code>的子类（事实上，它们都是<code>QWidget</code>的子类，而<code>QWidget</code>是<code>QObject</code>的子类）。这段代码是正确的，quit 的析构函数不会被调用两次，因为标准 C++ （ISO/IEC 14882:2003）要求，局部对象的析构顺序应该按照其创建顺序的相反过程。因此，这段代码在超出作用域时，会先调用 quit 的析构函数，将其从父对象 window 的子对象列表中删除，然后才会再调用 window 的析构函数。</p>
 <p>但是，如果我们使用下面的代码：</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;{
     QPushButton quit(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;Quit&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     QWidget window;
 

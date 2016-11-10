@@ -55,7 +55,7 @@
 
     <p><strong>通用视图</strong></p>
 <p>有的时候, views.py 的处理只是简单的返回一个 html, 这种情况就可以通过 [通用视图] 简写在 urls.py 中.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;from django.views.generic.simlpe import direct_to_template 版本更新, 用下面这个代替&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;from django.views.generic.simlpe import direct_to_template 版本更新, 用下面这个代替&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.views.generic.base &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; TemplateView
 
 urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
@@ -70,7 +70,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 <hr />
 <p>有的时候, views.py 里的视图函数有部分相同的逻辑, 此时可以把这部分逻辑提取出来.</p>
 <p>views.py</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view1(request):
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view1(request):
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view2(request):
@@ -85,7 +85,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>urls.py</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^view1/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, views(view1)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^view2/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, views(view2)),
 ]&lt;/span&gt;

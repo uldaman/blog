@@ -66,7 +66,7 @@
 <li>hadoop 2.x <code>hdfs dfs -???</code></li>
 </ul>
 <p>后面的 <code>???</code> 是一个具体的文件系统命令, 和 Linux 的文件系统命令很相似, 如查看当前 HDFS 文件系统中的文件:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HDFS dfs -ls hdfs://itcast01:9000/
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>HDFS dfs -ls hdfs://itcast01:9000/
 </pre></div>
 
 
@@ -89,7 +89,7 @@
 </tbody>
 </table>
 <p>如果在 <code>core-site.xml</code> 里指定了 <code>defaultFS</code>, 那上面地址中的 协议 和 主机地址端口 可以省略, 简写个目录结构就可以了:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HDFS dfs -ls /
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>HDFS dfs -ls /
 </pre></div>
 
 
@@ -125,7 +125,7 @@
 <p><strong>数据存在哪?</strong></p>
 <p>从 OS 的角度, 数据被放在 DataNode 的 <code>/tmp/dfs/data/current/</code> 目录下, 当然从 OS 的角度, 是看不懂这里面的文件的, 打开后都是些二进制.</p>
 <p><strong>帮助?</strong></p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>hdfs dfs -help
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>hdfs dfs -help
 hdfs dfs -help 具体命令
 </pre></div>
 

@@ -58,14 +58,14 @@
 <p>Java 中的方法跟 C 中的函数差不多, 没什么太多好说的, 可支持函数重载, 注意, 重载只与函数的参数有关, 与函数类型(即返回值)无关.</p>
 <h4 id="12">1.2 变参</h4>
 <p>Java 中也支持变参,  格式是 <strong>类型&hellip;</strong>(三个点).<br>Java 把可变参数当做数组处理.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">int</span> <span style="color: #06287e">add</span><span style="color: #666666">(</span><span style="color: #902000">int</span> x<span style="color: #666666">,</span> <span style="color: #902000">int</span><span style="color: #666666">...</span> args<span style="color: #666666">){</span>
-    <span style="color: #902000">int</span> sum <span style="color: #666666">=</span> x<span style="color: #666666">;</span>
-    <span style="color: #007020; font-weight: bold">for</span><span style="color: #666666">(</span><span style="color: #902000">int</span> i <span style="color: #666666">=</span> <span style="color: #40a070">0</span><span style="color: #666666">;</span> i <span style="color: #666666">&lt;</span> args<span style="color: #666666">.</span><span style="color: #4070a0">length</span><span style="color: #666666">;</span> i<span style="color: #666666">++){</span>
-    sum <span style="color: #666666">+=</span> args<span style="color: #666666">[</span>i<span style="color: #666666">];</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">add</span><span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">x</span><span style="color: #3399cc">,</span> <span style="color: #00cd00">int</span><span style="color: #3399cc">...</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">){</span>
+    <span style="color: #00cd00">int</span> <span style="color: #cccccc">sum</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">x</span><span style="color: #3399cc">;</span>
+    <span style="color: #cdcd00">for</span><span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">.</span><span style="color: #cccccc">length</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span><span style="color: #3399cc">++){</span>
+    <span style="color: #cccccc">sum</span> <span style="color: #3399cc">+=</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">[</span><span style="color: #cccccc">i</span><span style="color: #3399cc">];</span>
+<span style="color: #3399cc">}</span>
 
-    <span style="color: #007020; font-weight: bold">return</span> sum<span style="color: #666666">;</span>
-<span style="color: #666666">}</span>
+    <span style="color: #cdcd00">return</span> <span style="color: #cccccc">sum</span><span style="color: #3399cc">;</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
@@ -86,9 +86,9 @@ Java 中还提供了另外一种直接创建数组的方式, 它将声明数组�
 <p>普通的数组遍历也没什么好说的, 不过 java 中的数组支持泛型遍历.</p>
 <p>在遍历数组、集合时, foreach 更简单便捷, 这种语法类似 C++11 中的 &lt;<a href="https://msdn.microsoft.com/zh-cn/library/jj203382.aspx">基于范围的 for 循环</a>&gt;.
 语法:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">for</span> <span style="color: #666666">(</span>元素类型 元素变量 <span style="color: #666666">:</span> 遍历对象<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">for</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">元素类型</span> <span style="color: #cccccc">元素变量</span> <span style="color: #3399cc">:</span> <span style="color: #cccccc">遍历对象</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
 
-<span style="color: #666666">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
@@ -96,10 +96,10 @@ Java 中还提供了另外一种直接创建数组的方式, 它将声明数组�
 <p>所谓二维数组, 可以简单的理解为是一种“特殊”的一维数组, 它的每个数组空间中保存的是一个一维数组.</p>
 <p>二维数组定义方式: int[][] nn = null 或者 int nn[][] = null.</p>
 <p><strong>不规则二维数组</strong>: 在定义二维数组时也可以只指定行的个数(即列数全部为空数组), 然后再为每一行分别指定列的个数, 如果每行的列数不同, 则创建的是不规则的二维数组, 如:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">int</span><span style="color: #666666">[][]</span> nn <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #902000">int</span><span style="color: #666666">[</span><span style="color: #40a070">3</span><span style="color: #666666">][];</span>
-nn<span style="color: #666666">[]</span> <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #902000">int</span><span style="color: #666666">[</span><span style="color: #40a070">5</span><span style="color: #666666">];</span>
-nn<span style="color: #666666">[]</span> <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #902000">int</span><span style="color: #666666">[</span><span style="color: #40a070">6</span><span style="color: #666666">];</span>
-nn<span style="color: #666666">[]</span> <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #902000">int</span><span style="color: #666666">[</span><span style="color: #40a070">7</span><span style="color: #666666">];</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">int</span><span style="color: #3399cc">[][]</span> <span style="color: #cccccc">nn</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #00cd00">int</span><span style="color: #3399cc">[</span><span style="color: #cd00cd">3</span><span style="color: #3399cc">][];</span>
+<span style="color: #cccccc">nn</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #00cd00">int</span><span style="color: #3399cc">[</span><span style="color: #cd00cd">5</span><span style="color: #3399cc">];</span>
+<span style="color: #cccccc">nn</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #00cd00">int</span><span style="color: #3399cc">[</span><span style="color: #cd00cd">6</span><span style="color: #3399cc">];</span>
+<span style="color: #cccccc">nn</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #00cd00">int</span><span style="color: #3399cc">[</span><span style="color: #cd00cd">7</span><span style="color: #3399cc">];</span>
 </pre></div>
 
 

@@ -264,7 +264,7 @@ winodws 的多任务机制本质是时间片切换, 设置程序的 cpu 亲和�
 <p>右键我的电脑-&gt;属性-&gt;高级系统设置-&gt;高级-&gt;性能[设置]-&gt;调整为最佳性能-&gt;勾选<code>平滑屏幕字体边缘</code>-&gt;确定.</p>
 <h3 id="_2">其他优化</h3>
 <p>将以下代码copy到记事本中存为bat文件并以管理员身份运行运行</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>@echo off
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>@echo off
 sc stop MpsSvc **停止windows firewall服务**
 sc stop WinDefend **停止windows defender服务**
 sc stop TabletInputService **停止tablet pc服务**
@@ -280,7 +280,7 @@ echo.&amp; pause
 
 <p><br><br>
 将以下代码copy到记事本中存为reg文件运行</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Windows Registry Editor Version 5.00
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Control Panel\Mouse]
 &quot;MouseHoverTime&quot;=&quot;100&quot;
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\winreg]

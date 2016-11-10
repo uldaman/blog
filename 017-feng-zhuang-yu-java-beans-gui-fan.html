@@ -63,50 +63,50 @@
 <li>可序列化.</li>
 </ul>
 <p>我们编写类的时候, 最好就是按 Java Beans 的规范来定义, 特别是 getter、setter 方法可以很好的控制业务逻辑.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">PersonBean</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">PersonBean</span> <span style="color: #3399cc">{</span>
 
-    <span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic">     * name 属性(注意大小写)</span>
-<span style="color: #60a0b0; font-style: italic">     */</span>
-    <span style="color: #007020; font-weight: bold">private</span> String name <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span><span style="color: #666666">;</span>
+    <span style="color: #000080">/**</span>
+<span style="color: #000080">     * name 属性(注意大小写)</span>
+<span style="color: #000080">     */</span>
+    <span style="color: #00cd00">private</span> <span style="color: #cccccc">String</span> <span style="color: #cccccc">name</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">null</span><span style="color: #3399cc">;</span>
 
-    <span style="color: #007020; font-weight: bold">private</span> <span style="color: #902000">boolean</span> deceased <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">false</span><span style="color: #666666">;</span>
+    <span style="color: #00cd00">private</span> <span style="color: #00cd00">boolean</span> <span style="color: #cccccc">deceased</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
 
-    <span style="color: #60a0b0; font-style: italic">/** 无参构造器(没有参数) */</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #06287e">PersonBean</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #000080">/** 无参构造器(没有参数) */</span>
+    <span style="color: #00cd00">public</span> <span style="color: #cccccc">PersonBean</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic">     * name 属性的Getter方法</span>
-<span style="color: #60a0b0; font-style: italic">     */</span>
-    <span style="color: #007020; font-weight: bold">public</span> String <span style="color: #06287e">getName</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-        <span style="color: #007020; font-weight: bold">return</span> name<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #000080">/**</span>
+<span style="color: #000080">     * name 属性的Getter方法</span>
+<span style="color: #000080">     */</span>
+    <span style="color: #00cd00">public</span> <span style="color: #cccccc">String</span> <span style="color: #cccccc">getName</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+        <span style="color: #cdcd00">return</span> <span style="color: #cccccc">name</span><span style="color: #3399cc">;</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic">     * name 属性的Setter方法</span>
-<span style="color: #60a0b0; font-style: italic">     * @param value</span>
-<span style="color: #60a0b0; font-style: italic">     */</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">setName</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">final</span> String value<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        name <span style="color: #666666">=</span> value<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #000080">/**</span>
+<span style="color: #000080">     * name 属性的Setter方法</span>
+<span style="color: #000080">     * @param value</span>
+<span style="color: #000080">     */</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">setName</span><span style="color: #3399cc">(</span><span style="color: #00cd00">final</span> <span style="color: #cccccc">String</span> <span style="color: #cccccc">value</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
+        <span style="color: #cccccc">name</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">value</span><span style="color: #3399cc">;</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic">     * deceased 属性的Getter方法</span>
-<span style="color: #60a0b0; font-style: italic">     * 布尔型属性的Getter方法的不同形式(这里使用了is而非get)</span>
-<span style="color: #60a0b0; font-style: italic">     */</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">boolean</span> <span style="color: #06287e">isDeceased</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-        <span style="color: #007020; font-weight: bold">return</span> deceased<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
+    <span style="color: #000080">/**</span>
+<span style="color: #000080">     * deceased 属性的Getter方法</span>
+<span style="color: #000080">     * 布尔型属性的Getter方法的不同形式(这里使用了is而非get)</span>
+<span style="color: #000080">     */</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">boolean</span> <span style="color: #cccccc">isDeceased</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+        <span style="color: #cdcd00">return</span> <span style="color: #cccccc">deceased</span><span style="color: #3399cc">;</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic">     * deceased 属性的Setter方法</span>
-<span style="color: #60a0b0; font-style: italic">     * @param value</span>
-<span style="color: #60a0b0; font-style: italic">     */</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">setDeceased</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">final</span> <span style="color: #902000">boolean</span> value<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        deceased <span style="color: #666666">=</span> value<span style="color: #666666">;</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+    <span style="color: #000080">/**</span>
+<span style="color: #000080">     * deceased 属性的Setter方法</span>
+<span style="color: #000080">     * @param value</span>
+<span style="color: #000080">     */</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">setDeceased</span><span style="color: #3399cc">(</span><span style="color: #00cd00">final</span> <span style="color: #00cd00">boolean</span> <span style="color: #cccccc">value</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
+        <span style="color: #cccccc">deceased</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">value</span><span style="color: #3399cc">;</span>
+    <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

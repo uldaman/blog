@@ -75,7 +75,7 @@
 <h2 id="_3">创建数据目录</h2>
 <p>安装好后, Mongodb 需要手动创建一个根目录用来存放数据, 请注意, 数据目录应该放在根目录下(如 C:\ 或者 D:\ 等).<br>
 如在 C: 盘 下创建一个 Data 目录做为 Mongodb 的数据目录.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>D:\
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>D:\
 
 mkdir Data
 </pre></div>
@@ -84,13 +84,13 @@ mkdir Data
 <p><br></p>
 <h2 id="cmd-mongodb">以 CMD 进程运行 MongoDB 服务器</h2>
 <p>为了从命令提示符下运行 MongoDB 服务器, 需要在 MongoDB 目录的 <strong>bin</strong> 目录中执行 <strong>mongod.exe</strong> 文件.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>mongod --dbpath D:\Data
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>mongod --dbpath D:\Data
 </pre></div>
 
 
 <p><br></p>
 <p>如果执行成功, 可能会输出类似如下信息:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>I CONTROL  [main] Hotfix KB2731284 or later update is not installed, will zero-out data files
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>I CONTROL  [main] Hotfix KB2731284 or later update is not installed, will zero-out data files
 I CONTROL  [initandlisten] MongoDB starting : pid=10916 port=27017 dbpath=D:\Data 64-bit host=SH61041PCW
 I CONTROL  [initandlisten] targetMinOS: Windows Vista/Windows Server 2008
 I CONTROL  [initandlisten] db version v3.2.4
@@ -111,7 +111,7 @@ I NETWORK  [initandlisten] waiting for connections on port 27017
 
 <p><br></p>
 <h2 id="windows-mongodb">以 Windows 服务运行 MongoDB 服务器</h2>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>mongod --bind_ip [your id adress] --logpath [D:\Data\mongodb.log] --logappend --dbpath [D:\Data] --port [your port number] --serviceName [your service name] --serviceDisplayName [your service name] --install
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>mongod --bind_ip [your id adress] --logpath [D:\Data\mongodb.log] --logappend --dbpath [D:\Data] --port [your port number] --serviceName [your service name] --serviceDisplayName [your service name] --install
 </pre></div>
 
 
@@ -130,7 +130,7 @@ I NETWORK  [initandlisten] waiting for connections on port 27017
 <h2 id="mongodb-client">MongoDB 自带的 Client</h2>
 <p>MongoDB 自带的 Client 是交互式的 Shell, 用来对 MongoDB 进行操作和管理, 执行 MongoDB 根目录下 <strong>bin</strong> 目录中的 <strong>mongo.exe</strong> 文件就能打开这个交互环境.</p>
 <p>当进入 MongoDB Client 后, 它默认会链接到 <strong>test</strong> 文档(<strong>MongoDB 的文档就是常规理解中的数据库</strong>)</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt; mongo
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; mongo
 MongoDB shell version: 3.0.6
 connecting to: test
 ……
@@ -139,7 +139,7 @@ connecting to: test
 
 <p><br>
 <strong>db</strong> 命令用于查看当前操作的文档(数据库):</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt; db
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db
 test
 &gt;
 </pre></div>
@@ -147,26 +147,26 @@ test
 
 <p><br>
 <strong>db.serverCmdLineOpts()</strong> 方法用来查看连接的 Mongodb 的信息:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>db.serverCmdLineOpts()
-{
-        <span style="color: #4070a0">&quot;argv&quot;</span> <span style="color: #666666">:</span> [
-                <span style="color: #4070a0">&quot;mongod&quot;</span>,
-                <span style="color: #4070a0">&quot;--dbpath&quot;</span>,
-                <span style="color: #4070a0">&quot;D:\\Data&quot;</span>
-        ],
-        <span style="color: #4070a0">&quot;parsed&quot;</span> <span style="color: #666666">:</span> {
-                <span style="color: #4070a0">&quot;storage&quot;</span> <span style="color: #666666">:</span> {
-                        <span style="color: #4070a0">&quot;dbPath&quot;</span> <span style="color: #666666">:</span> <span style="color: #4070a0">&quot;D:\\Data&quot;</span>
-                }
-        },
-        <span style="color: #4070a0">&quot;ok&quot;</span> <span style="color: #666666">:</span> <span style="color: #40a070">1</span>
-}
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">db.serverCmdLineOpts()</span>
+<span style="color: #cccccc">{</span>
+        <span style="color: #cd0000">&quot;argv&quot;</span> <span style="color: #3399cc">:</span> <span style="color: #cccccc">[</span>
+                <span style="color: #cd0000">&quot;mongod&quot;</span><span style="color: #cccccc">,</span>
+                <span style="color: #cd0000">&quot;--dbpath&quot;</span><span style="color: #cccccc">,</span>
+                <span style="color: #cd0000">&quot;D:\\Data&quot;</span>
+        <span style="color: #cccccc">],</span>
+        <span style="color: #cd0000">&quot;parsed&quot;</span> <span style="color: #3399cc">:</span> <span style="color: #cccccc">{</span>
+                <span style="color: #cd0000">&quot;storage&quot;</span> <span style="color: #3399cc">:</span> <span style="color: #cccccc">{</span>
+                        <span style="color: #cd0000">&quot;dbPath&quot;</span> <span style="color: #3399cc">:</span> <span style="color: #cd0000">&quot;D:\\Data&quot;</span>
+                <span style="color: #cccccc">}</span>
+        <span style="color: #cccccc">},</span>
+        <span style="color: #cd0000">&quot;ok&quot;</span> <span style="color: #3399cc">:</span> <span style="color: #cd00cd">1</span>
+<span style="color: #cccccc">}</span>
 </pre></div>
 
 
 <p><br>
 MongoDB Client 中还可以运行一些简单的算术运算:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt; 2 + 2
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; 2 + 2
 4
 &gt;
 </pre></div>

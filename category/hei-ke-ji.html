@@ -69,10 +69,10 @@
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9<span style="color: #666666">::</span>Reset(D3DPRESENT_PARAMETERS <span style="color: #666666">*</span>pPresentationParameters) {
-    m_pManager<span style="color: #666666">-&gt;</span>PreReset();
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">HRESULT</span> <span style="color: #cccccc">APIENTRY</span> <span style="color: #cccccc">hkIDirect3DDevice9</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Reset(D3DPRESENT_PARAMETERS</span> <span style="color: #3399cc">*</span><span style="color: #cccccc">pPresentationParameters)</span> <span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">m_pManager</span><span style="color: #3399cc">-&gt;</span><span style="color: #cccccc">PreReset();</span>
 
-    HRESULT hRet <span style="color: #666666">=</span> m_pD3Ddev ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+    <span style="color: #cccccc">HRESULT</span> <span style="color: #cccccc">hRet</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">m_pD3Ddev ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -90,12 +90,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">#pragma pack (push,1)</span>
-<span style="color: #007020; font-weight: bold">typedef</span> <span style="color: #007020; font-weight: bold">struct</span> _RoleTree {
-    DWORD dwLBase;      <span style="color: #60a0b0; font-style: italic">//+0x0    左树</span>
-    DWORD dwSBase;      <span style="color: #60a0b0; font-style: italic">//+0x4    上一层树的地址</span>
-    DWORD dwRBase;      <span style="color: #60a0b0; font-style: italic">//+0x8    右树</span>
-    <span style="color: #902000">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">#pragma pack (push,1)</span>
+<span style="color: #cdcd00">typedef</span> <span style="color: #cdcd00">struct</span> <span style="color: #cccccc">_RoleTree</span> <span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">DWORD</span> <span style="color: #cccccc">dwLBase;</span>      <span style="color: #000080">//+0x0    左树</span>
+    <span style="color: #cccccc">DWORD</span> <span style="color: #cccccc">dwSBase;</span>      <span style="color: #000080">//+0x4    上一层树的地址</span>
+    <span style="color: #cccccc">DWORD</span> <span style="color: #cccccc">dwRBase;</span>      <span style="color: #000080">//+0x8    右树</span>
+    <span style="color: #00cd00">int</span> <span style="color: #cccccc">iID ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -113,8 +113,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">HRESULT</span> <span style="color: #cccccc">APIENTRY</span> <span style="color: #cccccc">hkIDirect3D9</span><span style="color: #3399cc">::</span><span style="color: #cccccc">CreateDevice(UINT</span> <span style="color: #cccccc">Adapter,</span> <span style="color: #cccccc">D3DDEVTYPE</span> <span style="color: #cccccc">DeviceType,</span> <span style="color: #cccccc">HWND</span> <span style="color: #cccccc">hFocusWindow</span>
+    <span style="color: #cccccc">,</span> <span style="color: #cccccc">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 

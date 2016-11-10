@@ -71,18 +71,18 @@
 <li>如时有一个操作数是 float, 计算结果是 float;</li>
 <li>如时有一个操作数是 double, 计算结果是 double;</li>
 </ul>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">byte</span> b1<span style="color: #666666">,</span> b2<span style="color: #666666">,</span> b<span style="color: #666666">;</span>
-b1 <span style="color: #666666">=</span> <span style="color: #40a070">1</span><span style="color: #666666">;</span>
-b2 <span style="color: #666666">=</span> <span style="color: #40a070">2</span><span style="color: #666666">;</span>
-b <span style="color: #666666">=</span> b1 <span style="color: #666666">+</span> b2<span style="color: #666666">;</span> <span style="color: #60a0b0; font-style: italic">// 报错</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">byte</span> <span style="color: #cccccc">b1</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">b2</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">b</span><span style="color: #3399cc">;</span>
+<span style="color: #cccccc">b1</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">1</span><span style="color: #3399cc">;</span>
+<span style="color: #cccccc">b2</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">2</span><span style="color: #3399cc">;</span>
+<span style="color: #cccccc">b</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">b1</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">b2</span><span style="color: #3399cc">;</span> <span style="color: #000080">// 报错</span>
 </pre></div>
 
 
 <p>这段代码会报错, 原因就是因为放生运算时,  byte 类型被提升成 int 型, 将 int 型赋给 b 肯定会报错.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">byte</span> s <span style="color: #666666">=</span> <span style="color: #40a070">2</span><span style="color: #666666">;</span>
-<span style="color: #902000">int</span> i <span style="color: #666666">=</span> <span style="color: #40a070">10</span><span style="color: #666666">;</span>
-s <span style="color: #666666">=</span> s <span style="color: #666666">+</span> i<span style="color: #666666">;</span>  <span style="color: #60a0b0; font-style: italic">// 报错</span>
-s <span style="color: #666666">+=</span> i<span style="color: #666666">;</span>   <span style="color: #60a0b0; font-style: italic">// √</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">byte</span> <span style="color: #cccccc">s</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">2</span><span style="color: #3399cc">;</span>
+<span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">10</span><span style="color: #3399cc">;</span>
+<span style="color: #cccccc">s</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">s</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">i</span><span style="color: #3399cc">;</span>  <span style="color: #000080">// 报错</span>
+<span style="color: #cccccc">s</span> <span style="color: #3399cc">+=</span> <span style="color: #cccccc">i</span><span style="color: #3399cc">;</span>   <span style="color: #000080">// √</span>
 </pre></div>
 
 

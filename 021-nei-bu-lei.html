@@ -71,11 +71,11 @@
 <p>内部类又分为: <strong>成员内部类</strong>、<strong>静态内部类</strong>、<strong>方法内部类</strong>、<strong>匿名内部类</strong> 四种</p>
 <h2 id="_1">成员内部类</h2>
 <p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">HelloWorld</span> <span style="color: #666666">{</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Inner</span> <span style="color: #666666">{</span>
-        <span style="color: #60a0b0; font-style: italic">// 此为内部类</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">HelloWorld</span> <span style="color: #3399cc">{</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">Inner</span> <span style="color: #3399cc">{</span>
+        <span style="color: #000080">// 此为内部类</span>
+    <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
@@ -99,81 +99,81 @@
 <li>如果外部类的静态成员与内部类的成员名称相同, 可通过&rdquo;类名.静态成员&rdquo;访问外部类的静态成员</li>
 <li>创建静态内部类的对象时, 不需要外部类的对象, 可以直接创建 **内部类 对象名= new 内部类()</li>
 </ul>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 外部类</span>
-<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">HelloWorld</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// 外部类</span>
+<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">HelloWorld</span> <span style="color: #3399cc">{</span>
 
-    <span style="color: #60a0b0; font-style: italic">// 外部类中的静态变量 score</span>
-    <span style="color: #007020; font-weight: bold">private</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">int</span> score <span style="color: #666666">=</span> <span style="color: #40a070">84</span><span style="color: #666666">;</span>
+    <span style="color: #000080">// 外部类中的静态变量 score</span>
+    <span style="color: #00cd00">private</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">score</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">84</span><span style="color: #3399cc">;</span>
 
-    <span style="color: #60a0b0; font-style: italic">// 创建静态内部类</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">SInner</span> <span style="color: #666666">{</span>
-        <span style="color: #60a0b0; font-style: italic">// 内部类中的变量 score</span>
-        <span style="color: #902000">int</span> score <span style="color: #666666">=</span> <span style="color: #40a070">91</span><span style="color: #666666">;</span>
+    <span style="color: #000080">// 创建静态内部类</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">SInner</span> <span style="color: #3399cc">{</span>
+        <span style="color: #000080">// 内部类中的变量 score</span>
+        <span style="color: #00cd00">int</span> <span style="color: #cccccc">score</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">91</span><span style="color: #3399cc">;</span>
 
-        <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">show</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;访问外部类中的score：&quot;</span> <span style="color: #666666">+</span> HelloWorld<span style="color: #666666">.</span><span style="color: #4070a0">score</span><span style="color: #666666">);</span>
-            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;访问内部类中的score：&quot;</span> <span style="color: #666666">+</span> score<span style="color: #666666">);</span>
-        <span style="color: #666666">}</span>
-    <span style="color: #666666">}</span>
+        <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">show</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+            <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;访问外部类中的score：&quot;</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">HelloWorld</span><span style="color: #3399cc">.</span><span style="color: #cccccc">score</span><span style="color: #3399cc">);</span>
+            <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;访问内部类中的score：&quot;</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">score</span><span style="color: #3399cc">);</span>
+        <span style="color: #3399cc">}</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">// 测试静态内部类</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-        <span style="color: #60a0b0; font-style: italic">// 直接创建内部类的对象</span>
-        SInner si <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> SInner<span style="color: #666666">();</span>
+    <span style="color: #000080">// 测试静态内部类</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">main</span><span style="color: #3399cc">(</span><span style="color: #cccccc">String</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
+        <span style="color: #000080">// 直接创建内部类的对象</span>
+        <span style="color: #cccccc">SInner</span> <span style="color: #cccccc">si</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">SInner</span><span style="color: #3399cc">();</span>
 
-        <span style="color: #60a0b0; font-style: italic">// 调用 show 方法</span>
-        si<span style="color: #666666">.</span><span style="color: #4070a0">show</span><span style="color: #666666">();</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+        <span style="color: #000080">// 调用 show 方法</span>
+        <span style="color: #cccccc">si</span><span style="color: #3399cc">.</span><span style="color: #cccccc">show</span><span style="color: #3399cc">();</span>
+    <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
 <h2 id="_3">方法内部类</h2>
 <p>即, 内部类定义在外部类的方法中, 它只能在该方法内可以使用.</p>
 <p><strong>注意:</strong> 由于方法内部类不能在其所在方法以外的地方使用, 因此方法内部类不能使用访问控制符和 static 修饰符.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 外部类</span>
-<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">HelloWorld</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// 外部类</span>
+<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">HelloWorld</span> <span style="color: #3399cc">{</span>
 
-    <span style="color: #007020; font-weight: bold">private</span> String name <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;外部类&quot;</span><span style="color: #666666">;</span>
+    <span style="color: #00cd00">private</span> <span style="color: #cccccc">String</span> <span style="color: #cccccc">name</span> <span style="color: #3399cc">=</span> <span style="color: #cd0000">&quot;外部类&quot;</span><span style="color: #3399cc">;</span>
 
-    <span style="color: #60a0b0; font-style: italic">// 外部类中的 show 方法</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">show</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-        <span style="color: #60a0b0; font-style: italic">// 定义方法内部类</span>
-        <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">MInner</span> <span style="color: #666666">{</span>
-            <span style="color: #902000">int</span> score <span style="color: #666666">=</span> <span style="color: #40a070">83</span><span style="color: #666666">;</span>
-            <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">int</span> <span style="color: #06287e">getScore</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
-                <span style="color: #007020; font-weight: bold">return</span> score <span style="color: #666666">+</span> <span style="color: #40a070">10</span><span style="color: #666666">;</span>
-            <span style="color: #666666">}</span>
-        <span style="color: #666666">}</span>
+    <span style="color: #000080">// 外部类中的 show 方法</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">show</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+        <span style="color: #000080">// 定义方法内部类</span>
+        <span style="color: #00cd00">class</span> <span style="color: #00cdcd">MInner</span> <span style="color: #3399cc">{</span>
+            <span style="color: #00cd00">int</span> <span style="color: #cccccc">score</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">83</span><span style="color: #3399cc">;</span>
+            <span style="color: #00cd00">public</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">getScore</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
+                <span style="color: #cdcd00">return</span> <span style="color: #cccccc">score</span> <span style="color: #3399cc">+</span> <span style="color: #cd00cd">10</span><span style="color: #3399cc">;</span>
+            <span style="color: #3399cc">}</span>
+        <span style="color: #3399cc">}</span>
 
-        <span style="color: #60a0b0; font-style: italic">// 创建方法内部类的对象</span>
-        MInner ss <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> MInner<span style="color: #666666">();</span>
+        <span style="color: #000080">// 创建方法内部类的对象</span>
+        <span style="color: #cccccc">MInner</span> <span style="color: #cccccc">ss</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">MInner</span><span style="color: #3399cc">();</span>
 
-        <span style="color: #60a0b0; font-style: italic">// 调用内部类的方法</span>
-        <span style="color: #902000">int</span> newScore <span style="color: #666666">=</span> ss<span style="color: #666666">.</span><span style="color: #4070a0">getScore</span><span style="color: #666666">();</span>
+        <span style="color: #000080">// 调用内部类的方法</span>
+        <span style="color: #00cd00">int</span> <span style="color: #cccccc">newScore</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">ss</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getScore</span><span style="color: #3399cc">();</span>
 
-        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;姓名：&quot;</span> <span style="color: #666666">+</span> name <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;\n加分后的成绩：&quot;</span> <span style="color: #666666">+</span> newScore<span style="color: #666666">);</span>
-    <span style="color: #666666">}</span>
+        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;姓名：&quot;</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">name</span> <span style="color: #3399cc">+</span> <span style="color: #cd0000">&quot;\n加分后的成绩：&quot;</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">newScore</span><span style="color: #3399cc">);</span>
+    <span style="color: #3399cc">}</span>
 
-    <span style="color: #60a0b0; font-style: italic">// 测试方法内部类</span>
-    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+    <span style="color: #000080">// 测试方法内部类</span>
+    <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">main</span><span style="color: #3399cc">(</span><span style="color: #cccccc">String</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
 
-        <span style="color: #60a0b0; font-style: italic">// 创建外部类的对象</span>
-        HelloWorld mo <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> HelloWorld<span style="color: #666666">();</span>
+        <span style="color: #000080">// 创建外部类的对象</span>
+        <span style="color: #cccccc">HelloWorld</span> <span style="color: #cccccc">mo</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">HelloWorld</span><span style="color: #3399cc">();</span>
 
-        <span style="color: #60a0b0; font-style: italic">// 调用外部类的方法</span>
-        mo<span style="color: #666666">.</span><span style="color: #4070a0">show</span><span style="color: #666666">();</span>
-    <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+        <span style="color: #000080">// 调用外部类的方法</span>
+        <span style="color: #cccccc">mo</span><span style="color: #3399cc">.</span><span style="color: #cccccc">show</span><span style="color: #3399cc">();</span>
+    <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
 <h2 id="_4">匿名内部类</h2>
 <p>也就是没有名字的内部类, 正因为没有名字, 所以匿名内部类只能使用一次, 它通常用来简化代码编写.</p>
 <p>匿名内部类确切的说, 应该叫 <strong>匿名内部类对象</strong>, 它是基于 继承/实现 的:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">new</span> 接口名<span style="color: #666666">/</span>父类名 <span style="color: #666666">{</span>
-    <span style="color: #60a0b0; font-style: italic">// 实现/重写 方法</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">new</span> <span style="color: #cccccc">接口名</span><span style="color: #3399cc">/</span><span style="color: #cccccc">父类名</span> <span style="color: #3399cc">{</span>
+    <span style="color: #000080">// 实现/重写 方法</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 

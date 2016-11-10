@@ -87,14 +87,14 @@
 <p>很简单, 直接拖拽动作编辑器中的icon到工具栏或菜单项里就可以了.</p>
 <p><img alt="" src="http://i62.tinypic.com/dh915h.jpg" /></p>
 <p>接下来就要为这个 Action 关联操作代码了, 即连接信号和槽.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Demo<span style="color: #666666">::</span>Demo(QWidget <span style="color: #666666">*</span>parent)
-    <span style="color: #666666">:</span> QMainWindow(parent)
-{
-    ui.setupUi(<span style="color: #007020; font-weight: bold">this</span>);
-    connect(ui.action_New, <span style="color: #666666">&amp;</span>QAction<span style="color: #666666">::</span>triggered, [](<span style="color: #902000">bool</span>) {
-        qDebug() <span style="color: #666666">&lt;&lt;</span> <span style="color: #4070a0">&quot;This is a Demo&quot;</span>;
-    });
-}
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">Demo</span><span style="color: #3399cc">::</span><span style="color: #cccccc">Demo(QWidget</span> <span style="color: #3399cc">*</span><span style="color: #cccccc">parent)</span>
+    <span style="color: #3399cc">:</span> <span style="color: #cccccc">QMainWindow(parent)</span>
+<span style="color: #cccccc">{</span>
+    <span style="color: #cccccc">ui.setupUi(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">);</span>
+    <span style="color: #cccccc">connect(ui.action_New,</span> <span style="color: #3399cc">&amp;</span><span style="color: #cccccc">QAction</span><span style="color: #3399cc">::</span><span style="color: #cccccc">triggered,</span> <span style="color: #cccccc">[](</span><span style="color: #00cd00">bool</span><span style="color: #cccccc">)</span> <span style="color: #cccccc">{</span>
+        <span style="color: #cccccc">qDebug()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;This is a Demo&quot;</span><span style="color: #cccccc">;</span>
+    <span style="color: #cccccc">});</span>
+<span style="color: #cccccc">}</span>
 </pre></div>
 
 

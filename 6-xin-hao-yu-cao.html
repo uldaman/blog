@@ -73,7 +73,7 @@
 <p><strong>所谓信号槽</strong>, 实际上类似观察者模式. 当某个事件发生之后, 比如, 按钮检测到自己被点击了一下, 它就会发出一个信号（signal）, 这种发出是没有目的的, 类似广播. 如果有对象对这个信号感兴趣, 它就会用自己的一个函数（成为槽（slot））来处理这个信号. 也就是说, 当信号发出时, 被连接的槽函数会自动被回调. 这就类似观察者模式: 当发生了感兴趣的事件, 某一个操作就会被自动触发.</p>
 <p>除了在Qt Creator 中添加信号/槽外, 还可以在.cpp文件中手动添加信号/槽.</p>
 <p>拖拽好按钮后, 返回 vs 中, 在.cpp中添加代码:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Demo::Demo(QWidget *&lt;span style=&quot;color: #000000&quot;&gt;parent)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>Demo::Demo(QWidget *&lt;span style=&quot;color: #000000&quot;&gt;parent)
     : QWidget(parent)
 {
     ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
@@ -85,7 +85,7 @@
 <p>红底部分是添加的代码.</p>
 <p>connect()是 QObject 类的一个静态函数, 功能就是关联信号/槽, QObject 类是 Qt 所有类的基类.</p>
 <p>这个函数有五个重载:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>QMetaObject::Connection connect(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;, Qt::ConnectionType = Qt::AutoConnection);
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>QMetaObject::Connection connect(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;, Qt::ConnectionType = Qt::AutoConnection);
 
 QMetaObject::Connection connect(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QMetaMethod &amp;&lt;span style=&quot;color: #000000&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QObject *, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QMetaMethod &amp;&lt;span style=&quot;color: #000000&quot;&gt;, Qt::ConnectionType = Qt::AutoConnection);
 
@@ -98,7 +98,7 @@ QMetaObject::Connection connect(&lt;/span&gt;&lt;span style=&quot;color: #0000ff
 
 
 <p>在日常代码中, <code>connect()</code>一般会使用前面四个参数, 常用的方式是下面这种:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;connect(sender, signal, receiver, slot);&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;connect(sender, signal, receiver, slot);&lt;/span&gt;
 </pre></div>
 
 
@@ -116,13 +116,13 @@ QMetaObject::Connection connect(&lt;/span&gt;&lt;span style=&quot;color: #0000ff
 <p>信号槽要求<strong>信号和槽的参数一致;</strong></p>
 <p>所谓一致, 是参数类型一致, 如果不一致, 允许的情况是: 槽函数的参数可以比信号的少. 即便如此, 槽函数的参数顺序也必须和信号的前面几个一致起来.</p>
 <p>我们在上面的例子中, 使用了 <code>**SIGNAL**</code>和 <code>**SLOT**</code>这两个宏, 这两个宏的功能是将两个函数名转换成了字符串.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>connect(ui.pushButton_quit, SIGNAL(clicked()), &lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;, SLOT(close()));
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>connect(ui.pushButton_quit, SIGNAL(clicked()), &lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;, SLOT(close()));
 </pre></div>
 
 
 <p>这句代码匹配的就是第一个重载, 它也可以省略第三个 this 参数, 这样匹配的就是第三个重载.</p>
 <p>还可以改成:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>connect(ui.pushButton_quit, &amp;QPushButton::clicked, &amp;QCoreApplication::quit);
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>connect(ui.pushButton_quit, &amp;QPushButton::clicked, &amp;QCoreApplication::quit);
 </pre></div>
 
 

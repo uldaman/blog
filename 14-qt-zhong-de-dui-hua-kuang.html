@@ -54,7 +54,7 @@
 
 
     <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
     Q_OBJECT
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
@@ -67,7 +67,7 @@
 <hr />
 <h1 id="_1">窗口属性</h1>
 <p>和 C++ 中一样, QDialog 也有模态与非模态之分, 当我们新建一个窗口后, 通过 exec() 来打开模态窗口, 通过 show() 来打开非模态窗口.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;MyDialog dialog;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;MyDialog dialog;
 dialog.exec() &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; dialog.show()&lt;/span&gt;
 </pre></div>
 
@@ -84,7 +84,7 @@ dialog.exec() &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/s
 <h1 id="_2">使用非模态对话框的注意事项(内存泄漏)</h1>
 <p>我们已经知道如何打开一个非模态对话框, 我们尝试着编写代码.
 假定我们的程序存在一个主窗口 MainWindow, 我们需要在 MainWindow 中打开一个非模态对话框:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
     QDialog dialog(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
     dialog.setWindowTitle(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello, dialog!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
     dialog.show();
@@ -94,7 +94,7 @@ dialog.exec() &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/s
 
 <p>尝试着执行程序就会发现, 我们创建的非模态对话框一闪而过, 这是因为 <code>show()</code>函数不会阻塞当前线程, 对话框会显示出来, 然后函数立即返回, 代码继续执行, 而 dialog 是建立在栈上的, <code>show()</code>函数返回, <code>MainWindow::open()</code>函数结束, dialog 超出作用域被析构, 因此对话框消失了.
 所以在之前&lt;12、对象模型(moc各parent)&gt;中提到 <strong>大胆在堆上创建对象,</strong> 好, 为了解决这个问题, 我们改成在堆上建立:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
     QDialog &lt;/span&gt;*dialog = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog;
     dialog&lt;/span&gt;-&gt;setWindowTitle(tr(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello, dialog!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;));
     dialog&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000&quot;&gt;show();
@@ -105,7 +105,7 @@ dialog.exec() &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/s
 <p>现在, 我们可以正常打开非模态对话框了.
 仔细分析代码就会发现, dialog 使用 new 在堆上分配空间, 却一直没有 delete, 如果我们的程序只有一个 MainWindow 主窗口, 也许这没有问题, 因为当主窗口退出了, 应用程序结束, 系统会回收所有分配给应用程序的空间. 但是, 如果我们的程序不只一个 MainWindow 窗口, 即 MainWindow 关闭时, 应用程序还在运行, 此时就会有内存泄露的问题了.</p>
 <p>解决方法很简单, 只需要将 MainWindow 的指针做为 dialog 的父窗口指针即可, 下面两种方式都是可以的(原理参考&lt;12、对象模型(moc各parent)&gt;):</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
     QDialog &lt;/span&gt;*dialog = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; QDialog(&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
     dialog&lt;/span&gt;-&gt;setWindowTitle(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello, dialog!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
     dialog&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000&quot;&gt;show();
@@ -122,7 +122,7 @@ dialog.exec() &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/s
 
 <p>但是, 其实这样问题并没有完全解决, 因为只要我们的 MainWindow 不关闭, 那么我们创建的非模态窗口就永远不会被销毁, 我们真实的想法是, 希望 dialog 退出的时候自动销毁对话框.
 值得高兴的是, Qt 中是可以这样做的, 我们只需要设置 dialog 的 WindowAttribute 就能达到目的:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
     QDialog &lt;/span&gt;*dialog = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog(&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);&lt;/span&gt;
     dialog&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000&quot;&gt;setAttribute(Qt::WA_DeleteOnClose);
     dialog&lt;/span&gt;-&gt;setWindowTitle(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello, dialog!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);

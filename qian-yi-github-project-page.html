@@ -70,16 +70,16 @@
 <h1 id="project-pages-site">创建 Project Pages site</h1>
 <p>Project Pages site 和普通的 Github Repository 没两样, 但它利用一个 <code>gh-pages</code> 分支来用于构建和发布项目页面的网站, 然后通过 <code>username.github.io/projectname</code> (你也可以自定义域名) 来访问这个项目的 <code>gh-pages</code>.</p>
 <p>我们直接在 Github 上再新建个仓库命名为 <code>blog</code>, 然后将它 clone 到本地:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>git clone github.com/user/repository.git
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>git clone github.com/user/repository.git
 </pre></div>
 
 
 <p><br>
 再创建 <code>gh-pages</code> 分支:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">cd</span> repository
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">cd</span> repository
 
 git checkout --orphan gh-pages
-Switched to a new branch <span style="color: #4070a0">&#39;gh-pages&#39;</span>
+Switched to a new branch <span style="color: #cd0000">&#39;gh-pages&#39;</span>
 
 git rm -rf .
 </pre></div>
@@ -87,7 +87,7 @@ git rm -rf .
 
 <p><br>
 现在, 这个 <code>gh-pages</code> 分支就是我们新的 <code>blog</code> 仓库, 类似于以前 Github Page 仓库 (username.github.io) 的主分支, 我们将以前 Github Page 仓库下的文件拷贝到这个 <code>gh-pages</code> 分支下, 最后提交到远程:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>git push origin gh-pages
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>git push origin gh-pages
 </pre></div>
 
 
@@ -101,7 +101,7 @@ git rm -rf .
 </ul>
 <p><img alt="" src="http://i64.tinypic.com/5dmhqc.jpg" /></p>
 <p>然后去 <code>dnspod</code> 为 <code>smallcpp.com</code> 添加一个记录:</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>blog    CNAME        username.github.io
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>blog    CNAME        username.github.io
 </pre></div>
 
 
@@ -115,14 +115,14 @@ git rm -rf .
 <p>在 Pelican 项目中, <code>pelicanconf.py</code> 配置文件中有一项 <strong>SITEURL</strong> 指向的是 <code>http://username.github.io</code>, 因此所有的静态文件都是访问 <code>username.github.io</code> 下的, 现在要改成 <code>http://username.github.io/blog</code>.</p>
 <h1 id="_3">补充</h1>
 <p><strong>Pelican</strong> 提供了 <strong>fabric</strong> 的方式部署代码, 直接执行 <code>fab gh_pages</code> 就能把项目的 output 目录下的文件推送到 <code>gh-pages</code> 分支, 不过要修改下 Pelican 默认的 <code>fabfile.py</code> (让其自动生成 CNAME):</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">gh_pages</span>():
-    <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
-    rebuild()
-    <span style="color: #007020; font-weight: bold">with</span> lcd(<span style="color: #4070a0">&#39;{deploy_path}&#39;</span><span style="color: #666666">.</span>format(<span style="color: #666666">**</span>env)):
-        local(<span style="color: #4070a0">&#39;echo blog.smallcpp.com &gt; CNAME&#39;</span>)
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">def</span> <span style="color: #cccccc">gh_pages():</span>
+    <span style="color: #cd0000">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
+    <span style="color: #cccccc">rebuild()</span>
+    <span style="color: #cdcd00">with</span> <span style="color: #cccccc">lcd(</span><span style="color: #cd0000">&#39;{deploy_path}&#39;</span><span style="color: #3399cc">.</span><span style="color: #cccccc">format(</span><span style="color: #3399cc">**</span><span style="color: #cccccc">env)):</span>
+        <span style="color: #cccccc">local(</span><span style="color: #cd0000">&#39;echo blog.smallcpp.com &gt; CNAME&#39;</span><span style="color: #cccccc">)</span>
 
-    local(<span style="color: #4070a0">&quot;ghp-import -b {github_pages_branch} {deploy_path}&quot;</span><span style="color: #666666">.</span>format(<span style="color: #666666">**</span>env))
-    local(<span style="color: #4070a0">&quot;git push origin {github_pages_branch}&quot;</span><span style="color: #666666">.</span>format(<span style="color: #666666">**</span>env))
+    <span style="color: #cccccc">local(</span><span style="color: #cd0000">&quot;ghp-import -b {github_pages_branch} {deploy_path}&quot;</span><span style="color: #3399cc">.</span><span style="color: #cccccc">format(</span><span style="color: #3399cc">**</span><span style="color: #cccccc">env))</span>
+    <span style="color: #cccccc">local(</span><span style="color: #cd0000">&quot;git push origin {github_pages_branch}&quot;</span><span style="color: #3399cc">.</span><span style="color: #cccccc">format(</span><span style="color: #3399cc">**</span><span style="color: #cccccc">env))</span>
 </pre></div>
 
 

@@ -67,7 +67,7 @@ process_exception(self, request, exception) &ndash; 异常时
 process_response(self, request, response) &ndash; views.py 返回时</strong>
 以上方法的返回值可以是 None 和 HttpResonse 对象，如果是 None, 则继续向下执行, 如果是 HttpResonse 对象, 则直接将该对象返回给用户.</p>
 <p>**自定义中间件</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; middleware.py&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; middleware.py&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; RequestExeute(object):
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; process_request(self,request):
         &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;pass&lt;/span&gt;
@@ -84,7 +84,7 @@ process_response(self, request, response) &ndash; views.py 返回时</strong>
 
 
 <p>**</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 注册中间件&lt;/span&gt;
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 注册中间件&lt;/span&gt;
 MIDDLEWARE_CLASSES =&lt;span style=&quot;color: #000000&quot;&gt; (
     &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;middleware.RequestExeute&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;,
 )&lt;/span&gt;
@@ -100,7 +100,7 @@ python manage.py createsuperuser</p>
 url(r&rsquo;^admin/&rsquo;, include(admin.site.urls))</p>
 <p><strong>3. 注册和配置 django admin 后台管理页面</strong></p>
 <p>a、在admin中执行如下配置</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; models
 
@@ -109,7 +109,7 @@ admin.site.register(models.UserType)&lt;/span&gt;
 
 
 <p>b、设置数据表名称</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; UserType(models.Model):
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; UserType(models.Model):
     name &lt;/span&gt;= models.CharField(max_length=50&lt;span style=&quot;color: #000000&quot;&gt;)
 
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Meta:
@@ -119,7 +119,7 @@ admin.site.register(models.UserType)&lt;/span&gt;
 
 
 <p>c、打开表之后, 设定默认显示, 需要在 model 中作如下配置</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; UserType(models.Model):
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; UserType(models.Model):
     name &lt;/span&gt;= models.CharField(max_length=50&lt;span style=&quot;color: #000000&quot;&gt;)
 
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;__unicode__&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(self):
@@ -142,7 +142,7 @@ admin.site.register(models.UserInfo,UserInfoAdmin)&lt;/span&gt;
 
 
 <p>d、为数据表添加搜索功能</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;  models
 
@@ -156,7 +156,7 @@ admin.site.register(models.UserInfo,UserInfoAdmin)&lt;/span&gt;
 
 
 <p>e、添加快速过滤</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;  models
 

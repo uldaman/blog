@@ -93,26 +93,26 @@
 <h2 id="api">相关 API</h2>
 <h3 id="1-javalangreflectproxy">1) <code>java.lang.reflect.Proxy</code></h3>
 <p>这是 Java 动态代理机制生成的所有动态代理类的父类, 它提供了一组静态方法来为一组接口动态地生成代理类及其对象.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器</span>
-<span style="color: #007020; font-weight: bold">static</span> InvocationHandler <span style="color: #06287e">getInvocationHandler</span><span style="color: #666666">(</span>Object proxy<span style="color: #666666">)</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器</span>
+<span style="color: #00cd00">static</span> <span style="color: #cccccc">InvocationHandler</span> <span style="color: #cccccc">getInvocationHandler</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Object</span> <span style="color: #cccccc">proxy</span><span style="color: #3399cc">)</span>
 
-<span style="color: #60a0b0; font-style: italic">// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象</span>
-<span style="color: #007020; font-weight: bold">static</span> Class <span style="color: #06287e">getProxyClass</span><span style="color: #666666">(</span>ClassLoader loader<span style="color: #666666">,</span> Class<span style="color: #666666">[]</span> interfaces<span style="color: #666666">)</span>
+<span style="color: #000080">// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象</span>
+<span style="color: #00cd00">static</span> <span style="color: #cccccc">Class</span> <span style="color: #cccccc">getProxyClass</span><span style="color: #3399cc">(</span><span style="color: #cccccc">ClassLoader</span> <span style="color: #cccccc">loader</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Class</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">interfaces</span><span style="color: #3399cc">)</span>
 
-<span style="color: #60a0b0; font-style: italic">// 方法 3：该方法用于判断指定类对象是否是一个动态代理类</span>
-<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">boolean</span> <span style="color: #06287e">isProxyClass</span><span style="color: #666666">(</span>Class cl<span style="color: #666666">)</span>
+<span style="color: #000080">// 方法 3：该方法用于判断指定类对象是否是一个动态代理类</span>
+<span style="color: #00cd00">static</span> <span style="color: #00cd00">boolean</span> <span style="color: #cccccc">isProxyClass</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Class</span> <span style="color: #cccccc">cl</span><span style="color: #3399cc">)</span>
 
-<span style="color: #60a0b0; font-style: italic">// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例</span>
-<span style="color: #007020; font-weight: bold">static</span> Object <span style="color: #06287e">newProxyInstance</span><span style="color: #666666">(</span>ClassLoader loader<span style="color: #666666">,</span> Class<span style="color: #666666">[]</span> interfaces<span style="color: #666666">,</span> InvocationHandler h<span style="color: #666666">)</span>
+<span style="color: #000080">// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例</span>
+<span style="color: #00cd00">static</span> <span style="color: #cccccc">Object</span> <span style="color: #cccccc">newProxyInstance</span><span style="color: #3399cc">(</span><span style="color: #cccccc">ClassLoader</span> <span style="color: #cccccc">loader</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Class</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">interfaces</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">InvocationHandler</span> <span style="color: #cccccc">h</span><span style="color: #3399cc">)</span>
 </pre></div>
 
 
 <p><br></p>
 <h3 id="2-javalangreflectinvocationhandler">2) <code>java.lang.reflect.InvocationHandler</code></h3>
 <p>这是调用处理器接口, 它自定义了一个 invoke 方法, 用于集中处理在动态代理类对象上的方法调用, 通常在该方法中实现对委托类的代理访问. 每次生成动态代理类对象时都要指定一个对应的调用处理器对象.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 该方法负责集中处理动态代理类上的所有方法调用. 第一个参数既是代理类实例, 第二个参数是被调用的方法对象</span>
-<span style="color: #60a0b0; font-style: italic">// 第三个方法是调用参数. 调用处理器根据这三个参数进行预处理或分派到委托类实例上反射执行</span>
-Object <span style="color: #06287e">invoke</span><span style="color: #666666">(</span>Object proxy<span style="color: #666666">,</span> Method method<span style="color: #666666">,</span> Object<span style="color: #666666">[]</span> args<span style="color: #666666">)</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// 该方法负责集中处理动态代理类上的所有方法调用. 第一个参数既是代理类实例, 第二个参数是被调用的方法对象</span>
+<span style="color: #000080">// 第三个方法是调用参数. 调用处理器根据这三个参数进行预处理或分派到委托类实例上反射执行</span>
+<span style="color: #cccccc">Object</span> <span style="color: #cccccc">invoke</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Object</span> <span style="color: #cccccc">proxy</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Method</span> <span style="color: #cccccc">method</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Object</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span>
 </pre></div>
 
 
@@ -127,94 +127,94 @@ Object <span style="color: #06287e">invoke</span><span style="color: #666666">(<
 <li>以调用处理器类型为参数, 利用反射机制得到动态代理类的构造函数</li>
 <li>以调用处理器对象为参数, 利用动态代理类的构造函数创建动态代理类对象</li>
 </ul>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
-<span style="color: #60a0b0; font-style: italic">// 其内部通常包含指向委托类实例的引用, 用于真正执行分派转发过来的方法调用</span>
-InvocationHandler handler <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> InvocationHandlerImpl<span style="color: #666666">(..);</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
+<span style="color: #000080">// 其内部通常包含指向委托类实例的引用, 用于真正执行分派转发过来的方法调用</span>
+<span style="color: #cccccc">InvocationHandler</span> <span style="color: #cccccc">handler</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">InvocationHandlerImpl</span><span style="color: #3399cc">(..);</span>
 
-<span style="color: #60a0b0; font-style: italic">// 通过 Proxy 为包括 Interface 接口在内的一组接口动态创建代理类的类对象</span>
-Class clazz <span style="color: #666666">=</span> Proxy<span style="color: #666666">.</span><span style="color: #4070a0">getProxyClass</span><span style="color: #666666">(</span>classLoader<span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> Class<span style="color: #666666">[]</span> <span style="color: #666666">{</span> Interface<span style="color: #666666">.</span><span style="color: #4070a0">class</span><span style="color: #666666">,</span> <span style="color: #666666">...</span> <span style="color: #666666">});</span>
+<span style="color: #000080">// 通过 Proxy 为包括 Interface 接口在内的一组接口动态创建代理类的类对象</span>
+<span style="color: #cccccc">Class</span> <span style="color: #cccccc">clazz</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Proxy</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getProxyClass</span><span style="color: #3399cc">(</span><span style="color: #cccccc">classLoader</span><span style="color: #3399cc">,</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Class</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">{</span> <span style="color: #cccccc">Interface</span><span style="color: #3399cc">.</span><span style="color: #cccccc">class</span><span style="color: #3399cc">,</span> <span style="color: #3399cc">...</span> <span style="color: #3399cc">});</span>
 
-<span style="color: #60a0b0; font-style: italic">// 通过反射从生成的类对象获得构造函数对象</span>
-Constructor constructor <span style="color: #666666">=</span> clazz<span style="color: #666666">.</span><span style="color: #4070a0">getConstructor</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Class<span style="color: #666666">[]</span> <span style="color: #666666">{</span> InvocationHandler<span style="color: #666666">.</span><span style="color: #4070a0">class</span> <span style="color: #666666">});</span>
+<span style="color: #000080">// 通过反射从生成的类对象获得构造函数对象</span>
+<span style="color: #cccccc">Constructor</span> <span style="color: #cccccc">constructor</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">clazz</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getConstructor</span><span style="color: #3399cc">(</span><span style="color: #cdcd00">new</span> <span style="color: #cccccc">Class</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">{</span> <span style="color: #cccccc">InvocationHandler</span><span style="color: #3399cc">.</span><span style="color: #cccccc">class</span> <span style="color: #3399cc">});</span>
 
-<span style="color: #60a0b0; font-style: italic">// 通过构造函数对象创建动态代理类实例</span>
-Interface Proxy <span style="color: #666666">=</span> <span style="color: #666666">(</span>Interface<span style="color: #666666">)</span>constructor<span style="color: #666666">.</span><span style="color: #4070a0">newInstance</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Object<span style="color: #666666">[]</span> <span style="color: #666666">{</span> handler <span style="color: #666666">});</span>
+<span style="color: #000080">// 通过构造函数对象创建动态代理类实例</span>
+<span style="color: #cccccc">Interface</span> <span style="color: #cccccc">Proxy</span> <span style="color: #3399cc">=</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">Interface</span><span style="color: #3399cc">)</span><span style="color: #cccccc">constructor</span><span style="color: #3399cc">.</span><span style="color: #cccccc">newInstance</span><span style="color: #3399cc">(</span><span style="color: #cdcd00">new</span> <span style="color: #cccccc">Object</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">{</span> <span style="color: #cccccc">handler</span> <span style="color: #3399cc">});</span>
 </pre></div>
 
 
 <p><br>
 Proxy类的静态方法newProxyInstance对上面具体步骤的后三步做了封装, 简化了动态代理对象的获取过程.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
-InvocationHandler handler <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> InvocationHandlerImpl<span style="color: #666666">(..);</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
+<span style="color: #cccccc">InvocationHandler</span> <span style="color: #cccccc">handler</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">InvocationHandlerImpl</span><span style="color: #3399cc">(..);</span>
 
-<span style="color: #60a0b0; font-style: italic">// 通过 Proxy 直接创建动态代理类实例</span>
-Interface proxy <span style="color: #666666">=</span> <span style="color: #666666">(</span>Interface<span style="color: #666666">)</span>Proxy<span style="color: #666666">.</span><span style="color: #4070a0">newProxyInstance</span><span style="color: #666666">(</span>classLoader<span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> Class<span style="color: #666666">[]</span> <span style="color: #666666">{</span> Interface<span style="color: #666666">.</span><span style="color: #4070a0">class</span> <span style="color: #666666">},</span> handler<span style="color: #666666">);</span>
+<span style="color: #000080">// 通过 Proxy 直接创建动态代理类实例</span>
+<span style="color: #cccccc">Interface</span> <span style="color: #cccccc">proxy</span> <span style="color: #3399cc">=</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">Interface</span><span style="color: #3399cc">)</span><span style="color: #cccccc">Proxy</span><span style="color: #3399cc">.</span><span style="color: #cccccc">newProxyInstance</span><span style="color: #3399cc">(</span><span style="color: #cccccc">classLoader</span><span style="color: #3399cc">,</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Class</span><span style="color: #3399cc">[]</span> <span style="color: #3399cc">{</span> <span style="color: #cccccc">Interface</span><span style="color: #3399cc">.</span><span style="color: #cccccc">class</span> <span style="color: #3399cc">},</span> <span style="color: #cccccc">handler</span><span style="color: #3399cc">);</span>
 </pre></div>
 
 
 <p><br></p>
 <h2 id="_6">示例</h2>
 <p>创建自己的调用处理器</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic"> * 动态代理类对应的调用处理程序类</span>
-<span style="color: #60a0b0; font-style: italic"> */</span>
-<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">SubjectInvocationHandler</span> <span style="color: #007020; font-weight: bold">implements</span> InvocationHandler <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">/**</span>
+<span style="color: #000080"> * 动态代理类对应的调用处理程序类</span>
+<span style="color: #000080"> */</span>
+<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">SubjectInvocationHandler</span> <span style="color: #00cd00">implements</span> <span style="color: #cccccc">InvocationHandler</span> <span style="color: #3399cc">{</span>
 
- <span style="color: #60a0b0; font-style: italic">//代理类持有一个委托类的对象引用</span>
- <span style="color: #007020; font-weight: bold">private</span> Object delegate<span style="color: #666666">;</span>
+ <span style="color: #000080">//代理类持有一个委托类的对象引用</span>
+ <span style="color: #00cd00">private</span> <span style="color: #cccccc">Object</span> <span style="color: #cccccc">delegate</span><span style="color: #3399cc">;</span>
 
- <span style="color: #007020; font-weight: bold">public</span> <span style="color: #06287e">SubjectInvocationHandler</span><span style="color: #666666">(</span>Object delegate<span style="color: #666666">)</span> <span style="color: #666666">{</span>
-  <span style="color: #007020; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #4070a0">delegate</span> <span style="color: #666666">=</span> delegate<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
+ <span style="color: #00cd00">public</span> <span style="color: #cccccc">SubjectInvocationHandler</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Object</span> <span style="color: #cccccc">delegate</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
+  <span style="color: #cdcd00">this</span><span style="color: #3399cc">.</span><span style="color: #cccccc">delegate</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">delegate</span><span style="color: #3399cc">;</span>
+ <span style="color: #3399cc">}</span>
 
- <span style="color: #555555; font-weight: bold">@Override</span>
- <span style="color: #007020; font-weight: bold">public</span> Object <span style="color: #06287e">invoke</span><span style="color: #666666">(</span>Object proxy<span style="color: #666666">,</span> Method method<span style="color: #666666">,</span> Object<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #007020; font-weight: bold">throws</span> Throwable <span style="color: #666666">{</span>
-  <span style="color: #902000">long</span> stime <span style="color: #666666">=</span> System<span style="color: #666666">.</span><span style="color: #4070a0">currentTimeMillis</span><span style="color: #666666">();</span>
-  <span style="color: #60a0b0; font-style: italic">//利用反射机制将请求分派给委托类处理. Method的invoke返回Object对象作为方法执行结果.</span>
-  <span style="color: #60a0b0; font-style: italic">//因为示例程序没有返回值, 所以这里忽略了返回值处理</span>
-  method<span style="color: #666666">.</span><span style="color: #4070a0">invoke</span><span style="color: #666666">(</span>delegate<span style="color: #666666">,</span> args<span style="color: #666666">);</span>
-  <span style="color: #902000">long</span> ftime <span style="color: #666666">=</span> System<span style="color: #666666">.</span><span style="color: #4070a0">currentTimeMillis</span><span style="color: #666666">();</span>
-  System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;执行任务耗时&quot;</span><span style="color: #666666">+(</span>ftime <span style="color: #666666">-</span> stime<span style="color: #666666">)+</span><span style="color: #4070a0">&quot;毫秒&quot;</span><span style="color: #666666">);</span>
+ <span style="color: #cccccc">@Override</span>
+ <span style="color: #00cd00">public</span> <span style="color: #cccccc">Object</span> <span style="color: #cccccc">invoke</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Object</span> <span style="color: #cccccc">proxy</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Method</span> <span style="color: #cccccc">method</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">Object</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #00cd00">throws</span> <span style="color: #cccccc">Throwable</span> <span style="color: #3399cc">{</span>
+  <span style="color: #00cd00">long</span> <span style="color: #cccccc">stime</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">currentTimeMillis</span><span style="color: #3399cc">();</span>
+  <span style="color: #000080">//利用反射机制将请求分派给委托类处理. Method的invoke返回Object对象作为方法执行结果.</span>
+  <span style="color: #000080">//因为示例程序没有返回值, 所以这里忽略了返回值处理</span>
+  <span style="color: #cccccc">method</span><span style="color: #3399cc">.</span><span style="color: #cccccc">invoke</span><span style="color: #3399cc">(</span><span style="color: #cccccc">delegate</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">);</span>
+  <span style="color: #00cd00">long</span> <span style="color: #cccccc">ftime</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">currentTimeMillis</span><span style="color: #3399cc">();</span>
+  <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;执行任务耗时&quot;</span><span style="color: #3399cc">+(</span><span style="color: #cccccc">ftime</span> <span style="color: #3399cc">-</span> <span style="color: #cccccc">stime</span><span style="color: #3399cc">)+</span><span style="color: #cd0000">&quot;毫秒&quot;</span><span style="color: #3399cc">);</span>
 
-  <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">null</span><span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+  <span style="color: #cdcd00">return</span> <span style="color: #cdcd00">null</span><span style="color: #3399cc">;</span>
+ <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
 <p><br>
 生成动态代理对象的工厂, 工厂方法列出了如何生成动态代理类对象的步骤.</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/**</span>
-<span style="color: #60a0b0; font-style: italic"> * 生成动态代理对象的工厂.</span>
-<span style="color: #60a0b0; font-style: italic"> */</span>
-<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">DynProxyFactory</span> <span style="color: #666666">{</span>
- <span style="color: #60a0b0; font-style: italic">//客户类调用此工厂方法获得代理对象.</span>
- <span style="color: #60a0b0; font-style: italic">//对客户类来说, 其并不知道返回的是代理类对象还是委托类对象.</span>
- <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> Subject <span style="color: #06287e">getInstance</span><span style="color: #666666">(){</span>
-  Subject delegate <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> RealSubject<span style="color: #666666">();</span>
-  InvocationHandler handler <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> SubjectInvocationHandler<span style="color: #666666">(</span>delegate<span style="color: #666666">);</span>
-  Subject proxy <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">null</span><span style="color: #666666">;</span>
-  proxy <span style="color: #666666">=</span> <span style="color: #666666">(</span>Subject<span style="color: #666666">)</span>Proxy<span style="color: #666666">.</span><span style="color: #4070a0">newProxyInstance</span><span style="color: #666666">(</span>
-    delegate<span style="color: #666666">.</span><span style="color: #4070a0">getClass</span><span style="color: #666666">().</span><span style="color: #4070a0">getClassLoader</span><span style="color: #666666">(),</span>
-    delegate<span style="color: #666666">.</span><span style="color: #4070a0">getClass</span><span style="color: #666666">().</span><span style="color: #4070a0">getInterfaces</span><span style="color: #666666">(),</span>
-    handler<span style="color: #666666">);</span>
-  <span style="color: #007020; font-weight: bold">return</span> proxy<span style="color: #666666">;</span>
- <span style="color: #666666">}</span>
-<span style="color: #666666">}</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">/**</span>
+<span style="color: #000080"> * 生成动态代理对象的工厂.</span>
+<span style="color: #000080"> */</span>
+<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">DynProxyFactory</span> <span style="color: #3399cc">{</span>
+ <span style="color: #000080">//客户类调用此工厂方法获得代理对象.</span>
+ <span style="color: #000080">//对客户类来说, 其并不知道返回的是代理类对象还是委托类对象.</span>
+ <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #cccccc">Subject</span> <span style="color: #cccccc">getInstance</span><span style="color: #3399cc">(){</span>
+  <span style="color: #cccccc">Subject</span> <span style="color: #cccccc">delegate</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">RealSubject</span><span style="color: #3399cc">();</span>
+  <span style="color: #cccccc">InvocationHandler</span> <span style="color: #cccccc">handler</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">SubjectInvocationHandler</span><span style="color: #3399cc">(</span><span style="color: #cccccc">delegate</span><span style="color: #3399cc">);</span>
+  <span style="color: #cccccc">Subject</span> <span style="color: #cccccc">proxy</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">null</span><span style="color: #3399cc">;</span>
+  <span style="color: #cccccc">proxy</span> <span style="color: #3399cc">=</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">Subject</span><span style="color: #3399cc">)</span><span style="color: #cccccc">Proxy</span><span style="color: #3399cc">.</span><span style="color: #cccccc">newProxyInstance</span><span style="color: #3399cc">(</span>
+    <span style="color: #cccccc">delegate</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getClass</span><span style="color: #3399cc">().</span><span style="color: #cccccc">getClassLoader</span><span style="color: #3399cc">(),</span>
+    <span style="color: #cccccc">delegate</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getClass</span><span style="color: #3399cc">().</span><span style="color: #cccccc">getInterfaces</span><span style="color: #3399cc">(),</span>
+    <span style="color: #cccccc">handler</span><span style="color: #3399cc">);</span>
+  <span style="color: #cdcd00">return</span> <span style="color: #cccccc">proxy</span><span style="color: #3399cc">;</span>
+ <span style="color: #3399cc">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
 <p><br>
 动态代理客户类</p>
-<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Client</span> <span style="color: #666666">{</span>
+<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">Client</span> <span style="color: #3399cc">{</span>
 
- <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+ <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">main</span><span style="color: #3399cc">(</span><span style="color: #cccccc">String</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
 
-  Subject proxy <span style="color: #666666">=</span> DynProxyFactory<span style="color: #666666">.</span><span style="color: #4070a0">getInstance</span><span style="color: #666666">();</span>
-  proxy<span style="color: #666666">.</span><span style="color: #4070a0">dealTask</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;DBQueryTask&quot;</span><span style="color: #666666">);</span>
- <span style="color: #666666">}</span>
+  <span style="color: #cccccc">Subject</span> <span style="color: #cccccc">proxy</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">DynProxyFactory</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getInstance</span><span style="color: #3399cc">();</span>
+  <span style="color: #cccccc">proxy</span><span style="color: #3399cc">.</span><span style="color: #cccccc">dealTask</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;DBQueryTask&quot;</span><span style="color: #3399cc">);</span>
+ <span style="color: #3399cc">}</span>
 
-<span style="color: #666666">}</span>
+<span style="color: #3399cc">}</span>
 </pre></div>
 
 
