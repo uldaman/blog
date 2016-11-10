@@ -69,32 +69,32 @@
 <li><a href="#8-join">8. 加入线程(join)</a></li>
 </ul>
 </div>
-<h2 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 定义任务</h2>
+<h2 id="1">1. 定义任务</h2>
 <p>线程是用来&rdquo;驱动&rdquo;任务的, 通过实现 Runnable 接口的 run() 方法可以来定义一个任务.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// 显示 LiftOff(发射) 前的倒计时</span>
-<span style="color: #A71D5D">class</span> <span style="color: #445588">LiftOff</span> <span style="color: #A71D5D">implements</span> <span style="color: #333333">Runnable</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// default 倒数次数</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">taskCount</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">final</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">taskCount</span><span style="color: #A71D7E">++;</span> <span style="color: #999988; font-style: italic">// 记录线程 id</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// 显示 LiftOff(发射) 前的倒计时</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">LiftOff</span> <span style="color: #66d9ef">implements</span> <span style="color: #f8f8f2">Runnable</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">;</span> <span style="color: #75715e">// default 倒数次数</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">taskCount</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">final</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">taskCount</span><span style="color: #f92672">++;</span> <span style="color: #75715e">// 记录线程 id</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">countDown</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">status</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">return</span> <span style="color: #183691">&quot;#&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;(&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #A71D7E">(</span><span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">0</span> <span style="color: #A71D7E">?</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Liftoff!&quot;</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;). &quot;</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">status</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&quot;#&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;(&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0</span> <span style="color: #f92672">?</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Liftoff!&quot;</span><span style="color: #f92672">)</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;). &quot;</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">run</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(;</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>  <span style="color: #333333">countDown</span><span style="color: #A71D7E">--)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #333333">status</span><span style="color: #A71D7E">());</span>
-            <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">yield</span><span style="color: #A71D7E">();</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">run</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(;</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>  <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">--)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">status</span><span style="color: #f92672">());</span>
+            <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">yield</span><span style="color: #f92672">();</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
@@ -104,16 +104,16 @@
 <p>注意, Thread.yield() 虽然让 CPU 立即执行一次切换, 去执行其他线程, 但是这个&rdquo;其他&rdquo;也包含当前线程&hellip;</p>
 </blockquote>
 <p>当然, LiftOff 虽然实现了 Runnable, 但并不意味着它必须用新线程去驱动, 它仍然可以单独的使用.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">LiftOff</span> <span style="color: #333333">launch</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">();</span>
-        <span style="color: #333333">launch</span><span style="color: #A71D7E">.</span><span style="color: #008080">run</span><span style="color: #A71D7E">();</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">LiftOff</span> <span style="color: #f8f8f2">launch</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">();</span>
+        <span style="color: #f8f8f2">launch</span><span style="color: #f92672">.</span><span style="color: #a6e22e">run</span><span style="color: #f92672">();</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>del *.class
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>del *.class
 
 javac MainThread.java
 
@@ -123,20 +123,20 @@ java MainThread
 </pre></div>
 
 
-<h2 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 附加线程</h2>
+<h2 id="2">2. 附加线程</h2>
 <p>实现 Runnable 接口后, 要实现线程驱动, 还必须显示地创建一个新线程, 并将 Runnable 附着在其上, <strong>Thread</strong> 类就是用来完成这个动作的, 我们只需要将 Runnable 对象传给 Thread 的构造函数即可.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">Thread</span> <span style="color: #333333">t</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Thread</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">());</span>
-        <span style="color: #333333">t</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Waiting for Liftoff.&quot;</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">());</span>
+        <span style="color: #f8f8f2">t</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Waiting for Liftoff.&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
 <p>创建 Thread 对象后, 调用该对象的 <strong>start()</strong> 方法为新线程执行必需的初始化操作, 然后新线程开始去&rdquo;跑动&rdquo;(即调用 Runnable 的 run() 方法), 执行结果如下:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>javac MainThread.java
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>javac MainThread.java
 
 java MainThread
 
@@ -147,20 +147,20 @@ Waiting for Liftoff.
 
 <p>我们可以看到, start() 方法是__立即返回__的, 创建运行新线程并不会阻塞当前线程的继续执行.</p>
 <p>当然你可以创建更多的线程:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">Thread</span> <span style="color: #333333">t</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Thread</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">());</span>
-            <span style="color: #333333">t</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span>
-        <span style="color: #A71D7E">}</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Waiting for Liftoff.&quot;</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">());</span>
+            <span style="color: #f8f8f2">t</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span>
+        <span style="color: #f92672">}</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Waiting for Liftoff.&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
 <p>执行结果如下:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>del *.class
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>del *.class
 
 javac MainThread.java
 
@@ -177,27 +177,27 @@ java MainThread
 
 
 <p>可见, 多线程是轮流交换着去执行的.</p>
-<h2 id="3-executor"><a name="user-content-3-executor" href="#3-executor" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. Executor</h2>
+<h2 id="3-executor">3. Executor</h2>
 <p>Executor 是 Java 中启动线程的优选方案.<br>
 它 是 Java SE5的 <strong>java.util.concurrent</strong> 包中的_执行器_, 它可以用来管理 Thread 对象, 相当于一个中间件.</p>
 <p>再用上面的 LiftOff 例子, 使用 Executor 我们无须再显示的创建 Thread 对象.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.util.concurrent.*</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.concurrent.*</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">ExecutorService</span> <span style="color: #333333">exec</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Executors</span><span style="color: #A71D7E">.</span><span style="color: #008080">newCachedThreadPool</span><span style="color: #A71D7E">();</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">ExecutorService</span> <span style="color: #f8f8f2">exec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Executors</span><span style="color: #f92672">.</span><span style="color: #a6e22e">newCachedThreadPool</span><span style="color: #f92672">();</span>
 
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">exec</span><span style="color: #A71D7E">.</span><span style="color: #008080">execute</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">());</span>
-        <span style="color: #A71D7E">}</span>
-        <span style="color: #333333">exec</span><span style="color: #A71D7E">.</span><span style="color: #008080">shutdown</span><span style="color: #A71D7E">();</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">exec</span><span style="color: #f92672">.</span><span style="color: #a6e22e">execute</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">());</span>
+        <span style="color: #f92672">}</span>
+        <span style="color: #f8f8f2">exec</span><span style="color: #f92672">.</span><span style="color: #a6e22e">shutdown</span><span style="color: #f92672">();</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
 <p>执行结果如下:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>javac MainThread.java
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>javac MainThread.java
 
 java MainThread
 
@@ -235,78 +235,78 @@ Executor 创建时处于运行状态, 当调用 shutdown() 后，处于关闭状
 </ul>
 </li>
 </ul>
-<h2 id="4"><a name="user-content-4" href="#4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. 休眠</h2>
+<h2 id="4">4. 休眠</h2>
 <p>让线程休眠的方法就是调用  <strong>Thread.sleep()</strong>.</p>
 <p>继续刚才的 LiftOff 的例子, 我们只需要更它的 run() 方法.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">run</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(;</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>  <span style="color: #333333">countDown</span><span style="color: #A71D7E">--)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #333333">status</span><span style="color: #A71D7E">());</span>
-            <span style="color: #999988; font-style: italic">// Thread.sleep(100);</span>
-            <span style="color: #999988; font-style: italic">// java SE5 style:</span>
-            <span style="color: #333333">TimeUnit</span><span style="color: #A71D7E">.</span><span style="color: #008080">MILLISECONDS</span><span style="color: #A71D7E">.</span><span style="color: #008080">sleep</span><span style="color: #A71D7E">(</span><span style="color: #0086b3">100</span><span style="color: #A71D7E">);</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">catch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">InterruptedException</span> <span style="color: #333333">e</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Interrupted Exception&quot;</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">run</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">try</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(;</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>  <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">--)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">status</span><span style="color: #f92672">());</span>
+            <span style="color: #75715e">// Thread.sleep(100);</span>
+            <span style="color: #75715e">// java SE5 style:</span>
+            <span style="color: #f8f8f2">TimeUnit</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MILLISECONDS</span><span style="color: #f92672">.</span><span style="color: #a6e22e">sleep</span><span style="color: #f92672">(</span><span style="color: #ae81ff">100</span><span style="color: #f92672">);</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span> <span style="color: #66d9ef">catch</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">InterruptedException</span> <span style="color: #f8f8f2">e</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Interrupted Exception&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
 
-<span style="color: #A71D7E">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
 <p>sleep() 与 yield() 的区别就在于, sleep() 除了拥有 yield() 的功能外, 还可以让 cpu 在指定时间内不再切换回自身.</p>
 <p>sleep() 的调用会抛出 <strong>InterruptedException</strong> 异常, 因为异常不能跨线程传播, 所以我们必须在线程本地处理掉.</p>
 <p>Java SE5 引入了更加显示的 sleep(), 作为 <strong>TimeUnit</strong> 类的一部分, 这个方法允许指定 sleep() 的时间单位, 如上面的就是 <strong>MILLISECONDS</strong>(毫秒).</p>
-<h2 id="5"><a name="user-content-5" href="#5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5. 优先级</h2>
+<h2 id="5">5. 优先级</h2>
 <p>简单的说, 线程调试器会让优先级高的线程先执行, 但并不是意味着优先级低的线程就得不到执行了, 它只是执行的频率低一些而已.</p>
 <p>可以使用 <strong>Thread.getPriority()</strong> 来获取现有线程的优先级, 使用 <strong>Thread.setPriority()</strong> 来修改它.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.util.concurrent.*</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.concurrent.*</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">SimplePriorities</span> <span style="color: #A71D5D">implements</span> <span style="color: #333333">Runnable</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// 倒计时</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">double</span> <span style="color: #333333">d</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">priority</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// 优先级</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SimplePriorities</span> <span style="color: #66d9ef">implements</span> <span style="color: #f8f8f2">Runnable</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">;</span> <span style="color: #75715e">// 倒计时</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">double</span> <span style="color: #f8f8f2">d</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">priority</span><span style="color: #f92672">;</span> <span style="color: #75715e">// 优先级</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">SimplePriorities</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">priority</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">priority</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">priority</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">SimplePriorities</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">priority</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">priority</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">priority</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">toString</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">currentThread</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;: &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">toString</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">currentThread</span><span style="color: #f92672">()</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;: &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">run</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">currentThread</span><span style="color: #A71D7E">().</span><span style="color: #008080">setPriority</span><span style="color: #A71D7E">(</span><span style="color: #333333">priority</span><span style="color: #A71D7E">);</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">run</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">currentThread</span><span style="color: #f92672">().</span><span style="color: #a6e22e">setPriority</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">priority</span><span style="color: #f92672">);</span>
 
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(;</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">--)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #999988; font-style: italic">// 进行一个稍大开销的运算, 让效果明显点</span>
-            <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">100000</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-                <span style="color: #333333">d</span> <span style="color: #A71D7E">+=</span> <span style="color: #A71D7E">(</span><span style="color: #333333">Math</span><span style="color: #A71D7E">.</span><span style="color: #008080">PI</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">Math</span><span style="color: #A71D7E">.</span><span style="color: #008080">E</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">/</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">double</span><span style="color: #A71D7E">)</span><span style="color: #333333">i</span><span style="color: #A71D7E">;</span>
-                <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">i</span> <span style="color: #A71D7E">%</span> <span style="color: #0086b3">1000</span> <span style="color: #A71D7E">==</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-                    <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">yield</span><span style="color: #A71D7E">();</span>
-                <span style="color: #A71D7E">}</span>
-            <span style="color: #A71D7E">}</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(;</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">--)</span> <span style="color: #f92672">{</span>
+            <span style="color: #75715e">// 进行一个稍大开销的运算, 让效果明显点</span>
+            <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">100000</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+                <span style="color: #f8f8f2">d</span> <span style="color: #f92672">+=</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Math</span><span style="color: #f92672">.</span><span style="color: #a6e22e">PI</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">Math</span><span style="color: #f92672">.</span><span style="color: #a6e22e">E</span><span style="color: #f92672">)</span> <span style="color: #f92672">/</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">double</span><span style="color: #f92672">)</span><span style="color: #f8f8f2">i</span><span style="color: #f92672">;</span>
+                <span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">i</span> <span style="color: #f92672">%</span> <span style="color: #ae81ff">1000</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+                    <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">yield</span><span style="color: #f92672">();</span>
+                <span style="color: #f92672">}</span>
+            <span style="color: #f92672">}</span>
 
-            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">this</span><span style="color: #A71D7E">);</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #66d9ef">this</span><span style="color: #f92672">);</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">ExecutorService</span> <span style="color: #333333">exec</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Executors</span><span style="color: #A71D7E">.</span><span style="color: #008080">newCachedThreadPool</span><span style="color: #A71D7E">();</span>
-        <span style="color: #A71D5D">for</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">&lt;</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">exec</span><span style="color: #A71D7E">.</span><span style="color: #008080">execute</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">SimplePriorities</span><span style="color: #A71D7E">(</span><span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">MIN_PRIORITY</span><span style="color: #A71D7E">));</span>
-        <span style="color: #A71D7E">}</span>
-        <span style="color: #333333">exec</span><span style="color: #A71D7E">.</span><span style="color: #008080">execute</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">SimplePriorities</span><span style="color: #A71D7E">(</span><span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">MAX_PRIORITY</span><span style="color: #A71D7E">));</span>
-        <span style="color: #333333">exec</span><span style="color: #A71D7E">.</span><span style="color: #008080">shutdown</span><span style="color: #A71D7E">();</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">ExecutorService</span> <span style="color: #f8f8f2">exec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Executors</span><span style="color: #f92672">.</span><span style="color: #a6e22e">newCachedThreadPool</span><span style="color: #f92672">();</span>
+        <span style="color: #66d9ef">for</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">exec</span><span style="color: #f92672">.</span><span style="color: #a6e22e">execute</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">SimplePriorities</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MIN_PRIORITY</span><span style="color: #f92672">));</span>
+        <span style="color: #f92672">}</span>
+        <span style="color: #f8f8f2">exec</span><span style="color: #f92672">.</span><span style="color: #a6e22e">execute</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">SimplePriorities</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">MAX_PRIORITY</span><span style="color: #f92672">));</span>
+        <span style="color: #f8f8f2">exec</span><span style="color: #f92672">.</span><span style="color: #a6e22e">shutdown</span><span style="color: #f92672">();</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
 <p>执行结果如下:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
 Thread[pool-1-thread-3,1,main]: 5
 Thread[pool-1-thread-1,1,main]: 5
 Thread[pool-1-thread-4,1,main]: 5
@@ -317,7 +317,8 @@ Thread[pool-1-thread-2,1,main]: 4
 ...
 </pre></div>
 
-在 SimplePriorities 中完成了 <strong>toString()</strong> 的覆盖用来打印*线程的名称*、<em>优先级*及线程所属*线程组</em>, <strong>Thread.currentThread()</strong> 方法可以用来获取当前任务所在线程的 Thread 对象引用.</p>
+
+<p>在 SimplePriorities 中完成了 <strong>toString()</strong> 的覆盖用来打印<em>线程的名称</em>、<em>优先级</em>及线程所属<em>线程组</em>, <strong>Thread.currentThread()</strong> 方法可以用来获取当前任务所在线程的 Thread 对象引用.</p>
 <p>在 main 中, 我们创建 5 个低优化级的线程和 1 个高优先级的线程, 因为优化级与操作系统有依赖, 所以唯一的可移植设置是使用:</p>
 <ul>
 <li>MIN_PRIORITY</li>
@@ -326,7 +327,7 @@ Thread[pool-1-thread-2,1,main]: 4
 </ul>
 <p>现在说说为什么要在 run() 中设计那么一个稍大开销的运算?<br>
 先看看注释掉那段运算后执行的结果:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
 Thread[pool-1-thread-2,1,main]: 4
 Thread[pool-1-thread-2,1,main]: 3
 Thread[pool-1-thread-2,1,main]: 2
@@ -338,12 +339,12 @@ Thread[pool-1-thread-6,10,main]: 4
 
 
 <p>可以看到, 这些输出几乎是连续的(前几个都是 pool-1-thread-2).<br>如果没有加入这些运算的话, 因为 CPU 执行是非常快速的, 没有开销大的运算, 线程还没发生切换就被执行完了, 这样也就看不到设置的优先级效果.</p>
-<h2 id="6"><a name="user-content-6" href="#6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6. 后台线程(也称守护线程)</h2>
+<h2 id="6">6. 后台线程(也称守护线程)</h2>
 <p>所谓 <strong>Daemon</strong> 线程, 是指在程序运行时在后台提供一种通用服务的线程, 当所有的非后台线程线束时, 程序也就终止了, 同时会杀死进程中的所有后台线程.</p>
 <p><strong>setDaemon()</strong> 方法可以将一个线程设置为后台线程, 但是注意, 它必须要在__线程启动前设置__.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">Thread</span> <span style="color: #333333">daemon</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Thread</span><span style="color: #A71D7E">();</span>
-<span style="color: #333333">daemon</span><span style="color: #A71D7E">.</span><span style="color: #008080">setDaemon</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">true</span><span style="color: #A71D7E">);</span>
-<span style="color: #333333">daemon</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">daemon</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">();</span>
+<span style="color: #f8f8f2">daemon</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setDaemon</span><span style="color: #f92672">(</span><span style="color: #66d9ef">true</span><span style="color: #f92672">);</span>
+<span style="color: #f8f8f2">daemon</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span>
 </pre></div>
 
 
@@ -355,79 +356,79 @@ Thread[pool-1-thread-6,10,main]: 4
 </blockquote>
 <p>还有一个情况就是 <strong>finally</strong> 语句, 如果所有的非后台线程都结束, 那么后台线程会在不执行 finally 语句的情况下被终止.</p>
 <p>所以这几乎是一种不好的思想, 因为__非后台的 Executor__ 通常是一种更好的守护方式, 因为 Executor 控制的所有线程可以同时被关闭, 在后面将会提及.</p>
-<h2 id="7"><a name="user-content-7" href="#7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7. 另外的创建线程方法</h2>
+<h2 id="7">7. 另外的创建线程方法</h2>
 <p>虽然使用 Executor 是优选的方案, 但还是要了解一下另外两种创建新线程的方法.</p>
-<h3 id="71-thread"><a name="user-content-71-thread" href="#71-thread" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.1 直接继承 Thread</h3>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">LiftOff</span> <span style="color: #A71D5D">extends</span> <span style="color: #333333">Thread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// default 倒数次数</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">taskCount</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">final</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">taskCount</span><span style="color: #A71D7E">++;</span> <span style="color: #999988; font-style: italic">// 记录线程 id</span>
+<h3 id="71-thread">7.1 直接继承 Thread</h3>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">LiftOff</span> <span style="color: #66d9ef">extends</span> <span style="color: #f8f8f2">Thread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">;</span> <span style="color: #75715e">// default 倒数次数</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">taskCount</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">final</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">taskCount</span><span style="color: #f92672">++;</span> <span style="color: #75715e">// 记录线程 id</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">countDown</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">status</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">return</span> <span style="color: #183691">&quot;#&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;(&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #A71D7E">(</span><span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">0</span> <span style="color: #A71D7E">?</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Liftoff!&quot;</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;). &quot;</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">status</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&quot;#&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;(&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0</span> <span style="color: #f92672">?</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Liftoff!&quot;</span><span style="color: #f92672">)</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;). &quot;</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">run</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(;</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>  <span style="color: #333333">countDown</span><span style="color: #A71D7E">--)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #333333">status</span><span style="color: #A71D7E">());</span>
-            <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">yield</span><span style="color: #A71D7E">();</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">run</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(;</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>  <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">--)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">status</span><span style="color: #f92672">());</span>
+            <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">yield</span><span style="color: #f92672">();</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">LiftOff</span> <span style="color: #333333">launch</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">();</span>
-        <span style="color: #333333">launch</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">LiftOff</span> <span style="color: #f8f8f2">launch</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">();</span>
+        <span style="color: #f8f8f2">launch</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
-<h3 id="72-runnable"><a name="user-content-72-runnable" href="#72-runnable" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.2 自执行 Runnable</h3>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">LiftOff</span> <span style="color: #A71D5D">implements</span> <span style="color: #333333">Runnable</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">;</span> <span style="color: #999988; font-style: italic">// default 倒数次数</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">taskCount</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #A71D5D">final</span> <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">taskCount</span><span style="color: #A71D7E">++;</span> <span style="color: #999988; font-style: italic">// 记录线程 id</span>
-    <span style="color: #A71D5D">private</span> <span style="color: #333333">Thread</span> <span style="color: #333333">t</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Thread</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">this</span><span style="color: #A71D7E">);</span> <span style="color: #999988; font-style: italic">// 创建一个线程成员属性</span>
+<h3 id="72-runnable">7.2 自执行 Runnable</h3>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">LiftOff</span> <span style="color: #66d9ef">implements</span> <span style="color: #f8f8f2">Runnable</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">;</span> <span style="color: #75715e">// default 倒数次数</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">taskCount</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">final</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">taskCount</span><span style="color: #f92672">++;</span> <span style="color: #75715e">// 记录线程 id</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">Thread</span> <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">(</span><span style="color: #66d9ef">this</span><span style="color: #f92672">);</span> <span style="color: #75715e">// 创建一个线程成员属性</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">t</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span> <span style="color: #999988; font-style: italic">// 执行线程</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">t</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 执行线程</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #795DA3">LiftOff</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">this</span><span style="color: #A71D7E">.</span><span style="color: #008080">countDown</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">countDown</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #a6e22e">LiftOff</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">countDown</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #333333">String</span> <span style="color: #795DA3">status</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">return</span> <span style="color: #183691">&quot;#&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">id</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;(&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #A71D7E">(</span><span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #0086b3">0</span> <span style="color: #A71D7E">?</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Liftoff!&quot;</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;). &quot;</span><span style="color: #A71D7E">;</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">status</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&quot;#&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">id</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;(&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">0</span> <span style="color: #f92672">?</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Liftoff!&quot;</span><span style="color: #f92672">)</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;). &quot;</span><span style="color: #f92672">;</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">run</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(;</span> <span style="color: #333333">countDown</span> <span style="color: #A71D7E">&gt;=</span> <span style="color: #0086b3">0</span><span style="color: #A71D7E">;</span>  <span style="color: #333333">countDown</span><span style="color: #A71D7E">--)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #333333">status</span><span style="color: #A71D7E">());</span>
-            <span style="color: #333333">Thread</span><span style="color: #A71D7E">.</span><span style="color: #008080">yield</span><span style="color: #A71D7E">();</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">run</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(;</span> <span style="color: #f8f8f2">countDown</span> <span style="color: #f92672">&gt;=</span> <span style="color: #ae81ff">0</span><span style="color: #f92672">;</span>  <span style="color: #f8f8f2">countDown</span><span style="color: #f92672">--)</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">status</span><span style="color: #f92672">());</span>
+            <span style="color: #f8f8f2">Thread</span><span style="color: #f92672">.</span><span style="color: #a6e22e">yield</span><span style="color: #f92672">();</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">MainThread</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">LiftOff</span> <span style="color: #333333">launch</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">LiftOff</span><span style="color: #A71D7E">();</span>
-        <span style="color: #333333">launch</span><span style="color: #A71D7E">.</span><span style="color: #008080">start</span><span style="color: #A71D7E">();</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MainThread</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">LiftOff</span> <span style="color: #f8f8f2">launch</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">LiftOff</span><span style="color: #f92672">();</span>
+        <span style="color: #f8f8f2">launch</span><span style="color: #f92672">.</span><span style="color: #a6e22e">start</span><span style="color: #f92672">();</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
-<h2 id="8-join"><a name="user-content-8-join" href="#8-join" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>8. 加入线程(join)</h2>
+<h2 id="8-join">8. 加入线程(join)</h2>
 <p>一个线程可以在其他线程之上调用 <strong>join()</strong> 方法, 这个方法是阻塞的, 它的含义在于等到被 join 的线程执行结束之后再执行新线程.</p>
 <p>join() 方法还可以加一个__超时参数__, 其意义在于如果等待超时后, join() 方法也能返回.</p>
 <p>join() 方法还可以被__中断__, 在被 join 的线程上调用  <strong>interrupt()</strong> 方法, 不过这个方法会抛出 <strong>InterruptedException</strong> 异常.</p>

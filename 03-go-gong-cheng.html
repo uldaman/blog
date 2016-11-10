@@ -57,77 +57,80 @@
 <p>打开 LiteIDE, 点击新建</p>
 <p><img alt="新建 calc" src="http://i66.tinypic.com/24vutn4.jpg" /></p>
 <p>在 main.go 中输入如下代码:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">// clac project main.go</span>
-<span style="color: #A71D5D">package</span> <span style="color: #333333">main</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// clac project main.go</span>
+<span style="color: #f92672">package</span> <span style="color: #a6e22e">main</span>
 
-<span style="color: #A71D5D">import</span> (
-    <span style="color: #183691">&quot;fmt&quot;</span>
-    <span style="color: #183691">&quot;os&quot;</span>    <span style="color: #999988; font-style: italic">// 用来取命令行参数</span>
-    <span style="color: #183691">&quot;simplemath&quot;</span>    <span style="color: #999988; font-style: italic">// 我们自定义的包, 里面是 add 算法</span>
-    <span style="color: #183691">&quot;strconv&quot;</span>    <span style="color: #999988; font-style: italic">// 用来做字符串转换</span>
-)
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">(</span>
+    <span style="color: #e6db74">&quot;fmt&quot;</span>
+    <span style="color: #e6db74">&quot;os&quot;</span>    <span style="color: #75715e">// 用来取命令行参数</span>
+    <span style="color: #e6db74">&quot;simplemath&quot;</span>    <span style="color: #75715e">// 我们自定义的包, 里面是 add 算法</span>
+    <span style="color: #e6db74">&quot;strconv&quot;</span>    <span style="color: #75715e">// 用来做字符串转换</span>
+<span style="color: #f8f8f2">)</span>
 
-<span style="color: #A71D5D">var</span> <span style="color: #333333">Usage</span> = <span style="color: #A71D5D">func</span>() {
-    <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;USAGE: calc command [arguments]...&quot;</span>)
-    <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;\nThe commands are:\n\tadd\tAddition of two values.&quot;</span>)
-}
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">Usage</span> <span style="color: #f8f8f2">=</span> <span style="color: #66d9ef">func</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Println</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;USAGE: calc command [arguments]...&quot;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Println</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;\nThe commands are:\n\tadd\tAddition of two values.&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">}</span>
 
-<span style="color: #A71D5D">func</span> <span style="color: #333333">main</span>() {
-    <span style="color: #333333">args</span> <span style="color: #A71D7E">:=</span> <span style="color: #333333">os</span>.<span style="color: #333333">Args</span>    <span style="color: #999988; font-style: italic">// := 表示同时进行变量声明和初始化的工作</span>
-    <span style="color: #A71D5D">if</span> <span style="color: #333333">args</span> <span style="color: #A71D7E">==</span> <span style="color: #A71D5D">nil</span> <span style="color: #A71D7E">||</span> <span style="color: #ED6A43">len</span>(<span style="color: #333333">args</span>) &lt; <span style="color: #0086b3">3</span> {
-        <span style="color: #333333">Usage</span>()
-        <span style="color: #A71D5D">return</span>
-    }
+<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">main</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">args</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">os</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Args</span>    <span style="color: #75715e">// := 表示同时进行变量声明和初始化的工作</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">args</span> <span style="color: #f92672">==</span> <span style="color: #66d9ef">nil</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">len(</span><span style="color: #a6e22e">args</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">&lt;</span> <span style="color: #ae81ff">3</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">Usage</span><span style="color: #f8f8f2">()</span>
+        <span style="color: #66d9ef">return</span>
+    <span style="color: #f8f8f2">}</span>
 
-    <span style="color: #A71D5D">switch</span> <span style="color: #333333">args</span>[<span style="color: #0086b3">1</span>] {
-    <span style="color: #A71D5D">case</span> <span style="color: #183691">&quot;add&quot;</span>:
-        <span style="color: #A71D5D">if</span> <span style="color: #ED6A43">len</span>(<span style="color: #333333">args</span>) <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">4</span> {
-            <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
-            <span style="color: #A71D5D">return</span>
-        }
-        <span style="color: #333333">v1</span>, <span style="color: #333333">err1</span> <span style="color: #A71D7E">:=</span> <span style="color: #333333">strconv</span>.<span style="color: #333333">Atoi</span>(<span style="color: #333333">args</span>[<span style="color: #0086b3">2</span>])
-        <span style="color: #333333">v2</span>, <span style="color: #333333">err2</span> <span style="color: #A71D7E">:=</span> <span style="color: #333333">strconv</span>.<span style="color: #333333">Atoi</span>(<span style="color: #333333">args</span>[<span style="color: #0086b3">3</span>])
-        <span style="color: #A71D5D">if</span> <span style="color: #333333">err1</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D5D">nil</span> <span style="color: #A71D7E">||</span> <span style="color: #333333">err2</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D5D">nil</span> {
-            <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
-            <span style="color: #A71D5D">return</span>
-        }
-        <span style="color: #333333">ret</span> <span style="color: #A71D7E">:=</span> <span style="color: #333333">simplemath</span>.<span style="color: #333333">Add</span>(<span style="color: #333333">v1</span>, <span style="color: #333333">v2</span>)
-        <span style="color: #333333">fmt</span>.<span style="color: #333333">Println</span>(<span style="color: #183691">&quot;Result: &quot;</span>, <span style="color: #333333">ret</span>)
-    <span style="color: #A71D5D">default</span>:
-        <span style="color: #333333">Usage</span>()
-    }
-}
+    <span style="color: #66d9ef">switch</span> <span style="color: #a6e22e">args</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">case</span> <span style="color: #e6db74">&quot;add&quot;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">len(</span><span style="color: #a6e22e">args</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">!=</span> <span style="color: #ae81ff">4</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Println</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #66d9ef">return</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #a6e22e">v1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">err1</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">strconv</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Atoi</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">args</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">])</span>
+        <span style="color: #a6e22e">v2</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">err2</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">strconv</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Atoi</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">args</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">])</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">err1</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f92672">||</span> <span style="color: #a6e22e">err2</span> <span style="color: #f92672">!=</span> <span style="color: #66d9ef">nil</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Println</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #66d9ef">return</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #a6e22e">ret</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">simplemath</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">v1</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">v2</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #a6e22e">fmt</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Println</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Result: &quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">ret</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">default</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #a6e22e">Usage</span><span style="color: #f8f8f2">()</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 然后, 在 src 目录下 (与 calc 目录同级) 新建个 <strong>simplemath</strong> 目录, 并新建个 add.go 文件:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">package</span> <span style="color: #333333">simplemath</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">package</span> <span style="color: #a6e22e">simplemath</span>
 
-<span style="color: #A71D5D">func</span> <span style="color: #333333">Add</span>(<span style="color: #333333">a</span> <span style="color: #A71D5D; font-weight: bold">int</span>, <span style="color: #333333">b</span> <span style="color: #A71D5D; font-weight: bold">int</span>) <span style="color: #A71D5D; font-weight: bold">int</span> {
-    <span style="color: #A71D5D">return</span> <span style="color: #333333">a</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">b</span>
-}
+<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">Add</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">a</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">b</span> <span style="color: #66d9ef">int</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">a</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">b</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 此时的文件结构如下:</p>
 <p><img alt="文件结构" src="http://i68.tinypic.com/2r71y04.jpg" /></p>
 <p>点击 LiteIDE 工具栏上的 <strong>B</strong> 图标进行编译, 然后 calc 目录下就生成了一个 exe 可执行文件, 打开 cmd 测试下:</p>
 <p><img alt="命令行" src="http://i63.tinypic.com/2ztem21.jpg" /></p>
 <p>另外, LiteIDE 支持__单元测试__, 我们在写 simplemath 包时, 可以为 add 函数编写了对应的单元测试代码.</p>
 <p>再新建个 add_test.go 文件:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">package</span> <span style="color: #333333">simplemath</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">package</span> <span style="color: #a6e22e">simplemath</span>
 
-<span style="color: #A71D5D">import</span> <span style="color: #183691">&quot;testing&quot;</span>
+<span style="color: #f92672">import</span> <span style="color: #e6db74">&quot;testing&quot;</span>
 
-<span style="color: #A71D5D">func</span> <span style="color: #333333">TestAdd1</span>(<span style="color: #333333">t</span> <span style="color: #A71D7E">*</span><span style="color: #333333">testing</span>.<span style="color: #333333">T</span>) {
-    <span style="color: #333333">r</span> <span style="color: #A71D7E">:=</span> <span style="color: #333333">Add</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">2</span>)
-    <span style="color: #A71D5D">if</span> <span style="color: #333333">r</span> <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">3</span> {
-        <span style="color: #333333">t</span>.<span style="color: #333333">Errorf</span>(<span style="color: #183691">&quot;Add(1, 2) failed. Got %d, expected 3.&quot;</span>, <span style="color: #333333">r</span>)
-    }
-}
+<span style="color: #66d9ef">func</span> <span style="color: #a6e22e">TestAdd1</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">t</span> <span style="color: #f92672">*</span><span style="color: #a6e22e">testing</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">T</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">r</span> <span style="color: #f92672">:=</span> <span style="color: #a6e22e">Add</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #a6e22e">r</span> <span style="color: #f92672">!=</span> <span style="color: #ae81ff">3</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">t</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">Errorf</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Add(1, 2) failed. Got %d, expected 3.&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">r</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 点击 LiteIDE 工具栏上的 <strong>T</strong> 图标就能执行该测试单元了.</p>
 <p><img alt="测试单元" src="http://i65.tinypic.com/347fuz6.jpg" /></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/golang.html">Golang</a>

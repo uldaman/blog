@@ -67,19 +67,20 @@
 <p>那有没有什么办法能不这么频繁的改动 main 方法又能测试完所有要测试的方法呢?</p>
 <p>利用 <strong>JUnit</strong> 就能做到这一点, 具体的 JUnit 使用方法参考上面的 <strong>References</strong>, 这里教大家一种简单点的使用方法.</p>
 <p>在你要测试的方法前加上 <code>@Test</code> 就可以了.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">App</span> <span style="color: #A71D7E">{</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">App</span> <span style="color: #f92672">{</span>
 
-    <span style="color: #333333">@Test</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">test_test</span><span style="color: #A71D7E">()</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;8888&quot;</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #a6e22e">@Test</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">test_test</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;8888&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 这里 Eclipse 就会提示错误, 我们引入 JUnit 包就可以了.</p>
 <p><img alt="" src="http://i66.tinypic.com/ejbk3q.jpg" /></p>
-<p>测试方法也很简单, 如果想测试**指定的方法**, 那就在要测试的方法名上右键, 选择 Run As 或者 Debug As -> JUnit, 如果要测试**所有的方法**, 那就在类的作用域里右键, 选择 Run 或者 Debug -> JUnit.</p>
+<p>测试方法也很简单, 如果想测试<strong>指定的方法</strong>, 那就在要测试的方法名上右键, 选择 Run As 或者 Debug As -> JUnit, 如果要测试<strong>所有的方法</strong>, 那就在类的作用域里右键, 选择 Run 或者 Debug -> JUnit.</p>
 <p>或者在 JUnit 的窗体内也可以操作.</p>
 <p><img alt="" src="http://i67.tinypic.com/oupef8.jpg" /></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>

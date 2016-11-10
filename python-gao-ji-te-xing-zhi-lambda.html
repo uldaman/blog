@@ -54,20 +54,23 @@
 
 
     <p>lambda 函数也叫匿名函数, 即函数没有具体的名称;</p>
-<p>严格来说, lambda 是一个表达式, 也正因为它是表达式, 所以它可以用在某些不能使用 <strong>def</strong> 的场合, 如:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">info</span> <span style="color: #A71D7E">=</span> [<span style="color: #A71D5D">lambda</span> <span style="color: #333333">a</span>: <span style="color: #333333">a</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">3</span>, <span style="color: #A71D5D">lambda</span> <span style="color: #333333">b</span>: <span style="color: #333333">b</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">3</span>] <span style="color: #999988; font-style: italic"># ** 两个乘号表示乘方</span>
+<p>严格来说, lambda 是一个表达式, 也正因为它是表达式, 所以它可以用在某些不能使用 <strong>def</strong> 的场合, 如:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">info</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">a:</span> <span style="color: #f8f8f2">a</span> <span style="color: #f92672">**</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">b:</span> <span style="color: #f8f8f2">b</span> <span style="color: #f92672">**</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">]</span> <span style="color: #75715e"># ** 两个乘号表示乘方</span>
 </pre></div>
-</p>
-<p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #0086b3">2</span> <span style="color: #999988; font-style: italic"># x 的平方</span>
-<span style="color: #333333">v</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>,<span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">**</span> <span style="color: #333333">y</span> <span style="color: #999988; font-style: italic"># x 的 y 次方</span>
+
+
+<p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">g</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">**</span> <span style="color: #ae81ff">2</span> <span style="color: #75715e"># x 的平方</span>
+<span style="color: #f8f8f2">v</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,y</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">**</span> <span style="color: #f8f8f2">y</span> <span style="color: #75715e"># x 的 y 次方</span>
 </pre></div>
-</p>
-<p>看个例子, 求 1 到 100 的合:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">reduce</span>(<span style="color: #A71D5D">lambda</span> <span style="color: #333333">x</span>, <span style="color: #333333">y</span> : <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>, <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">1</span>, <span style="color: #0086b3">101</span>))
-<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">5050</span>
+
+
+<p>看个例子, 求 1 到 100 的合:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">reduce(</span><span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">101</span><span style="color: #f8f8f2">))</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span><span style="color: #ae81ff">5050</span>
 </pre></div>
-</p>
+
+
 <p><strong>lambda 可以配合 map、reduce、filter、sorted 高效操作列表</strong>.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

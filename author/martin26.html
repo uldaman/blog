@@ -49,10 +49,10 @@
 </h6>
 
 
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>装饰者模式</h3>
-<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过**继承**来扩展功能.</p>
-<p>然而, 使用继承是**静态**的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
-<p>而装饰者模式可以**动态**地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
+<h3 id="_1">装饰者模式</h3>
+<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过<strong>继承</strong>来扩展功能.</p>
+<p>然而, 使用继承是<strong>静态</strong>的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
+<p>而装饰者模式可以<strong>动态</strong>地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
 <blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
 
 <p>装饰模式的UML图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
@@ -81,9 +81,9 @@
 <li><a href="#_5">迪米特法则</a></li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>单一职责原则</h1>
+<h1 id="_1">单一职责原则</h1>
 <p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
-<p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了**简单工厂模式**和**策略模式**.</p>
+<p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了<strong>简单工厂模式</strong>和<strong>策略模式</strong>.</p>
 <p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
 <p><strong>软件设计真正要做的许多内容 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
@@ -103,13 +103,13 @@
 
 <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
 
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>策略模式</h4>
+<h4 id="_1">策略模式</h4>
 <p>回顾下简单工厂模式, 在最后的main函数中, 我们暴露了两个类, Operation类和Factory类.
 能不能对这两个类进行再封装, 使其最暴露一个类就能写完main函数呢?
 那就引入了策略模式.</p>
 <p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251" /></p>
 <p>可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
@@ -127,7 +127,7 @@
 
 
 <p>首先看一下”计算器”程序:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
@@ -148,9 +148,9 @@
 
 <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
 
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式分类</h4>
+<h4 id="_1">设计模式分类</h4>
 <p>一共23种设计模式！</p>
-<p>按照目的来分,设计模式可以分为**创建型模式**、<strong>结构型模式**和**行为型模式</strong>.</p>
+<p>按照目的来分,设计模式可以分为<strong>创建型模式</strong>、<strong>结构型模式</strong>和<strong>行为型模式</strong>.</p>
 <ol>
 <li>
 <p>创建型模式用来处理对象的创建过程；</p>
@@ -198,16 +198,16 @@
 > </blockquote>
 
 <p><img alt="UML类图样例" src="http://img.blog.csdn.net/20150211193154259" /></p>
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>类图和接口图</h4>
-<p>首先**动物**矩形框, 它就代表一个**类图**, 分三层:
-第一层显示类的名称, 如果是**抽象类**, 则用斜体表示
+<h4 id="_1">类图和接口图</h4>
+<p>首先<strong>动物</strong>矩形框, 它就代表一个<strong>类图</strong>, 分三层:
+第一层显示类的名称, 如果是<strong>抽象类</strong>, 则用斜体表示
 第二层是类的属性
 第三层是类的方法</p>
 <p>注意前面的符号:
 ‘+’ –&gt; public
 ‘-’ –&gt; private
 ‘#’ –&gt; protected</p>
-<p>左下角的”飞翔”矩形框, 它是一个**接口图**, 它与类图的区别是顶端有**interface**显示, 然后它只有二层, 第二层是接口方法.
+<p>左下角的”飞翔”矩形框, 它是一个<strong>接口图</strong>, 它与类图的区别是顶端有<strong>interface</strong>显示, 然后它只有二层, 第二层是接口方法.
 另外接口还有另一种表示法 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
@@ -226,7 +226,7 @@
 
 <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
 
-<h4 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设计模式是否有必要学?</h4>
+<h4 id="_1">设计模式是否有必要学?</h4>
 <p>答案在我看来是肯定的, 学这些不是考虑将来会不会用到, 而是在学习的过程中进行的思想洗礼, 通过这些模式让我们找到编程的感觉, 从而设计出易维护 易扩展 易复用 灵活性好的程序.</p>
 <blockquote>模式不是设计出来的, 是重构出来的. 好的设计也不是设计出来的，是重构出来的.
 在<大话设计模式>中, 大部分的情况都是小菜先写出一个”垃圾代码”, 然后发现问题, 再对它进行重构.
@@ -251,7 +251,7 @@
 
 <p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
 <p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
 QTextCodec::setCodecForCStrings(...)
 QTextCodec::setCodecForLocale(...)
 
@@ -288,7 +288,7 @@ QTextCodec::setCodecForLocale(...)
 <p>第一种方式:</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb22.png" /></a></p>
 <p>第二种方式:</p>
-<p>进入 Qt 安装目录, 找到 assistant.exe**.**</p>
+<p>进入 Qt 安装目录, 找到 assistant.exe<strong>.</strong></p>
 <p>D:\Development\Qt5.3.2\5.3\msvc2010_opengl\bin\assistant.exe</p>
 <p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
@@ -309,7 +309,7 @@ QTextCodec::setCodecForLocale(...)
 <p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
 <p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 

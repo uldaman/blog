@@ -66,72 +66,77 @@
 </li>
 </ul>
 </div>
-<h1 id="1-count"><a name="user-content-1-count" href="#1-count" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. count</h1>
+<h1 id="1-count">1. count</h1>
 <p>count 是最简单的聚合工具, 返回集合中的 Document 数量.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">count</span>()
-<span style="color: #0086b3">0</span>
-<span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;x&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">count</span>()
-<span style="color: #0086b3">1</span>
-<span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;x&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">2</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">count</span>()
-<span style="color: #0086b3">2</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span><span style="color: #f8f8f2">()</span>
+<span style="color: #ae81ff">0</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span><span style="color: #f8f8f2">()</span>
+<span style="color: #ae81ff">1</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span><span style="color: #f8f8f2">()</span>
+<span style="color: #ae81ff">2</span>
 </pre></div>
 
-<br>
+
+<p><br>
 count 和 find 一样, 也接受条件:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">count</span>({<span style="color: #183691">&#39;x&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>})
-<span style="color: #0086b3">1</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">})</span>
+<span style="color: #ae81ff">1</span>
 </pre></div>
 
-<br>
+
+<p><br>
 从结果可以看出，只有符合条件的文档参与了计算.</p>
-<h1 id="2-distinct"><a name="user-content-2-distinct" href="#2-distinct" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. distinct</h1>
+<h1 id="2-distinct">2. distinct</h1>
 <p>distinct 用来统计集合中给定 key 所有不同的值.</p>
 <p>插入 4 条测试数据(请留意Age字段):</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;name&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;Ada&#39;</span>, <span style="color: #183691">&#39;age&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;name&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;Fred&#39;</span>, <span style="color: #183691">&#39;age&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">35</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;name&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;Andy&#39;</span>, <span style="color: #183691">&#39;age&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">35</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;name&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;Susan&#39;</span>, <span style="color: #183691">&#39;age&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">60</span>})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;Ada&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;Fred&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">35</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;Andy&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">35</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;Susan&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">60</span><span style="color: #f8f8f2">})</span>
 </pre></div>
 
-<br>
+
+<p><br>
 distinct 命令必须指定集合名称和需要统计的字段, 如: age</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">runCommand</span>({<span style="color: #183691">&quot;distinct&quot;</span><span style="color: #A71D7E">:</span><span style="color: #183691">&quot;test&quot;</span>, <span style="color: #183691">&quot;key&quot;</span><span style="color: #A71D7E">:</span><span style="color: #183691">&quot;age&quot;</span>})
-{
-        <span style="color: #183691">&quot;values&quot;</span> <span style="color: #A71D7E">:</span> [
-                <span style="color: #0086b3">20</span>,
-                <span style="color: #0086b3">35</span>,
-                <span style="color: #0086b3">60</span>
-        ],
-        <span style="color: #183691">&quot;stats&quot;</span> <span style="color: #A71D7E">:</span> {
-                <span style="color: #183691">&quot;n&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">4</span>,
-                <span style="color: #183691">&quot;nscanned&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">4</span>,
-                <span style="color: #183691">&quot;nscannedObjects&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">4</span>,
-                <span style="color: #183691">&quot;timems&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>,
-                <span style="color: #183691">&quot;cursor&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;BasicCursor&quot;</span>
-        },
-        <span style="color: #183691">&quot;ok&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>
-}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">runCommand</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&quot;distinct&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;test&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;key&quot;</span><span style="color: #f92672">:</span><span style="color: #e6db74">&quot;age&quot;</span><span style="color: #f8f8f2">})</span>
+<span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&quot;values&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span>
+                <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #ae81ff">35</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #ae81ff">60</span>
+        <span style="color: #f8f8f2">],</span>
+        <span style="color: #e6db74">&quot;stats&quot;</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span>
+                <span style="color: #e6db74">&quot;n&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #e6db74">&quot;nscanned&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #e6db74">&quot;nscannedObjects&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #e6db74">&quot;timems&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+                <span style="color: #e6db74">&quot;cursor&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;BasicCursor&quot;</span>
+        <span style="color: #f8f8f2">},</span>
+        <span style="color: #e6db74">&quot;ok&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br></p>
-<h1 id="3-group"><a name="user-content-3-group" href="#3-group" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3. group</h1>
-<h2 id="31-group"><a name="user-content-31-group" href="#31-group" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.1 group 基础</h2>
+
+<p><br></p>
+<h1 id="3-group">3. group</h1>
+<h2 id="31-group">3.1 group 基础</h2>
 <p>group 聚合工具有些复杂:<br>
 先选定分组所依据的键, 此后 MongoDB 就会将集合中的数据, 依据 <strong>选定键的值的不同</strong> 分成若干组(即选定键的值相同的为一组), 然后可以通过聚合(运算)每一组内的文档, 产生一个结果文档.</p>
 <blockquote>
 <p>有点类似 <em>05、Mongodb Cursor</em> 中提到的 <strong>forEach()</strong> 方法和 <strong>map()</strong> 方法, 不同的是 group 会先根据指定 key 对要聚合的 Documents 进行分组, 而且它的运算也更复杂.</p>
 </blockquote>
 <p>先插入一点测试数据:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20&#39;</span>, <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20 03:20:40&#39;</span>, <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.23</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21&#39;</span>, <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21 11:28:00&#39;</span>, <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.27</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20&#39;</span>, <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20 05:00:00&#39;</span>, <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.10</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-22&#39;</span>, <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-22 05:26:00&#39;</span>, <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.30</span>})
-<span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">insert</span>({<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21&#39;</span>, <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21 08:34:00&#39;</span>, <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.01</span>})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20 03:20:40&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.23</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21 11:28:00&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.27</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20 05:00:00&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.10</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-22&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-22 05:26:00&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.30</span><span style="color: #f8f8f2">})</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">({</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21 08:34:00&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.01</span><span style="color: #f8f8f2">})</span>
 </pre></div>
 
-<br>
+
+<p><br>
 我们先分析下这几条测试数据:<br>
 根据 <strong>day</strong> 的不同, 上面插入的测试数据可以分为三组, 即: &lsquo;2016-04-20&rsquo;、&lsquo;2016-04-21&rsquo; 和 &lsquo;2016-04-22&rsquo;, 然后:<br>
 <strong>&lsquo;2016-04-20&rsquo;</strong> 这一组里, <strong>time</strong> 最新的为 <strong>&lsquo;2016-04-20 05:00:00&rsquo;</strong><br>
@@ -139,104 +144,108 @@ distinct 命令必须指定集合名称和需要统计的字段, 如: age</p>
 <strong>&lsquo;2016-04-22&rsquo;</strong> 这一组里, <strong>time</strong> 最新的为 <strong>&lsquo;2016-04-22 05:26:00&rsquo;</strong><br></p>
 <p>那么, Mongodb 的 <strong>group</strong> 工具就可以完成上面的这种功能.<br>
 可以将 <strong>day</strong> 作为 <strong>group</strong> 的分组键, 然后取出 <strong>time</strong> 键值为最新时间的文档, 同时也取出该文档的 <strong>price</strong> 键值.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">group</span>({
-    <span style="color: #183691">&#39;key&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">true</span>}, <span style="color: #999988; font-style: italic">// 如果是多个字段, 可以为 {&#39;f1&#39;: true,&#39;f2&#39;: true}</span>
-    <span style="color: #183691">&#39;initial&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;0&#39;</span>}, <span style="color: #999988; font-style: italic">// initial 表示 $reduce 函数参数 prev 的初始值</span>
-    <span style="color: #183691">&#39;$reduce&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">doc</span>, <span style="color: #333333">prev</span>) { <span style="color: #999988; font-style: italic">// $reduce 方法接受两个参数, doc 正在迭代的当前 document, prev 表示上一次迭代的结果 document</span>
-        <span style="color: #A71D5D">if</span> (<span style="color: #333333">doc</span>.<span style="color: #333333">time</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #333333">prev</span>.<span style="color: #333333">time</span>) {
-            <span style="color: #333333">prev</span>.<span style="color: #333333">day</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">day</span>;
-            <span style="color: #333333">prev</span>.<span style="color: #333333">price</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">price</span>;
-            <span style="color: #333333">prev</span>.<span style="color: #333333">time</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">time</span>;
-        }
-    }
-})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">group</span><span style="color: #f8f8f2">({</span>
+    <span style="color: #e6db74">&#39;key&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// 如果是多个字段, 可以为 {&#39;f1&#39;: true,&#39;f2&#39;: true}</span>
+    <span style="color: #e6db74">&#39;initial&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;0&#39;</span><span style="color: #f8f8f2">},</span> <span style="color: #75715e">// initial 表示 $reduce 函数参数 prev 的初始值</span>
+    <span style="color: #e6db74">&#39;$reduce&#39;</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span> <span style="color: #75715e">// $reduce 方法接受两个参数, doc 正在迭代的当前 document, prev 表示上一次迭代的结果 document</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span> <span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">day</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">day</span><span style="color: #f8f8f2">;</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">price</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">price</span><span style="color: #f8f8f2">;</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">})</span>
 
-<span style="color: #999988; font-style: italic">// 下面是 group 的返回结果, 可以看到就是 $reduce 方法中最终 prev 的数据</span>
-[
-    {
-        <span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20&#39;</span>,
-        <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-20 05:00:00&#39;</span>,
-        <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.1</span>
-    },
-    {
-        <span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21&#39;</span>,
-        <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-21 11:28:00&#39;</span>,
-        <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.27</span>
-    },
-    {
-        <span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-22&#39;</span>,
-        <span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;2016-04-22 05:26:00&#39;</span>,
-        <span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">4.3</span>
-    }
-]
+<span style="color: #75715e">// 下面是 group 的返回结果, 可以看到就是 $reduce 方法中最终 prev 的数据</span>
+<span style="color: #f8f8f2">[</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-20 05:00:00&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.1</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-21 11:28:00&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.27</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-22&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;2016-04-22 05:26:00&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">4.3</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">]</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>在某些时候, 你还可以使用 <strong>condition</strong> 参数 (也可以用 <strong>cond</strong> 参数 或者 <strong>q</strong> 参数, 功能是一样的) 来过滤要运算的文档, 就像 <strong>find()</strong> 方法的 <strong>query</strong> 一样.</p>
 <p>例如, 我现在只想运算 <strong>price &gt; 4.1</strong> 的文档:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">group</span>({
-    <span style="color: #183691">&#39;key&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;day&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">true</span>},
-    <span style="color: #183691">&#39;initial&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;time&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;0&#39;</span>},
-    <span style="color: #183691">&#39;$reduce&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">doc</span>, <span style="color: #333333">prev</span>) {
-        <span style="color: #A71D5D">if</span> (<span style="color: #333333">doc</span>.<span style="color: #333333">time</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #333333">prev</span>.<span style="color: #333333">time</span>) {
-            <span style="color: #333333">prev</span>.<span style="color: #333333">day</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">day</span>;
-            <span style="color: #333333">prev</span>.<span style="color: #333333">price</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">price</span>;
-            <span style="color: #333333">prev</span>.<span style="color: #333333">time</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">doc</span>.<span style="color: #333333">time</span>;
-        }
-    },
-    <span style="color: #183691">&#39;condition&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;price&#39;</span><span style="color: #A71D7E">:</span> {<span style="color: #183691">&#39;$gt&#39;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&#39;4.1&#39;</span>}} <span style="color: #999988; font-style: italic">// 只运算 price &gt; 4.1 的文档</span>
-})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">group</span><span style="color: #f8f8f2">({</span>
+    <span style="color: #e6db74">&#39;key&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;day&#39;</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #e6db74">&#39;initial&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;time&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;0&#39;</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #e6db74">&#39;$reduce&#39;</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span> <span style="color: #f92672">&gt;</span> <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">day</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">day</span><span style="color: #f8f8f2">;</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">price</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">price</span><span style="color: #f8f8f2">;</span>
+            <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">time</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #e6db74">&#39;condition&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;price&#39;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;$gt&#39;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;4.1&#39;</span><span style="color: #f8f8f2">}}</span> <span style="color: #75715e">// 只运算 price &gt; 4.1 的文档</span>
+<span style="color: #f8f8f2">})</span>
 </pre></div>
 
-<br></p>
-<h2 id="32"><a name="user-content-32" href="#32" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.2 完成器</h2>
+
+<p><br></p>
+<h2 id="32">3.2 完成器</h2>
 <p>通过上面已经知道 <strong>group</strong> 工具最终会返回一个结果文档, 但有的时候, 我们可能不需要整个结果文档, 而是需要对这个结果再运算, 然后得到一个值, 可以是字符串, 可以是数字, 我们只想要这个结果值, 那怎么办?<br>
 或者有的时候, 我们是想要在结果文档中添加一个新字段, 那又该怎么办?</p>
 <p><strong>group</strong> 工具的 <strong>finalize</strong> (完成器) 参数就是用来对 <strong>group</strong> 返回的结果文档再加工的&hellip;</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">test</span>.<span style="color: #333333">group</span>({
-    <span style="color: #333333">key</span><span style="color: #A71D7E">:</span> { <span style="color: #333333">day</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">true</span>},
-    <span style="color: #333333">initial</span><span style="color: #A71D7E">:</span> {<span style="color: #333333">count</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>},
-    <span style="color: #333333">reduce</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">obj</span>, <span style="color: #333333">prev</span>) {
-        <span style="color: #333333">prev</span>.<span style="color: #333333">count</span><span style="color: #A71D7E">++</span>;
-    },
-    <span style="color: #333333">finalize</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">out</span>) { <span style="color: #999988; font-style: italic">// $finalize 方法接受一个参数, 即 $reduce 返回的结果文档, 这里做测试用, 仅在结果文档中新增一个键</span>
-        <span style="color: #333333">out</span>.<span style="color: #333333">scaledCount</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">out</span>.<span style="color: #333333">count</span> <span style="color: #A71D7E">*</span> <span style="color: #0086b3">10</span>
-    }
-})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">test</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">group</span><span style="color: #f8f8f2">({</span>
+    <span style="color: #a6e22e">key</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">day</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #a6e22e">initial</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">count</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">},</span>
+    <span style="color: #a6e22e">reduce</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">obj</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #a6e22e">finalize</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">out</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span> <span style="color: #75715e">// $finalize 方法接受一个参数, 即 $reduce 返回的结果文档, 这里做测试用, 仅在结果文档中新增一个键</span>
+        <span style="color: #a6e22e">out</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">scaledCount</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">out</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">count</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">10</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">})</span>
 
-[
-    {
-        <span style="color: #183691">&quot;day&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;2012-08-20&quot;</span>,
-        <span style="color: #183691">&quot;count&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">2</span>,
-        <span style="color: #183691">&quot;scaledCount&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>
-    },
-    {
-        <span style="color: #183691">&quot;day&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;2012-08-21&quot;</span>,
-        <span style="color: #183691">&quot;count&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">2</span>,
-        <span style="color: #183691">&quot;scaledCount&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>
-    },
-    {
-        <span style="color: #183691">&quot;day&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;2012-08-22&quot;</span>,
-        <span style="color: #183691">&quot;count&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>,
-        <span style="color: #183691">&quot;scaledCount&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">10</span>
-    }
-]
+<span style="color: #f8f8f2">[</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&quot;day&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;2012-08-20&quot;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;count&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;scaledCount&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&quot;day&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;2012-08-21&quot;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;count&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;scaledCount&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&quot;day&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;2012-08-22&quot;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;count&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #e6db74">&quot;scaledCount&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">10</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">]</span>
 </pre></div>
 
-<br></p>
-<h2 id="33"><a name="user-content-33" href="#33" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.3 将函数做为分组依据</h2>
+
+<p><br></p>
+<h2 id="33">3.3 将函数做为分组依据</h2>
 <p>在 3.1 和 3.2 中我们都是用 <strong>day</strong> 来做为分组依据的, 但在某些情况下, 单纯的使用字段来做为分组依据可能实现不了我们实际想要的功能.</p>
 <p>例如, 假设存在一个保存了文章列表的集合, 集合里面有个 <strong>tag</strong> 字段, 用来标识文章的标签, 此时我们应该忽略 tag 值的大小写, 因为 AAA 和 aaa 表示的都是同一个标签&hellip;但如果直接用 <strong>tag</strong> 做分组依据, AAA 和 aaa 就会被分为不同组....</p>
 <p>为了消除这个问题, 就要定义一个__函数__来确定文档分组的依据, 定义分组函数要用到 <strong>$keyf</strong>, 注意, 不是 <strong>key</strong>.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">blog</span>.<span style="color: #333333">group</span>({
-    <span style="color: #183691">&#39;$keyf&#39;</span> <span style="color: #A71D7E">:</span> <span style="color: #A71D5D">function</span>(<span style="color: #333333">x</span>) { <span style="color: #999988; font-style: italic">// $keyf 方法接收一个参数, 表示当前集合的文档, 要返回一个值, 表示分组依据, 这里就把 tag 转成小写后的 值做为分组依据</span>
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span>.<span style="color: #333333">tag</span>.<span style="color: #333333">toLowerCase</span>();
-    },
-    ......
-})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">blog</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">group</span><span style="color: #f8f8f2">({</span>
+    <span style="color: #e6db74">&#39;$keyf&#39;</span> <span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">x</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span> <span style="color: #75715e">// $keyf 方法接收一个参数, 表示当前集合的文档, 要返回一个值, 表示分组依据, 这里就把 tag 转成小写后的 值做为分组依据</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">x</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">tag</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">toLowerCase</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">......</span>
+<span style="color: #f8f8f2">})</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a>
 
 </p>

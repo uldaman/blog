@@ -61,45 +61,49 @@
 <li><a href="#4-systemprofile">4. system.profile</a></li>
 </ul>
 </div>
-<h2 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1. 概述</h2>
+<h2 id="1">1. 概述</h2>
 <p>Mongodb Profile 用于记录慢查询, 默认记录在 system.profile 中.</p>
 <p>但 system.profile 是固定大小的 collection, 默认大小是 1M, 如果要修改该大小， 用下面的方法:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">setProfilingLevel</span>(<span style="color: #0086b3">0</span>)
-<span style="color: #333333">db</span>.<span style="color: #333333">system</span>.<span style="color: #333333">profile</span>.<span style="color: #333333">drop</span>()
-<span style="color: #333333">db</span>.<span style="color: #333333">createCollection</span>( <span style="color: #183691">&quot;system.profile&quot;</span>, { <span style="color: #333333">capped</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">true</span>, <span style="color: #333333">size</span><span style="color: #A71D7E">:</span><span style="color: #0086b3">4096000</span> } )
-<span style="color: #333333">db</span>.<span style="color: #333333">setProfilingLevel</span>(<span style="color: #0086b3">1</span>)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">setProfilingLevel</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">system</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">profile</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">drop</span><span style="color: #f8f8f2">()</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">createCollection</span><span style="color: #f8f8f2">(</span> <span style="color: #e6db74">&quot;system.profile&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">capped</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">size</span><span style="color: #f92672">:</span><span style="color: #ae81ff">4096000</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">setProfilingLevel</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br></p>
-<h2 id="2-profile"><a name="user-content-2-profile" href="#2-profile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2. 查看当前 Profile</h2>
+
+<p><br></p>
+<h2 id="2-profile">2. 查看当前 Profile</h2>
 <p>查看当前是否开启 Profile 功能用命令:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">getProfilingLevel</span>()
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">getProfilingLevel</span><span style="color: #f8f8f2">()</span>
 </pre></div>
 
-<br>
+
+<p><br>
 返回 Level 等级, 返回值:</p>
 <ul>
 <li>0 关闭</li>
 <li>1 记录慢命令, 默认为大于 100 ms</li>
 <li>2 记录全部</li>
 </ul>
-<h2 id="3profiling"><a name="user-content-3profiling" href="#3profiling" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.开启profiling功能</h2>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">setProfilingLevel</span>(<span style="color: #0086b3">1</span>,<span style="color: #0086b3">1000</span>)
-{ <span style="color: #183691">&quot;was&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>, <span style="color: #183691">&quot;slowms&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>, <span style="color: #183691">&quot;ok&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span> }
+<h2 id="3profiling">3.开启profiling功能</h2>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">setProfilingLevel</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">1000</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;was&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;slowms&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;ok&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 第一个参数表示 Profile 的级别, 第二个参数是定义慢查询的阈值</p>
-<h2 id="4-systemprofile"><a name="user-content-4-systemprofile" href="#4-systemprofile" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4. system.profile</h2>
+<h2 id="4-systemprofile">4. system.profile</h2>
 <p>通过 db.system.profile.find() 查看当前的监控日志.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">system</span>.<span style="color: #333333">profile</span>.<span style="color: #333333">find</span>()
-{ <span style="color: #183691">&quot;ts&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">ISODate</span>(<span style="color: #183691">&quot;2014-05-05T02:45:10.359Z&quot;</span>), <span style="color: #183691">&quot;info&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;query test.system.profile reslen:36 nscanned:0  \nquery: {}  nreturned:0 bytes:20&quot;</span>, <span style="color: #183691">&quot;millis&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span> }
-{ <span style="color: #183691">&quot;ts&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">ISODate</span>(<span style="color: #183691">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #183691">&quot;info&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;query test.$cmd ntoreturn:1 command: { count: \&quot;system.profile\&quot;, query: {}, fields: {} } reslen:64 bytes:48&quot;</span>, <span style="color: #183691">&quot;millis&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span> }
-{ <span style="color: #183691">&quot;ts&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">ISODate</span>(<span style="color: #183691">&quot;2014-05-05T02:45:13.562Z&quot;</span>), <span style="color: #183691">&quot;info&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;query test.system.profile ntoreturn:5 reslen:36 nscanned:2  \nquery: { query: { millis: { $gt: 0.0 } }, orderby: { $natural: -1.0 } }  nreturned:0 bytes:20&quot;</span>, <span style="color: #183691">&quot;millis&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span> }
-{ <span style="color: #183691">&quot;ts&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #333333">ISODate</span>(<span style="color: #183691">&quot;2014-05-05T02:45:17.171Z&quot;</span>), <span style="color: #183691">&quot;info&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;query test.emp reslen:261 nscanned:5  \nquery: {}  nreturned:5 bytes:245&quot;</span>, <span style="color: #183691">&quot;millis&quot;</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span> }
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">system</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">profile</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;ts&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;2014-05-05T02:45:10.359Z&quot;</span><span style="color: #f8f8f2">),</span> <span style="color: #e6db74">&quot;info&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;query test.system.profile reslen:36 nscanned:0  \nquery: {}  nreturned:0 bytes:20&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;millis&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;ts&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;2014-05-05T02:45:13.562Z&quot;</span><span style="color: #f8f8f2">),</span> <span style="color: #e6db74">&quot;info&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;query test.$cmd ntoreturn:1 command: { count: \&quot;system.profile\&quot;, query: {}, fields: {} } reslen:64 bytes:48&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;millis&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;ts&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;2014-05-05T02:45:13.562Z&quot;</span><span style="color: #f8f8f2">),</span> <span style="color: #e6db74">&quot;info&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;query test.system.profile ntoreturn:5 reslen:36 nscanned:2  \nquery: { query: { millis: { $gt: 0.0 } }, orderby: { $natural: -1.0 } }  nreturned:0 bytes:20&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;millis&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">{</span> <span style="color: #e6db74">&quot;ts&quot;</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">ISODate</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;2014-05-05T02:45:17.171Z&quot;</span><span style="color: #f8f8f2">),</span> <span style="color: #e6db74">&quot;info&quot;</span> <span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;query test.emp reslen:261 nscanned:5  \nquery: {}  nreturned:5 bytes:245&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;millis&quot;</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span> <span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 返回值说明:</p>
 <ul>
 <li>ts: 该命令执行的时间</li>

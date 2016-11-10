@@ -64,8 +64,8 @@
 <li><a href="#hyperloglog">HyperLogLog</a></li>
 </ul>
 </div>
-<p>命令速查: <a href="http://doc.redisfans.com/"><a href="http://doc.redisfans.com/"><a href="http://doc.redisfans.com/">http://doc.redisfans.com/</a></a></a></p>
-<h1 id="key"><a name="user-content-key" href="#key" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Key 操作</h1>
+<p>命令速查: <a href="http://doc.redisfans.com/">http://doc.redisfans.com/</a></p>
+<h1 id="key">Key 操作</h1>
 <p>redis 中不管保存什么类型的数据, 它都要对应一个 key, 先看看 key 的命令有哪些.</p>
 <ul>
 <li><strong>keys</strong>: 返回所有符合给定模式(正则)的 key<ul>
@@ -172,7 +172,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="string"><a name="user-content-string" href="#string" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>String</h1>
+<h1 id="string">String</h1>
 <p>一个键最多存储 <strong>512 MB</strong>.</p>
 <blockquote>
 <p>注意: 所有的 String 命令, 设置 value 时要用引号包起来(数字除外, 输入数字 redis 会自动在内部转化成 str)</p>
@@ -326,7 +326,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="hash"><a name="user-content-hash" href="#hash" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hash</h1>
+<h1 id="hash">Hash</h1>
 <p>Redis Hash 其实是 key 的 value 中保存的是一个 HashMap, 如果该 Map 的成员数比较少, 则会采用类似一维线性的紧凑格式来存储该 Map, 即省去了大量指针的内存开销, 这个参数控制对应在 redis.conf 配置文件中下面 2 项:</p>
 <ul>
 <li>hash-max-zipmap-entries 64</li>
@@ -415,10 +415,10 @@
 </ul>
 </li>
 </ul>
-<h1 id="list"><a name="user-content-list" href="#list" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>List</h1>
+<h1 id="list">List</h1>
 <p>List 型的 value 最多存储 (2^32 - 1) 个元素</p>
 <p>List 类型的数据的弊端和常规 List 一样 -- 通过下标(索引)来访问, 效率很低.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>list 就是数据结构中的双向链表, 因此它的内存空间可以是不连续的, 通过指针来进行数据的访问, 这个特点使得它的随即存取变的非常没有效率, 但它的 插入/删除、取首/尾数据 效率高.
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>list 就是数据结构中的双向链表, 因此它的内存空间可以是不连续的, 通过指针来进行数据的访问, 这个特点使得它的随即存取变的非常没有效率, 但它的 插入/删除、取首/尾数据 效率高.
 </pre></div>
 
 
@@ -551,7 +551,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="set"><a name="user-content-set" href="#set" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Set</h1>
+<h1 id="set">Set</h1>
 <p>可以理解成一种特殊的 list.</p>
 <p>但和 List 类型不同的是, Set 集合中不允许出现重复的元素, 这一点和 C++ 标准库中的 set 容器是完全相同的.</p>
 <p>和 List 类型相比, Set 类型在功能上还存在着一个非常重要的特性, 即完成多个 Set 之间的聚合计算操作, 如并集、差集.</p>
@@ -654,7 +654,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="sorted-set"><a name="user-content-sorted-set" href="#sorted-set" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Sorted Set</h1>
+<h1 id="sorted-set">Sorted Set</h1>
 <p>相当于给 set 中的元素都关联一个权值, SortedSet 根据权值可以为集合进行排序.</p>
 <ul>
 <li><strong>zrank</strong>: 获取元素的排名(下标)<ul>
@@ -792,9 +792,9 @@
 </ul>
 </li>
 </ul>
-<h1 id="hyperloglog"><a name="user-content-hyperloglog" href="#hyperloglog" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>HyperLogLog</h1>
+<h1 id="hyperloglog">HyperLogLog</h1>
 <p>这是 Redis 在 2.8.9 版本新添加的类型.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>需求:
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>需求:
 记录网站每天获得的独立 IP 数量
 
 2.8.9 的解决方案:

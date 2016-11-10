@@ -69,7 +69,7 @@
 <li>SUM() 求和</li>
 </ul>
 <p>聚集函数常常和分组一起工作.</p>
-<h1 id="group-by"><a name="user-content-group-by" href="#group-by" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>GROUP BY 用法解析</h1>
+<h1 id="group-by">GROUP BY 用法解析</h1>
 <p><code>GROUP BY</code> 语法可以根据给定数据列的每个成员对查询结果进行分组统计, 最终得到一个分组汇总表.</p>
 <p><code>SELECT</code> 子句中的列名必须为分组列或列函数 (列函数对于 <code>GROUP BY</code> 子句定义的每个组各返回一个结果.).</p>
 <p>例子:</p>
@@ -153,10 +153,11 @@
 </tbody>
 </table>
 <p>例如, 我想列出每个部门最高薪水的结果, sql 语句如下:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">STAFF</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">SELECT</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #66d9ef">MAX</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MAXIMUM</span> <span style="color: #66d9ef">FROM</span> <span style="color: #f8f8f2">STAFF</span> <span style="color: #66d9ef">GROUP</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span>
 </pre></div>
 
-<br>
+
+<p><br>
 查询结果如下:</p>
 <table>
 <thead>
@@ -189,10 +190,11 @@
 <p>注意: 计算的是每个部门 (由 <code>GROUP BY</code> 子句定义的组) 而不是整个公司的 <code>MAX(SALARY)</code>.</p>
 </blockquote>
 <p>例如, 查询每个部门的总的薪水数:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">sum</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">total</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">STAFF</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">SELECT</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #66d9ef">sum</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">total</span> <span style="color: #66d9ef">FROM</span> <span style="color: #f8f8f2">STAFF</span> <span style="color: #66d9ef">GROUP</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span>
 </pre></div>
 
-<br>
+
+<p><br>
 查询结果如下:</p>
 <table>
 <thead>
@@ -216,13 +218,14 @@
 </tr>
 </tbody>
 </table>
-<h1 id="where-group-by"><a name="user-content-where-group-by" href="#where-group-by" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>将 WHERE 子句与 GROUP BY 子句一起使用</h1>
-<p>分组查询可以在形成组和计算列函数**之前**使用具有消除非限定行的标准 <code>WHERE</code> 子句 (必须在 <code>GROUP BY</code> 子句之前指定 <code>WHERE</code> 子句).</p>
+<h1 id="where-group-by">将 WHERE 子句与 GROUP BY 子句一起使用</h1>
+<p>分组查询可以在形成组和计算列函数<strong>之前</strong>使用具有消除非限定行的标准 <code>WHERE</code> 子句 (必须在 <code>GROUP BY</code> 子句之前指定 <code>WHERE</code> 子句).</p>
 <p>例如, 查询公司 2010 年入职的各个部门每个级别里的最高薪水:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">WHERE</span> <span style="color: #333333">HIREDATE</span> <span style="color: #A71D7E">&gt;</span> <span style="color: #183691">&#39;2010-01-01&#39;</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>, <span style="color: #333333">EDLEVEL</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">SELECT</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #f8f8f2">EDLEVEL,</span> <span style="color: #66d9ef">MAX</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MAXIMUM</span> <span style="color: #66d9ef">FROM</span> <span style="color: #f8f8f2">staff</span> <span style="color: #66d9ef">WHERE</span> <span style="color: #f8f8f2">HIREDATE</span> <span style="color: #f92672">&gt;</span> <span style="color: #e6db74">&#39;2010-01-01&#39;</span> <span style="color: #66d9ef">GROUP</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #f8f8f2">EDLEVEL</span> <span style="color: #66d9ef">ORDER</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #f8f8f2">EDLEVEL</span>
 </pre></div>
 
-<br>
+
+<p><br>
 查询结果如下:</p>
 <table>
 <thead>
@@ -258,16 +261,17 @@
 <blockquote>
 <p>注意: 在 <code>SELECT</code> 语句中指定的每个列名也在 <code>GROUP BY</code> 子句中提到(未在这两个地方提到的列名将产生错误).</p>
 </blockquote>
-<p><code>GROUP BY</code> 子句对 <code>DEPT</code> 和 <code>EDLEVEL</code> 的每个**唯一组合**各返回一行.</p>
-<h1 id="group-by-having"><a name="user-content-group-by-having" href="#group-by-having" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>在 GROUP BY 子句之后使用 HAVING 子句</h1>
+<p><code>GROUP BY</code> 子句对 <code>DEPT</code> 和 <code>EDLEVEL</code> 的每个<strong>唯一组合</strong>各返回一行.</p>
+<h1 id="group-by-having">在 GROUP BY 子句之后使用 HAVING 子句</h1>
 <p><code>where</code> 子句的作用是在对查询结果进行分组前, 将不符合 <code>where</code> 条件的行去掉, 即在分组之前过滤数据, 条件中不能包含聚组函数, 使用where条件显示特定的行.</p>
 <p><code>having</code> 子句的作用是筛选满足条件的组, 即在分组之后过滤数据, 条件中经常包含聚集函数, 使用 <code>having</code> 条件显示特定的组, 也可以使用多个分组标准进行分组.</p>
 <p><code>having</code> 子句被限制子已经在SELECT语句中定义的列和聚合表达式上.</p>
 <p>例如: 寻找雇员数超过2个的部门的最高和最低薪水:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span>, <span style="color: #A71D5D">MIN</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MINIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span> <span style="color: #A71D5D">HAVING</span> <span style="color: #A71D5D">COUNT</span>(<span style="color: #A71D7E">*</span>) <span style="color: #A71D7E">&gt;</span><span style="color: #0086b3">2</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">SELECT</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #66d9ef">MAX</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MAXIMUM,</span> <span style="color: #66d9ef">MIN</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MINIMUM</span> <span style="color: #66d9ef">FROM</span> <span style="color: #f8f8f2">staff</span> <span style="color: #66d9ef">GROUP</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span> <span style="color: #66d9ef">HAVING</span> <span style="color: #66d9ef">COUNT</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&gt;</span><span style="color: #ae81ff">2</span> <span style="color: #66d9ef">ORDER</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span>
 </pre></div>
 
-<br>
+
+<p><br>
 查询结果如下:</p>
 <table>
 <thead>
@@ -291,10 +295,11 @@
 </tbody>
 </table>
 <p>例如: 寻找雇员平均工资大于3000的部门的最高和最低薪水:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">SELECT</span> <span style="color: #333333">DEPT</span>, <span style="color: #A71D5D">MAX</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MAXIMUM</span>, <span style="color: #A71D5D">MIN</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D5D">AS</span> <span style="color: #333333">MINIMUM</span> <span style="color: #A71D5D">FROM</span> <span style="color: #333333">staff</span> <span style="color: #A71D5D">GROUP</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span> <span style="color: #A71D5D">HAVING</span> <span style="color: #A71D5D">AVG</span>(<span style="color: #333333">SALARY</span>) <span style="color: #A71D7E">&gt;</span><span style="color: #0086b3">3000</span> <span style="color: #A71D5D">ORDER</span> <span style="color: #A71D5D">BY</span> <span style="color: #333333">DEPT</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">SELECT</span> <span style="color: #f8f8f2">DEPT,</span> <span style="color: #66d9ef">MAX</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MAXIMUM,</span> <span style="color: #66d9ef">MIN</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #66d9ef">AS</span> <span style="color: #f8f8f2">MINIMUM</span> <span style="color: #66d9ef">FROM</span> <span style="color: #f8f8f2">staff</span> <span style="color: #66d9ef">GROUP</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span> <span style="color: #66d9ef">HAVING</span> <span style="color: #66d9ef">AVG</span><span style="color: #f8f8f2">(SALARY)</span> <span style="color: #f92672">&gt;</span><span style="color: #ae81ff">3000</span> <span style="color: #66d9ef">ORDER</span> <span style="color: #66d9ef">BY</span> <span style="color: #f8f8f2">DEPT</span>
 </pre></div>
 
-<br>
+
+<p><br>
 查询结果如下:</p>
 <table>
 <thead>

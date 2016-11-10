@@ -75,7 +75,7 @@ manage.py makemigrations &ndash; 配合上 syncdb
 manage.py migrate &ndash; 配合上 syncdb</p>
 <p>最简单案例:</p>
 <p>打开 web 里的 views.py, 定义 index 方法:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
 
 &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your views here.&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index(request):
@@ -84,7 +84,7 @@ manage.py migrate &ndash; 配合上 syncdb</p>
 
 
 <p>打开 工程 里的 urls.py, 定义 url 映射:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index
 urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, include(admin.site.urls)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^index/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, index),
@@ -92,7 +92,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 </pre></div>
 
 
-<p>现在启动服务, 在浏览器里输入: <a href="http://127.0.0.1:8000/index"><a href="http://127.0.0.1:8000/index"><a href="http://127.0.0.1:8000/index">http://127.0.0.1:8000/index</a></a></a> 就能看到效果了.注意, 如果不自定义 urlpatterns , 那么 <a href="http://127.0.0.1:8000"><a href="http://127.0.0.1:8000"><a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></a></a> 会返回一个默认的页面, 如果定义了 urlpatterns 就不会返回默认页面.
+<p>现在启动服务, 在浏览器里输入: <a href="http://127.0.0.1:8000/index">http://127.0.0.1:8000/index</a> 就能看到效果了.注意, 如果不自定义 urlpatterns , 那么 <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> 会返回一个默认的页面, 如果定义了 urlpatterns 就不会返回默认页面.
 egc</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

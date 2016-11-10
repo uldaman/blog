@@ -56,46 +56,49 @@
     <p>当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(<strong>generator</strong>)表达式而不是列表解析;</p>
 <p>生成器表达式的语法和列表解析一样, 只不过生成器表达式是被（）括起来的, 而不是[ ], 如下:</p>
 <p><strong>(exp for iter_var in iterable)</strong></p>
-<p><strong>(exp for iter_var in iterable if cond_exp)</strong>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> (<span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">10</span>))
-<span style="color: #A71D7E">&gt;&gt;&gt;</span> <span style="color: #333333">g</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">generator</span> <span style="color: #ED6A43">object</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">genexpr</span><span style="color: #A71D7E">&gt;</span> <span style="color: #333333">at</span> <span style="color: #0086b3">0x1022ef630</span><span style="color: #A71D7E">&gt;</span>
+<p><strong>(exp for iter_var in iterable if cond_exp)</strong></p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">g</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(x</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">x</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">))</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">g</span> <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">generator</span> <span style="color: #f8f8f2">object</span> <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">genexpr</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">at</span> <span style="color: #ae81ff">0x1022ef630</span><span style="color: #f92672">&gt;</span>
 </pre></div>
-</p>
-<p>如此,  我们得到的就是一个生成器, 如果想要一个一个提取元素出来, 可以通过 <strong>next()</strong> 函数获得 <strong>generator</strong> 的下一个返回值:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
-<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">0</span>
-<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
-<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">1</span>
-<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
-<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">4</span>
-<span style="color: #A71D7E">.</span>
-<span style="color: #A71D7E">.</span>
-<span style="color: #A71D7E">.</span>
-<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
-<span style="color: #A71D7E">&gt;&gt;&gt;</span><span style="color: #0086b3">81</span>
-<span style="color: #ED6A43">next</span>(<span style="color: #333333">g</span>)
-<span style="color: #333333">Traceback</span> (<span style="color: #333333">most</span> <span style="color: #333333">recent</span> <span style="color: #333333">call</span> <span style="color: #333333">last</span>):
-    <span style="color: #333333">File</span> <span style="color: #183691">&quot;&lt;stdin&gt;&quot;</span>, <span style="color: #333333">line</span> <span style="color: #0086b3">1</span>, <span style="color: #A71D7E">in</span> <span style="color: #A71D7E">&lt;</span><span style="color: #333333">module</span><span style="color: #A71D7E">&gt;</span>
-<span style="color: #990000">StopIteration</span>
-</pre></div>
-</p>
-<p>或者使用 <strong>for</strong> 循环遍历, 因为 <strong>generator</strong> 也是可迭代对象:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">g</span> <span style="color: #A71D7E">=</span> (<span style="color: #333333">x</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">x</span> <span style="color: #A71D5D">for</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">in</span> <span style="color: #ED6A43">range</span>(<span style="color: #0086b3">10</span>))
-<span style="color: #A71D5D">for</span> <span style="color: #333333">n</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">g</span>:
-    <span style="color: #A71D5D">print</span>(<span style="color: #333333">n</span>)
 
-<span style="color: #0086b3">0</span>
-<span style="color: #0086b3">1</span>
-<span style="color: #0086b3">4</span>
-<span style="color: #0086b3">9</span>
-<span style="color: #0086b3">16</span>
-<span style="color: #0086b3">25</span>
-<span style="color: #0086b3">36</span>
-<span style="color: #0086b3">49</span>
-<span style="color: #0086b3">64</span>
-<span style="color: #0086b3">81</span>
+
+<p>如此,  我们得到的就是一个生成器, 如果想要一个一个提取元素出来, 可以通过 <strong>next()</strong> 函数获得 <strong>generator</strong> 的下一个返回值:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">next(g)</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span><span style="color: #ae81ff">0</span>
+<span style="color: #f8f8f2">next(g)</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span><span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">next(g)</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span><span style="color: #ae81ff">4</span>
+<span style="color: #f92672">.</span>
+<span style="color: #f92672">.</span>
+<span style="color: #f92672">.</span>
+<span style="color: #f8f8f2">next(g)</span>
+<span style="color: #f92672">&gt;&gt;&gt;</span><span style="color: #ae81ff">81</span>
+<span style="color: #f8f8f2">next(g)</span>
+<span style="color: #f8f8f2">Traceback</span> <span style="color: #f8f8f2">(most</span> <span style="color: #f8f8f2">recent</span> <span style="color: #f8f8f2">call</span> <span style="color: #f8f8f2">last):</span>
+    <span style="color: #f8f8f2">File</span> <span style="color: #e6db74">&quot;&lt;stdin&gt;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">line</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">in</span> <span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">module</span><span style="color: #f92672">&gt;</span>
+<span style="color: #a6e22e">StopIteration</span>
 </pre></div>
-</p>
+
+
+<p>或者使用 <strong>for</strong> 循环遍历, 因为 <strong>generator</strong> 也是可迭代对象:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">g</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(x</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">x</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">))</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">g:</span>
+    <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(n)</span>
+
+<span style="color: #ae81ff">0</span>
+<span style="color: #ae81ff">1</span>
+<span style="color: #ae81ff">4</span>
+<span style="color: #ae81ff">9</span>
+<span style="color: #ae81ff">16</span>
+<span style="color: #ae81ff">25</span>
+<span style="color: #ae81ff">36</span>
+<span style="color: #ae81ff">49</span>
+<span style="color: #ae81ff">64</span>
+<span style="color: #ae81ff">81</span>
+</pre></div>
+
+
 <p>生成器表达式并不真正创建数字列表, 而是返回一个生成器, 这个生成器在每次计算出一个条目后, 把这个条目“产生”(<strong>yield</strong>)出来;</p>
 <p>生成器表达式使用了“惰性计算”(lazy evaluation, 也有翻译为“延迟求值”, 我以为这种按需调用 call by need 的方式翻译为惰性更好一些), 只有在检索时才被赋值(evaluated), 所以在列表比较长的情况下使用更有效(节省内存).</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>

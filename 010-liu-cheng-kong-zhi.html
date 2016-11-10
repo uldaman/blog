@@ -53,73 +53,75 @@
 </h6>
 
 
-    <p>补充下以前用的比较少的**三元运算符**, 其它也没什么说的了..</p>
-<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>三元运算符</h2>
+    <p>补充下以前用的比较少的<strong>三元运算符</strong>, 其它也没什么说的了..</p>
+<h2 id="_1">三元运算符</h2>
 <p>expression1 <strong>?</strong> expression2 <strong>:</strong> expression3</p>
 <p>等同于:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">expression1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #333333">expression2</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D7E">}</span> <span style="color: #A71D5D">else</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #333333">expression3</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">expression1</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">expression2</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">expression3</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
 
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>流程控制的例子</h2>
-<p>判断季度
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">QuarterDemo1</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">nMonth</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">;</span>
-        <span style="color: #A71D5D">switch</span> <span style="color: #A71D7E">(</span><span style="color: #333333">nMonth</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">2</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">3</span><span style="color: #A71D7E">:</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;First Quarter&quot;</span><span style="color: #A71D7E">);</span>
-                <span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">4</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">5</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">6</span><span style="color: #A71D7E">:</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Second  Quarter&quot;</span><span style="color: #A71D7E">);</span>
-                <span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">7</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">8</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">9</span><span style="color: #A71D7E">:</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Third Quarter&quot;</span><span style="color: #A71D7E">);</span>
-                <span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">10</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">11</span><span style="color: #A71D7E">:</span>
-            <span style="color: #A71D5D">case</span> <span style="color: #0086b3">12</span><span style="color: #A71D7E">:</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Fourth Quarter&quot;</span><span style="color: #A71D7E">);</span>
-                <span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<h2 id="_2">流程控制的例子</h2>
+<p>判断季度</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">QuarterDemo1</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">nMonth</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">;</span>
+        <span style="color: #66d9ef">switch</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">nMonth</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">3</span><span style="color: #f92672">:</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;First Quarter&quot;</span><span style="color: #f92672">);</span>
+                <span style="color: #66d9ef">break</span><span style="color: #f92672">;</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">4</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">6</span><span style="color: #f92672">:</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Second  Quarter&quot;</span><span style="color: #f92672">);</span>
+                <span style="color: #66d9ef">break</span><span style="color: #f92672">;</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">7</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">8</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">9</span><span style="color: #f92672">:</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Third Quarter&quot;</span><span style="color: #f92672">);</span>
+                <span style="color: #66d9ef">break</span><span style="color: #f92672">;</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">11</span><span style="color: #f92672">:</span>
+            <span style="color: #66d9ef">case</span> <span style="color: #ae81ff">12</span><span style="color: #f92672">:</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Fourth Quarter&quot;</span><span style="color: #f92672">);</span>
+                <span style="color: #66d9ef">break</span><span style="color: #f92672">;</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">QuarterDemo2</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">nMonth</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">3</span><span style="color: #A71D7E">;</span>
-        <span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">nQuarter</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D7E">(</span><span style="color: #333333">nMonth</span> <span style="color: #A71D7E">-</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">/</span> <span style="color: #0086b3">3</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">;</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #333333">nQuarter</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot; &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;Quarter&quot;</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">QuarterDemo2</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">nMonth</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span><span style="color: #f92672">;</span>
+        <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">nQuarter</span> <span style="color: #f92672">=</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">nMonth</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">)</span> <span style="color: #f92672">/</span> <span style="color: #ae81ff">3</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">;</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">nQuarter</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; &quot;</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;Quarter&quot;</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-<br></p>
-<p>9 * 9 乘法表
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">MultiplyDemo</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span> <span style="color: #A71D7E">&lt;=</span> <span style="color: #0086b3">9</span><span style="color: #A71D7E">;</span> <span style="color: #333333">i</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #A71D5D">for</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">j</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">1</span><span style="color: #A71D7E">;</span> <span style="color: #333333">j</span> <span style="color: #A71D7E">&lt;=</span> <span style="color: #333333">i</span><span style="color: #A71D7E">;</span> <span style="color: #333333">j</span><span style="color: #A71D7E">++)</span> <span style="color: #A71D7E">{</span>
-                <span style="color: #999988; font-style: italic">// 下面两种方式都是用来对齐打印的</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">(</span><span style="color: #333333">i</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;*&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">j</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&quot;=&quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #A71D7E">(</span><span style="color: #333333">i</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">j</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">+</span> <span style="color: #183691">&#39;\t&#39;</span><span style="color: #A71D7E">);</span>
-                <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">printf</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;%d * %d = %-5d&quot;</span><span style="color: #A71D7E">,</span> <span style="color: #333333">i</span><span style="color: #A71D7E">,</span> <span style="color: #333333">j</span><span style="color: #A71D7E">,</span> <span style="color: #A71D7E">(</span><span style="color: #333333">i</span> <span style="color: #A71D7E">*</span> <span style="color: #333333">j</span><span style="color: #A71D7E">));</span>
-            <span style="color: #A71D7E">}</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+
+<p><br></p>
+<p>9 * 9 乘法表</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">MultiplyDemo</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">&lt;=</span> <span style="color: #ae81ff">9</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+            <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">j</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">j</span> <span style="color: #f92672">&lt;=</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">;</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">++)</span> <span style="color: #f92672">{</span>
+                <span style="color: #75715e">// 下面两种方式都是用来对齐打印的</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">i</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;*&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">j</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;=&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">i</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">)</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&#39;\t&#39;</span><span style="color: #f92672">);</span>
+                <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">printf</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;%d * %d = %-5d&quot;</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">,</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">i</span> <span style="color: #f92672">*</span> <span style="color: #f8f8f2">j</span><span style="color: #f92672">));</span>
+            <span style="color: #f92672">}</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-对齐打印, 可以用 &lsquo;\t&rsquo; 制表符, 或者使用 &lsquo;%-5d&rsquo; 来格式化.<br>**-5**表示输出 5 个光标位, 如下图:<br>
+
+<p>对齐打印, 可以用 &lsquo;\t&rsquo; 制表符, 或者使用 &lsquo;%-5d&rsquo; 来格式化.<br><strong>-5</strong>表示输出 5 个光标位, 如下图:<br>
 <img alt="" src="http://i64.tinypic.com/15x0c3a.jpg" /></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

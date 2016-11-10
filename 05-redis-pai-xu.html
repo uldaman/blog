@@ -66,7 +66,7 @@
 <li><a href="#_1">注意事项</a></li>
 </ul>
 </div>
-<h3 id="sort-key"><a name="user-content-sort-key" href="#sort-key" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key</h3>
+<h3 id="sort-key">sort key</h3>
 <ul>
 <li>sort key: 对指定 key 的 value 进行排序<ul>
 <li>value 必须是数字, 如果是字符串, 需要用到可选参数</li>
@@ -75,7 +75,7 @@
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>redis&gt; LPUSH today_cost 30 1.5 10 8
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>redis&gt; LPUSH today_cost 30 1.5 10 8
 (integer) 4
 redis&gt; SORT today_cost
 1) &quot;1.5&quot;
@@ -85,7 +85,7 @@ redis&gt; SORT today_cost
 </pre></div>
 
 
-<h3 id="sort-key-alpha"><a name="user-content-sort-key-alpha" href="#sort-key-alpha" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key alpha</h3>
+<h3 id="sort-key-alpha">sort key alpha</h3>
 <ul>
 <li>sort key alpha<ul>
 <li>如果指定 key 的 value 是字符串, 需要加下 alpha 参数来进行排序</li>
@@ -94,7 +94,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<h3 id="sort-key-limit-offset-count"><a name="user-content-sort-key-limit-offset-count" href="#sort-key-limit-offset-count" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key limit offset count</h3>
+<h3 id="sort-key-limit-offset-count">sort key limit offset count</h3>
 <ul>
 <li>sort key limit offset count<ul>
 <li>对排序后的结果进行截取, 截取从 offset 处开始的 count 个元素</li>
@@ -103,7 +103,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<h3 id="sort-key-by"><a name="user-content-sort-key-by" href="#sort-key-by" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key by</h3>
+<h3 id="sort-key-by">sort key by</h3>
 <ul>
 <li>sort key by<ul>
 <li>通过外部其它 key 的 value 来排序, 前提是当前 key 中的元素与外部 key 中的 value 有某种联系</li>
@@ -116,7 +116,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<h3 id="sort-key-get"><a name="user-content-sort-key-get" href="#sort-key-get" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key get</h3>
+<h3 id="sort-key-get">sort key get</h3>
 <ul>
 <li>sort key get<ul>
 <li>取出与当前 key 中元素相关联的外部 key 的 value</li>
@@ -132,7 +132,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<h3 id="sort-key-by-get"><a name="user-content-sort-key-by-get" href="#sort-key-by-get" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key by get</h3>
+<h3 id="sort-key-by-get">sort key by get</h3>
 <ul>
 <li>sort key by get<ul>
 <li>通过组合使用 by 和 get, 可以让排序结果以更直观的方式显示出来<ul>
@@ -146,7 +146,7 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>redis 127.0.0.1:6379&gt; sort uid by user_level_* get user_name_*
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>redis 127.0.0.1:6379&gt; sort uid by user_level_* get user_name_*
 1) &quot;jack&quot;       # level = 10
 2) &quot;peter&quot;      # level = 25
 3) &quot;mary&quot;       # level = 70
@@ -173,21 +173,21 @@ redis&gt; SORT today_cost
 </ul>
 </li>
 </ul>
-<h3 id="getby-hash"><a name="user-content-getby-hash" href="#getby-hash" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>get/by hash</h3>
+<h3 id="getby-hash">get/by hash</h3>
 <p>上面介绍的 get 和 by 参数, 其外部 key 还可以是 hash, 其语法类似指针.</p>
 <p>假设 user_1、user_2、user_3 都保存的是 hash, 该 hash 中的 field 是 level, 现在想根据 hash 中的 level 来排序, 可以这么写:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>sort uid by user_*-&gt;level
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>sort uid by user_*-&gt;level
 </pre></div>
 
 
-<h3 id="sort-key-store-destination"><a name="user-content-sort-key-store-destination" href="#sort-key-store-destination" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>sort key store destination</h3>
+<h3 id="sort-key-store-destination">sort key store destination</h3>
 <ul>
 <li>sort key store destination<ul>
 <li>将排序结果保存在 destination 中</li>
 </ul>
 </li>
 </ul>
-<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>注意事项</h3>
+<h3 id="_1">注意事项</h3>
 <p>sort 命令较耗内存, 其时间复杂度为 O(N+M*log(M)), N 为要排序的列表或集合内的元素数量, M 为要返回的元素数量</p>
 <ul>
 <li>尽可能地减少待排序 key 中 List/Set 的长度 (减小 N)</li>

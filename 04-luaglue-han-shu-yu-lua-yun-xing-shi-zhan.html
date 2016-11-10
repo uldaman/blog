@@ -75,14 +75,14 @@ C/C++ 从 Lua 栈中取出里面的两个参数进行加法计算, 然后将结�
 <p>那么问题来了!
 在 C/C++ 写的 LuaGlue 函数底层代码中, 怎么取出这些参数, 然后又怎么将计算结果压回栈, 最后又是怎么设置栈底指针的呢?
 cLua 类中的 GetIntArgument 方法能够从 Lua 栈中返回一个整型数据.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; cLua::GetIntArgument(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nDefault &lt;span style=&quot;color: #008000&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;= 0&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;*/&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; cLua::GetIntArgument(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nDefault &lt;span style=&quot;color: #008000&quot;&gt;/*&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;= 0&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;*/&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; luaL_optinteger(m_pScriptContext, num, nDefault);
 }&lt;/span&gt;
 </pre></div>
 
 
 <p>而cLua 类中的 PushInt 方法能够向 Lua 栈中压入一个整型数据.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; cLua::PushInt(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; value) {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; cLua::PushInt(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; value) {
     lua_pushinteger(m_pScriptContext, value);
 }&lt;/span&gt;
 </pre></div>
@@ -90,7 +90,7 @@ cLua 类中的 GetIntArgument 方法能够从 Lua 栈中返回一个整型数据
 
 <p>这两个方法都要求传入参数在 Lua 栈中的位置.</p>
 <p>好了, 现在我们大概可以写出这个 LuaGlue 的底层代码了:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>LuaGlue LuaGlue_Add(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>LuaGlue LuaGlue_Add(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argNum = &lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nSum1 = luaL_optinteger(L, argNum++, &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;);   &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 取出参数一&lt;/span&gt;
     &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nSum2 = luaL_optinteger(L, argNum++, &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;);   &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 取出参数二&lt;/span&gt;

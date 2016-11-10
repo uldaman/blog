@@ -59,29 +59,29 @@
 <li>子类必须实现抽象类 <strong>abstractmethod、abstractproperty</strong> 方法</li>
 <li>Python 中使用抽象功能会增大消耗, 所以大部分情况下都采用更宽松的作法, 即定义成正常的类, 通过编程规范来约束</li>
 </ul>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic">#!coding=utf-8</span>
-<span style="color: #A71D5D">from</span> <span style="color: #555555">abc</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">ABCMeta</span>, <span style="color: #333333">abstractmethod</span>, <span style="color: #333333">abstractproperty</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!coding=utf-8</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">abc</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">ABCMeta,</span> <span style="color: #f8f8f2">abstractmethod,</span> <span style="color: #f8f8f2">abstractproperty</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Foo</span>:
-  <span style="color: #333333">__metaclass__</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">ABCMeta</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Foo</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #f8f8f2">__metaclass__</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ABCMeta</span>
 
-  <span style="color: #333333">@abstractmethod</span>
-  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">spam</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">a</span>, <span style="color: #333333">b</span>):
-    <span style="color: #A71D5D">pass</span>
+  <span style="color: #a6e22e">@abstractmethod</span>
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">spam</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">a,</span> <span style="color: #f8f8f2">b):</span>
+    <span style="color: #66d9ef">pass</span>
 
-  <span style="color: #333333">@abstractproperty</span>
-  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">name</span>(<span style="color: #ed6a43">self</span>):
-    <span style="color: #A71D5D">pass</span>
+  <span style="color: #a6e22e">@abstractproperty</span>
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">name</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #66d9ef">pass</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Bar</span>(<span style="color: #333333">Foo</span>):
-  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">spam</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">a</span>, <span style="color: #333333">b</span>):
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">a</span>, <span style="color: #333333">b</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Bar</span><span style="color: #f8f8f2">(Foo):</span>
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">spam</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">a,</span> <span style="color: #f8f8f2">b):</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">a,</span> <span style="color: #f8f8f2">b</span>
 
-  <span style="color: #A71D5D">def</span> <span style="color: #795DA3">name</span>():
-    <span style="color: #A71D5D">pass</span>
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">name</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #66d9ef">pass</span>
 
-<span style="color: #333333">b</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Bar</span>()
-<span style="color: #333333">b</span><span style="color: #A71D7E">.</span><span style="color: #333333">spam</span>(<span style="color: #0086b3">1</span>,<span style="color: #0086b3">2</span>)
+<span style="color: #f8f8f2">b</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Bar()</span>
+<span style="color: #f8f8f2">b</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">spam(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

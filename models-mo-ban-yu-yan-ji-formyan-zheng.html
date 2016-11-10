@@ -56,7 +56,7 @@
     <p><strong>模板语言</strong></p>
 <p>依赖于 Python, 可以把数据内嵌到 html 中展示.</p>
 <p>eg:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
     &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;meta &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;charset&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;UTF-8&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
@@ -122,7 +122,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>if html 模板</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{% if xx %}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{% if xx %}
     true
 {% else %}
     假
@@ -131,7 +131,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>需要注意, 没有 elseif 这种语法, 如果想要实现, 就需要在 else 里再使用 if 模板.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{% ifequal xx &#39;yy&#39; %}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000&quot;&gt;{% ifequal xx &#39;yy&#39; %}
     true 如果 xx == yy
 {% else %}
     假
@@ -153,7 +153,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 <li>
 <p>创建任意 .py 文件，如：xx.py</p>
 <p><span style="color: #008000">#</span><span style="color: #008000">!/usr/bin/env python</span><span style="color: #008000"></p>
-<h1 id="codingutf-8"><a name="user-content-codingutf-8" href="#codingutf-8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a></span><span style="color: #008000">coding:utf-8</span></h1>
+<h1 id="codingutf-8"></span><span style="color: #008000">coding:utf-8</span></h1>
 <p><span style="color: #0000ff">from</span> django <span style="color: #0000ff">import</span><span style="color: #000000"> template
 </span><span style="color: #0000ff">from</span> django.template.base <span style="color: #0000ff">import</span><span style="color: #000000"> resolve_variable, Node, TemplateSyntaxError</p>
 <p>register </span>=<span style="color: #000000"> template.Library()</p>
@@ -188,7 +188,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 <p>Form 验证可以使用 HTML 自带的 input 来发送数据, 也可以使用 Python 的 form(推荐).</p>
 <p><strong>使用 HTML 的 form</strong></p>
 <p>在 template 目录下建立一个 login.html 文件:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;&lt;!--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; HTML &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;--&gt;&lt;/span&gt;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;&lt;!--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; HTML &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;--&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;!&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;DOCTYPE html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;html&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;head &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;lang&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;en&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
@@ -207,7 +207,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>修改 views.py:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; python&lt;/span&gt;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; python&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Login(request):
     &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;print request.method&lt;/span&gt;
     &lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; request.method == &lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;POST&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
@@ -225,7 +225,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 <p>之所以用 filter 而不用 get, 是因为 get 方法如果结果为空时会报异常.</p>
 <p>最后在 urls.py 里做映射, 然后通过 <strong>localhost:8000/web/login/</strong> 就能进入 Login 函数, 然后返回 login.html 开始登录操作.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^login/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, Login),
 ]&lt;/span&gt;
 </pre></div>
@@ -242,7 +242,7 @@ TEMPLATES &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     </span><span style="color: #800000">&ldquo;&rdquo;&ldquo;</span><span style="color: #800000">
     注册用 Form
     </span><span style="color: #800000">&ldquo;&rdquo;&ldquo;</span><span style="color: #000000"></p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>userName &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; forms.CharField()
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>userName &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; forms.CharField()
 email &lt;/span&gt;= forms.EmailField(required=True)
 </pre></div>
 

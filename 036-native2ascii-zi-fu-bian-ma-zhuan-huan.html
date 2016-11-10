@@ -61,13 +61,13 @@
 <li><a href="#_2">命令格式</a></li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>编码/解码</h1>
+<h1 id="_1">编码/解码</h1>
 <p>任何数据在内存中都是以二进制的形式保存, 也就是说一个文本文件, 不管你看到的是中文还是英文或者是法文, 它在内存也都是一串二进制数据 (或者说是一串字节数组), 那么当用一个文本浏览器打开一个文本文件时, 该文本浏览器就会拿它读出来的字节数组去 &ldquo;查字典&rdquo;, 然后将查到的结果展现出来.</p>
-<p>这个 &ldquo;查字典&rdquo; 的动作就被称之为**解码**, 同时也不叫它 &ldquo;查字典&rdquo;, 而叫它查码表, 常见的码表有 ASCII、ISO-8859-1、GB2312、GBK、UTF-8、UTF-16 等.</p>
-<p>(解码, 解码, 可以理解成**破解密码**, 二进制数据相当于密码, 人眼不可识别, 你需要把这串密码破解出来才能知道它是什么内容, 所以叫解码).</p>
-<p>相对的, 将可识别的文字转换成字节数组的过程就称之为**编码**, 根据使用的码表不同, 同样的文字会被编码成不同的字节数组.</p>
+<p>这个 &ldquo;查字典&rdquo; 的动作就被称之为<strong>解码</strong>, 同时也不叫它 &ldquo;查字典&rdquo;, 而叫它查码表, 常见的码表有 ASCII、ISO-8859-1、GB2312、GBK、UTF-8、UTF-16 等.</p>
+<p>(解码, 解码, 可以理解成<strong>破解密码</strong>, 二进制数据相当于密码, 人眼不可识别, 你需要把这串密码破解出来才能知道它是什么内容, 所以叫解码).</p>
+<p>相对的, 将可识别的文字转换成字节数组的过程就称之为<strong>编码</strong>, 根据使用的码表不同, 同样的文字会被编码成不同的字节数组.</p>
 <p><img alt="" src="http://i64.tinypic.com/2012gz5.jpg" /></p>
-<h1 id="native2ascii"><a name="user-content-native2ascii" href="#native2ascii" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>native2ascii 简介</h1>
+<h1 id="native2ascii">native2ascii 简介</h1>
 <p>native2ascii 是 sun java sdk 提供的一个工具, 用来将文本类文件 (比如 <code>*.txt</code>、<code>*.ini</code> 等等) 转为 Unicode 编码.</p>
 <p><strong>为什么要进行转码?</strong></p>
 <p>原因在于程序的国际化, 来看下 Unicode 编码的定义:<br>
@@ -76,9 +76,9 @@ Unicode (统一码、万国码、单一码) 是一种在计算机上使用的字
 <p>简单的理解, 也就是说 Unicode 是个全球通用的 &ldquo;字典&rdquo;.</p>
 <p>而 JAVAC 是以系统默认编码读入源文件, 然后按 UNICODE 进行编码, 也就是说有 &ldquo;bytes&rdquo; -> &ldquo;encode 字符&rdquo; -> &ldquo;Unicode 字符&rdquo; 的转换;<br>
 那么, 如果一开始, 源文件是在中国的电脑上开发出来的, 它很可能是 GBK 编码, 然后移植到外国的电脑上, 外国的电脑以系统默认编码读入源文件, 但是很遗憾, 外国的电脑的系统默认编码可不是 GBK, 所以在 &ldquo;bytes&rdquo; -> &ldquo;encode 字符&rdquo; 这一步就会出错.</p>
-<h1 id="native2ascii_1"><a name="user-content-native2ascii_1" href="#native2ascii_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>获取 native2ascii</h1>
+<h1 id="native2ascii_1">获取 native2ascii</h1>
 <p>安装了 jdk 后, 假如你是在 windows 上安装, 那么在 jdk 的安装目录下, 会有一个 bin 目录, 其中 native2ascii.exe 正是.</p>
-<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>命令格式</h1>
+<h1 id="_2">命令格式</h1>
 <p><code>native2ascii -[options] [inputfile [outputfile]]</code></p>
 <p>说明:</p>
 <ul>

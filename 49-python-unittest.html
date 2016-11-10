@@ -93,38 +93,39 @@
 </ul>
 <p><strong>测试过程:</strong></p>
 <p><img alt="" src="http://i68.tinypic.com/o9loqc.jpg" /></p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初始用法 (单个测试用例)</h1>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
+<h1 id="_1">初始用法 (单个测试用例)</h1>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Add</span>(<span style="color: #ED6A43">object</span>):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Add</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestAdd</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Add</span>()
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestAdd</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Add()</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">runTest</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">runTest</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #999988; font-style: italic"># demo_add = TestAdd()  # 默认执行 runTest</span>
-    <span style="color: #333333">demo_add</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">TestAdd</span>(<span style="color: #183691">&#39;test_add&#39;</span>)  <span style="color: #999988; font-style: italic"># 执行参数的方法</span>
-    <span style="color: #333333">demo_add</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>()
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #75715e"># demo_add = TestAdd()  # 默认执行 runTest</span>
+    <span style="color: #f8f8f2">demo_add</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">TestAdd(</span><span style="color: #e6db74">&#39;test_add&#39;</span><span style="color: #f8f8f2">)</span>  <span style="color: #75715e"># 执行参数的方法</span>
+    <span style="color: #f8f8f2">demo_add</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">run()</span>
 </pre></div>
 
-<br></p>
-<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>中级用法 (测试集)</h1>
+
+<p><br></p>
+<h1 id="_2">中级用法 (测试集)</h1>
 <p>unittest.TestSuite: 测试用例的集合, 存放测试用例的容器</p>
 <p>添加测试集的方法:</p>
 <ul>
@@ -133,177 +134,181 @@
 <li><code>addTests(self, tests)</code></li>
 </ul>
 <p>运行测试集: <code>TextTestRunner()</code></p>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>简单测试集</h2>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
+<h2 id="_3">简单测试集</h2>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Count</span>(<span style="color: #ED6A43">object</span>):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Count</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">sub</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">-</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">y</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestCount</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Count</span>()
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestCount</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Count()</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">5</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">5</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">get_suite</span>():
-    <span style="color: #333333">demo_count_add</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">TestCount</span>(<span style="color: #183691">&#39;test_add&#39;</span>)
-    <span style="color: #333333">demo_count_sub</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">TestCount</span>(<span style="color: #183691">&#39;test_sub&#39;</span>)
-    <span style="color: #333333">suite</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestSuite</span>()
-    <span style="color: #333333">suite</span><span style="color: #A71D7E">.</span><span style="color: #333333">addTests</span>([<span style="color: #333333">demo_count_add</span>, <span style="color: #333333">demo_count_sub</span>])
-    <span style="color: #A71D5D">return</span> <span style="color: #333333">suite</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_suite</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #f8f8f2">demo_count_add</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">TestCount(</span><span style="color: #e6db74">&#39;test_add&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">demo_count_sub</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">TestCount(</span><span style="color: #e6db74">&#39;test_sub&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">suite</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestSuite()</span>
+    <span style="color: #f8f8f2">suite</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addTests([demo_count_add,</span> <span style="color: #f8f8f2">demo_count_sub])</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">suite</span>
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">get_suite</span>()
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">countTestCases</span>()
-    <span style="color: #333333">runner</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextTestRunner</span>()
-    <span style="color: #333333">runner</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>(<span style="color: #333333">s</span>)
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">get_suite()</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">countTestCases()</span>
+    <span style="color: #f8f8f2">runner</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TextTestRunner()</span>
+    <span style="color: #f8f8f2">runner</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">run(s)</span>
 </pre></div>
 
-<br></p>
-<h2 id="map"><a name="user-content-map" href="#map" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>结合 map</h2>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Count</span>(<span style="color: #ED6A43">object</span>):
+<p><br></p>
+<h2 id="map">结合 map</h2>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Count</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">sub</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">-</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestCount</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Count</span>()
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">y</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestCount</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Count()</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">10</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">10</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">get_suite</span>():
-    <span style="color: #333333">case_list</span> <span style="color: #A71D7E">=</span> [<span style="color: #183691">&#39;test_add&#39;</span>, <span style="color: #183691">&#39;test_sub&#39;</span>]
-    <span style="color: #333333">demos</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">map</span>(<span style="color: #333333">TestCount</span>, <span style="color: #333333">case_list</span>)
-    <span style="color: #333333">suite</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestSuite</span>()
-    <span style="color: #333333">suite</span><span style="color: #A71D7E">.</span><span style="color: #333333">addTests</span>(<span style="color: #333333">demos</span>)
-    <span style="color: #A71D5D">return</span> <span style="color: #333333">suite</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">get_suite</span>()
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">countTestCases</span>()
-    <span style="color: #333333">runner</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextTestRunner</span>()
-    <span style="color: #333333">runner</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>(<span style="color: #333333">s</span>)
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_suite</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #f8f8f2">case_list</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;test_add&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;test_sub&#39;</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">demos</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">map(TestCount,</span> <span style="color: #f8f8f2">case_list)</span>
+    <span style="color: #f8f8f2">suite</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestSuite()</span>
+    <span style="color: #f8f8f2">suite</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addTests(demos)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">suite</span>
+
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">get_suite()</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">countTestCases()</span>
+    <span style="color: #f8f8f2">runner</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TextTestRunner()</span>
+    <span style="color: #f8f8f2">runner</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">run(s)</span>
 </pre></div>
 
-<br></p>
-<h2 id="9595init9595"><a name="user-content-9595init9595" href="#9595init9595" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 __init__</h2>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Count</span>(<span style="color: #ED6A43">object</span>):
+<p><br></p>
+<h2 id="9595init9595">使用 __init__</h2>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Count</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">sub</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">-</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestCount</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Count</span>()
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">y</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestCount</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Count()</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">10</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">10</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
 
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">CountTestSuite</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestSuite</span>):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">CountTestSuite</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestSuite):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">__init__</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #333333">case_list</span> <span style="color: #A71D7E">=</span> [<span style="color: #183691">&#39;test_add&#39;</span>, <span style="color: #183691">&#39;test_sub&#39;</span>]
-        <span style="color: #333333">demos</span> <span style="color: #A71D7E">=</span> <span style="color: #ED6A43">map</span>(<span style="color: #333333">TestCount</span>, <span style="color: #333333">case_list</span>)
-        <span style="color: #ED6A43">super</span>(<span style="color: #333333">CountTestSuite</span>, <span style="color: #ed6a43">self</span>)<span style="color: #A71D7E">.</span><span style="color: #333333">__init__</span>(<span style="color: #333333">demos</span>)
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">case_list</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;test_add&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;test_sub&#39;</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #f8f8f2">demos</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">map(TestCount,</span> <span style="color: #f8f8f2">case_list)</span>
+        <span style="color: #f8f8f2">super(CountTestSuite,</span> <span style="color: #f8f8f2">self)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">__init__(demos)</span>
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">CountTestSuite</span>()
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">countTestCases</span>()
-    <span style="color: #333333">runner</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextTestRunner</span>()
-    <span style="color: #333333">runner</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>(<span style="color: #333333">s</span>)
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">CountTestSuite()</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">countTestCases()</span>
+    <span style="color: #f8f8f2">runner</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TextTestRunner()</span>
+    <span style="color: #f8f8f2">runner</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">run(s)</span>
 </pre></div>
 
-<br></p>
-<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自动构建测试集</h2>
+
+<p><br></p>
+<h2 id="_4">自动构建测试集</h2>
 <p><code>unitest.makeSuite</code></p>
 <p>测试方法必须以 规定前缀 开头 (前缀可以通过 makeSuite 的 prefix 参数指定, 默认是 test)</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Count</span>(<span style="color: #ED6A43">object</span>):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Count</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">sub</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">-</span> <span style="color: #333333">y</span>
-
-
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestCount</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Count</span>()
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">30</span>
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #A71D5D">print</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>) <span style="color: #A71D7E">==</span> <span style="color: #0086b3">12</span>
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">y</span>
 
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #333333">s</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">makeSuite</span>(<span style="color: #333333">TestCount</span>, <span style="color: #333333">prefix</span><span style="color: #A71D7E">=</span><span style="color: #183691">&#39;test&#39;</span>)
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">s</span><span style="color: #A71D7E">.</span><span style="color: #333333">countTestCases</span>()
-    <span style="color: #333333">runner</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TextTestRunner</span>()
-    <span style="color: #333333">runner</span><span style="color: #A71D7E">.</span><span style="color: #333333">run</span>(<span style="color: #333333">s</span>)
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestCount</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Count()</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">30</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">12</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
+
+
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">makeSuite(TestCount,</span> <span style="color: #f8f8f2">prefix</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;test&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">countTestCases()</span>
+    <span style="color: #f8f8f2">runner</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TextTestRunner()</span>
+    <span style="color: #f8f8f2">runner</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">run(s)</span>
 </pre></div>
 
-<br></p>
-<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>高级用法</h1>
+
+<p><br></p>
+<h1 id="_5">高级用法</h1>
 <p><code>unittest.main()</code> 自动检测测试类中所有以 test 开头的方法</p>
 <p>使用这种方法时, 如果使用 IDLE 的话, 可能会出现下面这种错:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>Traceback (most recent call last):
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Traceback (most recent call last):
   File &quot;C:\Users\chaoqun.zhu\Desktop\ss.py&quot;, line 32, in &lt;module&gt;
     unittest.main()
   File &quot;C:\Python27\lib\unittest\main.py&quot;, line 95, in __init__
@@ -313,13 +318,14 @@
 SystemExit: False
 </pre></div>
 
-<br>
+
+<p><br>
 这是一个 IDLE 问题</p>
 <p>因为 <code>unittest.main()</code> 函数会调用 <code>sys.exit()</code> 来结束函数进程, 类似 <code>sys.exit(1)</code> 表示非正常退出, <code>sys.exist(0)</code> 表示正常退出;</p>
 <p>可以使用 <code>unittest.main(exit=False)</code> 解决.</p>
 <p><strong>main() 方法过程:</strong></p>
 <p><img alt="" src="http://i65.tinypic.com/jh3pzd.jpg" /></p>
-<h1 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>结果判断</h1>
+<h1 id="_6">结果判断</h1>
 <p>继承 <code>unittest.TestCase</code> 就会继承下面这些方法</p>
 <table>
 <thead>
@@ -380,43 +386,44 @@ SystemExit: False
 </tbody>
 </table>
 <p><br></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">unittest</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">unittest</span>
 
 
-<span style="color: #A71D5D">class</span> <span style="color: #445588">Count</span>(<span style="color: #ED6A43">object</span>):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Count</span><span style="color: #f8f8f2">(object):</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">add</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">y</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">y</span>
 
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">sub</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">x</span>, <span style="color: #333333">y</span>):
-        <span style="color: #A71D5D">return</span> <span style="color: #333333">x</span> <span style="color: #A71D7E">-</span> <span style="color: #333333">y</span>
-
-
-<span style="color: #A71D5D">class</span> <span style="color: #445588">TestCount</span>(<span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">TestCase</span>):
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">setUp</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 构造</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Count</span>()
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_add</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">assertEqual</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">add</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">20</span>), <span style="color: #0086b3">0</span>)
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">assertEqual</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>), <span style="color: #0086b3">5</span>)
-
-    <span style="color: #A71D5D">def</span> <span style="color: #795DA3">tearDown</span>(<span style="color: #ed6a43">self</span>):
-        <span style="color: #999988; font-style: italic"># 析构</span>
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">sub</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">y):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">y</span>
 
 
-<span style="color: #A71D5D">if</span> <span style="color: #333333">__name__</span> <span style="color: #A71D7E">==</span> <span style="color: #183691">&#39;__main__&#39;</span>:
-    <span style="color: #333333">unittest</span><span style="color: #A71D7E">.</span><span style="color: #333333">main</span>(<span style="color: #ED6A43">exit</span><span style="color: #A71D7E">=</span><span style="color: #ed6a43">False</span>)
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TestCount</span><span style="color: #f8f8f2">(unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TestCase):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">setUp</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 构造</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Count()</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_add</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">),</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">),</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">tearDown</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># 析构</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
+
+
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;__main__&#39;</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">unittest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">main(exit</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
 </pre></div>
 
-<br>
+
+<p><br>
 执行结果:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>F.
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>F.
 ======================================================================
 FAIL: test_add (__main__.TestCount)
 ----------------------------------------------------------------------
@@ -431,40 +438,45 @@ Ran 2 tests in 0.000s
 FAILED (failures=1)
 </pre></div>
 
-<br>
+
+<p><br>
 第一行的 F 表示有几个 FAIL, 这里只有一个.</p>
-<h1 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>忽略测试</h1>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>@unittest.skip(reson)
+<h1 id="_7">忽略测试</h1>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>@unittest.skip(reson)
 @unittest.skip(condition, reason)
 @unittest.skipUnless(condition, reason)
 @unittest.expectedFailure  失败不计入失败结果
 </pre></div>
 
-<br></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">@unittest.skip</span>(<span style="color: #183691">&#39;Not Test&#39;</span>)
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">assertEqual</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>), <span style="color: #0086b3">5</span>)
+
+<p><br></p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@unittest.skip</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Not Test&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">),</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span>
 
 
-<span style="color: #333333">@unittest.expectedFailure</span>
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">test_sub</span>(<span style="color: #ed6a43">self</span>):
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">assertEqual</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">obj</span><span style="color: #A71D7E">.</span><span style="color: #333333">sub</span>(<span style="color: #0086b3">10</span>, <span style="color: #0086b3">5</span>), <span style="color: #0086b3">5</span>)
+<span style="color: #a6e22e">@unittest.expectedFailure</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_sub</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">obj</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">sub(</span><span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">),</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br></p>
-<h1 id="mock"><a name="user-content-mock" href="#mock" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>解决环境依赖 mock</h1>
+
+<p><br></p>
+<h1 id="mock">解决环境依赖 mock</h1>
 <p>向测试对象提供一套和测试资源完全相同的接口和方法, 不关心具体实现过程, 只关心具体结果.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>py 3.0 +
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>py 3.0 +
 unittest.mock
 </pre></div>
 
-<br></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>py 2.7&lt;br&gt;
+
+<p><br></p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>py 2.7&lt;br&gt;
 pip install mock
 mock.Mock
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>关于 mock 参考: <a href="http://www.oschina.net/translate/unit-testing-with-the-python-mock-class">使用 Python Mock 类进行单元测试</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

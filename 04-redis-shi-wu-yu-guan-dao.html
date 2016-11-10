@@ -70,43 +70,43 @@
 <li><a href="#_5">管道</a></li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>事务</h1>
+<h1 id="_1">事务</h1>
 <p>事务可以理解为一个打包的批量执行脚本, 将一串的命令发送给 redis 串行化地执行.</p>
 <p>需要注意的是, redis 的事务要么不执行, 要执行就一定会执行完, 哪怕中间某条命令出错, 它也不会暂停或者回滚, 而是继续向后执行剩下的命令, 所以在事务执行的过程中, 是不能得到返回值的, 要等到 redis 执行完这个事务后一次性返回.</p>
-<h2 id="multi"><a name="user-content-multi" href="#multi" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>multi</h2>
+<h2 id="multi">multi</h2>
 <p><strong>multi</strong>: 开启事务, 事务块中的多条语句会按照顺序放入对列中</p>
 <p><img alt="" src="http://i63.tinypic.com/1sbaeh.jpg" /></p>
 <p>执行 multi 后, 进入事务模式, 后面输入的所有命令都会被放入队列当中, 直到运行 exec/discard 命令.</p>
-<h2 id="exec"><a name="user-content-exec" href="#exec" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>exec</h2>
+<h2 id="exec">exec</h2>
 <p><strong>exec</strong>: 执行队列中的事务</p>
 <p><img alt="" src="http://i64.tinypic.com/2wg6rfc.jpg" /></p>
 <p>执行完事务后, 一次性返回所有命令的结果.</p>
-<h2 id="discard"><a name="user-content-discard" href="#discard" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>discard</h2>
+<h2 id="discard">discard</h2>
 <p><strong>discard</strong>: 取消事务, 放弃执行事务块内的所有命令.</p>
-<h2 id="watchunwatch"><a name="user-content-watchunwatch" href="#watchunwatch" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>watch/unwatch</h2>
+<h2 id="watchunwatch">watch/unwatch</h2>
 <p><strong>watch</strong>: 监视一个或多个 key, 如果在执行事务之前, 这个 key 如果被其它客户端改动, 那么执行 exec 时会返回 nil(相当于事务被取消了).</p>
 <p>所谓的监视, 就是要保证, 在执行事务前, 没有其他客户端更改我们监视的 key.</p>
 <p><strong>unwatch</strong>: 取消对所有 key 的监视, 需要注意, 如果 watch 后, exec/discard 了事务, 那么相当于自动 unwatch 了, 不需要再次 unwatch.</p>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>错误处理</h2>
-<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>语法错误</h3>
+<h2 id="_2">错误处理</h2>
+<h3 id="_3">语法错误</h3>
 <p>如, 命令不存在, 参数错误等等, 这种情况下, exec 后, 会直接返回错误, 事务不会被执行.</p>
-<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>运行时错误</h3>
+<h3 id="_4">运行时错误</h3>
 <p>事务开启后, 一定会执行完, 中间某条命令出错, 也不会暂停或者回滚, 而是继续向后执行剩下的命令, 等到全部执行完后, 才看得到错误信息.</p>
-<h1 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>管道</h1>
+<h1 id="_5">管道</h1>
 <p>pipelining: 管道, 可以理解成阉割版的事务</p>
 <p>事务具有原子性, 一个事务中的命令要么都执行, 要么都不执行. 即可以说:<br>
 <strong>事务同命令一样, 都是 Redis 的最小执行单位</strong></p>
 <p>而管道, 它也可以一次性发送多条命令, 并在执行完后一次性将结果返回, 管道通过减少客户端与 Redis 的通信次数来实现降低往返时延, <strong>但它不具备原子性</strong>.</p>
 <p>Redis 本身没有提供 pipelining 相关的命令, 它由使用 Redis 的客户端程序决定, 如 <strong>redis-py</strong></p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">redis</span>
-<span style="color: #333333">r</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">redis</span><span style="color: #A71D7E">.</span><span style="color: #333333">StrictRedis</span>(<span style="color: #333333">host</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;127.0.0.1&#39;</span>, <span style="color: #333333">port</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">6379</span>, <span style="color: #333333">db</span> <span style="color: #A71D7E">=</span> <span style="color: #0086b3">0</span>)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">redis</span>
+<span style="color: #f8f8f2">r</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">redis</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">StrictRedis(host</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;127.0.0.1&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">6379</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">db</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
 
-<span style="color: #333333">pipe</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">r</span><span style="color: #A71D7E">.</span><span style="color: #333333">pipeline</span>() <span style="color: #999988; font-style: italic"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
-<span style="color: #333333">pipe</span><span style="color: #A71D7E">.</span><span style="color: #333333">set</span>(<span style="color: #183691">&#39;foo&#39;</span>, <span style="color: #183691">&#39;bar&#39;</span>)
-<span style="color: #333333">pipe</span><span style="color: #A71D7E">.</span><span style="color: #333333">get</span>(<span style="color: #183691">&#39;foo&#39;</span>)
-<span style="color: #333333">result</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">pipe</span><span style="color: #A71D7E">.</span><span style="color: #333333">execute</span>()
+<span style="color: #f8f8f2">pipe</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pipeline()</span> <span style="color: #75715e"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
+<span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">set(</span><span style="color: #e6db74">&#39;foo&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;bar&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(</span><span style="color: #e6db74">&#39;foo&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">execute()</span>
 
-<span style="color: #A71D5D">print</span> <span style="color: #333333">result</span> <span style="color: #999988; font-style: italic"># [True, &#39;bar&#39;]</span>
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">result</span> <span style="color: #75715e"># [True, &#39;bar&#39;]</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a>
 

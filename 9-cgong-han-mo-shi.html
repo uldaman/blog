@@ -53,9 +53,9 @@
 </h6>
 
 
-    <p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html"><a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html"><a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></a></a></p>
+    <p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></p>
 <p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
-<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的**&rdquo;开放-封闭原则&rdquo;,** 于是, 工厂模式就来了&hellip;</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的<strong>&ldquo;开放-封闭原则&rdquo;,</strong> 于是, 工厂模式就来了&hellip;</p>
 <p>工厂模式: 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041357457281.jpg"><img alt="工厂模式" src="http://images.cnitblog.com/blog/723444/201502/132041374791953.jpg" /></a></p>
 <p>[cpp]#include <iostream>
@@ -63,7 +63,7 @@ using namespace std;</p>
 <p>class Operation {
 public:
     virtual double GetResult() = 0;</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>double m_dNum_A = 0;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>double m_dNum_A = 0;
 double m_dNum_B = 0;
 </pre></div>
 
@@ -129,12 +129,12 @@ public:
         return new OperationDiv();
     }
 };</p>
-<p>int _tmain(int argc, _TCHAR* argv[]) {
-    IFactory* operFactory = NULL;
+<p>int _tmain(int argc, _TCHAR<em> argv[]) {
+    IFactory</em> operFactory = NULL;
     char cOp;
     cout &lt;&lt; &ldquo;请输入操作符(+ - * / . . .):&rdquo; &lt;&lt; endl;
     cin &gt;&gt; cOp;</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>switch (cOp) {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>switch (cOp) {
 case &#39;+&#39;:
     operFactory = new AddFactory();
     break;

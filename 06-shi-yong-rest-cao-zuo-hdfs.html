@@ -63,44 +63,48 @@
 </ul>
 </div>
 <p>要使用 rest 操作 HDFS, 需要先开启集群的 rest 服务.</p>
-<h1 id="vim-httpfs-envsh"><a name="user-content-vim-httpfs-envsh" href="#vim-httpfs-envsh" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>vim httpfs-env.sh</h1>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">export</span> <span style="color: #008080">HTTPFS_HTTP_PORT</span><span style="color: #A71D7E">=</span>14000
+<h1 id="vim-httpfs-envsh">vim httpfs-env.sh</h1>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HTTPFS_HTTP_PORT</span><span style="color: #f92672">=</span>14000
 </pre></div>
 
-<br></p>
-<h1 id="vim-core-sitexml"><a name="user-content-vim-core-sitexml" href="#vim-core-sitexml" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>vim core-site.xml</h1>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;property&gt;</span>
-    <span style="color: #999988; font-style: italic">&lt;!--可使用节点--&gt;</span>
-    <span style="color: #000080">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #000080">&lt;/name&gt;</span>
-    <span style="color: #000080">&lt;value&gt;</span>*<span style="color: #000080">&lt;/value&gt;</span>
-<span style="color: #000080">&lt;/property&gt;</span>
-<span style="color: #000080">&lt;property&gt;</span>
-    <span style="color: #999988; font-style: italic">&lt;!--可使用用户组--&gt;</span>
-    <span style="color: #000080">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #000080">&lt;/name&gt;</span>
-    <span style="color: #000080">&lt;value&gt;</span>*<span style="color: #000080">&lt;/value&gt;</span>
-<span style="color: #000080">&lt;/property&gt;</span>
+
+<p><br></p>
+<h1 id="vim-core-sitexml">vim core-site.xml</h1>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;property&gt;</span>
+    <span style="color: #75715e">&lt;!--可使用节点--&gt;</span>
+    <span style="color: #f92672">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #f92672">&lt;/name&gt;</span>
+    <span style="color: #f92672">&lt;value&gt;</span>*<span style="color: #f92672">&lt;/value&gt;</span>
+<span style="color: #f92672">&lt;/property&gt;</span>
+<span style="color: #f92672">&lt;property&gt;</span>
+    <span style="color: #75715e">&lt;!--可使用用户组--&gt;</span>
+    <span style="color: #f92672">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #f92672">&lt;/name&gt;</span>
+    <span style="color: #f92672">&lt;value&gt;</span>*<span style="color: #f92672">&lt;/value&gt;</span>
+<span style="color: #f92672">&lt;/property&gt;</span>
 </pre></div>
 
-<br></p>
-<h1 id="hdfs-sitexml"><a name="user-content-hdfs-sitexml" href="#hdfs-sitexml" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>hdfs-site.xml</h1>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #000080">&lt;property&gt;</span>
-    <span style="color: #999988; font-style: italic">&lt;!--启动 webhdfs--&gt;</span>
-    <span style="color: #000080">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #000080">&lt;/name&gt;</span>
-    <span style="color: #000080">&lt;value&gt;</span>true<span style="color: #000080">&lt;/value&gt;</span>
-<span style="color: #000080">&lt;/property&gt;</span>
+
+<p><br></p>
+<h1 id="hdfs-sitexml">hdfs-site.xml</h1>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;property&gt;</span>
+    <span style="color: #75715e">&lt;!--启动 webhdfs--&gt;</span>
+    <span style="color: #f92672">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #f92672">&lt;/name&gt;</span>
+    <span style="color: #f92672">&lt;value&gt;</span>true<span style="color: #f92672">&lt;/value&gt;</span>
+<span style="color: #f92672">&lt;/property&gt;</span>
 </pre></div>
 
-<br></p>
-<h1 id="namenode"><a name="user-content-namenode" href="#namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>重启 NameNode</h1>
+
+<p><br></p>
+<h1 id="namenode">重启 NameNode</h1>
 <p>修改好配置文件后, 重新启动 NameNode:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>./stop-all.sh
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>./stop-all.sh
 ./start-all.sh
 ./httpfs.sh start
 </pre></div>
 
-<br>
+
+<p><br>
 最后一行就是启动集群的 rest 服务器.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>测试</h1>
+<h1 id="_1">测试</h1>
 <p>执行命令 <code>curl -i "http://192.168.1.213:14000/webhdfs/v1?user.name=root&amp;op=LISTSTATUS"</code></p>
 <blockquote>
 <p>-i 表示显示 http response 的头信息, 连同网页代码一起.</p>
@@ -114,7 +118,7 @@
 </li>
 <li>返回 json 格式</li>
 </ul>
-<p>更多命令参考 <a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html"><a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html"><a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html">http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html</a></a></a></p>
+<p>更多命令参考 <a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html">http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-hdfs/WebHDFS.html</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>

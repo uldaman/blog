@@ -67,23 +67,23 @@
 </li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>分布式文件系统</h1>
+<h1 id="_1">分布式文件系统</h1>
 <p>HDFS 是一种分布式文件系统, 即 Hadoop Distributed File System (Hadoop 的分布式文件系统).</p>
 <p>常见的分布式文件系统有, GFS、HDFS、Lustre 、Ceph 、GridFS 、mogileFS、TFS、FastDFS等; 各自适用于不同的领域, 它们都不是系统级的分布式文件系统, 而是应用级的分布式文件存储服务.</p>
 <p><strong>什么是分布式文件系统?</strong></p>
 <p>数据量越来越多, 在一个操作系统管辖的范围存不下了, 那么就分配到更多的操作系统管理的磁盘中, 但是不方便管理和维护, 因此迫切需要一种系统来管理多台机器上的文件, 这就是分布式文件管理系统.</p>
-<p>它是一种允许文件通过**网络**在多台主机上**分享**的文件系统, 可让多机器上的多用户分享文件和存储空间, 为进一步的大数据**分析**提供数据支持.</p>
+<p>它是一种允许文件通过<strong>网络</strong>在多台主机上<strong>分享</strong>的文件系统, 可让多机器上的多用户分享文件和存储空间, 为进一步的大数据<strong>分析</strong>提供数据支持.</p>
 <p><strong>通透性</strong>: 让实际上是通过网络来访问文件的动作, 由程序与用户看来, 就像是访问本地的磁盘一般 (对比下共享文件的方式, 需要知道对方的 ip 地址才能访问).</p>
 <p><strong>容错</strong>: 自动数据冗余, 即使系统中有某些节点脱机, 整体来说系统仍然可以持续运作而不会有数据损失; 功能类似 Raid 自动备份功能, 在 <code>hdfs-site.xml</code> 文件中会配置个 <code>dfs.replication</code> 参数用来指定 Hadoop 集群的复制因子 (也就是一个文件会备份几份).</p>
-<p>分布式文件管理系统很多, HDFS 只是其中一种; 它是流式的数据访问, 也就是说批量读取而非随机读取, 所以它擅长的是 <strong>OLAP</strong>, 而不是 <strong>OLTP</strong>, 适用于**一次写入多次查询**的情况, **不支持**并发写情况, **不合适**存储小文件.</p>
-<p>**一次写入**即写入后无法更新, 只能删除重写, 2.0 好像支持追加内容.</p>
-<p>**不支持并发写**并不是指不能同时存储多份文件, 而是指, 一份大文件被分成多个块时, 是一个块写满再写另一个块的, 不能同时写所有的块.</p>
+<p>分布式文件管理系统很多, HDFS 只是其中一种; 它是流式的数据访问, 也就是说批量读取而非随机读取, 所以它擅长的是 <strong>OLAP</strong>, 而不是 <strong>OLTP</strong>, 适用于<strong>一次写入多次查询</strong>的情况, <strong>不支持</strong>并发写情况, <strong>不合适</strong>存储小文件.</p>
+<p><strong>一次写入</strong>即写入后无法更新, 只能删除重写, 2.0 好像支持追加内容.</p>
+<p><strong>不支持并发写</strong>并不是指不能同时存储多份文件, 而是指, 一份大文件被分成多个块时, 是一个块写满再写另一个块的, 不能同时写所有的块.</p>
 <p><strong>不合适存储小文件</strong>, 因为 NameNode 将文件系统中的元数据存储在内存中, 因此, HDFS 所能存储的文件数量会受到 NameNode 内存的限制.</p>
 <p>下面是一张 HDFS 的简单示图, 参考下:</p>
 <p><img alt="HDFS" src="http://i61.tinypic.com/dwcpw9.jpg" /></p>
 <p>当 <strong>Client</strong> 需要存储一份文件的时候, 如 a.log (200M), Client 先和 HDFS 中的 <strong>NameNode</strong> 取得联系, NameNode 从自己的集群中找到一个可以存储的 <strong>DataNode</strong> 并告诉 Client, Client 开始向指定的 DataNode 存储数据.<br>
 存储数据的时候, 会根据文件的大小分块存储(2.0 默认 128M), 当存储完一个块后, DataNode 会检查 NameNode 中设置的副本数量, 如果不止一份的话, 当前 DataNode 就会水平传递 (pipline) 块给其他的 DataNode, 然后再申请另一个块, 继续存储剩余的文件内容…以此类推.</p>
-<h1 id="hdfs"><a name="user-content-hdfs" href="#hdfs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>HDFS 的可靠性</h1>
+<h1 id="hdfs">HDFS 的可靠性</h1>
 <ul>
 <li><strong>冗余副本策略</strong><ul>
 <li>数据会根据复制因子保存多份, 即使系统中有某些节点脱机, 整体来说系统仍然可以持续运作而不会有数据损失</li>
@@ -118,7 +118,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>体系结构</h1>
+<h1 id="_2">体系结构</h1>
 <ul>
 <li>NameNode<ul>
 <li>事务日志</li>
@@ -128,10 +128,10 @@
 <li>SecondaryNameNode</li>
 <li>DataNode</li>
 </ul>
-<h2 id="namenode"><a name="user-content-namenode" href="#namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>NameNode</h2>
+<h2 id="namenode">NameNode</h2>
 <p>NameNode 是管理节点, 维护集群的<a href="http://wiki.smallcpp.com/Hadoop/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E8%A7%A3%E6%9E%90.html">命名空间</a> (就是集群 HDFS 的目录结构), 包括文件目录树、文件/目录的元数据、每个文件对应的数据块列表, 以及接收用户的操作请求.</p>
 <p><strong>MetaData</strong> (元数据)</p>
-<p>存储细节: 为了性能和安全兼具, Metadata 在 HDFS 中会存储**两**份, 内存一份, 磁盘一份(镜像).</p>
+<p>存储细节: 为了性能和安全兼具, Metadata 在 HDFS 中会存储<strong>两</strong>份, 内存一份, 磁盘一份(镜像).</p>
 <table>
 <thead>
 <tr>
@@ -151,7 +151,7 @@
 </tbody>
 </table>
 <p>HDFS 通过 CRC 校验块的完整性.</p>
-<p>Namenode 使用**事务日志**记录 HDFS 元数据的变化, 使用**映像文件**存储 MetaData.</p>
+<p>Namenode 使用<strong>事务日志</strong>记录 HDFS 元数据的变化, 使用<strong>映像文件</strong>存储 MetaData.</p>
 <p>事务日志和映像文件保存在 <code>/tmp/dfs/name/current</code> 目录下:</p>
 <ul>
 <li><strong>fsimage</strong>: 元数据镜像文件, 存储某一时候 NameNode 的内存元数据信息</li>
@@ -161,19 +161,20 @@
 <p>当有操作发生时, NameNode 首先向写操作日志到磁盘, 即向 <strong>edits</strong> 文件中写日志, 成功返回后, 才会修改内存, 并且向客户端返回.</p>
 <p>Hadoop 会维护一个 <strong>fsimage</strong> 文件, 也就是 NameNode 中 MetaData 的硬盘镜像, 但是 <strong>fsimage</strong> 不会随时与 NameNode 内存中的 MetaData 保持一致, 而是每隔一段时间通过合并 <strong>edits</strong> 文件来更新内容 (仅限 1.0 和 伪分布式, 2.0 集群是实时的), <strong>edits</strong> 合并后就会进行一次清空. Secondary NameNode 就是用来合并 <strong>fsimage</strong> 和 <strong>edits</strong> 文件来更新 NameNode 的 MetaData 的.</p>
 <p>在 <code>/tmp/dfs/name/current</code> 目录下, 除了那三个文件外, 还有个 <strong>VERSION</strong> 文件:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>martin@itcast01:/usr/itcast/hadoop-2.7.3/tmp/dfs/name/current$ cat VERSION
-<span style="color: #999988; font-style: italic">#Sun Oct 16 17:28:41 CST 2016</span>
-<span style="color: #008080">namespaceID</span><span style="color: #A71D7E">=</span>1526300018
-<span style="color: #008080">clusterID</span><span style="color: #A71D7E">=</span>CID-cc6f47f9-4021-4f9b-87a6-ad7ad82b7af7
-<span style="color: #008080">cTime</span><span style="color: #A71D7E">=</span>0
-<span style="color: #008080">storageType</span><span style="color: #A71D7E">=</span>NAME_NODE
-<span style="color: #008080">blockpoolID</span><span style="color: #A71D7E">=</span>BP-1803451175-192.168.142.155-1476610121875
-<span style="color: #008080">layoutVersion</span><span style="color: #A71D7E">=</span>-63
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>martin@itcast01:/usr/itcast/hadoop-2.7.3/tmp/dfs/name/current$ cat VERSION
+<span style="color: #75715e">#Sun Oct 16 17:28:41 CST 2016</span>
+<span style="color: #f8f8f2">namespaceID</span><span style="color: #f92672">=</span>1526300018
+<span style="color: #f8f8f2">clusterID</span><span style="color: #f92672">=</span>CID-cc6f47f9-4021-4f9b-87a6-ad7ad82b7af7
+<span style="color: #f8f8f2">cTime</span><span style="color: #f92672">=</span>0
+<span style="color: #f8f8f2">storageType</span><span style="color: #f92672">=</span>NAME_NODE
+<span style="color: #f8f8f2">blockpoolID</span><span style="color: #f92672">=</span>BP-1803451175-192.168.142.155-1476610121875
+<span style="color: #f8f8f2">layoutVersion</span><span style="color: #f92672">=</span>-63
 </pre></div>
 
-<br>
+
+<p><br>
 这里的数据是用来标识集群、节点唯一性的.</p>
-<h2 id="secondary-namenode"><a name="user-content-secondary-namenode" href="#secondary-namenode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Secondary NameNode</h2>
+<h2 id="secondary-namenode">Secondary NameNode</h2>
 <p>HA 解决方案 (高可用)</p>
 <p><strong>工作模式</strong>:</p>
 <p>从 NameNode 下载元数据信息 (<strong>fsimage</strong>, <strong>edits</strong>), 然后合并二者, 生成新的 <strong>fsimage</strong>, 在本地保存一份后推送到 NameNode, 替换旧的 <strong>fsimage</strong>.</p>
@@ -183,12 +184,12 @@
 <li><code>fs.checkpoint.period</code> 指定两次 checkpoint 的最大时间间隔, 默认 3600 秒</li>
 <li><code>fs.checkpoint.size</code> 规定 edits 的大小, 默认 64M</li>
 </ul>
-<h2 id="datanode"><a name="user-content-datanode" href="#datanode" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DataNode</h2>
+<h2 id="datanode">DataNode</h2>
 <p>真实文件数据存储服务</p>
 <p>文件块(block): 最基本存储单位, hp 1.0 默认 64M, hp 2.0 默认 128M, 从文件的 0 编号开始, 按指定大小, 顺序对文件进行划分并编号.</p>
 <p>HDFS 中, 如果一个文件小于一个数据块的大小 , 并不占用整个数据块 (这些文件最终被保存在 tmp/dfs/data/current/&hellip;/finalized/ 中).</p>
 <p>默认 3 个副本 (如果已存在一份存储好的文件(3个副本), 突然有一个小弟挂掉了, NameNode 会再安排另一个小弟重新备份这个文件, 这是基于心跳包机制的).</p>
-<h2 id="block"><a name="user-content-block" href="#block" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>读取数据流程 (以 block 为单位)</h2>
+<h2 id="block">读取数据流程 (以 block 为单位)</h2>
 <ul>
 <li>客户端要访问 HDFS 中的一个文件</li>
 <li>首先从 NameNode 获得组成返个文件的数据块位置列表</li>
@@ -196,7 +197,7 @@
 <li>访问 DataNode 获取数据</li>
 <li>NameNode 并不参不数据实际传输</li>
 </ul>
-<h2 id="block_1"><a name="user-content-block_1" href="#block_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>写入数据流程 (以 block 为单位)</h2>
+<h2 id="block_1">写入数据流程 (以 block 为单位)</h2>
 <ul>
 <li>客户端请求 NameNode 创建新文件</li>
 <li>客户端将数据写入 DFSOutputStream</li>

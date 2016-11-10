@@ -72,91 +72,97 @@
 <p>在使用时发现, 64 位的 py2exe 没办法打包成一个 exe 文件, 会生成很碰依赖文件, 而且实战中还发现其他问题, 推荐使用 pyinstaller 去打包 exe, 使用非常简单, 如果不想显示 console, 并且打包成一个单独的 exe 文件, 那就加两个参数:<br>
 pyinstaller app.py &ndash;noconsole &ndash;onefile</p>
 </blockquote>
-<h1 id="py2exe"><a name="user-content-py2exe" href="#py2exe" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 py2exe</h1>
-<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>一、简介</h2>
+<h1 id="py2exe">使用 py2exe</h1>
+<h2 id="_1">一、简介</h2>
 <p>py2exe 是一个将 python 脚本打包成 windows 上的可独立执行的可执行程序 (*.exe) 的工具, 这样, 就可以不用装 python 而在 windows 系统上运行这个可执行程序.</p>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>二、安装</h2>
-<p>从 <a href="http://prdownloads.sourceforge.net/py2exe"><a href="http://prdownloads.sourceforge.net/py2exe"><a href="http://prdownloads.sourceforge.net/py2exe">http://prdownloads.sourceforge.net/py2exe</a></a></a> 下载并安装与当前系统匹配的 py2exe 安装程序, 这将安装 py2exe 和相应的例子, 这些例子被安装在 <code>lib\site-packages\py2exe\samples</code> 目录下.</p>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>三、应用</h2>
+<h2 id="_2">二、安装</h2>
+<p>从 <a href="http://prdownloads.sourceforge.net/py2exe">http://prdownloads.sourceforge.net/py2exe</a> 下载并安装与当前系统匹配的 py2exe 安装程序, 这将安装 py2exe 和相应的例子, 这些例子被安装在 <code>lib\site-packages\py2exe\samples</code> 目录下.</p>
+<h2 id="_3">三、应用</h2>
 <p>我们将一节笔记中做好的 <strong>first_window</strong> 程序打包成 exe.</p>
 <p>在 <strong>first_window</strong> 目录下新建一个 py 文件, 名字随意 (我这里就取名为 <code>exe.py</code> 了), 填充以下内容:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># -*- coding: utf-8 -*-</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># -*- coding: utf-8 -*-</span>
 
-<span style="color: #A71D5D">from</span> <span style="color: #555555">distutils.core</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">setup</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">py2exe</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">distutils.core</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">setup</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">py2exe</span>
 
-<span style="color: #333333">options</span> <span style="color: #A71D7E">=</span> {
-    <span style="color: #183691">&#39;py2exe&#39;</span>: {
-        <span style="color: #183691">&#39;dll_excludes&#39;</span>: [<span style="color: #183691">&#39;MSVCP90.dll&#39;</span>],  <span style="color: #999988; font-style: italic"># py2exe 会提示 MSVCP90.dll: No such file or directory, 要么将 windows 目录下的 MSVCP90.dll 拷到 python 安装目录下, 要么就在这里配置下</span>
-        <span style="color: #183691">&#39;includes&#39;</span>: [<span style="color: #183691">&#39;sip&#39;</span>],  <span style="color: #999988; font-style: italic"># py2exe 打包 pyqt 程序时不会带上 sip, 手动指定下</span>
-        <span style="color: #183691">&#39;bundle_files&#39;</span>: <span style="color: #0086b3">1</span>,  <span style="color: #999988; font-style: italic"># 打包成一个 exe 程序, 否则会在生成一堆依赖 dll、pyd 文件, 只支持 32 位 python</span>
-        <span style="color: #183691">&#39;compressed&#39;</span>: <span style="color: #0086b3">1</span>,  <span style="color: #999988; font-style: italic"># 启用压缩</span>
-        <span style="color: #183691">&#39;optimize&#39;</span>: <span style="color: #0086b3">2</span>  <span style="color: #999988; font-style: italic"># 2级优化</span>
-    }
-}
+<span style="color: #f8f8f2">options</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #e6db74">&#39;py2exe&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;dll_excludes&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;MSVCP90.dll&#39;</span><span style="color: #f8f8f2">],</span>  <span style="color: #75715e"># py2exe 会提示 MSVCP90.dll: No such file or directory, 要么将 windows 目录下的 MSVCP90.dll 拷到 python 安装目录下, 要么就在这里配置下</span>
+        <span style="color: #e6db74">&#39;includes&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;sip&#39;</span><span style="color: #f8f8f2">],</span>  <span style="color: #75715e"># py2exe 打包 pyqt 程序时不会带上 sip, 手动指定下</span>
+        <span style="color: #e6db74">&#39;bundle_files&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>  <span style="color: #75715e"># 打包成一个 exe 程序, 否则会在生成一堆依赖 dll、pyd 文件, 只支持 32 位 python</span>
+        <span style="color: #e6db74">&#39;compressed&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>  <span style="color: #75715e"># 启用压缩</span>
+        <span style="color: #e6db74">&#39;optimize&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">2</span>  <span style="color: #75715e"># 2级优化</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 
-<span style="color: #333333">setup</span>(
-    <span style="color: #333333">version</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;1.0.0&#39;</span>,  <span style="color: #999988; font-style: italic"># exe 版本</span>
-    <span style="color: #333333">description</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;description for your exe&#39;</span>,  <span style="color: #999988; font-style: italic"># 文件说明 (在 exe 属性里显示的)</span>
-    <span style="color: #333333">name</span> <span style="color: #A71D7E">=</span> <span style="color: #183691">&#39;name for your exe&#39;</span>,  <span style="color: #999988; font-style: italic"># 产品名称 (不是 exe 文件名, 是在 exe 属性里显示的)</span>
-    <span style="color: #333333">options</span> <span style="color: #A71D7E">=</span>  <span style="color: #333333">options</span>,
-    <span style="color: #333333">zipfile</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">None</span>, <span style="color: #999988; font-style: italic"># 不生成zip库文件</span>
-    <span style="color: #333333">windows</span> <span style="color: #A71D7E">=</span> [<span style="color: #183691">&#39;first_window.py&#39;</span>],  <span style="color: #999988; font-style: italic"># 如果是窗口程序就用 windows, 控制台程序就用 console</span>
-    )
+<span style="color: #f8f8f2">setup(</span>
+    <span style="color: #f8f8f2">version</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;1.0.0&#39;</span><span style="color: #f8f8f2">,</span>  <span style="color: #75715e"># exe 版本</span>
+    <span style="color: #f8f8f2">description</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;description for your exe&#39;</span><span style="color: #f8f8f2">,</span>  <span style="color: #75715e"># 文件说明 (在 exe 属性里显示的)</span>
+    <span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;name for your exe&#39;</span><span style="color: #f8f8f2">,</span>  <span style="color: #75715e"># 产品名称 (不是 exe 文件名, 是在 exe 属性里显示的)</span>
+    <span style="color: #f8f8f2">options</span> <span style="color: #f92672">=</span>  <span style="color: #f8f8f2">options,</span>
+    <span style="color: #f8f8f2">zipfile</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None,</span> <span style="color: #75715e"># 不生成zip库文件</span>
+    <span style="color: #f8f8f2">windows</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;first_window.py&#39;</span><span style="color: #f8f8f2">],</span>  <span style="color: #75715e"># 如果是窗口程序就用 windows, 控制台程序就用 console</span>
+    <span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br>
+
+<p><br>
 然后控制台进入 <strong>first_window</strong> 目录, 执行命令: <code>python exe.py py2exe</code>, 系统就开始打包了, 打包完成后会生成一个 <code>dist</code> 目录, 这里存放 exe 文件.</p>
-<p>开发 pyqt 程序时, 可能会产生多个 py 文件, 只需要在打包脚本中指定**入口文件**就可以了, py2exe 会自动分析依赖, 但并不是绝对的, 例如 sip 包就不会被自动带上, 所以这里就需要我们在 <code>includes</code> 中配置.<br>
+<p>开发 pyqt 程序时, 可能会产生多个 py 文件, 只需要在打包脚本中指定<strong>入口文件</strong>就可以了, py2exe 会自动分析依赖, 但并不是绝对的, 例如 sip 包就不会被自动带上, 所以这里就需要我们在 <code>includes</code> 中配置.<br>
 另外, 也可以在 options 的 <code>packages</code> 参数里配置, 让 py2exe 在打包时把 package 打包进去 (包名就是 <code>__init__.py</code> 所在的目录名), 效果和 <code>includes</code> 一样.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">options</span> <span style="color: #A71D7E">=</span> {
-      <span style="color: #183691">&#39;py2exe&#39;</span>: {
-        <span style="color: #183691">&#39;packages&#39;</span>: [<span style="color: #183691">&#39;first_window&#39;</span>]
-    }
-}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">options</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #e6db74">&#39;py2exe&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;packages&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;first_window&#39;</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br></p>
-<h1 id="pyinstaller"><a name="user-content-pyinstaller" href="#pyinstaller" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 pyinstaller</h1>
-<h2 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>一、初识</h2>
+
+<p><br></p>
+<h1 id="pyinstaller">使用 pyinstaller</h1>
+<h2 id="_4">一、初识</h2>
 <p>用过 pyinstaller 之后的第一感觉就是相见恨晚, 有这么好用的打包程序, 谁 tm 还用 py2exe, 全程根本不需要手工指定 include 哪些包、哪些 dll 应该被包含, 哪些不该包含, 全都自动实现, 基本剩我们只需要执行如下代码就可以了:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pyinstaller app.py
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>pyinstaller app.py
 </pre></div>
 
-<br>
+
+<p><br>
 如果不想显示 console, 并且打包成一个单独的 exe 文件, 那就加两个参数:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>pyinstaller app.py --noconsole --onefile
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>pyinstaller app.py --noconsole --onefile
 </pre></div>
 
-<br>如果你只引用了很少的资源, 你可以这样简单的打包程序在系统中的显示图标</p>
-<h2 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>二、打包所有静态资源</h2>
+
+<p><br>如果你只引用了很少的资源, 你可以这样简单的打包程序在系统中的显示图标</p>
+<h2 id="_5">二、打包所有静态资源</h2>
 <p>Qt 本身在资源管理器的资源是可以直接打包入程序中, 不需要做什么处理的, 但有时可能需要在程序中调用一些外部资源文件, 此时 pyinstaller 就不能帮我们自动打包了..</p>
 <p>我们可以先用如下的命令去打包一次程序:<code>pyinstaller app.py --noconsole --onefile -i icon.ico</code><br>
 这里的 <strong>-i</strong> 参数就是给程序添加在资源管理器中显示的图标, 打包完之后会在同目录下生成一个 <strong>app.spec</strong> 文件,我们可以通过编辑这个 <strong>app.spec</strong> 文件来把其他资源文件打包进 exe 文件里.</p>
 <p>假设我们程序的里有一个图标叫 title_bar.ico, 我们修改 spec 文件如下 (先把 <strong>task_bar.ico</strong> 放在同目录下):</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">a</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">Analysis</span>([
-                <span style="color: #333333">datas</span><span style="color: #A71D7E">=</span>[(<span style="color: #183691">&#39;task_bar.ico&#39;</span>,<span style="color: #183691">&#39;.&#39;</span>)]
-            ])
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">a</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">Analysis</span><span style="color: #f8f8f2">([</span>
+                <span style="color: #a6e22e">datas</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">[(</span><span style="color: #e6db74">&#39;task_bar.ico&#39;</span><span style="color: #f8f8f2">,</span><span style="color: #e6db74">&#39;.&#39;</span><span style="color: #f8f8f2">)]</span>
+            <span style="color: #f8f8f2">])</span>
 </pre></div>
 
-<br>
+
+<p><br>
 这样就把 <strong>task_bar.ico</strong> 文件打包进 exe 文件了, 每次执行 exe 文件的时候都会把这个 icon 解压到一个临时目录中供调用.</p>
 <p>现在的问题在于, 这个临时目录的路径是不固定的, 那么我们在程序中要如何寻找这个临时目录里的资源文件呢?</p>
 <p>pyinstaller 通过给 sys 模块提供一个 <code>sys._MEIPASS</code> 的参数来告知这个临时目录的路径.</p>
 <p>现在我们可以写这样一个函数来保证在 python 源码运行模式和 pyinstaller 打包模式都正常获取资源文件的路径:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">resource_path</span>(<span style="color: #333333">rel_path</span><span style="color: #A71D7E">=</span><span style="color: #183691">&#39;icon.ico&#39;</span>):
-    <span style="color: #A71D5D">try</span>:
-        <span style="color: #333333">base_path</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">sys</span><span style="color: #A71D7E">.</span><span style="color: #333333">_MEIPASS</span>
-    <span style="color: #A71D5D">except</span> <span style="color: #990000">AttributeError</span>:
-        <span style="color: #333333">base_path</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">path</span><span style="color: #A71D7E">.</span><span style="color: #333333">abspath</span>(<span style="color: #183691">&quot;.&quot;</span>)
-    <span style="color: #A71D5D">return</span> <span style="color: #333333">os</span><span style="color: #A71D7E">.</span><span style="color: #333333">path</span><span style="color: #A71D7E">.</span><span style="color: #333333">join</span>(<span style="color: #333333">base_path</span>, <span style="color: #333333">rel_path</span>)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">resource_path</span><span style="color: #f8f8f2">(rel_path</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;icon.ico&#39;</span><span style="color: #f8f8f2">):</span>
+    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">base_path</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_MEIPASS</span>
+    <span style="color: #66d9ef">except</span> <span style="color: #a6e22e">AttributeError</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">base_path</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">abspath(</span><span style="color: #e6db74">&quot;.&quot;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">join(base_path,</span> <span style="color: #f8f8f2">rel_path)</span>
 </pre></div>
 
-<br>
+
+<p><br>
 当以 python 源码运行时就获取当前的路径, 打包后运行时就获取临时目录的路径, 这样我们在 pyqt 中的 icon 设置代码就变成了:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">icon_file</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">resource_path</span>(<span style="color: #183691">&#39;icon.ico&#39;</span>)
-<span style="color: #333333">window</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">MyApp</span>()
-<span style="color: #333333">window</span><span style="color: #A71D7E">.</span><span style="color: #333333">setWindowIcon</span>(<span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QIcon</span>(<span style="color: #333333">icon_file</span>))
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">icon_file</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">resource_path(</span><span style="color: #e6db74">&#39;icon.ico&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">window</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">MyApp()</span>
+<span style="color: #f8f8f2">window</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setWindowIcon(QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QIcon(icon_file))</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 

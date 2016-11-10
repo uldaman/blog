@@ -59,20 +59,21 @@
 <p>官方说该装饰器在新的 pyqt 中已被 <a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">pyqtSlot</a> 替代</p>
 </blockquote>
 <p>参考官方文档:<br>
-<a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator">http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator</a></a></a><br>
-<a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot</a></a></a></p>
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator">http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator</a><br>
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot</a></p>
 <p>举个例子:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">QObject</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pushButton</span>, <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">SIGNAL</span>(<span style="color: #333333">_fromUtf8</span>(<span style="color: #183691">&quot;clicked(bool)&quot;</span>)), <span style="color: #ed6a43">self</span>, <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">SLOT</span>(<span style="color: #333333">_fromUtf8</span>(<span style="color: #183691">&quot;on_pushButton(bool)&quot;</span>)))
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QObject</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">connect(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pushButton,</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SIGNAL(_fromUtf8(</span><span style="color: #e6db74">&quot;clicked(bool)&quot;</span><span style="color: #f8f8f2">)),</span> <span style="color: #f8f8f2">self,</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SLOT(_fromUtf8(</span><span style="color: #e6db74">&quot;on_pushButton(bool)&quot;</span><span style="color: #f8f8f2">)))</span>
 
-<span style="color: #333333">@pyqtSignature</span>(<span style="color: #183691">&quot;&quot;</span>)
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_pushButton</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">checked</span>):
-    <span style="color: #183691">&quot;&quot;&quot;</span>
-<span style="color: #183691">    Slot documentation goes here.</span>
-<span style="color: #183691">    &quot;&quot;&quot;</span>
-    <span style="color: #A71D5D">print</span> <span style="color: #183691">&quot;111&quot;</span>
+<span style="color: #a6e22e">@pyqtSignature</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">on_pushButton</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">checked):</span>
+    <span style="color: #e6db74">&quot;&quot;&quot;</span>
+<span style="color: #e6db74">    Slot documentation goes here.</span>
+<span style="color: #e6db74">    &quot;&quot;&quot;</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #e6db74">&quot;111&quot;</span>
 </pre></div>
 
-<br>
+
+<p><br>
 我这里手动关联了一个信号槽, 按以前对 C++ 开发 Qt 的理解, 当产生 <code>clicked(bool)</code> 信号时, 会找到 <code>on_pushButton(self, checked)</code> 槽函数&hellip;</p>
 <p>然而, 遗憾的是, pyqt 不具备这样的功能, 如果你不在 <code>@pyqtSignature("")</code> 声明, pyqt 是找不到这个槽函数的&hellip;所以你必须改成 <code>@pyqtSignature("bool")</code>.</p>
 <p>个人理解是, 因为 Python 函数的灵活性 (PyQt4 allows any Python callable to be used as a slot, not just Qt slots), 太灵活了, 所以要被限制 ? ?</p>

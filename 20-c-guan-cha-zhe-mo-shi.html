@@ -61,7 +61,7 @@
 这个 [老师&ndash;学生] 的模型应该如下:</p>
 <p><img alt="" src="http://i59.tinypic.com/2luz0wy.jpg" /></p>
 <p>OK, 现在来用 C++ 代码来实现这个模型.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;tchar.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;list&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;iostream&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
@@ -167,7 +167,7 @@
 <strong>ConcreteSubject:</strong> 具体通知者类, 当通知者内部状态发生改变时, 给所有添加过的观察者发出通知. 它可以直接用 Subject 的方法, 也可以重写它们.
 <strong>Observer:</strong> 抽象观察者, 它保存一个状态信息的属性, 以便本身的状态和通知者状态相协调, 有定义一个接口, 在得到通知时更新自己.
 <strong>ConcreteObserver:</strong> 具体观察者, 实现象观察者的更新接口.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>适用场景</h1>
+<h1 id="_1">适用场景</h1>
 <p>当一个对象的改变需要同时改变其他对象, 而它并不用知道有多少对象待改变时, 应该考虑使用观察者模式.
 观察者模式所做的工作其实就是在解除耦合, 让耦合的双方都依赖于抽象, 而不是依赖于具体, 从而使得各自的变化都不会影响另一边的变化.
  0</p>

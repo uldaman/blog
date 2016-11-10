@@ -54,7 +54,7 @@
 
 
     <p><span style="color: #0000ff">from</span> web.views <span style="color: #0000ff">import</span><span style="color: #000000"> index</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, include(admin.site.urls)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^index/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, index),
 ]&lt;/span&gt;
@@ -66,7 +66,7 @@
 <p>这里考虑一种情况, 想像下那种论坛上帖子的页数, 如果每个 Url 都要做 映射, 那该怎么做?
 <img alt="" src="http://i57.tinypic.com/14aa5c6.jpg" /></p>
 <p>所以 Django 提供了动态配置 URL 的功能, 即用正则表达式.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page
 
 urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, include(admin.site.urls)),
@@ -76,7 +76,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>如果使用了这种方式, 那么其映射函数就要对后面的(\d*)做处理.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
 
 &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your views here.&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page(request, id):
@@ -87,21 +87,21 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 
 
 <p>可以看到, 这个函数比普通映射函数, 多了一个参数.
-这个参数和正则表达式上是一致的, 如果正则是 r(^page/(\d*)/(\d*)), 那么它的映射函数比上面的函数还要多一个参数.</p>
-<p>如果要想在正则里指定映射函数的参数名, 可以使用**命名组**的方式:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page),
+这个参数和正则表达式上是一致的, 如果正则是 r(^page/(\d<em>)/(\d</em>)), 那么它的映射函数比上面的函数还要多一个参数.</p>
+<p>如果要想在正则里指定映射函数的参数名, 可以使用<strong>命名组</strong>的方式:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page),
 </pre></div>
 
 
 <p>这样, 它的映射函数的第二个参数就必须命名为 index.</p>
-<p>另外, 还可以**设计默认值**:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, Page),
+<p>另外, 还可以<strong>设计默认值</strong>:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, Page),
 url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;}),
 </pre></div>
 
 
-<p>当访问, <a href="http://localhost:8000/page/">http://localhost:8000/page/</a> 2 时, 它会匹配到第一条规则, 而当访问 <a href="http://localhost:8000/page/">http://localhost:8000/page/</a> 时, 第一条规则因为加了 <strong>$ 限定符,</strong> 所以不能被匹配, 它会匹配到第二条规则, 而第二条规则指定了 index 的值 为 1, 这样页面就会访问到 <a href="http://localhost:8000/page/">http://localhost:8000/page/</a> 1</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page, {&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; : 1}),
+<p>当访问, http://localhost:8000/page/ 2 时, 它会匹配到第一条规则, 而当访问 http://localhost:8000/page/ 时, 第一条规则因为加了 <strong>$ 限定符,</strong> 所以不能被匹配, 它会匹配到第二条规则, 而第二条规则指定了 index 的值 为 1, 这样页面就会访问到 http://localhost:8000/page/ 1</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page, {&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; : 1}),
 </pre></div>
 
 
@@ -109,7 +109,7 @@ url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt
 <hr />
 <p>以上方法, 会让一个工程下的所有 app 都通过 urls.py, 如果 app 多的话, 会让逻辑容易出错, 所以还可以让每个 app 的 url 映射来处理.</p>
 <p>首先, 要改造 urls.py 文件:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, include(admin.site.urls)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^web/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, include(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;web.urls&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)),
 ]&lt;/span&gt;
@@ -118,7 +118,7 @@ url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt
 
 <p>代码逻辑很清晰, 不多解释了&hellip;</p>
 <p>然后, 在 web 项目里新建一个 urls.py 文件:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.conf.urls &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; include, url
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.conf.urls &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; include, url
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.contrib &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; admin
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page
@@ -132,7 +132,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 <p>Django 中的路由系统和其他语言的框架有所不同, 在 Django 中每一个请求的 url 都要有一条路由映射, 这样才能将请求交给对一个的 view 中的函数去处理;
 而其他大部分的 Web 框架则是对一类的 url 请求做一条路由映射, 从而是路由系统变得简洁.
 通过反射机制, 也可以为 Django 开发一套动态的路由系统;
-Demo: <a href="http://yunpan.cn/cm6gUbnMiqhfq"><a href="http://yunpan.cn/cm6gUbnMiqhfq"><a href="http://yunpan.cn/cm6gUbnMiqhfq">http://yunpan.cn/cm6gUbnMiqhfq</a></a></a> 访问密码 5808</p>
+Demo: <a href="http://yunpan.cn/cm6gUbnMiqhfq">http://yunpan.cn/cm6gUbnMiqhfq</a> 访问密码 5808</p>
 <blockquote>
 <p>nf</p>
 </blockquote>

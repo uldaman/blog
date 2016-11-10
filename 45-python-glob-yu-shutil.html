@@ -64,34 +64,36 @@
 <li><a href="#shutil">shutil</a></li>
 </ul>
 </div>
-<h1 id="glob"><a name="user-content-glob" href="#glob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob</h1>
-<h2 id="globglob"><a name="user-content-globglob" href="#globglob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob.glob</h2>
+<h1 id="glob">glob</h1>
+<h2 id="globglob">glob.glob</h2>
 <p>返回所有匹配的文件路径列表, 它只有一个参数 pathname, 定义了文件路径匹配规则, 这里可以是绝对路径, 也可以是相对路径, 下面是使用 glob.glob 的例子:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">glob</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">glob</span>
 
-<span style="color: #999988; font-style: italic"># 获取指定目录下的所有图片</span>
-<span style="color: #A71D5D">print</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">glob</span>(<span style="color: #183691">r&quot;E:\Picture\*\*.jpg&quot;</span>)
+<span style="color: #75715e"># 获取指定目录下的所有图片</span>
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">glob</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">glob(</span><span style="color: #e6db74">r&quot;E:\Picture\*\*.jpg&quot;</span><span style="color: #f8f8f2">)</span>
 
-<span style="color: #999988; font-style: italic"># 获取上级目录的所有.py文件</span>
-<span style="color: #A71D5D">print</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">glob</span>(<span style="color: #183691">r&#39;../*.py&#39;</span>)  <span style="color: #999988; font-style: italic"># 相对路径</span>
+<span style="color: #75715e"># 获取上级目录的所有.py文件</span>
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">glob</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">glob(</span><span style="color: #e6db74">r&#39;../*.py&#39;</span><span style="color: #f8f8f2">)</span>  <span style="color: #75715e"># 相对路径</span>
 </pre></div>
 
-<br></p>
-<h2 id="globiglob"><a name="user-content-globiglob" href="#globiglob" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>glob.iglob</h2>
+
+<p><br></p>
+<h2 id="globiglob">glob.iglob</h2>
 <p>与 glob.glob 类似, 但它获取的是一个可迭代对象, 使用它可以逐个获取匹配的文件路径名 (类似 rang 与 xrang 的区别).</p>
 <p>下面是一个简单的例子:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">glob</span>
-<span style="color: #999988; font-style: italic"># 父目录中的.py文件</span>
-<span style="color: #333333">f</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">glob</span><span style="color: #A71D7E">.</span><span style="color: #333333">iglob</span>(<span style="color: #183691">r&#39;../*.py&#39;</span>)
-<span style="color: #A71D5D">print</span> <span style="color: #333333">f</span>  <span style="color: #999988; font-style: italic"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">glob</span>
+<span style="color: #75715e"># 父目录中的.py文件</span>
+<span style="color: #f8f8f2">f</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">glob</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">iglob(</span><span style="color: #e6db74">r&#39;../*.py&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">f</span>  <span style="color: #75715e"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
 
-<span style="color: #A71D5D">for</span> <span style="color: #333333">py</span> <span style="color: #A71D7E">in</span> <span style="color: #333333">f</span>:
-    <span style="color: #A71D5D">print</span> <span style="color: #333333">py</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">py</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">f:</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">py</span>
 </pre></div>
 
-<br></p>
-<h1 id="shutil"><a name="user-content-shutil" href="#shutil" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>shutil</h1>
-<p>High-level file operations  高级的文件操作模块, 提供了一些易操作的文件**移动**、<strong>复制</strong>、<strong>打包</strong>、<strong>压缩</strong>、**解压**API.</p>
+
+<p><br></p>
+<h1 id="shutil">shutil</h1>
+<p>High-level file operations  高级的文件操作模块, 提供了一些易操作的文件<strong>移动</strong>、<strong>复制</strong>、<strong>打包</strong>、<strong>压缩</strong>、<strong>解压</strong>API.</p>
 <table>
 <thead>
 <tr>

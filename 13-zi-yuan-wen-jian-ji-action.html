@@ -59,7 +59,7 @@
 <li><a href="#action">添加 Action</a></li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加资源</h1>
+<h1 id="_1">添加资源</h1>
 <p>Qt 资源系统是一个跨平台的资源机制, 用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部. 如果你的程序需要加载特定的资源(图标、文本翻译等), 那么, 将其放置在资源文件中, 就再也不需要担心这些文件的丢失. 也就是说, 如果你将资源以资源文件形式存储, 它是会编译到可执行文件内部.</p>
 <p>双击打VS项目文件中的.qrc文件打开资源编辑器.</p>
 <p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg" /></p>
@@ -70,9 +70,9 @@
 <p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了.</p>
 <p><img alt="" src="http://i60.tinypic.com/24b0qc8.jpg" /></p>
 <p>接下来为这个新添加的资源文件关联动作.</p>
-<h1 id="action"><a name="user-content-action" href="#action" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加 Action</h1>
-<p>Action 可以显示在**菜单栏**, 作为一个菜单项, 当用户点击该菜单项, 对用户的点击做出响应;<br>
-也可以在**工具栏**, 作为一个工具栏按钮, 用户点击这个按钮就可以执行相应的操作, Qt 使用 QAction 类作为动作.<br>
+<h1 id="action">添加 Action</h1>
+<p>Action 可以显示在<strong>菜单栏</strong>, 作为一个菜单项, 当用户点击该菜单项, 对用户的点击做出响应;<br>
+也可以在<strong>工具栏</strong>, 作为一个工具栏按钮, 用户点击这个按钮就可以执行相应的操作, Qt 使用 QAction 类作为动作.<br>
 动作包含了图标、菜单文字、快捷键、状态栏文字、浮动帮助等信息.</p>
 <p>默认的, 菜单栏及工具栏只有 <strong>QMainWindow</strong> 上才有, 如果想在 QDialog 或者 QWidget 添加该怎么做呢?<br>
 要记得，QToolBar 以及 QStatusBar 都是 QWidget 的子类, 因此我们就可以将其结合布局管理器添加到另外的 QWidget 上面 (QLayout 布局提供了 setMenuBar() 函数，可以方便的添加菜单栏).</p>
@@ -87,17 +87,18 @@
 <p>很简单, 直接拖拽动作编辑器中的icon到工具栏或菜单项里就可以了.</p>
 <p><img alt="" src="http://i62.tinypic.com/dh915h.jpg" /></p>
 <p>接下来就要为这个 Action 关联操作代码了, 即连接信号和槽.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">Demo</span><span style="color: #A71D7E">::</span><span style="color: #333333">Demo</span>(<span style="color: #333333">QWidget</span> <span style="color: #A71D7E">*</span><span style="color: #333333">parent</span>)
-    <span style="color: #A71D7E">:</span> <span style="color: #333333">QMainWindow</span>(<span style="color: #333333">parent</span>)
-{
-    <span style="color: #333333">ui</span>.<span style="color: #333333">setupUi</span>(<span style="color: #A71D5D">this</span>);
-    <span style="color: #333333">connect</span>(<span style="color: #333333">ui</span>.<span style="color: #333333">action_New</span>, <span style="color: #A71D7E">&amp;</span><span style="color: #333333">QAction</span><span style="color: #A71D7E">::</span><span style="color: #333333">triggered</span>, [](<span style="color: #A71D5D; font-weight: bold">bool</span>) {
-        <span style="color: #333333">qDebug</span>() <span style="color: #A71D7E">&lt;&lt;</span> <span style="color: #183691">&quot;This is a Demo&quot;</span>;
-    });
-}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">Demo</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">Demo(QWidget</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">parent)</span>
+    <span style="color: #f92672">:</span> <span style="color: #f8f8f2">QMainWindow(parent)</span>
+<span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">ui.setupUi(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">connect(ui.action_New,</span> <span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">QAction</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">triggered,</span> <span style="color: #f8f8f2">[](</span><span style="color: #66d9ef">bool</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">qDebug()</span> <span style="color: #f92672">&lt;&lt;</span> <span style="color: #e6db74">&quot;This is a Demo&quot;</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">});</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 triggered() 是 QAction 的信号函数, 当点击 QAction 时被发出.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 

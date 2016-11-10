@@ -69,65 +69,69 @@
 </ul>
 </div>
 <p>以 Hadoop 权威指南 (第三版) 3.5.2 为例.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.InputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.net.URI</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.InputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.net.URI</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.conf.Configuration</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.FileSystem</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.Path</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.io.IOUtils</span><span style="color: #A71D7E">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.conf.Configuration</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.FileSystem</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.Path</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.io.IOUtils</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">FileSystemCat</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">String</span> <span style="color: #333333">uri</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">args</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">0</span><span style="color: #A71D7E">];</span>
-        <span style="color: #333333">FileSystem</span> <span style="color: #333333">fs</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">FileSystem</span><span style="color: #A71D7E">.</span><span style="color: #008080">get</span><span style="color: #A71D7E">(</span><span style="color: #333333">URI</span><span style="color: #A71D7E">.</span><span style="color: #008080">create</span><span style="color: #A71D7E">(</span><span style="color: #333333">uri</span><span style="color: #A71D7E">),</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Configuration</span><span style="color: #A71D7E">());</span>
-        <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">null</span><span style="color: #A71D7E">;</span>
-        <span style="color: #A71D5D">try</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fs</span><span style="color: #A71D7E">.</span><span style="color: #008080">open</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">Path</span><span style="color: #A71D7E">(</span><span style="color: #333333">uri</span><span style="color: #A71D7E">));</span>
-            <span style="color: #333333">IOUtils</span><span style="color: #A71D7E">.</span><span style="color: #008080">copyBytes</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">int</span><span style="color: #A71D7E">,</span> <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">,</span> <span style="color: #0086b3">4096</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">);</span>
-        <span style="color: #A71D7E">}</span> <span style="color: #A71D5D">finally</span> <span style="color: #A71D7E">{</span>
-            <span style="color: #333333">IOUtils</span><span style="color: #A71D7E">.</span><span style="color: #008080">closeStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">);</span>
-        <span style="color: #A71D7E">}</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">FileSystemCat</span> <span style="color: #f92672">{</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">Exception</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">uri</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">[</span><span style="color: #ae81ff">0</span><span style="color: #f92672">];</span>
+        <span style="color: #f8f8f2">FileSystem</span> <span style="color: #f8f8f2">fs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">FileSystem</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">URI</span><span style="color: #f92672">.</span><span style="color: #a6e22e">create</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">uri</span><span style="color: #f92672">),</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Configuration</span><span style="color: #f92672">());</span>
+        <span style="color: #f8f8f2">InputStream</span> <span style="color: #f8f8f2">in</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">null</span><span style="color: #f92672">;</span>
+        <span style="color: #66d9ef">try</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">in</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fs</span><span style="color: #f92672">.</span><span style="color: #a6e22e">open</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Path</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">uri</span><span style="color: #f92672">));</span>
+            <span style="color: #f8f8f2">IOUtils</span><span style="color: #f92672">.</span><span style="color: #a6e22e">copyBytes</span><span style="color: #f92672">(</span><span style="color: #66d9ef">int</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">4096</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">);</span>
+        <span style="color: #f92672">}</span> <span style="color: #66d9ef">finally</span> <span style="color: #f92672">{</span>
+            <span style="color: #f8f8f2">IOUtils</span><span style="color: #f92672">.</span><span style="color: #a6e22e">closeStream</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">in</span><span style="color: #f92672">);</span>
+        <span style="color: #f92672">}</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 代码就不解释了, 主要记录一下环境设置.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>环境变量</h1>
+<h1 id="_1">环境变量</h1>
 <p>如果你是参考我的 Wiki <a href="http://wiki.smallcpp.com/Hadoop/%E6%90%AD%E5%BB%BA%20Hadoop%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.html#33">搭建 Hadoop 分布式实验环境</a> 搭建的实验环境, 那环境变量应该是已经配好了.</p>
 <p><code>vim ~/.bashrc</code></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">export</span> <span style="color: #008080">JAVA_HOME</span><span style="color: #A71D7E">=</span>/usr/java/jdk1.8.0_101
-<span style="color: #ED6A43">export</span> <span style="color: #008080">HADOOP_HOME</span><span style="color: #A71D7E">=</span>/usr/itcast/hadoop-2.7.3
-<span style="color: #ED6A43">export</span> <span style="color: #008080">PATH</span><span style="color: #A71D7E">=</span><span style="color: #008080">$PATH</span>:<span style="color: #008080">$JAVA_HOME</span>/bin:<span style="color: #008080">$HADOOP_HOME</span>/bin:<span style="color: #008080">$HADOOP_HOME</span>/sbin
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">JAVA_HOME</span><span style="color: #f92672">=</span>/usr/java/jdk1.8.0_101
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HADOOP_HOME</span><span style="color: #f92672">=</span>/usr/itcast/hadoop-2.7.3
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">PATH</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$PATH</span>:<span style="color: #f8f8f2">$JAVA_HOME</span>/bin:<span style="color: #f8f8f2">$HADOOP_HOME</span>/bin:<span style="color: #f8f8f2">$HADOOP_HOME</span>/sbin
 </pre></div>
 
-<br>
+
+<p><br>
 运行 <code>source ~/.bashrc</code> 刷新环境变量.</p>
-<h1 id="hadoop"><a name="user-content-hadoop" href="#hadoop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hadoop 类目录</h1>
+<h1 id="hadoop">Hadoop 类目录</h1>
 <p>这个类目录的作用是当运行 hadoop 或者 hdfs 的命令时, 命令的搜索目录.</p>
 <p>首先到 Hadoop 的根目录下创建一个新目录:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ED6A43">cd</span> /usr/itcast/hadoop-2.7.3/
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">cd</span> /usr/itcast/hadoop-2.7.3/
 mkdir myclass
 </pre></div>
 
-<br>
-然后 <code>vim hadoop-env.sh</code> 设置 <code>HADOOP_CLASSPATH</code>:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999988; font-style: italic"># Extra Java CLASSPATH elements.  Automatically insert capacity-scheduler.</span>
-<span style="color: #ED6A43">export</span> <span style="color: #008080">HADOOP_CLASSPATH</span><span style="color: #A71D7E">=</span>/usr/itcast/hadoop-2.7.3/myclass
 
-<span style="color: #A71D5D">for</span> f in <span style="color: #008080">$HADOOP_HOME</span>/contrib/capacity-scheduler/*.jar; <span style="color: #A71D5D">do</span>
-  <span style="color: #A71D5D">if</span> <span style="color: #A71D7E">[</span> <span style="color: #183691">&quot;</span><span style="color: #008080">$HADOOP_CLASSPATH</span><span style="color: #183691">&quot;</span> <span style="color: #A71D7E">]</span>; <span style="color: #A71D5D">then</span>
-    <span style="color: #ED6A43">export</span> <span style="color: #008080">HADOOP_CLASSPATH</span><span style="color: #A71D7E">=</span><span style="color: #008080">$HADOOP_CLASSPATH</span>:<span style="color: #008080">$f</span>
-  <span style="color: #A71D5D">else</span>
-    <span style="color: #ED6A43">export</span> <span style="color: #008080">HADOOP_CLASSPATH</span><span style="color: #A71D7E">=</span><span style="color: #008080">$f</span>
-  <span style="color: #A71D5D">fi</span>
-<span style="color: #A71D5D">done</span>
+<p><br>
+然后 <code>vim hadoop-env.sh</code> 设置 <code>HADOOP_CLASSPATH</code>:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Extra Java CLASSPATH elements.  Automatically insert capacity-scheduler.</span>
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HADOOP_CLASSPATH</span><span style="color: #f92672">=</span>/usr/itcast/hadoop-2.7.3/myclass
+
+<span style="color: #66d9ef">for</span> f in <span style="color: #f8f8f2">$HADOOP_HOME</span>/contrib/capacity-scheduler/*.jar<span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">do</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$HADOOP_CLASSPATH</span><span style="color: #e6db74">&quot;</span> <span style="color: #f92672">]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
+    <span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HADOOP_CLASSPATH</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$HADOOP_CLASSPATH</span>:<span style="color: #f8f8f2">$f</span>
+  <span style="color: #66d9ef">else</span>
+    <span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HADOOP_CLASSPATH</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$f</span>
+  <span style="color: #66d9ef">fi</span>
+<span style="color: #66d9ef">done</span>
 </pre></div>
 
-<br>
+
+<p><br>
 这样当执行 <code>hdfs FileSystemCat</code> 的时候, 就会去 <code>/usr/itcast/hadoop-2.7.3/myclass</code> 找我们写好的 <code>FileSystemCat</code> 应用了.</p>
-<h1 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>编译源码</h1>
+<h1 id="_2">编译源码</h1>
 <p>要将 Java 源码文件编译成 <code>.class</code> 文件才能被 Hadoop 识别, 编译 Hdfs 应用需要导入 Hadoop 的 jar 包, 这些包位于以下目录:</p>
 <ul>
 <li>/usr/itcast/hadoop-2.7.1/share/hadoop/common</li>
@@ -136,77 +140,80 @@ mkdir myclass
 <li>/usr/itcast/hadoop-2.7.1/share/hadoop/hdfs/lib</li>
 </ul>
 <p>我们这里的例子用到的是 <code>/usr/itcast/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar</code> 包, 执行 <code>javac</code> 命令时用 <code>-cp</code> 指定下就好.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>javac -cp /usr/itcast/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar FileSystemCat.java
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>javac -cp /usr/itcast/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar FileSystemCat.java
 </pre></div>
 
-<br>
+
+<p><br>
 然后 <code>/usr/itcast/hadoop-2.7.3/myclass</code> 下就多了个 <code>FileSystemCat.class</code> 文件.</p>
 <p>这时执行 <code>hdfs FileSystemCat /xxx</code> 就能查看到 <code>xxx</code> 文件的内容啦, 类似 linux 的 <code>cat</code> 命令.</p>
-<h1 id="ant"><a name="user-content-ant" href="#ant" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ant</h1>
+<h1 id="ant">ant</h1>
 <p>由于编译源码时需要指定 Hadoop 的 jar 包, 当引入的 jar 包多时, 这样就特别麻烦, 我们可以借用 ant 工具来编译源码, ant 可以在 <code>bulid.xml</code> 中设定 jar 包的所在目录, 这样就比较方便了.</p>
 <p>这里仅作介绍, 因为我是使用 <a href="http://blog.smallcpp.com/05-shi-yong-java-api-cao-zuo-hdfs.html#eclipse-hdfs">Eclipse</a> 进行开发的, 导入 jar 包相对于说, 还是比较方便的.</p>
-<h1 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>其他例子</h1>
-<h2 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>例 1</h2>
+<h1 id="_3">其他例子</h1>
+<h2 id="1">例 1</h2>
 <p>读入本地文件系统一个大约一百多字节的文本文件, 并将其第 101-120 字节的内容写入 HDFS 成为一个新文件.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.BufferedInputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.FileInputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.InputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.OutputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.net.URI</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.BufferedInputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.FileInputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.InputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.OutputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.net.URI</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.conf.Configuration</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.FileSystem</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.Path</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.io.IOUtils</span><span style="color: #A71D7E">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.conf.Configuration</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.FileSystem</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.Path</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.io.IOUtils</span><span style="color: #f92672">;</span>
 
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">CopyLocalToHdfs</span> <span style="color: #A71D7E">{</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">CopyLocalToHdfs</span> <span style="color: #f92672">{</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">String</span> <span style="color: #333333">local_uri</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">args</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">0</span><span style="color: #A71D7E">];</span>
-        <span style="color: #333333">String</span> <span style="color: #333333">hdfs_uri</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">args</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">];</span>
-        <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">BufferedInputStream</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">FileInputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">local_uri</span><span style="color: #A71D7E">));</span>
-        <span style="color: #333333">in</span><span style="color: #A71D7E">.</span><span style="color: #008080">skip</span><span style="color: #A71D7E">(</span><span style="color: #0086b3">100</span><span style="color: #A71D7E">);</span>
-        <span style="color: #333333">FileSystem</span> <span style="color: #333333">fs</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">FileSystem</span><span style="color: #A71D7E">.</span><span style="color: #008080">get</span><span style="color: #A71D7E">(</span><span style="color: #333333">URI</span><span style="color: #A71D7E">.</span><span style="color: #008080">create</span><span style="color: #A71D7E">(</span><span style="color: #333333">hdfs_uri</span><span style="color: #A71D7E">),</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Configuration</span><span style="color: #A71D7E">(),</span> <span style="color: #183691">&quot;martin&quot;</span><span style="color: #A71D7E">);</span>
-        <span style="color: #333333">OutputStream</span> <span style="color: #333333">out</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fs</span><span style="color: #A71D7E">.</span><span style="color: #008080">create</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">Path</span><span style="color: #A71D7E">(</span><span style="color: #333333">hdfs_uri</span><span style="color: #A71D7E">));</span>
-        <span style="color: #333333">IOUtils</span><span style="color: #A71D7E">.</span><span style="color: #008080">copyBytes</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">,</span> <span style="color: #333333">out</span><span style="color: #A71D7E">,</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">long</span><span style="color: #A71D7E">)</span><span style="color: #0086b3">20</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D">true</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">Exception</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">local_uri</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">[</span><span style="color: #ae81ff">0</span><span style="color: #f92672">];</span>
+        <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">hdfs_uri</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">[</span><span style="color: #ae81ff">1</span><span style="color: #f92672">];</span>
+        <span style="color: #f8f8f2">InputStream</span> <span style="color: #f8f8f2">in</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">BufferedInputStream</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">FileInputStream</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">local_uri</span><span style="color: #f92672">));</span>
+        <span style="color: #f8f8f2">in</span><span style="color: #f92672">.</span><span style="color: #a6e22e">skip</span><span style="color: #f92672">(</span><span style="color: #ae81ff">100</span><span style="color: #f92672">);</span>
+        <span style="color: #f8f8f2">FileSystem</span> <span style="color: #f8f8f2">fs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">FileSystem</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">URI</span><span style="color: #f92672">.</span><span style="color: #a6e22e">create</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hdfs_uri</span><span style="color: #f92672">),</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Configuration</span><span style="color: #f92672">(),</span> <span style="color: #e6db74">&quot;martin&quot;</span><span style="color: #f92672">);</span>
+        <span style="color: #f8f8f2">OutputStream</span> <span style="color: #f8f8f2">out</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fs</span><span style="color: #f92672">.</span><span style="color: #a6e22e">create</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Path</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hdfs_uri</span><span style="color: #f92672">));</span>
+        <span style="color: #f8f8f2">IOUtils</span><span style="color: #f92672">.</span><span style="color: #a6e22e">copyBytes</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">in</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">out</span><span style="color: #f92672">,</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">long</span><span style="color: #f92672">)</span><span style="color: #ae81ff">20</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">true</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-<br></p>
-<h2 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>例 2</h2>
+
+<p><br></p>
+<h2 id="2">例 2</h2>
 <p>例 1 的反向操作, 读入 HDFS 文件系统一个大约一百多字节的文本文件, 并将其第 101-120 字节的内容写入本地文件系统成为一个新文件.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.BufferedOutputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.FileOutputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.InputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.io.OutputStream</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">java.net.URI</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.BufferedOutputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.FileOutputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.InputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.io.OutputStream</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.net.URI</span><span style="color: #f92672">;</span>
 
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.conf.Configuration</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.FileSystem</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.fs.Path</span><span style="color: #A71D7E">;</span>
-<span style="color: #A71D5D">import</span> <span style="color: #555555">org.apache.hadoop.io.IOUtils</span><span style="color: #A71D7E">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.conf.Configuration</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.FileSystem</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.fs.Path</span><span style="color: #f92672">;</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">org.apache.hadoop.io.IOUtils</span><span style="color: #f92672">;</span>
 
 
-<span style="color: #A71D5D">public</span> <span style="color: #A71D5D">class</span> <span style="color: #445588">CopyHdfsToLocal</span> <span style="color: #A71D7E">{</span>
+<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">CopyHdfsToLocal</span> <span style="color: #f92672">{</span>
 
-    <span style="color: #A71D5D">public</span> <span style="color: #A71D5D">static</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">main</span><span style="color: #A71D7E">(</span><span style="color: #333333">String</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">args</span><span style="color: #A71D7E">)</span> <span style="color: #A71D5D">throws</span> <span style="color: #333333">Exception</span> <span style="color: #A71D7E">{</span>
-        <span style="color: #333333">String</span> <span style="color: #333333">hdfs_uri</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">args</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">0</span><span style="color: #A71D7E">];</span>
-        <span style="color: #333333">String</span> <span style="color: #333333">local_uri</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">args</span><span style="color: #A71D7E">[</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">];</span>
-        <span style="color: #333333">FileSystem</span> <span style="color: #333333">fs</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">FileSystem</span><span style="color: #A71D7E">.</span><span style="color: #008080">get</span><span style="color: #A71D7E">(</span><span style="color: #333333">URI</span><span style="color: #A71D7E">.</span><span style="color: #008080">create</span><span style="color: #A71D7E">(</span><span style="color: #333333">hdfs_uri</span><span style="color: #A71D7E">),</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Configuration</span><span style="color: #A71D7E">(),</span> <span style="color: #183691">&quot;martin&quot;</span><span style="color: #A71D7E">);</span>
-        <span style="color: #333333">InputStream</span> <span style="color: #333333">in</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">fs</span><span style="color: #A71D7E">.</span><span style="color: #008080">open</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">Path</span><span style="color: #A71D7E">(</span><span style="color: #333333">hdfs_uri</span><span style="color: #A71D7E">));</span>
-        <span style="color: #333333">in</span><span style="color: #A71D7E">.</span><span style="color: #008080">skip</span><span style="color: #A71D7E">(</span><span style="color: #0086b3">100</span><span style="color: #A71D7E">);</span>
-        <span style="color: #333333">OutputStream</span> <span style="color: #333333">out</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">BufferedOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #A71D5D">new</span> <span style="color: #333333">FileOutputStream</span><span style="color: #A71D7E">(</span><span style="color: #333333">local_uri</span><span style="color: #A71D7E">));</span>
-        <span style="color: #333333">IOUtils</span><span style="color: #A71D7E">.</span><span style="color: #008080">copyBytes</span><span style="color: #A71D7E">(</span><span style="color: #333333">in</span><span style="color: #A71D7E">,</span> <span style="color: #333333">out</span><span style="color: #A71D7E">,</span> <span style="color: #A71D7E">(</span><span style="color: #A71D5D; font-weight: bold">long</span><span style="color: #A71D7E">)</span><span style="color: #0086b3">20</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D">true</span><span style="color: #A71D7E">);</span>
-    <span style="color: #A71D7E">}</span>
-<span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">Exception</span> <span style="color: #f92672">{</span>
+        <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">hdfs_uri</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">[</span><span style="color: #ae81ff">0</span><span style="color: #f92672">];</span>
+        <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">local_uri</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">[</span><span style="color: #ae81ff">1</span><span style="color: #f92672">];</span>
+        <span style="color: #f8f8f2">FileSystem</span> <span style="color: #f8f8f2">fs</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">FileSystem</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">URI</span><span style="color: #f92672">.</span><span style="color: #a6e22e">create</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hdfs_uri</span><span style="color: #f92672">),</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Configuration</span><span style="color: #f92672">(),</span> <span style="color: #e6db74">&quot;martin&quot;</span><span style="color: #f92672">);</span>
+        <span style="color: #f8f8f2">InputStream</span> <span style="color: #f8f8f2">in</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fs</span><span style="color: #f92672">.</span><span style="color: #a6e22e">open</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Path</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">hdfs_uri</span><span style="color: #f92672">));</span>
+        <span style="color: #f8f8f2">in</span><span style="color: #f92672">.</span><span style="color: #a6e22e">skip</span><span style="color: #f92672">(</span><span style="color: #ae81ff">100</span><span style="color: #f92672">);</span>
+        <span style="color: #f8f8f2">OutputStream</span> <span style="color: #f8f8f2">out</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">BufferedOutputStream</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">FileOutputStream</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">local_uri</span><span style="color: #f92672">));</span>
+        <span style="color: #f8f8f2">IOUtils</span><span style="color: #f92672">.</span><span style="color: #a6e22e">copyBytes</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">in</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">out</span><span style="color: #f92672">,</span> <span style="color: #f92672">(</span><span style="color: #66d9ef">long</span><span style="color: #f92672">)</span><span style="color: #ae81ff">20</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">true</span><span style="color: #f92672">);</span>
+    <span style="color: #f92672">}</span>
+<span style="color: #f92672">}</span>
 </pre></div>
 
-<br></p>
-<h1 id="eclipse-hdfs"><a name="user-content-eclipse-hdfs" href="#eclipse-hdfs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 Eclipse 开发 Hdfs 应用</h1>
+
+<p><br></p>
+<h1 id="eclipse-hdfs">使用 Eclipse 开发 Hdfs 应用</h1>
 <p>参考我的 Wiki: <a href="http://wiki.smallcpp.com/Hadoop/%E4%BD%BF%E7%94%A8%20Eclipse%20%E5%BC%80%E5%8F%91%20HDFS.html">使用 Eclipse 开发 HDFS</a></p>
-<h1 id="hdfs"><a name="user-content-hdfs" href="#hdfs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Hdfs 源码分析</h1>
+<h1 id="hdfs">Hdfs 源码分析</h1>
 <p>参考 <a href="http://blog.csdn.net/lipeng_bigdata/article/category/6049177">HDFS 2.6.0 源码分析</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 

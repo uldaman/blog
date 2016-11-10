@@ -65,19 +65,21 @@
 </div>
 <p>索引的重要性可参考字典的设计, 如想要在新华字典中找某一个字, 可以先在字典的索引区找到这个字的页码, 这种功能就相当于数据库中的索引, 可以很方便的让你索引到数据库中的数据.</p>
 <p>所有的 MongoDB 集合默认都有一个唯一索引在字段 <strong>_id</strong> 上, 如果应用程序没有为 <strong>_id</strong> 列定义一个值, MongoDB 将创建一个带有 ObjectId 值的列.</p>
-<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>创建索引</h2>
+<h2 id="_1">创建索引</h2>
 <p><strong>ensureIndex()</strong> 方法可以创建一个新的索引.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.ensureIndex({KEY: 1})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.ensureIndex({KEY: 1})
 </pre></div>
 
-<br>
+
+<p><br>
 语法中 Key 值为你要创建的索引字段, <strong>1</strong> 为指定按升序创建索引, 如果你想按降序来创建索引指定为 <strong>-1</strong> 即可.</p>
 <p><strong>复合索引</strong></p>
 <p><strong>ensureIndex()</strong> 方法中也可以设置使用多个字段创建索引(关系型数据库中称作复合索引), 如:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.col.ensureIndex({&#39;title&#39;: 1, &#39;description&#39;: -1})
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>db.col.ensureIndex({&#39;title&#39;: 1, &#39;description&#39;: -1})
 </pre></div>
 
-<br>
+
+<p><br>
 该索引被创建后, 基于 <strong>title</strong> 和 <strong>description</strong> 的查询将会用到该索引, 或者是基于 <strong>title</strong> 的查询也会用到该索引, 但是只是基于 <strong>description</strong> 的查询将不会用到该复合索引;<br>
 因此可以说, 如果想用到复合索引, 必须在查询条件中包含复合索引中的前 N 个索引列&hellip;</p>
 <p>ensureIndex() 接收__可选参数__</p>
@@ -142,9 +144,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>查询索引</h2>
+<h2 id="_2">查询索引</h2>
 <p><strong>getIndexes()</strong> 该当可以查询当前已有的索引信息, 以之前创建的 col 集合为例:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>db.col.getIndexes()
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>db.col.getIndexes()
 [
         {
                 &quot;v&quot; : 1,
@@ -157,7 +159,8 @@
 ]
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>返回值分析:</p>
 <ul>
 <li>v: 索引的版本号, 暂时发现无叼用</li>
@@ -165,7 +168,7 @@
 <li>name: 索引的名称, 如果未指定, MongoDB 会通过连接索引的字段名和排序顺序(1/-1)生成一个索引名称</li>
 <li>ns: 索引所属的数据库和集合</li>
 </ul>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>删除索引</h2>
+<h2 id="_3">删除索引</h2>
 <p><strong>dropIndex()</strong> 方法用来删除索引</p>
 <ul>
 <li>db.tab.dropIndex(&lt;indexname>) 删除指定索引, 有两种方式<ul>
@@ -175,27 +178,28 @@
 </li>
 <li>db.tab.dropIndexes() 删除所有索引</li>
 </ul>
-<h2 id="explain"><a name="user-content-explain" href="#explain" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>explain</h2>
+<h2 id="explain">explain</h2>
 <p>explain() 方法是一个对查询非常有用的工具, 可以用来查看查询命令的详情, 例如是否使用了索引、消耗了多久, 以及扫描了多少文档才得到结果.</p>
 <p>先看一个没有走索引的例子:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">find</span>().<span style="color: #333333">explain</span>()
-{
-    <span style="color: #183691">&quot;cursor&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;BasicCursor&quot;</span>,
-    <span style="color: #183691">&quot;indexBounds&quot;</span><span style="color: #A71D7E">:</span> [],
-    <span style="color: #183691">&quot;nscanned&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">64</span>,
-    <span style="color: #183691">&quot;nscannedObjects&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">64</span>,
-    <span style="color: #183691">&quot;n&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">64</span>,
-    <span style="color: #183691">&quot;millis&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>,
-    <span style="color: #183691">&quot;allPlans&quot;</span><span style="color: #A71D7E">:</span> [
-        {
-            <span style="color: #183691">&quot;cursor&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;BasicCursor&quot;</span>,
-            <span style="color: #183691">&quot;indexBounds&quot;</span><span style="color: #A71D7E">:</span> []
-        }
-    ]
-}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">explain</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span>
+    <span style="color: #e6db74">&quot;cursor&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;BasicCursor&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;indexBounds&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[],</span>
+    <span style="color: #e6db74">&quot;nscanned&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">64</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;nscannedObjects&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">64</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;n&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">64</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;millis&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;allPlans&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span>
+        <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&quot;cursor&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;BasicCursor&quot;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&quot;indexBounds&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[]</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">]</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 重点返回值:</p>
 <ul>
 <li>cursor: BasicCursor, 这个表示没有使用索引, 等下会演示下使用了索引的情形.</li>
@@ -203,48 +207,49 @@
 <li>n: 64, 返回了多个少文档, 即查询结果</li>
 <li>millis: 0, 耗时</li>
 </ul>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">col</span>.<span style="color: #333333">find</span>({<span style="color: #333333">age</span><span style="color: #A71D7E">:</span> {<span style="color: #333333">$gt</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>, <span style="color: #333333">$lt</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">30</span>}}).<span style="color: #333333">explain</span>()
-{
-    <span style="color: #183691">&quot;cursor&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;BtreeCursor age_1&quot;</span>,
-    <span style="color: #183691">&quot;indexBounds&quot;</span><span style="color: #A71D7E">:</span> [
-        [
-            {
-                <span style="color: #183691">&quot;age&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>
-            },
-            {
-                <span style="color: #183691">&quot;age&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">30</span>
-            }
-        ]
-    ],
-    <span style="color: #183691">&quot;nscanned&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">14</span>,
-    <span style="color: #183691">&quot;nscannedObjects&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">12</span>,
-    <span style="color: #183691">&quot;n&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">12</span>,
-    <span style="color: #183691">&quot;millis&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>,
-    <span style="color: #183691">&quot;allPlans&quot;</span><span style="color: #A71D7E">:</span> [
-        {
-            <span style="color: #183691">&quot;cursor&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;BtreeCursor age_1&quot;</span>,
-            <span style="color: #183691">&quot;indexBounds&quot;</span><span style="color: #A71D7E">:</span> [
-                [
-                    {
-                        <span style="color: #183691">&quot;age&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">20</span>
-                    },
-                    {
-                        <span style="color: #183691">&quot;age&quot;</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">30</span>
-                    }
-                ]
-            ]
-        }
-    ]
-}
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">col</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">age</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">$gt</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">$lt</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">30</span><span style="color: #f8f8f2">}}).</span><span style="color: #a6e22e">explain</span><span style="color: #f8f8f2">()</span>
+<span style="color: #f8f8f2">{</span>
+    <span style="color: #e6db74">&quot;cursor&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;BtreeCursor age_1&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;indexBounds&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span>
+        <span style="color: #f8f8f2">[</span>
+            <span style="color: #f8f8f2">{</span>
+                <span style="color: #e6db74">&quot;age&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span>
+            <span style="color: #f8f8f2">},</span>
+            <span style="color: #f8f8f2">{</span>
+                <span style="color: #e6db74">&quot;age&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">30</span>
+            <span style="color: #f8f8f2">}</span>
+        <span style="color: #f8f8f2">]</span>
+    <span style="color: #f8f8f2">],</span>
+    <span style="color: #e6db74">&quot;nscanned&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">14</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;nscannedObjects&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;n&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">12</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;millis&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;allPlans&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span>
+        <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&quot;cursor&quot;</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;BtreeCursor age_1&quot;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&quot;indexBounds&quot;</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">[</span>
+                <span style="color: #f8f8f2">[</span>
+                    <span style="color: #f8f8f2">{</span>
+                        <span style="color: #e6db74">&quot;age&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">20</span>
+                    <span style="color: #f8f8f2">},</span>
+                    <span style="color: #f8f8f2">{</span>
+                        <span style="color: #e6db74">&quot;age&quot;</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">30</span>
+                    <span style="color: #f8f8f2">}</span>
+                <span style="color: #f8f8f2">]</span>
+            <span style="color: #f8f8f2">]</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">]</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 重点返回值:</p>
 <ul>
 <li>cursor: BtreeCursor age_1, 表示使用了索引 age_1</li>
 <li>allPlans: 包含所有可能用到的索引尝试, 这个例子很明确的表示只有 age_1 可用</li>
 </ul>
-<h2 id="hint"><a name="user-content-hint" href="#hint" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>hint</h2>
+<h2 id="hint">hint</h2>
 <p>hint() 方法可以强制查询使用某个索引, 这在需要指定搜索顺序时比较有用.</p>
 <p>假设已有 {&lsquo;username&rsquo;: 1, &lsquo;age&rsquo;: 1} 和 {&lsquo;age&rsquo;: 1, &lsquo;username&rsquo;: 1} 两个索引, 你可以通过 hint() 指定使用哪条索引, 通常 Mongodb 自身会帮你选择.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a>

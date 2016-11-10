@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>什么是事务</h2>
+    <h2 id="_1">什么是事务</h2>
 <p>在说 Mongodb 之前, 先了解一下什么是事务.</p>
 <p>事务是逻辑上的一组操作, 组成这组操作的各个单元, 要不全都成功, 要不全都失败, 这个特性就是__事务__.</p>
 <p><strong>那这有什么用呢?</strong></p>
@@ -61,7 +61,7 @@
 <p>那么问题来了, 现在开始删除用户, Ok, 你已经删除了 <strong>用户</strong> 表里的基本资料, 然后&hellip;断电了~~~So&hellip;你的数据现在就有可能异常, 因为你只删除了 <strong>用户</strong> 表里的基本资, 而没有删除 <strong>权限</strong> 表的权限资料!</p>
 <p>所以, 事务的就应运而生&hellip;</p>
 <p>你可以将删除 <strong>用户</strong> 表里的基本资料和删除 <strong>权限</strong> 表的权限资料两个操作封装成__事务__, 然后再去执行, 这样要么全部执行成功, 要么全部执行失败, 这样就避免了某个操作成功某个操作失败, 而且执行过程中是__原子__的, 不会被其他的操作影响.</p>
-<h2 id="mongodb"><a name="user-content-mongodb" href="#mongodb" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Mongodb 的事务</h2>
+<h2 id="mongodb">Mongodb 的事务</h2>
 <p>现在我们已经知道了事务的用处及好处, 但可惜的是&hellip;</p>
 <p>Mongodb 目前不能创建一个事务处理__多个__集合!!! 什么意思呢?</p>
 <p>就是说, Mongodb 只保证你向一个集合里写数据是&rdquo;事务&rdquo;的&hellip;<br>

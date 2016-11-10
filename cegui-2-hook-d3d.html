@@ -59,24 +59,24 @@
 但是, 如果要想在游戏中使用 CEGUI 自绘界面, 就必须使用游戏本身创建的 Direct3DDevice, 而不能直接自己调用 CreateDevice();
 那么要想获得游戏的 Direct3DDevice, 就需要 HOOK D3D, 在游戏调用 CreateDevice() 时取得游戏创建的 Direct3DDevice.</p>
 <p>HOOK D3D 的源码网上流传的有很多, 这里也收集了两份:
-注入法: <a href="http://yunpan.cn/cwmYIwqDQYGzX"><a href="http://yunpan.cn/cwmYIwqDQYGzX"><a href="http://yunpan.cn/cwmYIwqDQYGzX">http://yunpan.cn/cwmYIwqDQYGzX</a></a></a>  访问密码 9694
-劫持法: <a href="http://yunpan.cn/cw3V3zaqMkBdF"><a href="http://yunpan.cn/cw3V3zaqMkBdF"><a href="http://yunpan.cn/cw3V3zaqMkBdF">http://yunpan.cn/cw3V3zaqMkBdF</a></a></a>  访问密码 c178</p>
+注入法: <a href="http://yunpan.cn/cwmYIwqDQYGzX">http://yunpan.cn/cwmYIwqDQYGzX</a>  访问密码 9694
+劫持法: <a href="http://yunpan.cn/cw3V3zaqMkBdF">http://yunpan.cn/cw3V3zaqMkBdF</a>  访问密码 c178</p>
 <p>这两种方法在最终 HOOK 上采取的方式都一致的, 都是利用了 C++ 继承的特性, 区别只在于 dll 的注入方式.</p>
 <p>这里以 d3d9 为例简单说明一下:
 首先, 已经知道要 HOOK IDirect3D9::CreateDevice() 这个函数才能取得游戏创建的 Direct3DDevice, 而 CreateDevice() 是 IDirect3D9 接口的虚函数, 这一点我们阅读 D3D 的头文件 d3d9.h 就可以得知(见下面代码摘要), 实际上, d3d 系列的所有函数都是虚函数.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #999999; font-weight: bold">#define DECLARE_INTERFACE_(iface, baseiface) interface DECLSPEC_NOVTABLE iface : public baseiface</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#define DECLARE_INTERFACE_(iface, baseiface) interface DECLSPEC_NOVTABLE iface : public baseiface</span>
 
-<span style="color: #999999; font-weight: bold">#define STDMETHOD(method) virtual COM_DECLSPEC_NOTHROW HRESULT STDMETHODCALLTYPE method</span>
-<span style="color: #999999; font-weight: bold">#define STDMETHOD_(type,method) virtual COM_DECLSPEC_NOTHROW type STDMETHODCALLTYPE method</span>
+<span style="color: #75715e">#define STDMETHOD(method) virtual COM_DECLSPEC_NOTHROW HRESULT STDMETHODCALLTYPE method</span>
+<span style="color: #75715e">#define STDMETHOD_(type,method) virtual COM_DECLSPEC_NOTHROW type STDMETHODCALLTYPE method</span>
 
-<span style="color: #333333">DECLARE_INTERFACE_</span>(<span style="color: #333333">IDirect3D9</span>, <span style="color: #333333">IUnknown</span>) {
-    <span style="color: #999988; font-style: italic">/*** IUnknown methods ***/</span>
-    <span style="color: #333333">STDMETHOD</span>(<span style="color: #333333">QueryInterface</span>)(<span style="color: #333333">THIS_</span> <span style="color: #333333">REFIID</span> <span style="color: #333333">riid</span>, <span style="color: #A71D5D; font-weight: bold">void</span><span style="color: #A71D7E">**</span> <span style="color: #333333">ppvObj</span>) <span style="color: #333333">PURE</span>;
-   ......
-    <span style="color: #999988; font-style: italic">/*** IDirect3D9 methods ***/</span>
-    <span style="color: #333333">STDMETHOD</span>(<span style="color: #333333">RegisterSoftwareDevice</span>)(<span style="color: #333333">THIS_</span> <span style="color: #A71D5D; font-weight: bold">void</span><span style="color: #A71D7E">*</span> <span style="color: #333333">pInitializeFunction</span>) <span style="color: #333333">PURE</span>;
-   ......
-};
+<span style="color: #f8f8f2">DECLARE_INTERFACE_(IDirect3D9,</span> <span style="color: #f8f8f2">IUnknown)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">/*** IUnknown methods ***/</span>
+    <span style="color: #f8f8f2">STDMETHOD(QueryInterface)(THIS_</span> <span style="color: #f8f8f2">REFIID</span> <span style="color: #f8f8f2">riid,</span> <span style="color: #66d9ef">void</span><span style="color: #f92672">**</span> <span style="color: #f8f8f2">ppvObj)</span> <span style="color: #f8f8f2">PURE;</span>
+   <span style="color: #f8f8f2">......</span>
+    <span style="color: #75715e">/*** IDirect3D9 methods ***/</span>
+    <span style="color: #f8f8f2">STDMETHOD(RegisterSoftwareDevice)(THIS_</span> <span style="color: #66d9ef">void</span><span style="color: #f92672">*</span> <span style="color: #f8f8f2">pInitializeFunction)</span> <span style="color: #f8f8f2">PURE;</span>
+   <span style="color: #f8f8f2">......</span>
+<span style="color: #f8f8f2">};</span>
 </pre></div>
 
 
@@ -87,31 +87,32 @@
 <hr />
 <p>除了利用 C++ 继承特性外, 还有一种方法是利用 C++ 虚函数的特性直接 HOOK IDirect3D9 的虚表, 所以有必要先了解一下虚函数的机制: 当类中定义有虚函数时, 编译器会将该类中所有虚函数的地址保存在一张表中, 这张表被称为虚函数地址表(虚表), 同时编译器会在类中添加一个隐藏的数据成员, 即虚表指针, 它指向该类的虚表,  这个隐藏的数据成员在类的开始处, 即类的头 4 字节.</p>
 <p>知道了上面这些, 那 HOOK IDirect3D9 的虚表也就不在话下了, 第一步仍然是 HOOK Direct3DCreate9() 取游戏创建的 IDirect3D9 指针, 有了这个指针, 就能从它的头 4 字节处取出虚表, 再找到 CreateDevice() 在虚表中的位置, 替换成我们自己的 CreateDevice(), 然后 OOXX . . .</p>
-<p>参考代码:
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">class</span> <span style="color: #445588">Test</span> {
-<span style="color: #A71D5D">public</span><span style="color: #A71D7E">:</span>
-    <span style="color: #A71D5D">virtual</span> <span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Hello</span>() {
-        <span style="color: #333333">AfxMessageBox</span>(<span style="color: #A71D5D">nullptr</span>);
-    }
-};
+<p>参考代码:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Test</span> <span style="color: #f8f8f2">{</span>
+<span style="color: #66d9ef">public</span><span style="color: #f92672">:</span>
+    <span style="color: #66d9ef">virtual</span> <span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">Hello()</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">AfxMessageBox(</span><span style="color: #66d9ef">nullptr</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">};</span>
 
-<span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #A71D5D">__stdcall</span> <span style="color: #795DA3">New_Hello</span>() {
-    <span style="color: #333333">AfxMessageBox</span>(<span style="color: #333333">TEXT</span>(<span style="color: #183691">&quot;Hello&quot;</span>));
-}
+<span style="color: #66d9ef">void</span> <span style="color: #66d9ef">__stdcall</span> <span style="color: #a6e22e">New_Hello</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">AfxMessageBox(TEXT(</span><span style="color: #e6db74">&quot;Hello&quot;</span><span style="color: #f8f8f2">));</span>
+<span style="color: #f8f8f2">}</span>
 
-<span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #795DA3">BnClickedButton</span>() {
-    <span style="color: #333333">Test</span><span style="color: #A71D7E">*</span> <span style="color: #333333">pTest</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">Test</span>;
-    <span style="color: #333333">PVOID</span> <span style="color: #333333">p</span> <span style="color: #A71D7E">=</span> ((<span style="color: #333333">PVOID</span><span style="color: #A71D7E">*</span>)<span style="color: #333333">pTest</span>)[<span style="color: #0086b3">0</span>]; <span style="color: #999988; font-style: italic">// 取虚表</span>
-    <span style="color: #333333">DWORD</span> <span style="color: #333333">dwOldPro</span>;
-    <span style="color: #333333">VirtualProtect</span>(<span style="color: #333333">p</span>, <span style="color: #0086b3">4</span>, <span style="color: #333333">PAGE_EXECUTE_READWRITE</span>, <span style="color: #A71D7E">&amp;</span><span style="color: #333333">dwOldPro</span>); <span style="color: #999988; font-style: italic">// 修改内存保护属性</span>
-    ((<span style="color: #333333">PVOID</span><span style="color: #A71D7E">*</span>)<span style="color: #333333">p</span>)[<span style="color: #0086b3">0</span>] <span style="color: #A71D7E">=</span> <span style="color: #333333">New_Hello</span>; <span style="color: #999988; font-style: italic">// 改函数表函数</span>
-    <span style="color: #333333">VirtualProtect</span>(<span style="color: #333333">p</span>, <span style="color: #0086b3">4</span>, <span style="color: #333333">dwOldPro</span>, <span style="color: #A71D7E">&amp;</span><span style="color: #333333">dwOldPro</span>); <span style="color: #999988; font-style: italic">// 恢复内存保护属性</span>
-    <span style="color: #333333">pTest</span><span style="color: #A71D7E">-&gt;</span><span style="color: #333333">Hello</span>();
-    <span style="color: #A71D5D">delete</span> <span style="color: #333333">pTest</span>;
-}
+<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">BnClickedButton</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">Test</span><span style="color: #f92672">*</span> <span style="color: #f8f8f2">pTest</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Test;</span>
+    <span style="color: #f8f8f2">PVOID</span> <span style="color: #f8f8f2">p</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">((PVOID</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)pTest)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span> <span style="color: #75715e">// 取虚表</span>
+    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwOldPro;</span>
+    <span style="color: #f8f8f2">VirtualProtect(p,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">PAGE_EXECUTE_READWRITE,</span> <span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">dwOldPro);</span> <span style="color: #75715e">// 修改内存保护属性</span>
+    <span style="color: #f8f8f2">((PVOID</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)p)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">New_Hello;</span> <span style="color: #75715e">// 改函数表函数</span>
+    <span style="color: #f8f8f2">VirtualProtect(p,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">dwOldPro,</span> <span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">dwOldPro);</span> <span style="color: #75715e">// 恢复内存保护属性</span>
+    <span style="color: #f8f8f2">pTest</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">Hello();</span>
+    <span style="color: #66d9ef">delete</span> <span style="color: #f8f8f2">pTest;</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
-</p>
-<p>最后共享一份 d3d 虚函数的索引: <a href="http://yunpan.cn/cw3kuPtUp2xHu"><a href="http://yunpan.cn/cw3kuPtUp2xHu"><a href="http://yunpan.cn/cw3kuPtUp2xHu">http://yunpan.cn/cw3kuPtUp2xHu</a></a></a>  访问密码 bc7a</p>
+
+
+<p>最后共享一份 d3d 虚函数的索引: <a href="http://yunpan.cn/cw3kuPtUp2xHu">http://yunpan.cn/cw3kuPtUp2xHu</a>  访问密码 bc7a</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>

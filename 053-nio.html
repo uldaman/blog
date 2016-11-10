@@ -73,7 +73,7 @@
 <li><a href="http://ifeve.com/java-nio-all/">Java NIO 系列教程</a></li>
 <li><a href="http://www.cnblogs.com/bheart/p/6027050.html">Java NIO 中核心组成和 IO 区别</a></li>
 </ul>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>概述</h1>
+<h1 id="_1">概述</h1>
 <p>原有的 I/O 流有着太多的软件层次需要提速:</p>
 <ul>
 <li>小数据块的大量复制</li>
@@ -87,34 +87,34 @@
 <li>NIO 首次提供了文件锁定机制</li>
 </ul>
 <p>和 NIO 相关的类都在 <code>java.nio</code> 包下</p>
-<h1 id="buffer"><a name="user-content-buffer" href="#buffer" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Buffer</h1>
-<h2 id="heap-buffer-direct-buffer"><a name="user-content-heap-buffer-direct-buffer" href="#heap-buffer-direct-buffer" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Heap Buffer 与 Direct Buffer.</h2>
+<h1 id="buffer">Buffer</h1>
+<h2 id="heap-buffer-direct-buffer">Heap Buffer 与 Direct Buffer.</h2>
 <p>Buffer 有两种一种是 <strong>Heap Buffer</strong>, 另一种是 <strong>Direct Buffer</strong>.</p>
 <p>第一种方式是分配 JVM 堆内存, 属于 GC 管辖范围, 由于需要拷贝所以速度相对较慢 (由于 Java 程序运行在 JVM 中, 所以旧的 I/O 流都是需要在 OS 本地内存中转一下);<br>
 第二种方式是分配 OS 本地内存, 不属于 GC 管辖范围, 由于不需要内存拷贝所以速度相对较快.</p>
 <blockquote>
-<p>由于构造和析构 Direct Buffer 时间成本高, 建议使用**缓冲池**, 参见 netty 的实现.</p>
+<p>由于构造和析构 Direct Buffer 时间成本高, 建议使用<strong>缓冲池</strong>, 参见 netty 的实现.</p>
 </blockquote>
 <p><strong>References</strong>:<br>
 <a href="http://eyesmore.iteye.com/blog/1133335">JAVA NIO 之 Direct Buffer 与 Heap Buffer 的区别？</a><br>
 <a href="http://stevex.blog.51cto.com/4300375/1582209">JAVA NIO 内存泄露</a></p>
-<h2 id="bytebuffer"><a name="user-content-bytebuffer" href="#bytebuffer" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ByteBuffer</h2>
+<h2 id="bytebuffer">ByteBuffer</h2>
 <p><strong>创建</strong> ByteBuffer 有两种方法:</p>
 <ul>
 <li>使用 <code>allocate()</code> 或者 <code>allocateDirect()</code> 静态方法</li>
 <li>通过 <code>wrap()</code> 静态方法包装一个已有的数组来创建</li>
 </ul>
-<p>通过 put 系列方法可将数据**写入** ByteBuffer, 如:</p>
+<p>通过 put 系列方法可将数据<strong>写入</strong> ByteBuffer, 如:</p>
 <ul>
 <li>putChar(char value)</li>
 <li>putChar(int index, char value)</li>
 <li>putInt(int value)</li>
 <li>putInt(int index, int value)</li>
 </ul>
-<p>然后通过 get 系列方法可**获取** ByteBuffer 中的数据 (注意, 写入/读取数据顺序要一致, 才能读到想要的数据).</p>
-<p>ByteBuffer还可以**设置** byte 的顺序.</p>
+<p>然后通过 get 系列方法可<strong>获取</strong> ByteBuffer 中的数据 (注意, 写入/读取数据顺序要一致, 才能读到想要的数据).</p>
+<p>ByteBuffer还可以<strong>设置</strong> byte 的顺序.</p>
 <ul>
-<li><code>java.io</code> 中数据对流的渲染总是**大位在前**.</li>
+<li><code>java.io</code> 中数据对流的渲染总是<strong>大位在前</strong>.</li>
 <li><code>java.nio</code> 中则可以用指定字节顺序.<ul>
 <li><code>order(ByteOrder.BIG_ENDIAN)</code> 大位在前</li>
 <li><code>order(ByteOrder.LITTLE_ENDIAN)</code> 小位在前</li>
@@ -122,16 +122,17 @@
 </ul>
 </li>
 </ul>
-<p>ByteBuffer 无法用于**数组传输**, 一般的做法是将 ByteBuffer 转换成对应类型的 Buffer, 然后向其中写入数据, 例如在当前位置向 ByteBuffer 中写入 float[]:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">float</span><span style="color: #A71D7E">[]</span> <span style="color: #333333">array</span><span style="color: #A71D7E">;</span>
-<span style="color: #999988; font-style: italic">// ... 其它代码</span>
+<p>ByteBuffer 无法用于<strong>数组传输</strong>, 一般的做法是将 ByteBuffer 转换成对应类型的 Buffer, 然后向其中写入数据, 例如在当前位置向 ByteBuffer 中写入 float[]:</p>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">float</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">array</span><span style="color: #f92672">;</span>
+<span style="color: #75715e">// ... 其它代码</span>
 
-<span style="color: #333333">FloarBuffer</span> <span style="color: #333333">floatBuf</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">byteBuffer</span><span style="color: #A71D7E">.</span><span style="color: #008080">asFloatBuffer</span><span style="color: #A71D7E">();</span>
-<span style="color: #333333">floatBuf</span><span style="color: #A71D7E">.</span><span style="color: #008080">put</span><span style="color: #A71D7E">(</span><span style="color: #333333">array</span><span style="color: #A71D7E">);</span>
+<span style="color: #f8f8f2">FloarBuffer</span> <span style="color: #f8f8f2">floatBuf</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">byteBuffer</span><span style="color: #f92672">.</span><span style="color: #a6e22e">asFloatBuffer</span><span style="color: #f92672">();</span>
+<span style="color: #f8f8f2">floatBuf</span><span style="color: #f92672">.</span><span style="color: #a6e22e">put</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">array</span><span style="color: #f92672">);</span>
 </pre></div>
 
-<br></p>
-<h1 id="channel"><a name="user-content-channel" href="#channel" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Channel</h1>
+
+<p><br></p>
+<h1 id="channel">Channel</h1>
 <p>回想一下之前学的 I/O, 先建立一个流, 然后从流中读取/写入数据, 而在 NIO 中, 我们不用流而用 <strong>Channel</strong>, 它类似流, 但又有些不同:</p>
 <ul>
 <li>既可以从通道中读取数据, 又可以写数据到通道, 但流的读写通常是单向的</li>
@@ -166,42 +167,44 @@
 </li>
 </ul>
 <p>下面是一个使用 FileChannel 读取数据到 Buffer 中的示例:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">RandomAccessFile</span> <span style="color: #333333">aFile</span> <span style="color: #A71D7E">=</span> <span style="color: #A71D5D">new</span> <span style="color: #333333">RandomAccessFile</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;data/nio-data.txt&quot;</span><span style="color: #A71D7E">,</span> <span style="color: #183691">&quot;rw&quot;</span><span style="color: #A71D7E">);</span>
-<span style="color: #333333">FileChannel</span> <span style="color: #333333">inChannel</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">aFile</span><span style="color: #A71D7E">.</span><span style="color: #008080">getChannel</span><span style="color: #A71D7E">();</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">RandomAccessFile</span> <span style="color: #f8f8f2">aFile</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">RandomAccessFile</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;data/nio-data.txt&quot;</span><span style="color: #f92672">,</span> <span style="color: #e6db74">&quot;rw&quot;</span><span style="color: #f92672">);</span>
+<span style="color: #f8f8f2">FileChannel</span> <span style="color: #f8f8f2">inChannel</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">aFile</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getChannel</span><span style="color: #f92672">();</span>
 
-<span style="color: #333333">ByteBuffer</span> <span style="color: #333333">buf</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">ByteBuffer</span><span style="color: #A71D7E">.</span><span style="color: #008080">allocate</span><span style="color: #A71D7E">(</span><span style="color: #0086b3">48</span><span style="color: #A71D7E">);</span>
+<span style="color: #f8f8f2">ByteBuffer</span> <span style="color: #f8f8f2">buf</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ByteBuffer</span><span style="color: #f92672">.</span><span style="color: #a6e22e">allocate</span><span style="color: #f92672">(</span><span style="color: #ae81ff">48</span><span style="color: #f92672">);</span>
 
-<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">bytesRead</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">inChannel</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">buf</span><span style="color: #A71D7E">);</span>
-<span style="color: #A71D5D">while</span> <span style="color: #A71D7E">(</span><span style="color: #333333">bytesRead</span> <span style="color: #A71D7E">!=</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span><span style="color: #A71D7E">)</span> <span style="color: #A71D7E">{</span>
-    <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">println</span><span style="color: #A71D7E">(</span><span style="color: #183691">&quot;Read &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">bytesRead</span><span style="color: #A71D7E">);</span>
-    <span style="color: #333333">buf</span><span style="color: #A71D7E">.</span><span style="color: #008080">flip</span><span style="color: #A71D7E">();</span>
+<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">bytesRead</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">inChannel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">read</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">buf</span><span style="color: #f92672">);</span>
+<span style="color: #66d9ef">while</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">bytesRead</span> <span style="color: #f92672">!=</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;Read &quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">bytesRead</span><span style="color: #f92672">);</span>
+    <span style="color: #f8f8f2">buf</span><span style="color: #f92672">.</span><span style="color: #a6e22e">flip</span><span style="color: #f92672">();</span>
 
-    <span style="color: #A71D5D">while</span><span style="color: #A71D7E">(</span><span style="color: #333333">buf</span><span style="color: #A71D7E">.</span><span style="color: #008080">hasRemaining</span><span style="color: #A71D7E">()){</span>
-        <span style="color: #333333">System</span><span style="color: #A71D7E">.</span><span style="color: #008080">out</span><span style="color: #A71D7E">.</span><span style="color: #008080">print</span><span style="color: #A71D7E">((</span><span style="color: #A71D5D; font-weight: bold">char</span><span style="color: #A71D7E">)</span><span style="color: #333333">buf</span><span style="color: #A71D7E">.</span><span style="color: #008080">get</span><span style="color: #A71D7E">());</span>
-    <span style="color: #A71D7E">}</span>
+    <span style="color: #66d9ef">while</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">buf</span><span style="color: #f92672">.</span><span style="color: #a6e22e">hasRemaining</span><span style="color: #f92672">()){</span>
+        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">((</span><span style="color: #66d9ef">char</span><span style="color: #f92672">)</span><span style="color: #f8f8f2">buf</span><span style="color: #f92672">.</span><span style="color: #a6e22e">get</span><span style="color: #f92672">());</span>
+    <span style="color: #f92672">}</span>
 
-    <span style="color: #333333">buf</span><span style="color: #A71D7E">.</span><span style="color: #008080">clear</span><span style="color: #A71D7E">();</span>
-    <span style="color: #333333">bytesRead</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">inChannel</span><span style="color: #A71D7E">.</span><span style="color: #008080">read</span><span style="color: #A71D7E">(</span><span style="color: #333333">buf</span><span style="color: #A71D7E">);</span>
-<span style="color: #A71D7E">}</span>
-<span style="color: #333333">aFile</span><span style="color: #A71D7E">.</span><span style="color: #008080">close</span><span style="color: #A71D7E">();</span>
+    <span style="color: #f8f8f2">buf</span><span style="color: #f92672">.</span><span style="color: #a6e22e">clear</span><span style="color: #f92672">();</span>
+    <span style="color: #f8f8f2">bytesRead</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">inChannel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">read</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">buf</span><span style="color: #f92672">);</span>
+<span style="color: #f92672">}</span>
+<span style="color: #f8f8f2">aFile</span><span style="color: #f92672">.</span><span style="color: #a6e22e">close</span><span style="color: #f92672">();</span>
 </pre></div>
 
-<br>
+
+<p><br>
 注意 <code>buf.flip()</code> 的调用, 它的作用有两个:</p>
 <ul>
 <li>把 limit 设置为当前的 position 值</li>
 <li>把 position 设置为 0</li>
 </ul>
 <p>然后处理的数据就是从 position 到 limit 直接的数据, 也就是刚刚读取过来的数据.</p>
-<h2 id="memory-mapped"><a name="user-content-memory-mapped" href="#memory-mapped" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Memory Mapped</h2>
+<h2 id="memory-mapped">Memory Mapped</h2>
 <p>虚拟内存映射: 把文件的某一段(磁盘/硬盘上)直接映射到内存中去; 一旦文件被映射, 访问文件就会非常快, 不用通过系统的 <code>read()</code> 或 <code>write()</code>.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">MappedByteBuffer</span> <span style="color: #333333">FileChannel</span><span style="color: #A71D7E">.</span><span style="color: #008080">map</span><span style="color: #A71D7E">(</span><span style="color: #333333">MapMode</span><span style="color: #A71D7E">,</span> <span style="color: #A71D5D; font-weight: bold">long</span> <span style="color: #333333">position</span><span style="color: #A71D7E">,</span> <span style="color: #333333">longsize</span><span style="color: #A71D7E">)</span>
-<span style="color: #999988; font-style: italic">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">MappedByteBuffer</span> <span style="color: #f8f8f2">FileChannel</span><span style="color: #f92672">.</span><span style="color: #a6e22e">map</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">MapMode</span><span style="color: #f92672">,</span> <span style="color: #66d9ef">long</span> <span style="color: #f8f8f2">position</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">longsize</span><span style="color: #f92672">)</span>
+<span style="color: #75715e">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
 </pre></div>
 
-<br>
+
+<p><br>
 通过 <code>FileChannel</code> 可以将文件映射到内存中, 取得一个 <code>MappedByteBuffer</code>.</p>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>说明:</h2>
+<h2 id="_2">说明:</h2>
 <p>剩下的还有 162 ~ 166 没看, 看不下去了,  以后再看吧</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

@@ -63,95 +63,100 @@
 <li><a href="#optimistic-loop">Optimistic Loop</a></li>
 </ul>
 </div>
-<h2 id="use-counters-collection"><a name="user-content-use-counters-collection" href="#use-counters-collection" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Use Counters Collection</h2>
+<h2 id="use-counters-collection">Use Counters Collection</h2>
 <p>1. Insert into the counters collection, the initial value for the userid:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">counters</span>.<span style="color: #333333">insert</span>(
-   {
-      <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;userid&quot;</span>,
-      <span style="color: #333333">seq</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">0</span>
-   }
-)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">counters</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span>
+   <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;userid&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">seq</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">0</span>
+   <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>2. Create a <strong>getNextSequence</strong> function that accepts a name of the sequence. The function uses the findAndModify() method to atomically increment the seq value and return this new value:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">function</span> <span style="color: #333333">getNextSequence</span>(<span style="color: #333333">name</span>) {
-   <span style="color: #A71D5D">var</span> <span style="color: #333333">ret</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">db</span>.<span style="color: #333333">counters</span>.<span style="color: #333333">findAndModify</span>(
-          {
-            <span style="color: #333333">query</span><span style="color: #A71D7E">:</span> { <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #333333">name</span> },
-            <span style="color: #333333">update</span><span style="color: #A71D7E">:</span> { <span style="color: #333333">$inc</span><span style="color: #A71D7E">:</span> { <span style="color: #333333">seq</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span> } },
-            <span style="color: #A71D5D">new</span><span style="color: #A71D7E">:</span> <span style="color: #A71D5D">true</span> <span style="color: #999988; font-style: italic">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
-          }
-   );
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getNextSequence</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+   <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">ret</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">counters</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">findAndModify</span><span style="color: #f8f8f2">(</span>
+          <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">query</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #a6e22e">name</span> <span style="color: #f8f8f2">},</span>
+            <span style="color: #a6e22e">update</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">$inc</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">seq</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">},</span>
+            <span style="color: #66d9ef">new</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span> <span style="color: #75715e">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
+          <span style="color: #f8f8f2">}</span>
+   <span style="color: #f8f8f2">);</span>
 
-   <span style="color: #A71D5D">return</span> <span style="color: #333333">ret</span>.<span style="color: #333333">seq</span>;
-}
+   <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">ret</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">seq</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>3. Use this <strong>getNextSequence()</strong> function during insert().</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">db</span>.<span style="color: #333333">users</span>.<span style="color: #333333">insert</span>(
-   {
-     <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #333333">getNextSequence</span>(<span style="color: #183691">&quot;userid&quot;</span>),
-     <span style="color: #333333">name</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Sarah C.&quot;</span>
-   }
-)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">users</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span>
+   <span style="color: #f8f8f2">{</span>
+     <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #a6e22e">getNextSequence</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;userid&quot;</span><span style="color: #f8f8f2">),</span>
+     <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Sarah C.&quot;</span>
+   <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">)</span>
 
-<span style="color: #333333">db</span>.<span style="color: #333333">users</span>.<span style="color: #333333">insert</span>(
-   {
-     <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #333333">getNextSequence</span>(<span style="color: #183691">&quot;userid&quot;</span>),
-     <span style="color: #333333">name</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Bob D.&quot;</span>
-   }
-)
+<span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">users</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span>
+   <span style="color: #f8f8f2">{</span>
+     <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #a6e22e">getNextSequence</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;userid&quot;</span><span style="color: #f8f8f2">),</span>
+     <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Bob D.&quot;</span>
+   <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br></p>
-<h2 id="optimistic-loop"><a name="user-content-optimistic-loop" href="#optimistic-loop" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Optimistic Loop</h2>
+
+<p><br></p>
+<h2 id="optimistic-loop">Optimistic Loop</h2>
 <p>1. Create a function named <strong>insertDocument</strong> that performs the &ldquo;insert if not present&rdquo; loop. The function wraps the insert() method and takes a <strong>doc</strong> and a <strong>targetCollection</strong> arguments.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">function</span> <span style="color: #333333">insertDocument</span>(<span style="color: #333333">doc</span>, <span style="color: #333333">targetCollection</span>) {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">function</span> <span style="color: #a6e22e">insertDocument</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">targetCollection</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
 
-    <span style="color: #A71D5D">while</span> (<span style="color: #0086b3">1</span>) {
+    <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
 
-        <span style="color: #A71D5D">var</span> <span style="color: #333333">cursor</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">targetCollection</span>.<span style="color: #333333">find</span>( {}, { <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span> } ).<span style="color: #333333">sort</span>( { <span style="color: #333333">_id</span><span style="color: #A71D7E">:</span> <span style="color: #A71D7E">-</span><span style="color: #0086b3">1</span> } ).<span style="color: #333333">limit</span>(<span style="color: #0086b3">1</span>);
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">cursor</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">targetCollection</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">find</span><span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">{},</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">).</span><span style="color: #a6e22e">sort</span><span style="color: #f8f8f2">(</span> <span style="color: #f8f8f2">{</span> <span style="color: #a6e22e">_id</span><span style="color: #f92672">:</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span> <span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">).</span><span style="color: #a6e22e">limit</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">);</span>
 
-        <span style="color: #A71D5D">var</span> <span style="color: #333333">seq</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">cursor</span>.<span style="color: #333333">hasNext</span>() <span style="color: #A71D7E">?</span> <span style="color: #333333">cursor</span>.<span style="color: #333333">next</span>().<span style="color: #333333">_id</span> <span style="color: #A71D7E">+</span> <span style="color: #0086b3">1</span> <span style="color: #A71D7E">:</span> <span style="color: #0086b3">1</span>;
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">seq</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">cursor</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f8f8f2">()</span> <span style="color: #f92672">?</span> <span style="color: #a6e22e">cursor</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">next</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">_id</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">1</span> <span style="color: #f92672">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">;</span>
 
-        <span style="color: #333333">doc</span>.<span style="color: #333333">_id</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">seq</span>;
+        <span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">_id</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">seq</span><span style="color: #f8f8f2">;</span>
 
-        <span style="color: #A71D5D">var</span> <span style="color: #333333">results</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">targetCollection</span>.<span style="color: #333333">insert</span>(<span style="color: #333333">doc</span>);
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">results</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">targetCollection</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">doc</span><span style="color: #f8f8f2">);</span>
 
-        <span style="color: #A71D5D">if</span>( <span style="color: #333333">results</span>.<span style="color: #333333">hasWriteError</span>() ) {
-            <span style="color: #A71D5D">if</span>( <span style="color: #333333">results</span>.<span style="color: #333333">writeError</span>.<span style="color: #333333">code</span> <span style="color: #A71D7E">==</span> <span style="color: #0086b3">11000</span> <span style="color: #999988; font-style: italic">/* dup key */</span> )
-                <span style="color: #A71D5D">continue</span>;
-            <span style="color: #A71D5D">else</span>
-                <span style="color: #333333">print</span>( <span style="color: #183691">&quot;unexpected error inserting data: &quot;</span> <span style="color: #A71D7E">+</span> <span style="color: #333333">tojson</span>( <span style="color: #333333">results</span> ) );
-        }
+        <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span> <span style="color: #a6e22e">results</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">hasWriteError</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span> <span style="color: #a6e22e">results</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">writeError</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">code</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">11000</span> <span style="color: #75715e">/* dup key */</span> <span style="color: #f8f8f2">)</span>
+                <span style="color: #66d9ef">continue</span><span style="color: #f8f8f2">;</span>
+            <span style="color: #66d9ef">else</span>
+                <span style="color: #a6e22e">print</span><span style="color: #f8f8f2">(</span> <span style="color: #e6db74">&quot;unexpected error inserting data: &quot;</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">tojson</span><span style="color: #f8f8f2">(</span> <span style="color: #a6e22e">results</span> <span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
 
-        <span style="color: #A71D5D">break</span>;
-    }
-}
+        <span style="color: #66d9ef">break</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p>2. Use the <strong>insertDocument()</strong> function to perform an insert:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">var</span> <span style="color: #333333">myCollection</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">db</span>.<span style="color: #333333">users2</span>;
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">myCollection</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">db</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">users2</span><span style="color: #f8f8f2">;</span>
 
-<span style="color: #333333">insertDocument</span>(
-   {
-     <span style="color: #333333">name</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Grace H.&quot;</span>
-   },
-   <span style="color: #333333">myCollection</span>
-);
+<span style="color: #a6e22e">insertDocument</span><span style="color: #f8f8f2">(</span>
+   <span style="color: #f8f8f2">{</span>
+     <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Grace H.&quot;</span>
+   <span style="color: #f8f8f2">},</span>
+   <span style="color: #a6e22e">myCollection</span>
+<span style="color: #f8f8f2">);</span>
 
-<span style="color: #333333">insertDocument</span>(
-   {
-     <span style="color: #333333">name</span><span style="color: #A71D7E">:</span> <span style="color: #183691">&quot;Ted R.&quot;</span>
-   },
-   <span style="color: #333333">myCollection</span>
-)
+<span style="color: #a6e22e">insertDocument</span><span style="color: #f8f8f2">(</span>
+   <span style="color: #f8f8f2">{</span>
+     <span style="color: #a6e22e">name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;Ted R.&quot;</span>
+   <span style="color: #f8f8f2">},</span>
+   <span style="color: #a6e22e">myCollection</span>
+<span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a>
 
 </p>

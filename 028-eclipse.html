@@ -73,9 +73,9 @@
 <li><a href="#_11">常用快捷键</a></li>
 </ul>
 </div>
-<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装</h2>
+<h2 id="_1">安装</h2>
 <p>在官网上下载最新版本的 Eclipse, 不过它是英文版的, 我们需要手动下载语言包, Eclipse 有一个语言包项目, 叫 Eclipse Babel Project, 如果需要语言包, 可以联机从这儿下载.</p>
-<p><a href="http://www.eclipse.org/babel/"><a href="http://www.eclipse.org/babel/"><a href="http://www.eclipse.org/babel/">http://www.eclipse.org/babel/</a></a></a></p>
+<p><a href="http://www.eclipse.org/babel/">http://www.eclipse.org/babel/</a></p>
 <p>找到下载页面后, 还要根据自己使用的 Eclipse 的版本来确定在哪下载.</p>
 <p><img alt="" src="http://i59.tinypic.com/2ibyxyx.jpg" /></p>
 <p><img alt="" src="http://i58.tinypic.com/30sfqyb.jpg" /></p>
@@ -83,7 +83,7 @@
 <p>点击第一张图上的 Luna, 跳转到语言包下载界面, 找到中文包, 下载, 解压, 覆盖即可.</p>
 <p><img alt="" src="http://i57.tinypic.com/fn8sg0.jpg" /></p>
 <p>再次打开 Eclipse 就是中文的了.</p>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用</h2>
+<h2 id="_2">使用</h2>
 <p>用 Eclipse 编写 Java 程序可以总结为四步:</p>
 <ol>
 <li>创建 Java 项目</li>
@@ -91,11 +91,11 @@
 <li>编写 Java 源代码</li>
 <li>运行 Java 程序</li>
 </ol>
-<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置字体</h3>
+<h3 id="_3">设置字体</h3>
 <p>&ldquo;窗口&rdquo; -&gt; &ldquo;首选项&rdquo;</p>
 <p>然后在左上角的过滤器中输入外观, 选择 &ldquo;颜色和字体&rdquo;, 在右边选择 &ldquo;基本&rdquo; -&gt; &ldquo;文本字体&rdquo; -&gt; &ldquo;编辑&rdquo;</p>
 <p><img alt="" src="http://i67.tinypic.com/op8do8.jpg" /></p>
-<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自动提示</h3>
+<h3 id="_4">自动提示</h3>
 <p>接下来, 设置下 eclipse 的自动提示<br>(你可以在任何时候 alt + / 来触发).
 window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</p>
 <p><img alt="" src="http://i60.tinypic.com/1zoj2no.jpg" /></p>
@@ -109,39 +109,43 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg" /></p>
 <p>打开 <code>org.eclipse.jface.text.contentassist.CompletionProposalPopup</code> 文件第 1336 行代码, 具体代码如下:</p>
 <p><img alt="" src="http://i67.tinypic.com/20rae14.jpg" /></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
-                        <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
-                        <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
-                        <span style="color: #333333">insertProposal</span><span style="color: #A71D7E">(</span><span style="color: #333333">p</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">,</span> <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">,</span> <span style="color: #333333">fContentAssistSubjectControlAdapter</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSelectedRange</span><span style="color: #A71D7E">().</span><span style="color: #008080">x</span><span style="color: #A71D7E">);</span>
-                    <span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">contains</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">triggers</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">))</span> <span style="color: #f92672">{</span>
+                        <span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doit</span><span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
+                        <span style="color: #f8f8f2">hide</span><span style="color: #f92672">();</span>
+                        <span style="color: #f8f8f2">insertProposal</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">p</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">stateMask</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">fContentAssistSubjectControlAdapter</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getSelectedRange</span><span style="color: #f92672">().</span><span style="color: #a6e22e">x</span><span style="color: #f92672">);</span>
+                    <span style="color: #f92672">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 修改之后的代码是:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">if</span> <span style="color: #A71D7E">(</span><span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;=&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #0086b3">0x20</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">key</span> <span style="color: #A71D7E">!=</span> <span style="color: #183691">&#39;;&#39;</span> <span style="color: #A71D7E">&amp;&amp;</span> <span style="color: #333333">contains</span><span style="color: #A71D7E">(</span><span style="color: #333333">triggers</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">))</span> <span style="color: #A71D7E">{</span>
-                        <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
-                        <span style="color: #333333">hide</span><span style="color: #A71D7E">();</span>
-                        <span style="color: #333333">insertProposal</span><span style="color: #A71D7E">(</span><span style="color: #333333">p</span><span style="color: #A71D7E">,</span> <span style="color: #333333">key</span><span style="color: #A71D7E">,</span> <span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">,</span> <span style="color: #333333">fContentAssistSubjectControlAdapter</span><span style="color: #A71D7E">.</span><span style="color: #008080">getSelectedRange</span><span style="color: #A71D7E">().</span><span style="color: #008080">x</span><span style="color: #A71D7E">);</span>
-                    <span style="color: #A71D7E">}</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">key</span> <span style="color: #f92672">!=</span> <span style="color: #e6db74">&#39;=&#39;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">key</span> <span style="color: #f92672">!=</span> <span style="color: #ae81ff">0x20</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">key</span> <span style="color: #f92672">!=</span> <span style="color: #e6db74">&#39;;&#39;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">contains</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">triggers</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">))</span> <span style="color: #f92672">{</span>
+                        <span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doit</span><span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
+                        <span style="color: #f8f8f2">hide</span><span style="color: #f92672">();</span>
+                        <span style="color: #f8f8f2">insertProposal</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">p</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">key</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">stateMask</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">fContentAssistSubjectControlAdapter</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getSelectedRange</span><span style="color: #f92672">().</span><span style="color: #a6e22e">x</span><span style="color: #f92672">);</span>
+                    <span style="color: #f92672">}</span>
 </pre></div>
 
-<br>
+
+<p><br>
 如果想要使用 &ldquo;tab&rdquo; 键上屏需要修改 1328 行, 具体代码如下:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">case</span> <span style="color: #a61717; background-color: #e3d2d2">&#39;</span><span style="color: #A71D7E">/</span><span style="color: #333333">t</span><span style="color: #a61717; background-color: #e3d2d2">&#39;</span><span style="color: #A71D7E">:</span>
-<span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
-<span style="color: #333333">fProposalShell</span><span style="color: #A71D7E">.</span><span style="color: #008080">setFocus</span><span style="color: #A71D7E">();</span>
-<span style="color: #A71D5D">return</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">case</span> <span style="color: #960050; background-color: #1e0010">&#39;</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">t</span><span style="color: #960050; background-color: #1e0010">&#39;</span><span style="color: #f92672">:</span>
+<span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doit</span><span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
+<span style="color: #f8f8f2">fProposalShell</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setFocus</span><span style="color: #f92672">();</span>
+<span style="color: #66d9ef">return</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
 </pre></div>
 
-<br>
+
+<p><br>
 修改之后的代码是:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">case</span> <span style="color: #183691">&#39;\t&#39;</span><span style="color: #A71D7E">:</span>
-<span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">doit</span><span style="color: #A71D7E">=</span> <span style="color: #A71D5D">false</span><span style="color: #A71D7E">;</span>
-<span style="color: #333333">insertSelectedProposalWithMask</span><span style="color: #A71D7E">(</span><span style="color: #333333">e</span><span style="color: #A71D7E">.</span><span style="color: #008080">stateMask</span><span style="color: #A71D7E">);</span>
-<span style="color: #A71D5D">break</span><span style="color: #A71D7E">;</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">case</span> <span style="color: #e6db74">&#39;\t&#39;</span><span style="color: #f92672">:</span>
+<span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">doit</span><span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f92672">;</span>
+<span style="color: #f8f8f2">insertSelectedProposalWithMask</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">e</span><span style="color: #f92672">.</span><span style="color: #a6e22e">stateMask</span><span style="color: #f92672">);</span>
+<span style="color: #66d9ef">break</span><span style="color: #f92672">;</span>
 </pre></div>
 
-<br>
+
+<p><br>
 修改完成之后需要保存替换原来的 jar 文件:</p>
 <p>项目右键 -> export</p>
 <p><img alt="" src="http://i67.tinypic.com/2pydoci.jpg" /></p>
@@ -150,10 +154,10 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <p>点击 Next, 选择 Destination 选项卡, 选择 Directory, 选择一个要保存插件的目录, 然后 Finish.</p>
 <p><img alt="" src="http://i63.tinypic.com/2vacpe1.jpg" /></p>
 <p>然后就会在所选的目录下产生一个新的 plugins 目录, 里面有一个 jar 文件, 用它替换掉 Eclipse/plugins 里面的 (注意版本号可能会不一样), 最后重新启动一下 Eclipse.</p>
-<h3 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>导航器</h3>
+<h3 id="_5">导航器</h3>
 <p>类似 &ldquo;资源管理器&rdquo;, 它的视图和 &ldquo;包资源管理器&rdquo; 有点像, 因为有些文件或文件夹在 &ldquo;包资源管理器&rdquo; 看不到, 这时可以到 &ldquo;导航器&rdquo; 中查看.</p>
 <p>&ldquo;窗口&rdquo; -&gt; &ldquo;显示视图&rdquo; -&gt; &ldquo;其他&rdquo;, 在弹出窗中选择 &ldquo;常规&rdquo; -&gt; &ldquo;导航器&rdquo;, 此时 &ldquo;导航器&rdquo; 就出现在 IDE 左侧的视图中了.</p>
-<h3 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>自动构建</h3>
+<h3 id="_6">自动构建</h3>
 <p>eclipse 的 java 构建器包含了两种构建 java 程序的方法:</p>
 <ul>
 <li>自动构建</li>
@@ -162,25 +166,25 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <p>其中, 自动构建是 java 构建器默认采用的方式, 即当文件修改后保存或者对整个项目进行刷新时, java 构建器就会对其进行编译.</p>
 <p>这显然不是一种我希望的方式, 我希望是我点击 &ldquo;Run&rdquo; 或者 &ldquo;Debug&rdquo; 时 IDE 再去构建, 而不是保存一下文件就构建一下.</p>
 <p>关闭方法很简单, &ldquo;项目&rdquo; -&gt; &ldquo;自动构建&rdquo;, 取消 &ldquo;自动构建&rdquo; 前面的选项即可.</p>
-<h3 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>抽取函数</h3>
+<h3 id="_7">抽取函数</h3>
 <p>快捷键 <code>Shift + Alt + M</code> 能将选中的代码块进行方法抽取.</p>
 <p>这是属于 <strong>重构</strong> 功能的一部分, 可以点击选中的代码块, 选择 &ldquo;重构&rdquo; -> &ldquo;抽取方法&rdquo;</p>
-<h3 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置编码</h3>
+<h3 id="_8">设置编码</h3>
 <p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Workspace -&gt; Text file encoding -&gt; Other -&gt; UTF-8.</p>
 <p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Content Types, 在右面选择 &ldquo;Text&rdquo;, 在 default encoding 输入 &ldquo;UTF-8&rdquo;, 点 &ldquo;update&rdquo; 按钮更新.</p>
-<h3 id="monokai"><a name="user-content-monokai" href="#monokai" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>设置 Monokai 主题</h3>
-<h4 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置黑色框架</h4>
+<h3 id="monokai">设置 Monokai 主题</h3>
+<h4 id="_9">配置黑色框架</h4>
 <p>Window -> Preferences -> General -> Apperance 选择主题为 Dark, 确认.</p>
 <p><img alt="" src="http://i68.tinypic.com/30hnd45.jpg" /></p>
 <p>完成之后确认, 颜色大概是这个样子:</p>
 <p><img alt="" src="http://i66.tinypic.com/jb74aw.jpg" /></p>
 <p>这肯定不是我们想要的样子, 因为这个主题只是配置了框架的颜色，代码编辑区的样式还需要我们继续配置.</p>
-<h3 id="_10"><a name="user-content-_10" href="#_10" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>配置代码编辑区的样式</h3>
+<h3 id="_10">配置代码编辑区的样式</h3>
 <p>去 帮助 -> 安装新软件，按下 &ldquo;添加站点进入&rdquo;, 输入 <code>http://eclipse-color-theme.github.io/update</code> 作为网址, 然后点击继续安装.</p>
 <p><img alt="" src="http://i64.tinypic.com/2u7c7ro.jpg" /></p>
 <p>安装完成之后, Window -> Preferences -> General -> Appereance -> Color Theme 选择其中的样式.</p>
 <p><img alt="" src="http://i63.tinypic.com/20ppxrn.jpg" /></p>
-<h2 id="_11"><a name="user-content-_11" href="#_11" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>常用快捷键</h2>
+<h2 id="_11">常用快捷键</h2>
 <ol>
 <li>Ctrl + 1 (快速修复)</li>
 <li>Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件</li>

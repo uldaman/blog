@@ -74,11 +74,12 @@
 <li>getItem (下拉)</li>
 </ul>
 <p>首先来看看 getText 函数：</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">QtGui</span>
-<span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QInputDialog</span><span style="color: #A71D7E">.</span><span style="color: #333333">getText</span>(<span style="color: #ed6a43">self</span>, <span style="color: #183691">u&#39;提示&#39;</span>, <span style="color: #183691">u&#39;输入信息:&#39;</span>, <span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QLineEdit</span><span style="color: #A71D7E">.</span><span style="color: #333333">Normal</span>, <span style="color: #183691">u&quot;请输入你的信息...&quot;</span>)
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">PyQt4</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">QtGui</span>
+<span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QInputDialog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">getText(self,</span> <span style="color: #e6db74">u&#39;提示&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">u&#39;输入信息:&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QLineEdit</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Normal,</span> <span style="color: #e6db74">u&quot;请输入你的信息...&quot;</span><span style="color: #f8f8f2">)</span>
 </pre></div>
 
-<br>
+
+<p><br>
 代码比较简单，使用 getText 函数就可以弹出一个可供用户输入的对话框:</p>
 <p><img alt="" src="http://i63.tinypic.com/w1qixt.jpg" /></p>
 <p>另外, 该函数接收两个返回值:</p>
@@ -86,7 +87,7 @@
 <li>QString 用户输入的信息 (如果用户点击 cancel , 则该值为空)</li>
 <li>bool 用户点击 ok 还是 cancel</li>
 </ul>
-<p>其它静态方法使用类似, 参考文档: <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText">http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText</a></a></a></p>
+<p>其它静态方法使用类似, 参考文档: <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText">http://pyqt.sourceforge.net/Docs/PyQt4/qinputdialog.html#getText</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 
 </p>

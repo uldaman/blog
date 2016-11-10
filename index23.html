@@ -49,9 +49,9 @@
 </h6>
 
 
-<p>Windows 搭建 Lua 环境包含3部分内容：**编译lua的库文件(<em>.lib), 编译lua解释器(lua.exe), 编译lua编译器(luac.exe)*</em>.
+<p>Windows 搭建 Lua 环境包含3部分内容：<strong>编译lua的库文件(*.lib), 编译lua解释器(lua.exe), 编译lua编译器(luac.exe)</strong>.
 我们采用 VS2013 + lua-5.2.4 来进行编译.</p>
-<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org"><a href="http://www.lua.org"><a href="http://www.lua.org">http://www.lua.org</a></a></a>
+<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a>
 我这里下载的是 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/lua.html">Lua</a>
 
 </p>
@@ -70,7 +70,7 @@
 
 <p>在 国嵌C++ 中曾分析过重载与重写.
 看下面这个例子:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; CParent {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; CParent {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
     &lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
@@ -106,9 +106,9 @@
 
 <p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持&rdquo;糖块句法&rdquo;, 允许程序通过一个简单的&rdquo;foreach&rdquo;语句自动遍历list中的元素.
 C++11增加了一个类似的特性, for语句可以简单地遍历列表中的元素.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #333333">my_array</span>[<span style="color: #0086b3">5</span>] <span style="color: #A71D7E">=</span> {<span style="color: #0086b3">1</span>, <span style="color: #0086b3">2</span>, <span style="color: #0086b3">3</span>, <span style="color: #0086b3">4</span>, <span style="color: #0086b3">5</span>};
-<span style="color: #999988; font-style: italic">// double the value of each element in my_array:</span>
-<span style="color: #A71D5D">for</span> (<span style="color: #A71D5D; font-weight: bold">int</span> <span style="color: #A71D7E">&amp;</span><span style="color: #333333">x</span> : <span style="color: #333333">my_array ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">my_array[</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">};</span>
+<span style="color: #75715e">// double the value of each element in my_array:</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">int</span> <span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">x</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">my_array ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
 </p>
 
@@ -125,7 +125,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
 
 <p>先看下面这两个重载函数.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
 </p>
@@ -144,11 +144,11 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
 <p>在C++11之前, auto关键字用来指定存储期, 表明变量具有本地范围, 块范围的变量声明（如for循环体内的变量声明）默认为auto存储类型.
 其实大多普通声明方式声明的变量都是 auto 变量, 他们不需要明确指定auto关键字, 默认就是auto的了, auto变量在离开作用域是会变程序自动释放.</p>
-<p>在新标准中, auto 的功能变为**自动类型推导.
-**auto 通知编译器去根据初始化代码推断所声明变量的真实类型.
+<p>在新标准中, auto 的功能变为<strong>自动类型推导.
+</strong>auto 通知编译器去根据初始化代码推断所声明变量的真实类型.
 各种作用域内声明变量都可以用到它, 如: 名空间中, 程序块中, 或是for循环的初始化语句中.
 需要注意的是, auto不能用来声明函数的返回值.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>auto i = &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>auto i = &lt;span style ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 
 </p>
 

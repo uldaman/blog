@@ -81,7 +81,7 @@
 <li><a href="#_1">事件过滤器</a></li>
 </ul>
 </div>
-<h1 id="qt"><a name="user-content-qt" href="#qt" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初识 Qt 中的事件</h1>
+<h1 id="qt">初识 Qt 中的事件</h1>
 <p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
@@ -105,12 +105,12 @@
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
 <p>实现代码如下:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D; font-weight: bold">void</span> <span style="color: #333333">Qt_Notepad</span><span style="color: #A71D7E">::</span><span style="color: #333333">OpenFile</span>() {
-    <span style="color: #333333">QString</span> <span style="color: #333333">fileName</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QFileDialog</span><span style="color: #A71D7E">::</span><span style="color: #333333">getOpenFileName</span>(<span style="color: #A71D5D">this</span>, <span style="color: #183691">&quot;Open File&quot;</span>, <span style="color: #ED6A43">NULL</span>, <span style="color: #183691">&quot;file (*.*)&quot;</span>);
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">Qt_Notepad</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">OpenFile()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">QString</span> <span style="color: #f8f8f2">fileName</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QFileDialog</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">getOpenFileName(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Open File&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">NULL,</span> <span style="color: #e6db74">&quot;file (*.*)&quot;</span><span style="color: #f8f8f2">);</span>
 
-    <span style="color: #A71D5D">if</span> (<span style="color: #A71D7E">!</span><span style="color: #333333">fileName</span>.<span style="color: #333333">isEmpty</span>()) {
-        <span style="color: #333333">QFile</span> <span style="color: #333333">file</span>;
-        <span style="color: #333333">file ...</span></pre></div></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">fileName.isEmpty())</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">QFile</span> <span style="color: #f8f8f2">file;</span>
+        <span style="color: #f8f8f2">file ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -161,7 +161,7 @@
 
 <p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>模态对话框</h1>
+<h1 id="_1">模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
 <p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
@@ -180,7 +180,7 @@
 
 
 <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
     Q_OBJECT
 
 &lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
@@ -205,7 +205,7 @@
 <li><a href="#action">添加 Action</a></li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加资源</h1>
+<h1 id="_1">添加资源</h1>
 <p>Qt 资源系统是一个跨平台的资源机制, 用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部. 如果你的程序需要加载特定的资源(图标、文本翻译等), 那么, 将其放置在资源文件中, 就再也不需要担心这些文件的丢失. 也就是说, 如果你将资源以资源文件形式存储, 它是会编译到可执行文件内部.</p>
 <p>双击打VS项目文件中的.qrc文件打开资源编辑器.</p>
 <p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg" /></p>
@@ -229,7 +229,7 @@
 </h6>
 
 
-<p>转自: <a href="http://www.devbean.net/"><a href="http://www.devbean.net/"><a href="http://www.devbean.net/">http://www.devbean.net/</a></a></a></p>
+<p>转自: <a href="http://www.devbean.net/">http://www.devbean.net/</a></p>
 <p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C ...</em></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>

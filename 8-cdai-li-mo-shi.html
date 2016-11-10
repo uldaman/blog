@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>代理模式</h3>
+    <h3 id="_1">代理模式</h3>
 <p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
 <p>情景:</p>
 <ol>
@@ -85,7 +85,7 @@ public:
 <p>class Proxy
     : public Subject {
 public:</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>void Request() {
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>void Request() {
     if (m_realSubject == NULL) {
         m_realSubject = new RealSubject();
     }
@@ -97,17 +97,17 @@ public:</p>
 <p>protected:
     RealSubject* m_realSubject;
 };</p>
-<p>int _tmain(int argc, _TCHAR* argv[]) {
-    Proxy* proxy = new Proxy();
+<p>int _tmain(int argc, _TCHAR<em> argv[]) {
+    Proxy</em> proxy = new Proxy();
     proxy-&gt;Request();</p>
-<div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>system(&quot;PAUSE&quot;);
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>system(&quot;PAUSE&quot;);
 return 0;
 </pre></div>
 
 
 <p>}[/cpp]</p>
 <p>这样, 我们在客户端中, 都是通过代理类来访问真实的实体, 在代理类中, 就可以控制对真实实体的访问.</p>
-<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>应用</h3>
+<h3 id="_2">应用</h3>
 <ol>
 <li>远程代理, 也就是为一个对象在不同的地址空间提供局部代表, 这样可以隐藏一个对象存在不同地址空间的事实.</li>
 </ol>

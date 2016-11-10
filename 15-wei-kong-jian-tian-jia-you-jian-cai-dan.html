@@ -67,87 +67,92 @@
 </li>
 </ul>
 </div>
-<h1 id="action"><a name="user-content-action" href="#action" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加 Action</h1>
+<h1 id="action">添加 Action</h1>
 <p>参考之前学 Qt 的系列笔记: <a href="http://www.smallcpp.com/13-zi-yuan-wen-jian-ji-action.html">13、资源文件及 Action</a></p>
 <p>Qt 中, 每个菜单项是一个 Action, 我们要显示右键菜单, 也要先定义好 Action, 方法就参考上面的笔记, 在 Qt 设计师中添加, 也可以像下面这样, 自己在代码中添加.</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">from</span> <span style="color: #555555">PyQt4.QtGui</span> <span style="color: #A71D5D">import</span> <span style="color: #333333">QMenu</span>, <span style="color: #333333">QAction</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">PyQt4.QtGui</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">QMenu,</span> <span style="color: #f8f8f2">QAction</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_open</span>():
-    <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;打开&#39;</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">on_open</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #e6db74">u&#39;打开&#39;</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_download</span>():
-    <span style="color: #A71D5D">print</span> <span style="color: #183691">u&#39;下载&#39;</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">on_download</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #66d9ef">print</span> <span style="color: #e6db74">u&#39;下载&#39;</span>
 
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QMenu</span>()
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QMenu()</span>
 
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QAction</span>(<span style="color: #ed6a43">self</span>)
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span><span style="color: #A71D7E">.</span><span style="color: #333333">setText</span>(<span style="color: #183691">u&quot;打开&quot;</span>)
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span><span style="color: #A71D7E">.</span><span style="color: #333333">triggered</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #333333">on_open</span>)
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QAction(self)</span>
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setText(</span><span style="color: #e6db74">u&quot;打开&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">triggered</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">connect(on_open)</span>
 
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">QAction</span>(<span style="color: #ed6a43">self</span>)
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span><span style="color: #A71D7E">.</span><span style="color: #333333">setText</span>(<span style="color: #183691">u&quot;下载&quot;</span>)
-<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span><span style="color: #A71D7E">.</span><span style="color: #333333">triggered</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #333333">on_download</span>)
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QAction(self)</span>
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setText(</span><span style="color: #e6db74">u&quot;下载&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">triggered</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">connect(on_download)</span>
 </pre></div>
 
-<br></p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>添加菜单</h1>
+
+<p><br></p>
+<h1 id="_1">添加菜单</h1>
 <p>这里有两种方法, 一种是基于事件, 另一种是基于信号槽</p>
-<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>重写事件</h3>
+<h3 id="_2">重写事件</h3>
 <p>Qt 的控件都有一个右键菜单事件 <code>contextMenuEvent</code>, 我们重写这个事件就可以了:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">contextMenuEvent</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">e_contextMenuEvent</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">contextMenuEvent</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">e_contextMenuEvent</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">e_contextMenuEvent</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">event</span>):
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">clear</span>()  <span style="color: #999988; font-style: italic"># 清除原有菜单</span>
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span>)
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addSeparator</span>()  <span style="color: #999988; font-style: italic"># 分隔线</span>
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span>)
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">exec_</span>(<span style="color: #333333">event</span><span style="color: #A71D7E">.</span><span style="color: #333333">globalPos</span>())
-    <span style="color: #333333">event</span><span style="color: #A71D7E">.</span><span style="color: #333333">accept</span>()
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">e_contextMenuEvent</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">event):</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">clear()</span>  <span style="color: #75715e"># 清除原有菜单</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open)</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addSeparator()</span>  <span style="color: #75715e"># 分隔线</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download)</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exec_(event</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">globalPos())</span>
+    <span style="color: #f8f8f2">event</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
 </pre></div>
 
-<br>
+
+<p><br>
 如果想添加次级菜单, 可以使用 <code>pop_menu.addMenu</code>:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #A71D5D">def</span> <span style="color: #795DA3">e_contextMenuEvent</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">event</span>):
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">clear</span>()
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span>)
-    <span style="color: #333333">secondary_menu</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addMenu</span>(<span style="color: #183691">u&#39;其它&#39;</span>)
-    <span style="color: #333333">secondary_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span>)
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">exec_</span>(<span style="color: #333333">event</span><span style="color: #A71D7E">.</span><span style="color: #333333">globalPos</span>())
-    <span style="color: #333333">event</span><span style="color: #A71D7E">.</span><span style="color: #333333">accept</span>()
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">e_contextMenuEvent</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">event):</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">clear()</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open)</span>
+    <span style="color: #f8f8f2">secondary_menu</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addMenu(</span><span style="color: #e6db74">u&#39;其它&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">secondary_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download)</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exec_(event</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">globalPos())</span>
+    <span style="color: #f8f8f2">event</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">accept()</span>
 </pre></div>
 
-<br></p>
+
+<p><br></p>
 <p><img alt="" src="http://i64.tinypic.com/1532qds.jpg" /></p>
 <p>如果是在 Table 类的控件上, 你可以还需要得到当前鼠标所在的 item:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #333333">point</span> <span style="color: #A71D7E">=</span> <span style="color: #333333">event</span><span style="color: #A71D7E">.</span><span style="color: #333333">pos</span>()
-<span style="color: #333333">item</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">tableWidgetItem</span><span style="color: #A71D7E">.</span><span style="color: #333333">itemAt</span>(<span style="color: #333333">point</span>)
-<span style="color: #A71D5D">if</span> <span style="color: #333333">item</span> <span style="color: #A71D7E">!=</span> <span style="color: #ed6a43">None</span>:
-    <span style="color: #A71D5D">pass</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">point</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">event</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pos()</span>
+<span style="color: #f8f8f2">item</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">tableWidgetItem</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">itemAt(point)</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">item</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">None:</span>
+    <span style="color: #66d9ef">pass</span>
 </pre></div>
 
-<br>
+
+<p><br>
 要注意, <code>itemAt</code> 使用的是局部坐标, <code>exec_</code> 使用的是全局坐标.</p>
-<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>关联信号槽</h3>
+<h3 id="_3">关联信号槽</h3>
 <p>这种方法的机制是为控件建立 press 的信号槽, 在槽函数里判断是左键还是右键, 这种方法对有 item 的控件支持比较好, 如: QListWidget、QTableWidget、QTreeWidget.</p>
 <p>以 QTableWidget 为例, 我们先在主窗体上拖一个 QTableWidget:</p>
 <p><img alt="" src="http://i65.tinypic.com/919ggk.jpg" /></p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span><span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">tableWidget</span><span style="color: #A71D7E">.</span><span style="color: #333333">itemPressed</span><span style="color: #A71D7E">.</span><span style="color: #333333">connect</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">on_item_clicked</span>)  <span style="color: #999988; font-style: italic"># 关联信号槽</span>
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">tableWidget</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">itemPressed</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">connect(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">on_item_clicked)</span>  <span style="color: #75715e"># 关联信号槽</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">on_item_clicked</span>(<span style="color: #ed6a43">self</span>, <span style="color: #333333">item</span>):
-    <span style="color: #A71D5D">if</span> <span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">qApp</span><span style="color: #A71D7E">.</span><span style="color: #333333">mouseButtons</span>() <span style="color: #A71D7E">==</span> <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">Qt</span><span style="color: #A71D7E">.</span><span style="color: #333333">LeftButton</span>:
-        <span style="color: #A71D5D">return</span>
-    <span style="color: #A71D5D">elif</span> <span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">qApp</span><span style="color: #A71D7E">.</span><span style="color: #333333">mouseButtons</span>() <span style="color: #A71D7E">==</span> <span style="color: #333333">QtCore</span><span style="color: #A71D7E">.</span><span style="color: #333333">Qt</span><span style="color: #A71D7E">.</span><span style="color: #333333">RightButton</span>:
-        <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">show_menu</span>()
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">on_item_clicked</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">item):</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">qApp</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">mouseButtons()</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Qt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">LeftButton:</span>
+        <span style="color: #66d9ef">return</span>
+    <span style="color: #66d9ef">elif</span> <span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">qApp</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">mouseButtons()</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Qt</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RightButton:</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show_menu()</span>
 
-<span style="color: #A71D5D">def</span> <span style="color: #795DA3">show_menu</span>(<span style="color: #ed6a43">self</span>):
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">clear</span>()
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_open</span>)
-    <span style="color: #333333">secondary_menu</span> <span style="color: #A71D7E">=</span> <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addMenu</span>(<span style="color: #183691">u&#39;其它&#39;</span>)
-    <span style="color: #333333">secondary_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">addAction</span>(<span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">action_download</span>)
-    <span style="color: #ed6a43">self</span><span style="color: #A71D7E">.</span><span style="color: #333333">pop_menu</span><span style="color: #A71D7E">.</span><span style="color: #333333">exec_</span>(<span style="color: #333333">QtGui</span><span style="color: #A71D7E">.</span><span style="color: #333333">QCursor</span><span style="color: #A71D7E">.</span><span style="color: #333333">pos</span>())
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_menu</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">clear()</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_open)</span>
+    <span style="color: #f8f8f2">secondary_menu</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addMenu(</span><span style="color: #e6db74">u&#39;其它&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">secondary_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">addAction(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">action_download)</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pop_menu</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exec_(QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QCursor</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pos())</span>
 </pre></div>
 
-<br>
+
+<p><br>
 可以看到, 这种方法我们很方便的就得到了一个 item 对象, 而不需要像事件里那样使用 <code>itemAt()</code>.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 

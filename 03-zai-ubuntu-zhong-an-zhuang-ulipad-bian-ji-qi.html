@@ -55,13 +55,13 @@
 
     <p>Ulipad 是一个国人编写的专业 Python 编辑器, 它基于 wxpython 开发的GUI(图形化界面).
 好吧, 有人说 vim, 我承认它确实是神器, 但上手实在是有点蛋疼…以后有机会使用的时候再学吧…</p>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>安装</h1>
+<h1 id="_1">安装</h1>
 <p>在安装之前, 有必要确认下我们 Ubuntu 上的 Python 是否正常.
 打开终端, 输入 python –V (注意大小写, 是大写的 V).</p>
 <p><img alt="" src="http://i61.tinypic.com/1zovrsl.jpg" /></p>
 <p>如果正常输出了 Python 版本号, 就可以开始安装 Ulipad 了.</p>
 <ol>
-<li>用 goolge 搜索 ulipad 或者 直接进入 <a href="http://code.google.com/p/ulipad/"><a href="http://code.google.com/p/ulipad/"><a href="http://code.google.com/p/ulipad/">http://code.google.com/p/ulipad/</a></a></a>
+<li>用 goolge 搜索 ulipad 或者 直接进入 <a href="http://code.google.com/p/ulipad/">http://code.google.com/p/ulipad/</a>
 点击 Downloads, 下载最新的 zip 压缩包(为了访问 google, 你可能需要做点什么…总之, 你懂的).</li>
 </ol>
 <p><img alt="" src="http://i57.tinypic.com/1z36t93.jpg" /></p>
@@ -120,12 +120,13 @@ sudo apt-get install python-wxgtk2.8
 <ol>
 <li>最后为了方便以后打开 Ulipad, 将快捷方式添加到 &lsquo;应用程序&rsquo;</li>
 </ol>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>sudo gedit /usr/share/applications/Ulipad.desktop
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo gedit /usr/share/applications/Ulipad.desktop
 </pre></div>
 
-<br>
+
+<p><br>
 然后在里面添加如下内容:</p>
-<p><div class="codehilite" style="background: #F7F7F7"><pre style="line-height: 125%"><span></span>[Desktop Entry]
+<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>[Desktop Entry]
 Name=Ulipad
 Comment=a Python IDE
 Exec=python /home/zgf/py/ulipad/UliPad.py
@@ -136,7 +137,8 @@ Type=Application
 Categories=Application;Development;
 </pre></div>
 
-<br>
+
+<p><br>
 保存后, Ulipad 就会出现在&rsquo;应用程序&rsquo;里面:</p>
 <p><img alt="" src="http://i64.tinypic.com/15i0osn.jpg" /></p>
 <p>然后把它锁在侧边栏:</p>
