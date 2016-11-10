@@ -12,12 +12,15 @@ before_install:
 - git config --global user.email "351522453@qq.com"
 - git remote set-url --push origin git@github.com:z351522453/blog.git
 - git fetch origin gh-pages:refs/remotes/origin/gh-pages
+- git clone https://github.com/z351522453/pymdown-styles.git
 
 install:
 - sudo pip install fabric
 - sudo pip install ghp-import
 - sudo pip install pelican
 - sudo pip install Markdown
+- sudo pip install pymdown-extensions
+- cd pymdown-styles && sudo python setup.py install && cd ..
 
 script:
 - fab gh_pages
