@@ -66,7 +66,7 @@
 <p>●　　<strong>装饰(Decorator)类：</strong>抽象装饰类, 维护一个构件(Component)对象的实例, 定义一个与抽象构件接口一致的接口.</p>
 <p>●　　<strong>具体装饰(ConcreteDecorator)类：</strong>具体装饰类, 负责给构件对象&rdquo;贴上&rdquo;附加的责任.</p>
 <p>它的C++模型如下(技术有限, 可能实现的有问题, 欢迎指正):</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
 &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//
 &lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
@@ -164,7 +164,7 @@
 <h3 id="_2">模式的简化</h3>
 <p>如果只有一个ConcreteComponent类, 那么可以考虑去掉Cpmponent类, 让Decorator直接继承ConcreteComponent类, 重写ConcreteComponent的Operation方法.</p>
 <p>同样, 如果只有一个ConreteDecortor类, 那么也可以去掉单独的Decorator类, 把Decorator和ConreteDecortor的合并.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreateComponent {

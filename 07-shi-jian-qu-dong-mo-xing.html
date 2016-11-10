@@ -59,7 +59,7 @@
 这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 MFC 中的控件 ID).</p>
 <p>那来看看怎么设计这个事件驱动模型.
 首先, 提供一个 LuaGlue 函数来设定在 Lua 脚本中的事件处理程序.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>LuaGlue _RegisterEvent(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>LuaGlue _RegisterEvent(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
     g_strEventHandle &lt;/span&gt;= g_lua.GetStringArgument(&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
 }&lt;/span&gt;
@@ -67,7 +67,7 @@
 
 
 <p>那么, 再来设计发送事件函数.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (g_strEventHandle != &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
         &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buf[&lt;span style=&quot;color: #800080&quot;&gt;256&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;];
         &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (args) {
@@ -84,7 +84,7 @@
 <p>第一个参数是事件ID, 这个很好理解, 那第二个参数是什么?
 因为 Lua 是支持变参系统的, 所以我们可以为每个事件设定不同的参数, 而第二个参数是用来表示那些可变参数的.</p>
 <p>接下来, 看看 Lua 事件处理函数的模板:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; EVENT_SAMPLE = &lt;span style=&quot;color: #800080&quot;&gt;1000&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; EVENT_SAMPLE = &lt;span style=&quot;color: #800080&quot;&gt;1000&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 
 RegisterEvent(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;EventHandle&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 
@@ -100,7 +100,7 @@ RegisterEvent(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&l
 
 
 <p>现在, 我们在 C/C++ 的主程序中发出事件, 看看会输出什么:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000&lt;span style=&quot;color: #000000&quot;&gt;
 cLua g_lua;
 g_lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:\\Users\\Administrator\\Desktop\\test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
 FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;\&quot;你好\&quot;, 10&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;);
@@ -111,7 +111,7 @@ FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&g
 <p>看! 一个基于 C/C++ 和 Lua 的事件驱动模型建立起来了.
 这个系统需要注意的地方在于, Lua 代码和 C/C++ 代码需要对事件 ID 和传递的参数的含义保持一致.</p>
 <p>下面是完整的 C/C++ 端代码:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt; g_strEventHandle = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt; g_strEventHandle = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
 cLua g_lua;
 
 LuaGlue _RegisterEvent(lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; L) {

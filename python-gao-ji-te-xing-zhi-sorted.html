@@ -55,8 +55,8 @@
 
     <p>sorted() 函数接收两个参数, 一个是序列, 一个是函数 (参数顺序和 map/reduce/filter 相反).</p>
 <p>python 内置的 sorted() 函数就可以对 list 进行排序:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">sorted</span><span style="color: #cccccc">([</span><span style="color: #cd00cd">36</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">5</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">9</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">21</span><span style="color: #cccccc">])</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cccccc">[</span><span style="color: #cd00cd">5</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">9</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">21</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">36</span><span style="color: #cccccc">]</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">5</span>, <span style="color: #666666">9</span>, <span style="color: #666666">12</span>, <span style="color: #666666">21</span>, <span style="color: #666666">36</span>]
 </pre></div>
 
 
@@ -67,44 +67,44 @@
 <li>如果认为 x == y, 则返回 0</li>
 <li>如果认为 x &gt; y, 则返回 1</li>
 </ul>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">def</span> <span style="color: #cccccc">reversed_cmp(x,</span> <span style="color: #cccccc">y):</span>
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">x</span> <span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">y:</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #3399cc">-</span><span style="color: #cd00cd">1</span>
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">x</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">y:</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">1</span>
-    <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">0</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">reversed_cmp</span>(x, y):
+    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> y:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">-1</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> x <span style="color: #666666">&lt;</span> y:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>
 </pre></div>
 
 
 <p>传入自定义的比较函数 reversed_cmp，就可以实现倒序排序：</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span> <span style="color: #cd00cd">sorted</span><span style="color: #cccccc">([</span><span style="color: #cd00cd">36</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">5</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">9</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">21</span><span style="color: #cccccc">],</span> <span style="color: #cccccc">reversed_cmp)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cccccc">[</span><span style="color: #cd00cd">36</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">21</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">9</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">5</span><span style="color: #cccccc">]</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span> <span style="color: #AA22FF">sorted</span>([<span style="color: #666666">36</span>, <span style="color: #666666">5</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">21</span>], reversed_cmp)
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #666666">36</span>, <span style="color: #666666">21</span>, <span style="color: #666666">12</span>, <span style="color: #666666">9</span>, <span style="color: #666666">5</span>]
 </pre></div>
 
 
 <p>我们再看一个字符串排序的例子：</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">sorted</span><span style="color: #cccccc">([</span><span style="color: #cd0000">&#39;bob&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;about&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Zoo&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Credit&#39;</span><span style="color: #cccccc">])</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cccccc">[</span><span style="color: #cd0000">&#39;Credit&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Zoo&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;about&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;bob&#39;</span><span style="color: #cccccc">]</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">sorted</span>([<span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>])
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #BB4444">&#39;Credit&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;bob&#39;</span>]
 </pre></div>
 
 
 <p>默认情况下, 对字符串排序, 是按照 ASCII 的大小比较的, 也就是说, 它是区分大小写的, 由于&rsquo;Z&rsquo; &lt; &lsquo;a&rsquo;, 所以大写字母 Z 会排在小写字母 a 的前面.</p>
 <p>现在, 我们提出排序应该忽略大小写, 按照字母序排序, 要实现这个算法, 只要我们定义出忽略大小写的比较函数就可以:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">def</span> <span style="color: #cccccc">cmp_ignore_case(s1,</span> <span style="color: #cccccc">s2):</span>
-    <span style="color: #cccccc">u1</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">s1</span><span style="color: #3399cc">.</span><span style="color: #cccccc">upper()</span>
-    <span style="color: #cccccc">u2</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">s2</span><span style="color: #3399cc">.</span><span style="color: #cccccc">upper()</span>
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">u1</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">u2:</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #3399cc">-</span><span style="color: #cd00cd">1</span>
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">u1</span> <span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">u2:</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">1</span>
-    <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">0</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">def</span> <span style="color: #00A000">cmp_ignore_case</span>(s1, s2):
+    u1 <span style="color: #666666">=</span> s1<span style="color: #666666">.</span>upper()
+    u2 <span style="color: #666666">=</span> s2<span style="color: #666666">.</span>upper()
+    <span style="color: #AA22FF; font-weight: bold">if</span> u1 <span style="color: #666666">&lt;</span> u2:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">-1</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> u1 <span style="color: #666666">&gt;</span> u2:
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">1</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0</span>
 </pre></div>
 
 
 <p>忽略大小写来比较两个字符串, 实际上就是先把字符串都变成大写(或者都变成小写)再比较.</p>
 <p>这样, 我们给 sorted() 传入上述比较函数, 即可实现忽略大小写的排序:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">sorted</span><span style="color: #cccccc">([</span><span style="color: #cd0000">&#39;bob&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;about&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Zoo&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Credit&#39;</span><span style="color: #cccccc">],</span> <span style="color: #cccccc">cmp_ignore_case)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cccccc">[</span><span style="color: #cd0000">&#39;about&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;bob&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Credit&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;Zoo&#39;</span><span style="color: #cccccc">]</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">sorted</span>([<span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>], cmp_ignore_case)
+<span style="color: #666666">&gt;&gt;&gt;</span>[<span style="color: #BB4444">&#39;about&#39;</span>, <span style="color: #BB4444">&#39;bob&#39;</span>, <span style="color: #BB4444">&#39;Credit&#39;</span>, <span style="color: #BB4444">&#39;Zoo&#39;</span>]
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

@@ -197,7 +197,7 @@ public:
     {
         return 8;
     }</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>CMaster(){}
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>CMaster(){}
 </pre></div>
 
 
@@ -208,7 +208,7 @@ public:
 <p>class NewMaster : public CMaster {
 public:
     NewMaster(){}</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>virtual int eightSwordSkill()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>virtual int eightSwordSkill()
 {
     return CMaster::eightSwordSkill() * 2;
 }
@@ -221,7 +221,7 @@ public:
 };[/cpp]</p>
 <h5 id="_13">纯虚函数</h5>
 <p>故意的只声明函数原型, 而不定义函数体的虚函数称为纯虚函数.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Shape {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Shape {
 public:
     virtual double area() = 0
 }&lt;/code&gt;
@@ -248,7 +248,7 @@ public:
 <p>举个例子，有一个接口，规定一个方法 int calc(int b);
 这个函数用于计算从1到b的和</p>
 <p>比如有两个类实现了这个接口</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;//第一类是这么实现的
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;//第一类是这么实现的
 int calc(int b)
 {
 int sum = 0;
@@ -269,7 +269,7 @@ return sum;
 
 <p>可见不管哪个类实现了这个接口，我们只要调用calc方法就能计算出sum，而不用管他是怎么实现的.</p>
 <p>而C++在设计时, 接口这种概念还没有提出来, 所以C++中没有直接支持接口的语法, 但是可以使用纯虚函数来实现接口.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Interface {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Interface {
 public:
     virtual void func1() = 0;
     virtual void func2(int t) = 0;

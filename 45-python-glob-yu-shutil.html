@@ -67,13 +67,13 @@
 <h1 id="glob">glob</h1>
 <h2 id="globglob">glob.glob</h2>
 <p>返回所有匹配的文件路径列表, 它只有一个参数 pathname, 定义了文件路径匹配规则, 这里可以是绝对路径, 也可以是相对路径, 下面是使用 glob.glob 的例子:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">import</span> <span style="color: #cccccc">glob</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">glob</span>
 
-<span style="color: #000080"># 获取指定目录下的所有图片</span>
-<span style="color: #cdcd00">print</span> <span style="color: #cccccc">glob</span><span style="color: #3399cc">.</span><span style="color: #cccccc">glob(</span><span style="color: #cd0000">r&quot;E:\Picture\*\*.jpg&quot;</span><span style="color: #cccccc">)</span>
+<span style="color: #008800; font-style: italic"># 获取指定目录下的所有图片</span>
+<span style="color: #AA22FF; font-weight: bold">print</span> glob<span style="color: #666666">.</span>glob(<span style="color: #BB4444">r&quot;E:\Picture\*\*.jpg&quot;</span>)
 
-<span style="color: #000080"># 获取上级目录的所有.py文件</span>
-<span style="color: #cdcd00">print</span> <span style="color: #cccccc">glob</span><span style="color: #3399cc">.</span><span style="color: #cccccc">glob(</span><span style="color: #cd0000">r&#39;../*.py&#39;</span><span style="color: #cccccc">)</span>  <span style="color: #000080"># 相对路径</span>
+<span style="color: #008800; font-style: italic"># 获取上级目录的所有.py文件</span>
+<span style="color: #AA22FF; font-weight: bold">print</span> glob<span style="color: #666666">.</span>glob(<span style="color: #BB4444">r&#39;../*.py&#39;</span>)  <span style="color: #008800; font-style: italic"># 相对路径</span>
 </pre></div>
 
 
@@ -81,13 +81,13 @@
 <h2 id="globiglob">glob.iglob</h2>
 <p>与 glob.glob 类似, 但它获取的是一个可迭代对象, 使用它可以逐个获取匹配的文件路径名 (类似 rang 与 xrang 的区别).</p>
 <p>下面是一个简单的例子:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">import</span> <span style="color: #cccccc">glob</span>
-<span style="color: #000080"># 父目录中的.py文件</span>
-<span style="color: #cccccc">f</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">glob</span><span style="color: #3399cc">.</span><span style="color: #cccccc">iglob(</span><span style="color: #cd0000">r&#39;../*.py&#39;</span><span style="color: #cccccc">)</span>
-<span style="color: #cdcd00">print</span> <span style="color: #cccccc">f</span>  <span style="color: #000080"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">glob</span>
+<span style="color: #008800; font-style: italic"># 父目录中的.py文件</span>
+f <span style="color: #666666">=</span> glob<span style="color: #666666">.</span>iglob(<span style="color: #BB4444">r&#39;../*.py&#39;</span>)
+<span style="color: #AA22FF; font-weight: bold">print</span> f  <span style="color: #008800; font-style: italic"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
 
-<span style="color: #cdcd00">for</span> <span style="color: #cccccc">py</span> <span style="color: #cdcd00">in</span> <span style="color: #cccccc">f:</span>
-    <span style="color: #cdcd00">print</span> <span style="color: #cccccc">py</span>
+<span style="color: #AA22FF; font-weight: bold">for</span> py <span style="color: #AA22FF; font-weight: bold">in</span> f:
+    <span style="color: #AA22FF; font-weight: bold">print</span> py
 </pre></div>
 
 

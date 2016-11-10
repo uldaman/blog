@@ -80,7 +80,7 @@ luaopen_math(L);
 <p>初始化好 Lua 环境后, 就可以开始编写 LuaGule 函数了.
 所有的 LuaGule 函数被要求为 int 返回和一个 lua_State* 参数, 并且必须是 C 方式调用, 这意味着, 我们需要用 <strong>extern “C”</strong>来声明函数.
 编写好后, 为了让其能被 Lua 访问, 程序需要使用一个 Lua API &ndash; <strong>lua_register(lua_State <em>L, const char </em>name, lua_CFunction f)</strong> 来注册 LuaGule 函数.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;tchar.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;LuaEx.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
 

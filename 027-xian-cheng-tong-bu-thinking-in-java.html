@@ -66,21 +66,21 @@
 <p>所有对象都自动含有单一的锁(也称__监视器__), 当在对象上调用其任意 synchronized 方法时, 该对象都会被自动加锁, 这时, 该对象上的其他 synchronized 方法只有等到前一个方法调用完毕并释放锁之后才能被调用.</p>
 <h2 id="2-lock">2. Lock 对象</h2>
 <p>Java SE5 的 <strong>java.util.concurrent</strong> 类库还包含有定义在 <strong>java.util.concurrent.locks</strong> 中的显式的互斥机制.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">import</span> <span style="color: #cccccc">java.util.concurrent.locks.*</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">java.util.concurrent.locks.*</span><span style="color: #666666">;</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">MutexEvent</span> <span style="color: #3399cc">{</span>
-    <span style="color: #00cd00">private</span> <span style="color: #cccccc">Lock</span> <span style="color: #cccccc">lock</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">ReentrantLock</span><span style="color: #3399cc">();</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MutexEvent</span> <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> Lock lock <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> ReentrantLock<span style="color: #666666">();</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">fun</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">lock</span><span style="color: #3399cc">.</span><span style="color: #cccccc">lock</span><span style="color: #3399cc">();</span>
-        <span style="color: #cdcd00">try</span> <span style="color: #3399cc">{</span>
-            <span style="color: #000080">// ...</span>
-            <span style="color: #cdcd00">return</span><span style="color: #3399cc">;</span>
-        <span style="color: #3399cc">}</span> <span style="color: #cdcd00">finally</span> <span style="color: #3399cc">{</span>
-            <span style="color: #cccccc">lock</span><span style="color: #3399cc">.</span><span style="color: #cccccc">unlock</span><span style="color: #3399cc">();</span>
-        <span style="color: #3399cc">}</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">fun</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        lock<span style="color: #666666">.</span><span style="color: #BB4444">lock</span><span style="color: #666666">();</span>
+        <span style="color: #AA22FF; font-weight: bold">try</span> <span style="color: #666666">{</span>
+            <span style="color: #008800; font-style: italic">// ...</span>
+            <span style="color: #AA22FF; font-weight: bold">return</span><span style="color: #666666">;</span>
+        <span style="color: #666666">}</span> <span style="color: #AA22FF; font-weight: bold">finally</span> <span style="color: #666666">{</span>
+            lock<span style="color: #666666">.</span><span style="color: #BB4444">unlock</span><span style="color: #666666">();</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

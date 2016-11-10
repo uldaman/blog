@@ -69,37 +69,37 @@
 <p>在这些基础类型之上 Go 还封装了下面这几种类型: <strong>int</strong>、<strong>uint</strong> 和 <strong>uintptr</strong> 等, 这些类型的特点在于使用方便, 但使用者不能对这些类型的长度做任何假设, 对于常规的开发来说, 用 <strong>int</strong> 和 <strong>uint</strong> 就可以了, 没必要用 <strong>int8</strong> 之类明确指定长度的类型, 以免导致移植困难.</p>
 <h1 id="1">1.变量声明</h1>
 <p>Go 添加了 var 关键字, 变量的类型在变量名后声明.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">var</span> <span style="color: #cccccc">v1</span> <span style="color: #00cd00">int</span>
-<span style="color: #00cd00">var</span> <span style="color: #cccccc">v2</span> <span style="color: #00cd00">string</span>
-<span style="color: #00cd00">var</span> <span style="color: #cccccc">v3</span> <span style="color: #cccccc">[</span><span style="color: #cd00cd">10</span><span style="color: #cccccc">]</span><span style="color: #00cd00">int</span> <span style="color: #000080">// 数组</span>
-<span style="color: #00cd00">var</span> <span style="color: #cccccc">v4</span> <span style="color: #3399cc">*</span><span style="color: #00cd00">int</span> <span style="color: #000080">// 指针</span>
-<span style="color: #00cd00">var</span> <span style="color: #cccccc">(</span>
-    <span style="color: #cccccc">v5</span> <span style="color: #00cd00">int</span>
-    <span style="color: #cccccc">v6</span> <span style="color: #00cd00">string</span>
-<span style="color: #cccccc">)</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">var</span> v1 <span style="color: #00BB00; font-weight: bold">int</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> v2 <span style="color: #00BB00; font-weight: bold">string</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> v3 [<span style="color: #666666">10</span>]<span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #008800; font-style: italic">// 数组</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> v4 <span style="color: #666666">*</span><span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #008800; font-style: italic">// 指针</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> (
+    v5 <span style="color: #00BB00; font-weight: bold">int</span>
+    v6 <span style="color: #00BB00; font-weight: bold">string</span>
+)
 </pre></div>
 
 
 <p><br></p>
 <h1 id="2">2. 变量初始化</h1>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">var</span> <span style="color: #cccccc">v1</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">=</span> <span style="color: #cd00cd">10</span>
-<span style="color: #00cd00">var</span> <span style="color: #cccccc">v2</span> <span style="color: #cccccc">=</span> <span style="color: #cd00cd">20</span> <span style="color: #000080">// 编译器将自动推导类型</span>
-<span style="color: #cccccc">v3</span> <span style="color: #3399cc">:=</span> <span style="color: #cd00cd">30</span> <span style="color: #000080">// 编译器将自动推导类型</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">var</span> v1 <span style="color: #00BB00; font-weight: bold">int</span> = <span style="color: #666666">10</span>
+<span style="color: #AA22FF; font-weight: bold">var</span> v2 = <span style="color: #666666">20</span> <span style="color: #008800; font-style: italic">// 编译器将自动推导类型</span>
+v3 <span style="color: #666666">:=</span> <span style="color: #666666">30</span> <span style="color: #008800; font-style: italic">// 编译器将自动推导类型</span>
 </pre></div>
 
 
 <p><br></p>
 <h1 id="3">3. 多重赋值</h1>
 <p>在 C/C++ 中要交换两个变量的值, 可能需要这样:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">t</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">i;</span>
-<span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">j;</span>
-<span style="color: #cccccc">j</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">t;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>t <span style="color: #666666">=</span> i;
+i <span style="color: #666666">=</span> j;
+j <span style="color: #666666">=</span> t;
 </pre></div>
 
 
 <p><br>
 而到了 go 中, 可以这样:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">i,</span> <span style="color: #cccccc">j</span> <span style="color: #cccccc">=</span> <span style="color: #cccccc">j,</span> <span style="color: #cccccc">i</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>i, j = j, i
 </pre></div>
 
 
@@ -107,24 +107,24 @@
 在介绍函数的多重返回值时, 将对其进行更加深入的介绍, 总而言之, 多重赋值功能让 Go 语言与 C/C++ 语言相比可以非常明显地减少代码行数.</p>
 <h1 id="4">4. 匿名变量</h1>
 <p>简单的来说, 可能通过 <strong>_</strong> 来接受不被重视的值, 这个在 lua 中已经用过好多次了:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">-- lua code</span>
-<span style="color: #cdcd00">for</span> <span style="color: #cccccc">_,</span> <span style="color: #cccccc">k</span> <span style="color: #cdcd00">in</span> <span style="color: #cccccc">table</span> <span style="color: #cdcd00">do</span>
-    <span style="color: #000080">--执行体</span>
-<span style="color: #cdcd00">end</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic">-- lua code</span>
+<span style="color: #AA22FF; font-weight: bold">for</span> _, k <span style="color: #AA22FF; font-weight: bold">in</span> table <span style="color: #AA22FF; font-weight: bold">do</span>
+    <span style="color: #008800; font-style: italic">--执行体</span>
+<span style="color: #AA22FF; font-weight: bold">end</span>
 </pre></div>
 
 
 <p><br>
 在 Go 中,  假设存在一个 函数 Test() 有三个返回值, 而我们只对它最后一个返回值感兴趣:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">_,</span> <span style="color: #cccccc">_,</span> <span style="color: #cccccc">nickName</span> <span style="color: #3399cc">:=</span> <span style="color: #cccccc">Test()</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>_, _, nickName <span style="color: #666666">:=</span> Test()
 </pre></div>
 
 
 <p><br></p>
 <h1 id="5">5. 常量</h1>
 <p>Go 中的常量可以说是无类型的, 通过 <strong>const</strong> 关键字可以指定一个常量.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">const</span> <span style="color: #cccccc">zero</span> <span style="color: #cccccc">=</span> <span style="color: #cd00cd">0.0</span>
-<span style="color: #00cd00">const</span> <span style="color: #cccccc">Pi</span> <span style="color: #00cd00">float64</span> <span style="color: #cccccc">=</span> <span style="color: #cd00cd">3.14159265358979323846</span> <span style="color: #000080">// 指定类型也是可以的</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">const</span> zero = <span style="color: #666666">0.0</span>
+<span style="color: #AA22FF; font-weight: bold">const</span> Pi <span style="color: #00BB00; font-weight: bold">float64</span> = <span style="color: #666666">3.14159265358979323846</span> <span style="color: #008800; font-style: italic">// 指定类型也是可以的</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/golang.html">Golang</a>
 

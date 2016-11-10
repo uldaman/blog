@@ -68,7 +68,7 @@
 <p>将下来为工程创建一个 CLua 类(<a href="https://github.com/z351522453/LuaLib">源码传送门</a>), 该类封装了一部分 Lua API 函数, 隐藏了 Lua 需要的初始化和关闭处理, 它的使用说明及源码分析将在后面进一步说明.</p>
 <p>好, 接下来就开始编译 LuaLib 工程的 Debug 和 Release 版本, 将生成的 .lib 文件分别命名为 LuaLib_Debug.lib 和 LuaLib_Release.lib.</p>
 <p>现在把 CLua.h 单独复制出来, 在文件开头添加如下代码:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;#ifdef _DEBUG
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;#ifdef _DEBUG
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
 &lt;span style=&quot;color: #0000ff;&quot;&gt;#else&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Release.lib&quot;)
@@ -77,7 +77,7 @@
 
 
 <p>好, 现在的 CLua.h 中的代码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; once&lt;span style=&quot;color: #000000;&quot;&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; once&lt;span style=&quot;color: #000000;&quot;&gt;
 
 #ifdef _DEBUG
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
@@ -128,7 +128,7 @@
 <p>接下来使用 CLua 来实现第二篇中的例子.
 打开 VS2013 新创建一个 win32 应用程序 工程, 将 CLua.h、LuaLib_Debug.lib 和 LuaLib_Release.lib 三份文件拷贝过去.
 修改源码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;CLua.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
 
 

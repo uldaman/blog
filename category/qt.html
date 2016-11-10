@@ -105,12 +105,12 @@
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">void</span> <span style="color: #cccccc">Qt_Notepad</span><span style="color: #3399cc">::</span><span style="color: #cccccc">OpenFile()</span> <span style="color: #cccccc">{</span>
-    <span style="color: #cccccc">QString</span> <span style="color: #cccccc">fileName</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QFileDialog</span><span style="color: #3399cc">::</span><span style="color: #cccccc">getOpenFileName(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Open File&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">NULL</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;file (*.*)&quot;</span><span style="color: #cccccc">);</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Open File&quot;</span>, <span style="color: #AA22FF">NULL</span>, <span style="color: #BB4444">&quot;file (*.*)&quot;</span>);
 
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">(</span><span style="color: #3399cc">!</span><span style="color: #cccccc">fileName.isEmpty())</span> <span style="color: #cccccc">{</span>
-        <span style="color: #cccccc">QFile</span> <span style="color: #cccccc">file;</span>
-        <span style="color: #cccccc">file ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -180,7 +180,7 @@
 
 
 <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
     Q_OBJECT
 
 &lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>

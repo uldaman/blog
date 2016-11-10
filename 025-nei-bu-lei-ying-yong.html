@@ -62,35 +62,35 @@
 <h2 id="1">1. 多重继承</h2>
 <p>内部类最吸引的原因是: 每个内部类都能独立地继承/实现一个类/接口.</p>
 <p>这样就为类提供了__&rdquo;多重继承&rdquo;__的可能.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">class</span> <span style="color: #00cdcd">D</span> <span style="color: #3399cc">{</span>
-<span style="color: #3399cc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">D</span> <span style="color: #666666">{</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">E</span> <span style="color: #3399cc">{</span>
-<span style="color: #3399cc">}</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">E</span> <span style="color: #666666">{</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">O</span> <span style="color: #00cd00">extends</span> <span style="color: #cccccc">D</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 外部类继承 D</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">O</span> <span style="color: #AA22FF; font-weight: bold">extends</span> D <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 外部类继承 D</span>
 
-    <span style="color: #00cd00">class</span> <span style="color: #00cdcd">I</span> <span style="color: #00cd00">extends</span> <span style="color: #cccccc">E</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 内部类继承 E</span>
-    <span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">I</span> <span style="color: #AA22FF; font-weight: bold">extends</span> E <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 内部类继承 E</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #cccccc">E</span> <span style="color: #cccccc">makeE</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">I</span><span style="color: #3399cc">();</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> E <span style="color: #00A000">makeE</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">new</span> I<span style="color: #666666">();</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">TestDemo</span> <span style="color: #3399cc">{</span>
-    <span style="color: #00cd00">static</span> <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">takesD</span><span style="color: #3399cc">(</span><span style="color: #cccccc">D</span> <span style="color: #cccccc">d</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-    <span style="color: #3399cc">}</span>
+<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">TestDemo</span> <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">takesD</span><span style="color: #666666">(</span>D d<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">static</span> <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">takesE</span><span style="color: #3399cc">(</span><span style="color: #cccccc">E</span> <span style="color: #cccccc">e</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-    <span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">takesE</span><span style="color: #666666">(</span>E e<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">main</span><span style="color: #3399cc">(</span><span style="color: #cccccc">String</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">O</span> <span style="color: #cccccc">o</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">O</span><span style="color: #3399cc">();</span>
-        <span style="color: #cccccc">takesD</span><span style="color: #3399cc">(</span><span style="color: #cccccc">o</span><span style="color: #3399cc">);</span>
-        <span style="color: #cccccc">takesE</span><span style="color: #3399cc">(</span><span style="color: #cccccc">o</span><span style="color: #3399cc">.</span><span style="color: #cccccc">makeE</span><span style="color: #3399cc">());</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        O o <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> O<span style="color: #666666">();</span>
+        takesD<span style="color: #666666">(</span>o<span style="color: #666666">);</span>
+        takesE<span style="color: #666666">(</span>o<span style="color: #666666">.</span><span style="color: #BB4444">makeE</span><span style="color: #666666">());</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
@@ -107,70 +107,70 @@
 <p>通过这个定义, 可以看出, java 中的内部类就是一个面向对象的闭包, 因为它不仅包含其外部类对象(创建内部类的作用域)的信息, 还自动拥有一个__指向此外部类对象的引用__, 在此作用域内, 内部类有权操作外部类的所有成员.</p>
 <p>而所谓的__回调__, 就是通过传递对象的一些信息, 然后在稍后的某个时刻允许这些信息调用其初始的对象, 在 C 中这一般通过传递对象的指针来实现, 而指针的弊端嘛&hellip;大家都懂的;</p>
 <p>在 Java 中, 内部类提供的闭包功能是一个优良的替代方案, 它比指针灵活、安全.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">interface</span> <span style="color: #00cdcd">Incrementable</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 一个计数器接口</span>
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">increment</span><span style="color: #3399cc">();</span>
-<span style="color: #3399cc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">interface</span> <span style="color: #0000FF">Incrementable</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 一个计数器接口</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">increment</span><span style="color: #666666">();</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Caller</span> <span style="color: #3399cc">{</span>
-    <span style="color: #00cd00">private</span> <span style="color: #cccccc">Incrementable</span> <span style="color: #cccccc">callbackReference</span><span style="color: #3399cc">;</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Caller</span> <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> Incrementable callbackReference<span style="color: #666666">;</span>
 
-    <span style="color: #cccccc">Caller</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Incrementable</span> <span style="color: #cccccc">cbh</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">callbackReference</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">cbh</span><span style="color: #3399cc">;</span>
-    <span style="color: #3399cc">}</span>
+    Caller<span style="color: #666666">(</span>Incrementable cbh<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        callbackReference <span style="color: #666666">=</span> cbh<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">run</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">callbackReference</span><span style="color: #3399cc">.</span><span style="color: #cccccc">increment</span><span style="color: #3399cc">();</span> <span style="color: #000080">// 通过引用回调 increment() 方法</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">run</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        callbackReference<span style="color: #666666">.</span><span style="color: #BB4444">increment</span><span style="color: #666666">();</span> <span style="color: #008800; font-style: italic">// 通过引用回调 increment() 方法</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Callee1</span> <span style="color: #00cd00">implements</span> <span style="color: #cccccc">Incrementable</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 实现接口</span>
-    <span style="color: #00cd00">private</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Callee1</span> <span style="color: #AA22FF; font-weight: bold">implements</span> Incrementable <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 实现接口</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0;</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">increment</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;一个计数器&quot;</span><span style="color: #3399cc">);</span>
-        <span style="color: #cccccc">i</span><span style="color: #3399cc">++;</span>
-        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cccccc">i</span><span style="color: #3399cc">);</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">increment</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;一个计数器&quot;</span><span style="color: #666666">);</span>
+        i<span style="color: #666666">++;</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>i<span style="color: #666666">);</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">abstract</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">MyIncrement</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 一个计数器抽象类</span>
-    <span style="color: #00cd00">abstract</span> <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">increment</span><span style="color: #3399cc">();</span>
-<span style="color: #3399cc">}</span>
+<span style="color: #AA22FF; font-weight: bold">abstract</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">MyIncrement</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 一个计数器抽象类</span>
+    <span style="color: #AA22FF; font-weight: bold">abstract</span> <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">increment</span><span style="color: #666666">();</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Callee2</span> <span style="color: #00cd00">extends</span> <span style="color: #cccccc">MyIncrement</span> <span style="color: #3399cc">{</span>
-    <span style="color: #00cd00">private</span> <span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">10</span><span style="color: #3399cc">;</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Callee2</span> <span style="color: #AA22FF; font-weight: bold">extends</span> MyIncrement <span style="color: #666666">{</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #00BB00; font-weight: bold">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">10;</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">increment</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 重写</span>
-        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;另一个计数器&quot;</span><span style="color: #3399cc">);</span>
-        <span style="color: #cccccc">i</span><span style="color: #3399cc">++;</span>
-        <span style="color: #cccccc">System</span><span style="color: #3399cc">.</span><span style="color: #cccccc">out</span><span style="color: #3399cc">.</span><span style="color: #cccccc">println</span><span style="color: #3399cc">(</span><span style="color: #cccccc">i</span><span style="color: #3399cc">);</span>
-    <span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">increment</span><span style="color: #666666">()</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 重写</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span><span style="color: #BB4444">&quot;另一个计数器&quot;</span><span style="color: #666666">);</span>
+        i<span style="color: #666666">++;</span>
+        System<span style="color: #666666">.</span><span style="color: #BB4444">out</span><span style="color: #666666">.</span><span style="color: #BB4444">println</span><span style="color: #666666">(</span>i<span style="color: #666666">);</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">private</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">Closure</span> <span style="color: #00cd00">implements</span> <span style="color: #cccccc">Incrementable</span> <span style="color: #3399cc">{</span>
-        <span style="color: #00cd00">public</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">increment</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 实现, 提供一个外部类的 Hook</span>
-            <span style="color: #cccccc">Callee2</span><span style="color: #3399cc">.</span><span style="color: #cccccc">this</span><span style="color: #3399cc">.</span><span style="color: #cccccc">increment</span><span style="color: #3399cc">();</span>
-        <span style="color: #3399cc">}</span>
-    <span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">private</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Closure</span> <span style="color: #AA22FF; font-weight: bold">implements</span> Incrementable <span style="color: #666666">{</span>
+        <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">increment</span><span style="color: #666666">()</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 实现, 提供一个外部类的 Hook</span>
+            Callee2<span style="color: #666666">.</span><span style="color: #BB4444">this</span><span style="color: #666666">.</span><span style="color: #BB4444">increment</span><span style="color: #666666">();</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #cccccc">Incrementable</span> <span style="color: #cccccc">getCallbackReference</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">{</span> <span style="color: #000080">// 返回一个 Incrementable 引用, 任何人拿到这个引用也只能调用 increment() 方法</span>
-        <span style="color: #cdcd00">return</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Closure</span><span style="color: #3399cc">();</span>
-    <span style="color: #3399cc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> Incrementable <span style="color: #00A000">getCallbackReference</span><span style="color: #666666">()</span> <span style="color: #666666">{</span> <span style="color: #008800; font-style: italic">// 返回一个 Incrementable 引用, 任何人拿到这个引用也只能调用 increment() 方法</span>
+        <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">new</span> Closure<span style="color: #666666">();</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #000080">// 其它方法</span>
-<span style="color: #3399cc">}</span>
+    <span style="color: #008800; font-style: italic">// 其它方法</span>
+<span style="color: #666666">}</span>
 
-<span style="color: #00cd00">public</span> <span style="color: #00cd00">class</span> <span style="color: #00cdcd">TestDemo</span> <span style="color: #3399cc">{</span>
+<span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">TestDemo</span> <span style="color: #666666">{</span>
 
-    <span style="color: #00cd00">public</span> <span style="color: #00cd00">static</span> <span style="color: #00cd00">void</span> <span style="color: #cccccc">main</span><span style="color: #3399cc">(</span><span style="color: #cccccc">String</span><span style="color: #3399cc">[]</span> <span style="color: #cccccc">args</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">Callee1</span> <span style="color: #cccccc">c1</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Callee1</span><span style="color: #3399cc">();</span>
-        <span style="color: #cccccc">Caller</span> <span style="color: #cccccc">caller1</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Caller</span><span style="color: #3399cc">(</span><span style="color: #cccccc">c1</span><span style="color: #3399cc">);</span> <span style="color: #000080">// 设置回调</span>
-        <span style="color: #cccccc">caller1</span><span style="color: #3399cc">.</span><span style="color: #cccccc">run</span><span style="color: #3399cc">();</span>
+    <span style="color: #AA22FF; font-weight: bold">public</span> <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        Callee1 c1 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Callee1<span style="color: #666666">();</span>
+        Caller caller1 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Caller<span style="color: #666666">(</span>c1<span style="color: #666666">);</span> <span style="color: #008800; font-style: italic">// 设置回调</span>
+        caller1<span style="color: #666666">.</span><span style="color: #BB4444">run</span><span style="color: #666666">();</span>
 
-        <span style="color: #cccccc">Callee2</span> <span style="color: #cccccc">c2</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Callee2</span><span style="color: #3399cc">();</span>
-        <span style="color: #cccccc">Caller</span> <span style="color: #cccccc">caller2</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">new</span> <span style="color: #cccccc">Caller</span><span style="color: #3399cc">(</span><span style="color: #cccccc">c2</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getCallbackReference</span><span style="color: #3399cc">());</span> <span style="color: #000080">// 设置回调</span>
-        <span style="color: #cccccc">caller2</span><span style="color: #3399cc">.</span><span style="color: #cccccc">run</span><span style="color: #3399cc">();</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+        Callee2 c2 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Callee2<span style="color: #666666">();</span>
+        Caller caller2 <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">new</span> Caller<span style="color: #666666">(</span>c2<span style="color: #666666">.</span><span style="color: #BB4444">getCallbackReference</span><span style="color: #666666">());</span> <span style="color: #008800; font-style: italic">// 设置回调</span>
+        caller2<span style="color: #666666">.</span><span style="color: #BB4444">run</span><span style="color: #666666">();</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 

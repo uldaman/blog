@@ -153,7 +153,7 @@
 </tbody>
 </table>
 <p>例如, 我想列出每个部门最高薪水的结果, sql 语句如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">SELECT</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cdcd00">MAX</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MAXIMUM</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cccccc">STAFF</span> <span style="color: #cdcd00">GROUP</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">SELECT</span> DEPT, <span style="color: #AA22FF; font-weight: bold">MAX</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MAXIMUM <span style="color: #AA22FF; font-weight: bold">FROM</span> STAFF <span style="color: #AA22FF; font-weight: bold">GROUP</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT
 </pre></div>
 
 
@@ -190,7 +190,7 @@
 <p>注意: 计算的是每个部门 (由 <code>GROUP BY</code> 子句定义的组) 而不是整个公司的 <code>MAX(SALARY)</code>.</p>
 </blockquote>
 <p>例如, 查询每个部门的总的薪水数:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">SELECT</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cdcd00">sum</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">total</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cccccc">STAFF</span> <span style="color: #cdcd00">GROUP</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">SELECT</span> DEPT, <span style="color: #AA22FF; font-weight: bold">sum</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> total <span style="color: #AA22FF; font-weight: bold">FROM</span> STAFF <span style="color: #AA22FF; font-weight: bold">GROUP</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT
 </pre></div>
 
 
@@ -221,7 +221,7 @@
 <h1 id="where-group-by">将 WHERE 子句与 GROUP BY 子句一起使用</h1>
 <p>分组查询可以在形成组和计算列函数<strong>之前</strong>使用具有消除非限定行的标准 <code>WHERE</code> 子句 (必须在 <code>GROUP BY</code> 子句之前指定 <code>WHERE</code> 子句).</p>
 <p>例如, 查询公司 2010 年入职的各个部门每个级别里的最高薪水:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">SELECT</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cccccc">EDLEVEL,</span> <span style="color: #cdcd00">MAX</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MAXIMUM</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cccccc">staff</span> <span style="color: #cdcd00">WHERE</span> <span style="color: #cccccc">HIREDATE</span> <span style="color: #3399cc">&gt;</span> <span style="color: #cd0000">&#39;2010-01-01&#39;</span> <span style="color: #cdcd00">GROUP</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cccccc">EDLEVEL</span> <span style="color: #cdcd00">ORDER</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cccccc">EDLEVEL</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">SELECT</span> DEPT, EDLEVEL, <span style="color: #AA22FF; font-weight: bold">MAX</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MAXIMUM <span style="color: #AA22FF; font-weight: bold">FROM</span> staff <span style="color: #AA22FF; font-weight: bold">WHERE</span> HIREDATE <span style="color: #666666">&gt;</span> <span style="color: #BB4444">&#39;2010-01-01&#39;</span> <span style="color: #AA22FF; font-weight: bold">GROUP</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT, EDLEVEL <span style="color: #AA22FF; font-weight: bold">ORDER</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT, EDLEVEL
 </pre></div>
 
 
@@ -267,7 +267,7 @@
 <p><code>having</code> 子句的作用是筛选满足条件的组, 即在分组之后过滤数据, 条件中经常包含聚集函数, 使用 <code>having</code> 条件显示特定的组, 也可以使用多个分组标准进行分组.</p>
 <p><code>having</code> 子句被限制子已经在SELECT语句中定义的列和聚合表达式上.</p>
 <p>例如: 寻找雇员数超过2个的部门的最高和最低薪水:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">SELECT</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cdcd00">MAX</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MAXIMUM,</span> <span style="color: #cdcd00">MIN</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MINIMUM</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cccccc">staff</span> <span style="color: #cdcd00">GROUP</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span> <span style="color: #cdcd00">HAVING</span> <span style="color: #cdcd00">COUNT</span><span style="color: #cccccc">(</span><span style="color: #3399cc">*</span><span style="color: #cccccc">)</span> <span style="color: #3399cc">&gt;</span><span style="color: #cd00cd">2</span> <span style="color: #cdcd00">ORDER</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">SELECT</span> DEPT, <span style="color: #AA22FF; font-weight: bold">MAX</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MAXIMUM, <span style="color: #AA22FF; font-weight: bold">MIN</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MINIMUM <span style="color: #AA22FF; font-weight: bold">FROM</span> staff <span style="color: #AA22FF; font-weight: bold">GROUP</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT <span style="color: #AA22FF; font-weight: bold">HAVING</span> <span style="color: #AA22FF; font-weight: bold">COUNT</span>(<span style="color: #666666">*</span>) <span style="color: #666666">&gt;2</span> <span style="color: #AA22FF; font-weight: bold">ORDER</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT
 </pre></div>
 
 
@@ -295,7 +295,7 @@
 </tbody>
 </table>
 <p>例如: 寻找雇员平均工资大于3000的部门的最高和最低薪水:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">SELECT</span> <span style="color: #cccccc">DEPT,</span> <span style="color: #cdcd00">MAX</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MAXIMUM,</span> <span style="color: #cdcd00">MIN</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #cdcd00">AS</span> <span style="color: #cccccc">MINIMUM</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cccccc">staff</span> <span style="color: #cdcd00">GROUP</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span> <span style="color: #cdcd00">HAVING</span> <span style="color: #cdcd00">AVG</span><span style="color: #cccccc">(SALARY)</span> <span style="color: #3399cc">&gt;</span><span style="color: #cd00cd">3000</span> <span style="color: #cdcd00">ORDER</span> <span style="color: #cdcd00">BY</span> <span style="color: #cccccc">DEPT</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">SELECT</span> DEPT, <span style="color: #AA22FF; font-weight: bold">MAX</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MAXIMUM, <span style="color: #AA22FF; font-weight: bold">MIN</span>(SALARY) <span style="color: #AA22FF; font-weight: bold">AS</span> MINIMUM <span style="color: #AA22FF; font-weight: bold">FROM</span> staff <span style="color: #AA22FF; font-weight: bold">GROUP</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT <span style="color: #AA22FF; font-weight: bold">HAVING</span> <span style="color: #AA22FF; font-weight: bold">AVG</span>(SALARY) <span style="color: #666666">&gt;3000</span> <span style="color: #AA22FF; font-weight: bold">ORDER</span> <span style="color: #AA22FF; font-weight: bold">BY</span> DEPT
 </pre></div>
 
 

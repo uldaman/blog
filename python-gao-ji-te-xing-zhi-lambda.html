@@ -55,19 +55,19 @@
 
     <p>lambda 函数也叫匿名函数, 即函数没有具体的名称;</p>
 <p>严格来说, lambda 是一个表达式, 也正因为它是表达式, 所以它可以用在某些不能使用 <strong>def</strong> 的场合, 如:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">info</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">[</span><span style="color: #cdcd00">lambda</span> <span style="color: #cccccc">a:</span> <span style="color: #cccccc">a</span> <span style="color: #3399cc">**</span> <span style="color: #cd00cd">3</span><span style="color: #cccccc">,</span> <span style="color: #cdcd00">lambda</span> <span style="color: #cccccc">b:</span> <span style="color: #cccccc">b</span> <span style="color: #3399cc">**</span> <span style="color: #cd00cd">3</span><span style="color: #cccccc">]</span> <span style="color: #000080"># ** 两个乘号表示乘方</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>info <span style="color: #666666">=</span> [<span style="color: #AA22FF; font-weight: bold">lambda</span> a: a <span style="color: #666666">**</span> <span style="color: #666666">3</span>, <span style="color: #AA22FF; font-weight: bold">lambda</span> b: b <span style="color: #666666">**</span> <span style="color: #666666">3</span>] <span style="color: #008800; font-style: italic"># ** 两个乘号表示乘方</span>
 </pre></div>
 
 
 <p>lambda 语法中, 冒号前是参数, 多个用逗号隔开, 冒号右边的返回值:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">g</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">lambda</span> <span style="color: #cccccc">x</span> <span style="color: #cccccc">:</span> <span style="color: #cccccc">x</span> <span style="color: #3399cc">**</span> <span style="color: #cd00cd">2</span> <span style="color: #000080"># x 的平方</span>
-<span style="color: #cccccc">v</span> <span style="color: #3399cc">=</span> <span style="color: #cdcd00">lambda</span> <span style="color: #cccccc">x,y</span> <span style="color: #cccccc">:</span> <span style="color: #cccccc">x</span> <span style="color: #3399cc">**</span> <span style="color: #cccccc">y</span> <span style="color: #000080"># x 的 y 次方</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>g <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x : x <span style="color: #666666">**</span> <span style="color: #666666">2</span> <span style="color: #008800; font-style: italic"># x 的平方</span>
+v <span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">lambda</span> x,y : x <span style="color: #666666">**</span> y <span style="color: #008800; font-style: italic"># x 的 y 次方</span>
 </pre></div>
 
 
 <p>看个例子, 求 1 到 100 的合:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">reduce</span><span style="color: #cccccc">(</span><span style="color: #cdcd00">lambda</span> <span style="color: #cccccc">x,</span> <span style="color: #cccccc">y</span> <span style="color: #cccccc">:</span> <span style="color: #cccccc">x</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">y,</span> <span style="color: #cd00cd">range</span><span style="color: #cccccc">(</span><span style="color: #cd00cd">1</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">101</span><span style="color: #cccccc">))</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cd00cd">5050</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">reduce</span>(<span style="color: #AA22FF; font-weight: bold">lambda</span> x, y : x <span style="color: #666666">+</span> y, <span style="color: #AA22FF">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">101</span>))
+<span style="color: #666666">&gt;&gt;&gt;5050</span>
 </pre></div>
 
 

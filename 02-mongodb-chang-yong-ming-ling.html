@@ -87,7 +87,7 @@
 </ul>
 </div>
 <p>首先, 要先进入 Mongodb Client 交互环境:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; mongo
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; mongo
 MongoDB shell version: 3.0.6
 connecting to: test
 ...
@@ -97,14 +97,14 @@ connecting to: test
 <p><br></p>
 <h2 id="_1">创建数据库(文档)</h2>
 <p><strong>命令格式:</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>use DATABASE_NAME
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>use DATABASE_NAME
 </pre></div>
 
 
 <p><br>
 如果数据库不存在, 则创建数据库并切换过去, 否则直接切换到指定数据库.</p>
 <p><strong>实例:</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; use runoob
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; use runoob
 switched to db runoob
 &gt; db
 runoob
@@ -115,7 +115,7 @@ runoob
 <p><br>
 现在我们创建一个新数据库 runoob, 然后 db 命令查看当前所在的数据库, 就会当前环境看到已经切换到 runoob 数据库中了..</p>
 <p>使用 <strong>show dbs</strong> 命令可以查看所有已存在的数据库:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; show dbs
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; show dbs
 local  0.078GB
 test   0.078GB
 &gt;
@@ -126,7 +126,7 @@ test   0.078GB
 但是, 我们发现刚创建的数据库 runoob 并不在数据库的列表中, 要显示它, 我们需要向 runoob 数据库插入一些数据, 关于如何插入数据, 请参考下面的笔记.</p>
 <h2 id="_2">删除数据库(文档)</h2>
 <p><strong>命令格式:</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.dropDatabase()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.dropDatabase()
 </pre></div>
 
 
@@ -134,7 +134,7 @@ test   0.078GB
 删除当前所在数据库</p>
 <p><strong>实例:</strong><br>
 首先, 查看所有数据库:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; show dbs
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; show dbs
 local   0.078GB
 runoob  0.078GB
 test    0.078GB
@@ -143,7 +143,7 @@ test    0.078GB
 
 <p><br>
 切换到待删除数据库 runoob:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; use runoob
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; use runoob
 switched to db runoob
 &gt;
 </pre></div>
@@ -151,14 +151,14 @@ switched to db runoob
 
 <p><br>
 执行删除命令:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db.dropDatabase()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; db.dropDatabase()
 {&quot;dropped&quot;: &quot;runoob&quot;, &quot;ok&quot;: 1}
 </pre></div>
 
 
 <p><br>
 最后, 再通过 show dbs 命令数据库是否删除成功:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; show dbs
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; show dbs
 local  0.078GB
 test   0.078GB
 &gt;
@@ -169,7 +169,7 @@ test   0.078GB
 <h2 id="_3">插入数据</h2>
 <p><strong>命令格式:</strong><br>
 MongoDB 使用 <strong>insert()</strong> 或 <strong>save()</strong> 方法向<strong>集合</strong>中插入文档:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.insert(document)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.insert(document)
 </pre></div>
 
 
@@ -207,7 +207,7 @@ MongoDB 使用 <strong>insert()</strong> 或 <strong>save()</strong> 方法向<s
 <p>对于常用 Python 的我来说, 更喜欢把它说成是一种 <strong>Dict</strong> 结构.</p>
 <p><strong>实例:</strong><br>
 首先, 创建一个新数据库:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; use runoob
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; use runoob
 switched to db runoob
 &gt; db
 runoob
@@ -217,7 +217,7 @@ runoob
 
 <p><br>
 然后向 <strong>runoob</strong> 数据库的 <strong>col</strong> 集合中插入数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;MongoDB 教程&#39;, age: 18})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;MongoDB 教程&#39;, age: 18})
 </pre></div>
 
 
@@ -233,7 +233,7 @@ runoob
 </li>
 </ul>
 <p>现在可以通过 <strong>find()</strong> 命令查看已插入的数据, 关于<strong>查询</strong>的命令详细用法请继续参考下面的笔记, 这里仅测试下 <strong>_id</strong> 字段&hellip;</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db.col.find()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; db.col.find()
 {&quot;_id&quot;: ObjectId(&quot;56064886ade2f21f36b03134&quot;), &quot;name&quot;: &quot;MongoDB 教程&quot;, &quot;age&quot;: 18}
 &gt;
 </pre></div>
@@ -244,7 +244,7 @@ runoob
 <h2 id="_4">删除文档</h2>
 <p><strong>remove()</strong> 方法用来移除集合中的数据</p>
 <p><strong>命令格式:</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.collection.remove(
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.collection.remove(
    {query},
    {justOne}
 )
@@ -258,7 +258,7 @@ runoob
 <li>justOne: 可选, 如果设为 true 或 1, 则只删除一个文档, 默认删除所有匹配文档, 如 {justOne: true}</li>
 </ul>
 <p>如果想删除所有数据, 可以使用以下方式:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.col.remove({})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.remove({})
 </pre></div>
 
 
@@ -270,7 +270,7 @@ runoob
 <li><strong>save()</strong> 通过传入的文档来替换已有文档, 它的本质是用新文档覆盖掉旧文档</li>
 </ul>
 <p><strong>update()</strong><br></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.collection.update(
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.collection.update(
    {query},
    {update},
    {
@@ -301,7 +301,7 @@ runoob
 <li>writeConcern: 可选, 抛出异常的级别</li>
 </ul>
 <p><strong>save()</strong><br></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.collection.save(
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.collection.save(
    {document},
    {
      writeConcern: &lt;document&gt;
@@ -320,7 +320,7 @@ runoob
 <h3 id="_7">基础查询</h3>
 <p><strong>命令格式:</strong><br>
 MongoDB 使用 <strong>find()</strong> 或 <strong>findOne()</strong> 方法从<strong>集合</strong>中插查询数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.COLLECTION_NAME.find()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.COLLECTION_NAME.find()
 &gt;db.col.find().pretty()
 </pre></div>
 
@@ -329,7 +329,7 @@ MongoDB 使用 <strong>find()</strong> 或 <strong>findOne()</strong> 方法从<
 find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如果需要以易读的<strong>结构化</strong>方式来读取数据, 可以使用 <strong>pretty()</strong> 方法.</p>
 <p><strong>实例</strong><br>
 查询 col 集合中的数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db.col.find().pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; db.col.find().pretty()
 {
         &quot;_id&quot; : ObjectId(&quot;56063f17ade2f21f36b03133&quot;),
         &quot;name&quot;: &quot;MongoDB 教程&quot;,
@@ -343,7 +343,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <h3 id="_8">过滤返回字段</h3>
 <p>通过 find() 的第二个参数可以指定返回的字段.</p>
 <p>例如, 只想返回 name 字段:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;name&#39;: 1}).pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;name&#39;: 1}).pretty()
 {
         &quot;_id&quot; : ObjectId(&quot;56063f17ade2f21f36b03133&quot;),
         &quot;name&quot;: &quot;MongoDB 教程&quot;,
@@ -354,7 +354,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <p><br>
 注意, _id 总是返回的.</p>
 <p>或者指定哪些字段不返回:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;_id&#39;: 0}).pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt; db.col.find({}, {&#39;_id&#39;: 0}).pretty()
 {
         &quot;name&quot;: &quot;MongoDB 教程&quot;,
         &quot;age&quot;: 18
@@ -421,13 +421,13 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <h3 id="_10">嵌套条件查询</h3>
 <p>因为 MongoDB 中存储的数据是 document(Dict), 所以有些 key 中保存的 value 可能是另一个 document(Dict), 此时, 我们可以用<strong>嵌套条件</strong>来查询到嵌套在 value 中的子 document(Dict), 语法格式就是<strong>点号</strong>.</p>
 <p>先插入一条嵌套数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18, school: {name: &#39;交通大学&#39;, city: &#39;上海&#39;}})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18, school: {name: &#39;交通大学&#39;, city: &#39;上海&#39;}})
 </pre></div>
 
 
 <p><br>
 如果想要根据学校名字来查询数据, 就可以用下面这种嵌套条件:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.col.find({&#39;school.name&#39;: &#39;交通大学&#39;}).pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.find({&#39;school.name&#39;: &#39;交通大学&#39;}).pretty()
 </pre></div>
 
 
@@ -435,14 +435,14 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <h3 id="_11">不包含字段查询</h3>
 <p>这种查询是查询集合中<strong>没有某个字段</strong>的数据.</p>
 <p>先插入两条数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.insert({name: &#39;张三&#39;, age: 18)
 &gt;db.col.insert({name: &#39;李四&#39;)
 </pre></div>
 
 
 <p><br>
 现在需求查询没有 age 字段的数据, 方法如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.find({&#39;age&#39;: {$exists:false}})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.find({&#39;age&#39;: {$exists:false}})
 </pre></div>
 
 
@@ -450,7 +450,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <h3 id="_12">复合条件查询</h3>
 <h4 id="or">OR 条件</h4>
 <p>OR 条件语句使用了关键字 <strong>$or</strong>, 语法格式如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
    {
       $or: [
          {key1: value1}, {key2:value2}
@@ -463,7 +463,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <p><br></p>
 <h4 id="in">IN 条件</h4>
 <p>in 条件语句, 也是一种或者逻辑, 使用了关键字 <strong>$in</strong>, 但它与 or 不同, or 是在不同的 field 之间或者, 而 in 是在同一个 field 间或者, 并且支持对<strong>数组</strong>型元素进行查询</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.find({key1: {$in: [value1, value2]}}).pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.find({key1: {$in: [value1, value2]}}).pretty()
 </pre></div>
 
 
@@ -471,7 +471,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 匹配 key1 的值为 value1 或者 value2 的元素, 或者匹配包含有 value1 / value2 的数组元素.</p>
 <h4 id="and">AND 条件</h4>
 <p>OR 条件语句可以使用了关键字 <strong>$and</strong>, 也可以直接在条件 document 中可以传入多个键(key), 每个键(key)以<strong>逗号</strong>隔开.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.find(
    {
       $and: [
          {key1: value1}, {key2:value2}
@@ -487,7 +487,7 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 <p><br></p>
 <h4 id="all">ALL 条件</h4>
 <p>ALL 条件用来对数组中的元素进行全匹配, 使用了关键字 <strong>$all</strong>.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&gt;db.col.find({key1: {$all: [value1, value2]}}).pretty()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&gt;db.col.find({key1: {$all: [value1, value2]}}).pretty()
 </pre></div>
 
 
@@ -505,13 +505,13 @@ find() 方法以<strong>非结构化</strong>的方式来显示所有文档, 如
 </ul>
 <p>语法:
 find() 方法具有投影基本语法如下</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find({}, {KEY1: 1, KEY1: 0})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find({}, {KEY1: 1, KEY1: 0})
 </pre></div>
 
 
 <p><br>
 请注意 <strong>_id</strong> 字段始终显示, 如果不想这个字段, 那么需要将其设置为 0:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find({}, {KEY: 1, _id: 0})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find({}, {KEY: 1, _id: 0})
 </pre></div>
 
 
@@ -520,27 +520,27 @@ find() 方法具有投影基本语法如下</p>
 <p>MongoDB 的分页功能需要用到两个方法: <strong>Limit()</strong> 和 <strong>Skip()</strong></p>
 <h5 id="limit">Limit()</h5>
 <p>limit() 方法接受一个数字参数, 该参数指定读取的记录条数.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().limit(number)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().limit(number)
 </pre></div>
 
 
 <p><br></p>
 <h5 id="skip">Skip()</h5>
 <p>skip() 方法用来跳过指定数量的数据, skip() 方法同样接受一个数字参数作为跳过的记录条数</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().skip(number)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().skip(number)
 </pre></div>
 
 
 <p><br>
 配合 <strong>Limit()</strong> 和 <strong>Skip()</strong> 就能实现分页查询的功能, 例如每页面显示 10 条数据, 想显示第 5 页的数据:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().skip(4 * 10).limit(10)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().skip(4 * 10).limit(10)
 </pre></div>
 
 
 <p><br></p>
 <h4 id="_16">排序</h4>
 <p><strong>命令格式:</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().sort({KEY: 1})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.find().sort({KEY: 1})
 </pre></div>
 
 

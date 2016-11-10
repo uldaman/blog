@@ -109,39 +109,39 @@ window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</
 <p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg" /></p>
 <p>打开 <code>org.eclipse.jface.text.contentassist.CompletionProposalPopup</code> 文件第 1336 行代码, 具体代码如下:</p>
 <p><img alt="" src="http://i67.tinypic.com/20rae14.jpg" /></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">if</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">contains</span><span style="color: #3399cc">(</span><span style="color: #cccccc">triggers</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">key</span><span style="color: #3399cc">))</span> <span style="color: #3399cc">{</span>
-                        <span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">doit</span><span style="color: #3399cc">=</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
-                        <span style="color: #cccccc">hide</span><span style="color: #3399cc">();</span>
-                        <span style="color: #cccccc">insertProposal</span><span style="color: #3399cc">(</span><span style="color: #cccccc">p</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">key</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">stateMask</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">fContentAssistSubjectControlAdapter</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getSelectedRange</span><span style="color: #3399cc">().</span><span style="color: #cccccc">x</span><span style="color: #3399cc">);</span>
-                    <span style="color: #3399cc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>contains<span style="color: #666666">(</span>triggers<span style="color: #666666">,</span> key<span style="color: #666666">))</span> <span style="color: #666666">{</span>
+                        e<span style="color: #666666">.</span><span style="color: #BB4444">doit</span><span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
+                        hide<span style="color: #666666">();</span>
+                        insertProposal<span style="color: #666666">(</span>p<span style="color: #666666">,</span> key<span style="color: #666666">,</span> e<span style="color: #666666">.</span><span style="color: #BB4444">stateMask</span><span style="color: #666666">,</span> fContentAssistSubjectControlAdapter<span style="color: #666666">.</span><span style="color: #BB4444">getSelectedRange</span><span style="color: #666666">().</span><span style="color: #BB4444">x</span><span style="color: #666666">);</span>
+                    <span style="color: #666666">}</span>
 </pre></div>
 
 
 <p><br>
 修改之后的代码是:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">if</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">key</span> <span style="color: #3399cc">!=</span> <span style="color: #cd0000">&#39;=&#39;</span> <span style="color: #3399cc">&amp;&amp;</span> <span style="color: #cccccc">key</span> <span style="color: #3399cc">!=</span> <span style="color: #cd00cd">0x20</span> <span style="color: #3399cc">&amp;&amp;</span> <span style="color: #cccccc">key</span> <span style="color: #3399cc">!=</span> <span style="color: #cd0000">&#39;;&#39;</span> <span style="color: #3399cc">&amp;&amp;</span> <span style="color: #cccccc">contains</span><span style="color: #3399cc">(</span><span style="color: #cccccc">triggers</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">key</span><span style="color: #3399cc">))</span> <span style="color: #3399cc">{</span>
-                        <span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">doit</span><span style="color: #3399cc">=</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
-                        <span style="color: #cccccc">hide</span><span style="color: #3399cc">();</span>
-                        <span style="color: #cccccc">insertProposal</span><span style="color: #3399cc">(</span><span style="color: #cccccc">p</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">key</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">stateMask</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">fContentAssistSubjectControlAdapter</span><span style="color: #3399cc">.</span><span style="color: #cccccc">getSelectedRange</span><span style="color: #3399cc">().</span><span style="color: #cccccc">x</span><span style="color: #3399cc">);</span>
-                    <span style="color: #3399cc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">if</span> <span style="color: #666666">(</span>key <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;=&#39;</span> <span style="color: #666666">&amp;&amp;</span> key <span style="color: #666666">!=</span> <span style="color: #666666">0x20</span> <span style="color: #666666">&amp;&amp;</span> key <span style="color: #666666">!=</span> <span style="color: #BB4444">&#39;;&#39;</span> <span style="color: #666666">&amp;&amp;</span> contains<span style="color: #666666">(</span>triggers<span style="color: #666666">,</span> key<span style="color: #666666">))</span> <span style="color: #666666">{</span>
+                        e<span style="color: #666666">.</span><span style="color: #BB4444">doit</span><span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
+                        hide<span style="color: #666666">();</span>
+                        insertProposal<span style="color: #666666">(</span>p<span style="color: #666666">,</span> key<span style="color: #666666">,</span> e<span style="color: #666666">.</span><span style="color: #BB4444">stateMask</span><span style="color: #666666">,</span> fContentAssistSubjectControlAdapter<span style="color: #666666">.</span><span style="color: #BB4444">getSelectedRange</span><span style="color: #666666">().</span><span style="color: #BB4444">x</span><span style="color: #666666">);</span>
+                    <span style="color: #666666">}</span>
 </pre></div>
 
 
 <p><br>
 如果想要使用 &ldquo;tab&rdquo; 键上屏需要修改 1328 行, 具体代码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">case</span> <span style="color: #cccccc; border: 1px solid #FF0000">&#39;</span><span style="color: #3399cc">/</span><span style="color: #cccccc">t</span><span style="color: #cccccc; border: 1px solid #FF0000">&#39;</span><span style="color: #3399cc">:</span>
-<span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">doit</span><span style="color: #3399cc">=</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
-<span style="color: #cccccc">fProposalShell</span><span style="color: #3399cc">.</span><span style="color: #cccccc">setFocus</span><span style="color: #3399cc">();</span>
-<span style="color: #cdcd00">return</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">case</span> <span style="border: 1px solid #FF0000">&#39;</span><span style="color: #666666">/</span>t<span style="border: 1px solid #FF0000">&#39;</span><span style="color: #666666">:</span>
+e<span style="color: #666666">.</span><span style="color: #BB4444">doit</span><span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
+fProposalShell<span style="color: #666666">.</span><span style="color: #BB4444">setFocus</span><span style="color: #666666">();</span>
+<span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
 </pre></div>
 
 
 <p><br>
 修改之后的代码是:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">case</span> <span style="color: #cd0000">&#39;\t&#39;</span><span style="color: #3399cc">:</span>
-<span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">doit</span><span style="color: #3399cc">=</span> <span style="color: #cdcd00">false</span><span style="color: #3399cc">;</span>
-<span style="color: #cccccc">insertSelectedProposalWithMask</span><span style="color: #3399cc">(</span><span style="color: #cccccc">e</span><span style="color: #3399cc">.</span><span style="color: #cccccc">stateMask</span><span style="color: #3399cc">);</span>
-<span style="color: #cdcd00">break</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&#39;\t&#39;</span><span style="color: #666666">:</span>
+e<span style="color: #666666">.</span><span style="color: #BB4444">doit</span><span style="color: #666666">=</span> <span style="color: #AA22FF; font-weight: bold">false</span><span style="color: #666666">;</span>
+insertSelectedProposalWithMask<span style="color: #666666">(</span>e<span style="color: #666666">.</span><span style="color: #BB4444">stateMask</span><span style="color: #666666">);</span>
+<span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
 </pre></div>
 
 

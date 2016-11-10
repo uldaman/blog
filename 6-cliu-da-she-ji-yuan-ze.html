@@ -77,28 +77,28 @@
 要达到这样的效果就是我们在设计类的时候, 时刻要考虑尽量让这个类是足够好, 写好了就不要去修改了, 如果新需求来, 我们增加一些类就完事了, 原来的代码能不动则不动.</p>
 <p>但是, 无论是多么的”封闭”, 都会存在一些无法对之封闭的变化, 既然不可能完全封闭, 设计人员就必须对于它设计的模块应该对哪种变化封闭做出选择, 他必须先猜测出最有可能发生的变化种类, 然后构造抽象来隔离那些变化.</p>
 <p>再回想一下我们之前的计算器例子, 一开始的时候, 我们把计算的算法都封装在一个类当中:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">class</span> <span style="color: #00cdcd">Operation</span> <span style="color: #3399cc">{</span>
-<span style="color: #00cd00">public</span><span style="color: #3399cc">:</span>
-    <span style="color: #00cd00">static</span> <span style="color: #00cd00">double</span> <span style="color: #cccccc">GetResult</span><span style="color: #3399cc">(</span><span style="color: #00cd00">double</span> <span style="color: #cccccc">dNum_A</span><span style="color: #3399cc">,</span> <span style="color: #00cd00">double</span> <span style="color: #cccccc">dNum_B</span><span style="color: #3399cc">,</span> <span style="color: #00cd00">char</span> <span style="color: #cccccc">cOp</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #00cd00">double</span> <span style="color: #cccccc">dResult</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0.0</span><span style="color: #3399cc">;</span>
-        <span style="color: #cdcd00">switch</span> <span style="color: #3399cc">(</span><span style="color: #cccccc">cOp</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cdcd00">case</span> <span style="color: #cd0000">&#39;+&#39;</span><span style="color: #3399cc">:</span>
-            <span style="color: #cccccc">dResult</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">dNum_A</span> <span style="color: #3399cc">+</span> <span style="color: #cccccc">dNum_B</span><span style="color: #3399cc">;</span>
-            <span style="color: #cdcd00">break</span><span style="color: #3399cc">;</span>
-        <span style="color: #cdcd00">case</span> <span style="color: #cd0000">&#39;-&#39;</span><span style="color: #3399cc">:</span>
-            <span style="color: #cccccc">dResult</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">dNum_A</span> <span style="color: #3399cc">-</span> <span style="color: #cccccc">dNum_B</span><span style="color: #3399cc">;</span>
-            <span style="color: #cdcd00">break</span><span style="color: #3399cc">;</span>
-        <span style="color: #cdcd00">case</span> <span style="color: #cd0000">&#39;*&#39;</span><span style="color: #3399cc">:</span>
-            <span style="color: #cccccc">dResult</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">dNum_A</span> <span style="color: #3399cc">*</span> <span style="color: #cccccc">dNum_B</span><span style="color: #3399cc">;</span>
-            <span style="color: #cdcd00">break</span><span style="color: #3399cc">;</span>
-        <span style="color: #cdcd00">case</span> <span style="color: #cd0000">&#39;/&#39;</span><span style="color: #3399cc">:</span>
-            <span style="color: #cccccc">dResult</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">dNum_A</span> <span style="color: #3399cc">/</span> <span style="color: #cccccc">dNum_B</span><span style="color: #3399cc">;</span>
-            <span style="color: #cdcd00">break</span><span style="color: #3399cc">;</span>
-        <span style="color: #3399cc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Operation</span> <span style="color: #666666">{</span>
+<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
+    <span style="color: #AA22FF; font-weight: bold">static</span> <span style="color: #00BB00; font-weight: bold">double</span> <span style="color: #00A000">GetResult</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">double</span> dNum_A<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">double</span> dNum_B<span style="color: #666666">,</span> <span style="color: #00BB00; font-weight: bold">char</span> cOp<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        <span style="color: #00BB00; font-weight: bold">double</span> dResult <span style="color: #666666">=</span> <span style="color: #666666">0.0;</span>
+        <span style="color: #AA22FF; font-weight: bold">switch</span> <span style="color: #666666">(</span>cOp<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&#39;+&#39;</span><span style="color: #666666">:</span>
+            dResult <span style="color: #666666">=</span> dNum_A <span style="color: #666666">+</span> dNum_B<span style="color: #666666">;</span>
+            <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
+        <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&#39;-&#39;</span><span style="color: #666666">:</span>
+            dResult <span style="color: #666666">=</span> dNum_A <span style="color: #666666">-</span> dNum_B<span style="color: #666666">;</span>
+            <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
+        <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&#39;*&#39;</span><span style="color: #666666">:</span>
+            dResult <span style="color: #666666">=</span> dNum_A <span style="color: #666666">*</span> dNum_B<span style="color: #666666">;</span>
+            <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
+        <span style="color: #AA22FF; font-weight: bold">case</span> <span style="color: #BB4444">&#39;/&#39;</span><span style="color: #666666">:</span>
+            dResult <span style="color: #666666">=</span> dNum_A <span style="color: #666666">/</span> dNum_B<span style="color: #666666">;</span>
+            <span style="color: #AA22FF; font-weight: bold">break</span><span style="color: #666666">;</span>
+        <span style="color: #666666">}</span>
 
-        <span style="color: #cdcd00">return</span> <span style="color: #cccccc">dResult</span><span style="color: #3399cc">;</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">}</span>
+        <span style="color: #AA22FF; font-weight: bold">return</span> dResult<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
@@ -182,43 +182,43 @@
 <p>迪米特法则还要求我们在设计时, 应该尽量减少对象之间的交互, 如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用. 简言之, <strong>就是通过引入一个合理的第三者来降低现有对象之间的耦合度</strong>.</p>
 <p>要理解这些可能有些难, 我们来看一下例子.</p>
 <p>体育老老师让体委清点全班女生个数, 先上一段有问题的代码:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc; border: 1px solid #FF0000">#</span><span style="color: #cccccc">include</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">list</span><span style="color: #3399cc">&gt;</span>
-<span style="color: #cccccc; border: 1px solid #FF0000">#</span><span style="color: #cccccc">include</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">iostream</span><span style="color: #3399cc">&gt;</span>
-<span style="color: #cccccc">using</span> <span style="color: #cccccc">namespace</span> <span style="color: #cccccc">std</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="border: 1px solid #FF0000">#</span>include <span style="color: #666666">&lt;</span>list<span style="color: #666666">&gt;</span>
+<span style="border: 1px solid #FF0000">#</span>include <span style="color: #666666">&lt;</span>iostream<span style="color: #666666">&gt;</span>
+using namespace std<span style="color: #666666">;</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Girl</span> <span style="color: #3399cc">{</span>
-<span style="color: #3399cc">};</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Girl</span> <span style="color: #666666">{</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">GroupLeader</span> <span style="color: #3399cc">{</span>
-    <span style="color: #000080">//有清查女生的工作</span>
-<span style="color: #00cd00">public</span><span style="color: #3399cc">:</span>
-    <span style="color: #00cd00">void</span> <span style="color: #cccccc">countGirls</span><span style="color: #3399cc">(</span><span style="color: #cccccc">list</span><span style="color: #3399cc">&lt;</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">){</span>
-        <span style="color: #cccccc">cout</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;女生数量是: &quot;</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">.</span><span style="color: #cccccc">size</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cccccc">endl</span><span style="color: #3399cc">;</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">};</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">GroupLeader</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">//有清查女生的工作</span>
+<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
+    <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">countGirls</span><span style="color: #666666">(</span>list<span style="color: #666666">&lt;</span>Girl<span style="color: #666666">&gt;</span> listGirls<span style="color: #666666">){</span>
+        cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;女生数量是: &quot;</span> <span style="color: #666666">&lt;&lt;</span> listGirls<span style="color: #666666">.</span><span style="color: #BB4444">size</span><span style="color: #666666">()</span> <span style="color: #666666">&lt;&lt;</span> endl<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Teacher</span> <span style="color: #3399cc">{</span>
-    <span style="color: #000080">//老师对学生发布命令,清一下女生</span>
-<span style="color: #00cd00">public</span><span style="color: #3399cc">:</span>
-    <span style="color: #00cd00">void</span> <span style="color: #cccccc">commond</span><span style="color: #3399cc">(</span><span style="color: #cccccc">GroupLeader</span> <span style="color: #cccccc">groupLeader</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">list</span><span style="color: #3399cc">&lt;</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">;</span>
-        <span style="color: #000080">//初始化女生</span>
-        <span style="color: #cdcd00">for</span> <span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cd00cd">20</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span><span style="color: #3399cc">++){</span>
-            <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">.</span><span style="color: #cccccc">push_back</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">());</span>
-        <span style="color: #3399cc">}</span>
-        <span style="color: #000080">//告诉体育委员开始执行清查任务</span>
-        <span style="color: #cccccc">groupLeader</span><span style="color: #3399cc">.</span><span style="color: #cccccc">countGirls</span><span style="color: #3399cc">(</span><span style="color: #cccccc">listGirls</span><span style="color: #3399cc">);</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">};</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Teacher</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">//老师对学生发布命令,清一下女生</span>
+<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
+    <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">commond</span><span style="color: #666666">(</span>GroupLeader groupLeader<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        list<span style="color: #666666">&lt;</span>Girl<span style="color: #666666">&gt;</span> listGirls<span style="color: #666666">;</span>
+        <span style="color: #008800; font-style: italic">//初始化女生</span>
+        <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0;</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">20;</span> i<span style="color: #666666">++){</span>
+            listGirls<span style="color: #666666">.</span><span style="color: #BB4444">push_back</span><span style="color: #666666">(</span>Girl<span style="color: #666666">());</span>
+        <span style="color: #666666">}</span>
+        <span style="color: #008800; font-style: italic">//告诉体育委员开始执行清查任务</span>
+        groupLeader<span style="color: #666666">.</span><span style="color: #BB4444">countGirls</span><span style="color: #666666">(</span>listGirls<span style="color: #666666">);</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">int</span> <span style="color: #cccccc">_tmain</span><span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">argc</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">_TCHAR</span><span style="color: #3399cc">*</span> <span style="color: #cccccc">argv</span><span style="color: #3399cc">[])</span> <span style="color: #3399cc">{</span>
-    <span style="color: #cccccc">Teacher</span> <span style="color: #cccccc">teacher</span><span style="color: #3399cc">;</span>
-    <span style="color: #000080">//老师发布命令</span>
-    <span style="color: #cccccc">teacher</span><span style="color: #3399cc">.</span><span style="color: #cccccc">commond</span><span style="color: #3399cc">(</span><span style="color: #cccccc">GroupLeader</span><span style="color: #3399cc">());</span>
+<span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #00A000">_tmain</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> argc<span style="color: #666666">,</span> _TCHAR<span style="color: #666666">*</span> argv<span style="color: #666666">[])</span> <span style="color: #666666">{</span>
+    Teacher teacher<span style="color: #666666">;</span>
+    <span style="color: #008800; font-style: italic">//老师发布命令</span>
+    teacher<span style="color: #666666">.</span><span style="color: #BB4444">commond</span><span style="color: #666666">(</span>GroupLeader<span style="color: #666666">());</span>
 
-    <span style="color: #cccccc">system</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;PAUSE&quot;</span><span style="color: #3399cc">);</span>
-    <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span>
-<span style="color: #3399cc">}</span>
+    system<span style="color: #666666">(</span><span style="color: #BB4444">&quot;PAUSE&quot;</span><span style="color: #666666">);</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0;</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
@@ -226,53 +226,53 @@
 问题出在 Teacher 这个类中, 首先, Girl 类做为 commond 方法的局部变量出现..</p>
 <p>其次, 和体育老师有直接联系的是体委, 而不是全班女生, 体育老师和女生不应该相互作用, 而应该通过体委来跳转(如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用).</p>
 <p>改进后代码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc; border: 1px solid #FF0000">#</span><span style="color: #cccccc">include</span> <span style="color: #cd0000">&quot;stdafx.h&quot;</span>
-<span style="color: #cccccc; border: 1px solid #FF0000">#</span><span style="color: #cccccc">include</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">list</span><span style="color: #3399cc">&gt;</span>
-<span style="color: #cccccc; border: 1px solid #FF0000">#</span><span style="color: #cccccc">include</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">iostream</span><span style="color: #3399cc">&gt;</span>
-<span style="color: #cccccc">using</span> <span style="color: #cccccc">namespace</span> <span style="color: #cccccc">std</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="border: 1px solid #FF0000">#</span>include <span style="color: #BB4444">&quot;stdafx.h&quot;</span>
+<span style="border: 1px solid #FF0000">#</span>include <span style="color: #666666">&lt;</span>list<span style="color: #666666">&gt;</span>
+<span style="border: 1px solid #FF0000">#</span>include <span style="color: #666666">&lt;</span>iostream<span style="color: #666666">&gt;</span>
+using namespace std<span style="color: #666666">;</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Girl</span> <span style="color: #3399cc">{</span>
-<span style="color: #3399cc">};</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Girl</span> <span style="color: #666666">{</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">GroupLeader</span> <span style="color: #3399cc">{</span>
-    <span style="color: #000080">//有清查女生的工作</span>
-<span style="color: #00cd00">private</span><span style="color: #3399cc">:</span>
-    <span style="color: #cccccc">list</span><span style="color: #3399cc">&lt;</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">m_listGirls</span><span style="color: #3399cc">;</span>
-    <span style="color: #000080">//传递全班的女生</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">GroupLeader</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">//有清查女生的工作</span>
+<span style="color: #AA22FF; font-weight: bold">private</span><span style="color: #666666">:</span>
+    list<span style="color: #666666">&lt;</span>Girl<span style="color: #666666">&gt;</span> m_listGirls<span style="color: #666666">;</span>
+    <span style="color: #008800; font-style: italic">//传递全班的女生</span>
 
-<span style="color: #cccccc">public:</span>
-    <span style="color: #cccccc">GroupLeader</span><span style="color: #3399cc">(</span><span style="color: #cccccc">list</span><span style="color: #3399cc">&lt;</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">_listGirls</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">m_listGirls</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">_listGirls</span><span style="color: #3399cc">;</span>
-    <span style="color: #3399cc">}</span>
+<span style="color: #A0A000">public:</span>
+    GroupLeader<span style="color: #666666">(</span>list<span style="color: #666666">&lt;</span>Girl<span style="color: #666666">&gt;</span> _listGirls<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        m_listGirls <span style="color: #666666">=</span> _listGirls<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #000080">//有清查女生的工作</span>
-    <span style="color: #00cd00">void</span> <span style="color: #cccccc">countGirls</span><span style="color: #3399cc">(){</span>
-        <span style="color: #cccccc">cout</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cd0000">&quot;女生数量是: &quot;</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cccccc">m_listGirls</span><span style="color: #3399cc">.</span><span style="color: #cccccc">size</span><span style="color: #3399cc">()</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cccccc">endl</span><span style="color: #3399cc">;</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">};</span>
+    <span style="color: #008800; font-style: italic">//有清查女生的工作</span>
+    <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">countGirls</span><span style="color: #666666">(){</span>
+        cout <span style="color: #666666">&lt;&lt;</span> <span style="color: #BB4444">&quot;女生数量是: &quot;</span> <span style="color: #666666">&lt;&lt;</span> m_listGirls<span style="color: #666666">.</span><span style="color: #BB4444">size</span><span style="color: #666666">()</span> <span style="color: #666666">&lt;&lt;</span> endl<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Teacher</span> <span style="color: #3399cc">{</span>
-    <span style="color: #000080">//老师对学生发布命令,清一下女生</span>
-<span style="color: #00cd00">public</span><span style="color: #3399cc">:</span>
-    <span style="color: #00cd00">void</span> <span style="color: #cccccc">commond</span><span style="color: #3399cc">(</span><span style="color: #cccccc">GroupLeader</span> <span style="color: #cccccc">groupLeader</span><span style="color: #3399cc">)</span> <span style="color: #3399cc">{</span>
-        <span style="color: #cccccc">groupLeader</span><span style="color: #3399cc">.</span><span style="color: #cccccc">countGirls</span><span style="color: #3399cc">();</span>
-    <span style="color: #3399cc">}</span>
-<span style="color: #3399cc">};</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Teacher</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">//老师对学生发布命令,清一下女生</span>
+<span style="color: #AA22FF; font-weight: bold">public</span><span style="color: #666666">:</span>
+    <span style="color: #00BB00; font-weight: bold">void</span> <span style="color: #00A000">commond</span><span style="color: #666666">(</span>GroupLeader groupLeader<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        groupLeader<span style="color: #666666">.</span><span style="color: #BB4444">countGirls</span><span style="color: #666666">();</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">};</span>
 
-<span style="color: #00cd00">int</span> <span style="color: #cccccc">_tmain</span><span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">argc</span><span style="color: #3399cc">,</span> <span style="color: #cccccc">_TCHAR</span><span style="color: #3399cc">*</span> <span style="color: #cccccc">argv</span><span style="color: #3399cc">[])</span> <span style="color: #3399cc">{</span>
-    <span style="color: #cccccc">list</span><span style="color: #3399cc">&lt;</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">;</span>
-    <span style="color: #000080">//初始化女生</span>
-    <span style="color: #cdcd00">for</span> <span style="color: #3399cc">(</span><span style="color: #00cd00">int</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cd00cd">20</span><span style="color: #3399cc">;</span> <span style="color: #cccccc">i</span><span style="color: #3399cc">++){</span>
-        <span style="color: #cccccc">listGirls</span><span style="color: #3399cc">.</span><span style="color: #cccccc">push_back</span><span style="color: #3399cc">(</span><span style="color: #cccccc">Girl</span><span style="color: #3399cc">());</span>
-    <span style="color: #3399cc">}</span>
+<span style="color: #00BB00; font-weight: bold">int</span> <span style="color: #00A000">_tmain</span><span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> argc<span style="color: #666666">,</span> _TCHAR<span style="color: #666666">*</span> argv<span style="color: #666666">[])</span> <span style="color: #666666">{</span>
+    list<span style="color: #666666">&lt;</span>Girl<span style="color: #666666">&gt;</span> listGirls<span style="color: #666666">;</span>
+    <span style="color: #008800; font-style: italic">//初始化女生</span>
+    <span style="color: #AA22FF; font-weight: bold">for</span> <span style="color: #666666">(</span><span style="color: #00BB00; font-weight: bold">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0;</span> i <span style="color: #666666">&lt;</span> <span style="color: #666666">20;</span> i<span style="color: #666666">++){</span>
+        listGirls<span style="color: #666666">.</span><span style="color: #BB4444">push_back</span><span style="color: #666666">(</span>Girl<span style="color: #666666">());</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #cccccc">Teacher</span> <span style="color: #cccccc">teacher</span><span style="color: #3399cc">;</span>
-    <span style="color: #000080">//老师发布命令</span>
-    <span style="color: #cccccc">teacher</span><span style="color: #3399cc">.</span><span style="color: #cccccc">commond</span><span style="color: #3399cc">(</span><span style="color: #cccccc">GroupLeader</span><span style="color: #3399cc">(</span><span style="color: #cccccc">listGirls</span><span style="color: #3399cc">));</span>
+    Teacher teacher<span style="color: #666666">;</span>
+    <span style="color: #008800; font-style: italic">//老师发布命令</span>
+    teacher<span style="color: #666666">.</span><span style="color: #BB4444">commond</span><span style="color: #666666">(</span>GroupLeader<span style="color: #666666">(</span>listGirls<span style="color: #666666">));</span>
 
-    <span style="color: #cccccc">system</span><span style="color: #3399cc">(</span><span style="color: #cd0000">&quot;PAUSE&quot;</span><span style="color: #3399cc">);</span>
-    <span style="color: #cdcd00">return</span> <span style="color: #cd00cd">0</span><span style="color: #3399cc">;</span>
-<span style="color: #3399cc">}</span>
+    system<span style="color: #666666">(</span><span style="color: #BB4444">&quot;PAUSE&quot;</span><span style="color: #666666">);</span>
+    <span style="color: #AA22FF; font-weight: bold">return</span> <span style="color: #666666">0;</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 

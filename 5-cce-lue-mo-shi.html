@@ -61,7 +61,7 @@
 那就引入了策略模式.</p>
 <p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251" /></p>
 <p>可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     Operation&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; m_oper;
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; m_dNumA = &lt;span style=&quot;color: #800080;&quot;&gt;0.0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
@@ -120,7 +120,7 @@
 <p>所谓的策略模式, 实现的就是Context环境类, 它可以理解成一个锦囊, 是一个装策略的地方, 又是策略的应用场景.</p>
 <p>当然上面的策略模式并不是一个原始的策略模式原型, 它还结合了简单工厂模式, 在它的构造函数里通过传进的参数来生成具体的Operation对象.
 而在原始的策略模式中, 这一步是在外面进行的, 在OperContext的构造中只是一个简单的赋值.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     Operation&lt;/span&gt;* m_oper =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; m_dNumA = &lt;span style=&quot;color: #800080;&quot;&gt;0.0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;

@@ -57,45 +57,45 @@
 <p>生成器表达式的语法和列表解析一样, 只不过生成器表达式是被（）括起来的, 而不是[ ], 如下:</p>
 <p><strong>(exp for iter_var in iterable)</strong></p>
 <p><strong>(exp for iter_var in iterable if cond_exp)</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">g</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">(x</span> <span style="color: #3399cc">*</span> <span style="color: #cccccc">x</span> <span style="color: #cdcd00">for</span> <span style="color: #cccccc">x</span> <span style="color: #cdcd00">in</span> <span style="color: #cd00cd">range</span><span style="color: #cccccc">(</span><span style="color: #cd00cd">10</span><span style="color: #cccccc">))</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span> <span style="color: #cccccc">g</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">generator</span> <span style="color: #cd00cd">object</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">genexpr</span><span style="color: #3399cc">&gt;</span> <span style="color: #cccccc">at</span> <span style="color: #cd00cd">0x1022ef630</span><span style="color: #3399cc">&gt;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>g <span style="color: #666666">=</span> (x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>))
+<span style="color: #666666">&gt;&gt;&gt;</span> g <span style="color: #666666">&lt;</span>generator <span style="color: #AA22FF">object</span> <span style="color: #666666">&lt;</span>genexpr<span style="color: #666666">&gt;</span> at <span style="color: #666666">0x1022ef630&gt;</span>
 </pre></div>
 
 
 <p>如此,  我们得到的就是一个生成器, 如果想要一个一个提取元素出来, 可以通过 <strong>next()</strong> 函数获得 <strong>generator</strong> 的下一个返回值:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cd00cd">next</span><span style="color: #cccccc">(g)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cd00cd">0</span>
-<span style="color: #cd00cd">next</span><span style="color: #cccccc">(g)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cd00cd">1</span>
-<span style="color: #cd00cd">next</span><span style="color: #cccccc">(g)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cd00cd">4</span>
-<span style="color: #3399cc">.</span>
-<span style="color: #3399cc">.</span>
-<span style="color: #3399cc">.</span>
-<span style="color: #cd00cd">next</span><span style="color: #cccccc">(g)</span>
-<span style="color: #3399cc">&gt;&gt;&gt;</span><span style="color: #cd00cd">81</span>
-<span style="color: #cd00cd">next</span><span style="color: #cccccc">(g)</span>
-<span style="color: #cccccc">Traceback</span> <span style="color: #cccccc">(most</span> <span style="color: #cccccc">recent</span> <span style="color: #cccccc">call</span> <span style="color: #cccccc">last):</span>
-    <span style="color: #cccccc">File</span> <span style="color: #cd0000">&quot;&lt;stdin&gt;&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cccccc">line</span> <span style="color: #cd00cd">1</span><span style="color: #cccccc">,</span> <span style="color: #cdcd00">in</span> <span style="color: #3399cc">&lt;</span><span style="color: #cccccc">module</span><span style="color: #3399cc">&gt;</span>
-<span style="color: #666699; font-weight: bold">StopIteration</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF">next</span>(g)
+<span style="color: #666666">&gt;&gt;&gt;0</span>
+<span style="color: #AA22FF">next</span>(g)
+<span style="color: #666666">&gt;&gt;&gt;1</span>
+<span style="color: #AA22FF">next</span>(g)
+<span style="color: #666666">&gt;&gt;&gt;4</span>
+<span style="color: #666666">.</span>
+<span style="color: #666666">.</span>
+<span style="color: #666666">.</span>
+<span style="color: #AA22FF">next</span>(g)
+<span style="color: #666666">&gt;&gt;&gt;81</span>
+<span style="color: #AA22FF">next</span>(g)
+Traceback (most recent call last):
+    File <span style="color: #BB4444">&quot;&lt;stdin&gt;&quot;</span>, line <span style="color: #666666">1</span>, <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #666666">&lt;</span>module<span style="color: #666666">&gt;</span>
+<span style="color: #D2413A; font-weight: bold">StopIteration</span>
 </pre></div>
 
 
 <p>或者使用 <strong>for</strong> 循环遍历, 因为 <strong>generator</strong> 也是可迭代对象:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">g</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">(x</span> <span style="color: #3399cc">*</span> <span style="color: #cccccc">x</span> <span style="color: #cdcd00">for</span> <span style="color: #cccccc">x</span> <span style="color: #cdcd00">in</span> <span style="color: #cd00cd">range</span><span style="color: #cccccc">(</span><span style="color: #cd00cd">10</span><span style="color: #cccccc">))</span>
-<span style="color: #cdcd00">for</span> <span style="color: #cccccc">n</span> <span style="color: #cdcd00">in</span> <span style="color: #cccccc">g:</span>
-    <span style="color: #cdcd00">print</span><span style="color: #cccccc">(n)</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>g <span style="color: #666666">=</span> (x <span style="color: #666666">*</span> x <span style="color: #AA22FF; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #AA22FF">range</span>(<span style="color: #666666">10</span>))
+<span style="color: #AA22FF; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> g:
+    <span style="color: #AA22FF; font-weight: bold">print</span>(n)
 
-<span style="color: #cd00cd">0</span>
-<span style="color: #cd00cd">1</span>
-<span style="color: #cd00cd">4</span>
-<span style="color: #cd00cd">9</span>
-<span style="color: #cd00cd">16</span>
-<span style="color: #cd00cd">25</span>
-<span style="color: #cd00cd">36</span>
-<span style="color: #cd00cd">49</span>
-<span style="color: #cd00cd">64</span>
-<span style="color: #cd00cd">81</span>
+<span style="color: #666666">0</span>
+<span style="color: #666666">1</span>
+<span style="color: #666666">4</span>
+<span style="color: #666666">9</span>
+<span style="color: #666666">16</span>
+<span style="color: #666666">25</span>
+<span style="color: #666666">36</span>
+<span style="color: #666666">49</span>
+<span style="color: #666666">64</span>
+<span style="color: #666666">81</span>
 </pre></div>
 
 

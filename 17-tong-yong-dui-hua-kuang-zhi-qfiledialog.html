@@ -60,45 +60,45 @@
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #00cd00">void</span> <span style="color: #cccccc">Qt_Notepad</span><span style="color: #3399cc">::</span><span style="color: #cccccc">OpenFile()</span> <span style="color: #cccccc">{</span>
-    <span style="color: #cccccc">QString</span> <span style="color: #cccccc">fileName</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QFileDialog</span><span style="color: #3399cc">::</span><span style="color: #cccccc">getOpenFileName(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Open File&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">NULL</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;file (*.*)&quot;</span><span style="color: #cccccc">);</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Open File&quot;</span>, <span style="color: #AA22FF">NULL</span>, <span style="color: #BB4444">&quot;file (*.*)&quot;</span>);
 
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">(</span><span style="color: #3399cc">!</span><span style="color: #cccccc">fileName.isEmpty())</span> <span style="color: #cccccc">{</span>
-        <span style="color: #cccccc">QFile</span> <span style="color: #cccccc">file;</span>
-        <span style="color: #cccccc">file.setFileName(fileName);</span>
-        <span style="color: #cdcd00">if</span> <span style="color: #cccccc">(file.open(QIODevice</span><span style="color: #3399cc">::</span><span style="color: #cccccc">ReadWrite))</span> <span style="color: #cccccc">{</span>
-            <span style="color: #cccccc">QTextStream</span> <span style="color: #cccccc">in(</span><span style="color: #3399cc">&amp;</span><span style="color: #cccccc">file);</span>
-            <span style="color: #cccccc">ui.textEdit</span><span style="color: #3399cc">-&gt;</span><span style="color: #cccccc">setText(in.readAll());</span>
-            <span style="color: #cccccc">file.close();</span>
-        <span style="color: #cccccc">}</span>
-    <span style="color: #cccccc">}</span>
-<span style="color: #cccccc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file.setFileName(fileName);
+        <span style="color: #AA22FF; font-weight: bold">if</span> (file.open(QIODevice<span style="color: #666666">::</span>ReadWrite)) {
+            QTextStream in(<span style="color: #666666">&amp;</span>file);
+            ui.textEdit<span style="color: #666666">-&gt;</span>setText(in.readAll());
+            file.close();
+        }
+    }
+}
 
-<span style="color: #00cd00">void</span> <span style="color: #cccccc">Qt_Notepad</span><span style="color: #3399cc">::</span><span style="color: #cccccc">SaveFile()</span> <span style="color: #cccccc">{</span>
-    <span style="color: #cccccc">QString</span> <span style="color: #cccccc">fileName</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QFileDialog</span><span style="color: #3399cc">::</span><span style="color: #cccccc">getSaveFileName(</span><span style="color: #cdcd00">this</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Save File&quot;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&quot;Untitled.txt&quot;</span><span style="color: #cccccc">);</span>
+<span style="color: #00BB00; font-weight: bold">void</span> Qt_Notepad<span style="color: #666666">::</span>SaveFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getSaveFileName(<span style="color: #AA22FF; font-weight: bold">this</span>, <span style="color: #BB4444">&quot;Save File&quot;</span>, <span style="color: #BB4444">&quot;Untitled.txt&quot;</span>);
 
-    <span style="color: #cdcd00">if</span> <span style="color: #cccccc">(</span><span style="color: #3399cc">!</span><span style="color: #cccccc">fileName.isEmpty())</span> <span style="color: #cccccc">{</span>
-        <span style="color: #cccccc">QFile</span> <span style="color: #cccccc">file;</span>
-        <span style="color: #cccccc">file.setFileName(fileName);</span>
-        <span style="color: #cdcd00">if</span> <span style="color: #cccccc">(file.open(QIODevice</span><span style="color: #3399cc">::</span><span style="color: #cccccc">ReadWrite))</span> <span style="color: #cccccc">{</span>
-            <span style="color: #cccccc">QTextStream</span> <span style="color: #cccccc">out(</span><span style="color: #3399cc">&amp;</span><span style="color: #cccccc">file);</span>
-            <span style="color: #cccccc">out</span> <span style="color: #3399cc">&lt;&lt;</span> <span style="color: #cccccc">ui.textEdit</span><span style="color: #3399cc">-&gt;</span><span style="color: #cccccc">toPlainText();</span> <span style="color: #000080">//取纯文本</span>
-            <span style="color: #cccccc">file.close();</span>
-        <span style="color: #cccccc">}</span>
-    <span style="color: #cccccc">}</span>
-<span style="color: #cccccc">}</span>
+    <span style="color: #AA22FF; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file.setFileName(fileName);
+        <span style="color: #AA22FF; font-weight: bold">if</span> (file.open(QIODevice<span style="color: #666666">::</span>ReadWrite)) {
+            QTextStream out(<span style="color: #666666">&amp;</span>file);
+            out <span style="color: #666666">&lt;&lt;</span> ui.textEdit<span style="color: #666666">-&gt;</span>toPlainText(); <span style="color: #008800; font-style: italic">//取纯文本</span>
+            file.close();
+        }
+    }
+}
 </pre></div>
 
 
 <p><br>
 这两个函数中分别使用了 QFileDialog 的两个静态函数: getOpenFileName() 和 getSaveFileName();</p>
 <p>先来看下 getOpenFileName() , 这个函数获取需要打开的文件的全路径.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">QString</span> <span style="color: #cccccc">getOpenFileName(QWidget</span> <span style="color: #3399cc">*</span> <span style="color: #cccccc">parent</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #cccccc">,</span>
-                        <span style="color: #cdcd00">const</span> <span style="color: #cccccc">QString</span> <span style="color: #3399cc">&amp;</span> <span style="color: #cccccc">caption</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QString(),</span>
-                        <span style="color: #cdcd00">const</span> <span style="color: #cccccc">QString</span> <span style="color: #3399cc">&amp;</span> <span style="color: #cccccc">dir</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QString(),</span>
-                        <span style="color: #cdcd00">const</span> <span style="color: #cccccc">QString</span> <span style="color: #3399cc">&amp;</span> <span style="color: #cccccc">filter</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">QString(),</span>
-                        <span style="color: #cccccc">QString</span> <span style="color: #3399cc">*</span> <span style="color: #cccccc">selectedFilter</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #cccccc">,</span>
-                        <span style="color: #cccccc">Options</span> <span style="color: #cccccc">options</span> <span style="color: #3399cc">=</span> <span style="color: #cd00cd">0</span><span style="color: #cccccc">)</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>QString getOpenFileName(QWidget <span style="color: #666666">*</span> parent <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> caption <span style="color: #666666">=</span> QString(),
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> dir <span style="color: #666666">=</span> QString(),
+                        <span style="color: #AA22FF; font-weight: bold">const</span> QString <span style="color: #666666">&amp;</span> filter <span style="color: #666666">=</span> QString(),
+                        QString <span style="color: #666666">*</span> selectedFilter <span style="color: #666666">=</span> <span style="color: #666666">0</span>,
+                        Options options <span style="color: #666666">=</span> <span style="color: #666666">0</span>)
 </pre></div>
 
 

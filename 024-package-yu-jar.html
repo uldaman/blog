@@ -65,24 +65,24 @@
 <h2 id="1-package">1. 导出 package</h2>
 <p>包, 即软件包, 可以理解成文件夹.</p>
 <p>使用关键字 <strong>package 包名</strong> 来使用, 如: package test;</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #000080">// Test.java</span>
-<span style="color: #cd00cd">package</span> <span style="color: #cccccc">com.test</span><span style="color: #3399cc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-style: italic">// Test.java</span>
+<span style="color: #AA22FF; font-weight: bold">package</span> <span style="color: #0000FF; font-weight: bold">com.test</span><span style="color: #666666">;</span>
 
-<span style="color: #00cd00">class</span> <span style="color: #00cdcd">Test</span> <span style="color: #3399cc">{</span>
-    <span style="color: #000080">// . . .</span>
-<span style="color: #3399cc">}</span>
+<span style="color: #AA22FF; font-weight: bold">class</span> <span style="color: #0000FF">Test</span> <span style="color: #666666">{</span>
+    <span style="color: #008800; font-style: italic">// . . .</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
 <p>编译方法:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>javac -d . Test.java // 点代表当前目录
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>javac -d . Test.java // 点代表当前目录
 </pre></div>
 
 
 <p><strong>-d</strong> 参数:<br>
 该参数的作用是依照包名在指定目录下生成相应的文件夹, 并把生成的目标文件放在该文件夹下.</p>
 <p>打包后, 就在当前目录下生成了一个目录树: <strong>./com/test/Test.class</strong>, 同时这个类的命名为 <strong>&ldquo;包名&rdquo;＋&rdquo; . &ldquo;＋&rdquo;类名&rdquo;</strong>, 即: com.test.Test, 也就是说, 使用 java 命令执行时, 要写成:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>java com.test.Test
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>java com.test.Test
 </pre></div>
 
 
@@ -111,14 +111,14 @@
 </ul>
 <p>当在 src 文件夹下写好源代码后, 通过 <strong>-d</strong> 参数指定生成的 *.class 文件放在 classes 目录下, 通过 <strong>-cp(ClassPath)</strong> 参数指定依赖库目录, -cp 可以除了指定目录外还可以指定 jar 包.</p>
 <p>如, 现在把刚才的 Test.java 放到 src 目录, 然后重新生成 *.class 文件.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>javac -cp classes/;lib/xxx.jar; -d classes/ src/Test.java
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>javac -cp classes/;lib/xxx.jar; -d classes/ src/Test.java
 </pre></div>
 
 
 <h2 id="5-jar">5. JAR 包</h2>
 <p>参考网文: <a href="http://blog.chinaunix.net/uid-692788-id-2681136.html">http://blog.chinaunix.net/uid-692788-id-2681136.html</a></p>
 <p>JAR 包是 Java 中所特有一种压缩文档, 它是由 JDK ~\bin\jar.exe 命令生成, 该命令将指定目录下的 package 压缩成 jar 包, 其实就可以把它理解为 .zip 包, 当然也是有区别的, JAR 包中有一个 META-INF\MANIFEST.MF 文件, 当你生成 JAR 包时, 它会自动生成.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>C:\Users\Administrator\Desktop&gt;jar
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>C:\Users\Administrator\Desktop&gt;jar
 用法: jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...
 选项:
     -c  创建新档案
@@ -148,7 +148,7 @@
 
 
 <p>根据上一节所说, 我们的 class 文件都在 classes 目录下, jar 目录生成在 lib 目录下, 所以:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>jar cvf lib/test.jar -C classes/ . (&lt;=注意这个点, 这个点是必须的, 而且前面有个空格)
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>jar cvf lib/test.jar -C classes/ . (&lt;=注意这个点, 这个点是必须的, 而且前面有个空格)
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

@@ -73,7 +73,7 @@
 <p>首先看 动物 –&gt; 鸟 –&gt; 鸭 –&gt; 唐老鸭 这条线, 它们都是继承关系, 用<strong>空心三角 +实线</strong>来表示．</p>
 <p>然后看 大雁 –&gt; 飞翔, 大雁实现了飞翔接口, 用<strong>空心三角 + 虚线</strong>来表示.</p>
 <p>再看 企鹅 –&gt; 气候, 企鹅不继承气候, 也不实现气候, 但它需要知道气候的变化, 也就是说在企鹅这个类中需要引用到气候这个类, 这就是<strong>“关联”</strong>关系, 用<strong>实线箭头</strong>来表示.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Penguin : public Bird {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Penguin : public Bird {
 public:
     Climate climage; // 企鹅类中引用到了气候对象
 }&lt;/code&gt;
@@ -88,7 +88,7 @@ public:
 >
 > </blockquote>
 
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class WideGooseAggregate {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class WideGooseAggregate {
 public:
     WideGoose[] arrayWideGoose; // 在雁群中有大雁数组对象
 }&lt;/code&gt;
@@ -112,7 +112,7 @@ public:
 >
 > </blockquote>
 
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Bird {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Bird {
 public:
     Bird() {
         m_LeftWing = new Wing();
@@ -128,7 +128,7 @@ protected:
 
 <p>可以看到, 在Bird构造时同时构造翅膀.</p>
 <p>最后看 动物 –&gt; 氧气, 动物 –&gt; 水, 动物中有新陈代谢方法, 而新陈代谢又需要用到氧气和水, 因此它们是一种依赖关系, 新陈代谢依赖于氧气和水<strong>(换个角度说就是新陈代谢这个方法有两个参数 氧气和水).</strong></p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Animal {
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>&lt;code&gt;class Animal {
 public:
     void Metabolism(Oxygen oxygen, Water water)
 }&lt;/code&gt;

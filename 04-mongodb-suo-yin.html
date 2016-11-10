@@ -67,7 +67,7 @@
 <p>所有的 MongoDB 集合默认都有一个唯一索引在字段 <strong>_id</strong> 上, 如果应用程序没有为 <strong>_id</strong> 列定义一个值, MongoDB 将创建一个带有 ObjectId 值的列.</p>
 <h2 id="_1">创建索引</h2>
 <p><strong>ensureIndex()</strong> 方法可以创建一个新的索引.</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.ensureIndex({KEY: 1})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.COLLECTION_NAME.ensureIndex({KEY: 1})
 </pre></div>
 
 
@@ -75,7 +75,7 @@
 语法中 Key 值为你要创建的索引字段, <strong>1</strong> 为指定按升序创建索引, 如果你想按降序来创建索引指定为 <strong>-1</strong> 即可.</p>
 <p><strong>复合索引</strong></p>
 <p><strong>ensureIndex()</strong> 方法中也可以设置使用多个字段创建索引(关系型数据库中称作复合索引), 如:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.col.ensureIndex({&#39;title&#39;: 1, &#39;description&#39;: -1})
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.ensureIndex({&#39;title&#39;: 1, &#39;description&#39;: -1})
 </pre></div>
 
 
@@ -146,7 +146,7 @@
 </table>
 <h2 id="_2">查询索引</h2>
 <p><strong>getIndexes()</strong> 该当可以查询当前已有的索引信息, 以之前创建的 col 集合为例:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span>db.col.getIndexes()
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.getIndexes()
 [
         {
                 &quot;v&quot; : 1,
@@ -181,21 +181,21 @@
 <h2 id="explain">explain</h2>
 <p>explain() 方法是一个对查询非常有用的工具, 可以用来查看查询命令的详情, 例如是否使用了索引、消耗了多久, 以及扫描了多少文档才得到结果.</p>
 <p>先看一个没有走索引的例子:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">db.col.find().explain()</span>
-<span style="color: #cccccc">{</span>
-    <span style="color: #cd0000">&quot;cursor&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd0000">&quot;BasicCursor&quot;</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;indexBounds&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[],</span>
-    <span style="color: #cd0000">&quot;nscanned&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">64</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;nscannedObjects&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">64</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;n&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">64</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;millis&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">0</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;allPlans&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[</span>
-        <span style="color: #cccccc">{</span>
-            <span style="color: #cd0000">&quot;cursor&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd0000">&quot;BasicCursor&quot;</span><span style="color: #cccccc">,</span>
-            <span style="color: #cd0000">&quot;indexBounds&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[]</span>
-        <span style="color: #cccccc">}</span>
-    <span style="color: #cccccc">]</span>
-<span style="color: #cccccc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.find().explain()
+{
+    <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BasicCursor&quot;</span>,
+    <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [],
+    <span style="color: #BB4444">&quot;nscanned&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;nscannedObjects&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;n&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">64</span>,
+    <span style="color: #BB4444">&quot;millis&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">0</span>,
+    <span style="color: #BB4444">&quot;allPlans&quot;</span><span style="color: #666666">:</span> [
+        {
+            <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BasicCursor&quot;</span>,
+            <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> []
+        }
+    ]
+}
 </pre></div>
 
 
@@ -207,39 +207,39 @@
 <li>n: 64, 返回了多个少文档, 即查询结果</li>
 <li>millis: 0, 耗时</li>
 </ul>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">db.col.find({age</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">{$gt</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">20</span><span style="color: #cccccc">,</span> <span style="color: #cccccc">$lt</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">30</span><span style="color: #cccccc">}}).explain()</span>
-<span style="color: #cccccc">{</span>
-    <span style="color: #cd0000">&quot;cursor&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd0000">&quot;BtreeCursor age_1&quot;</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;indexBounds&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[</span>
-        <span style="color: #cccccc">[</span>
-            <span style="color: #cccccc">{</span>
-                <span style="color: #cd0000">&quot;age&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">20</span>
-            <span style="color: #cccccc">},</span>
-            <span style="color: #cccccc">{</span>
-                <span style="color: #cd0000">&quot;age&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">30</span>
-            <span style="color: #cccccc">}</span>
-        <span style="color: #cccccc">]</span>
-    <span style="color: #cccccc">],</span>
-    <span style="color: #cd0000">&quot;nscanned&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">14</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;nscannedObjects&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;n&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">12</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;millis&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">1</span><span style="color: #cccccc">,</span>
-    <span style="color: #cd0000">&quot;allPlans&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[</span>
-        <span style="color: #cccccc">{</span>
-            <span style="color: #cd0000">&quot;cursor&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd0000">&quot;BtreeCursor age_1&quot;</span><span style="color: #cccccc">,</span>
-            <span style="color: #cd0000">&quot;indexBounds&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cccccc">[</span>
-                <span style="color: #cccccc">[</span>
-                    <span style="color: #cccccc">{</span>
-                        <span style="color: #cd0000">&quot;age&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">20</span>
-                    <span style="color: #cccccc">},</span>
-                    <span style="color: #cccccc">{</span>
-                        <span style="color: #cd0000">&quot;age&quot;</span><span style="color: #3399cc">:</span> <span style="color: #cd00cd">30</span>
-                    <span style="color: #cccccc">}</span>
-                <span style="color: #cccccc">]</span>
-            <span style="color: #cccccc">]</span>
-        <span style="color: #cccccc">}</span>
-    <span style="color: #cccccc">]</span>
-<span style="color: #cccccc">}</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>db.col.find({age<span style="color: #666666">:</span> {$gt<span style="color: #666666">:</span> <span style="color: #666666">20</span>, $lt<span style="color: #666666">:</span> <span style="color: #666666">30</span>}}).explain()
+{
+    <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BtreeCursor age_1&quot;</span>,
+    <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [
+        [
+            {
+                <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">20</span>
+            },
+            {
+                <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">30</span>
+            }
+        ]
+    ],
+    <span style="color: #BB4444">&quot;nscanned&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">14</span>,
+    <span style="color: #BB4444">&quot;nscannedObjects&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">12</span>,
+    <span style="color: #BB4444">&quot;n&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">12</span>,
+    <span style="color: #BB4444">&quot;millis&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">1</span>,
+    <span style="color: #BB4444">&quot;allPlans&quot;</span><span style="color: #666666">:</span> [
+        {
+            <span style="color: #BB4444">&quot;cursor&quot;</span><span style="color: #666666">:</span> <span style="color: #BB4444">&quot;BtreeCursor age_1&quot;</span>,
+            <span style="color: #BB4444">&quot;indexBounds&quot;</span><span style="color: #666666">:</span> [
+                [
+                    {
+                        <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">20</span>
+                    },
+                    {
+                        <span style="color: #BB4444">&quot;age&quot;</span><span style="color: #666666">:</span> <span style="color: #666666">30</span>
+                    }
+                ]
+            ]
+        }
+    ]
+}
 </pre></div>
 
 

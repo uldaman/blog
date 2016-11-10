@@ -61,20 +61,20 @@
 <p>存储过程 (procedure), 类似 mongodb 上的脚本, 就是把要执行的一组 SQL 语句放在 mysql 服务器上, 需要执行这组 SQL 语句时, 只要把参数及调用命令发送给 mysql 服务就可以了, 这样就大大降低了网络传输的损耗.</p>
 <h1 id="mysql">MySQL 存储过程的创建</h1>
 <p>MySQL 存储过程创建的格式:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cdcd00">CREATE</span> <span style="color: #cdcd00">PROCEDURE</span> <span style="color: #cccccc; border: 1px solid #FF0000">过程名</span> <span style="color: #cccccc">([</span><span style="color: #cccccc; border: 1px solid #FF0000">过程参数</span><span style="color: #cccccc">[,...]])</span>
-<span style="color: #cccccc">[</span><span style="color: #cccccc; border: 1px solid #FF0000">特性</span> <span style="color: #cccccc">...]</span> <span style="color: #cccccc; border: 1px solid #FF0000">过程体</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #AA22FF; font-weight: bold">CREATE</span> <span style="color: #AA22FF; font-weight: bold">PROCEDURE</span> <span style="border: 1px solid #FF0000">过程名</span> ([<span style="border: 1px solid #FF0000">过程参数</span>[,...]])
+[<span style="border: 1px solid #FF0000">特性</span> ...] <span style="border: 1px solid #FF0000">过程体</span>
 </pre></div>
 
 
 <p><br>
 例子:</p>
-<div class="codehilite" style="background: #000000"><pre style="line-height: 125%"><span></span><span style="color: #cccccc">mysql</span><span style="color: #3399cc">&gt;</span> <span style="color: #cdcd00">DELIMITER</span> <span style="color: #3399cc">//</span>
-<span style="color: #cccccc">mysql</span><span style="color: #3399cc">&gt;</span> <span style="color: #cdcd00">CREATE</span> <span style="color: #cdcd00">PROCEDURE</span> <span style="color: #cccccc">proc1(</span><span style="color: #cdcd00">OUT</span> <span style="color: #cccccc">s</span> <span style="color: #cd00cd">int</span><span style="color: #cccccc">)</span>
-    <span style="color: #3399cc">-&gt;</span> <span style="color: #cdcd00">BEGIN</span>
-    <span style="color: #3399cc">-&gt;</span> <span style="color: #cdcd00">SELECT</span> <span style="color: #cdcd00">COUNT</span><span style="color: #cccccc">(</span><span style="color: #3399cc">*</span><span style="color: #cccccc">)</span> <span style="color: #cdcd00">INTO</span> <span style="color: #cccccc">s</span> <span style="color: #cdcd00">FROM</span> <span style="color: #cdcd00">user</span><span style="color: #cccccc">;</span>
-    <span style="color: #3399cc">-&gt;</span> <span style="color: #cdcd00">END</span>
-    <span style="color: #3399cc">-&gt;</span> <span style="color: #3399cc">//</span>
-<span style="color: #cccccc">mysql</span><span style="color: #3399cc">&gt;</span> <span style="color: #cdcd00">DELIMITER</span><span style="color: #cccccc">;</span>
+<div class="codehilite" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>mysql<span style="color: #666666">&gt;</span> <span style="color: #AA22FF; font-weight: bold">DELIMITER</span> <span style="color: #666666">//</span>
+mysql<span style="color: #666666">&gt;</span> <span style="color: #AA22FF; font-weight: bold">CREATE</span> <span style="color: #AA22FF; font-weight: bold">PROCEDURE</span> proc1(<span style="color: #AA22FF; font-weight: bold">OUT</span> s <span style="color: #AA22FF">int</span>)
+    <span style="color: #666666">-&gt;</span> <span style="color: #AA22FF; font-weight: bold">BEGIN</span>
+    <span style="color: #666666">-&gt;</span> <span style="color: #AA22FF; font-weight: bold">SELECT</span> <span style="color: #AA22FF; font-weight: bold">COUNT</span>(<span style="color: #666666">*</span>) <span style="color: #AA22FF; font-weight: bold">INTO</span> s <span style="color: #AA22FF; font-weight: bold">FROM</span> <span style="color: #AA22FF; font-weight: bold">user</span>;
+    <span style="color: #666666">-&gt;</span> <span style="color: #AA22FF; font-weight: bold">END</span>
+    <span style="color: #666666">-&gt;</span> <span style="color: #666666">//</span>
+mysql<span style="color: #666666">&gt;</span> <span style="color: #AA22FF; font-weight: bold">DELIMITER</span>;
 </pre></div>
 
 
