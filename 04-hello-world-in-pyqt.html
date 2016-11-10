@@ -69,14 +69,14 @@
 <p>切换回下图序号 1 的标签, 可以看到多了一个 <code>Ui_first_window.py</code> 文件 (以 <strong>Ui</strong> 开头, 标明这是从 Qt 的 Ui 文件转换来的)</p>
 <p><img alt="" src="http://i68.tinypic.com/11qr6op.jpg" /></p>
 <p>这个文件有自测代码, 在 Eric 上按 <strong>F2</strong> 或者 点击下图中的图标, 就能打开刚才新建的窗体了.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&quot;__main__&quot;</span><span style="color: #f8f8f2">:</span>
-    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
-    <span style="color: #f8f8f2">app</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QApplication(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">argv)</span>
-    <span style="color: #f8f8f2">Dialog</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QtGui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QDialog()</span>
-    <span style="color: #f8f8f2">ui</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Ui_Dialog()</span>
-    <span style="color: #f8f8f2">ui</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setupUi(Dialog)</span>
-    <span style="color: #f8f8f2">Dialog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
-    <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exit(app</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exec_())</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #4070a0">&quot;__main__&quot;</span>:
+    <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">sys</span>
+    app <span style="color: #666666">=</span> QtGui<span style="color: #666666">.</span>QApplication(sys<span style="color: #666666">.</span>argv)
+    Dialog <span style="color: #666666">=</span> QtGui<span style="color: #666666">.</span>QDialog()
+    ui <span style="color: #666666">=</span> Ui_Dialog()
+    ui<span style="color: #666666">.</span>setupUi(Dialog)
+    Dialog<span style="color: #666666">.</span>show()
+    sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
 </pre></div>
 
 
@@ -91,26 +91,26 @@
 <p><img alt="" src="http://i67.tinypic.com/1411mcn.jpg" /></p>
 <p>这个文件要做些修改.</p>
 <p>去掉一个多余的点，将</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">.Ui_first_window</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Ui_Form</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">.Ui_first_window</span> <span style="color: #007020; font-weight: bold">import</span> Ui_Form
 </pre></div>
 
 
 <p><br>
 变成</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">Ui_first_window</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Ui_Form</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">Ui_first_window</span> <span style="color: #007020; font-weight: bold">import</span> Ui_Form
 </pre></div>
 
 
 <p><br>
 添加测试代码:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&quot;__main__&quot;</span><span style="color: #f8f8f2">:</span>
-    <span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
-    <span style="color: #f92672">from</span> <span style="color: #f8f8f2">PyQt4.QtGui</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">QApplication</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #4070a0">&quot;__main__&quot;</span>:
+    <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">sys</span>
+    <span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">PyQt4.QtGui</span> <span style="color: #007020; font-weight: bold">import</span> QApplication
 
-    <span style="color: #f8f8f2">app</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QApplication(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">argv)</span>
-    <span style="color: #f8f8f2">dlg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Dialog()</span>
-    <span style="color: #f8f8f2">dlg</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">show()</span>
-    <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exit(app</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">exec_())</span>
+    app <span style="color: #666666">=</span> QApplication(sys<span style="color: #666666">.</span>argv)
+    dlg <span style="color: #666666">=</span> Dialog()
+    dlg<span style="color: #666666">.</span>show()
+    sys<span style="color: #666666">.</span>exit(app<span style="color: #666666">.</span>exec_())
 </pre></div>
 
 

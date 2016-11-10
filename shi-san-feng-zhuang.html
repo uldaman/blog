@@ -55,17 +55,17 @@
 
     <p>封装, 面向对象思想三大特性之一, 概念就不多说了, 可以简单的理解成, 标准的 java 程序中, 应该通过类的方法来操作类的属性, 类的属性不应该设为 public.</p>
 <p>不过 Java 和 C++ 不一样, 它提供了 getter/setter 方法用于属性的读写, 直接上例子:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">HelloWorld</span> <span style="color: #f92672">{</span>
-    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">HelloWorld</span> <span style="color: #666666">{</span>
+    <span style="color: #007020; font-weight: bold">private</span> String name<span style="color: #666666">;</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">getName</span><span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> String <span style="color: #06287e">getName</span><span style="color: #666666">()</span> <span style="color: #666666">{</span>
+        <span style="color: #007020; font-weight: bold">return</span> name<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">_name</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-        <span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">_name</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">setName</span><span style="color: #666666">(</span>String _name<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        name <span style="color: #666666">=</span> _name<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 

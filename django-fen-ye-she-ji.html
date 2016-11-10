@@ -57,13 +57,13 @@
 <p>首先, 分页都是通过 get 不同地址来实现的:
 <img alt="" src="http://oi62.tinypic.com/xbwg0y.jpg" /></p>
 <p>分发 url 时, 通过下面这种方法, 使 url 有默认页:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/(?P&lt;p&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, All),
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>url(r&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/(?P&lt;p&gt;\d*)/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, All),
 url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^all/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, All, {&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;p&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;:&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;}),
 </pre></div>
 
 
 <p>再来看 All 函数 :</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.utils.safestring &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; mark_safe
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.utils.safestring &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; mark_safe
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):
     currentPage &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; int(p)

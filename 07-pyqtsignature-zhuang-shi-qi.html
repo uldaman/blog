@@ -62,14 +62,14 @@
 <a href="http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator">http://pyqt.sourceforge.net/Docs/PyQt4/old_style_signals_slots.html#the-qtcore-pyqtsignature-decorator</a><br>
 <a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot</a></p>
 <p>举个例子:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">QObject</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">connect(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pushButton,</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SIGNAL(_fromUtf8(</span><span style="color: #e6db74">&quot;clicked(bool)&quot;</span><span style="color: #f8f8f2">)),</span> <span style="color: #f8f8f2">self,</span> <span style="color: #f8f8f2">QtCore</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SLOT(_fromUtf8(</span><span style="color: #e6db74">&quot;on_pushButton(bool)&quot;</span><span style="color: #f8f8f2">)))</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>QtCore<span style="color: #666666">.</span>QObject<span style="color: #666666">.</span>connect(<span style="color: #007020">self</span><span style="color: #666666">.</span>pushButton, QtCore<span style="color: #666666">.</span>SIGNAL(_fromUtf8(<span style="color: #4070a0">&quot;clicked(bool)&quot;</span>)), <span style="color: #007020">self</span>, QtCore<span style="color: #666666">.</span>SLOT(_fromUtf8(<span style="color: #4070a0">&quot;on_pushButton(bool)&quot;</span>)))
 
-<span style="color: #a6e22e">@pyqtSignature</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">on_pushButton</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">checked):</span>
-    <span style="color: #e6db74">&quot;&quot;&quot;</span>
-<span style="color: #e6db74">    Slot documentation goes here.</span>
-<span style="color: #e6db74">    &quot;&quot;&quot;</span>
-    <span style="color: #66d9ef">print</span> <span style="color: #e6db74">&quot;111&quot;</span>
+<span style="color: #555555; font-weight: bold">@pyqtSignature</span>(<span style="color: #4070a0">&quot;&quot;</span>)
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">on_pushButton</span>(<span style="color: #007020">self</span>, checked):
+    <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">    Slot documentation goes here.</span>
+<span style="color: #4070a0; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #007020; font-weight: bold">print</span> <span style="color: #4070a0">&quot;111&quot;</span>
 </pre></div>
 
 

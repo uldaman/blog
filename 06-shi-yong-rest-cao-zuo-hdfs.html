@@ -64,39 +64,39 @@
 </div>
 <p>要使用 rest 操作 HDFS, 需要先开启集群的 rest 服务.</p>
 <h1 id="vim-httpfs-envsh">vim httpfs-env.sh</h1>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HTTPFS_HTTP_PORT</span><span style="color: #f92672">=</span>14000
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">export</span> <span style="color: #bb60d5">HTTPFS_HTTP_PORT</span><span style="color: #666666">=</span>14000
 </pre></div>
 
 
 <p><br></p>
 <h1 id="vim-core-sitexml">vim core-site.xml</h1>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;property&gt;</span>
-    <span style="color: #75715e">&lt;!--可使用节点--&gt;</span>
-    <span style="color: #f92672">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #f92672">&lt;/name&gt;</span>
-    <span style="color: #f92672">&lt;value&gt;</span>*<span style="color: #f92672">&lt;/value&gt;</span>
-<span style="color: #f92672">&lt;/property&gt;</span>
-<span style="color: #f92672">&lt;property&gt;</span>
-    <span style="color: #75715e">&lt;!--可使用用户组--&gt;</span>
-    <span style="color: #f92672">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #f92672">&lt;/name&gt;</span>
-    <span style="color: #f92672">&lt;value&gt;</span>*<span style="color: #f92672">&lt;/value&gt;</span>
-<span style="color: #f92672">&lt;/property&gt;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #062873; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #60a0b0; font-style: italic">&lt;!--可使用节点--&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #062873; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;value&gt;</span>*<span style="color: #062873; font-weight: bold">&lt;/value&gt;</span>
+<span style="color: #062873; font-weight: bold">&lt;/property&gt;</span>
+<span style="color: #062873; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #60a0b0; font-style: italic">&lt;!--可使用用户组--&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #062873; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;value&gt;</span>*<span style="color: #062873; font-weight: bold">&lt;/value&gt;</span>
+<span style="color: #062873; font-weight: bold">&lt;/property&gt;</span>
 </pre></div>
 
 
 <p><br></p>
 <h1 id="hdfs-sitexml">hdfs-site.xml</h1>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;property&gt;</span>
-    <span style="color: #75715e">&lt;!--启动 webhdfs--&gt;</span>
-    <span style="color: #f92672">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #f92672">&lt;/name&gt;</span>
-    <span style="color: #f92672">&lt;value&gt;</span>true<span style="color: #f92672">&lt;/value&gt;</span>
-<span style="color: #f92672">&lt;/property&gt;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #062873; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #60a0b0; font-style: italic">&lt;!--启动 webhdfs--&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #062873; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #062873; font-weight: bold">&lt;value&gt;</span>true<span style="color: #062873; font-weight: bold">&lt;/value&gt;</span>
+<span style="color: #062873; font-weight: bold">&lt;/property&gt;</span>
 </pre></div>
 
 
 <p><br></p>
 <h1 id="namenode">重启 NameNode</h1>
 <p>修改好配置文件后, 重新启动 NameNode:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>./stop-all.sh
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>./stop-all.sh
 ./start-all.sh
 ./httpfs.sh start
 </pre></div>

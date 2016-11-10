@@ -59,7 +59,7 @@ Lua 中的函数是带有词法定界（lexical scoping）的第一类值（firs
 <p><strong>第一类值（first-class values）</strong>是指,<strong> </strong>在 Lua 中函数和其他值（数值、字符串）一样, 函数可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值;
 正因為函數也可以被嵌套定義在另一個函數內部, 假设函数 f2 定义在函数 f1 中, 那么就称 f2 为 f1 的内嵌(inner)函数, f1 为 f2 的外包(enclosing)函数, 外包和内嵌都具有传递性, 即 f2 的内嵌必然是 f1的内嵌, 而 f1 的外包也一定是 f2 的外包, 内嵌函数能访问外包函数已创建的所有局部变量, 这种特性便是所谓的<strong>词法定界（lexical scoping）, </strong>而这些局部变量则称为该内嵌函数的外部局部变量(external local variable)或 <strong>upvalue.</strong></p>
 <p>简单的说闭包是一个函数加上它可以正确访问的 upvalue, 这个函数一般是一个匿名函数, 并且定义在另一个函数内部, 这个函数可以访问定义在外部函数内的成员变量, 参数, 以及全局函数, 如:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; f1(n)
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; f1(n)
    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 函数参数也是局部变量  &lt;/span&gt;
    &lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; ()
       &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(n) &lt;span style=&quot;color: #008000&quot;&gt;--&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 引用外包函数的局部变量  &lt;/span&gt;
@@ -72,7 +72,7 @@ Lua 中的函数是带有词法定界（lexical scoping）的第一类值（firs
 <hr />
 <p><strong>通過閉包來模擬面向對象</strong></p>
 <p>上一篇筆記, 通過 table 模擬了面向對象, 這一次, 通過閉包來模擬.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; People()
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; People()
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; tab =&lt;span style=&quot;color: #000000&quot;&gt; {}
 
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; tab:sayHi()
@@ -88,7 +88,7 @@ p.sayHi()&lt;/span&gt;
 
 
 <p>再來看看怎麼繼承:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Man()
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Man()
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; tab =&lt;span style=&quot;color: #000000&quot;&gt; People()
 
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; tab:sayHi()

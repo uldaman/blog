@@ -69,32 +69,32 @@
 在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!</p>
 <h1 id="slots">slots (限制动态属性)</h1>
 <p>作为一种动态语言, python 支持 在类实例化后, 为实例动态添加属性/方法的功能.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
-    <span style="color: #66d9ef">pass</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">pass</span>
 
-<span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student()</span>
-<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Michael&#39;</span> <span style="color: #75715e"># 动态给实例绑定一个属性</span>
-<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span>
+s <span style="color: #666666">=</span> Student()
+s<span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Michael&#39;</span> <span style="color: #60a0b0; font-style: italic"># 动态给实例绑定一个属性</span>
+<span style="color: #007020; font-weight: bold">print</span> s<span style="color: #666666">.</span>name
 </pre></div>
 
 
 <p>然而在某些情况下, 我们可能并不希望这样用, 此时, 可以通过类的 <strong>__slots__</strong> 变量, 来限制上面说到的功能.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
-    <span style="color: #f8f8f2">__slots__</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;name&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># 用tuple定义允许绑定的属性名称</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
+    __slots__ <span style="color: #666666">=</span> (<span style="color: #4070a0">&#39;name&#39;</span>, <span style="color: #4070a0">&#39;age&#39;</span>) <span style="color: #60a0b0; font-style: italic"># 用tuple定义允许绑定的属性名称</span>
 
 
 
-<span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student()</span> <span style="color: #75715e"># 创建新的实例</span>
-<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Michael&#39;</span> <span style="color: #75715e"># 绑定属性&#39;name&#39;</span>
-<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">age</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">25</span> <span style="color: #75715e"># 绑定属性 &#39;age&#39;</span>
+s <span style="color: #666666">=</span> Student() <span style="color: #60a0b0; font-style: italic"># 创建新的实例</span>
+s<span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Michael&#39;</span> <span style="color: #60a0b0; font-style: italic"># 绑定属性&#39;name&#39;</span>
+s<span style="color: #666666">.</span>age <span style="color: #666666">=</span> <span style="color: #40a070">25</span> <span style="color: #60a0b0; font-style: italic"># 绑定属性 &#39;age&#39;</span>
 
-<span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">99</span> <span style="color: #75715e"># 绑定未在 __slots__ 中指定的属性 &#39;score&#39;</span>
+s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #40a070">99</span> <span style="color: #60a0b0; font-style: italic"># 绑定未在 __slots__ 中指定的属性 &#39;score&#39;</span>
 </pre></div>
 
 
 <p><br>
 当我们运行 <code>s.score = 99</code> 时, 就会出错:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Traceback (most recent call last):
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;
 </pre></div>
@@ -105,50 +105,50 @@ AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;
 <h1 id="property-gettersetter">property (神奇的 getter/setter)</h1>
 <p>在 Java 中, 有一种 JavaBean 规范, 即所有属性对外部那是 private 的, 想要访问/设置, 必须通过 getter 和 setter 方法.</p>
 <p>这在 Python 中有更好的实现, 那就是 <strong>property</strong>, 它是一个装饰器, 负责把一个__方法变成属性__调用.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #a6e22e">@property</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">score</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_score</span>
+    <span style="color: #555555; font-weight: bold">@property</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">score</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>_score
 
-    <span style="color: #a6e22e">@score.setter</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">score</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">value):</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">isinstance(value,</span> <span style="color: #f8f8f2">int):</span>
-            <span style="color: #66d9ef">raise</span> <span style="color: #a6e22e">ValueError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;score must be an integer!&#39;</span><span style="color: #f8f8f2">)</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">value</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">0</span> <span style="color: #f92672">or</span> <span style="color: #f8f8f2">value</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">100</span><span style="color: #f8f8f2">:</span>
-            <span style="color: #66d9ef">raise</span> <span style="color: #a6e22e">ValueError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;score must between 0 ~ 100!&#39;</span><span style="color: #f8f8f2">)</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_score</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">value</span>
+    <span style="color: #555555; font-weight: bold">@score.setter</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">score</span>(<span style="color: #007020">self</span>, value):
+        <span style="color: #007020; font-weight: bold">if</span> <span style="color: #007020; font-weight: bold">not</span> <span style="color: #007020">isinstance</span>(value, <span style="color: #007020">int</span>):
+            <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #007020">ValueError</span>(<span style="color: #4070a0">&#39;score must be an integer!&#39;</span>)
+        <span style="color: #007020; font-weight: bold">if</span> value <span style="color: #666666">&lt;</span> <span style="color: #40a070">0</span> <span style="color: #007020; font-weight: bold">or</span> value <span style="color: #666666">&gt;</span> <span style="color: #40a070">100</span>:
+            <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #007020">ValueError</span>(<span style="color: #4070a0">&#39;score must between 0 ~ 100!&#39;</span>)
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>_score <span style="color: #666666">=</span> value
 </pre></div>
 
 
 <p><br>
 把一个 <strong>getter</strong> 方法变成属性, 只需要加上 <strong>@property</strong> 就可以了, 此时, <strong>@property</strong> 本身又创建了另一个装饰器 <strong>@xxx.setter</strong>, 负责把一个 <strong>setter</strong> 方法变成属性赋值, 于是, 我们就拥有一个可控的属性操作:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student()</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">60</span> <span style="color: #75715e"># OK, 实际转化为 s.set_score(60)</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span> <span style="color: #75715e"># OK, 实际转化为 s.get_score()</span>
-<span style="color: #ae81ff">60</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">9999</span>
-<span style="color: #f8f8f2">Traceback</span> <span style="color: #f8f8f2">(most</span> <span style="color: #f8f8f2">recent</span> <span style="color: #f8f8f2">call</span> <span style="color: #f8f8f2">last):</span>
-  <span style="color: #f92672">...</span>
-<span style="color: #a6e22e">ValueError</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">score</span> <span style="color: #f8f8f2">must</span> <span style="color: #f8f8f2">between</span> <span style="color: #ae81ff">0</span> <span style="color: #f92672">~</span> <span style="color: #ae81ff">100</span><span style="color: #960050; background-color: #1e0010">!</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #40a070">60</span> <span style="color: #60a0b0; font-style: italic"># OK, 实际转化为 s.set_score(60)</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #60a0b0; font-style: italic"># OK, 实际转化为 s.get_score()</span>
+<span style="color: #40a070">60</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score <span style="color: #666666">=</span> <span style="color: #40a070">9999</span>
+Traceback (most recent call last):
+  <span style="color: #666666">...</span>
+<span style="color: #007020">ValueError</span>: score must between <span style="color: #40a070">0</span> <span style="color: #666666">~</span> <span style="color: #40a070">100</span><span style="border: 1px solid #FF0000">!</span>
 </pre></div>
 
 
 <p><br>
 不仅如此, 还可以定义只读属性, 只定义 <strong>getter</strong> 方法, 不定义 <strong>setter</strong> 方法就是一个只读属性:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #a6e22e">@property</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">birth</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_birth</span>
+    <span style="color: #555555; font-weight: bold">@property</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">birth</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>_birth
 
-    <span style="color: #a6e22e">@birth.setter</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">birth</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">value):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_birth</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">value</span>
+    <span style="color: #555555; font-weight: bold">@birth.setter</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">birth</span>(<span style="color: #007020">self</span>, value):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>_birth <span style="color: #666666">=</span> value
 
-    <span style="color: #a6e22e">@property</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">age</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #ae81ff">2014</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_birth</span>
+    <span style="color: #555555; font-weight: bold">@property</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">age</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">2014</span> <span style="color: #666666">-</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>_birth
 </pre></div>
 
 
@@ -156,147 +156,147 @@ AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;
 <h1 id="str-repr">str 与 repr (打印类)</h1>
 <p>当我们需要打指定 <strong>print</strong> 类或者直接输入类时的输出内容, 就可以定制 <strong>__str__</strong> 和 <strong>__repr__</strong>,
 直接显示变量调用的是 <strong>__str__</strong>, print 时调用的是是 <strong>__repr__</strong>.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">name):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">name</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>, name):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__str__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&#39;Student object (name = %s)&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__str__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&#39;Student object (name = </span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0">)&#39;</span> <span style="color: #666666">%</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>name
 
-    <span style="color: #f8f8f2">__repr__</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">__str__</span>
+    __repr__ <span style="color: #666666">=</span> __str__
 </pre></div>
 
 
 <h1 id="iter">iter (遍历类)</h1>
 <p>如果一个类想被用于 <strong>for &hellip; in</strong> 循环, 类似 list 或 tuple 那样, 就必须实现一个 <strong>__iter__</strong> 方法, 该方法返回一个迭代对象, 然后, Python 的 for 循环就会不断调用该迭代对象的 <strong>next()</strong> 方法拿到循环的下一个值, 直到遇到 <strong>StopIteration</strong> 错误时退出循环.</p>
 <p>我们以斐波那契数列为例, 写一个 Fib 类, 可以作用于 for 循环:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Fib</span><span style="color: #f8f8f2">(object):</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">a,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">b</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span> <span style="color: #75715e"># 初始化两个计数器 a, b</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Fib</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>a, <span style="color: #007020">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> <span style="color: #40a070">0</span>, <span style="color: #40a070">1</span> <span style="color: #60a0b0; font-style: italic"># 初始化两个计数器 a, b</span>
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__iter__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span> <span style="color: #75715e"># 实例本身就是迭代对象, 故返回自己</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__iter__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">self</span> <span style="color: #60a0b0; font-style: italic"># 实例本身就是迭代对象, 故返回自己</span>
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">next</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">a,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">b</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">b,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">a</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">b</span> <span style="color: #75715e"># 计算下一个值</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">a</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">100000</span><span style="color: #f8f8f2">:</span> <span style="color: #75715e"># 退出循环的条件</span>
-            <span style="color: #66d9ef">raise</span> <span style="color: #a6e22e">StopIteration</span><span style="color: #f8f8f2">()</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">a</span> <span style="color: #75715e"># 返回下一个值</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">next</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>a, <span style="color: #007020">self</span><span style="color: #666666">.</span>b <span style="color: #666666">=</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>b, <span style="color: #007020">self</span><span style="color: #666666">.</span>a <span style="color: #666666">+</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>b <span style="color: #60a0b0; font-style: italic"># 计算下一个值</span>
+        <span style="color: #007020; font-weight: bold">if</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>a <span style="color: #666666">&gt;</span> <span style="color: #40a070">100000</span>: <span style="color: #60a0b0; font-style: italic"># 退出循环的条件</span>
+            <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #007020">StopIteration</span>()
+        <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>a <span style="color: #60a0b0; font-style: italic"># 返回下一个值</span>
 </pre></div>
 
 
 <p><br>
 使用结果如下:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">Fib():</span>
-<span style="color: #f92672">...</span>     <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">n</span>
-<span style="color: #f92672">...</span>
-<span style="color: #ae81ff">1</span>
-<span style="color: #ae81ff">1</span>
-<span style="color: #ae81ff">2</span>
-<span style="color: #ae81ff">3</span>
-<span style="color: #ae81ff">5</span>
-<span style="color: #f92672">...</span>
-<span style="color: #ae81ff">46368</span>
-<span style="color: #ae81ff">75025</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">for</span> n <span style="color: #007020; font-weight: bold">in</span> Fib():
+<span style="color: #666666">...</span>     <span style="color: #007020; font-weight: bold">print</span> n
+<span style="color: #666666">...</span>
+<span style="color: #40a070">1</span>
+<span style="color: #40a070">1</span>
+<span style="color: #40a070">2</span>
+<span style="color: #40a070">3</span>
+<span style="color: #40a070">5</span>
+<span style="color: #666666">...</span>
+<span style="color: #40a070">46368</span>
+<span style="color: #40a070">75025</span>
 </pre></div>
 
 
 <h1 id="call">call (实例自调用)</h1>
 <p>当调用一个类的实例方法时, 可以用 xxx.method() 来调用, 那能不能直接在实例本身上调用呢, 像 xxx() 这样?</p>
 <p>任何类, 只需要定义一个 <strong>__call__</strong> 方法, 就可以直接对实例进行调用.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">name):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">name</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>, name):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> name
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__call__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">print</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;My name is %s.&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name)</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__call__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020; font-weight: bold">print</span>(<span style="color: #4070a0">&#39;My name is </span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0">.&#39;</span> <span style="color: #666666">%</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>name)
 </pre></div>
 
 
 <p>调用方式如下:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student(</span><span style="color: #e6db74">&#39;Michael&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s()</span>
-<span style="color: #f8f8f2">My</span> <span style="color: #f8f8f2">name</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">Michael</span><span style="color: #f92672">.</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student(<span style="color: #4070a0">&#39;Michael&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> s()
+My name <span style="color: #007020; font-weight: bold">is</span> Michael<span style="color: #666666">.</span>
 </pre></div>
 
 
 <p><strong>__call__</strong>  还可以定义参数, 对实例进行直接调用就好比对一个函数进行调用一样, 所以你完全可以把对象看成函数, 把函数看成对象.</p>
 <p>如果需要判断一个对象是否能被调用, 通过 <strong>callable()</strong> 函数就可以了.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">callable(Student())</span>
-<span style="color: #f8f8f2">True</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020">callable</span>(Student())
+<span style="color: #007020">True</span>
 </pre></div>
 
 
 <h1 id="getattr">getattr (动态生成属性)</h1>
 <p>正常情况下, 当我们调用类的方法或属性时, 如果不存在, 就会报错. 比如定义 Student 类:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Michael&#39;</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Michael&#39;</span>
 </pre></div>
 
 
 <p><br>
 调用 name 属性, 没问题, 但是, 调用不存在的 score 属性, 就有问题了:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student()</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span>
-<span style="color: #f8f8f2">Michael</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span>
-<span style="color: #f8f8f2">Traceback</span> <span style="color: #f8f8f2">(most</span> <span style="color: #f8f8f2">recent</span> <span style="color: #f8f8f2">call</span> <span style="color: #f8f8f2">last):</span>
-  <span style="color: #f92672">...</span>
-<span style="color: #a6e22e">AttributeError</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;Student&#39;</span> <span style="color: #f8f8f2">object</span> <span style="color: #f8f8f2">has</span> <span style="color: #f8f8f2">no</span> <span style="color: #f8f8f2">attribute</span> <span style="color: #e6db74">&#39;score&#39;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">print</span> s<span style="color: #666666">.</span>name
+Michael
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">print</span> s<span style="color: #666666">.</span>score
+Traceback (most recent call last):
+  <span style="color: #666666">...</span>
+<span style="color: #007020">AttributeError</span>: <span style="color: #4070a0">&#39;Student&#39;</span> <span style="color: #007020">object</span> has no attribute <span style="color: #4070a0">&#39;score&#39;</span>
 </pre></div>
 
 
 <p>错误信息很清楚地告诉我们, 没有找到 score 这个 attribute.</p>
 <p>要避免这个错误, 除了可以加上一个 score 属性外, Python 还有另一个机制, 那就是写一个 <strong>__getattr__</strong> 方法, 动态返回一个属性. 修改如下:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Michael&#39;</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>):
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>name <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Michael&#39;</span>
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__getattr__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">attr):</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">attr</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;score&#39;</span><span style="color: #f8f8f2">:</span>
-            <span style="color: #66d9ef">return</span> <span style="color: #ae81ff">99</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__getattr__</span>(<span style="color: #007020">self</span>, attr):
+        <span style="color: #007020; font-weight: bold">if</span> attr <span style="color: #666666">==</span> <span style="color: #4070a0">&#39;score&#39;</span>:
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">99</span>
 </pre></div>
 
 
 <p><br>
 当调用不存在的属性时, 比如 score, Python 解释器会试图调用 <strong>__getattr__</strong>(self, &lsquo;score&rsquo;) 来尝试获得属性, 这样, 我们就有机会返回score的值:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Student()</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span>
-<span style="color: #e6db74">&#39;Michael&#39;</span>
-<span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">score</span>
-<span style="color: #ae81ff">99</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> Student()
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>name
+<span style="color: #4070a0">&#39;Michael&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>score
+<span style="color: #40a070">99</span>
 </pre></div>
 
 
 <p><br>
 __返回函数__也是完全可以的:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__getattr__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">attr):</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">attr</span><span style="color: #f92672">==</span><span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f8f8f2">:</span>
-            <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">25</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__getattr__</span>(<span style="color: #007020">self</span>, attr):
+        <span style="color: #007020; font-weight: bold">if</span> attr<span style="color: #666666">==</span><span style="color: #4070a0">&#39;age&#39;</span>:
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">lambda</span>: <span style="color: #40a070">25</span>
 </pre></div>
 
 
 <p><br>
 只是调用方式要变为:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&gt;&gt;&gt;</span> <span style="color: #f8f8f2">s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">age()</span>
-<span style="color: #ae81ff">25</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> s<span style="color: #666666">.</span>age()
+<span style="color: #40a070">25</span>
 </pre></div>
 
 
 <p><br>
 注意, 只有在没有找到属性的情况下, 才调用 <strong>__getattr__</strong>, 已有的属性, 比如 name, 不会在 <strong>__getattr__</strong> 中查找.</p>
 <p>此外, 注意, 如果我们访问一个类中没有定义, 又没有在 <strong>__getattr__</strong> 中定义的属性, 就会返回 <strong>None</strong>, 这是因为我们定义的 <strong>__getattr__</strong> 默认返回就是 None, 所以按照约定, 应该 <strong>AttributeError</strong> 的错误:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Student</span><span style="color: #f8f8f2">(object):</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Student</span>(<span style="color: #007020">object</span>):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__getattr__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">attr):</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">attr</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;age&#39;</span><span style="color: #f8f8f2">:</span>
-            <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">25</span>
-        <span style="color: #66d9ef">raise</span> <span style="color: #a6e22e">AttributeError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;</span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74">Student</span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74"> object has no attribute </span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74">%s</span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74">&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">attr)</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__getattr__</span>(<span style="color: #007020">self</span>, attr):
+        <span style="color: #007020; font-weight: bold">if</span> attr <span style="color: #666666">==</span> <span style="color: #4070a0">&#39;age&#39;</span>:
+            <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">lambda</span>: <span style="color: #40a070">25</span>
+        <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #007020">AttributeError</span>(<span style="color: #4070a0">&#39;</span><span style="color: #4070a0; font-weight: bold">\&#39;</span><span style="color: #4070a0">Student</span><span style="color: #4070a0; font-weight: bold">\&#39;</span><span style="color: #4070a0"> object has no attribute </span><span style="color: #4070a0; font-weight: bold">\&#39;</span><span style="color: #70a0d0; font-style: italic">%s</span><span style="color: #4070a0; font-weight: bold">\&#39;</span><span style="color: #4070a0">&#39;</span> <span style="color: #666666">%</span> attr)
 </pre></div>
 
 
@@ -304,7 +304,7 @@ __返回函数__也是完全可以的:</p>
 我们完成可以为类直接定义新属性, 使用 <strong>__getattr__</strong> 方法到底有什么用处呢?</p>
 <p><strong>举个例子:</strong><br>(参考: <a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0013946328809098c1be08a2c7e4319bd60269f62be04fa000">廖雪峰老师教程</a>)</p>
 <p>现在很多网站都搞 <strong>REST API</strong>, 比如新浪微博、豆瓣啥的:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>http://api.server/user/friends
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>http://api.server/user/friends
 http://api.server/user/timeline/list
 </pre></div>
 
@@ -312,7 +312,7 @@ http://api.server/user/timeline/list
 <p><br>
 如果要调用这些 API, 那不是要给每个 URL 对应的 API 都写一个方法? 这还不得累死, 而且, API 一旦改动, 我们写的方法也要改&hellip;</p>
 <p>这里就可以利用完全动态的 <strong>__getattr__</strong>, 我们可以写出一个链式调用:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>class Chain(object):
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>class Chain(object):
 
     def __init__(self, path=&#39;&#39;):
         self._path = path
@@ -327,7 +327,7 @@ http://api.server/user/timeline/list
 
 <p><br>
 试试:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; Chain().status.user.timeline.list
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; Chain().status.user.timeline.list
 &#39;/status/user/timeline/list&#39;
 </pre></div>
 

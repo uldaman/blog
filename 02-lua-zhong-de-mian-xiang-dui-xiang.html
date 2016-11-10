@@ -55,7 +55,7 @@
 
     <p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
 <p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
 People.sayHi &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;()
     &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi People!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
@@ -63,14 +63,14 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;functio
 
 
 <p>或者可以這樣:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; People.sayHi()
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; People.sayHi()
      &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi People!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>這就相當於創建一個類 People, 那怎麼生成這個類的實例呢? 它的構造函數呢?往下看:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;()
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;()
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; {}
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(People) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
         self[key] &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; var
@@ -84,7 +84,7 @@ p1.sayHi()&lt;/span&gt;
 
 
 <p>我們還可以為這個類添加帶參數的構造函數:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(name)
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(name)
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; {}
     self.name &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; name;
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(People) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
@@ -100,7 +100,7 @@ p1.sayHi()&lt;/span&gt;
 
 <p>現在, 我們類可以通過 new() 方法來實例化了.</p>
 <p>新問題是, 我們都知道, C++ 類有個 this 指針, 這點, 又要怎麼實現了? 可以借助 Lua 的語法糖(冒號):</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>People.sayHello = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(this)
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>People.sayHello = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(this)
     &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(this.name .. &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt; Say Hello!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 
@@ -110,7 +110,7 @@ p3:sayHello()&lt;/span&gt;
 
 
 <p>this 指針現在也有了, 那 C++ 類可以繼承, Lua 中又怎麼實現呢?</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Man =&lt;span style=&quot;color: #000000&quot;&gt; {}
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Man =&lt;span style=&quot;color: #000000&quot;&gt; {}
 Man.new &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(this)
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; People.new()
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(Man) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
@@ -123,14 +123,14 @@ Man.new &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;
 
 <p>這裡先生成一個 Peolple &ldquo;對象&rdquo;, 然後把這個對象 Key 對應的 value 替換成 Man 中 Key 對應的 value, 這樣的話, 如果 Man 中沒有 &ldquo;重寫&rdquo; People 中的方法, 那麼, 返回的 self 中的方法還是為 People 中的方法, 如果 &ldquo;重寫&rdquo; 了 People 中的方法, 因為做了替換操作, 所以返回的 self 中的方法其實是對應的 Man 中的方法, 這裡比較難理解, 我在下面錄製了個視頻來解釋這點.</p>
 <p>然後, 我們來重寫下 sayHi() 方法:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>Man.sayHi = &lt;span style=&quot;color: #0000ff&quot;&gt;function()&lt;/span&gt;
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>Man.sayHi = &lt;span style=&quot;color: #0000ff&quot;&gt;function()&lt;/span&gt;
     &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi Man&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>不管怎麼樣, 我們現在已經可以實現多態了:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 多態(tab)
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 多態(tab)
     tab.sayHi()
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 多態(m)&lt;/span&gt;

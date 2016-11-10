@@ -54,7 +54,7 @@
 <p>2、通过 Javac 命令对该 java 文件进行编译.</p>
 <p>3、通过 java 命令执行生成的 class 文件.</p>
 <p>新建一个 txt 文件, 然后改名为 HelloWorld.java, 用记事本打开该文件, 输写代码:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -162,12 +162,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#pragma pack (push,1)</span>
-<span style="color: #66d9ef">typedef</span> <span style="color: #66d9ef">struct</span> <span style="color: #f8f8f2">_RoleTree</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwLBase;</span>      <span style="color: #75715e">//+0x0    左树</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwSBase;</span>      <span style="color: #75715e">//+0x4    上一层树的地址</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwRBase;</span>      <span style="color: #75715e">//+0x8    右树</span>
-    <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">iID ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">#pragma pack (push,1)</span>
+<span style="color: #007020; font-weight: bold">typedef</span> <span style="color: #007020; font-weight: bold">struct</span> _RoleTree {
+    DWORD dwLBase;      <span style="color: #60a0b0; font-style: italic">//+0x0    左树</span>
+    DWORD dwSBase;      <span style="color: #60a0b0; font-style: italic">//+0x4    上一层树的地址</span>
+    DWORD dwRBase;      <span style="color: #60a0b0; font-style: italic">//+0x8    右树</span>
+    <span style="color: #902000">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -185,8 +185,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">HRESULT</span> <span style="color: #f8f8f2">APIENTRY</span> <span style="color: #f8f8f2">hkIDirect3D9</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">CreateDevice(UINT</span> <span style="color: #f8f8f2">Adapter,</span> <span style="color: #f8f8f2">D3DDEVTYPE</span> <span style="color: #f8f8f2">DeviceType,</span> <span style="color: #f8f8f2">HWND</span> <span style="color: #f8f8f2">hFocusWindow</span>
-    <span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">DWORD ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9<span style="color: #666666">::</span>CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
+    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -250,12 +250,12 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">void</span> <span style="color: #f8f8f2">Qt_Notepad</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">OpenFile()</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">QString</span> <span style="color: #f8f8f2">fileName</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">QFileDialog</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">getOpenFileName(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Open File&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">NULL,</span> <span style="color: #e6db74">&quot;file (*.*)&quot;</span><span style="color: #f8f8f2">);</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">void</span> Qt_Notepad<span style="color: #666666">::</span>OpenFile() {
+    QString fileName <span style="color: #666666">=</span> QFileDialog<span style="color: #666666">::</span>getOpenFileName(<span style="color: #007020; font-weight: bold">this</span>, <span style="color: #4070a0">&quot;Open File&quot;</span>, <span style="color: #007020">NULL</span>, <span style="color: #4070a0">&quot;file (*.*)&quot;</span>);
 
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">fileName.isEmpty())</span> <span style="color: #f8f8f2">{</span>
-        <span style="color: #f8f8f2">QFile</span> <span style="color: #f8f8f2">file;</span>
-        <span style="color: #f8f8f2">file ...</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+    <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>fileName.isEmpty()) {
+        QFile file;
+        file ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 

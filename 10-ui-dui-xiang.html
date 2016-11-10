@@ -64,7 +64,7 @@ connect(ui.pushButton_6, SIGNAL(clicked()), this, SLOT(On_Out()));</blockquote>
 <p>在 VS + Qt 开发环境中, 通过使用 Qt Designer 编辑 *.ui 文件来设计界面.</p>
 <p><img alt="" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></p>
 <p>设计好界面后, vs 就会把 *.ui 文件转换成对应的头文件, 这个头文件中包含了一个界面类.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Ui_DemoClass
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Ui_DemoClass
 {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     QLabel &lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt;label;
@@ -100,7 +100,7 @@ connect(ui.pushButton_6, SIGNAL(clicked()), this, SLOT(On_Out()));</blockquote>
 
 <p>看到这里就比较明白了, 这个界面类声明了界面上所用到的控件对象, 通过 setupUi 成员函数来设计界面布局.</p>
 <p>使用的时候, 在自定义类里面引用这个界面类, 声明一个UI的成员对象, 调用setUPUi函数.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;Ui::DemoClass ui;
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;Ui::DemoClass ui;
 ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;);
 </pre></div>
 

@@ -62,7 +62,7 @@
 </div>
 <h2 id="_1">内嵌对象</h2>
 <p>所谓内嵌对象, 就是类似 Dict 那样, 把另一个对象做为 Dict 中某个字段的 value, 如:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>{name: &#39;张三&#39;, school: {name: &#39;理工大学&#39;, city: &#39;上海&#39;}}
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>{name: &#39;张三&#39;, school: {name: &#39;理工大学&#39;, city: &#39;上海&#39;}}
 </pre></div>
 
 
@@ -81,7 +81,7 @@
 <p>很明显这种方式的__缺点__就是取数据时要取__多次__(Mongodb 不支持 SQL 中的 Join, 即联合查询).</p>
 <p>除了自己去实现这种引用关系外, Mongodb 也提供了自己的引用设计: <strong>DBRefs</strong></p>
 <p>语法如下:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>{
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>{
     $ref:
     $id:
     $db:
@@ -97,7 +97,7 @@
 <li>db: 可选, 数据库名称, 默认为当前所在库</li>
 </ul>
 <p>如下面这个实例中用户数据文档中的 <strong>address</strong> 字段使用了 <strong>DBRef</strong>:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>{
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>{
    &#39;_id&#39;:ObjectId(&#39;53402597d852426020000002&#39;),
    &#39;name&#39;: &#39;Tom Benzamin&#39;
    &#39;address&#39;: {
@@ -112,7 +112,7 @@
 <p><br>
 <strong>address DBRef</strong> 字段指定了引用的数据地址是在 <strong>w3cschoolcc</strong> 数据库下的 <strong>address_home</strong> 集合中,  其 <strong>_id</strong> 为 534009e4d852427820000002.</p>
 <p>通过下面这种方式, 可以取出 <strong>address</strong> 数据:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>var user = db.users.findOne({&#39;name&#39;:&#39;Tom Benzamin&#39;})
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>var user = db.users.findOne({&#39;name&#39;:&#39;Tom Benzamin&#39;})
 db[user.address.$ref].findOne({&#39;_id&#39;:(dbRef.$id)})
 </pre></div>
 

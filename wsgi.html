@@ -69,9 +69,9 @@
 <p><strong>不过要注意的是, WSGI/CGI 不是服务器, 不是 API, 不是 Python 模块, 更不是什么框架, 而是一种服务器和客户端交互的接口规范! 是规范!!</strong></p>
 <p>对于 wsgi 我们不需要了解太多, 不过一个简单的例子还是有必要的.</p>
 <p>我们新建一个 <strong>hello.py</strong></p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">application</span><span style="color: #f8f8f2">(environ,</span> <span style="color: #f8f8f2">start_response):</span>
-    <span style="color: #f8f8f2">start_response(</span><span style="color: #e6db74">&#39;200 OK&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">[(</span><span style="color: #e6db74">&#39;Content-Type&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;text/html&#39;</span><span style="color: #f8f8f2">)])</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">application</span>(environ, start_response):
+    start_response(<span style="color: #4070a0">&#39;200 OK&#39;</span>, [(<span style="color: #4070a0">&#39;Content-Type&#39;</span>, <span style="color: #4070a0">&#39;text/html&#39;</span>)])
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">&#39;&lt;h1&gt;Hello, web!&lt;/h1&gt;&#39;</span>
 </pre></div>
 
 
@@ -83,15 +83,15 @@
 <p>在函数内部, 我们通过调用 start_response() 返回 http header, 通过 return 返回 http body.</p>
 <p>刚才说了, http 的底层操作已经由专门的服务器软件实现好了, 那么这里我们的服务器软件是什么呢?</p>
 <p>Python 内置了一个 WSGI 服务器, 这个模块叫 wsgiref, 它是用纯 Python 编写的 WSGI 服务器的参考实现, 所谓“参考实现”是指该实现完全符合 WSGI 标准, 但是不考虑任何运行效率, 仅供开发和测试使用; 现在新建一个 <strong>server.py</strong></p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">wsgiref.simple_server</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">make_server</span>
-<span style="color: #75715e"># 导入我们自己编写的application函数:</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">hello</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">application</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">wsgiref.simple_server</span> <span style="color: #007020; font-weight: bold">import</span> make_server
+<span style="color: #60a0b0; font-style: italic"># 导入我们自己编写的application函数:</span>
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">hello</span> <span style="color: #007020; font-weight: bold">import</span> application
 
-<span style="color: #75715e"># 创建一个服务器，IP 地址为空，端口是8000，处理函数是 application:</span>
-<span style="color: #f8f8f2">httpd</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">make_server(</span><span style="color: #e6db74">&#39;&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">8000</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">application)</span>
-<span style="color: #66d9ef">print</span> <span style="color: #e6db74">&quot;Serving HTTP on port 8000...&quot;</span>
-<span style="color: #75715e"># 开始监听HTTP请求:</span>
-<span style="color: #f8f8f2">httpd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">serve_forever()</span>
+<span style="color: #60a0b0; font-style: italic"># 创建一个服务器，IP 地址为空，端口是8000，处理函数是 application:</span>
+httpd <span style="color: #666666">=</span> make_server(<span style="color: #4070a0">&#39;&#39;</span>, <span style="color: #40a070">8000</span>, application)
+<span style="color: #007020; font-weight: bold">print</span> <span style="color: #4070a0">&quot;Serving HTTP on port 8000...&quot;</span>
+<span style="color: #60a0b0; font-style: italic"># 开始监听HTTP请求:</span>
+httpd<span style="color: #666666">.</span>serve_forever()
 </pre></div>
 
 

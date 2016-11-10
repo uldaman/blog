@@ -55,11 +55,11 @@
 
     <p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持&rdquo;糖块句法&rdquo;, 允许程序通过一个简单的&rdquo;foreach&rdquo;语句自动遍历list中的元素.
 C++11增加了一个类似的特性, for语句可以简单地遍历列表中的元素.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">my_array[</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">};</span>
-<span style="color: #75715e">// double the value of each element in my_array:</span>
-<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">int</span> <span style="color: #f92672">&amp;</span><span style="color: #f8f8f2">x</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">my_array)</span> <span style="color: #f8f8f2">{</span>
-     <span style="color: #f8f8f2">x</span> <span style="color: #f92672">*=</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">;</span>
-<span style="color: #f8f8f2">}</span><span style="color: #f92672">&lt;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">int</span> my_array[<span style="color: #40a070">5</span>] <span style="color: #666666">=</span> {<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">4</span>, <span style="color: #40a070">5</span>};
+<span style="color: #60a0b0; font-style: italic">// double the value of each element in my_array:</span>
+<span style="color: #007020; font-weight: bold">for</span> (<span style="color: #902000">int</span> <span style="color: #666666">&amp;</span><span style="color: #002070; font-weight: bold">x</span> : my_array) {
+     x <span style="color: #666666">*=</span> <span style="color: #40a070">2</span>;
+}<span style="color: #666666">&lt;</span>
 </pre></div>
 
 
@@ -68,25 +68,25 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 <p><strong>请注意上面的 &amp; 符号, 如果想要通过 x 更改数组中的值就必须要使用引用类型, 否则 x 是一个拷贝的值(就像参数的参数一样).</strong></p>
 <p>可以用在C风格数组, 初始化列表和那些带有能返回迭代器的begin()和end()函数的类型上.</p>
 <p>所有提供了begin/end的标准容器都可以使用基于范围的for语句.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">map</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">string,</span> <span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">vector</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;&gt;</span> <span style="color: #f8f8f2">map;</span>
-<span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">vector</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">v;</span>
-<span style="color: #f8f8f2">v.push_back(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">);</span>
-<span style="color: #f8f8f2">v.push_back(</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">);</span>
-<span style="color: #f8f8f2">v.push_back(</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">);</span>
-<span style="color: #f8f8f2">map[</span><span style="color: #e6db74">&quot;one&quot;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">v;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>std<span style="color: #666666">::</span>map<span style="color: #666666">&lt;</span>std<span style="color: #666666">::</span>string, std<span style="color: #666666">::</span>vector<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;&gt;</span> map;
+std<span style="color: #666666">::</span>vector<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span> v;
+v.push_back(<span style="color: #40a070">1</span>);
+v.push_back(<span style="color: #40a070">2</span>);
+v.push_back(<span style="color: #40a070">3</span>);
+map[<span style="color: #4070a0">&quot;one&quot;</span>] <span style="color: #666666">=</span> v;
 
-<span style="color: #66d9ef">for</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">const</span> <span style="color: #66d9ef">auto</span><span style="color: #f92672">&amp;</span> <span style="color: #f8f8f2">kvp</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">map)</span> <span style="color: #f8f8f2">{</span>
-  <span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">cout</span> <span style="color: #f92672">&lt;&lt;</span> <span style="color: #f8f8f2">kvp.first</span> <span style="color: #f92672">&lt;&lt;</span> <span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">endl;</span>
+<span style="color: #007020; font-weight: bold">for</span>(<span style="color: #007020; font-weight: bold">const</span> <span style="color: #007020; font-weight: bold">auto</span><span style="color: #666666">&amp;</span> <span style="color: #002070; font-weight: bold">kvp</span> : map) {
+  std<span style="color: #666666">::</span>cout <span style="color: #666666">&lt;&lt;</span> kvp.first <span style="color: #666666">&lt;&lt;</span> std<span style="color: #666666">::</span>endl;
 
-  <span style="color: #66d9ef">for</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">auto</span> <span style="color: #f8f8f2">v</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">kvp.second)</span> <span style="color: #f8f8f2">{</span>
-     <span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">cout</span> <span style="color: #f92672">&lt;&lt;</span> <span style="color: #f8f8f2">v</span> <span style="color: #f92672">&lt;&lt;</span> <span style="color: #f8f8f2">std</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">endl;</span>
-  <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
+  <span style="color: #007020; font-weight: bold">for</span>(<span style="color: #007020; font-weight: bold">auto</span> <span style="color: #002070; font-weight: bold">v</span> : kvp.second) {
+     std<span style="color: #666666">::</span>cout <span style="color: #666666">&lt;&lt;</span> v <span style="color: #666666">&lt;&lt;</span> std<span style="color: #666666">::</span>endl;
+  }
+}
 
-<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">arr[]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f8f8f2">};</span>
-<span style="color: #66d9ef">for</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&amp;</span> <span style="color: #f8f8f2">e</span> <span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">arr)</span> <span style="color: #f8f8f2">{</span>
-  <span style="color: #f8f8f2">e</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">e</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">e;</span>
-<span style="color: #f8f8f2">}</span>
+<span style="color: #902000">int</span> arr[] <span style="color: #666666">=</span> {<span style="color: #40a070">1</span>, <span style="color: #40a070">2</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">4</span>, <span style="color: #40a070">5</span>};
+<span style="color: #007020; font-weight: bold">for</span>(<span style="color: #902000">int</span><span style="color: #666666">&amp;</span> <span style="color: #002070; font-weight: bold">e</span> : arr) {
+  e <span style="color: #666666">=</span> e<span style="color: #666666">*</span>e;
+}
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/c11.html">C++11</a>
 

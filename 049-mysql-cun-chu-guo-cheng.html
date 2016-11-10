@@ -61,20 +61,20 @@
 <p>存储过程 (procedure), 类似 mongodb 上的脚本, 就是把要执行的一组 SQL 语句放在 mysql 服务器上, 需要执行这组 SQL 语句时, 只要把参数及调用命令发送给 mysql 服务就可以了, 这样就大大降低了网络传输的损耗.</p>
 <h1 id="mysql">MySQL 存储过程的创建</h1>
 <p>MySQL 存储过程创建的格式:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">CREATE</span> <span style="color: #66d9ef">PROCEDURE</span> <span style="color: #960050; background-color: #1e0010">过程名</span> <span style="color: #f8f8f2">([</span><span style="color: #960050; background-color: #1e0010">过程参数</span><span style="color: #f8f8f2">[,...]])</span>
-<span style="color: #f8f8f2">[</span><span style="color: #960050; background-color: #1e0010">特性</span> <span style="color: #f8f8f2">...]</span> <span style="color: #960050; background-color: #1e0010">过程体</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">PROCEDURE</span> <span style="border: 1px solid #FF0000">过程名</span> ([<span style="border: 1px solid #FF0000">过程参数</span>[,...]])
+[<span style="border: 1px solid #FF0000">特性</span> ...] <span style="border: 1px solid #FF0000">过程体</span>
 </pre></div>
 
 
 <p><br>
 例子:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">mysql</span><span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">DELIMITER</span> <span style="color: #f92672">//</span>
-<span style="color: #f8f8f2">mysql</span><span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">CREATE</span> <span style="color: #66d9ef">PROCEDURE</span> <span style="color: #f8f8f2">proc1(</span><span style="color: #66d9ef">OUT</span> <span style="color: #f8f8f2">s</span> <span style="color: #f8f8f2">int)</span>
-    <span style="color: #f92672">-&gt;</span> <span style="color: #66d9ef">BEGIN</span>
-    <span style="color: #f92672">-&gt;</span> <span style="color: #66d9ef">SELECT</span> <span style="color: #66d9ef">COUNT</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">INTO</span> <span style="color: #f8f8f2">s</span> <span style="color: #66d9ef">FROM</span> <span style="color: #66d9ef">user</span><span style="color: #f8f8f2">;</span>
-    <span style="color: #f92672">-&gt;</span> <span style="color: #66d9ef">END</span>
-    <span style="color: #f92672">-&gt;</span> <span style="color: #f92672">//</span>
-<span style="color: #f8f8f2">mysql</span><span style="color: #f92672">&gt;</span> <span style="color: #66d9ef">DELIMITER</span><span style="color: #f8f8f2">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>mysql<span style="color: #666666">&gt;</span> <span style="color: #007020; font-weight: bold">DELIMITER</span> <span style="color: #666666">//</span>
+mysql<span style="color: #666666">&gt;</span> <span style="color: #007020; font-weight: bold">CREATE</span> <span style="color: #007020; font-weight: bold">PROCEDURE</span> proc1(<span style="color: #007020; font-weight: bold">OUT</span> s <span style="color: #007020">int</span>)
+    <span style="color: #666666">-&gt;</span> <span style="color: #007020; font-weight: bold">BEGIN</span>
+    <span style="color: #666666">-&gt;</span> <span style="color: #007020; font-weight: bold">SELECT</span> <span style="color: #007020; font-weight: bold">COUNT</span>(<span style="color: #666666">*</span>) <span style="color: #007020; font-weight: bold">INTO</span> s <span style="color: #007020; font-weight: bold">FROM</span> <span style="color: #007020; font-weight: bold">user</span>;
+    <span style="color: #666666">-&gt;</span> <span style="color: #007020; font-weight: bold">END</span>
+    <span style="color: #666666">-&gt;</span> <span style="color: #666666">//</span>
+mysql<span style="color: #666666">&gt;</span> <span style="color: #007020; font-weight: bold">DELIMITER</span>;
 </pre></div>
 
 

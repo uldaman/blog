@@ -55,41 +55,41 @@
 
     <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#pragma pack (push,1)</span>
-<span style="color: #66d9ef">typedef</span> <span style="color: #66d9ef">struct</span> <span style="color: #f8f8f2">_RoleTree</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwLBase;</span>      <span style="color: #75715e">//+0x0    左树</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwSBase;</span>      <span style="color: #75715e">//+0x4    上一层树的地址</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwRBase;</span>      <span style="color: #75715e">//+0x8    右树</span>
-    <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">iID;</span>            <span style="color: #75715e">//+0xC    二叉树ID</span>
-    <span style="color: #f8f8f2">DWORD</span> <span style="color: #f8f8f2">dwPBase;</span>      <span style="color: #75715e">//+0x10    数据数据指针</span>
-    <span style="color: #f8f8f2">byte</span> <span style="color: #f8f8f2">bTyep;</span>         <span style="color: #75715e">//+0x14</span>
-    <span style="color: #f8f8f2">byte</span> <span style="color: #f8f8f2">bEnd;</span>          <span style="color: #75715e">//+0x15    //是否到了尾节点 0为没到, 1为到了, 注意尾节点即没有左右树也没有了数据指针</span>
-<span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">RoleTree,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">pRoleTree;</span>
-<span style="color: #75715e">#pragma pack(pop)</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">#pragma pack (push,1)</span>
+<span style="color: #007020; font-weight: bold">typedef</span> <span style="color: #007020; font-weight: bold">struct</span> _RoleTree {
+    DWORD dwLBase;      <span style="color: #60a0b0; font-style: italic">//+0x0    左树</span>
+    DWORD dwSBase;      <span style="color: #60a0b0; font-style: italic">//+0x4    上一层树的地址</span>
+    DWORD dwRBase;      <span style="color: #60a0b0; font-style: italic">//+0x8    右树</span>
+    <span style="color: #902000">int</span> iID;            <span style="color: #60a0b0; font-style: italic">//+0xC    二叉树ID</span>
+    DWORD dwPBase;      <span style="color: #60a0b0; font-style: italic">//+0x10    数据数据指针</span>
+    byte bTyep;         <span style="color: #60a0b0; font-style: italic">//+0x14</span>
+    byte bEnd;          <span style="color: #60a0b0; font-style: italic">//+0x15    //是否到了尾节点 0为没到, 1为到了, 注意尾节点即没有左右树也没有了数据指针</span>
+} RoleTree, <span style="color: #666666">*</span>pRoleTree;
+<span style="color: #007020">#pragma pack(pop)</span>
 
-<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">GetTreeAddr</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">iObject</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ReadMemoryPtrData</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">(Role_BaseAddr);</span>
-    <span style="color: #f8f8f2">iObject</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ReadMemoryPtrData</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">(iObject</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">0x64</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #f8f8f2">iObject</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ReadMemoryPtrData</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">(iObject</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">0x4</span><span style="color: #f8f8f2">);</span>
-    <span style="color: #f8f8f2">TraceOutA(</span><span style="color: #e6db74">&quot;二叉树基址为: 0x%X&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">iObject);</span>
-    <span style="color: #66d9ef">this</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">TraverRoleTree(iObject);</span>
-<span style="color: #f8f8f2">}</span>
+<span style="color: #902000">void</span> <span style="color: #06287e">GetTreeAddr</span>() {
+    <span style="color: #902000">int</span> iObject <span style="color: #666666">=</span> ReadMemoryPtrData<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span>(Role_BaseAddr);
+    iObject <span style="color: #666666">=</span> ReadMemoryPtrData<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span>(iObject <span style="color: #666666">+</span> <span style="color: #40a070">0x64</span>);
+    iObject <span style="color: #666666">=</span> ReadMemoryPtrData<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span>(iObject <span style="color: #666666">+</span> <span style="color: #40a070">0x4</span>);
+    TraceOutA(<span style="color: #4070a0">&quot;二叉树基址为: 0x%X&quot;</span>, iObject);
+    <span style="color: #007020; font-weight: bold">this</span><span style="color: #666666">-&gt;</span>TraverRoleTree(iObject);
+}
 
-<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">TraverRoleTree</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">iObject)</span> <span style="color: #f8f8f2">{</span>
-    <span style="color: #f8f8f2">pRoleTree</span> <span style="color: #f8f8f2">pTree;</span>
-    <span style="color: #f8f8f2">pTree</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(pRoleTree)iObject;</span>
+<span style="color: #902000">void</span> <span style="color: #06287e">TraverRoleTree</span>(<span style="color: #902000">int</span> iObject) {
+    pRoleTree pTree;
+    pTree <span style="color: #666666">=</span> (pRoleTree)iObject;
 
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">pTree</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">bEnd)</span> <span style="color: #f8f8f2">{</span><span style="color: #75715e">//[[[pTree-&gt;dwPBase+0x1E0]+0x4]+0x2458]</span>
-        <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">tmp</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ReadMemoryPtrData</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">(pTree</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">dwPBase</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">0x1E0</span><span style="color: #f8f8f2">);</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(tmp)</span> <span style="color: #f8f8f2">{</span>
-            <span style="color: #f8f8f2">tmp</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ReadMemoryPtrData</span><span style="color: #f92672">&lt;</span><span style="color: #66d9ef">int</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">(tmp</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">0x4</span><span style="color: #f8f8f2">);</span>
-            <span style="color: #f8f8f2">TraceOutA(</span><span style="color: #e6db74">&quot;二叉树ID为: 0x%X--数据对象为: 0x%X--怪物名: %s&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">pTree</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">iID,</span> <span style="color: #f8f8f2">tmp,</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">char</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">)(tmp</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">0x34</span><span style="color: #f8f8f2">));</span>
-        <span style="color: #f8f8f2">}</span>
+    <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>pTree<span style="color: #666666">-&gt;</span>bEnd) {<span style="color: #60a0b0; font-style: italic">//[[[pTree-&gt;dwPBase+0x1E0]+0x4]+0x2458]</span>
+        <span style="color: #902000">int</span> tmp <span style="color: #666666">=</span> ReadMemoryPtrData<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span>(pTree<span style="color: #666666">-&gt;</span>dwPBase <span style="color: #666666">+</span> <span style="color: #40a070">0x1E0</span>);
+        <span style="color: #007020; font-weight: bold">if</span> (tmp) {
+            tmp <span style="color: #666666">=</span> ReadMemoryPtrData<span style="color: #666666">&lt;</span><span style="color: #902000">int</span><span style="color: #666666">&gt;</span>(tmp <span style="color: #666666">+</span> <span style="color: #40a070">0x4</span>);
+            TraceOutA(<span style="color: #4070a0">&quot;二叉树ID为: 0x%X--数据对象为: 0x%X--怪物名: %s&quot;</span>, pTree<span style="color: #666666">-&gt;</span>iID, tmp, (<span style="color: #902000">char</span><span style="color: #666666">*</span>)(tmp <span style="color: #666666">+</span> <span style="color: #40a070">0x34</span>));
+        }
 
-        <span style="color: #f8f8f2">TraverRoleTree(pTree</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">dwLBase);</span>
-        <span style="color: #f8f8f2">TraverRoleTree(pTree</span><span style="color: #f92672">-&gt;</span><span style="color: #f8f8f2">dwRBase);</span>
-    <span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
+        TraverRoleTree(pTree<span style="color: #666666">-&gt;</span>dwLBase);
+        TraverRoleTree(pTree<span style="color: #666666">-&gt;</span>dwRBase);
+    }
+}
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 

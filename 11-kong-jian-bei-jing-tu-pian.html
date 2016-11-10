@@ -108,23 +108,23 @@
 <a href="http://www.smallcpp.com/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html">19、事件小结及自定义事件</a></p>
 <p>按照这两篇参考文章, 我们可以先从 Label 继承一个我们自己的 Label, 并且重写我们自己的 Label 的 <code>mousePressEvent()</code>, 最后在 Qt 设计师上让 Label 控件从我们自己的 Label 上创建.</p>
 <p>这当然是可以的, 但是也比较麻烦, 在 PyQt 中我们可以在 Dialog Code 的初始化方法中让 Label 的 mousePressEvent() 直接指向我们自己的方法, 就像下面这样:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Dialog</span><span style="color: #f8f8f2">(QDialog,</span> <span style="color: #f8f8f2">Ui_Dialog):</span>
-    <span style="color: #e6db74">&quot;&quot;&quot;</span>
-<span style="color: #e6db74">    Class documentation goes here.</span>
-<span style="color: #e6db74">    &quot;&quot;&quot;</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">parent</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None):</span>
-        <span style="color: #e6db74">&quot;&quot;&quot;</span>
-<span style="color: #e6db74">        Constructor</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Dialog</span>(QDialog, Ui_Dialog):
+    <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">    Class documentation goes here.</span>
+<span style="color: #4070a0; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__init__</span>(<span style="color: #007020">self</span>, parent<span style="color: #666666">=</span><span style="color: #007020">None</span>):
+        <span style="color: #4070a0; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #4070a0; font-style: italic">        Constructor</span>
 
-<span style="color: #e6db74">        @param parent reference to the parent widget</span>
-<span style="color: #e6db74">        @type QWidget</span>
-<span style="color: #e6db74">        &quot;&quot;&quot;</span>
-        <span style="color: #f8f8f2">QDialog</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">__init__(self,</span> <span style="color: #f8f8f2">parent)</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setupUi(self)</span>
-        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">label</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">mousePressEvent</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">handle_press</span>
+<span style="color: #4070a0; font-style: italic">        @param parent reference to the parent widget</span>
+<span style="color: #4070a0; font-style: italic">        @type QWidget</span>
+<span style="color: #4070a0; font-style: italic">        &quot;&quot;&quot;</span>
+        QDialog<span style="color: #666666">.</span>__init__(<span style="color: #007020">self</span>, parent)
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>setupUi(<span style="color: #007020">self</span>)
+        <span style="color: #007020">self</span><span style="color: #666666">.</span>label<span style="color: #666666">.</span>mousePressEvent <span style="color: #666666">=</span> <span style="color: #007020">self</span><span style="color: #666666">.</span>handle_press
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_press</span><span style="color: #f8f8f2">(self,</span>  <span style="color: #f8f8f2">event):</span>
-        <span style="color: #66d9ef">print</span> <span style="color: #e6db74">&#39;clicked&#39;</span>
+    <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">handle_press</span>(<span style="color: #007020">self</span>,  event):
+        <span style="color: #007020; font-weight: bold">print</span> <span style="color: #4070a0">&#39;clicked&#39;</span>
 </pre></div>
 
 

@@ -180,49 +180,49 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <li>使用 hasNext() 检查序列中是否还有元素</li>
 <li>使用 remove() 将迭代器新返回的元素删除</li>
 </ul>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.*</span><span style="color: #f92672">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.*</span><span style="color: #666666">;</span>
 
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">SimpleIteration</span> <span style="color: #f92672">{</span>
+<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">SimpleIteration</span> <span style="color: #666666">{</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-        <span style="color: #75715e">// TODO 自动生成的方法存根</span>
-        <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Integer</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">list</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">ArrayList</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Integer</span><span style="color: #f92672">&gt;();</span>
-        <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">(</span><span style="color: #ae81ff">0</span><span style="color: #f92672">));</span>
-        <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">));</span>
-        <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">));</span>
-        <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">(</span><span style="color: #ae81ff">3</span><span style="color: #f92672">));</span>
-        <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">(</span><span style="color: #ae81ff">4</span><span style="color: #f92672">));</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        <span style="color: #60a0b0; font-style: italic">// TODO 自动生成的方法存根</span>
+        ArrayList<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;</span> list <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> ArrayList<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;();</span>
+        list<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Integer<span style="color: #666666">(</span><span style="color: #40a070">0</span><span style="color: #666666">));</span>
+        list<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Integer<span style="color: #666666">(</span><span style="color: #40a070">1</span><span style="color: #666666">));</span>
+        list<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Integer<span style="color: #666666">(</span><span style="color: #40a070">2</span><span style="color: #666666">));</span>
+        list<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Integer<span style="color: #666666">(</span><span style="color: #40a070">3</span><span style="color: #666666">));</span>
+        list<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> Integer<span style="color: #666666">(</span><span style="color: #40a070">4</span><span style="color: #666666">));</span>
 
-        <span style="color: #f8f8f2">Iterator</span><span style="color: #f92672">&lt;</span><span style="color: #f8f8f2">Integer</span><span style="color: #f92672">&gt;</span> <span style="color: #f8f8f2">it</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">iterator</span><span style="color: #f92672">();</span>
+        Iterator<span style="color: #666666">&lt;</span>Integer<span style="color: #666666">&gt;</span> it <span style="color: #666666">=</span> list<span style="color: #666666">.</span><span style="color: #4070a0">iterator</span><span style="color: #666666">();</span>
 
-        <span style="color: #75715e">// iterator 方式遍历</span>
-        <span style="color: #66d9ef">while</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f92672">())</span> <span style="color: #f92672">{</span>
-            <span style="color: #f8f8f2">Integer</span> <span style="color: #f8f8f2">integer</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">next</span><span style="color: #f92672">();</span>
-            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">integer</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; | &quot;</span><span style="color: #f92672">);</span>
-        <span style="color: #f92672">}</span>
-        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">();</span>
+        <span style="color: #60a0b0; font-style: italic">// iterator 方式遍历</span>
+        <span style="color: #007020; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #4070a0">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            Integer integer <span style="color: #666666">=</span> it<span style="color: #666666">.</span><span style="color: #4070a0">next</span><span style="color: #666666">();</span>
+            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">print</span><span style="color: #666666">(</span>integer <span style="color: #666666">+</span> <span style="color: #4070a0">&quot; | &quot;</span><span style="color: #666666">);</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">();</span>
 
-        <span style="color: #75715e">// 泛型 for 遍历</span>
-        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">Integer</span> <span style="color: #f8f8f2">integer</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">list</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">print</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">integer</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot; | &quot;</span><span style="color: #f92672">);</span>
-        <span style="color: #f92672">}</span>
-        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">();</span>
+        <span style="color: #60a0b0; font-style: italic">// 泛型 for 遍历</span>
+        <span style="color: #007020; font-weight: bold">for</span> <span style="color: #666666">(</span>Integer integer <span style="color: #666666">:</span> list<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">print</span><span style="color: #666666">(</span>integer <span style="color: #666666">+</span> <span style="color: #4070a0">&quot; | &quot;</span><span style="color: #666666">);</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">();</span>
 
-        <span style="color: #75715e">// 删除元素</span>
-        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">list</span><span style="color: #f92672">);</span> <span style="color: #75715e">// 输出原始的 list</span>
-        <span style="color: #f8f8f2">it</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">list</span><span style="color: #f92672">.</span><span style="color: #a6e22e">iterator</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 重新赋值 iterator</span>
-        <span style="color: #66d9ef">while</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f92672">())</span> <span style="color: #f92672">{</span>
-            <span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">next</span><span style="color: #f92672">();</span>
-            <span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">remove</span><span style="color: #f92672">();</span>
-        <span style="color: #f92672">}</span>
-        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">list</span><span style="color: #f92672">);</span>
-    <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
+        <span style="color: #60a0b0; font-style: italic">// 删除元素</span>
+        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span>list<span style="color: #666666">);</span> <span style="color: #60a0b0; font-style: italic">// 输出原始的 list</span>
+        it <span style="color: #666666">=</span> list<span style="color: #666666">.</span><span style="color: #4070a0">iterator</span><span style="color: #666666">();</span> <span style="color: #60a0b0; font-style: italic">// 重新赋值 iterator</span>
+        <span style="color: #007020; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #4070a0">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            it<span style="color: #666666">.</span><span style="color: #4070a0">next</span><span style="color: #666666">();</span>
+            it<span style="color: #666666">.</span><span style="color: #4070a0">remove</span><span style="color: #666666">();</span>
+        <span style="color: #666666">}</span>
+        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span>list<span style="color: #666666">);</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
 <p>执行结果:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>0 | 1 | 2 | 3 | 4 |
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>0 | 1 | 2 | 3 | 4 |
 0 | 1 | 2 | 3 | 4 |
 [0, 1, 2, 3, 4]
 []
@@ -252,26 +252,26 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <h2 id="treeset">TreeSet</h2>
 <p>TreeSet 是依靠 TreeMap 来实现的.</p>
 <p>所以, 同 TreeMap, TreeSet 也是一个<strong>有序集合</strong>, TreeSet 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeSet 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeSet 对象时, 传递实现 Comparator 接口的比较器对象.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.Iterator</span><span style="color: #f92672">;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">java.util.*</span><span style="color: #f92672">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.Iterator</span><span style="color: #666666">;</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.util.*</span><span style="color: #666666">;</span>
 
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">TreeSetTest</span> <span style="color: #f92672">{</span>
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-        <span style="color: #f8f8f2">Set</span> <span style="color: #f8f8f2">ts</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">TreeSet</span><span style="color: #f92672">();</span>
-        <span style="color: #f8f8f2">ts</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;abc&quot;</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">ts</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;xyz&quot;</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">ts</span><span style="color: #f92672">.</span><span style="color: #a6e22e">add</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;rst&quot;</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">Iterator</span> <span style="color: #f8f8f2">it</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ts</span><span style="color: #f92672">.</span><span style="color: #a6e22e">iterator</span><span style="color: #f92672">();</span>
-        <span style="color: #66d9ef">while</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">hasNext</span><span style="color: #f92672">())</span> <span style="color: #f92672">{</span>
-            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">it</span><span style="color: #f92672">.</span><span style="color: #a6e22e">next</span><span style="color: #f92672">());</span>
-        <span style="color: #f92672">}</span>
-    <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
+<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">TreeSetTest</span> <span style="color: #666666">{</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span> args<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        Set ts <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> TreeSet<span style="color: #666666">();</span>
+        ts<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;abc&quot;</span><span style="color: #666666">);</span>
+        ts<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;xyz&quot;</span><span style="color: #666666">);</span>
+        ts<span style="color: #666666">.</span><span style="color: #4070a0">add</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;rst&quot;</span><span style="color: #666666">);</span>
+        Iterator it <span style="color: #666666">=</span> ts<span style="color: #666666">.</span><span style="color: #4070a0">iterator</span><span style="color: #666666">();</span>
+        <span style="color: #007020; font-weight: bold">while</span> <span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #4070a0">hasNext</span><span style="color: #666666">())</span> <span style="color: #666666">{</span>
+            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span>it<span style="color: #666666">.</span><span style="color: #4070a0">next</span><span style="color: #666666">());</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
 <p>执行结果:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>abc
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>abc
 rst
 xyz
 </pre></div>

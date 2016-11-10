@@ -98,15 +98,15 @@
 <strong>事务同命令一样, 都是 Redis 的最小执行单位</strong></p>
 <p>而管道, 它也可以一次性发送多条命令, 并在执行完后一次性将结果返回, 管道通过减少客户端与 Redis 的通信次数来实现降低往返时延, <strong>但它不具备原子性</strong>.</p>
 <p>Redis 本身没有提供 pipelining 相关的命令, 它由使用 Redis 的客户端程序决定, 如 <strong>redis-py</strong></p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">redis</span>
-<span style="color: #f8f8f2">r</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">redis</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">StrictRedis(host</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;127.0.0.1&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">port</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">6379</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">db</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">redis</span>
+r <span style="color: #666666">=</span> redis<span style="color: #666666">.</span>StrictRedis(host <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;127.0.0.1&#39;</span>, port <span style="color: #666666">=</span> <span style="color: #40a070">6379</span>, db <span style="color: #666666">=</span> <span style="color: #40a070">0</span>)
 
-<span style="color: #f8f8f2">pipe</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">r</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">pipeline()</span> <span style="color: #75715e"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
-<span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">set(</span><span style="color: #e6db74">&#39;foo&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;bar&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(</span><span style="color: #e6db74">&#39;foo&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pipe</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">execute()</span>
+pipe <span style="color: #666666">=</span> r<span style="color: #666666">.</span>pipeline() <span style="color: #60a0b0; font-style: italic"># 此为事务, 管道的使用方式和事务相同, 创建时加上参数 transaction = False</span>
+pipe<span style="color: #666666">.</span>set(<span style="color: #4070a0">&#39;foo&#39;</span>, <span style="color: #4070a0">&#39;bar&#39;</span>)
+pipe<span style="color: #666666">.</span>get(<span style="color: #4070a0">&#39;foo&#39;</span>)
+result <span style="color: #666666">=</span> pipe<span style="color: #666666">.</span>execute()
 
-<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">result</span> <span style="color: #75715e"># [True, &#39;bar&#39;]</span>
+<span style="color: #007020; font-weight: bold">print</span> result <span style="color: #60a0b0; font-style: italic"># [True, &#39;bar&#39;]</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a>
 

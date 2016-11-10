@@ -61,10 +61,10 @@
 <a href="http://www.cnblogs.com/husam/p/3830225.html?utm_source=tuicool&amp;utm_medium=referral">使用 JDBC 的 addBatch() 方法提高效率</a></p>
 <p>在批量更新 SQL 操作的时候建议使用 addBatch, 这样效率是高些, 数据量越大越能体现出来.</p>
 <p><strong>Statement</strong> 接口里有两个方法:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// 将给定的 SQL 命令添加到此 Statement 对象的当前命令列表中. 通过调用方法 executeBatch 可以批量执行此列表中的命令.</span>
-<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">addBatch</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">sql</span><span style="color: #f92672">)</span>
-<span style="color: #75715e">// 将一批命令提交给数据库来执行, 如果全部命令执行成功, 则返回更新计数组成的数组.</span>
-<span style="color: #66d9ef">int</span><span style="color: #f92672">[]</span> <span style="color: #a6e22e">executeBatch</span><span style="color: #f92672">()</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 将给定的 SQL 命令添加到此 Statement 对象的当前命令列表中. 通过调用方法 executeBatch 可以批量执行此列表中的命令.</span>
+<span style="color: #902000">void</span> <span style="color: #06287e">addBatch</span><span style="color: #666666">(</span>String sql<span style="color: #666666">)</span>
+<span style="color: #60a0b0; font-style: italic">// 将一批命令提交给数据库来执行, 如果全部命令执行成功, 则返回更新计数组成的数组.</span>
+<span style="color: #902000">int</span><span style="color: #666666">[]</span> <span style="color: #06287e">executeBatch</span><span style="color: #666666">()</span>
 </pre></div>
 
 
@@ -72,44 +72,44 @@
 返回: 包含批中每个命令的一个元素的更新计数所组成的数组 (数组中的每个元素为: 成功处理了命令后, 执行命令所影响数据库中行数的更新计数), 数组的元素根据将命令添加到批中的顺序排序.</p>
 <p><strong>PreparedStatement</strong> 接口里:<br>
 重写了 <code>addBatch()</code> 的方法, <code>executeBatch()</code> 并没有重写.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// 将一组参数添加到此 PreparedStatement 对象的批处理命令中.</span>
-<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">addBatch</span><span style="color: #f92672">()</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 将一组参数添加到此 PreparedStatement 对象的批处理命令中.</span>
+<span style="color: #902000">void</span> <span style="color: #06287e">addBatch</span><span style="color: #666666">()</span>
 </pre></div>
 
 
 <p><br>
 因为数据库的处理速度是非常惊人的, 单次吞吐量很大, 执行效率极高, <code>addBatch()</code> 把若干 sql 语句装载到一起, 然后一次送到数据库执行, 执行只需要很短的时间.</p>
 <p>这里说说 <code>PreparedStatement</code> 最重要的 <code>addbatch()</code> 的使用.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// 1.建立链接(打电话拨号)</span>
-<span style="color: #f8f8f2">Connection</span> <span style="color: #f8f8f2">connection</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">getConnection</span><span style="color: #f92672">();</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// 1.建立链接(打电话拨号)</span>
+Connection connection <span style="color: #666666">=</span> getConnection<span style="color: #666666">();</span>
 
-<span style="color: #75715e">// 2.不自动 Commit (瓜子不是一个一个吃, 全部剥开放桌子上, 然后一口舔了)</span>
-<span style="color: #f8f8f2">connection</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setAutoCommit</span><span style="color: #f92672">(</span><span style="color: #66d9ef">false</span><span style="color: #f92672">);</span>
+<span style="color: #60a0b0; font-style: italic">// 2.不自动 Commit (瓜子不是一个一个吃, 全部剥开放桌子上, 然后一口舔了)</span>
+connection<span style="color: #666666">.</span><span style="color: #4070a0">setAutoCommit</span><span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">false</span><span style="color: #666666">);</span>
 
-<span style="color: #75715e">// 3.预编译SQL语句, 只编译一回哦, 效率高啊.(发明一个剥瓜子的方法, 以后不要总想怎么剥瓜子好, 就这样剥.)</span>
-<span style="color: #f8f8f2">PreparedStatement</span> <span style="color: #f8f8f2">statement</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">connection</span><span style="color: #f92672">.</span><span style="color: #a6e22e">prepareStatement</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;INSERT INTO TABLEX VALUES(?, ?)&quot;</span><span style="color: #f92672">);</span>
+<span style="color: #60a0b0; font-style: italic">// 3.预编译SQL语句, 只编译一回哦, 效率高啊.(发明一个剥瓜子的方法, 以后不要总想怎么剥瓜子好, 就这样剥.)</span>
+PreparedStatement statement <span style="color: #666666">=</span> connection<span style="color: #666666">.</span><span style="color: #4070a0">prepareStatement</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;INSERT INTO TABLEX VALUES(?, ?)&quot;</span><span style="color: #666666">);</span>
 
-<span style="color: #75715e">// 4.来一个剥一个, 然后放桌子上</span>
-<span style="color: #75715e">// 记录1</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setInt</span><span style="color: #f92672">(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">1</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setString</span><span style="color: #f92672">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">,</span> <span style="color: #e6db74">&quot;Cujo&quot;</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addBatch</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
+<span style="color: #60a0b0; font-style: italic">// 4.来一个剥一个, 然后放桌子上</span>
+<span style="color: #60a0b0; font-style: italic">// 记录1</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setInt</span><span style="color: #666666">(</span><span style="color: #40a070">1</span><span style="color: #666666">,</span> <span style="color: #40a070">1</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setString</span><span style="color: #666666">(</span><span style="color: #40a070">2</span><span style="color: #666666">,</span> <span style="color: #4070a0">&quot;Cujo&quot;</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">addBatch</span><span style="color: #666666">();</span> <span style="color: #60a0b0; font-style: italic">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
 
-<span style="color: #75715e">// 记录2</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setInt</span><span style="color: #f92672">(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setString</span><span style="color: #f92672">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">,</span> <span style="color: #e6db74">&quot;Fred&quot;</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addBatch</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
+<span style="color: #60a0b0; font-style: italic">// 记录2</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setInt</span><span style="color: #666666">(</span><span style="color: #40a070">1</span><span style="color: #666666">,</span> <span style="color: #40a070">2</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setString</span><span style="color: #666666">(</span><span style="color: #40a070">2</span><span style="color: #666666">,</span> <span style="color: #4070a0">&quot;Fred&quot;</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">addBatch</span><span style="color: #666666">();</span> <span style="color: #60a0b0; font-style: italic">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
 
-<span style="color: #75715e">// 记录3</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setInt</span><span style="color: #f92672">(</span><span style="color: #ae81ff">1</span><span style="color: #f92672">,</span> <span style="color: #ae81ff">3</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setString</span><span style="color: #f92672">(</span><span style="color: #ae81ff">2</span><span style="color: #f92672">,</span> <span style="color: #e6db74">&quot;Mark&quot;</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">addBatch</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
+<span style="color: #60a0b0; font-style: italic">// 记录3</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setInt</span><span style="color: #666666">(</span><span style="color: #40a070">1</span><span style="color: #666666">,</span> <span style="color: #40a070">3</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">setString</span><span style="color: #666666">(</span><span style="color: #40a070">2</span><span style="color: #666666">,</span> <span style="color: #4070a0">&quot;Mark&quot;</span><span style="color: #666666">);</span>
+statement<span style="color: #666666">.</span><span style="color: #4070a0">addBatch</span><span style="color: #666666">();</span> <span style="color: #60a0b0; font-style: italic">// 把这条执行语句加到 PreparedStatement 对象的批处理命令中</span>
 
-<span style="color: #75715e">// 批量执行上面3条语句. 一口吞了, 很爽</span>
-<span style="color: #66d9ef">int</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">counts</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">statement</span><span style="color: #f92672">.</span><span style="color: #a6e22e">executeBatch</span><span style="color: #f92672">();</span> <span style="color: #75715e">// 把以上添加到批处理命令中的所有命令一次过提交给数据库来执行</span>
+<span style="color: #60a0b0; font-style: italic">// 批量执行上面3条语句. 一口吞了, 很爽</span>
+<span style="color: #902000">int</span><span style="color: #666666">[]</span> counts <span style="color: #666666">=</span> statement<span style="color: #666666">.</span><span style="color: #4070a0">executeBatch</span><span style="color: #666666">();</span> <span style="color: #60a0b0; font-style: italic">// 把以上添加到批处理命令中的所有命令一次过提交给数据库来执行</span>
 
-<span style="color: #75715e">// Commit it 咽下去, 到肚子(DB)里面</span>
-<span style="color: #f8f8f2">connection</span><span style="color: #f92672">.</span><span style="color: #a6e22e">commit</span><span style="color: #f92672">();</span>
+<span style="color: #60a0b0; font-style: italic">// Commit it 咽下去, 到肚子(DB)里面</span>
+connection<span style="color: #666666">.</span><span style="color: #4070a0">commit</span><span style="color: #666666">();</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

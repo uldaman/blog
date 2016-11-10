@@ -63,9 +63,9 @@
 <h2 id="string">String 类</h2>
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">si</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;xxx&quot;</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">s2</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">String</span><span style="color: #f92672">();</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">s3</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">String</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;xxx&quot;</span><span style="color: #f92672">);</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>String si <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;xxx&quot;</span><span style="color: #666666">;</span>
+String s2 <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> String<span style="color: #666666">();</span>
+String s3 <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> String<span style="color: #666666">(</span><span style="color: #4070a0">&quot;xxx&quot;</span><span style="color: #666666">);</span>
 </pre></div>
 
 
@@ -103,10 +103,10 @@
 <li>使用 String 类的 valueOf() 方法</li>
 <li>用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</li>
 </ul>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">c</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">10</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">str1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">.</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">c</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">str2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">String</span><span style="color: #f92672">.</span><span style="color: #a6e22e">valueOf</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">c</span><span style="color: #f92672">);</span>
-<span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">str3</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">c</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f92672">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #902000">int</span> c <span style="color: #666666">=</span> <span style="color: #40a070">10</span><span style="color: #666666">;</span>
+String str1 <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #4070a0">toString</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
+String str2 <span style="color: #666666">=</span> String<span style="color: #666666">.</span><span style="color: #4070a0">valueOf</span><span style="color: #666666">(</span>c<span style="color: #666666">);</span>
+String str3 <span style="color: #666666">=</span> c <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;&quot;</span><span style="color: #666666">;</span>
 </pre></div>
 
 
@@ -115,9 +115,9 @@
 <li>调用包装类的 parseXxx 静态方法</li>
 <li>调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱</li>
 </ul>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">str</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;10&quot;</span><span style="color: #f92672">;</span>
-<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">d</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">.</span><span style="color: #a6e22e">paseInt</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">str</span><span style="color: #f92672">);</span>
-<span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">e</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Integer</span><span style="color: #f92672">.</span><span style="color: #a6e22e">valueOf</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">str</span><span style="color: #f92672">);</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>String str <span style="color: #666666">=</span> <span style="color: #4070a0">&quot;10&quot;</span><span style="color: #666666">;</span>
+<span style="color: #902000">int</span> d <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #4070a0">paseInt</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
+<span style="color: #902000">int</span> e <span style="color: #666666">=</span> Integer<span style="color: #666666">.</span><span style="color: #4070a0">valueOf</span><span style="color: #666666">(</span>str<span style="color: #666666">);</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

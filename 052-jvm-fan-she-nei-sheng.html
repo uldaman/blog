@@ -124,61 +124,61 @@
 <p>Java 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法, 通过这些 API 可以使你不需要了解这个规则, 这些 API 存放于包 <code>java.beans</code> 中.</p>
 <p>一般的做法是通过类 <code>Introspector</code> 来获取某个对象的 BeanInfo 信息, 然后通过 BeanInfo 来获取属性的描述器 (<strong>PropertyDescriptor</strong>), 通过这个属性描述器就可以获取某个属性对应的 <code>getter/setter</code> 方法, 然后我们就可以通过反射机制来调用这些方法.</p>
 <p>下面我们来看一个例子, 这个例子把某个对象的所有属性名称和值都打印出来:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">importjava</span><span style="color: #f92672">.</span><span style="color: #a6e22e">beans</span><span style="color: #f92672">.</span><span style="color: #a6e22e">BeanInfo</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">importjava</span><span style="color: #f92672">.</span><span style="color: #a6e22e">beans</span><span style="color: #f92672">.</span><span style="color: #a6e22e">Introspector</span><span style="color: #f92672">;</span>
-<span style="color: #f8f8f2">importjava</span><span style="color: #f92672">.</span><span style="color: #a6e22e">beans</span><span style="color: #f92672">.</span><span style="color: #a6e22e">PropertyDescriptor</span><span style="color: #f92672">;</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>importjava<span style="color: #666666">.</span><span style="color: #4070a0">beans</span><span style="color: #666666">.</span><span style="color: #4070a0">BeanInfo</span><span style="color: #666666">;</span>
+importjava<span style="color: #666666">.</span><span style="color: #4070a0">beans</span><span style="color: #666666">.</span><span style="color: #4070a0">Introspector</span><span style="color: #666666">;</span>
+importjava<span style="color: #666666">.</span><span style="color: #4070a0">beans</span><span style="color: #666666">.</span><span style="color: #4070a0">PropertyDescriptor</span><span style="color: #666666">;</span>
 
-<span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">IntrospectorDemo</span> <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span><span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">Exception</span> <span style="color: #f92672">{</span>
-        <span style="color: #f8f8f2">IntrospectorDemo</span> <span style="color: #f8f8f2">demo</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">IntrospectorDemo</span><span style="color: #f92672">();</span>
-        <span style="color: #f8f8f2">demo</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;WinterLau&quot;</span><span style="color: #f92672">);</span>
+<span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">IntrospectorDemo</span> <span style="color: #666666">{</span>
+    String name<span style="color: #666666">;</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span>args<span style="color: #666666">)</span> <span style="color: #007020; font-weight: bold">throws</span> Exception <span style="color: #666666">{</span>
+        IntrospectorDemo demo <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> IntrospectorDemo<span style="color: #666666">();</span>
+        demo<span style="color: #666666">.</span><span style="color: #4070a0">setName</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;WinterLau&quot;</span><span style="color: #666666">);</span>
 
-        <span style="color: #75715e">// 如果不想把父类的属性也列出来的话, 那 getBeanInfo 的第二个参数填写父类的信息</span>
-        <span style="color: #f8f8f2">BeanInfo</span> <span style="color: #f8f8f2">bi</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Introspector</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getBeanInfo</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">demo</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getClass</span><span style="color: #f92672">(),</span> <span style="color: #f8f8f2">Object</span><span style="color: #f92672">.</span><span style="color: #a6e22e">class</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">PropertyDescriptor</span><span style="color: #f92672">[]</span> <span style="color: #f8f8f2">props</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">bi</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getPropertyDescriptors</span><span style="color: #f92672">();</span>
+        <span style="color: #60a0b0; font-style: italic">// 如果不想把父类的属性也列出来的话, 那 getBeanInfo 的第二个参数填写父类的信息</span>
+        BeanInfo bi <span style="color: #666666">=</span> Introspector<span style="color: #666666">.</span><span style="color: #4070a0">getBeanInfo</span><span style="color: #666666">(</span>demo<span style="color: #666666">.</span><span style="color: #4070a0">getClass</span><span style="color: #666666">(),</span> Object<span style="color: #666666">.</span><span style="color: #4070a0">class</span><span style="color: #666666">);</span>
+        PropertyDescriptor<span style="color: #666666">[]</span> props <span style="color: #666666">=</span> bi<span style="color: #666666">.</span><span style="color: #4070a0">getPropertyDescriptors</span><span style="color: #666666">();</span>
 
-        <span style="color: #75715e">/*for (int i = 0; i &lt; props.length; i++) {</span>
-<span style="color: #75715e">            System.out.println(props[i].getName() + &quot;=&quot; + props[i].getReadMethod().invoke(demo));</span>
-<span style="color: #75715e">        }*/</span>
-        <span style="color: #66d9ef">for</span> <span style="color: #f92672">(</span><span style="color: #f8f8f2">PropertyDescriptor</span> <span style="color: #f8f8f2">prop</span> <span style="color: #f92672">:</span> <span style="color: #f8f8f2">props</span> <span style="color: #f92672">)</span> <span style="color: #f92672">{</span>
-            <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">prop</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getName</span><span style="color: #f92672">()</span> <span style="color: #f92672">+</span> <span style="color: #e6db74">&quot;=&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">prop</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getReadMethod</span><span style="color: #f92672">().</span><span style="color: #a6e22e">invoke</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">demo</span><span style="color: #f92672">));</span>
-        <span style="color: #f92672">}</span>
-    <span style="color: #f92672">}</span>
+        <span style="color: #60a0b0; font-style: italic">/*for (int i = 0; i &lt; props.length; i++) {</span>
+<span style="color: #60a0b0; font-style: italic">            System.out.println(props[i].getName() + &quot;=&quot; + props[i].getReadMethod().invoke(demo));</span>
+<span style="color: #60a0b0; font-style: italic">        }*/</span>
+        <span style="color: #007020; font-weight: bold">for</span> <span style="color: #666666">(</span>PropertyDescriptor prop <span style="color: #666666">:</span> props <span style="color: #666666">)</span> <span style="color: #666666">{</span>
+            System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span>prop<span style="color: #666666">.</span><span style="color: #4070a0">getName</span><span style="color: #666666">()</span> <span style="color: #666666">+</span> <span style="color: #4070a0">&quot;=&quot;</span> <span style="color: #666666">+</span> prop<span style="color: #666666">.</span><span style="color: #4070a0">getReadMethod</span><span style="color: #666666">().</span><span style="color: #4070a0">invoke</span><span style="color: #666666">(</span>demo<span style="color: #666666">));</span>
+        <span style="color: #666666">}</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">getName</span><span style="color: #f92672">(){</span>
-        <span style="color: #f8f8f2">retur</span> <span style="color: #f8f8f2">nname</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> String <span style="color: #06287e">getName</span><span style="color: #666666">(){</span>
+        retur nname<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">){</span>
-        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">name</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">setName</span><span style="color: #666666">(</span>String name<span style="color: #666666">){</span>
+        <span style="color: #007020; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #4070a0">name</span><span style="color: #666666">=</span>name<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 
 
 <p><br>
 另外, 如果已知属性名的话, 是可以直接通过 <code>PropertyDescriptor</code> 类来操作 JavaBean 的.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">public</span> <span style="color: #66d9ef">class</span> <span style="color: #a6e22e">IntrospectorDemo</span> <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">static</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">main</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span><span style="color: #f92672">[]</span><span style="color: #f8f8f2">args</span><span style="color: #f92672">)</span> <span style="color: #66d9ef">throws</span> <span style="color: #f8f8f2">Exception</span> <span style="color: #f92672">{</span>
-        <span style="color: #f8f8f2">IntrospectorDemo</span> <span style="color: #f8f8f2">demo</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">IntrospectorDemo</span><span style="color: #f92672">();</span>
-        <span style="color: #f8f8f2">demo</span><span style="color: #f92672">.</span><span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;WinterLau&quot;</span><span style="color: #f92672">);</span>
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">IntrospectorDemo</span> <span style="color: #666666">{</span>
+    String name<span style="color: #666666">;</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> <span style="color: #06287e">main</span><span style="color: #666666">(</span>String<span style="color: #666666">[]</span>args<span style="color: #666666">)</span> <span style="color: #007020; font-weight: bold">throws</span> Exception <span style="color: #666666">{</span>
+        IntrospectorDemo demo <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> IntrospectorDemo<span style="color: #666666">();</span>
+        demo<span style="color: #666666">.</span><span style="color: #4070a0">setName</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;WinterLau&quot;</span><span style="color: #666666">);</span>
 
-        <span style="color: #f8f8f2">PropertyDescriptor</span> <span style="color: #f8f8f2">propDesc</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #f8f8f2">PropertyDescriptor</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;name&quot;</span><span style="color: #f92672">,</span> <span style="color: #f8f8f2">demo</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">Method</span> <span style="color: #f8f8f2">methodGetName</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">proDescriptor</span><span style="color: #f92672">.</span><span style="color: #a6e22e">getReadMethod</span><span style="color: #f92672">();</span>
-        <span style="color: #f8f8f2">Object</span> <span style="color: #f8f8f2">objName</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">methodGetName</span><span style="color: #f92672">.</span><span style="color: #a6e22e">invoke</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">demo</span><span style="color: #f92672">);</span>
-        <span style="color: #f8f8f2">System</span><span style="color: #f92672">.</span><span style="color: #a6e22e">out</span><span style="color: #f92672">.</span><span style="color: #a6e22e">println</span><span style="color: #f92672">(</span><span style="color: #e6db74">&quot;get name:&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">objName</span><span style="color: #f92672">.</span><span style="color: #a6e22e">toString</span><span style="color: #f92672">());</span>
-    <span style="color: #f92672">}</span>
+        PropertyDescriptor propDesc <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> PropertyDescriptor<span style="color: #666666">(</span><span style="color: #4070a0">&quot;name&quot;</span><span style="color: #666666">,</span> demo<span style="color: #666666">);</span>
+        Method methodGetName <span style="color: #666666">=</span> proDescriptor<span style="color: #666666">.</span><span style="color: #4070a0">getReadMethod</span><span style="color: #666666">();</span>
+        Object objName <span style="color: #666666">=</span> methodGetName<span style="color: #666666">.</span><span style="color: #4070a0">invoke</span><span style="color: #666666">(</span>demo<span style="color: #666666">);</span>
+        System<span style="color: #666666">.</span><span style="color: #4070a0">out</span><span style="color: #666666">.</span><span style="color: #4070a0">println</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;get name:&quot;</span> <span style="color: #666666">+</span> objName<span style="color: #666666">.</span><span style="color: #4070a0">toString</span><span style="color: #666666">());</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #f8f8f2">String</span> <span style="color: #a6e22e">getName</span><span style="color: #f92672">(){</span>
-        <span style="color: #f8f8f2">retur</span> <span style="color: #f8f8f2">nname</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> String <span style="color: #06287e">getName</span><span style="color: #666666">(){</span>
+        retur nname<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
 
-    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">void</span> <span style="color: #a6e22e">setName</span><span style="color: #f92672">(</span><span style="color: #f8f8f2">String</span> <span style="color: #f8f8f2">name</span><span style="color: #f92672">){</span>
-        <span style="color: #66d9ef">this</span><span style="color: #f92672">.</span><span style="color: #a6e22e">name</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">name</span><span style="color: #f92672">;</span>
-    <span style="color: #f92672">}</span>
-<span style="color: #f92672">}</span>
+    <span style="color: #007020; font-weight: bold">public</span> <span style="color: #902000">void</span> <span style="color: #06287e">setName</span><span style="color: #666666">(</span>String name<span style="color: #666666">){</span>
+        <span style="color: #007020; font-weight: bold">this</span><span style="color: #666666">.</span><span style="color: #4070a0">name</span><span style="color: #666666">=</span>name<span style="color: #666666">;</span>
+    <span style="color: #666666">}</span>
+<span style="color: #666666">}</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

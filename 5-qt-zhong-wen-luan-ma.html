@@ -55,7 +55,7 @@
 
     <p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
 <p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
 QTextCodec::setCodecForCStrings(...)
 QTextCodec::setCodecForLocale(...)
 
@@ -72,13 +72,13 @@ QTextCodec::setCodecForLocale(...)
 <p>*</p>
 <p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
 <p>但是在 Qt5 之后, 移除了 setCodecForTr 函数, 之前的 setCodecxxx 各种副作用都不再存在, 而且中文问题更为简单:</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>QString s1 = QStringLiteral(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;中文&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>QString s1 = QStringLiteral(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;中文&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
 QString s2 &lt;/span&gt;= QString::fromWCharArray(L&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;中文&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;);
 </pre></div>
 
 
 <p>这两种写法都是可以的.</p>
-<div class="codehilite" style="background: #272822"><pre style="line-height: 125%"><span></span>&lt;a href=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image25.png&quot;&gt;&lt;img src=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb25.png&quot; style=&quot;background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&quot; title=&quot;image&quot; height=&quot;342&quot; width=&quot;502&quot; alt=&quot;image&quot; border=&quot;0&quot;&gt;&lt;/a&gt;
+<div class="codehilite" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;a href=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image25.png&quot;&gt;&lt;img src=&quot;http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb25.png&quot; style=&quot;background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px&quot; title=&quot;image&quot; height=&quot;342&quot; width=&quot;502&quot; alt=&quot;image&quot; border=&quot;0&quot;&gt;&lt;/a&gt;
 
 
 
