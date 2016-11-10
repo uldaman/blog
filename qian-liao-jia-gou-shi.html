@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>(二十二) Java 中的包装类</title>
+    <title>浅聊架构师</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -45,32 +45,57 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html" rel="bookmark"
-        title="Permalink to (二十二) Java 中的包装类">(二十二) Java 中的包装类</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/qian-liao-jia-gou-shi.html" rel="bookmark"
+        title="Permalink to 浅聊架构师">浅聊架构师</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-06-13T13:20:00+08:00">Sat 13 June 2015
+<h6 class="subheader" title="2016-11-10T13:27:00+08:00">Thu 10 November 2016
 </h6>
 
 
-    <p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
-<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
-<p>包装类主要提供了两大类方法:
-*. 将本类型和其他基本类型进行转换的方法
-*. 将字符串和本类型及包装类互相转换的方法</p>
-<hr />
-<p>以 Integet 为例, 其它类似</p>
-<p>Integer n1 = new Integer(5);
-Integet n2 = new Integer(“5”);</p>
-<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
-<hr />
-<p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
-<p>**装箱：**把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
-<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p>**拆箱：**和装箱相反，把包装类对象转换成基本类型的值，又可分为手动拆箱和自动拆箱;
-<img alt="" src="http://i61.tinypic.com/2vmtses.jpg" />
-???</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+    <div class="toc">
+<ul></ul>
+</div>
+<p>成为架构师也许是大部分 IT 人士的目标, 我也不例外, 但在与同事 (同行) 的交流中, 我发现大部分人对架构的理解都是比较片面的, 例如:</p>
+<ul>
+<li>运维人员普遍认为架构师的职责在于为公司搭建一个可伸缩、高并发、高可靠的集群环境;</li>
+<li>而开发的眼中, 却认为架构师就是设计出高内聚低耦合、可维护、可扩展的程序代码, 甚至还有些人认为架构就是分层, 比如 &ldquo;三层架构&rdquo;（或者四层、五层&hellip;反正分层越多就说明项目越复杂而且架构就越牛）.</li>
+</ul>
+<p>那哪种说法正确呢?</p>
+<p>其实都正确, 只是所处的方向不同, 架构师是一个统称, 不同的架构方法论, 会将架构分为不同视图, 每个视图侧重某一个方面、领域的问题.</p>
+<p>比如希赛推的 <strong>ADMEMS</strong> 架构体系, 分为以下几种视图:</p>
+<ul>
+<li>物理架构: 描述机器的物理部署、网络拓扑方面.</li>
+<li>数据架构: 描述数据的存储结构、格式等方面.</li>
+<li>运行架构: 描述运行期线程、进程间的交互工作机制.</li>
+<li>逻辑架构: 指如何将代码分成不同模块、组件, 以及之间的职责分配、交互行为.</li>
+<li>开发架构: 主要指开发工具的选择, 程序单元的划分, 开发管理规范流程等方面. 例如分为哪些工程、项目, 源代码管理, 自动化编译构建、测试、部署等.</li>
+</ul>
+<blockquote>
+<p>目前国际上运用比较广泛的是 <strong>TOGAF</strong> 架构体系, 它把架构分为业务架构、数据架构、应用架构、技术架构等几个方面.</p>
+</blockquote>
+<p>实际上很少有公司是严格按照这五种视图去分工和设计的, 在我看来, 架构师大致分为两个方向: <strong>软件架构师**和**系统架构师</strong>（有些企业叫**运维架构师**）. 前两种视图, 可以归纳为软件架构, 而后三种架构, 则归为系统架构.</p>
+<ul>
+<li>软件架构师<ul>
+<li>运行架构</li>
+<li>逻辑架构</li>
+<li>开发架构</li>
+</ul>
+</li>
+<li>系统架构师 (运维架构师)<ul>
+<li>物理架构</li>
+<li>数据架构</li>
+</ul>
+</li>
+</ul>
+<p>简单的理解:</p>
+<ul>
+<li>软件架构师的职责就是设计层次清晰、可维护、可重用、可扩展的程序代码, 一般又分为**纵向**设计和**横向**设计 (层次划分、模块划分及接口定义), 但总的来说, 软件架构描述的是构成系统的抽象组件的职责及之间的交互</li>
+<li>系统架构师的职责是搭建高性能、高并发、高可靠, 可伸缩、可容灾的集群环境</li>
+</ul>
+<p>在国内大部分中小型互联网公司, 基于处于这种现状, 有些牛逼的人士则身兼两职 (这是不是应该叫 CTO?), 我记得以前有人曾**总结**过: 天朝的架构师就是**会运维的高级开发**.</p>
+<p>我的这篇 blog 的标题是 &ldquo;浅聊&rdquo;, 目的是为了让 IT 新人理解什么是架构师, 以及架构师的职责 (只是我个人的理解), 而至于到底要怎么设计, 就又是另一套可发散性的讨论话题了, 也根本没有什么固定标准可言, 但基本思想是相通的, 重要的东西还是需要以心传心~</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a>
 
 </p>
 
@@ -81,7 +106,7 @@ Integet n2 = new Integer(“5”);</p>
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="er-shi-er-java-zhong-de-bao-zhuang-lei" data-title="(二十二) Java 中的包装类" data-url="http://blog.smallcpp.com/er-shi-er-java-zhong-de-bao-zhuang-lei.html"></div>
+    <div class="ds-thread" data-thread-key="qian-liao-jia-gou-shi" data-title="浅聊架构师" data-url="http://blog.smallcpp.com/qian-liao-jia-gou-shi.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
