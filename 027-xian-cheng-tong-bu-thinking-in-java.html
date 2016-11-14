@@ -53,7 +53,23 @@
 </h6>
 
 
-    <div class="toc">
+    <p>同步
+synchronized 同步代码块, 线程间的锁
+获取锁的线程执行完退出了, 或者异常了, 锁才会被释放
+那么问题就是, 当锁被占用时,  其它线程就只能一直 wait, 好在 java 提供了 lock 对象, 它支持 timeout
+另外, synchronized 不支持读写锁分离, 而 lock 支持
+lock 的锁需要显示地手动获取释放</p>
+<p>java.util.concurrent.locks.Lock
+Lock 是个接口, 提供以下方法:
+lock
+lockInterruptibly 可调用 interrupt 中断等待
+tryLock 尝试获取锁</p>
+<p>ReentrantLock 可重入锁, 是 JDK 中唯一实现了 Lock 接口的类, 并且提供了更多的方法</p>
+<p>ReadWriteLock 也是一个接口, 提供两个方法
+readLock
+writeLock</p>
+<p>ReentrantReadWriteLock 是 JDK 唯一实现了 ReadWriteLock 的类, 它提供了更多的方法, 当然主要还是 readLock 和 writeLock 两个方法.</p>
+<div class="toc">
 <ul>
 <li><a href="#1-synchronized">1. synchronized 关键字</a></li>
 <li><a href="#2-lock">2. Lock 对象</a></li>

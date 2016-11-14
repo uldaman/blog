@@ -53,24 +53,55 @@
 </h6>
 
 
-    <div class="toc">
+    <p>进程和线程:</p>
 <ul>
-<li><a href="#1">1. 定义任务</a></li>
-<li><a href="#2">2. 附加线程</a></li>
-<li><a href="#3-executor">3. Executor</a></li>
-<li><a href="#4">4. 休眠</a></li>
-<li><a href="#5">5. 优先级</a></li>
-<li><a href="#6">6. 后台线程(也称守护线程)</a></li>
-<li><a href="#7">7. 另外的创建线程方法</a><ul>
-<li><a href="#71-thread">7.1 直接继承 Thread</a></li>
-<li><a href="#72-runnable">7.2 自执行 Runnable</a></li>
+<li><strong>进程</strong>, 线程的容器, 有独立的运行空间</li>
+<li><strong>线程</strong>, CPU 最小执行单元, 通过 CPU 的时间片切换来实现多线程&rdquo;并行&rdquo;</li>
+</ul>
+<p>在 Java 中, 最底层地创建线程有两种方案:</p>
+<ul>
+<li>继承 Thread 类</li>
+<li>实现 Runable 接口</li>
+</ul>
+<p>实际开发中, 我们其实很少用这两种方案, 而是使用 <code>java.util.concurrent</code> (并发包), 主要包含消息队列、原子量、并发集合、同步器、可重入锁、线程池等.</p>
+<div class="toc">
+<ul>
+<li><a href="#javautilconcurrent">java.util.concurrent (并发包)</a><ul>
+<li><a href="#executor">Executor</a><ul>
+<li><a href="#_1">定义任务</a></li>
+<li><a href="#executor_1">使用 Executor 驱动</a></li>
+<li><a href="#_2">另一种提交任务方法</a></li>
 </ul>
 </li>
-<li><a href="#8-join">8. 加入线程(join)</a></li>
+</ul>
+</li>
+<li><a href="#_3">线程休眠</a></li>
+<li><a href="#_4">线程优先级</a></li>
+<li><a href="#_5">后台线程(也称守护线程)</a></li>
+<li><a href="#_6">另外的创建线程方法</a><ul>
+<li><a href="#thread">直接继承 Thread</a></li>
+<li><a href="#runnable">实现 Runnable 接口</a></li>
+</ul>
+</li>
+<li><a href="#join">加入线程(join)</a></li>
 </ul>
 </div>
-<h2 id="1">1. 定义任务</h2>
-<p>线程是用来&rdquo;驱动&rdquo;任务的, 通过实现 Runnable 接口的 run() 方法可以来定义一个任务.</p>
+<h1 id="javautilconcurrent"><code>java.util.concurrent</code> (并发包)</h1>
+<h2 id="executor">Executor</h2>
+<p>Executor 是 Java 中启动线程的优选方案.<br>
+它 是 Java SE5的 <strong>java.util.concurrent</strong> 包中的<em>执行器</em>, 它可以用来管理 Thread 对象, 相当于一个中间件.</p>
+<p>Java 通过 <code>java.util.concurrent.Executors</code> 提供四种<strong>线程池</strong>, 分别为:</p>
+<ul>
+<li>newCachedThreadPool 创建一个可缓存线程池, 如果线程池长度超过处理需要, 可灵活回收空闲线程, 若无可回收, 则新建线程.</li>
+<li>newFixedThreadPool 创建一个定长线程池, 可控制线程最大并发数, 超出的线程会在队列中等待.</li>
+<li>newScheduledThreadPool 创建一个定长线程池, 支持定时及周期性任务执行 (多数情况下可用来替代 Timer 类).</li>
+<li>newSingleThreadExecutor 创建一个单线程化的线程池, 它只会用唯一的工作线程来执行任务, 保证所有任务按照指定顺序 (FIFO, LIFO, 优先级) 执行.</li>
+</ul>
+<blockquote>
+<p>线程的数量通常和当前 CPU 核心数一致比较好, 通过 <code>Runtime.getRuntime().availableProcessors()</code> 可以获得当前 CPU 核心数 (注意不是 CPU 线程数, 有的 CPU 是什么 4 核 8 线程).</p>
+</blockquote>
+<p>要使用 Executor, 首先要定义任务, 然后用 Executor 去&rdquo;驱动&rdquo;它.</p>
+<h3 id="_1">定义任务</h3>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 显示 LiftOff(发射) 前的倒计时</span>
 <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">LiftOff</span> <span style="color: #8B008B; font-weight: bold">implements</span> Runnable {
     <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">int</span> countDown = <span style="color: #B452CD">10</span>; <span style="color: #228B22">// default 倒数次数</span>
@@ -98,7 +129,8 @@
 </pre></div>
 
 
-<p>稍微解释下, id 属性用来区分 LiftOff 任务的多个实例(线程), 所以它被定义成 final 的.</p>
+<p><br>
+稍微解释下, id 属性用来区分 LiftOff 任务的多个实例(线程), 所以它被定义成 final 的.</p>
 <p><strong>Thread.yield()</strong> 静态方法的作用是对 <em>线程调度器</em> 的一种建议, 它是在声明此刻我(当前线程)放弃对 CPU 的占用权, 现在正是你(CPU)切换时间片的大好时机.</p>
 <blockquote>
 <p>注意, Thread.yield() 虽然让 CPU 立即执行一次切换, 去执行其他线程, 但是这个&rdquo;其他&rdquo;也包含当前线程&hellip;</p>
@@ -113,6 +145,8 @@
 </pre></div>
 
 
+<p><br>
+输出结果:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>del *.class
 
 javac MainThread.java
@@ -123,64 +157,8 @@ java MainThread
 </pre></div>
 
 
-<h2 id="2">2. 附加线程</h2>
-<p>实现 Runnable 接口后, 要实现线程驱动, 还必须显示地创建一个新线程, 并将 Runnable 附着在其上, <strong>Thread</strong> 类就是用来完成这个动作的, 我们只需要将 Runnable 对象传给 Thread 的构造函数即可.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
-        Thread t = <span style="color: #8B008B; font-weight: bold">new</span> Thread(<span style="color: #8B008B; font-weight: bold">new</span> LiftOff());
-        t.<span style="color: #658b00">start</span>();
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Waiting for Liftoff.&quot;</span>);
-    }
-}
-</pre></div>
-
-
-<p>创建 Thread 对象后, 调用该对象的 <strong>start()</strong> 方法为新线程执行必需的初始化操作, 然后新线程开始去&rdquo;跑动&rdquo;(即调用 Runnable 的 run() 方法), 执行结果如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>javac MainThread.java
-
-java MainThread
-
-Waiting for Liftoff.
-#0(10). #0(9). #0(8). #0(7). #0(6). #0(5). #0(4). #0(3). #0(2). #0(1). #0(Liftoff).
-</pre></div>
-
-
-<p>我们可以看到, start() 方法是__立即返回__的, 创建运行新线程并不会阻塞当前线程的继续执行.</p>
-<p>当然你可以创建更多的线程:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
-        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">5</span>; i++) {
-            Thread t = <span style="color: #8B008B; font-weight: bold">new</span> Thread(<span style="color: #8B008B; font-weight: bold">new</span> LiftOff());
-            t.<span style="color: #658b00">start</span>();
-        }
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Waiting for Liftoff.&quot;</span>);
-    }
-}
-</pre></div>
-
-
-<p>执行结果如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>del *.class
-
-javac MainThread.java
-
-java MainThread
-
-#0(10). #0(9). #0(8). #0(7). #0(6). #0(5). #0(4). #0(3). #0(2).
-#0(1). Waiting for Liftoff. #2(10). #1(10). #1(9). #2(9). #0(Liftoff!).
-#4(10). #3(10). #4(9). #2(8). #1(8). #2(7). #4(8). #3(9). #4(7). #2(6).
-#1(7). #2(5). #4(6). #4(5). #3(8). #4(4). #2(4). #1(6). #2(3). #4(3).
-#3(7). #4(2). #2(2). #1(5). #2(1). #4(1). #3(6). #4(Liftoff!). #2(Liftoff!).
-#1(4). #3(5). #1(3). #3(4). #1(2). #3(3). #1(1). #3(2). #1(Liftoff!).
-#3(1). #3(Liftoff!).
-</pre></div>
-
-
-<p>可见, 多线程是轮流交换着去执行的.</p>
-<h2 id="3-executor">3. Executor</h2>
-<p>Executor 是 Java 中启动线程的优选方案.<br>
-它 是 Java SE5的 <strong>java.util.concurrent</strong> 包中的_执行器_, 它可以用来管理 Thread 对象, 相当于一个中间件.</p>
-<p>再用上面的 LiftOff 例子, 使用 Executor 我们无须再显示的创建 Thread 对象.</p>
+<p><br></p>
+<h3 id="executor_1">使用 Executor 驱动</h3>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.concurrent.*</span>;
 
 <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
@@ -196,7 +174,8 @@ java MainThread
 </pre></div>
 
 
-<p>执行结果如下:</p>
+<p><br>
+执行结果如下:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>javac MainThread.java
 
 java MainThread
@@ -211,33 +190,23 @@ java MainThread
 </pre></div>
 
 
-<p>单个的 Executor 就可以被用来创建和管理系统中所有的任务.</p>
+<p><br>
+单个的 Executor 就可以被用来创建和管理系统中所有的任务.</p>
 <p><strong>ExecutorService</strong> 接口提供了管理终止的方法(具有生命周期的 Executor), 它知道如何构建恰当的上下文来执行 Runnable 对象.<br>
 一个 ExecutorService 的生命周期有三种状态: 运行、关闭、终止.<br>
 Executor 创建时处于运行状态, 当调用 shutdown() 后，处于关闭状态, <strong>isShutdown()</strong> 方法返回 true,这时, 不应该再向 Executor 中添加任务, 所有已添加的任务执行完毕后, Executor 处于终止状态, <strong>isTerminated()</strong> 返回 true.<br>
 如果 Executor 处于关闭状态, 往 Executor 提交任务会抛出 unchecked exception RejectedExecutionException.</p>
 <p><strong>shutdown()</strong> 方法防止新任务被提交给 Executor, 但允许执行以前提交的任务.<br>
 另外还有个 <strong>shutdownNow()</strong> 方法, 它阻止等待任务的启动并试图停止当前正在执行的任务.</p>
-<p><strong>CachedThreadPool</strong> 类型的 Executor 将为每个任务根据需要创建新线程的线程池.<br>
-除了 CachedThreadPool 外, Executor 还有其他的一些类型:</p>
+<h3 id="_2">另一种提交任务方法</h3>
+<p>上面的例子, 我们实现了一个 Runable 接口, 然后用 <code>ExecutorService.execute</code> 来执行任务, Executor 还提供另一种执行任务的方法来满足不同情况下的需求, 那就是 <code>ExecutorService.submit</code>, 与 <code>execute</code> 不同, <code>submit</code> 的任务需要实现的是 <strong>Callable</strong> 接口而不是 Runable.</p>
 <ul>
-<li>public static ExecutorService <strong>newFixedThreadPool</strong>(int nThreads)<ul>
-<li>创建固定数目线程的线程池</li>
+<li><code>ExecutorService.execute</code> 任务无返回值, 如果需要知道线程的情况, 就需要另外的共享变量.</li>
+<li><code>ExecutorService.submit</code> 任务返回一个 <strong>Future</strong> 实例表示任务的状态, 通过 <code>Future.get()</code> 可以取到 (阻塞), 可以通过 <code>Future.isDone()</code> 来判断线程是否完成.</li>
 </ul>
-</li>
-<li>public static ExecutorService <strong>newSingleThreadExecutor</strong>()<ul>
-<li>创建一个单线程化的 Executor</li>
-<li>如果向 Single Executor 中添加了多任务, 这些任务会&rdquo;排队执行&rdquo;</li>
-</ul>
-</li>
-<li>public static ScheduledExecutorService <strong>newScheduledThreadPool</strong>(int corePoolSize)<ul>
-<li>创建一个支持定时及周期性的任务执行的线程池, 多数情况下可用来替代 Timer 类</li>
-</ul>
-</li>
-</ul>
-<h2 id="4">4. 休眠</h2>
+<h1 id="_3">线程休眠</h1>
 <p>让线程休眠的方法就是调用  <strong>Thread.sleep()</strong>.</p>
-<p>继续刚才的 LiftOff 的例子, 我们只需要更它的 run() 方法.</p>
+<p>继续刚才的 LiftOff 的例子, 我们只需要更新它的 <code>run()</code> 方法.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">run</span>() {
     <span style="color: #8B008B; font-weight: bold">try</span> {
         <span style="color: #8B008B; font-weight: bold">for</span> (; countDown &gt;= <span style="color: #B452CD">0</span>;  countDown--) {
@@ -254,10 +223,11 @@ Executor 创建时处于运行状态, 当调用 shutdown() 后，处于关闭状
 </pre></div>
 
 
-<p>sleep() 与 yield() 的区别就在于, sleep() 除了拥有 yield() 的功能外, 还可以让 cpu 在指定时间内不再切换回自身.</p>
+<p><br>
+sleep() 与 yield() 的区别就在于, sleep() 除了拥有 yield() 的功能外, 还可以让 cpu 在指定时间内不再切换回自身.</p>
 <p>sleep() 的调用会抛出 <strong>InterruptedException</strong> 异常, 因为异常不能跨线程传播, 所以我们必须在线程本地处理掉.</p>
 <p>Java SE5 引入了更加显示的 sleep(), 作为 <strong>TimeUnit</strong> 类的一部分, 这个方法允许指定 sleep() 的时间单位, 如上面的就是 <strong>MILLISECONDS</strong>(毫秒).</p>
-<h2 id="5">5. 优先级</h2>
+<h1 id="_4">线程优先级</h1>
 <p>简单的说, 线程调试器会让优先级高的线程先执行, 但并不是意味着优先级低的线程就得不到执行了, 它只是执行的频率低一些而已.</p>
 <p>可以使用 <strong>Thread.getPriority()</strong> 来获取现有线程的优先级, 使用 <strong>Thread.setPriority()</strong> 来修改它.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.concurrent.*</span>;
@@ -296,16 +266,17 @@ Executor 创建时处于运行状态, 当调用 shutdown() 后，处于关闭状
     <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
         ExecutorService exec = Executors.<span style="color: #658b00">newCachedThreadPool</span>();
         <span style="color: #8B008B; font-weight: bold">for</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">5</span>; i++) {
-            exec.<span style="color: #658b00">execute</span>(<span style="color: #8B008B; font-weight: bold">new</span> SimplePriorities(Thread.<span style="color: #658b00">MIN_PRIORITY</span>));
+            exec.<span style="color: #658b00">execute</span>(<span style="color: #8B008B; font-weight: bold">new</span> SimplePriorities(Thread.<span style="color: #658b00">MIN</span>*PRIORITY));
         }
-        exec.<span style="color: #658b00">execute</span>(<span style="color: #8B008B; font-weight: bold">new</span> SimplePriorities(Thread.<span style="color: #658b00">MAX_PRIORITY</span>));
+        exec.<span style="color: #658b00">execute</span>(<span style="color: #8B008B; font-weight: bold">new</span> SimplePriorities(Thread.<span style="color: #658b00">MAX</span>*PRIORITY));
         exec.<span style="color: #658b00">shutdown</span>();
     }
 }
 </pre></div>
 
 
-<p>执行结果如下:</p>
+<p><br>
+执行结果如下:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
 Thread[pool-1-thread-3,1,main]: 5
 Thread[pool-1-thread-1,1,main]: 5
@@ -318,14 +289,15 @@ Thread[pool-1-thread-2,1,main]: 4
 </pre></div>
 
 
-<p>在 SimplePriorities 中完成了 <strong>toString()</strong> 的覆盖用来打印<em>线程的名称</em>、<em>优先级</em>及线程所属<em>线程组</em>, <strong>Thread.currentThread()</strong> 方法可以用来获取当前任务所在线程的 Thread 对象引用.</p>
-<p>在 main 中, 我们创建 5 个低优化级的线程和 1 个高优先级的线程, 因为优化级与操作系统有依赖, 所以唯一的可移植设置是使用:</p>
+<p><br>
+在 SimplePriorities 中完成了 <strong>toString()</strong> 的覆盖用来打印<em>线程的名称</em>、<em>优先级</em>及线程所属<em>线程组</em>, <strong>Thread.currentThread()</strong> 方法可以用来获取当前任务所在线程的 Thread 对象引用.</p>
+<p>在 <code>main</code> 中, 我们创建 5 个低优化级的线程和 1 个高优先级的线程, 因为优化级与操作系统有依赖, 所以唯一的可移植设置是使用:</p>
 <ul>
-<li>MIN_PRIORITY</li>
-<li>NORM_PRIORITY</li>
-<li>MAX_PRIORITY</li>
+<li>MIN*PRIORITY</li>
+<li>NORM*PRIORITY</li>
+<li>MAX*PRIORITY</li>
 </ul>
-<p>现在说说为什么要在 run() 中设计那么一个稍大开销的运算?<br>
+<p>现在说说为什么要在 <code>run()</code> 中设计那么一个稍大开销的运算?<br>
 先看看注释掉那段运算后执行的结果:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Thread[pool-1-thread-2,1,main]: 5
 Thread[pool-1-thread-2,1,main]: 4
@@ -338,27 +310,29 @@ Thread[pool-1-thread-6,10,main]: 4
 </pre></div>
 
 
-<p>可以看到, 这些输出几乎是连续的(前几个都是 pool-1-thread-2).<br>如果没有加入这些运算的话, 因为 CPU 执行是非常快速的, 没有开销大的运算, 线程还没发生切换就被执行完了, 这样也就看不到设置的优先级效果.</p>
-<h2 id="6">6. 后台线程(也称守护线程)</h2>
+<p><br>
+可以看到, 这些输出几乎是连续的(前几个都是 pool-1-thread-2).<br>如果没有加入这些运算的话, 因为 CPU 执行是非常快速的, 没有开销大的运算, 线程还没发生切换就被执行完了, 这样也就看不到设置的优先级效果.</p>
+<h1 id="_5">后台线程(也称守护线程)</h1>
 <p>所谓 <strong>Daemon</strong> 线程, 是指在程序运行时在后台提供一种通用服务的线程, 当所有的非后台线程线束时, 程序也就终止了, 同时会杀死进程中的所有后台线程.</p>
-<p><strong>setDaemon()</strong> 方法可以将一个线程设置为后台线程, 但是注意, 它必须要在__线程启动前设置__.</p>
+<p><strong>setDaemon()</strong> 方法可以将一个线程设置为后台线程, 但是注意, 它必须要在<strong>线程启动前设置</strong>.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Thread daemon = <span style="color: #8B008B; font-weight: bold">new</span> Thread();
 daemon.<span style="color: #658b00">setDaemon</span>(<span style="color: #8B008B; font-weight: bold">true</span>);
 daemon.<span style="color: #658b00">start</span>();
 </pre></div>
 
 
-<p>这里我们没有使用 Executor, 而是通过 Thread 显示的创建线程, 以便可以设置线程的后台标志.</p>
-<p>通过编写定制的 ThreadFactory 也可以定制由 Executor 创建的线程的属性(后台、优先级及名称), 这里就不演示了.</p>
+<p><br>
+这里我们没有使用 Executor, 而是通过 Thread 显示的创建线程, 以便可以设置线程的后台标志.</p>
+<p>通过编写定制的 <code>ThreadFactory</code> 也可以定制由 Executor 创建的线程的属性(后台、优先级及名称), 这里就不演示了.</p>
 <p><strong>isDaemon()</strong> 方法返回一个线程是否是后台线程.</p>
 <blockquote>
 <p>由后台线损创建的任何其它线程也将自动地被设置为后台线程.</p>
 </blockquote>
 <p>还有一个情况就是 <strong>finally</strong> 语句, 如果所有的非后台线程都结束, 那么后台线程会在不执行 finally 语句的情况下被终止.</p>
-<p>所以这几乎是一种不好的思想, 因为__非后台的 Executor__ 通常是一种更好的守护方式, 因为 Executor 控制的所有线程可以同时被关闭, 在后面将会提及.</p>
-<h2 id="7">7. 另外的创建线程方法</h2>
-<p>虽然使用 Executor 是优选的方案, 但还是要了解一下另外两种创建新线程的方法.</p>
-<h3 id="71-thread">7.1 直接继承 Thread</h3>
+<p>所以这几乎是一种不好的思想, 因为<strong>非后台的 Executor</strong> 通常是一种更好的守护方式, 因为 Executor 控制的所有线程可以同时被关闭, 在后面将会提及.</p>
+<h1 id="_6">另外的创建线程方法</h1>
+<p>虽然使用 Executor 是优选的方案, 但还是要了解一下另外两种&rdquo;原始&rdquo;的创建新线程方法.</p>
+<h2 id="thread">直接继承 Thread</h2>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">LiftOff</span> <span style="color: #8B008B; font-weight: bold">extends</span> Thread {
     <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">int</span> countDown = <span style="color: #B452CD">10</span>; <span style="color: #228B22">// default 倒数次数</span>
     <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">int</span> taskCount = <span style="color: #B452CD">0</span>;
@@ -392,46 +366,69 @@ daemon.<span style="color: #658b00">start</span>();
 </pre></div>
 
 
-<h3 id="72-runnable">7.2 自执行 Runnable</h3>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">LiftOff</span> <span style="color: #8B008B; font-weight: bold">implements</span> Runnable {
-    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #a7a7a7; font-weight: bold">int</span> countDown = <span style="color: #B452CD">10</span>; <span style="color: #228B22">// default 倒数次数</span>
-    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">int</span> taskCount = <span style="color: #B452CD">0</span>;
-    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #8B008B; font-weight: bold">final</span> <span style="color: #a7a7a7; font-weight: bold">int</span> id = taskCount++; <span style="color: #228B22">// 记录线程 id</span>
-    <span style="color: #8B008B; font-weight: bold">private</span> Thread t = <span style="color: #8B008B; font-weight: bold">new</span> Thread(<span style="color: #8B008B; font-weight: bold">this</span>); <span style="color: #228B22">// 创建一个线程成员属性</span>
-
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">LiftOff</span>() {
-        t.<span style="color: #658b00">start</span>(); <span style="color: #228B22">// 执行线程</span>
-    }
-
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">LiftOff</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> countDown) {
-        <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">countDown</span> = countDown;
-    }
-
-    <span style="color: #8B008B; font-weight: bold">public</span> String <span style="color: #008b45">status</span>() {
-        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&quot;#&quot;</span> + id + <span style="color: #CD5555">&quot;(&quot;</span> + (countDown &gt; <span style="color: #B452CD">0</span> ? countDown : <span style="color: #CD5555">&quot;Liftoff!&quot;</span>) + <span style="color: #CD5555">&quot;). &quot;</span>;
-    }
-
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">run</span>() {
-        <span style="color: #8B008B; font-weight: bold">for</span> (; countDown &gt;= <span style="color: #B452CD">0</span>;  countDown--) {
-            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>(status());
-            Thread.<span style="color: #658b00">yield</span>();
-        }
-    }
-}
-
-<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
+<p><br></p>
+<h2 id="runnable">实现 Runnable 接口</h2>
+<p>实现 Runnable 接口后, 要实现线程驱动, 还必须显示地创建一个新线程, 并将 Runnable 附着在其上, <strong>Thread</strong> 类就是用来完成这个动作的, 我们只需要将 Runnable 对象传给 Thread 的构造函数即可.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
     <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
-        LiftOff launch = <span style="color: #8B008B; font-weight: bold">new</span> LiftOff();
-        launch.<span style="color: #658b00">start</span>();
+        Thread t = <span style="color: #8B008B; font-weight: bold">new</span> Thread(<span style="color: #8B008B; font-weight: bold">new</span> LiftOff());
+        t.<span style="color: #658b00">start</span>();
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Waiting for Liftoff.&quot;</span>);
     }
 }
 </pre></div>
 
 
-<h2 id="8-join">8. 加入线程(join)</h2>
-<p>一个线程可以在其他线程之上调用 <strong>join()</strong> 方法, 这个方法是阻塞的, 它的含义在于等到被 join 的线程执行结束之后再执行新线程.</p>
-<p>join() 方法还可以加一个__超时参数__, 其意义在于如果等待超时后, join() 方法也能返回.</p>
-<p>join() 方法还可以被__中断__, 在被 join 的线程上调用  <strong>interrupt()</strong> 方法, 不过这个方法会抛出 <strong>InterruptedException</strong> 异常.</p>
+<p><br>
+创建 Thread 对象后, 调用该对象的 <strong>start()</strong> 方法为新线程执行必需的初始化操作, 然后新线程开始去&rdquo;跑动&rdquo;(即调用 Runnable 的 run() 方法), 执行结果如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>javac MainThread.java
+
+java MainThread
+
+Waiting for Liftoff.
+#0(10). #0(9). #0(8). #0(7). #0(6). #0(5). #0(4). #0(3). #0(2). #0(1). #0(Liftoff).
+</pre></div>
+
+
+<p><br>
+我们可以看到, start() 方法是<strong>立即返回</strong>的, 创建运行新线程并不会阻塞当前线程的继续执行.</p>
+<p>当然你可以创建更多的线程:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MainThread</span> {
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">5</span>; i++) {
+            Thread t = <span style="color: #8B008B; font-weight: bold">new</span> Thread(<span style="color: #8B008B; font-weight: bold">new</span> LiftOff());
+            t.<span style="color: #658b00">start</span>();
+        }
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Waiting for Liftoff.&quot;</span>);
+    }
+}
+</pre></div>
+
+
+<p><br>
+执行结果如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>del *.class
+
+javac MainThread.java
+
+java MainThread
+
+#0(10). #0(9). #0(8). #0(7). #0(6). #0(5). #0(4). #0(3). #0(2).
+#0(1). Waiting for Liftoff. #2(10). #1(10). #1(9). #2(9). #0(Liftoff!).
+#4(10). #3(10). #4(9). #2(8). #1(8). #2(7). #4(8). #3(9). #4(7). #2(6).
+#1(7). #2(5). #4(6). #4(5). #3(8). #4(4). #2(4). #1(6). #2(3). #4(3).
+#3(7). #4(2). #2(2). #1(5). #2(1). #4(1). #3(6). #4(Liftoff!). #2(Liftoff!).
+#1(4). #3(5). #1(3). #3(4). #1(2). #3(3). #1(1). #3(2). #1(Liftoff!).
+#3(1). #3(Liftoff!).
+</pre></div>
+
+
+<p><br>
+可见, 多线程是轮流交换着去执行的.</p>
+<h1 id="join">加入线程(join)</h1>
+<p>一个线程可以在其他线程之上调用 <code>join()</code> 方法, 这个方法是阻塞的, 它的含义在于等到被 join 的线程执行结束之后再执行新线程.</p>
+<p>join() 方法还可以加一个<strong>超时参数</strong>, 其意义在于如果等待超时后, join() 方法也能返回.</p>
+<p>join() 方法还可以被<strong>中断</strong>, 在被 join 的线程上调用  <strong>interrupt()</strong> 方法, 不过这个方法会抛出 <strong>InterruptedException</strong> 异常.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 
 </p>
