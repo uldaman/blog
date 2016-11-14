@@ -58,8 +58,8 @@
 <ul>
 <li><a href="#synchronized">synchronized 关键字</a></li>
 <li><a href="#lock">Lock 对象</a><ul>
-<li><a href="#javautilconcurrentlockslock">java.util.concurrent.locks.Lock</a></li>
-<li><a href="#javautilconcurrentlocksreadwritelock">java.util.concurrent.locks.ReadWriteLock</a></li>
+<li><a href="#lock_1">Lock</a></li>
+<li><a href="#readwritelock">ReadWriteLock</a></li>
 </ul>
 </li>
 <li><a href="#blockingqueue">BlockingQueue</a><ul>
@@ -77,8 +77,8 @@
 <p>使用 <code>synchronized</code>, 必须要等到获取锁的线程执行完退出了, 或者异常了, 锁才会被释放, 那么问题就是, 当锁被占用时, 其它线程就只能一直 wait, 好在 java 提供了 lock 对象, 它支持 <strong>timeout</strong>, 另外, synchronized 不支持<strong>读写锁分离</strong>, 而 lock 支持, 但 lock 的锁需要显示地手动获取释放.</p>
 <h1 id="lock">Lock 对象</h1>
 <p>Java SE5 的 <code>java.util.concurrent</code> 类库还包含有定义在 <code>java.util.concurrent.locks</code> 中的显式的互斥机制.</p>
-<h2 id="javautilconcurrentlockslock"><code>java.util.concurrent.locks.Lock</code></h2>
-<p>Lock 是个接口, 提供以下方法:</p>
+<h2 id="lock_1">Lock</h2>
+<p><code>java.util.concurrent.locks.Lock</code> 是个接口, 提供以下方法:</p>
 <ul>
 <li>lock 锁住</li>
 <li>lockInterruptibly 锁住 (与 lock 不同, 可调用 interrupt 中断等待)</li>
@@ -105,8 +105,8 @@
 
 
 <p><br></p>
-<h2 id="javautilconcurrentlocksreadwritelock"><code>java.util.concurrent.locks.ReadWriteLock</code></h2>
-<p>顾名思义, 一种支持读写分离的锁, ReadWriteLock 也是一个接口, 提供两个方法</p>
+<h2 id="readwritelock">ReadWriteLock</h2>
+<p>顾名思义, 一种支持读写分离的锁, <code>java.util.concurrent.locks.ReadWriteLock</code> 也是一个接口, 提供两个方法:</p>
 <ul>
 <li>readLock</li>
 <li>writeLock</li>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>055、JMS</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/055-jms.html" rel="bookmark"
+        title="Permalink to 055、JMS">055、JMS</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-11-14T14:14:00+08:00">Mon 14 November 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">概念</a></li>
+<li><a href="#activemq">ActiveMQ</a><ul>
+<li><a href="#_2">介绍</a></li>
+<li><a href="#_3">使用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<blockquote>
+<p>我们仅了解下有这么个东西就行, 后面的 Kafka 才是我们要学的 (JMS 常用在 JavaEE 里, 而大数据领域多是用 Kafka).</p>
+</blockquote>
+<h1 id="_1">概念</h1>
+<p>JMS 即 Java 消息服务 (Java Message Service) 应用程序<strong>接口</strong>, 是一个 Java 平台中关于面向消息中间件 (MOM) 的 API, 用于在两个应用程序之间, 或分布式系统中发送消息, 进行异步通信. 它便于消息系统中的 Java 应用程序进行消息交换, 并且通过提供标准的产生、发送、接收消息的接口简化企业应用的开发. Java 消息服务是一个与具体平台无关的 API, 绝大多数 MOM 提供商都对 JMS 提供支持.</p>
+<p>JMS 由以下<strong>元素</strong>组成:</p>
+<ul>
+<li>JMS 提供者 provider: 连接面向消息中间件, JMS 接口的一个实现. 提供者可以是 Java 平台的 JMS 实现, 也可以是非 Java 平台的面向消息中间件的适配器.</li>
+<li>JMS 客户: 生产或消费基于消息的 Java 的应用程序或对象.<ul>
+<li>JMS 生产者: 创建并发送消息的 JMS 客户.</li>
+<li>JMS 消费者: 接收消息的 JMS 客户.</li>
+</ul>
+</li>
+<li>JMS 消息: 包括可以在 JMS 客户之间传递的数据的对象</li>
+<li>JMS 队列: 一个容纳那些被发送的等待阅读的消息的区域. 与队列名字所暗示的意思不同, 消息的接受顺序并不一定要与消息的发送顺序相同. 一旦一个消息被阅读, 该消息将被从队列中移走.</li>
+<li>JMS 主题: 一种支持发送消息给多个订阅者的机制.</li>
+</ul>
+<h1 id="activemq">ActiveMQ</h1>
+<h2 id="_2">介绍</h2>
+<p>ActiveMQ 是一个完全支持 JMS 1.1 和 J2EE 1.4 规范的 JMS Provider 实现.</p>
+<blockquote>
+<p>目前比较流行的 4 个消息队列中间件产品: ActiveMQ、RabbitMQ、Kafka 和 Redis</p>
+<p>RabbitMQ 是一个Advanced Message Queuing Protocol (AMQP) 的开源实现, 由以高性能、可伸缩性出名的 Erlang 写成. 关于 JMS 和 AMQP 的对比参见: <a href="http://wiki.smallcpp.com/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/JMS%20AMQP%20%E5%AF%B9%E6%AF%94%E8%A1%A8.html">JMS AMQP 对比表</a>, 简单的理解, JMS 是针对 Java 专门提出的解决方案, 而 AMQP 是通用的解决方案.</p>
+<p>Kafka 是一种分布式的, 基于发布/订阅的消息系统. Kafka 开发语言为 Scala, 支持跨平台. 其设计主要目标如下: 以时间复杂度为 O(1) 的方式提供消息持久化能力、高吞吐率、支持 Kafka Server 间的消息分区, 及分布式消费, 同时保证消息顺序传输、支持离线数据处理和实时数据处理、支持在线水平扩展.</p>
+<p>Redis 是一个高性能的 key-value 内存数据库, 它的出现很大程度补偿了 memcached 这类 key-value 存储的不足. 虽然它是一个数据库系统, 但本身支持 MQ 功能, 完全可以当做一个轻量级的队列服务器使用.</p>
+</blockquote>
+<p>Java 消息服务应用程序结构支持两种模型:</p>
+<ul>
+<li>点对点或队列模型<ul>
+<li>一个生产者向一个特定的队列发布消息, 一个消费者从该队列中读取消息</li>
+</ul>
+</li>
+<li>发布者/订阅者模型<ul>
+<li>发布者/订阅者模型支持向一个特定的消息主题发布消息, 多个消费者可以获得消息</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>跟 redis 的消息队列差不多的概念.</p>
+</blockquote>
+<h2 id="_3">使用</h2>
+<p><a href="http://archive.apache.org/dist">ActiveMQ</a> 解压后, 配置文件在 <code>conf/activemq.xml</code> 下, 其中 <code>transportConnector</code> 标签定义了 ActiveMQ 的通信方式.</p>
+<blockquote>
+<p>客户端与代理 (Client-to-Broker) 之间的通信连接器称为传输连接器 (transport connectors), 用于接收和监听客户端的请求.</p>
+<p>通过 transportConnector 来定义单个连接器, ActiveMQ 中可以使用多种协议的在不同端口上进行监听;</p>
+<p>URI 属性定义网络协议和可选的参数, 通过 URI 将 ActiveMQ 的连接暴露给外部客户端或者其他代理进行链接.</p>
+</blockquote>
+<p>在默认的 <code>conf/activemq.xml</code> 中可以看到 TCP 连接端口是 61616, 双击 <code>bin/activemq.bat</code> 启动 activemq 服务, 然后通过查看该端口的信息可以测试 ActiveMQ 是否成功启动 <code>netstat -an|find "61616"</code>.</p>
+<p>ActiveMQ 默认启动时, 启动了内置的 jetty 服务器, 提供一个用于监控 ActiveMQ 的 admin 应用: <a href="http://127.0.0.1:8161/admin/">用户名和密码都是 admin</a></p>
+<p>后面怎么针对 ActiveMQ 用 Java 编程就不提了, 还是那句话: 仅了解下有这么个东西就行, 后面的 Kafka 才是我们要学的 (JMS 常用在 JavaEE 里, 而大数据领域多是用 Kafka).</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="055-jms" data-title="055、JMS" data-url="http://blog.smallcpp.com/055-jms.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
