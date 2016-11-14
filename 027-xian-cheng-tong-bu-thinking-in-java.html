@@ -53,35 +53,39 @@
 </h6>
 
 
-    <p>同步
-synchronized 同步代码块, 线程间的锁
-获取锁的线程执行完退出了, 或者异常了, 锁才会被释放
-那么问题就是, 当锁被占用时,  其它线程就只能一直 wait, 好在 java 提供了 lock 对象, 它支持 timeout
-另外, synchronized 不支持读写锁分离, 而 lock 支持
-lock 的锁需要显示地手动获取释放</p>
-<p>java.util.concurrent.locks.Lock
-Lock 是个接口, 提供以下方法:
-lock
-lockInterruptibly 可调用 interrupt 中断等待
-tryLock 尝试获取锁</p>
-<p>ReentrantLock 可重入锁, 是 JDK 中唯一实现了 Lock 接口的类, 并且提供了更多的方法</p>
-<p>ReadWriteLock 也是一个接口, 提供两个方法
-readLock
-writeLock</p>
-<p>ReentrantReadWriteLock 是 JDK 唯一实现了 ReadWriteLock 的类, 它提供了更多的方法, 当然主要还是 readLock 和 writeLock 两个方法.</p>
+    <p>线程安全问题和线程同步的概念不多描述了, 主要看看 Java 中的解决方案.</p>
 <div class="toc">
 <ul>
-<li><a href="#1-synchronized">1. synchronized 关键字</a></li>
-<li><a href="#2-lock">2. Lock 对象</a></li>
+<li><a href="#synchronized">synchronized 关键字</a></li>
+<li><a href="#lock">Lock 对象</a><ul>
+<li><a href="#javautilconcurrentlockslock">java.util.concurrent.locks.Lock</a></li>
+<li><a href="#javautilconcurrentlocksreadwritelock">java.util.concurrent.locks.ReadWriteLock</a></li>
+</ul>
+</li>
+<li><a href="#blockingqueue">BlockingQueue</a><ul>
+<li><a href="#_1">引入</a></li>
+<li><a href="#_2">使用说明</a></li>
+</ul>
+</li>
+<li><a href="#volatile">volatile 关键字</a></li>
 </ul>
 </div>
-<p>线程安全问题和线程同步的概念不多描述了, 主要看看 Java 中的解决方案.</p>
-<h2 id="1-synchronized">1. synchronized 关键字</h2>
-<p><strong>synchronized</strong> 关键字可用来给对象的方法或者代码块加锁, 当它锁定一个方法或者一个代码块的时候, 同一时刻最多只有一个线程执行这段代码, 当两个并发线程访问同一个对象 object 中的这个加锁同步代码块时, 一个时间内只能有一个线程得到执行, 另一个线程必须等待当前线程执行完这个代码块以后才能执行该代码块.</p>
-<p>通常设计中, 要控制对共享资源的访问, 得先把它包装进一个对象, 然后把所有要访问这个资源的方法标记为 <strong>synchronized</strong>.</p>
-<p>所有对象都自动含有单一的锁(也称__监视器__), 当在对象上调用其任意 synchronized 方法时, 该对象都会被自动加锁, 这时, 该对象上的其他 synchronized 方法只有等到前一个方法调用完毕并释放锁之后才能被调用.</p>
-<h2 id="2-lock">2. Lock 对象</h2>
-<p>Java SE5 的 <strong>java.util.concurrent</strong> 类库还包含有定义在 <strong>java.util.concurrent.locks</strong> 中的显式的互斥机制.</p>
+<h1 id="synchronized">synchronized 关键字</h1>
+<p><code>synchronized</code> 关键字可用来给对象的<strong>方法</strong>或者<strong>代码块</strong>加锁, 当它锁定一个方法或者一个代码块的时候, 同一时刻最多只有一个线程执行这段代码, 当两个并发线程访问同一个对象 object 中的这个加锁同步代码块时, 一个时间内只能有一个线程得到执行, 另一个线程必须等待当前线程执行完这个代码块以后才能执行该代码块.</p>
+<p>通常设计中, 要控制对共享资源的访问, 得先把它包装进一个对象, 然后把所有要访问这个资源的方法标记为 <code>synchronized</code>.</p>
+<p>所有对象都自动含有单一的锁(也称<strong>监视器</strong>), 当在对象上调用其任意 synchronized 方法时, 该对象都会被自动加锁, 这时, 该对象上的其他 synchronized 方法只有等到前一个方法调用完毕并释放锁之后才能被调用.</p>
+<p>使用 <code>synchronized</code>, 必须要等到获取锁的线程执行完退出了, 或者异常了, 锁才会被释放, 那么问题就是, 当锁被占用时, 其它线程就只能一直 wait, 好在 java 提供了 lock 对象, 它支持 <strong>timeout</strong>, 另外, synchronized 不支持<strong>读写锁分离</strong>, 而 lock 支持, 但 lock 的锁需要显示地手动获取释放.</p>
+<h1 id="lock">Lock 对象</h1>
+<p>Java SE5 的 <code>java.util.concurrent</code> 类库还包含有定义在 <code>java.util.concurrent.locks</code> 中的显式的互斥机制.</p>
+<h2 id="javautilconcurrentlockslock"><code>java.util.concurrent.locks.Lock</code></h2>
+<p>Lock 是个接口, 提供以下方法:</p>
+<ul>
+<li>lock 锁住</li>
+<li>lockInterruptibly 锁住 (与 lock 不同, 可调用 interrupt 中断等待)</li>
+<li>tryLock 尝试获取锁</li>
+<li>unlock 释放锁</li>
+</ul>
+<p><code>ReentrantLock</code> (可重入锁), 是 JDK 中唯一实现了 Lock 接口的类, 并且提供了更多的方法.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.concurrent.locks.*</span>;
 
 <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MutexEvent</span> {
@@ -98,6 +102,72 @@ writeLock</p>
     }
 }
 </pre></div>
+
+
+<p><br></p>
+<h2 id="javautilconcurrentlocksreadwritelock"><code>java.util.concurrent.locks.ReadWriteLock</code></h2>
+<p>顾名思义, 一种支持读写分离的锁, ReadWriteLock 也是一个接口, 提供两个方法</p>
+<ul>
+<li>readLock</li>
+<li>writeLock</li>
+</ul>
+<p><code>ReentrantReadWriteLock</code> 是 JDK 唯一实现了 ReadWriteLock 的类, 它提供了更多的方法, 当然主要还是 readLock 和 writeLock 两个方法.</p>
+<p>代码就不演示了, 都差不多的使用方法.</p>
+<h1 id="blockingqueue">BlockingQueue</h1>
+<h2 id="_1">引入</h2>
+<p>考虑一个问题, 当使用锁时, 假如有 10 个线程在等同一个锁, 那么谁将拿到下一个锁是未知的, 但通过 BlockingQueue, 我们就能对顺序做控制, 所以 BlockingQueue 主要是解决之前的线程同步方式的缺陷, 即可控性.</p>
+<p>但是 BlockingQueue 本身也只是个<strong>队列</strong>, 但是是一个<strong>特殊</strong>的队列: 即 BlockQueue 支持<strong>阻塞存取</strong>:</p>
+<ul>
+<li>如果 BlockQueue 是空的, 从 BlockingQueue 取东西的操作将会被阻断进入等待状态, 直到 BlockingQueue 进了东西才会被唤醒.</li>
+<li>如果 BlockingQueue 是满的, 任何试图往里存东西的操作也会被阻断进入等待状态, 直到 BlockingQueue 里有空间才会被唤醒继续操作.</li>
+</ul>
+<p>BlockingQueue 是 <code>java.util.concurrent</code> 下用来解决如何高效安全 &ldquo;传输&rdquo; 数据的问题, 通过这些高效并且线程安全的队列类, 为我们快速搭建高质量的多线程程序带来极大的便利.</p>
+<blockquote>
+<p>BlockingQueue 只是提供了一种同步解决方案, 但并不是唯一, 如 redis 的队列, 一样可以做到这些功能, 而且还是分布式的.</p>
+</blockquote>
+<h2 id="_2">使用说明</h2>
+<p>BlockingQueue 是个接口, 提供以下方法:</p>
+<ul>
+<li>put, take: 阻塞式存和取</li>
+<li>add, poll: 非阻塞式存和取</li>
+<li>offer: 检查队列是否还有位置存取, 通常可以配合 add 一起使用</li>
+<li>remainingCapacity: 返回队列剩余容量, 然而并不准</li>
+<li>remove: 移除元素</li>
+<li>contains: 查看队列是否有某个元素</li>
+<li>drainTo: 移除队列中所有可用元素, 并将它们到给定 collection 中</li>
+</ul>
+<p>有四个具体的实现类, 常用两种:</p>
+<ul>
+<li><code>ArrayBlockingQueue</code> 由数组支持的有界阻塞队列 (即大小固定)</li>
+<li><code>LinkedBlockingQueue</code> 由链表支持, 构造时如果传入大小, 则大小也有限制, 如果不传, 由 <code>Interger.MAX_VALUE</code> 来决定</li>
+</ul>
+<p>这两个队列都是 <strong>FIFO</strong> (先入先出) 的顺序.</p>
+<p><code>LinkedBlockingQueue</code> 和 <code>ArrayBlockingQueue</code> 比较起来, 它们背后所用的数据结构不一样, 导致 LinkedBlockingQueue 的数据吞吐量要大于 ArrayBlockingQueue, 但在线程数量很大时其性能的可预见性低于 ArrayBlockingQueue.</p>
+<p>另外两个实现是:</p>
+<ul>
+<li><code>PriorityBlockingQueue</code> 类似于 LinkedBlockQueue, 但其所含对象的排序不是 FIFO, 而是依据对象的自然排序顺序或者是构造函数的 Comparator 决定的顺序.</li>
+<li><code>SynchronousQueue</code> 特殊的 BlockingQueue, 对其的操作必须是放和取交替完成的 (生产 - 消费).</li>
+</ul>
+<blockquote>
+<p>再次说明: BlockingQueue 只是个特殊的队列, 本身没有什么线程同步不同步的概念, 但通过它, 我们可以实现线程按顺序同步的效果.</p>
+</blockquote>
+<h1 id="volatile">volatile 关键字</h1>
+<p>volatile 被认为是轻量级的 synchronized, 它在多线程开发中保证了共享变量的 <strong>可见性</strong>, 也就是说保证线程在每次使用变量的时候, 都会读取变量修改后的最新的值.</p>
+<blockquote>
+<p>锁提供了两种主要特性: <strong>互斥</strong> (mutual exclusion) 和 <strong>可见性</strong> (visibility)<br>
+<strong>互斥</strong>即一次只允许一个线程持有某个特定的锁, 因此可使用该特性实现对共享数据的协调访问协议, 这样, 一次就只有一个线程能够使用该共享数据.<br>
+<strong>可见性</strong>要更加复杂一些, 它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个线程是可见的 —— 如果没有同步机制提供的这种可见性保证, 线程看到的共享变量可能是修改前的值或不一致的值, 这将引发许多严重问题.</p>
+</blockquote>
+<p>volatile 变量所需的编码较少, 运行时开销也较少, 不会像锁那样造成线程阻塞, 也就很少造成可伸缩性问题, 而且在某些情况下, 如果读操作远远大于写操作, volatile 变量还可以提供优于锁的性能优势, 所以很多开发可能倾向于使用 volatile 变量而不是锁.</p>
+<p>但由于 volatile 变量只具有 synchronized 的可见性特性, 而不具备原子特性 (互斥), 因此, 要使 volatile 变量提供理想的 &ldquo;线程安全&rdquo;, 必须同时满足下面两个条件:</p>
+<ul>
+<li>对变量的写操作不依赖于当前值 (例如自增/自减就不行, 因为自增/自减需要上次的计算结果)</li>
+<li>该变量没有包含在 &ldquo;与多个变量相关的不变式类&rdquo; 中</li>
+</ul>
+<blockquote>
+<p>通常在一个线程写、多个线程读的情况下, volatile 是有效的</p>
+</blockquote>
+<p><strong>Reference</strong>: <a href="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html">正确使用 volatile 变量</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 
 </p>
