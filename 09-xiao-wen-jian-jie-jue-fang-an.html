@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>09. 小文件解决方案</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/09-xiao-wen-jian-jie-jue-fang-an.html" rel="bookmark"
+        title="Permalink to 09. 小文件解决方案">09. 小文件解决方案</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-11-23T18:27:00+08:00">Wed 23 November 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#_1">可选方案</a></li>
+<li><a href="#hadoop-archives">Hadoop Archives</a></li>
+</ul>
+</div>
+<blockquote>
+<p>所谓的小文件指的是小于一个 block size 的文件.</p>
+</blockquote>
+<h1 id="_1">可选方案</h1>
+<p>对于尚未上传到 HDFS 的文件, 可以采用以下几种方案:</p>
+<ul>
+<li>应用程序自己合并文件上传 (要根据实际情况来, 因为上传后不好处理)</li>
+<li>SequenceFile/MapFile, 同样需要自己编程上传文件, 上传的数据将被打包成 k, v 的形式</li>
+</ul>
+<blockquote>
+<p>通常对于 &ldquo;the small files problem&rdquo; 的回应会是: 使用 SequenceFile.<br>
+这种方法是说, 使用 filename 作为 key, 而 file contents 作为 value.</p>
+</blockquote>
+<p>对于已存在在 HDFS 上的文件, 可以使用:</p>
+<ul>
+<li>Hadoop Archives (HAR files, 类似 zip/rar 的文件归档功能, 打完包后, 需要<strong>手动删除</strong>被打包前的文件)</li>
+<li>CombineFileInputFormat (MR 的内容)</li>
+<li>HBase compact (HBase 的内容, 把多个 HFile 合并成一个 HFile)</li>
+</ul>
+<p>CombineFileInputFormat 及 HBase compact 将在后面的 MR 及 HBase 专题记录, 本篇介绍下 Hadoop Archives.</p>
+<h1 id="hadoop-archives">Hadoop Archives</h1>
+<p><strong>References</strong>:<br>
+<a href="http://blog.csdn.net/lastsweetop/article/details/9123155">Hadoop 深入研究: (五) —— Archives</a><br>
+<a href="https://my.oschina.net/u/270950/blog/170570">Hadoop 关于处理大量小文件的问题和解决方法</a></p>
+<p>Hadoop Archives (HAR files) 是在 0.18.0 版本中引入的, 它的出现就是为了缓解大量小文件消耗 NameNode 内存的问题.</p>
+<p>HAR 文件是通过在 HDFS 上构建一个层次化的文件系统来工作, HAR 文件一旦创建便不可再更改.</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/小文件处理/harindex.png" /></p>
+<p>HAR 文件通过 Hadoop 的 Archive 命令来创建, 而这个命令实际上也是运行了一个 <strong>MapReduce</strong> 任务来将小文件打包成 HAR.</p>
+<p>对于 client 端来说, 使用 HAR 文件没有任何影响, 所有的原始文件都可见&amp;&amp;透明, 但在HDFS端它内部的文件数减少了.</p>
+<p>通过 HAR 来读取一个文件并不会比直接从 HDFS 中读取文件高效, 而且实际上可能还会稍微<strong>低效</strong>一点, 因为对每一个 HAR 文件的访问都需要完成两层 index 文件的读取和文件本身数据的读取 (见上图). 并且尽管 HAR 文件可以被用来作为 <strong>MapReduce job</strong> 的 input, 但是并没有特殊的方法来使 maps 将 HAR 文件中打包的文件当作一个 HDFS 文件处理.</p>
+<p>总结一下就是说 HAR:</p>
+<ul>
+<li>通过将小文件打包成一个大文件来减少 NameNode 的内存消耗</li>
+<li>虽然可以 HAR 当成一个包传递成 Map 任务, 但是实际处理时, 并不是将它看作一个文件, 而是以打包前的数据进行处理</li>
+</ul>
+<p><strong>创建文件</strong>: <code>hadoop archive -archiveName xxx.har -p  /src  /dest</code> (-p 参数指定要打包的目录和目的地目录)</p>
+<p><strong>查看内容</strong>: <code>hadoop fs -lsr har:///dest/xxx.har</code> (注意 har:/// 协议)</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="09-xiao-wen-jian-jie-jue-fang-an" data-title="09. 小文件解决方案" data-url="http://blog.smallcpp.com/09-xiao-wen-jian-jie-jue-fang-an.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
