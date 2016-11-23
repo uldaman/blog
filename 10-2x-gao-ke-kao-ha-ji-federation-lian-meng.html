@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>10. 2.X 高可靠 HA 及 Federation (联盟)</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/10-2x-gao-ke-kao-ha-ji-federation-lian-meng.html" rel="bookmark"
+        title="Permalink to 10. 2.X 高可靠 HA 及 Federation (联盟)">10. 2.X 高可靠 HA 及 Federation (联盟)</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-11-23T19:00:00+08:00">Wed 23 November 2016
+</h6>
+
+
+    <div class="toc">
+<ul>
+<li><a href="#ha-federation">HA + Federation 架构图</a></li>
+<li><a href="#federation">Federation (联盟/联邦)</a><ul>
+<li><a href="#_1">块池</a></li>
+<li><a href="#_2">多命名空间的管理问题</a></li>
+<li><a href="#_3">配置</a></li>
+<li><a href="#java-api">Java API</a></li>
+</ul>
+</li>
+<li><a href="#2x">2.X 高可靠</a><ul>
+<li><a href="#_4">原理</a></li>
+<li><a href="#_5">接管方式</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>首先说明 . . . 也许这两个功能你根本不可能用到上, 因为你的集群规模完全达不到要求.</p>
+<p>在 1.X 时代, 你可能需要再另外建立一个 Hadoop 集群 . . . 想像一下建立一个集群的成本 . . .</p>
+<p>Hadoop 1.x 中, 一个集群就只有一个 NameNode, 这种架构虽然实现简单, 但会产生<strong>单点</strong>、<strong>内存</strong>瓶颈、<strong>性能</strong>
+瓶颈等限制.</p>
+<p><strong>问题一</strong>, 整个 Hadoop 集群的命名空间都归一个 NameNode 管理, 这样 HDFS 所能存储的文件数量会受到 NameNode 容量的限制;</p>
+<p><strong>问题二</strong>, 当集群进行复杂运算时, 也只有一个 NameNode 在运作, 集群的运算性能也会受到 NameNode 的限制.</p>
+<p><strong>问题三</strong>, 虽然集群有 Second NameNode 作为辅助节点, 但并不会完成自动切换, 当 NameNode 宕掉时, 还是需要人工去处理.</p>
+<p>虽然仅仅在像 Yahoo 和 Facebook 返种规模的大公司才会面对这样的限制问题, 但在 Hadoop 2.x 中, 官方还是给出了解决方案.</p>
+<h1 id="ha-federation">HA + Federation 架构图</h1>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/HAFederation.png" /></p>
+<p>先放张图, 后面的内容将对其进行解释.</p>
+<h1 id="federation">Federation (联盟/联邦)</h1>
+<p>2.X 时代引入了 Federation, 采用 Federation 的最主要原因很简单, 它能够解决上述的 <strong>问题一</strong> 和 <strong>问题二</strong>.</p>
+<p>Federation 提供了 Hadoop 集群多 NameNode 的能力, 让集群可以水平扩展, 一定程度解决了单 NameNode 的<strong>内存</strong>瓶颈和<strong>性能</strong>
+瓶颈.</p>
+<p>为了<strong>水平扩展</strong> NameNode, Federation 使用了多个独立的 NameNode, 有各自自己的命名空间, 他们之间相互独立且不需要互相协调, 各自分工, 管理自己的区域, 不需要和其它 <strong>NameNode</strong> 协调合作, 但是 DataNode 作为统一的块存储设备被所有 NameNode 共享.</p>
+<p>每一个 <strong>DataNode</strong> 都在所有的 <strong>NameNode</strong> 进行注册, DataNode 发送心跳信息、块报告到所有的 NameNode 上, 同时呢, 也执行所有 NameNode 发来的命令, 而 NameNode 通过 <strong>Block Pools</strong> (块池) 对其进行管理.</p>
+<blockquote>
+<p>其实 Federation 主要还是解决了 DataNode 不能被多个 NameNode 共享的问题.</p>
+</blockquote>
+<p>Federation 的配置管理是向后兼容的, 允许现有的单节点 NameNode 不需要任何配置就可以正常工作. 新的配置文件被设计成使得在集群中的所有节点都可以具有相同的配置文件，而不需要部署不同的配置文件在不同的机器上.</p>
+<p><strong>总结下 Federation:</strong></p>
+<ul>
+<li>HDFS 集群扩展性.<ul>
+<li>多个 NameNode 分管一部分目录空间, 使得一个集群可以扩展到更多节点, 不再像 1.x 中那样由于内存的限制制约文件存储数目.</li>
+</ul>
+</li>
+<li>性能更高效.<ul>
+<li>多个 NameNode 管理不同的数据, 且同时对外提供服务, 将为用户提供更高的读写吞吐率.</li>
+</ul>
+</li>
+<li>良好的隔离性.<ul>
+<li>用户可根据需要将不同业务数据交由不同 NameNode 管理, 这样不同业务之间影响很小.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.png" /></p>
+<h2 id="_1">块池</h2>
+<p><strong>块池</strong>是逻辑上的概念, 就是属于单个命名空间的一组块, 它并不是以 DataNode 的个数来划分, 而是将所有的 DataNode 当成一个整体来划分, 所以, 同一个 DataNode 中的块可以被分给多个不同的 Block Pool.</p>
+<p>Block Pool 允许一个 NameNode 在不通知其他 NameNode 的情况下为一个新的 Block 创建 Block ID, 但由于 DataNode 会向所有 NameNode 发送心跳及块报告, 所以其它 NameNode 也会知道这个 Block 的使用情况, 这样一个 NameNode 失效就不会影响到其下的 DataNode 为其他 NameNode 继续服务.</p>
+<p>当向集群存储数据时, 集群先为其分配 NameNode 创建命名空间, 然后 Block Pools 从 DataNode 上寻找空闲 Block 加入当前 NameNode 所管辖下的块池, 最后 NameNode 将数据存放进这些 Block.</p>
+<h2 id="_2">多命名空间的管理问题</h2>
+<p>为了方便管理多个命名空间, HDFS Federation 采用了经典的 <strong>Client Side Mount Table</strong> 方式.</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png" /></p>
+<p>如上图所示, 每个深色三角形代表一个独立的命名空间, 上方浅色的三角形代表从客户角度去访问下方的子命名空间. 各个深色的命名空间 Mount 到浅色的表中, 客户可以访问不同的挂载点来访问不同的命名空间, 这就如同在 Linux 系统中访问不同<strong>挂载点</strong>一样.</p>
+<h2 id="_3">配置</h2>
+<p><strong>core-site.xml</strong> 配置</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.defaultFS<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>viewfs://nsX<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;description&gt;</span>
+    整个 Federation 集群对外提供服务的 NS 逻辑名称, 注意, 这里的协议不再是 hdfs, 而是新引入的 viewfs, 这个逻辑名称会在下面的挂载表中用到
+    <span style="color: #8B008B; font-weight: bold">&lt;/description&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
+</pre></div>
+
+
+<p><br></p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.viewfs.mounttable.default.link./cluster01<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>hdfs://itcast01:9000/<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
+
+<span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.viewfs.mounttable.default.link./cluster02<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
+    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>hdfs://itcast02:9000<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
+<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
+</pre></div>
+
+
+<p><br>
+访问地址: <code>viewfs://nsX/cluster01</code> (以前的访问方式 <code>hdfs://itcast01:9000</code> 依然有效果).</p>
+<h2 id="java-api">Java API</h2>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ViewFileSystem fsView = (ViewFileSystem)ViewFileSystem.<span style="color: #658b00">get</span>(conf);
+MountPoint[] m = fsView.<span style="color: #658b00">getMountPoints</span>();
+<span style="color: #8B008B; font-weight: bold">for</span> (MountPoint m1 : m) {
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(m1.<span style="color: #658b00">getSrc</span>());
+}
+</pre></div>
+
+
+<p><br></p>
+<h1 id="2x">2.X 高可靠</h1>
+<p>Reference: <a href="http://www.cnblogs.com/sy270321/p/4398815.html">Hadoop2 NameNode HA 原理详解</a></p>
+<p>Hadoop2 NameNode HA 方案让 NameNode 有个备份节点, 当 NameNode 宕掉了, 备份节点就接管 NameNode 的职责.</p>
+<h2 id="_4">原理</h2>
+<p>需要用到集群: <strong>JournalNodes</strong>.</p>
+<p>两个 NameNode 通过 JournalNodes 通信, 共享 NameNode 数据.</p>
+<p>NameNode 有两种状态, 一种是激活状态 <strong>Active</strong>, 另一种是准备状态 <strong>Standby</strong>;</p>
+<p>Active 对外提供服务, 当 Active 数据发生变化, 它会同步到 JournalNodes, JournalNodes 收到变化后同步给 Standby, 当 Active 宕掉, Standby 就可以接管.</p>
+<h2 id="_5">接管方式</h2>
+<ul>
+<li>手动接管</li>
+<li>自动接管, 要通过 FailoverController (故障转移控制器) 去实现, 而 FailoverController 是属于 <a href="http://blog.smallcpp.com/07-zookeeper-jian-jie.html">zookeeper</a> 集群的一部分.</li>
+</ul>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="10-2x-gao-ke-kao-ha-ji-federation-lian-meng" data-title="10. 2.X 高可靠 HA 及 Federation (联盟)" data-url="http://blog.smallcpp.com/10-2x-gao-ke-kao-ha-ji-federation-lian-meng.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -44,6 +44,24 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.com/9-cgong-han-mo-shi.html"><h3 class="article-title">9、[C++]工厂模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></p>
+<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的<strong>&ldquo;开放-封闭原则 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.com/9-cgong-han-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.com/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html"><h3 class="article-title">'[转]UML 中关系详解以及在visio中的表示'</h3></a>
 <h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
 </h6>
@@ -295,40 +313,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.com/1-cshe-ji-mo-shi-yu-mian-xiang-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html"><h3 class="article-title">5、QT 中文乱码</h3></a>
-<h6 class="subheader" title="2015-02-15T14:13:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
-<p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
-QTextCodec::setCodecForCStrings(...)
-QTextCodec::setCodecForLocale(...)
-
-
-
-然后这三句代码是有安全隐患的, 下面的文章都有说明:
-</pre></div>
-
-
-<p>*</p>
-<p><a href="http://hi.baidu.com/cyclone/blog/item/9d7293130e5a498d6538dbf1.html">QString 与中文问题</a></p>
-<p>*</p>
-<p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
-<p>*</p>
-<p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
-<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.com/5-qt-zhong-wen-luan-ma.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

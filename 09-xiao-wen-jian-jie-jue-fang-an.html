@@ -63,7 +63,7 @@
 <p>所谓的小文件指的是小于一个 block size 的文件.</p>
 </blockquote>
 <h1 id="_1">可选方案</h1>
-<p>对于尚未上传到 HDFS 的文件, 可以采用以下几种方案:</p>
+<p>对于<strong>尚未上传</strong>到 HDFS 的文件, 可以采用以下几种方案:</p>
 <ul>
 <li>应用程序自己合并文件上传 (要根据实际情况来, 因为上传后不好处理)</li>
 <li>SequenceFile/MapFile, 同样需要自己编程上传文件, 上传的数据将被打包成 k, v 的形式</li>
@@ -72,7 +72,7 @@
 <p>通常对于 &ldquo;the small files problem&rdquo; 的回应会是: 使用 SequenceFile.<br>
 这种方法是说, 使用 filename 作为 key, 而 file contents 作为 value.</p>
 </blockquote>
-<p>对于已存在在 HDFS 上的文件, 可以使用:</p>
+<p>对于<strong>已存在</strong>于 HDFS 上的文件, 可以使用:</p>
 <ul>
 <li>Hadoop Archives (HAR files, 类似 zip/rar 的文件归档功能, 打完包后, 需要<strong>手动删除</strong>被打包前的文件)</li>
 <li>CombineFileInputFormat (MR 的内容)</li>
