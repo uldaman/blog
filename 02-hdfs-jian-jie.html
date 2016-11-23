@@ -175,7 +175,13 @@
 <p><br>
 这里的数据是用来标识集群、节点唯一性的.</p>
 <h2 id="secondary-namenode">Secondary NameNode</h2>
-<p>HA 解决方案 (高可用)</p>
+<p>Secondary NameNode 的作用主要体现在 Hadoop 1.x 下,  Secondary NameNode 会按照配置的时间及大小定期合并 NameNode 节点上的 fsimage 和 edits, 这样做的目的包含三方面:</p>
+<ul>
+<li>edits 中可能包含一些文件的创建及删除的操作, 合并之后, 删除的文件就不存在了, 只保存了存在的文件, 删除的文件也就不会合并到 fsimage 中, 这样会节省空间</li>
+<li>NameNode 在每次重启时都会将 fsimage 和 edits 合并, 如果不在 Secondary NameNode 中定期合并, 在重启 NameNode 时会非常慢</li>
+<li>提供冷备份的功能</li>
+</ul>
+<p>在 Hadoop 2.X 中, 提供了 HA 解决方案 (高可用), 彻底解决了 NameNode 单点的问题, 也就不存在 Secondary NameNode, 引入了 Standby NameNode,可以顺利的将 Active NameNode 进行热备.</p>
 <p><strong>工作模式</strong>:</p>
 <p>从 NameNode 下载元数据信息 (<strong>fsimage</strong>, <strong>edits</strong>), 然后合并二者, 生成新的 <strong>fsimage</strong>, 在本地保存一份后推送到 NameNode, 替换旧的 <strong>fsimage</strong>.</p>
 <p><img alt="" src="http://blog.smallcpp.com/theme/images/Hdfs简介/SecondaryNameNode.jpg" /></p>
@@ -198,11 +204,9 @@
 <li>NameNode 并不参不数据实际传输</li>
 </ul>
 <h2 id="block_1">写入数据流程 (以 block 为单位)</h2>
-<ul>
-<li>客户端请求 NameNode 创建新文件</li>
-<li>客户端将数据写入 DFSOutputStream</li>
-<li>建立 pipeline 依次将目标数据块写入各个 DataNode, 建立多个副本</li>
-</ul>
+<p>HDFS client 上传数据到 HDFS 时, 会首先在本地<strong>缓存</strong>数据, 当数据达到一个 block 大小时, 请求 NameNode 分配一个 block. NameNode 就会从当前集群寻找一个空闲 block, 然后把 block 所在的 DataNode 的信息告诉 HDFS client. HDFS client 拿到信息后直接和 DataNode 通信, 把数据写到 DataNode 节点的一个 block 文件中 (在传输过程中, 以 Packet 为最小单位).</p>
+<p>由于 Hadoop 有副本机制, 例如三个, 所以 NameNode 会寻找三个空闲 block 组成 pipeline, 依次将目标数据块写入各个 DataNode, 建立多个副本, 待所以副本数据都上传完毕后, HDFS client 会继续下一个 block 的操作.</p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hdfs简介/hdfswriteflow.png" /></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
 
 </p>
