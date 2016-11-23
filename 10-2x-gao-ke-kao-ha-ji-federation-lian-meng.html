@@ -115,7 +115,7 @@
 <p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png" /></p>
 <p>如上图所示, 每个深色三角形代表一个独立的命名空间, 上方浅色的三角形代表从客户角度去访问下方的子命名空间. 各个深色的命名空间 Mount 到浅色的表中, 客户可以访问不同的挂载点来访问不同的命名空间, 这就如同在 Linux 系统中访问不同<strong>挂载点</strong>一样.</p>
 <h2 id="federation_1">配置 Federation</h2>
-<p>还实操过, 需要的时候参考: <a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: 我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践)</p>
+<p>还没实操过, 需要的时候参考: <a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践</code>)</p>
 <p>需要注意一点的就是, Federation 需要在每个 NameNode 上分别格式化, 第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
 <h2 id="java-api">Java API</h2>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ViewFileSystem fsView = (ViewFileSystem)ViewFileSystem.<span style="color: #658b00">get</span>(conf);
