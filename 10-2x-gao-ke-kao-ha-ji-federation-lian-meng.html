@@ -59,21 +59,13 @@
 <li><a href="#federation">Federation (联盟/联邦)</a><ul>
 <li><a href="#_1">块池</a></li>
 <li><a href="#_2">多命名空间的管理问题</a></li>
-<li><a href="#federation_1">配置 Federation</a><ul>
-<li><a href="#_3">设置配置文件</a><ul>
-<li><a href="#nameservices">方式一: nameservices</a></li>
-<li><a href="#viewfs">方式二: viewfs</a></li>
-</ul>
-</li>
-<li><a href="#namenode">格式化 NameNode</a></li>
-</ul>
-</li>
+<li><a href="#federation_1">配置 Federation</a></li>
 <li><a href="#java-api">Java API</a></li>
 </ul>
 </li>
 <li><a href="#2x">2.X 高可靠</a><ul>
-<li><a href="#_4">原理</a></li>
-<li><a href="#_5">接管方式</a></li>
+<li><a href="#_3">原理</a></li>
+<li><a href="#_4">接管方式</a></li>
 </ul>
 </li>
 </ul>
@@ -123,47 +115,8 @@
 <p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png" /></p>
 <p>如上图所示, 每个深色三角形代表一个独立的命名空间, 上方浅色的三角形代表从客户角度去访问下方的子命名空间. 各个深色的命名空间 Mount 到浅色的表中, 客户可以访问不同的挂载点来访问不同的命名空间, 这就如同在 Linux 系统中访问不同<strong>挂载点</strong>一样.</p>
 <h2 id="federation_1">配置 Federation</h2>
-<p>Federation 的配置管理是向后兼容的, 即允许在不改变任何配置的情况下将当前运行的单节点环境转换成联邦环境.</p>
-<p>新的配置文件被设计成使得在集群中的所有节点都可以具有相同的配置文件，而不需要部署不同的配置文件在不同的机器上.</p>
-<h3 id="_3">设置配置文件</h3>
-<p>配置 Federation 我好像找到两种方式 . . .具体还没弄明白, 一种是配置 <strong>nameservices</strong>, 另一种是配置 <strong>viewfs</strong>.</p>
-<h4 id="nameservices">方式一: nameservices</h4>
-<p>要使用 HDFS Federation, 只需在 DataNode 的 <code>hdfs-site.xml</code> 中修改如下选项即可:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>dfs.nameservices<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>namenode1,namenode2<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
-</pre></div>
-
-
-<p><br></p>
-<h4 id="viewfs">方式二: viewfs</h4>
-<p><strong>core-site.xml</strong> 配置</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.defaultFS<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>viewfs://ClusterName<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;description&gt;</span>
-    ClusterName 是集群对外提供服务的 NS 逻辑名称, 可以自定义一个;
-    注意, 这里的协议不再是 hdfs, 而是新引入的 viewfs, 这个逻辑名称会在下面的挂载表中用到
-    <span style="color: #8B008B; font-weight: bold">&lt;/description&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
-
-<span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.viewfs.mounttable.default.link./cluster01<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>hdfs://itcast01:9000/<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
-
-<span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>fs.viewfs.mounttable.default.link./cluster02<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>hdfs://itcast02:9000<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
-</pre></div>
-
-
-<p><br>
-访问地址: <code>viewfs://ClusterName/cluster01</code> (以前的访问方式 <code>hdfs://itcast01:9000</code> 依然有效果).</p>
-<h3 id="namenode">格式化 NameNode</h3>
-<p>不管使用上面哪种试, 都需要在两个 NameNode 上分别格式化, 第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
+<p>还实操过, 需要的时候参考: <a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: 我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践)</p>
+<p>需要注意一点的就是, Federation 需要在每个 NameNode 上分别格式化, 第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
 <h2 id="java-api">Java API</h2>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ViewFileSystem fsView = (ViewFileSystem)ViewFileSystem.<span style="color: #658b00">get</span>(conf);
 MountPoint[] m = fsView.<span style="color: #658b00">getMountPoints</span>();
@@ -177,12 +130,12 @@ MountPoint[] m = fsView.<span style="color: #658b00">getMountPoints</span>();
 <h1 id="2x">2.X 高可靠</h1>
 <p>Reference: <a href="http://www.cnblogs.com/sy270321/p/4398815.html">Hadoop2 NameNode HA 原理详解</a></p>
 <p>Hadoop2 NameNode HA 方案让 NameNode 有个备份节点, 当 NameNode 宕掉了, 备份节点就接管 NameNode 的职责.</p>
-<h2 id="_4">原理</h2>
+<h2 id="_3">原理</h2>
 <p>需要用到集群: <strong>JournalNodes</strong>.</p>
 <p>两个 NameNode 通过 JournalNodes 通信, 共享 NameNode 数据.</p>
 <p>NameNode 有两种状态, 一种是激活状态 <strong>Active</strong>, 另一种是准备状态 <strong>Standby</strong>;</p>
 <p>Active 对外提供服务, 当 Active 数据发生变化, 它会同步到 JournalNodes, JournalNodes 收到变化后同步给 Standby, 当 Active 宕掉, Standby 就可以接管.</p>
-<h2 id="_5">接管方式</h2>
+<h2 id="_4">接管方式</h2>
 <ul>
 <li>手动接管</li>
 <li>自动接管, 要通过 FailoverController (故障转移控制器) 去实现, 而 FailoverController 是属于 <a href="http://blog.smallcpp.com/07-zookeeper-jian-jie.html">zookeeper</a> 集群的一部分.</li>
