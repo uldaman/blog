@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>10. 2.X 高可靠 HA 及 Federation (联盟)</title>
+    <title>10. 2.X HA (高可靠) 及 Federation (联盟).md</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
@@ -45,8 +45,8 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/10-2x-gao-ke-kao-ha-ji-federation-lian-meng.html" rel="bookmark"
-        title="Permalink to 10. 2.X 高可靠 HA 及 Federation (联盟)">10. 2.X 高可靠 HA 及 Federation (联盟)</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/10-2x-ha-gao-ke-kao-ji-federation-lian-meng-md.html" rel="bookmark"
+        title="Permalink to 10. 2.X HA (高可靠) 及 Federation (联盟).md">10. 2.X HA (高可靠) 及 Federation (联盟).md</a></h3>
     </header>
 
 <h6 class="subheader" title="2016-11-23T19:00:00+08:00">Wed 23 November 2016
@@ -115,9 +115,9 @@
 <p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png" /></p>
 <p>如上图所示, 每个深色三角形代表一个独立的命名空间, 上方浅色的三角形代表从客户角度去访问下方的子命名空间. 各个深色的命名空间 Mount 到浅色的表中, 客户可以访问不同的挂载点来访问不同的命名空间, 这就如同在 Linux 系统中访问不同<strong>挂载点</strong>一样.</p>
 <h2 id="federation_1">配置 Federation</h2>
-<p>还没实操过, 需要的时候参考:<br>
-<a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践</code>)<br>
-<a href="http://www.cnblogs.com/nb591/p/3535662.html">搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</code>)<br></p>
+<p>还没实操过, 需要的时候参考 (主要是 <code>core-site.xml</code> 中 <strong>viewfs</strong> 及 <code>hdfs-site.xml</code> 中 <strong>nameservices</strong> 的配置):</p>
+<p><a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践</code>)</p>
+<p><a href="http://www.cnblogs.com/nb591/p/3535662.html">搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</code>)<br></p>
 <p>需要注意一点的就是, Federation 需要在每个 NameNode 上分别格式化, 第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
 <h2 id="java-api">Java API</h2>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ViewFileSystem fsView = (ViewFileSystem)ViewFileSystem.<span style="color: #658b00">get</span>(conf);
@@ -153,7 +153,7 @@ MountPoint[] m = fsView.<span style="color: #658b00">getMountPoints</span>();
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="10-2x-gao-ke-kao-ha-ji-federation-lian-meng" data-title="10. 2.X 高可靠 HA 及 Federation (联盟)" data-url="http://blog.smallcpp.com/10-2x-gao-ke-kao-ha-ji-federation-lian-meng.html"></div>
+    <div class="ds-thread" data-thread-key="10-2x-ha-gao-ke-kao-ji-federation-lian-meng-md" data-title="10. 2.X HA (高可靠) 及 Federation (联盟).md" data-url="http://blog.smallcpp.com/10-2x-ha-gao-ke-kao-ji-federation-lian-meng-md.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
