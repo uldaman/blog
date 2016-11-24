@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>11. 回收站的使用</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.com/11-hui-shou-zhan-de-shi-yong.html" rel="bookmark"
+        title="Permalink to 11. 回收站的使用">11. 回收站的使用</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-11-24T10:37:00+08:00">Thu 24 November 2016
+</h6>
+
+
+    <div class="toc">
+<ul></ul>
+</div>
+<p>和 Linux 系统的回收站设计一样，HDFS 会为每一个用户创建一个回收站目录: <code>/user/用户名/.Trash/</code>，开启该功能后, 每一个被用户通过 Shell 删除的文件或目录，都不是直接删除, 而是移动到 HDFS 的回收站内, 回收站中文件都一个生命周期，也就是当系统回收站中的文件或目录在一段时间之后没有被用户回复的话，HDFS 就会自动的把这个文件或目录彻底删除，之后用户就永远也找不回这个文件或目录了.</p>
+<p><strong>配置:</strong></p>
+<p>在<strong>每</strong>个节点上添加配置 <code>core-site.xml</code>,增加如下内容</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;property&gt;
+    &lt;name&gt;fs.trash.interval&lt;/name&gt;
+    &lt;value&gt;1440&lt;/value&gt;
+&lt;/property&gt;
+</pre></div>
+
+
+<p><br>
+1440 指定生命周期, 单位是分钟, 这里就是相当于 24 小时.</p>
+<blockquote>
+<p>开启回收站后, data 目录会变得复杂, 也会存在有垃圾数据.</p>
+</blockquote>
+<p><strong>Java Api</strong> 操作方式:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">boolean</span> <span style="color: #008b45">rm</span>(FileSystem fs, Path path, <span style="color: #a7a7a7; font-weight: bold">boolean</span> recursive, <span style="color: #a7a7a7; font-weight: bold">boolean</span> skipTrash) <span style="color: #8B008B; font-weight: bold">throws</span> IOException {
+
+    <span style="color: #8B008B; font-weight: bold">if</span> (!skipTrash) {
+        Trash trashTmp = <span style="color: #8B008B; font-weight: bold">new</span> Trash(fs, conf);
+        <span style="color: #8B008B; font-weight: bold">if</span> (trashTmp.<span style="color: #658b00">moveToTrash</span>(path)) {
+            log.<span style="color: #658b00">info</span>(<span style="color: #CD5555">&quot;Moved to trash: &quot;</span> + path);
+            <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">true</span>;
+        }
+    }
+
+    <span style="color: #a7a7a7; font-weight: bold">boolean</span> ret = fs.<span style="color: #658b00">delete</span>(path, recursive);
+    <span style="color: #8B008B; font-weight: bold">if</span> (ret) {
+        log.<span style="color: #658b00">info</span>(<span style="color: #CD5555">&quot;rm: &quot;</span> + path);
+    }
+    <span style="color: #8B008B; font-weight: bold">return</span> ret;
+}
+</pre></div>
+
+
+<p><br></p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="11-hui-shou-zhan-de-shi-yong" data-title="11. 回收站的使用" data-url="http://blog.smallcpp.com/11-hui-shou-zhan-de-shi-yong.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ji-chu.html">大数据 Mongodb 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ji-chu.html">大数据 Redis 基础</a></li>
+            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
