@@ -80,7 +80,7 @@ s.name = <span style="color: #CD5555">&#39;Michael&#39;</span> <span style="colo
 
 <p>然而在某些情况下, 我们可能并不希望这样用, 此时, 可以通过类的 <strong>__slots__</strong> 变量, 来限制上面说到的功能.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
-    **slots** = (<span style="color: #CD5555">&#39;name&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>) <span style="color: #228B22"># 用tuple定义允许绑定的属性名称</span>
+    __slots__ = (<span style="color: #CD5555">&#39;name&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>) <span style="color: #228B22"># 用tuple定义允许绑定的属性名称</span>
 
 
 
@@ -158,13 +158,13 @@ Traceback (most recent call last):
 <p>当我们需要打指定 <strong>print</strong> 类或者直接输入类时的输出内容, 就可以定制 <strong>__str__</strong> 和 <strong>__repr__</strong>,
 直接显示变量调用的是 <strong>__str__</strong>, print 时调用的是是 <strong>__repr__</strong>.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">init</span>**(<span style="color: #658b00">self</span>, name):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, name):
         <span style="color: #658b00">self</span>.name = name
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">str</span>**(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__str__</span>(<span style="color: #658b00">self</span>):
         <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #CD5555">&#39;Student object (name = %s)&#39;</span> % <span style="color: #658b00">self</span>.name
 
-    **<span style="color: #658b00">repr</span>** = **<span style="color: #658b00">str</span>**
+    **<span style="color: #658b00">repr</span>** = __str__
 </pre></div>
 
 
@@ -172,7 +172,7 @@ Traceback (most recent call last):
 <p>如果一个类想被用于 <strong>for &hellip; in</strong> 循环, 类似 list 或 tuple 那样, 就必须实现一个 <strong>__iter__</strong> 方法, 该方法返回一个迭代对象, 然后, Python 的 for 循环就会不断调用该迭代对象的 <strong>next()</strong> 方法拿到循环的下一个值, 直到遇到 <strong>StopIteration</strong> 错误时退出循环.</p>
 <p>我们以斐波那契数列为例, 写一个 Fib 类, 可以作用于 for 循环:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Fib</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">init</span>**(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
         <span style="color: #658b00">self</span>.a, <span style="color: #658b00">self</span>.b = <span style="color: #B452CD">0</span>, <span style="color: #B452CD">1</span> <span style="color: #228B22"># 初始化两个计数器 a, b</span>
 
     <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">iter</span>**(<span style="color: #658b00">self</span>):
@@ -206,10 +206,10 @@ Traceback (most recent call last):
 <p>当调用一个类的实例方法时, 可以用 xxx.method() 来调用, 那能不能直接在实例本身上调用呢, 像 xxx() 这样?</p>
 <p>任何类, 只需要定义一个 <strong>__call__</strong> 方法, 就可以直接对实例进行调用.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">init</span>**(<span style="color: #658b00">self</span>, name):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, name):
         <span style="color: #658b00">self</span>.name = name
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">call</span>**(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__call__</span>(<span style="color: #658b00">self</span>):
         <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;My name is %s.&#39;</span> % <span style="color: #658b00">self</span>.name)
 </pre></div>
 
@@ -232,7 +232,7 @@ My name <span style="color: #8B008B">is</span> Michael.
 <p>正常情况下, 当我们调用类的方法或属性时, 如果不存在, 就会报错. 比如定义 Student 类:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">init</span>**(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
         <span style="color: #658b00">self</span>.name = <span style="color: #CD5555">&#39;Michael&#39;</span>
 </pre></div>
 
@@ -253,10 +253,10 @@ Traceback (most recent call last):
 <p>要避免这个错误, 除了可以加上一个 score 属性外, Python 还有另一个机制, 那就是写一个 <strong>__getattr__</strong> 方法, 动态返回一个属性. 修改如下:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">init</span>**(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
         <span style="color: #658b00">self</span>.name = <span style="color: #CD5555">&#39;Michael&#39;</span>
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">getattr</span>**(<span style="color: #658b00">self</span>, attr):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, attr):
         <span style="color: #8B008B; font-weight: bold">if</span> attr == <span style="color: #CD5555">&#39;score&#39;</span>:
             <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">99</span>
 </pre></div>
@@ -276,7 +276,7 @@ Traceback (most recent call last):
 <strong>返回函数</strong>也是完全可以的:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">getattr</span>**(<span style="color: #658b00">self</span>, attr):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, attr):
         <span style="color: #8B008B; font-weight: bold">if</span> attr==<span style="color: #CD5555">&#39;age&#39;</span>:
             <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">lambda</span>: <span style="color: #B452CD">25</span>
 </pre></div>
@@ -294,7 +294,7 @@ Traceback (most recent call last):
 <p>此外, 注意, 如果我们访问一个类中没有定义, 又没有在 <strong>__getattr__</strong> 中定义的属性, 就会返回 <strong>None</strong>, 这是因为我们定义的 <strong>__getattr__</strong> 默认返回就是 None, 所以按照约定, 应该 <strong>AttributeError</strong> 的错误:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #a61717; background-color: #e3d2d2">**</span><span style="color: #008b45">getattr</span>**(<span style="color: #658b00">self</span>, attr):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, attr):
         <span style="color: #8B008B; font-weight: bold">if</span> attr == <span style="color: #CD5555">&#39;age&#39;</span>:
             <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">lambda</span>: <span style="color: #B452CD">25</span>
         <span style="color: #8B008B; font-weight: bold">raise</span> <span style="color: #008b45; font-weight: bold">AttributeError</span>(<span style="color: #CD5555">&#39;\&#39;Student\&#39; object has no attribute \&#39;%s\&#39;&#39;</span> % attr)
@@ -313,16 +313,16 @@ http://api.server/user/timeline/list
 <p><br>
 如果要调用这些 API, 那不是要给每个 URL 对应的 API 都写一个方法? 这还不得累死, 而且, API 一旦改动, 我们写的方法也要改&hellip;</p>
 <p>这里就可以利用完全动态的 <strong>__getattr__</strong>, 我们可以写出一个链式调用:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>class Chain(object):
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Chain</span>(<span style="color: #658b00">object</span>):
 
-    def **init**(self, path=&#39;&#39;):
-        self._path = path
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, path=<span style="color: #CD5555">&#39;&#39;</span>):
+        <span style="color: #658b00">self</span>._path = path
 
-    def **getattr**(self, path):
-        return Chain(&#39;%s/%s&#39; % (self._path, path))
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, path):
+        <span style="color: #8B008B; font-weight: bold">return</span> Chain(<span style="color: #CD5555">&#39;%s/%s&#39;</span> % (<span style="color: #658b00">self</span>._path, path))
 
-    def **str**(self):
-        return self._path
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__str__</span>(<span style="color: #658b00">self</span>):
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">self</span>._path
 </pre></div>
 
 
