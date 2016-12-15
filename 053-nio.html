@@ -53,27 +53,13 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">概述</a></li>
-<li><a href="#buffer">Buffer</a><ul>
-<li><a href="#heap-buffer-direct-buffer">Heap Buffer 与 Direct Buffer.</a></li>
-<li><a href="#bytebuffer">ByteBuffer</a></li>
-</ul>
-</li>
-<li><a href="#channel">Channel</a><ul>
-<li><a href="#memory-mapped">Memory Mapped</a></li>
-<li><a href="#_2">说明:</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <p><strong>Reference</strong>:<br></p>
 <ul>
 <li><a href="http://ifeve.com/java-nio-all/">Java NIO 系列教程</a></li>
 <li><a href="http://www.cnblogs.com/bheart/p/6027050.html">Java NIO 中核心组成和 IO 区别</a></li>
 </ul>
-<h1 id="_1">概述</h1>
+<h1>概述</h1>
 <p>原有的 I/O 流有着太多的软件层次需要提速:</p>
 <ul>
 <li>小数据块的大量复制</li>
@@ -87,8 +73,8 @@
 <li>NIO 首次提供了文件锁定机制</li>
 </ul>
 <p>和 NIO 相关的类都在 <code>java.nio</code> 包下</p>
-<h1 id="buffer">Buffer</h1>
-<h2 id="heap-buffer-direct-buffer">Heap Buffer 与 Direct Buffer.</h2>
+<h1>Buffer</h1>
+<h2>Heap Buffer 与 Direct Buffer.</h2>
 <p>Buffer 有两种一种是 <strong>Heap Buffer</strong>, 另一种是 <strong>Direct Buffer</strong>.</p>
 <p>第一种方式是分配 JVM 堆内存, 属于 GC 管辖范围, 由于需要拷贝所以速度相对较慢 (由于 Java 程序运行在 JVM 中, 所以旧的 I/O 流都是需要在 OS 本地内存中转一下);<br>
 第二种方式是分配 OS 本地内存, 不属于 GC 管辖范围, 由于不需要内存拷贝所以速度相对较快.</p>
@@ -98,7 +84,7 @@
 <p><strong>References</strong>:<br>
 <a href="http://eyesmore.iteye.com/blog/1133335">JAVA NIO 之 Direct Buffer 与 Heap Buffer 的区别？</a><br>
 <a href="http://stevex.blog.51cto.com/4300375/1582209">JAVA NIO 内存泄露</a></p>
-<h2 id="bytebuffer">ByteBuffer</h2>
+<h2>ByteBuffer</h2>
 <p><strong>创建</strong> ByteBuffer 有两种方法:</p>
 <ul>
 <li>使用 <code>allocate()</code> 或者 <code>allocateDirect()</code> 静态方法</li>
@@ -123,16 +109,16 @@
 </li>
 </ul>
 <p>ByteBuffer 无法用于<strong>数组传输</strong>, 一般的做法是将 ByteBuffer 转换成对应类型的 Buffer, 然后向其中写入数据, 例如在当前位置向 ByteBuffer 中写入 float[]:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">float</span>[] array;
-<span style="color: #228B22">// ... 其它代码</span>
+<div class="highlight"><pre><span></span><span class="kt">float</span><span class="o">[]</span> <span class="n">array</span><span class="o">;</span>
+<span class="c1">// ... 其它代码</span>
 
-FloarBuffer floatBuf = byteBuffer.<span style="color: #658b00">asFloatBuffer</span>();
-floatBuf.<span style="color: #658b00">put</span>(array);
+<span class="n">FloarBuffer</span> <span class="n">floatBuf</span> <span class="o">=</span> <span class="n">byteBuffer</span><span class="o">.</span><span class="na">asFloatBuffer</span><span class="o">();</span>
+<span class="n">floatBuf</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">array</span><span class="o">);</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="channel">Channel</h1>
+<h1>Channel</h1>
 <p>回想一下之前学的 I/O, 先建立一个流, 然后从流中读取/写入数据, 而在 NIO 中, 我们不用流而用 <strong>Channel</strong>, 它类似流, 但又有些不同:</p>
 <ul>
 <li>既可以从通道中读取数据, 又可以写数据到通道, 但流的读写通常是单向的</li>
@@ -167,24 +153,24 @@ floatBuf.<span style="color: #658b00">put</span>(array);
 </li>
 </ul>
 <p>下面是一个使用 FileChannel 读取数据到 Buffer 中的示例:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>RandomAccessFile aFile = <span style="color: #8B008B; font-weight: bold">new</span> RandomAccessFile(<span style="color: #CD5555">&quot;data/nio-data.txt&quot;</span>, <span style="color: #CD5555">&quot;rw&quot;</span>);
-FileChannel inChannel = aFile.<span style="color: #658b00">getChannel</span>();
+<div class="highlight"><pre><span></span><span class="n">RandomAccessFile</span> <span class="n">aFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RandomAccessFile</span><span class="o">(</span><span class="s">&quot;data/nio-data.txt&quot;</span><span class="o">,</span> <span class="s">&quot;rw&quot;</span><span class="o">);</span>
+<span class="n">FileChannel</span> <span class="n">inChannel</span> <span class="o">=</span> <span class="n">aFile</span><span class="o">.</span><span class="na">getChannel</span><span class="o">();</span>
 
-ByteBuffer buf = ByteBuffer.<span style="color: #658b00">allocate</span>(<span style="color: #B452CD">48</span>);
+<span class="n">ByteBuffer</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">ByteBuffer</span><span class="o">.</span><span class="na">allocate</span><span class="o">(</span><span class="mi">48</span><span class="o">);</span>
 
-<span style="color: #a7a7a7; font-weight: bold">int</span> bytesRead = inChannel.<span style="color: #658b00">read</span>(buf);
-<span style="color: #8B008B; font-weight: bold">while</span> (bytesRead != -<span style="color: #B452CD">1</span>) {
-    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;Read &quot;</span> + bytesRead);
-    buf.<span style="color: #658b00">flip</span>();
+<span class="kt">int</span> <span class="n">bytesRead</span> <span class="o">=</span> <span class="n">inChannel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">bytesRead</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Read &quot;</span> <span class="o">+</span> <span class="n">bytesRead</span><span class="o">);</span>
+    <span class="n">buf</span><span class="o">.</span><span class="na">flip</span><span class="o">();</span>
 
-    <span style="color: #8B008B; font-weight: bold">while</span>(buf.<span style="color: #658b00">hasRemaining</span>()){
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>((<span style="color: #a7a7a7; font-weight: bold">char</span>)buf.<span style="color: #658b00">get</span>());
-    }
+    <span class="k">while</span><span class="o">(</span><span class="n">buf</span><span class="o">.</span><span class="na">hasRemaining</span><span class="o">()){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">((</span><span class="kt">char</span><span class="o">)</span><span class="n">buf</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
 
-    buf.<span style="color: #658b00">clear</span>();
-    bytesRead = inChannel.<span style="color: #658b00">read</span>(buf);
-}
-aFile.<span style="color: #658b00">close</span>();
+    <span class="n">buf</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+    <span class="n">bytesRead</span> <span class="o">=</span> <span class="n">inChannel</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buf</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">aFile</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </pre></div>
 
 
@@ -195,16 +181,16 @@ aFile.<span style="color: #658b00">close</span>();
 <li>把 position 设置为 0</li>
 </ul>
 <p>然后处理的数据就是从 position 到 limit 直接的数据, 也就是刚刚读取过来的数据.</p>
-<h2 id="memory-mapped">Memory Mapped</h2>
+<h2>Memory Mapped</h2>
 <p>虚拟内存映射: 把文件的某一段(磁盘/硬盘上)直接映射到内存中去; 一旦文件被映射, 访问文件就会非常快, 不用通过系统的 <code>read()</code> 或 <code>write()</code>.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>MappedByteBuffer FileChannel.<span style="color: #658b00">map</span>(MapMode, <span style="color: #a7a7a7; font-weight: bold">long</span> position, longsize)
-<span style="color: #228B22">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
+<div class="highlight"><pre><span></span><span class="n">MappedByteBuffer</span> <span class="n">FileChannel</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">MapMode</span><span class="o">,</span> <span class="kt">long</span> <span class="n">position</span><span class="o">,</span> <span class="n">longsize</span><span class="o">)</span>
+<span class="c1">// MapMode 映射 mode: READ_ONLY、READ_WRITE、PRIVATE</span>
 </pre></div>
 
 
 <p><br>
 通过 <code>FileChannel</code> 可以将文件映射到内存中, 取得一个 <code>MappedByteBuffer</code>.</p>
-<h2 id="_2">说明:</h2>
+<h2>说明:</h2>
 <p>剩下的还有 162 ~ 166 没看, 看不下去了,  以后再看吧</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

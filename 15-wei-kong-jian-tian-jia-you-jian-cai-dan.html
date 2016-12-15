@@ -57,98 +57,89 @@
 <a href="http://blog.163.com/zhao_yunsong/blog/static/3405930920118163368768/">Qt QWidget 添加右键菜单</a><br>
 <a href="http://blog.sina.com.cn/s/blog_a6fb6cc90101dd5u.html">QTableWidget 详解</a></p>
 <p>编程中, 右键菜单是必不可少的, 特别是应用在 Table 类的控件上.</p>
-<div class="toc">
-<ul>
-<li><a href="#action">添加 Action</a></li>
-<li><a href="#_1">添加菜单</a><ul>
-<li><a href="#_2">重写事件</a></li>
-<li><a href="#_3">关联信号槽</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="action">添加 Action</h1>
+<p>[TOC]</p>
+<h1>添加 Action</h1>
 <p>参考之前学 Qt 的系列笔记: <a href="http://www.smallcpp.com/13-zi-yuan-wen-jian-ji-action.html">13、资源文件及 Action</a></p>
 <p>Qt 中, 每个菜单项是一个 Action, 我们要显示右键菜单, 也要先定义好 Action, 方法就参考上面的笔记, 在 Qt 设计师中添加, 也可以像下面这样, 自己在代码中添加.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">PyQt4.QtGui</span> <span style="color: #8B008B; font-weight: bold">import</span> QMenu, QAction
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="n">QMenu</span><span class="p">,</span> <span class="n">QAction</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_open</span>():
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">u&#39;打开&#39;</span>
+<span class="k">def</span> <span class="nf">on_open</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s1">u&#39;打开&#39;</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_download</span>():
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">u&#39;下载&#39;</span>
+<span class="k">def</span> <span class="nf">on_download</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s1">u&#39;下载&#39;</span>
 
-<span style="color: #658b00">self</span>.pop_menu = QMenu()
+<span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span> <span class="o">=</span> <span class="n">QMenu</span><span class="p">()</span>
 
-<span style="color: #658b00">self</span>.action_open = QAction(<span style="color: #658b00">self</span>)
-<span style="color: #658b00">self</span>.action_open.setText(<span style="color: #CD5555">u&quot;打开&quot;</span>)
-<span style="color: #658b00">self</span>.action_open.triggered.connect(on_open)
+<span class="bp">self</span><span class="o">.</span><span class="n">action_open</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">action_open</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">u&quot;打开&quot;</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">action_open</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_open</span><span class="p">)</span>
 
-<span style="color: #658b00">self</span>.action_download = QAction(<span style="color: #658b00">self</span>)
-<span style="color: #658b00">self</span>.action_download.setText(<span style="color: #CD5555">u&quot;下载&quot;</span>)
-<span style="color: #658b00">self</span>.action_download.triggered.connect(on_download)
+<span class="bp">self</span><span class="o">.</span><span class="n">action_download</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">action_download</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">u&quot;下载&quot;</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">action_download</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_download</span><span class="p">)</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="_1">添加菜单</h1>
+<h1>添加菜单</h1>
 <p>这里有两种方法, 一种是基于事件, 另一种是基于信号槽</p>
-<h3 id="_2">重写事件</h3>
+<h3>重写事件</h3>
 <p>Qt 的控件都有一个右键菜单事件 <code>contextMenuEvent</code>, 我们重写这个事件就可以了:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">self</span>.contextMenuEvent = <span style="color: #658b00">self</span>.e_contextMenuEvent
+<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_contextMenuEvent</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">e_contextMenuEvent</span>(<span style="color: #658b00">self</span>, event):
-    <span style="color: #658b00">self</span>.pop_menu.clear()  <span style="color: #228B22"># 清除原有菜单</span>
-    <span style="color: #658b00">self</span>.pop_menu.addAction(<span style="color: #658b00">self</span>.action_open)
-    <span style="color: #658b00">self</span>.pop_menu.addSeparator()  <span style="color: #228B22"># 分隔线</span>
-    <span style="color: #658b00">self</span>.pop_menu.addAction(<span style="color: #658b00">self</span>.action_download)
-    <span style="color: #658b00">self</span>.pop_menu.exec_(event.globalPos())
-    event.accept()
+<span class="k">def</span> <span class="nf">e_contextMenuEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1"># 清除原有菜单</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_open</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>  <span class="c1"># 分隔线</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_download</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">())</span>
+    <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br>
 如果想添加次级菜单, 可以使用 <code>pop_menu.addMenu</code>:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">e_contextMenuEvent</span>(<span style="color: #658b00">self</span>, event):
-    <span style="color: #658b00">self</span>.pop_menu.clear()
-    <span style="color: #658b00">self</span>.pop_menu.addAction(<span style="color: #658b00">self</span>.action_open)
-    secondary_menu = <span style="color: #658b00">self</span>.pop_menu.addMenu(<span style="color: #CD5555">u&#39;其它&#39;</span>)
-    secondary_menu.addAction(<span style="color: #658b00">self</span>.action_download)
-    <span style="color: #658b00">self</span>.pop_menu.exec_(event.globalPos())
-    event.accept()
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">e_contextMenuEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_open</span><span class="p">)</span>
+    <span class="n">secondary_menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="s1">u&#39;其它&#39;</span><span class="p">)</span>
+    <span class="n">secondary_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_download</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">())</span>
+    <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br></p>
-<p><img alt="" src="http://i64.tinypic.com/1532qds.jpg" /></p>
+<p><img alt="" src="http://i64.tinypic.com/1532qds.jpg"></p>
 <p>如果是在 Table 类的控件上, 你可以还需要得到当前鼠标所在的 item:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>point = event.pos()
-item = <span style="color: #658b00">self</span>.tableWidgetItem.itemAt(point)
-<span style="color: #8B008B; font-weight: bold">if</span> item != <span style="color: #658b00">None</span>:
-    <span style="color: #8B008B; font-weight: bold">pass</span>
+<div class="highlight"><pre><span></span><span class="n">point</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+<span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tableWidgetItem</span><span class="o">.</span><span class="n">itemAt</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">pass</span>
 </pre></div>
 
 
 <p><br>
 要注意, <code>itemAt</code> 使用的是局部坐标, <code>exec_</code> 使用的是全局坐标.</p>
-<h3 id="_3">关联信号槽</h3>
+<h3>关联信号槽</h3>
 <p>这种方法的机制是为控件建立 press 的信号槽, 在槽函数里判断是左键还是右键, 这种方法对有 item 的控件支持比较好, 如: QListWidget、QTableWidget、QTreeWidget.</p>
 <p>以 QTableWidget 为例, 我们先在主窗体上拖一个 QTableWidget:</p>
-<p><img alt="" src="http://i65.tinypic.com/919ggk.jpg" /></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">self</span>.tableWidget.itemPressed.connect(<span style="color: #658b00">self</span>.on_item_clicked)  <span style="color: #228B22"># 关联信号槽</span>
+<p><img alt="" src="http://i65.tinypic.com/919ggk.jpg"></p>
+<div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">itemPressed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_item_clicked</span><span class="p">)</span>  <span class="c1"># 关联信号槽</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_item_clicked</span>(<span style="color: #658b00">self</span>, item):
-    <span style="color: #8B008B; font-weight: bold">if</span> QtGui.qApp.mouseButtons() == QtCore.Qt.LeftButton:
-        <span style="color: #8B008B; font-weight: bold">return</span>
-    <span style="color: #8B008B; font-weight: bold">elif</span> QtGui.qApp.mouseButtons() == QtCore.Qt.RightButton:
-        <span style="color: #658b00">self</span>.show_menu()
+<span class="k">def</span> <span class="nf">on_item_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">mouseButtons</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">elif</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">mouseButtons</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_menu</span><span class="p">()</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">show_menu</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #658b00">self</span>.pop_menu.clear()
-    <span style="color: #658b00">self</span>.pop_menu.addAction(<span style="color: #658b00">self</span>.action_open)
-    secondary_menu = <span style="color: #658b00">self</span>.pop_menu.addMenu(<span style="color: #CD5555">u&#39;其它&#39;</span>)
-    secondary_menu.addAction(<span style="color: #658b00">self</span>.action_download)
-    <span style="color: #658b00">self</span>.pop_menu.exec_(QtGui.QCursor.pos())
+<span class="k">def</span> <span class="nf">show_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_open</span><span class="p">)</span>
+    <span class="n">secondary_menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="s1">u&#39;其它&#39;</span><span class="p">)</span>
+    <span class="n">secondary_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">action_download</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pop_menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
 </pre></div>
 
 

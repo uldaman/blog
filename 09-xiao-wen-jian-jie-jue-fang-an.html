@@ -53,23 +53,18 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">可选方案</a></li>
-<li><a href="#hadoop-archives">Hadoop Archives</a></li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <blockquote>
 <p>所谓的小文件指的是小于一个 block size 的文件.</p>
 </blockquote>
-<h1 id="_1">可选方案</h1>
+<h1>可选方案</h1>
 <p>对于<strong>尚未上传</strong>到 HDFS 的文件, 可以采用以下几种方案:</p>
 <ul>
 <li>应用程序自己合并文件上传 (要根据实际情况来, 因为上传后不好处理)</li>
 <li>SequenceFile/MapFile, 同样需要自己编程上传文件, 上传的数据将被打包成 k, v 的形式</li>
 </ul>
 <blockquote>
-<p>通常对于 &ldquo;the small files problem&rdquo; 的回应会是: 使用 SequenceFile.<br>
+<p>通常对于 "the small files problem" 的回应会是: 使用 SequenceFile.<br>
 这种方法是说, 使用 filename 作为 key, 而 file contents 作为 value.</p>
 </blockquote>
 <p>对于<strong>已存在</strong>于 HDFS 上的文件, 可以使用:</p>
@@ -79,13 +74,13 @@
 <li>HBase compact (HBase 的内容, 把多个 HFile 合并成一个 HFile)</li>
 </ul>
 <p>CombineFileInputFormat 及 HBase compact 将在后面的 MR 及 HBase 专题记录, 本篇介绍下 Hadoop Archives.</p>
-<h1 id="hadoop-archives">Hadoop Archives</h1>
+<h1>Hadoop Archives</h1>
 <p><strong>References</strong>:<br>
 <a href="http://blog.csdn.net/lastsweetop/article/details/9123155">Hadoop 深入研究: (五) —— Archives</a><br>
 <a href="https://my.oschina.net/u/270950/blog/170570">Hadoop 关于处理大量小文件的问题和解决方法</a></p>
 <p>Hadoop Archives (HAR files) 是在 0.18.0 版本中引入的, 它的出现就是为了缓解大量小文件消耗 NameNode 内存的问题.</p>
 <p>HAR 文件是通过在 HDFS 上构建一个层次化的文件系统来工作, HAR 文件一旦创建便不可再更改.</p>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/小文件处理/harindex.png" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/小文件处理/harindex.png"></p>
 <p>HAR 文件通过 Hadoop 的 Archive 命令来创建, 而这个命令实际上也是运行了一个 <strong>MapReduce</strong> 任务来将小文件打包成 HAR.</p>
 <p>对于 client 端来说, 使用 HAR 文件没有任何影响, 所有的原始文件都可见&amp;&amp;透明, 但在HDFS端它内部的文件数减少了.</p>
 <p>通过 HAR 来读取一个文件并不会比直接从 HDFS 中读取文件高效, 而且实际上可能还会稍微<strong>低效</strong>一点, 因为对每一个 HAR 文件的访问都需要完成两层 index 文件的读取和文件本身数据的读取 (见上图). 并且尽管 HAR 文件可以被用来作为 <strong>MapReduce job</strong> 的 input, 但是并没有特殊的方法来使 maps 将 HAR 文件中打包的文件当作一个 HDFS 文件处理.</p>

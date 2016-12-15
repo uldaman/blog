@@ -53,7 +53,7 @@
 </h6>
 
 
-    <p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
+    <p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg"></p>
 <p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
 <p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
 <p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
@@ -61,28 +61,28 @@
 <p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
 <p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect()的第一个参数).</p>
 <p>新建 Qt 项目, 拖拽界面.</p>
-<p><img alt="" src="http://i59.tinypic.com/nzlmxz.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/nzlmxz.jpg"></p>
 <p>将几个按钮和编辑框的对象名分别改成: pushButton_4, pushButton_5, pushButton_6, lineEdit_Out.</p>
 <p>返回 VS 中, 在头文件中添加槽函数.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; slots:
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; On_Out();
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> slots:
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> On_Out();
 </pre></div>
 
 
 <p>在.cpp实现文件中, 关联信号/槽, 和实现槽函数.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>testCalc::testCalc(QWidget *&lt;span style=&quot;color: #000000;&quot;&gt;parent)
+<div class="highlight"><pre><span></span>testCalc::testCalc(QWidget *<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>parent)
     : QMainWindow(parent)
 {
-    ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
-    connect(ui.pushButton_4, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
-    connect(ui.pushButton_5, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
-    connect(ui.pushButton_6, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
+    ui.setupUi(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
+    connect(ui.pushButton_4, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
+    connect(ui.pushButton_5, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
+    connect(ui.pushButton_6, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
 }
 
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; testCalc::On_Out() {
-    ui.lineEdit_Out&lt;/span&gt;-&gt;setText(((QPushButton*)sender())-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;text());
-}&lt;/span&gt;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> testCalc::On_Out() {
+    ui.lineEdit_Out<span class="nt">&lt;/span&gt;</span>-&gt;setText(((QPushButton*)sender())-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>text());
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 

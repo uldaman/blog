@@ -53,52 +53,43 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">单一职责原则</a></li>
-<li><a href="#-">开放-封闭原则</a></li>
-<li><a href="#_2">里氏代换原则</a></li>
-<li><a href="#_3">接口隔离原则</a></li>
-<li><a href="#_4">依赖倒置原则</a></li>
-<li><a href="#_5">迪米特法则</a></li>
-</ul>
-</div>
-<h1 id="_1">单一职责原则</h1>
+    <p>[TOC]</p>
+<h1>单一职责原则</h1>
 <p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
 <p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了<strong>简单工厂模式</strong>和<strong>策略模式</strong>.</p>
 <p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
 <p><strong>软件设计真正要做的许多内容, 就是发现职责并把那此职责相互分离.</strong></p>
 <p>怎么判断是否应该分离?</p>
 <p>那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离.</p>
-<hr />
-<h1 id="-">开放-封闭原则</h1>
+<hr>
+<h1>开放-封闭原则</h1>
 <p>开放-封闭原则: 软件实体(类 模块 函数等等), 应该是可以扩展但不可修改的.</p>
 <p>也就是说对于扩展是开放的, 对于更改是封闭的, 再换句话说就是<strong>设计软件要容易维护又不容易出问题的最好办法是多扩展少修改.</strong>
 要达到这样的效果就是我们在设计类的时候, 时刻要考虑尽量让这个类是足够好, 写好了就不要去修改了, 如果新需求来, 我们增加一些类就完事了, 原来的代码能不动则不动.</p>
 <p>但是, 无论是多么的”封闭”, 都会存在一些无法对之封闭的变化, 既然不可能完全封闭, 设计人员就必须对于它设计的模块应该对哪种变化封闭做出选择, 他必须先猜测出最有可能发生的变化种类, 然后构造抽象来隔离那些变化.</p>
 <p>再回想一下我们之前的计算器例子, 一开始的时候, 我们把计算的算法都封装在一个类当中:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Operation</span> {
-<span style="color: #8B008B; font-weight: bold">public</span>:
-    <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">double</span> <span style="color: #008b45">GetResult</span>(<span style="color: #a7a7a7; font-weight: bold">double</span> dNum_A, <span style="color: #a7a7a7; font-weight: bold">double</span> dNum_B, <span style="color: #a7a7a7; font-weight: bold">char</span> cOp) {
-        <span style="color: #a7a7a7; font-weight: bold">double</span> dResult = <span style="color: #B452CD">0.0</span>;
-        <span style="color: #8B008B; font-weight: bold">switch</span> (cOp) {
-        <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&#39;+&#39;</span>:
-            dResult = dNum_A + dNum_B;
-            <span style="color: #8B008B; font-weight: bold">break</span>;
-        <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&#39;-&#39;</span>:
-            dResult = dNum_A - dNum_B;
-            <span style="color: #8B008B; font-weight: bold">break</span>;
-        <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&#39;*&#39;</span>:
-            dResult = dNum_A * dNum_B;
-            <span style="color: #8B008B; font-weight: bold">break</span>;
-        <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&#39;/&#39;</span>:
-            dResult = dNum_A / dNum_B;
-            <span style="color: #8B008B; font-weight: bold">break</span>;
-        }
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Operation</span> <span class="o">{</span>
+<span class="kd">public</span><span class="o">:</span>
+    <span class="kd">static</span> <span class="kt">double</span> <span class="nf">GetResult</span><span class="o">(</span><span class="kt">double</span> <span class="n">dNum_A</span><span class="o">,</span> <span class="kt">double</span> <span class="n">dNum_B</span><span class="o">,</span> <span class="kt">char</span> <span class="n">cOp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">dResult</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">;</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">cOp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="sc">&#39;+&#39;</span><span class="o">:</span>
+            <span class="n">dResult</span> <span class="o">=</span> <span class="n">dNum_A</span> <span class="o">+</span> <span class="n">dNum_B</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;-&#39;</span><span class="o">:</span>
+            <span class="n">dResult</span> <span class="o">=</span> <span class="n">dNum_A</span> <span class="o">-</span> <span class="n">dNum_B</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;*&#39;</span><span class="o">:</span>
+            <span class="n">dResult</span> <span class="o">=</span> <span class="n">dNum_A</span> <span class="o">*</span> <span class="n">dNum_B</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="sc">&#39;/&#39;</span><span class="o">:</span>
+            <span class="n">dResult</span> <span class="o">=</span> <span class="n">dNum_A</span> <span class="o">/</span> <span class="n">dNum_B</span><span class="o">;</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
 
-        <span style="color: #8B008B; font-weight: bold">return</span> dResult;
-    }
-}
+        <span class="k">return</span> <span class="n">dResult</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
@@ -112,8 +103,8 @@
 <blockquote>
 <p>其实, 只要我们对另外 5 项原则遵守的好了, 设计出的软件自然是符合开闭原则的.</p>
 </blockquote>
-<hr />
-<h1 id="_2">里氏代换原则</h1>
+<hr>
+<h1>里氏代换原则</h1>
 <p><strong>里氏代换原则</strong>: 子类型必须能够替换掉它们的父类型, 即所有引用基类的地方必须能透明地使用其子类的对象 (因为子类继承了父类的方法).</p>
 <p>问题由来:<br>
 有一功能 P1, 由类 A 完成. 现需要将功能 P1 进行扩展, 扩展后的功能为 P, 由原功能 P1 与新功能 P2 组成. 扩展后的 P 由类 A 的子类 B 来完成, 则子类 B 在完成新功能 P2 的同时, 有可能会导致原有功能 P1 发生故障.</p>
@@ -130,17 +121,17 @@
 <li>当子类的方法实现父类的抽象方法时, 方法的后置条件 (即方法的返回值) 要比父类更严格</li>
 </ul>
 <p>其实, 里氏替换原则的<strong>重点</strong>在<strong>不影响原功能</strong>, 而不是不覆盖原方法, 另外, <strong>子类不要添加基类没有的约束</strong>, 所以正常遵从该原则的处理办法是<strong>在需要覆盖父类方法时应该首先考虑使用 <code>super</code> 调用父类的同名方法以保证父类同名方法会被调用</strong> (如果确实不需要调用父类方法, 则不需如此).</p>
-<hr />
-<h1 id="_3">接口隔离原则</h1>
+<hr>
+<h1>接口隔离原则</h1>
 <p>定义:<br>
 客户端不应该依赖它不需要的接口; 一个类对另一个类的依赖应该建立在最小的接口上.</p>
 <p>问题由来:<br>
 类 A 通过接口 I 依赖类 B, 类 C 通过接口 I 依赖类 D, 如果接口 I 对于类 A 和类 B 来说不是最小接口, 则类 B 和类 D 必须去实现他们不需要的方法.</p>
-<p><img alt="" src="http://i63.tinypic.com/ifpm55.jpg" /></p>
+<p><img alt="" src="http://i63.tinypic.com/ifpm55.jpg"></p>
 <p>解决方案:<br>
 将臃肿的接口 I 拆分为独立的几个接口, 类 A 和类 C 分别与他们需要的接口建立依赖关系. 也就是采用接口隔离原则.
 举例来说明接口隔离原则:</p>
-<p><img alt="" src="http://i68.tinypic.com/2r7bkw8.jpg" /></p>
+<p><img alt="" src="http://i68.tinypic.com/2r7bkw8.jpg"></p>
 <p>接口隔离原则的含义是:<br>
 建立单一接口, 不要建立庞大臃肿的接口, 尽量细化接口, 接口中的方法尽量少. 也就是说, 我们要为各个类建立专用的接口, 而不要试图去建立一个很庞大的接口供所有依赖它的类去调用. 在程序设计中, 依赖几个专用的接口要比依赖一个综合的接口更灵活.</p>
 <p>说到这里, 很多人会觉的接口隔离原则跟之前的<strong>单一职责</strong>原则很相似, 其实不然.</p>
@@ -153,8 +144,8 @@
 <li>提高内聚, 减少对外交互. 使接口用最少的方法去完成最多的事情</li>
 </ul>
 <p>运用接口隔离原则, 一定要适度, 接口设计的过大或过小都不好. 设计接口的时候, 只有多花些时间去思考和筹划, 才能准确地实践这一原则.</p>
-<hr />
-<h1 id="_4">依赖倒置原则</h1>
+<hr>
+<h1>依赖倒置原则</h1>
 <p>依赖倒置原则: 抽象不应该依赖细节, 细节应该依赖于抽象, 高层模块不应该依赖低层模块, 都应该依赖抽象.
 说白了, 就是应该<strong>针对接口编程</strong>而不要对实现编程.</p>
 <p>在我们的计算器(策略模式)程序中, <code>Context</code> 类依赖于 <code>Operation</code> 抽象类而不依赖具体的算法类, 具体的算法类也依赖于 <code>Operation</code> 抽象类, 根据里氏代换原则, 只要接口 <code>Operation</code> 抽象类是稳定的, 那么任何一个更改都不用担心其他受到影响(我们可以通过实例化新的子类来处理), 这使得无论高层模块还是低层模块都可以很容易地被复用.</p>
@@ -163,8 +154,8 @@
 例如: 我们做的项目大多要访问数据库, 所以我们就把数据库的代码写成了函数, 每次做新项目时就去调用这些函数, 这也就是高层依赖于低层模块了.</p>
 </blockquote>
 <p>依赖倒置原则其实可以说是面向对象设计的标志, 编程时考虑的都是如何针对抽象编程而不是针对细节编程, 即程序中所有的依赖关系都是终止于抽象类或者接口.</p>
-<hr />
-<h1 id="_5">迪米特法则</h1>
+<hr>
+<h1>迪米特法则</h1>
 <p>迪米特法则也叫最小知识原则, 迪米特法则还有一个更简单的定义: <strong>只与直接的朋友通信.</strong></p>
 <p>对于一个对象, 其朋友包括以下几类:</p>
 <ul>
@@ -182,43 +173,43 @@
 <p>迪米特法则还要求我们在设计时, 应该尽量减少对象之间的交互, 如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用. 简言之, <strong>就是通过引入一个合理的第三者来降低现有对象之间的耦合度</strong>.</p>
 <p>要理解这些可能有些难, 我们来看一下例子.</p>
 <p>体育老老师让体委清点全班女生个数, 先上一段有问题的代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a61717; background-color: #e3d2d2">#</span>include &lt;list&gt;
-<span style="color: #a61717; background-color: #e3d2d2">#</span>include &lt;iostream&gt;
-using namespace std;
+<div class="highlight"><pre><span></span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">list</span><span class="o">&gt;</span>
+<span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="o">;</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Girl</span> {
-};
+<span class="kd">class</span> <span class="nc">Girl</span> <span class="o">{</span>
+<span class="o">};</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">GroupLeader</span> {
-    <span style="color: #228B22">//有清查女生的工作</span>
-<span style="color: #8B008B; font-weight: bold">public</span>:
-    <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">countGirls</span>(list&lt;Girl&gt; listGirls){
-        cout &lt;&lt; <span style="color: #CD5555">&quot;女生数量是: &quot;</span> &lt;&lt; listGirls.<span style="color: #658b00">size</span>() &lt;&lt; endl;
-    }
-};
+<span class="kd">class</span> <span class="nc">GroupLeader</span> <span class="o">{</span>
+    <span class="c1">//有清查女生的工作</span>
+<span class="kd">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="nf">countGirls</span><span class="o">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Girl</span><span class="o">&gt;</span> <span class="n">listGirls</span><span class="o">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;女生数量是: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">listGirls</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">};</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Teacher</span> {
-    <span style="color: #228B22">//老师对学生发布命令,清一下女生</span>
-<span style="color: #8B008B; font-weight: bold">public</span>:
-    <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">commond</span>(GroupLeader groupLeader) {
-        list&lt;Girl&gt; listGirls;
-        <span style="color: #228B22">//初始化女生</span>
-        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">20</span>; i++){
-            listGirls.<span style="color: #658b00">push_back</span>(Girl());
-        }
-        <span style="color: #228B22">//告诉体育委员开始执行清查任务</span>
-        groupLeader.<span style="color: #658b00">countGirls</span>(listGirls);
-    }
-};
+<span class="kd">class</span> <span class="nc">Teacher</span> <span class="o">{</span>
+    <span class="c1">//老师对学生发布命令,清一下女生</span>
+<span class="kd">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="nf">commond</span><span class="o">(</span><span class="n">GroupLeader</span> <span class="n">groupLeader</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">list</span><span class="o">&lt;</span><span class="n">Girl</span><span class="o">&gt;</span> <span class="n">listGirls</span><span class="o">;</span>
+        <span class="c1">//初始化女生</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">listGirls</span><span class="o">.</span><span class="na">push_back</span><span class="o">(</span><span class="n">Girl</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="c1">//告诉体育委员开始执行清查任务</span>
+        <span class="n">groupLeader</span><span class="o">.</span><span class="na">countGirls</span><span class="o">(</span><span class="n">listGirls</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">};</span>
 
-<span style="color: #a7a7a7; font-weight: bold">int</span> <span style="color: #008b45">_tmain</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> argc, _TCHAR* argv[]) {
-    Teacher teacher;
-    <span style="color: #228B22">//老师发布命令</span>
-    teacher.<span style="color: #658b00">commond</span>(GroupLeader());
+<span class="kt">int</span> <span class="nf">_tmain</span><span class="o">(</span><span class="kt">int</span> <span class="n">argc</span><span class="o">,</span> <span class="n">_TCHAR</span><span class="o">*</span> <span class="n">argv</span><span class="o">[])</span> <span class="o">{</span>
+    <span class="n">Teacher</span> <span class="n">teacher</span><span class="o">;</span>
+    <span class="c1">//老师发布命令</span>
+    <span class="n">teacher</span><span class="o">.</span><span class="na">commond</span><span class="o">(</span><span class="n">GroupLeader</span><span class="o">());</span>
 
-    system(<span style="color: #CD5555">&quot;PAUSE&quot;</span>);
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
-}
+    <span class="n">system</span><span class="o">(</span><span class="s">&quot;PAUSE&quot;</span><span class="o">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 
 
@@ -226,53 +217,53 @@ using namespace std;
 问题出在 Teacher 这个类中, 首先, Girl 类做为 commond 方法的局部变量出现..</p>
 <p>其次, 和体育老师有直接联系的是体委, 而不是全班女生, 体育老师和女生不应该相互作用, 而应该通过体委来跳转(如果两个对象之间不必彼此直接通信, 那么这两个对象就不应当发生任何直接的相互作用, 如果其中的一个对象需要调用另一个对象的某一个方法的话, 可以通过第三者转发这个调用).</p>
 <p>改进后代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a61717; background-color: #e3d2d2">#</span>include <span style="color: #CD5555">&quot;stdafx.h&quot;</span>
-<span style="color: #a61717; background-color: #e3d2d2">#</span>include &lt;list&gt;
-<span style="color: #a61717; background-color: #e3d2d2">#</span>include &lt;iostream&gt;
-using namespace std;
+<div class="highlight"><pre><span></span><span class="err">#</span><span class="n">include</span> <span class="s">&quot;stdafx.h&quot;</span>
+<span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">list</span><span class="o">&gt;</span>
+<span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="o">;</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Girl</span> {
-};
+<span class="kd">class</span> <span class="nc">Girl</span> <span class="o">{</span>
+<span class="o">};</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">GroupLeader</span> {
-    <span style="color: #228B22">//有清查女生的工作</span>
-<span style="color: #8B008B; font-weight: bold">private</span>:
-    list&lt;Girl&gt; m_listGirls;
-    <span style="color: #228B22">//传递全班的女生</span>
+<span class="kd">class</span> <span class="nc">GroupLeader</span> <span class="o">{</span>
+    <span class="c1">//有清查女生的工作</span>
+<span class="kd">private</span><span class="o">:</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="n">Girl</span><span class="o">&gt;</span> <span class="n">m_listGirls</span><span class="o">;</span>
+    <span class="c1">//传递全班的女生</span>
 
-public:
-    GroupLeader(list&lt;Girl&gt; _listGirls) {
-        m_listGirls = _listGirls;
-    }
+<span class="nl">public:</span>
+    <span class="n">GroupLeader</span><span class="o">(</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Girl</span><span class="o">&gt;</span> <span class="n">_listGirls</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">m_listGirls</span> <span class="o">=</span> <span class="n">_listGirls</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span style="color: #228B22">//有清查女生的工作</span>
-    <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">countGirls</span>(){
-        cout &lt;&lt; <span style="color: #CD5555">&quot;女生数量是: &quot;</span> &lt;&lt; m_listGirls.<span style="color: #658b00">size</span>() &lt;&lt; endl;
-    }
-};
+    <span class="c1">//有清查女生的工作</span>
+    <span class="kt">void</span> <span class="nf">countGirls</span><span class="o">(){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;女生数量是: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_listGirls</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">};</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Teacher</span> {
-    <span style="color: #228B22">//老师对学生发布命令,清一下女生</span>
-<span style="color: #8B008B; font-weight: bold">public</span>:
-    <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">commond</span>(GroupLeader groupLeader) {
-        groupLeader.<span style="color: #658b00">countGirls</span>();
-    }
-};
+<span class="kd">class</span> <span class="nc">Teacher</span> <span class="o">{</span>
+    <span class="c1">//老师对学生发布命令,清一下女生</span>
+<span class="kd">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="nf">commond</span><span class="o">(</span><span class="n">GroupLeader</span> <span class="n">groupLeader</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">groupLeader</span><span class="o">.</span><span class="na">countGirls</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">};</span>
 
-<span style="color: #a7a7a7; font-weight: bold">int</span> <span style="color: #008b45">_tmain</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> argc, _TCHAR* argv[]) {
-    list&lt;Girl&gt; listGirls;
-    <span style="color: #228B22">//初始化女生</span>
-    <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">20</span>; i++){
-        listGirls.<span style="color: #658b00">push_back</span>(Girl());
-    }
+<span class="kt">int</span> <span class="nf">_tmain</span><span class="o">(</span><span class="kt">int</span> <span class="n">argc</span><span class="o">,</span> <span class="n">_TCHAR</span><span class="o">*</span> <span class="n">argv</span><span class="o">[])</span> <span class="o">{</span>
+    <span class="n">list</span><span class="o">&lt;</span><span class="n">Girl</span><span class="o">&gt;</span> <span class="n">listGirls</span><span class="o">;</span>
+    <span class="c1">//初始化女生</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="n">listGirls</span><span class="o">.</span><span class="na">push_back</span><span class="o">(</span><span class="n">Girl</span><span class="o">());</span>
+    <span class="o">}</span>
 
-    Teacher teacher;
-    <span style="color: #228B22">//老师发布命令</span>
-    teacher.<span style="color: #658b00">commond</span>(GroupLeader(listGirls));
+    <span class="n">Teacher</span> <span class="n">teacher</span><span class="o">;</span>
+    <span class="c1">//老师发布命令</span>
+    <span class="n">teacher</span><span class="o">.</span><span class="na">commond</span><span class="o">(</span><span class="n">GroupLeader</span><span class="o">(</span><span class="n">listGirls</span><span class="o">));</span>
 
-    system(<span style="color: #CD5555">&quot;PAUSE&quot;</span>);
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
-}
+    <span class="n">system</span><span class="o">(</span><span class="s">&quot;PAUSE&quot;</span><span class="o">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 
 

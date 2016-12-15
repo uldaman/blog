@@ -59,52 +59,52 @@
 
 <p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
-<h1 id="_1">模态对话框</h1>
+<h1>模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
 <p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog::result() 直接从对话框对象获取到数据值(当然要先在对话框中用 QDialog::setResult() 来设置数据).</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::open() {
-    QDialog dialog(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    dialog.setWindowTitle(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello, dialog!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> MainWindow::open() {
+    QDialog dialog(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+    dialog.setWindowTitle(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Hello, dialog!<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
     dialog.exec();
-    qDebug() &lt;/span&gt;&lt;&lt;&lt;span style=&quot;color: #000000&quot;&gt; dialog.result();
-}&lt;/span&gt;
+    qDebug() <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> dialog.result();
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 
 <p>注意使用 Dialog::result() 时, 不能设置 WA_DeleteOnClose 属性, 因为如果设置了这个属性, exec() 返回后, dialog 就会被销毁, 就不可能再获取到数据了.
 当然这里也不可能设置 WA_DeleteOnClose 属性, 因为这是模态对话框, 可以直接在栈上创建, 函数返回, 对话框所分配到的内存会自动释放, WA_DeleteOnClose 只有在堆上创建窗口时才使用, 一般用到非模态对话框上.</p>
 <p>另外, <code>QDialog::exec()也</code>是有返回值的, 其返回值是 <code>QDialog::Accepted</code>或者 <code>QDialog::Rejected</code>, 这取决于用户点击的是 “OK”还是 “Cancel”按钮(默认情况下, QDialog 有这两个按钮,“OK”被连接到到 accept() 槽, “Cancel”被连接到 reject() 槽), 一般我们会使用类似下面的代码：</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>QDialog dialog(&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (dialog.exec() ==&lt;span style=&quot;color: #000000&quot;&gt; QDialog::Accepted) {
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; do something&lt;/span&gt;
-} &lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; do something else&lt;/span&gt;
+<div class="highlight"><pre><span></span>QDialog dialog(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> (dialog.exec() ==<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QDialog::Accepted) {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> do something<span class="nt">&lt;/span&gt;</span>
+} <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>else<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> do something else<span class="nt">&lt;/span&gt;</span>
 }
 </pre></div>
 
 
-<h1 id="_2"></h1>
-<h1 id="_3">非模态对话框</h1>
+<h1></h1>
+<h1>非模态对话框</h1>
 <p>打开非模态对话框时, 代码是立即返回的, 这也就不可能通过 result() 来获取数据, 要想实现通信, 可以使用信号槽机制.</p>
 <p>非模态对话框在关闭时可以调用 <code>QDialog::accept()</code>或者 <code>QDialog::reject()</code>或者更通用的 <code>QDialog::done()</code>函数, 所以就可以在重写这几个函数发出信号;
 另外, 如果找不到合适的信号发出点, 还可以重写 <code>QDialog::closeEvent()</code>函数, 在这里发出信号. 在需要接收数据的窗口（这里是主窗口）连接到这个信号即可.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; UserAgeDialog::accept() {
-    emit userAgeChanged(newAge); &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; newAge is an int&lt;/span&gt;
-&lt;span style=&quot;color: #000000&quot;&gt;    QDialog::accept();
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> UserAgeDialog::accept() {
+    emit userAgeChanged(newAge); <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> newAge is an int<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>    QDialog::accept();
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; in main window:&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MainWindow::showUserAgeDialog() {
-    UserAgeDialog &lt;/span&gt;*dialog = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; UserAgeDialog(&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    connect(dialog, &lt;/span&gt;&amp;UserAgeDialog::userAgeChanged, &lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;, &amp;&lt;span style=&quot;color: #000000&quot;&gt;MainWindow::setUserAge);
-    dialog&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000&quot;&gt;show();
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> in main window:<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> MainWindow::showUserAgeDialog() {
+    UserAgeDialog <span class="nt">&lt;/span&gt;</span>*dialog = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> UserAgeDialog(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+    connect(dialog, <span class="nt">&lt;/span&gt;</span><span class="err">&amp;</span>UserAgeDialog::userAgeChanged, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;</span>, <span class="err">&amp;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>MainWindow::setUserAge);
+    dialog<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>show();
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; ...&lt;/span&gt;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> ...<span class="nt">&lt;/span&gt;</span>
 
-&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; MainWindow::setUserAge(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; age) {
-    userAge &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; age;
-}&lt;/span&gt;
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> MainWindow::setUserAge(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> age) {
+    userAge <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> age;
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 

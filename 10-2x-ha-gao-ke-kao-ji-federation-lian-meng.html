@@ -53,23 +53,7 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#ha-federation">HA + Federation 架构图</a></li>
-<li><a href="#federation">Federation (联盟/联邦)</a><ul>
-<li><a href="#_1">块池</a></li>
-<li><a href="#_2">多命名空间的管理问题</a></li>
-<li><a href="#federation_1">配置 Federation</a></li>
-<li><a href="#java-api">Java API</a></li>
-</ul>
-</li>
-<li><a href="#2x">2.X 高可靠</a><ul>
-<li><a href="#_3">原理</a></li>
-<li><a href="#_4">接管方式</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <p>首先说明 . . . 也许这两个功能你根本不可能用到上, 因为你的集群规模完全达不到要求.</p>
 <p>在 1.X 时代, 你可能需要再另外建立一个 Hadoop 集群 . . . 想像一下建立一个集群的成本 . . .</p>
 <p>Hadoop 1.x 中, 一个集群就只有一个 NameNode, 这种架构虽然实现简单, 但会产生<strong>单点</strong>、<strong>内存</strong>瓶颈、<strong>性能</strong>
@@ -78,10 +62,10 @@
 <p><strong>问题二</strong>, 当集群进行复杂运算时, 也只有一个 NameNode 在运作, 集群的运算性能也会受到 NameNode 的限制.</p>
 <p><strong>问题三</strong>, 虽然集群有 Second NameNode 作为辅助节点, 但并不会完成自动切换, 当 NameNode 宕掉时, 还是需要人工去处理.</p>
 <p>虽然仅仅在像 Yahoo 和 Facebook 返种规模的大公司才会面对这样的限制问题, 但在 Hadoop 2.x 中, 官方还是给出了解决方案.</p>
-<h1 id="ha-federation">HA + Federation 架构图</h1>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/HAFederation.png" /></p>
+<h1>HA + Federation 架构图</h1>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/HAFederation.png"></p>
 <p>先放张图, 后面的内容将对其进行解释.</p>
-<h1 id="federation">Federation (联盟/联邦)</h1>
+<h1>Federation (联盟/联邦)</h1>
 <p>2.X 时代引入了 Federation, 采用 Federation 的最主要原因很简单, 它能够解决上述的 <strong>问题一</strong> 和 <strong>问题二</strong>.</p>
 <p>Federation 提供了 Hadoop 集群多 NameNode 的能力, 让集群可以水平扩展, 一定程度解决了单 NameNode 的<strong>内存</strong>瓶颈和<strong>性能</strong>
 瓶颈.</p>
@@ -105,39 +89,39 @@
 </ul>
 </li>
 </ul>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.png" /></p>
-<h2 id="_1">块池</h2>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop新特性/HDFS联邦.png"></p>
+<h2>块池</h2>
 <p><strong>块池</strong>是逻辑上的概念, 就是属于单个命名空间的一组块, 它并不是以 DataNode 的个数来划分, 而是将所有的 DataNode 当成一个整体来划分, 所以, 同一个 DataNode 中的块可以被分给多个不同的 Block Pool.</p>
 <p>Block Pool 允许一个 NameNode 在不通知其他 NameNode 的情况下为一个新的 Block 创建 Block ID, 但由于 DataNode 会向所有 NameNode 发送心跳及块报告, 所以其它 NameNode 也会知道这个 Block 的使用情况, 这样一个 NameNode 失效就不会影响到其下的 DataNode 为其他 NameNode 继续服务.</p>
 <p>当向集群存储数据时, 集群先为其分配 NameNode 创建命名空间, 然后 Block Pools 从 DataNode 上寻找空闲 Block 加入当前 NameNode 所管辖下的块池, 最后 NameNode 将数据存放进这些 Block.</p>
-<h2 id="_2">多命名空间的管理问题</h2>
+<h2>多命名空间的管理问题</h2>
 <p>为了方便管理多个命名空间, HDFS Federation 采用了经典的 <strong>Client Side Mount Table</strong> 方式.</p>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/高可靠联盟/ClientSideMountTable.png"></p>
 <p>如上图所示, 每个深色三角形代表一个独立的命名空间, 上方浅色的三角形代表从客户角度去访问下方的子命名空间. 各个深色的命名空间 Mount 到浅色的表中, 客户可以访问不同的挂载点来访问不同的命名空间, 这就如同在 Linux 系统中访问不同<strong>挂载点</strong>一样.</p>
-<h2 id="federation_1">配置 Federation</h2>
+<h2>配置 Federation</h2>
 <p>还没实操过, 需要的时候参考 (主要是 <code>core-site.xml</code> 中 <strong>viewfs</strong> 及 <code>hdfs-site.xml</code> 中 <strong>nameservices</strong> 的配置):</p>
 <p><a href="http://www.infoq.com/cn/articles/hadoop-2-0-namenode-ha-federation-practice-zh">Hadoop 2.0 NameNode HA 和 Federation 实践</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/Hadoop 2.0 NameNode HA 和 Federation 实践</code>)</p>
 <p><a href="http://www.cnblogs.com/nb591/p/3535662.html">搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</a> (为防止链接失效, 我摘到了 <strong>OneNote</strong> 中: <code>我的笔记本/Hadoop 拾遗/搭建 Hadoop 2.2.0 HA &amp;&amp; Federation</code>)<br></p>
 <p>需要注意一点的就是, Federation 需要在每个 NameNode 上分别格式化, 第一个 NameNode 可以使用之前的 <code>hdfs namenode -format</code> 命令进行格式化, 格式化后就会产生一个 <strong>ClusterId</strong>, 剩下的 NameNode 需要指定 <strong>ClusterId</strong> 进行格式化: <code>hdfs namenode -format -clusterId</code>.</p>
-<h2 id="java-api">Java API</h2>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ViewFileSystem fsView = (ViewFileSystem)ViewFileSystem.<span style="color: #658b00">get</span>(conf);
-MountPoint[] m = fsView.<span style="color: #658b00">getMountPoints</span>();
-<span style="color: #8B008B; font-weight: bold">for</span> (MountPoint m1 : m) {
-    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(m1.<span style="color: #658b00">getSrc</span>());
-}
+<h2>Java API</h2>
+<div class="highlight"><pre><span></span><span class="n">ViewFileSystem</span> <span class="n">fsView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ViewFileSystem</span><span class="o">)</span><span class="n">ViewFileSystem</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">conf</span><span class="o">);</span>
+<span class="n">MountPoint</span><span class="o">[]</span> <span class="n">m</span> <span class="o">=</span> <span class="n">fsView</span><span class="o">.</span><span class="na">getMountPoints</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">MountPoint</span> <span class="n">m1</span> <span class="o">:</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">m1</span><span class="o">.</span><span class="na">getSrc</span><span class="o">());</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="2x">2.X 高可靠</h1>
+<h1>2.X 高可靠</h1>
 <p>Reference: <a href="http://www.cnblogs.com/sy270321/p/4398815.html">Hadoop2 NameNode HA 原理详解</a></p>
 <p>Hadoop2 NameNode HA 方案让 NameNode 有个备份节点, 当 NameNode 宕掉了, 备份节点就接管 NameNode 的职责.</p>
-<h2 id="_3">原理</h2>
+<h2>原理</h2>
 <p>需要用到集群: <strong>JournalNodes</strong>.</p>
 <p>两个 NameNode 通过 JournalNodes 通信, 共享 NameNode 数据.</p>
 <p>NameNode 有两种状态, 一种是激活状态 <strong>Active</strong>, 另一种是准备状态 <strong>Standby</strong>;</p>
 <p>Active 对外提供服务, 当 Active 数据发生变化, 它会同步到 JournalNodes, JournalNodes 收到变化后同步给 Standby, 当 Active 宕掉, Standby 就可以接管.</p>
-<h2 id="_4">接管方式</h2>
+<h2>接管方式</h2>
 <ul>
 <li>手动接管</li>
 <li>自动接管, 要通过 FailoverController (故障转移控制器) 去实现, 而 FailoverController 是属于 <a href="http://blog.smallcpp.com/07-zookeeper-jian-jie.html">zookeeper</a> 集群的一部分.</li>

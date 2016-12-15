@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h3 id="_1">代理模式</h3>
+    <h3>代理模式</h3>
 <p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
 <p>情景:</p>
 <ol>
@@ -65,7 +65,7 @@
 </li>
 </ol>
 <p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png" /></a></p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png"></a></p>
 <p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
 <p>RealSubject: 真实实体(老总/大小姐)</p>
 <p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
@@ -79,13 +79,13 @@ public:
     : public Subject {
 public:
     void Request() {
-        cout &lt;&lt; &ldquo;真实的请求&rdquo; &lt;&lt; endl;
+        cout &lt;&lt; "真实的请求" &lt;&lt; endl;
     }
 };</p>
 <p>class Proxy
     : public Subject {
 public:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>void Request() {
+<div class="highlight"><pre><span></span>void Request() {
     if (m_realSubject == NULL) {
         m_realSubject = new RealSubject();
     }
@@ -100,14 +100,14 @@ public:</p>
 <p>int _tmain(int argc, _TCHAR<em> argv[]) {
     Proxy</em> proxy = new Proxy();
     proxy-&gt;Request();</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>system(&quot;PAUSE&quot;);
+<div class="highlight"><pre><span></span>system(&quot;PAUSE&quot;);
 return 0;
 </pre></div>
 
 
 <p>}[/cpp]</p>
 <p>这样, 我们在客户端中, 都是通过代理类来访问真实的实体, 在代理类中, 就可以控制对真实实体的访问.</p>
-<h3 id="_2">应用</h3>
+<h3>应用</h3>
 <ol>
 <li>远程代理, 也就是为一个对象在不同的地址空间提供局部代表, 这样可以隐藏一个对象存在不同地址空间的事实.</li>
 </ol>
@@ -129,7 +129,7 @@ return 0;
 <p>写在最后:....</p>
 <blockquote>好吧, 虽然代理模式是个很简单的模式, 但是具体在哪里用....我还真没搞清楚...请原谅我的无知...</blockquote>
 
-<p>c&rdquo;a</p>
+<p>c"a</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>

@@ -62,63 +62,63 @@
 <a href="http://askandstudy.blog.163.com/blog/static/199752058201202823638708/">pyqt class reference添加到qt设计师的qt助手中</a><br>
 <a href="http://www.cnblogs.com/Braveliu/p/5055387.html">利用Qt Assistant 定制帮助文档</a><br></p>
 <p>我们在 <code>\site-packages\PyQt4\doc\html</code> 目录下新建个 <code>pyqtclassreference.qhp</code> 文件, 这个文件就把它理解成一个配置文件好了, 等下要根据这个配置文件生成 <code>qch</code> 文件, 在 <code>pyqtclassreference.qhp</code> 中写入以下内容 (这个文件我共享了一份: <a href="http://share.weiyun.com/f65c8c82d20c167f13880412d5fbe673">传送门</a>):</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
- <span style="color: #8B008B; font-weight: bold">&lt;QtHelpProject</span> <span style="color: #658b00">version=</span><span style="color: #CD5555">&quot;1.0&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;</span>
-     <span style="color: #8B008B; font-weight: bold">&lt;namespace&gt;</span>pyqt.doc<span style="color: #8B008B; font-weight: bold">&lt;/namespace&gt;</span>
-     <span style="color: #8B008B; font-weight: bold">&lt;virtualFolder&gt;</span>doc<span style="color: #8B008B; font-weight: bold">&lt;/virtualFolder&gt;</span>
-     <span style="color: #8B008B; font-weight: bold">&lt;filterSection&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;toc&gt;</span> <span style="color: #228B22">&lt;!-- 该标签指定了目录, 这些关键字会显示在 Qt Assistant 的目录页面 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;section</span> <span style="color: #658b00">title=</span><span style="color: #CD5555">&quot;qabstractanimation&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qabstractanimation.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/section&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;section</span> <span style="color: #658b00">title=</span><span style="color: #CD5555">&quot;qabstractbutton&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qabstractbutton.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/section&gt;</span>
-            <span style="color: #228B22">&lt;!-- 省略了 N 多, 足有 500 个左右 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;section</span> <span style="color: #658b00">title=</span><span style="color: #CD5555">&quot;qxmlstreamreader&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qxmlstreamreader.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/section&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;section</span> <span style="color: #658b00">title=</span><span style="color: #CD5555">&quot;qxmlstreamwriter&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qxmlstreamwriter.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/section&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;/toc&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;keywords&gt;</span> <span style="color: #228B22">&lt;!-- 该标签指定了索引, 这些关键字会显示在 Qt Assistant 的索引页面 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;keyword</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;qabstractanimation&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qabstractanimation.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/keyword&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;keyword</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;qabstractbutton&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qabstractbutton.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/keyword&gt;</span>
-            <span style="color: #228B22">&lt;!-- 省略了 N 多, 足有 500 个左右 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;keyword</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;qxmlstreamreader&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qxmlstreamreader.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/keyword&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;keyword</span> <span style="color: #658b00">name=</span><span style="color: #CD5555">&quot;qxmlstreamwriter&quot;</span> <span style="color: #658b00">ref=</span><span style="color: #CD5555">&quot;qxmlstreamwriter.html&quot;</span><span style="color: #8B008B; font-weight: bold">&gt;&lt;/keyword&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;/keywords&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;files&gt;</span> <span style="color: #228B22">&lt;!-- 该标签指定了实际的文件 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>qabstractanimation.html<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>qabstractbutton.html<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #228B22">&lt;!-- 省略了 N 多 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>images/alphafill.png<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>images/assistant-toolbar.png<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #228B22">&lt;!-- 省略了 N 多 --&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>_static/ajax-loader.gif<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>_static/basic.css<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>_sources/buffer_interface.txt<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #8B008B; font-weight: bold">&lt;file&gt;</span>_sources/build_system.txt<span style="color: #8B008B; font-weight: bold">&lt;/file&gt;</span>
-            <span style="color: #228B22">&lt;!-- 省略了 N 多 --&gt;</span>
-         <span style="color: #8B008B; font-weight: bold">&lt;/files&gt;</span>
-     <span style="color: #8B008B; font-weight: bold">&lt;/filterSection&gt;</span>
- <span style="color: #8B008B; font-weight: bold">&lt;/QtHelpProject&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+ <span class="nt">&lt;QtHelpProject</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;namespace&gt;</span>pyqt.doc<span class="nt">&lt;/namespace&gt;</span>
+     <span class="nt">&lt;virtualFolder&gt;</span>doc<span class="nt">&lt;/virtualFolder&gt;</span>
+     <span class="nt">&lt;filterSection&gt;</span>
+         <span class="nt">&lt;toc&gt;</span> <span class="c">&lt;!-- 该标签指定了目录, 这些关键字会显示在 Qt Assistant 的目录页面 --&gt;</span>
+            <span class="nt">&lt;section</span> <span class="na">title=</span><span class="s">&quot;qabstractanimation&quot;</span> <span class="na">ref=</span><span class="s">&quot;qabstractanimation.html&quot;</span><span class="nt">&gt;&lt;/section&gt;</span>
+            <span class="nt">&lt;section</span> <span class="na">title=</span><span class="s">&quot;qabstractbutton&quot;</span> <span class="na">ref=</span><span class="s">&quot;qabstractbutton.html&quot;</span><span class="nt">&gt;&lt;/section&gt;</span>
+            <span class="c">&lt;!-- 省略了 N 多, 足有 500 个左右 --&gt;</span>
+            <span class="nt">&lt;section</span> <span class="na">title=</span><span class="s">&quot;qxmlstreamreader&quot;</span> <span class="na">ref=</span><span class="s">&quot;qxmlstreamreader.html&quot;</span><span class="nt">&gt;&lt;/section&gt;</span>
+            <span class="nt">&lt;section</span> <span class="na">title=</span><span class="s">&quot;qxmlstreamwriter&quot;</span> <span class="na">ref=</span><span class="s">&quot;qxmlstreamwriter.html&quot;</span><span class="nt">&gt;&lt;/section&gt;</span>
+         <span class="nt">&lt;/toc&gt;</span>
+         <span class="nt">&lt;keywords&gt;</span> <span class="c">&lt;!-- 该标签指定了索引, 这些关键字会显示在 Qt Assistant 的索引页面 --&gt;</span>
+            <span class="nt">&lt;keyword</span> <span class="na">name=</span><span class="s">&quot;qabstractanimation&quot;</span> <span class="na">ref=</span><span class="s">&quot;qabstractanimation.html&quot;</span><span class="nt">&gt;&lt;/keyword&gt;</span>
+            <span class="nt">&lt;keyword</span> <span class="na">name=</span><span class="s">&quot;qabstractbutton&quot;</span> <span class="na">ref=</span><span class="s">&quot;qabstractbutton.html&quot;</span><span class="nt">&gt;&lt;/keyword&gt;</span>
+            <span class="c">&lt;!-- 省略了 N 多, 足有 500 个左右 --&gt;</span>
+            <span class="nt">&lt;keyword</span> <span class="na">name=</span><span class="s">&quot;qxmlstreamreader&quot;</span> <span class="na">ref=</span><span class="s">&quot;qxmlstreamreader.html&quot;</span><span class="nt">&gt;&lt;/keyword&gt;</span>
+            <span class="nt">&lt;keyword</span> <span class="na">name=</span><span class="s">&quot;qxmlstreamwriter&quot;</span> <span class="na">ref=</span><span class="s">&quot;qxmlstreamwriter.html&quot;</span><span class="nt">&gt;&lt;/keyword&gt;</span>
+         <span class="nt">&lt;/keywords&gt;</span>
+         <span class="nt">&lt;files&gt;</span> <span class="c">&lt;!-- 该标签指定了实际的文件 --&gt;</span>
+            <span class="nt">&lt;file&gt;</span>qabstractanimation.html<span class="nt">&lt;/file&gt;</span>
+            <span class="nt">&lt;file&gt;</span>qabstractbutton.html<span class="nt">&lt;/file&gt;</span>
+            <span class="c">&lt;!-- 省略了 N 多 --&gt;</span>
+            <span class="nt">&lt;file&gt;</span>images/alphafill.png<span class="nt">&lt;/file&gt;</span>
+            <span class="nt">&lt;file&gt;</span>images/assistant-toolbar.png<span class="nt">&lt;/file&gt;</span>
+            <span class="c">&lt;!-- 省略了 N 多 --&gt;</span>
+            <span class="nt">&lt;file&gt;</span>_static/ajax-loader.gif<span class="nt">&lt;/file&gt;</span>
+            <span class="nt">&lt;file&gt;</span>_static/basic.css<span class="nt">&lt;/file&gt;</span>
+            <span class="nt">&lt;file&gt;</span>_sources/buffer_interface.txt<span class="nt">&lt;/file&gt;</span>
+            <span class="nt">&lt;file&gt;</span>_sources/build_system.txt<span class="nt">&lt;/file&gt;</span>
+            <span class="c">&lt;!-- 省略了 N 多 --&gt;</span>
+         <span class="nt">&lt;/files&gt;</span>
+     <span class="nt">&lt;/filterSection&gt;</span>
+ <span class="nt">&lt;/QtHelpProject&gt;</span>
 </pre></div>
 
 
 <p><br>
-这个文件里面的内容太多了, 手写是不可能的&hellip;所以用写个脚本去生成这个文件比较靠谱, 脚本关键性代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># -*- coding: utf-8 -*-</span>
-<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
+这个文件里面的内容太多了, 手写是不可能的...所以用写个脚本去生成这个文件比较靠谱, 脚本关键性代码如下:</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-files=os.listdir(<span style="color: #CD5555">&#39;\site-packages\PyQt4\doc\html&#39;</span>)
-<span style="color: #8B008B; font-weight: bold">for</span> <span style="color: #658b00">file</span> <span style="color: #8B008B">in</span> files:
-    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">file</span> != <span style="color: #CD5555">&#39;make_qch.py&#39;</span>:
-        title_name = os.path.basename(<span style="color: #658b00">file</span>)
-        title_name = title_name.split(<span style="color: #CD5555">&#39;.&#39;</span>, <span style="color: #B452CD">1</span>)[<span style="color: #B452CD">0</span>]
-        <span style="color: #658b00">file</span> = <span style="color: #CD5555">&#39;&lt;section title=&quot;&#39;</span> + title_name + <span style="color: #CD5555">&#39;&quot; ref=&quot;&#39;</span> + <span style="color: #658b00">file</span> + <span style="color: #CD5555">&#39;&quot;&gt;&lt;/section&gt;&#39;</span>
-        <span style="color: #228B22"># file = &#39;&lt;keyword name=&quot;&#39; + title_name + &#39;&quot; ref=&quot;&#39; + file + &#39;&quot;&gt;&lt;/keyword&gt;&#39;</span>
-        <span style="color: #228B22"># file = &#39;&lt;file&gt;_sources/&#39; + file + &#39;&lt;/file&gt;&#39;</span>
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #658b00">file</span>
+<span class="n">files</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;\site-packages\PyQt4\doc\html&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">file</span> <span class="o">!=</span> <span class="s1">&#39;make_qch.py&#39;</span><span class="p">:</span>
+        <span class="n">title_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+        <span class="n">title_name</span> <span class="o">=</span> <span class="n">title_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">file</span> <span class="o">=</span> <span class="s1">&#39;&lt;section title=&quot;&#39;</span> <span class="o">+</span> <span class="n">title_name</span> <span class="o">+</span> <span class="s1">&#39;&quot; ref=&quot;&#39;</span> <span class="o">+</span> <span class="nb">file</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&lt;/section&gt;&#39;</span>
+        <span class="c1"># file = &#39;&lt;keyword name=&quot;&#39; + title_name + &#39;&quot; ref=&quot;&#39; + file + &#39;&quot;&gt;&lt;/keyword&gt;&#39;</span>
+        <span class="c1"># file = &#39;&lt;file&gt;_sources/&#39; + file + &#39;&lt;/file&gt;&#39;</span>
+        <span class="k">print</span> <span class="nb">file</span>
 </pre></div>
 
 
 <p><br>
 然后是用命令生成 <code>pyqtclassreference.qch</code> 文件:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>C:\Python27\Lib\site-packages\PyQt4\doc\html&gt;qhelpgenerator pyqtclassreference.qhp -o pyqtclassreference.qch
+<div class="highlight"><pre><span></span>C:\Python27\Lib\site-packages\PyQt4\doc\html&gt;qhelpgenerator pyqtclassreference.qhp -o pyqtclassreference.qch
 Building up file structure...
 Insert custom filters...
 Insert help data for filter section (1 of 1)...
@@ -133,7 +133,7 @@ C:\Python27\Lib\site-packages\PyQt4\doc\html&gt;
 
 <p><br>
 再把该 pyqtclassreference.qch 文件添加到 Qt Assistant 中就可以了 (编辑 -> 首选项), 下图是添加后的界面:</p>
-<p><img alt="" src="http://i64.tinypic.com/2rztls1.jpg" /></p>
+<p><img alt="" src="http://i64.tinypic.com/2rztls1.jpg"></p>
 <p>pyqtclassreference.qch 我也共享了一份生成好的: <a href="http://share.weiyun.com/52a4278e52ef50769583509dbbc76544">传送门</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 

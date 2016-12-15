@@ -54,83 +54,72 @@
 
 
     <p>由于 Python 的线程历史性原因, 所以在 PyQt 中还是推荐使用 Qt 的线程机制.</p>
-<div class="toc">
-<ul>
-<li><a href="#qthread">初识 QThread</a></li>
-<li><a href="#_1">线程间通信</a></li>
-<li><a href="#qt">Qt 的线程同步</a><ul>
-<li><a href="#_2">可用的类</a></li>
-<li><a href="#qmutex-qreadwriterlock">QMutex 与 QReadWriterLock</a></li>
-<li><a href="#qsemaphore">QSemaphore</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="qthread">初识 QThread</h1>
+<p>[TOC]</p>
+<h1>初识 QThread</h1>
 <p>Qt 使用 <code>QThread</code> 来管理线程, 首先我们要从 QThread 继承一个子类, 并重写它的 <code>run()</code> 方法, 我们可以认为, run() 方法就是线程需要执行的代码, 然后在需要的时候, 调用 QThread::start() 方法启动一个线程.
 最后, 还需要将 <code>QThread.deleteLater()</code> 方法与 <code>QThread.finished()</code> 信号连接起来, 以便当线程完成时, 系统可以帮我们清除线程实例.</p>
 <p>例如:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">WorkThread</span>(QThread):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__int__</span>(<span style="color: #658b00">self</span>):
-        <span style="color: #658b00">self</span>.finished.connect(<span style="color: #658b00">self</span>.deleteLater)
-        <span style="color: #658b00">super</span>(WorkThread, <span style="color: #658b00">self</span>).__init__()
+<span class="k">class</span> <span class="nc">WorkThread</span><span class="p">(</span><span class="n">QThread</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WorkThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">run</span>(<span style="color: #658b00">self</span>):
-        time.sleep(<span style="color: #B452CD">10</span>)
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-workThread = WorkThread()
-workThread.start()
+<span class="n">workThread</span> <span class="o">=</span> <span class="n">WorkThread</span><span class="p">()</span>
+<span class="n">workThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br>
 需要注意, 如果你在一个类的方法里 start 一个线程, 你需要将线程实例申明为类的属性, 否则, 当你调用完这个 start 线程的类方法后, 由于方法退出, 局部的线程实例被销毁, 就会报错: <code>QThread: Destroyed while thread is still running</code>.</p>
 <p>例如下面这样就会报错:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">word_start</span>(<span style="color: #658b00">self</span>):
-    workThread = WorkThread()
-    workThread.start()
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">word_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">workThread</span> <span class="o">=</span> <span class="n">WorkThread</span><span class="p">()</span>
+    <span class="n">workThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br>
 要改成:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">word_start</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #658b00">self</span>.workThread = WorkThread()
-    <span style="color: #658b00">self</span>.workThread.start()
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">word_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">workThread</span> <span class="o">=</span> <span class="n">WorkThread</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">workThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="_1">线程间通信</h1>
+<h1>线程间通信</h1>
 <p>在 Qt 中, 可以很方便的利用信号槽的机制在多线程间进行通信:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">time</span>
-<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">PyQt4.QtCore</span> <span style="color: #8B008B; font-weight: bold">import</span> pyqtSignal
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">pyqtSignal</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">WorkThread</span>(QThread):
-    sin_out = pyqtSignal()  <span style="color: #228B22"># 定义一个信号</span>
+<span class="k">class</span> <span class="nc">WorkThread</span><span class="p">(</span><span class="n">QThread</span><span class="p">):</span>
+    <span class="n">sin_out</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>  <span class="c1"># 定义一个信号</span>
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__int__</span>(<span style="color: #658b00">self</span>):
-        <span style="color: #658b00">self</span>.finished.connect(<span style="color: #658b00">self</span>.deleteLater)
-        <span style="color: #658b00">super</span>(WorkThread, <span style="color: #658b00">self</span>).__init__()
+    <span class="k">def</span> <span class="nf">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">WorkThread</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">run</span>(<span style="color: #658b00">self</span>):
-        time.sleep(<span style="color: #B452CD">10</span>)
-        <span style="color: #658b00">self</span>.sin_out.emit()  <span style="color: #228B22"># 发射信号</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sin_out</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>  <span class="c1"># 发射信号</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">on_output</span>():
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">u&#39;线程结束&#39;</span>
+<span class="k">def</span> <span class="nf">on_output</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s1">u&#39;线程结束&#39;</span>
 
-workThread = WorkThread()
-workThread.sin_out.connect(on_output)  <span style="color: #228B22"># 连接信号槽</span>
-workThread.start()
+<span class="n">workThread</span> <span class="o">=</span> <span class="n">WorkThread</span><span class="p">()</span>
+<span class="n">workThread</span><span class="o">.</span><span class="n">sin_out</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_output</span><span class="p">)</span>  <span class="c1"># 连接信号槽</span>
+<span class="n">workThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="qt">Qt 的线程同步</h1>
-<h3 id="_2">可用的类</h3>
+<h1>Qt 的线程同步</h1>
+<h3>可用的类</h3>
 <p>Qt 提供以下几个类来保证线程同步问题:</p>
 <ul>
 <li><strong>QMutex</strong> 提供相互排斥的锁, 或互斥量<ul>
@@ -148,11 +137,11 @@ workThread.start()
 <a href="http://www.cnblogs.com/NeuqUstcIim/archive/2008/08/02/1258871.html">Qt 多线程</a><br>
 <a href="http://www.cnblogs.com/findumars/p/5176046.html">Qt 线程同步</a></p>
 <p>具体的例子参考上面的资料和官方文档, 这里仅解释下重点感念.</p>
-<h3 id="qmutex-qreadwriterlock">QMutex 与 QReadWriterLock</h3>
-<p>如果使用 <strong>QMutex</strong>, 那么当一个线程对受保护的数据进行读的时候, 那么其它任何线程都不能对受保护的数据进行操作&hellip;</p>
+<h3>QMutex 与 QReadWriterLock</h3>
+<p>如果使用 <strong>QMutex</strong>, 那么当一个线程对受保护的数据进行读的时候, 那么其它任何线程都不能对受保护的数据进行操作...</p>
 <p>而使用 <strong>QReadWriterLock</strong>, 加了 <strong>QWriteLocker</strong> 的锁和 QMutex 效果一样, 不允许其它任何线程都不能对受保护的数据进行操作,因为我正在写数据内, 还没写完, 你读什么..<br>
-但是加了 <strong>QReadLocker</strong> 的锁就不一样了, 它允许其它也使用 <strong>QReadLocker</strong> 的线程对受保护的数据进行读取, 因为大家都是读嘛, 无所谓了, 却不允许使用 <strong>QWriteLocker</strong> 的线程对受保护的数据进行写入, 因为必须要我读完你才能写&hellip;</p>
-<h3 id="qsemaphore">QSemaphore</h3>
+但是加了 <strong>QReadLocker</strong> 的锁就不一样了, 它允许其它也使用 <strong>QReadLocker</strong> 的线程对受保护的数据进行读取, 因为大家都是读嘛, 无所谓了, 却不允许使用 <strong>QWriteLocker</strong> 的线程对受保护的数据进行写入, 因为必须要我读完你才能写...</p>
+<h3>QSemaphore</h3>
 <p>QSemaphore (信号量)支持两个基本是函数, acquire() 和 release()</p>
 <ul>
 <li>acquire(n): 尝试获取 n 个资源, 如果没有足够的可用资源, 这个调用将阻塞, 直到足够的资源可用</li>
@@ -163,51 +152,51 @@ workThread.start()
 <p>假设有一个餐厅, 信号量的初始值为餐厅凳子总数目, 当有客人到，他就需要凳子, 当凳子被坐下, 可用的凳子数就减少, 当客人离开, 可用的凳子数就增加, 就允许更多的人进入, 如果有 10 个人需要凳子, 但是只有 9 张凳子, 那么这 10 个人将等待, 如果有 4 个人需要凳子, 他们可以直接坐下 (这样就只剩下 5 张凳子空着，那 10 个人将等得更久), 这就类似 <strong>QSemaphore</strong> 的概念.</p>
 <p>信号量的一个典型的应用就是用来控制缓冲区的读写,下面通过一个典型用例: 生产者和消费者, 来实现这二者之间的同步.</p>
 <p>这里就不用 Python 代码了, 上一份别人的 C++ 代码: <a href="http://www.cnblogs.com/venow/archive/2012/10/15/2724943.html">Qt 信号量 QSemaphore</a></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;QtCore/QCoreApplication&gt;</span><span style="color: #1e889b"></span>
-<span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;QSemaphore&gt;</span><span style="color: #1e889b"></span>
-<span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;QThread&gt;</span><span style="color: #1e889b"></span>
-<span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;iostream&gt;</span><span style="color: #1e889b"></span>
-<span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;QTime&gt;</span><span style="color: #1e889b"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;QtCore/QCoreApplication&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;QSemaphore&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;QThread&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;QTime&gt;</span><span class="cp"></span>
 
-<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #a7a7a7; font-weight: bold">int</span> DataSize = <span style="color: #B452CD">100</span>;
-<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #a7a7a7; font-weight: bold">int</span> BufferSize = <span style="color: #B452CD">1</span>;
-<span style="color: #a7a7a7; font-weight: bold">char</span> buffer[BufferSize];
+<span class="k">const</span> <span class="kt">int</span> <span class="n">DataSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">BufferSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BufferSize</span><span class="p">];</span>
 
-QSemaphore <span style="color: #008b45">freeSpace</span>(BufferSize);
-QSemaphore <span style="color: #008b45">usedSpace</span>(<span style="color: #B452CD">0</span>);  <span style="color: #228B22">// 必须要用 0, 因为要和 freeSpace 共用信号, 也就是说当 freeSpace - 1 时则 usedSpace + 1, 具体看下面的详细分析</span>
+<span class="n">QSemaphore</span> <span class="nf">freeSpace</span><span class="p">(</span><span class="n">BufferSize</span><span class="p">);</span>
+<span class="n">QSemaphore</span> <span class="nf">usedSpace</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">// 必须要用 0, 因为要和 freeSpace 共用信号, 也就是说当 freeSpace - 1 时则 usedSpace + 1, 具体看下面的详细分析</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Producer</span> : <span style="color: #8B008B; font-weight: bold">public</span> QThread {
-<span style="color: #8B008B; font-weight: bold">protected</span>:
-    <span style="color: #a7a7a7; font-weight: bold">void</span> run() {
-        qsrand(QTime(<span style="color: #B452CD">0</span>, <span style="color: #B452CD">0</span>, <span style="color: #B452CD">0</span>).secsTo(QTime::currentTime()));
-        qsrand(<span style="color: #658b00">NULL</span>);
-        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; DataSize; ++i) {
-            freeSpace.acquire();
-            std::cerr&lt;&lt;<span style="color: #CD5555">&quot;P&quot;</span>;
-            usedSpace.release();
-        }
-    }
-};
+<span class="k">class</span> <span class="nc">Producer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QThread</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">qsrand</span><span class="p">(</span><span class="n">QTime</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="n">secsTo</span><span class="p">(</span><span class="n">QTime</span><span class="o">::</span><span class="n">currentTime</span><span class="p">()));</span>
+        <span class="n">qsrand</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DataSize</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">freeSpace</span><span class="p">.</span><span class="n">acquire</span><span class="p">();</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&quot;P&quot;</span><span class="p">;</span>
+            <span class="n">usedSpace</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Consumer</span> : <span style="color: #8B008B; font-weight: bold">public</span> QThread {
-<span style="color: #8B008B; font-weight: bold">protected</span>:
-    <span style="color: #a7a7a7; font-weight: bold">void</span> run() {
-        <span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #a7a7a7; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; DataSize; ++i) {
-            usedSpace.acquire();
-            std::cerr&lt;&lt;<span style="color: #CD5555">&quot;C&quot;</span>;
-            freeSpace.release();
-        }
-        std::cerr&lt;&lt;std::endl;
-    }
-};
+<span class="k">class</span> <span class="nc">Consumer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QThread</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DataSize</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">usedSpace</span><span class="p">.</span><span class="n">acquire</span><span class="p">();</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&quot;C&quot;</span><span class="p">;</span>
+            <span class="n">freeSpace</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 
-<span style="color: #a7a7a7; font-weight: bold">int</span> <span style="color: #008b45">main</span>(<span style="color: #a7a7a7; font-weight: bold">int</span> argc, <span style="color: #a7a7a7; font-weight: bold">char</span> *argv[]) {
-    Producer producer;
-    Consumer consumer;
-    producer.start();
-    consumer.start();
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
-}
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">Producer</span> <span class="n">producer</span><span class="p">;</span>
+    <span class="n">Consumer</span> <span class="n">consumer</span><span class="p">;</span>
+    <span class="n">producer</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+    <span class="n">consumer</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -223,7 +212,7 @@ QSemaphore <span style="color: #008b45">usedSpace</span>(<span style="color: #B4
 <ul>
 <li>step1: <code>usedSpace.acquire()</code> 从 usedSpace 获取一个可用信号, 由于我们开始是用 0 来初始化的 usedSpace, 所以必须等到上面 producer 执行一次第三步, 就也是为什么 usedSpace 要用 0 来初始化的原因</li>
 <li>step2: 输出 C</li>
-<li>step3: <code>freeSpace.release()</code> 释放 freeSpace 的信号, 于是上面 producer 中的第四步从阻塞中获救了&hellip;</li>
+<li>step3: <code>freeSpace.release()</code> 释放 freeSpace 的信号, 于是上面 producer 中的第四步从阻塞中获救了...</li>
 <li>step4: 回到 for 循环首, <code>usedSpace.acquire()</code> 由于第一步已经获取了一个信号, 所以现在阻塞住了, 它必须要等到上面 producer 再走到第三步释放 usedSpace</li>
 </ul>
 <p>我们重新按照 producer、consumer 各自执行一次的顺序理下这个过程:</p>
@@ -248,7 +237,7 @@ QSemaphore <span style="color: #008b45">usedSpace</span>(<span style="color: #B4
 <br><br>
 重复这个过程 . . .</li>
 </ul>
-<p><img alt="" src="http://i65.tinypic.com/2yn1cad.jpg" /></p>
+<p><img alt="" src="http://i65.tinypic.com/2yn1cad.jpg"></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 
 </p>

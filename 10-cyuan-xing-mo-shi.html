@@ -60,7 +60,7 @@
 <p>浅拷贝：就是给对象中的每个成员变量进行复制, 就是把A1类中的变量直接赋给A2类中变量, 属于值传递, 但是涉及到有指针类型的成为, 它们指向的是同一块内存. 这就出现了问题：当B把内存释放了（如：析构）, 这时A内的指针就是野指针了, 出现运行错误.</p>
 <p>深拷贝：就是不仅使用值传递, 而是要每个变量都有自己一份独立的内存空间, 互不干扰.</p>
 <p>原型模式 UML 类图:</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/142332127612297.jpg"><img alt="原型模式" src="http://images.cnitblog.com/blog/723444/201502/142332134178695.jpg" /></a></p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/142332127612297.jpg"><img alt="原型模式" src="http://images.cnitblog.com/blog/723444/201502/142332134178695.jpg"></a></p>
 <p>以下代码摘自: <a href="http://www.jellythink.com/archives/105">《C++设计模式——原型模式》</a></p>
 <p>[cpp]
 /<em>
@@ -69,7 +69,7 @@
 <strong> Date         : 2013/11/25
 </strong> Description  : More information, please go to http://www.jellythink.com
 </em>/</p>
-<h1 id="include">include <iostream></h1>
+<h1>include <iostream></h1>
 <p>using namespace std;</p>
 <p>//接口
 class Prototype
@@ -77,7 +77,7 @@ class Prototype
 public :
     Prototype(){}
     virtual ~Prototype(){}</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>virtual Prototype * Clone() = 0;
+<div class="highlight"><pre><span></span>virtual Prototype * Clone() = 0;
 </pre></div>
 
 
@@ -88,7 +88,7 @@ class ConcretePrototype : public Prototype
 public :
     ConcretePrototype():m_counter(0){}
     virtual ~ConcretePrototype(){}</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>//拷贝构造函数
+<div class="highlight"><pre><span></span>//拷贝构造函数
 ConcretePrototype( const ConcretePrototype &amp; rhs)
 {
     m_counter = rhs .m_counter;
@@ -110,7 +110,7 @@ virtual ConcretePrototype * Clone()
 {
     //生成对像
     ConcretePrototype * conProA = new ConcretePrototype ();</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>//复制自身
+<div class="highlight"><pre><span></span>//复制自身
 ConcretePrototype * conProB = conProA-&gt;Clone();
 
 delete conProA;
@@ -125,10 +125,10 @@ return 0;
 
 <p>}
 [/cpp]</p>
-<h5 id="_1">常用场景</h5>
+<h5>常用场景</h5>
 <p>基本就是需要从A的实例得到一份与A内容相同, 但是又互不干扰的实例的话, 就需要使用原型模式.</p>
 <p>举例说明(可能是错的..):</p>
-<p>我们玩游戏打副本时, 有的游戏会这么设计, 在进副本前保存当前的人物状态, 然后打完副本后恢复前进副本前的状态, 此时是不是就可以应用原型模式? 进副本前复制一个当前角色的实例, 然后进副本后用复制出来的新实例来维护角色, 退出副本时又使用旧的实例&hellip;
+<p>我们玩游戏打副本时, 有的游戏会这么设计, 在进副本前保存当前的人物状态, 然后打完副本后恢复前进副本前的状态, 此时是不是就可以应用原型模式? 进副本前复制一个当前角色的实例, 然后进副本后用复制出来的新实例来维护角色, 退出副本时又使用旧的实例...
 00l</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 

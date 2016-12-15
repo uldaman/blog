@@ -53,28 +53,12 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#1">1. 概述</a></li>
-<li><a href="#2">2. 语法说明</a><ul>
-<li><a href="#21-lua-redis">2.1 Lua 调用 Redis 命令</a></li>
-<li><a href="#22">2.2 返回值</a></li>
-<li><a href="#23-lua">2.3 调用 Lua 脚本</a><ul>
-<li><a href="#231-eval">2.3.1 EVAL 命令</a></li>
-<li><a href="#231-evalsha">2.3.1 EVALSHA 命令</a></li>
-<li><a href="#232">2.3.2</a></li>
-<li><a href="#redis-lua">Redis 中可用的 Lua 库</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="1">1. 概述</h1>
+    <p>[TOC]</p>
+<h1>1. 概述</h1>
 <p>Redis 从 2.6 版本开始在服务器内部嵌入了一个 Lua 解释器, 使得用户在服务器端执行 Lua 脚本.</p>
 <ul>
 <li>
-<p>使用脚本可以直接在服务器端执行 Redis 命令, 并且一般的数据处理操作可以直接使用 Lua 脚本来完成 (不必再先从服务端查询数据, 然后让客户端进行处理, 最后又返回给服务端), 相当于为 Redis <strong>自定义了新&rdquo;命令&rdquo;</strong></p>
+<p>使用脚本可以直接在服务器端执行 Redis 命令, 并且一般的数据处理操作可以直接使用 Lua 脚本来完成 (不必再先从服务端查询数据, 然后让客户端进行处理, 最后又返回给服务端), 相当于为 Redis <strong>自定义了新"命令"</strong></p>
 </li>
 <li>
 <p>所有脚本都是以__事务__的形式来执行的, 脚本在执行过程中不会被其他工作打断, 也不会引起任何竞争条件, 完全可以使用 Lua 脚本来代替事务</p>
@@ -84,37 +68,37 @@
 </li>
 </ul>
 <p><strong>需求分析:</strong><br>
-我们希望的 Redis 提供一个 &ldquo;RATELIM ITING&rdquo; 命令用来实现访问频率限制功能, 这个命令只需要我们提供键名、时间限制和在时间限制内最多访问的次数三个参数就可以直接返回访问频率是否超限!</p>
+我们希望的 Redis 提供一个 "RATELIM ITING" 命令用来实现访问频率限制功能, 这个命令只需要我们提供键名、时间限制和在时间限制内最多访问的次数三个参数就可以直接返回访问频率是否超限!</p>
 <p>然而可惜的是 Redis 并没有提供这个命令, 不过我们可以使用 Redis 脚本功能自己定义新的命令, 代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">local</span> times = redis.call(<span style="color: #CD5555">&#39;incr&#39;</span>, KEYS[<span style="color: #B452CD">1</span>])
-<span style="color: #8B008B; font-weight: bold">if</span> times == <span style="color: #B452CD">1</span> <span style="color: #8B008B; font-weight: bold">then</span>
-    <span style="color: #228B22">-- KEYS[1]键刚创建, 所以为其设置生存时间</span>
-    redis.call(<span style="color: #CD5555">&#39;expire&#39;</span>, KEYS[<span style="color: #B452CD">1</span>], ARGV[<span style="color: #B452CD">1</span>])
-<span style="color: #8B008B; font-weight: bold">end</span>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">times</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">incr&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">times</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
+    <span class="c1">-- KEYS[1]键刚创建, 所以为其设置生存时间</span>
+    <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">expire&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">end</span>
 
-<span style="color: #8B008B; font-weight: bold">if</span> times <span style="color: #a61717; background-color: #e3d2d2">＞</span> <span style="color: #658b00">tonumber</span>(ARGV[<span style="color: #B452CD">2</span>]) <span style="color: #8B008B; font-weight: bold">then</span>
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>
-<span style="color: #8B008B; font-weight: bold">end</span>
+<span class="k">if</span> <span class="n">times</span> <span class="err">＞</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">0</span>
+<span class="k">end</span>
 
-<span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">1</span>
+<span class="k">return</span> <span class="mi">1</span>
 </pre></div>
 
 
 <p><br>
-这个功能就已经实现了&hellip;, 先不分析具体代码, 看看怎么使用它.</p>
+这个功能就已经实现了..., 先不分析具体代码, 看看怎么使用它.</p>
 <p>首先把这段代码存为 <strong>ratelimiting.lua</strong>, 然后在命名行中输入:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>redis-cli --eval /path/ratelimiting.lua rateKey , 10 3
+<div class="highlight"><pre><span></span>redis-cli --eval /path/ratelimiting.lua rateKey , 10 3
 </pre></div>
 
 
-<p>其中 <strong>&ndash;eval</strong> 参数是告诉 redis-cli 读取并运行后面的 Lua 脚本, <strong>/path/ratelimiting.lua</strong> 是 ratelimiting.lua 文件的位置, 后面跟着的是传给 Lua 脚本的参数, 其中 &ldquo;,&rdquo; 前的 <strong>rate.Key</strong> 是要操作的键, 可以在脚本中使用 <strong>KEYS[1]</strong> 获取, &ldquo;,&rdquo; 后面的 10 和 3 是参数, 在脚本中能够使用 <strong>ARGV[1] __和 __ARGV[2]</strong> 获得.</p>
+<p>其中 <strong>--eval</strong> 参数是告诉 redis-cli 读取并运行后面的 Lua 脚本, <strong>/path/ratelimiting.lua</strong> 是 ratelimiting.lua 文件的位置, 后面跟着的是传给 Lua 脚本的参数, 其中 "," 前的 <strong>rate.Key</strong> 是要操作的键, 可以在脚本中使用 <strong>KEYS[1]</strong> 获取, "," 后面的 10 和 3 是参数, 在脚本中能够使用 <strong>ARGV[1] __和 __ARGV[2]</strong> 获得.</p>
 <p>结合脚本的内容可知这行命令的作用就是将访问频率限制为每 10 秒最多 3 次, 所以在终端中不断地运行此命令会发现当访问频率在 10 秒内小于或等于 3 次时返回 1, 否则返回 0.</p>
-<p><strong>注意</strong> 上面的命令中 &ldquo;,&rdquo; 两边的空格不能省略, 否则会出错.</p>
-<h1 id="2">2. 语法说明</h1>
-<h2 id="21-lua-redis">2.1 Lua 调用 Redis 命令</h2>
+<p><strong>注意</strong> 上面的命令中 "," 两边的空格不能省略, 否则会出错.</p>
+<h1>2. 语法说明</h1>
+<h2>2.1 Lua 调用 Redis 命令</h2>
 <p>可以使用 <strong>redis.call()</strong> 及 <strong>redis.pcall()</strong> 调用 Redis 命令, 就像这样:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>redis.call(<span style="color: #CD5555">&#39;set&#39;</span>, <span style="color: #CD5555">&#39;foo&#39;</span>, <span style="color: #CD5555">&#39;bar&#39;</span>)
-<span style="color: #8B008B; font-weight: bold">local</span> value = redis.call(<span style="color: #CD5555">&#39;get&#39;</span>, <span style="color: #CD5555">&#39;foo&#39;</span>) <span style="color: #228B22">-- value 的值为 bar</span>
+<div class="highlight"><pre><span></span><span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">set&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">foo&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">bar&#39;</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">get&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">foo&#39;</span><span class="p">)</span> <span class="c1">-- value 的值为 bar</span>
 </pre></div>
 
 
@@ -144,34 +128,34 @@
 </tr>
 <tr>
 <td>状态回复</td>
-<td>Table (只有一个 &ldquo;ok&rdquo; Key )</td>
+<td>Table (只有一个 "ok" Key )</td>
 </tr>
 <tr>
 <td>错误回复</td>
-<td>Table (只有一个 &ldquo;err&rdquo; Key)</td>
+<td>Table (只有一个 "err" Key)</td>
 </tr>
 </tbody>
 </table>
 <p>空结果比较特殊, 其对应 Lua 的 false.</p>
-<h2 id="22">2.2 返回值</h2>
+<h2>2.2 返回值</h2>
 <p>在很多情况下都需要脚本可以返回值, 比如前面的访问频率限制脚本会返回访问频率是否超限. 在脚本中可以使用 <strong>return</strong> 语句将值返回给客户端, 如果没有执行 <strong>return</strong> 语句则默认返回 <strong>nil</strong>.</p>
 <p>在返回时, 它也会遵照 2.1 中表格的转换规则.</p>
-<h2 id="23-lua">2.3 调用 Lua 脚本</h2>
-<h3 id="231-eval">2.3.1 EVAL 命令</h3>
-<p>笔记开头, 在 redis-cli 启动时通过 <strong>&ndash;eval</strong> 参数调用了一次脚本.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>redis-cli --eval /path/ratelimiting.lua rateKey , 10 3
+<h2>2.3 调用 Lua 脚本</h2>
+<h3>2.3.1 EVAL 命令</h3>
+<p>笔记开头, 在 redis-cli 启动时通过 <strong>--eval</strong> 参数调用了一次脚本.</p>
+<div class="highlight"><pre><span></span>redis-cli --eval /path/ratelimiting.lua rateKey , 10 3
 </pre></div>
 
 
 <p>其实, 在 Redis 中提供了 <strong>EVAL</strong> 命令可以使开发者像调用其他 Redis 内置命令一样调用脚本, 格式如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>EVAL script numkeys key [key ...] arg [arg ...]
+<div class="highlight"><pre><span></span>EVAL script numkeys key [key ...] arg [arg ...]
 </pre></div>
 
 
 <ul>
 <li>script 参数是要执行的 Lua 脚本<ul>
 <li>可以是一个 Lua 字符串, 如:<ul>
-<li>&ldquo;return redis.call(&lsquo;set&rsquo;, KEYS[1], &lsquo;bar&rsquo;)&rdquo;</li>
+<li>"return redis.call('set', KEYS[1], 'bar')"</li>
 </ul>
 </li>
 <li>可以是一个 Lua 脚本文件<ul>
@@ -194,18 +178,18 @@
 </li>
 </ul>
 <p>之所以这么设置, 是为了以后操作集群, 暂时先强记着, 后面用到集群时再单独分析.</p>
-<h3 id="231-evalsha">2.3.1 EVALSHA 命令</h3>
+<h3>2.3.1 EVALSHA 命令</h3>
 <p>任何 Lua 脚本, 只要被 EVAL 命令执行过一次, 就会被储存到服务器的脚本缓存里面, 用户只要通过
 EVALSHA 命令, 指定被缓存脚本的 <strong>SHA1</strong> 值, 就可以在不发送脚本的情况下, 再次执行脚本:</p>
 <p>假设已知一个 SHA1 值:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>EVALSHA sha1 numkeys key [key ...] arg [arg ...]
+<div class="highlight"><pre><span></span>EVALSHA sha1 numkeys key [key ...] arg [arg ...]
 </pre></div>
 
 
 <p>那怎么获取 SHA 值呢? 看 2.3.2</p>
-<h3 id="232">2.3.2</h3>
+<h3>2.3.2</h3>
 <ul>
-<li>SCRIPT EXISTS sha1 [sha1 &hellip;]<ul>
+<li>SCRIPT EXISTS sha1 [sha1 ...]<ul>
 <li>检查 sha1 值所代表的脚本是否已经被加入到脚本缓存里面, 是的话返回 1 , 不是的话返回 0</li>
 </ul>
 </li>
@@ -226,7 +210,7 @@ EVALSHA 命令, 指定被缓存脚本的 <strong>SHA1</strong> 值, 就可以在
 </li>
 </ul>
 <p><strong>SCRIPT LOAD 结合 EVALSHA</strong></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>SCRIPT LOAD &quot;return &#39;hello moto&#39;&quot;
+<div class="highlight"><pre><span></span>SCRIPT LOAD &quot;return &#39;hello moto&#39;&quot;
 &quot;232fd51614574cf0867b83d384a5e898cfd24e5a&quot;
 
 EVALSHA &quot;232fd51614574cf0867b83d384a5e898cfd24e5a&quot; 0
@@ -234,7 +218,7 @@ EVALSHA &quot;232fd51614574cf0867b83d384a5e898cfd24e5a&quot; 0
 </pre></div>
 
 
-<h3 id="redis-lua">Redis 中可用的 Lua 库</h3>
+<h3>Redis 中可用的 Lua 库</h3>
 <p>Redis 在 Lua 环境里面载入了一些常用的函数库, 我们可以使用这些函数库, 直接在脚本里面处理数据, 它们分别是</p>
 <p>标准库:</p>
 <ul>
@@ -250,7 +234,7 @@ EVALSHA &quot;232fd51614574cf0867b83d384a5e898cfd24e5a&quot; 0
 <li>cjson 库: 将 Lua 值转换为 JSON 对象, 或者将 JSON 对象转换为 Lua 值</li>
 <li>cmsgpack 库: 将 Lua 值编码为 MessagePack 格式, 或者从 MessagePack 格式里面解码出 Lua</li>
 <li>redis.sha1hex: 这是一个函数, 不是库, 用来计算 sha 值<ul>
-<li>eval &lsquo;return redis.sha1hex(ARGV[1])&rsquo; 1 &ldquo;foo&rdquo;</li>
+<li>eval 'return redis.sha1hex(ARGV[1])' 1 "foo"</li>
 </ul>
 </li>
 </ul>

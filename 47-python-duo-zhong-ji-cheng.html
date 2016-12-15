@@ -53,39 +53,39 @@
 </h6>
 
 
-    <p>最近在使用 Python 多重继承的时候, 发现没有继承到第二个类的成员, 查了查资料, 还来是 super 搞的鬼&hellip;</p>
+    <p>最近在使用 Python 多重继承的时候, 发现没有继承到第二个类的成员, 查了查资料, 还来是 super 搞的鬼...</p>
 <p>super(TYPE, self).method 调用的是 mro 列表中第一个, 也即继承列表第一个类的方法, 改成 old_style 式的调用父类构造函数问题就解决了, 最终得出个结论:</p>
 <p>如果使用了多重继承, 那么最好使用 old_style, 否则使用 new_style (即 super), 但是不幸的是, 如果你需要在 new_style 中使用多重继承, 那么推荐用 GOF 里的组合模式来代替多重继承.</p>
 <p>参考资料: <a href="http://blog.ptsang.net/constructors_with_different_arguments_in_python_multiinheri_class">Python多重继承的异构构造器</a></p>
 <p>下面为资料原文:</p>
-<h1 id="what">What</h1>
+<h1>What</h1>
 <p>在 Python 里面, 如果你使用上 Qt、SQLAlchemy、Twisted 之类各种大型类库时候, 有时候多重继承 Multiple Inheritance 是个简单的解决方法, 但是多重继承的复杂性总容易造成误解和疑惑.</p>
-<p>一般&rdquo;常识&rdquo;说, 使用 super 访问父类的属性/方法, 这种说法在多重继承里面是不成立的, 多重继承的类并没有父类的概念 (There is no superclass in a MI world). 类似的博客在过去几年被人写了无数遍了, 因为过去版本里面 python 官方文档对 super 的解释非常有限而且有误导解释, 直到 2.6 以后的文档, 才详细说明了 super 在单继承和多继承的两种不同工作方式. 当时苦逼的程序员甚至不得不去翻看 Python 源码才搞清楚是什么回事. 以致几年来很多人对 python 的多重继承保持怀疑态度.</p>
+<p>一般"常识"说, 使用 super 访问父类的属性/方法, 这种说法在多重继承里面是不成立的, 多重继承的类并没有父类的概念 (There is no superclass in a MI world). 类似的博客在过去几年被人写了无数遍了, 因为过去版本里面 python 官方文档对 super 的解释非常有限而且有误导解释, 直到 2.6 以后的文档, 才详细说明了 super 在单继承和多继承的两种不同工作方式. 当时苦逼的程序员甚至不得不去翻看 Python 源码才搞清楚是什么回事. 以致几年来很多人对 python 的多重继承保持怀疑态度.</p>
 <p>Python 多重继承使用 Method Resolution Order 的动态算法来解决一个方法名的调用顺序, mro 其实说来简单, 就是一个深度优先的继承列表, 很易理解, 但随之来的是遇到互不相同的构造器 __init__ 参数的问题.</p>
 <p>Codepad运行结果: <a href="http://codepad.org/qQNiMzBl">http://codepad.org/qQNiMzBl</a></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">A</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> % arg1
-        <span style="color: #658b00">super</span>(A, <span style="color: #658b00">self</span>).__init__()
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in A, with arg1 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">arg1</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">B</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1, arg2):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> % (arg1, arg2)
-        <span style="color: #658b00">super</span>(B, <span style="color: #658b00">self</span>).__init__(arg1)
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in B, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">C</span>(B, A):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1, arg2):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> % (arg1, arg2)
-        <span style="color: #658b00">super</span>(C, <span style="color: #658b00">self</span>).__init__(arg1, arg2)
-        <span style="color: #8B008B; font-weight: bold">print</span> C.__mro__
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in C, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="n">__mro__</span>
 
-c = C(<span style="color: #CD5555">&quot;C&#39;s arg1&quot;</span>, <span style="color: #CD5555">&quot;C&#39;s arg2&quot;</span>)
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="s2">&quot;C&#39;s arg1&quot;</span><span class="p">,</span> <span class="s2">&quot;C&#39;s arg2&quot;</span><span class="p">)</span>
 </pre></div>
 
 
 <p><br>
 执行结果:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>init func in C, with arg1&#39;C&#39;s arg1&#39;, arg2 &#39;C&#39;s arg2&#39;
+<div class="highlight"><pre><span></span>init func in C, with arg1&#39;C&#39;s arg1&#39;, arg2 &#39;C&#39;s arg2&#39;
 init func in B, with arg1&#39;C&#39;s arg1&#39;, arg2 &#39;C&#39;s arg2&#39;
 init func in A, with arg1 &#39;C&#39;s arg1&#39;
 (&lt;class &#39;__main__.C&#39;&gt;, &lt;class &#39;__main__.B&#39;&gt;, &lt;class &#39;__main__.A&#39;&gt;, &lt;type &#39;object&#39;&gt;)
@@ -95,41 +95,41 @@ init func in A, with arg1 &#39;C&#39;s arg1&#39;
 <p><br>
 可见几个类的构造器的执行顺序正是 mro 列表的顺序. 重点是多重继承的各个类的构造器 __init__ 之所以能够执行, 是因为每个构造器里面都有一句 super()，这个 super 完成 mro 列表中下一个类的构造器的调用.</p>
 <p>这个事实听起来似乎很自然, 但看代码, B 的构造器还得必须知道 A 的构造器的参数？ B 需要知道自己将会被 C 同时继承 A, 并且调用 A 的构造？！！很荒谬, 但不幸的这是 mro 的特点. 代码是可以这么写, 但不应该, 为另一个不知道什么时候会被一起继承的类特地地写代码, 跟面对对象设计的解耦原则相违背.</p>
-<h1 id="how">How</h1>
+<h1>How</h1>
 <p>在 mro 方式的基础上, 这个问题是不可能有效解决的, 只能避免. 概括起来大概有这么两种方式.</p>
-<h3 id="1-super-mro">1. 使用传统类的方式, 显式调用被继承类的构造器, 避开 super 的 mro 自动化工作.</h3>
+<h3>1. 使用传统类的方式, 显式调用被继承类的构造器, 避开 super 的 mro 自动化工作.</h3>
 <p>Codepad 看运行效果: <a href="http://codepad.org/XCVdKCPm">http://codepad.org/XCVdKCPm</a></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">A</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in A, with arg1 &#39;%s&#39;&quot;</span> % arg1
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in A, with arg1 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">arg1</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">B</span>(<span style="color: #658b00">object</span>):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1, arg2):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in B, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> % (arg1, arg2)
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in B, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">C</span>(A, B):
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, arg1, arg2):
-        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&quot;init func in C, with arg1&#39;%s&#39;, arg2 &#39;%s&#39;&quot;</span> % (arg1, arg2)
-        <span style="color: #228B22"># super(C, self).__init__(arg1)  # 这两行</span>
-        A.__init__(<span style="color: #658b00">self</span>, arg1)  <span style="color: #228B22"># 等价</span>
-        B.__init__(<span style="color: #658b00">self</span>, arg1, arg2)
-        <span style="color: #8B008B; font-weight: bold">print</span> C.__mro__
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;init func in C, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="c1"># super(C, self).__init__(arg1)  # 这两行</span>
+        <span class="n">A</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">)</span>  <span class="c1"># 等价</span>
+        <span class="n">B</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="n">__mro__</span>
 
-c = C(<span style="color: #CD5555">&quot;C&#39;s arg1&quot;</span>, <span style="color: #CD5555">&quot;C&#39;s arg2&quot;</span>)
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="s2">&quot;C&#39;s arg1&quot;</span><span class="p">,</span> <span class="s2">&quot;C&#39;s arg2&quot;</span><span class="p">)</span>
 </pre></div>
 
 
 <p><br>
 注意 C 继承 A, B 的顺序已经改变.</p>
 <p>要排除一个容易产生的误解. Python 文档里面的 super 有个很显著的 Note: super() only works for new-style classes. super 只适用于新类. 但新类并不必须使用 super.</p>
-<p>直接调用被继承类的 __init__ 作为 unbound 方法调用, 需要指定一个实例, 如 self 作为参数, 依次调用各个被继承类. 缺点是如果这几个被继承类也在构造方法里面使用这样调用了同一个上级被继承类, 会出现&rdquo;爷爷类&rdquo;的构造方法被调用多次的情况.</p>
+<p>直接调用被继承类的 __init__ 作为 unbound 方法调用, 需要指定一个实例, 如 self 作为参数, 依次调用各个被继承类. 缺点是如果这几个被继承类也在构造方法里面使用这样调用了同一个上级被继承类, 会出现"爷爷类"的构造方法被调用多次的情况.</p>
 <p>如果一定使用 super, 要注意继承列表的顺序. super(TYPE, self).method 调用的是 mro 列表中第一个, 也即继承列表第一个类的方法.</p>
 <p>PyQt 里面的类内部一般 (未细究) 都使用 __init__ 的方式来初始化代码, 因而很多 PyQt 的例子代码都是使用 QtGui.QMainWindow.__init__(self) 这样的代码来初始化. 当然在单继承时候和 super 的写法是等价的, 但最好使用统一的原则:</p>
 <ul>
-<li>如果&rdquo;被继承类&rdquo;都使用 __init__，&rdquo;继承类&rdquo;就使用 __init__ 来初始化</li>
-<li>如果&rdquo;被继承类&rdquo;都使用 super，&rdquo;继承类&rdquo;就使用 super 来初始化</li>
+<li>如果"被继承类"都使用 __init__，"继承类"就使用 __init__ 来初始化</li>
+<li>如果"被继承类"都使用 super，"继承类"就使用 super 来初始化</li>
 </ul>
-<h3 id="2-composition-association-pattern-is-ahas-a">2. 使用 Composition / Association Pattern 的设计模式 (即&rsquo;Is-A&rsquo;转换成&rsquo;Has-A&rsquo;) 来实现相同功能, 避免多重继承.</h3>
+<h3>2. 使用 Composition / Association Pattern 的设计模式 (即'Is-A'转换成'Has-A') 来实现相同功能, 避免多重继承.</h3>
 <p>这个方法听起来未免有点让人不快 (破坏了原有设计思维) ，但实际上很可能这是更好的方式, 更清晰的代码, 尤其是要继承的类里面混合了使用 super、__init__ 两种初始化方式的时候.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

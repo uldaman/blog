@@ -53,23 +53,8 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#1">1. 预备</a></li>
-<li><a href="#2">2. 实验环境</a></li>
-<li><a href="#3-hadoop">3. Hadoop 生态圈</a></li>
-<li><a href="#4-hadoop">4. Hadoop 进程</a><ul>
-<li><a href="#41-namenode">4.1 NameNode</a></li>
-<li><a href="#42-secondary-namenode">4.2 Secondary NameNode</a></li>
-<li><a href="#43-datenode">4.3 DateNode</a></li>
-<li><a href="#44-jobtracker">4.4 JobTracker</a></li>
-<li><a href="#45-tasktracker">4.5 TaskTracker</a></li>
-</ul>
-</li>
-<li><a href="#5-cdh">5. CDH</a></li>
-</ul>
-</div>
-<h1 id="1">1. 预备</h1>
+    <p>[TOC]</p>
+<h1>1. 预备</h1>
 <p>使用 Hadoop 需要具体一些预备知识: Linux 和 Java;</p>
 <p>Linux 可以去看看《鸟哥的私房菜》, Java 不需要太过深入, 看看张孝祥的 《Java 就业培训》就好了.</p>
 <p><strong>OLTP</strong>: 联机事务处理, 是传统的关系型数据库的主要应用, 主要是基本的、日常的事务处理, 例如银行交易.</p>
@@ -79,20 +64,20 @@
 <p><strong>去 IEO</strong>: 它是阿里巴巴造出的概念, 其本意是, 在阿里巴巴的 IT 架构中, 去掉 IBM 的小型机、Oracle 数据库、EMC 存储设备, 代之以自己在开源软件基础上开发的系统;</p>
 <p>使用 Hadoop 也推崇这个概念, 毕竟 IEO 价格昂贵, 而 Hadoop 可以运行在廉价的 PC 机上.</p>
 <p>Hadoop 生产环境选型:</p>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop初识/集群选择.png" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop初识/集群选择.png"></p>
 <p>Hadoop 的大多思想都来源于 Google;</p>
 <p>Google 技术有三宝: <strong>GFS</strong>、<strong>MapReduce</strong> 和 <strong>BigTable</strong>! HDFS 的灵感就来自 GFS, 而 HBase 的灵感就是 BigTable, 当然也少不了 MapReduce.</p>
-<p><a href="http://blog.jobbole.com/71431/">Page Rank &ndash; 给每个网页评分</a>, 曾是 Google 发家致富的法宝, 是一套非常复杂的算法, 当 Google 收集的网页数量变得非常巨大后, 单台的服务器已经无法完成这个算法的运算, 于是 Google 推出了 <strong>Map-Reduce</strong> 的方法, 这套方法的中心思想就按某个依据将巨大/复杂的任务拆分、映射到多个服务器进行分布式计算, 最终将各个服务器的运算结果进行汇总.</p>
-<p><a href="http://blog.csdn.net/hguisu/article/details/7962350">倒排索引 &ndash; 解决全文搜索的问题</a></p>
-<h1 id="2">2. 实验环境</h1>
+<p><a href="http://blog.jobbole.com/71431/">Page Rank -- 给每个网页评分</a>, 曾是 Google 发家致富的法宝, 是一套非常复杂的算法, 当 Google 收集的网页数量变得非常巨大后, 单台的服务器已经无法完成这个算法的运算, 于是 Google 推出了 <strong>Map-Reduce</strong> 的方法, 这套方法的中心思想就按某个依据将巨大/复杂的任务拆分、映射到多个服务器进行分布式计算, 最终将各个服务器的运算结果进行汇总.</p>
+<p><a href="http://blog.csdn.net/hguisu/article/details/7962350">倒排索引 -- 解决全文搜索的问题</a></p>
+<h1>2. 实验环境</h1>
 <p>2.1. 条件允许, 可以搞台服务器, 装上 <strong>ESXI</strong>, 虚拟出几个服务器, 再通过 VMware Client 对其进行管理.</p>
 <p>2.2. 如果条件不允许, 可以在本机上用 VMware Workstation (或者 Virtualbox), 推荐虚拟出 3 台服务器, 一台用作 NameNode, 另两台用作 DataNode.</p>
-<p>2.3. 还可以在 Windows 上用 <strong>cygwin</strong> 虚拟出类 UNIX 环境, 不过不推荐这样做&hellip;</p>
+<p>2.3. 还可以在 Windows 上用 <strong>cygwin</strong> 虚拟出类 UNIX 环境, 不过不推荐这样做...</p>
 <p>我们使用 2.2 来进行实验, 参考我的一篇 wiki: <a href="http://wiki.smallcpp.com/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/%E6%90%AD%E5%BB%BA%20Hadoop%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.html">搭建 Hadoop 分布式实验环境</a></p>
 <blockquote>
 <p>如果使用 2.2 的话, 要去主板的 BIOS 中开启 VT 功能, 能很大的提高虚拟机性能.</p>
 </blockquote>
-<h1 id="3-hadoop">3. Hadoop 生态圈</h1>
+<h1>3. Hadoop 生态圈</h1>
 <p>这里仅介绍下几个重要的 Hadoop 子项目;</p>
 <ul>
 <li>Pig, 一种脚本语言, 目的是为了简化 MR 的编写</li>
@@ -103,36 +88,36 @@
 <blockquote>
 <p>以上仅为我个人理解, 现在对 Hadoop 接触不深, 可能理解有误, 以后再改进.</p>
 </blockquote>
-<h1 id="4-hadoop">4. Hadoop 进程</h1>
+<h1>4. Hadoop 进程</h1>
 <p>当 Hadoop 集群跑起来后, 它们产生一些守护进程 (就像在 Windows 系统下的服务一样), Hadoop 是 Java 开发的, 所以这些进程都是 Java 进程, 可以通过 <code>JPS</code> 查看.</p>
 <p>Hadoop 集群逻辑上分为两个节点: <strong>主节点 (Master)</strong>和<strong>从节点 (Slave)</strong>;</p>
 <p>Master 节点为运行着 <strong>NameNode</strong>、<strong>Secondary NameNode</strong> 及 <strong>JobTracker</strong> (<strong>ResourceManager</strong>) 节点的统称.</p>
 <p>Slave 节点为运行着 <strong>DataNode</strong> 及 <strong>TaskTracker</strong> (<strong>NodeManager</strong>) 节点的统称.</p>
-<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop初识/Hadoop集群.png" /></p>
+<p><img alt="" src="http://blog.smallcpp.com/theme/images/Hadoop初识/Hadoop集群.png"></p>
 <p>以下先简单介绍, 有个印象, 后续还会单独进行讲解.</p>
-<h2 id="41-namenode">4.1 NameNode</h2>
+<h2>4.1 NameNode</h2>
 <ul>
 <li>HDFS 的守护程序 (总控), 保存 Hadoop 集群的元数据.</li>
 <li>记录文件是怎么分块保存的.</li>
 <li>对内存和 I/O 进行集中管理.</li>
 </ul>
-<p>总之就是一个 &ldquo;老大&rdquo; 的角色, 在 Hadoop 1.x 中, NameNode 是<strong>单点</strong>的, 也就是说故障后则整个集群崩溃, 就算有 Secondary NameNode 做为替补, 但也要人工操作, 不能自动替换 (听说在 Hadoop 2.x 中已经支持自动切换了, 暂时没接触过, 还不敢确定).</p>
-<h2 id="42-secondary-namenode">4.2 Secondary NameNode</h2>
+<p>总之就是一个 "老大" 的角色, 在 Hadoop 1.x 中, NameNode 是<strong>单点</strong>的, 也就是说故障后则整个集群崩溃, 就算有 Secondary NameNode 做为替补, 但也要人工操作, 不能自动替换 (听说在 Hadoop 2.x 中已经支持自动切换了, 暂时没接触过, 还不敢确定).</p>
+<h2>4.2 Secondary NameNode</h2>
 <p>就是个 NameNode 的辅助程序, 或者说替补程序, 保存着 NameNode 元数据的快照, 当 NameNode 故障时, 可以用 Secondary NameNode 进行备用.</p>
-<h2 id="43-datenode">4.3 DateNode</h2>
+<h2>4.3 DateNode</h2>
 <p>数据节点守护程序, 简单的说就是 HDFS 保存数据的地方.</p>
-<h2 id="44-jobtracker">4.4 JobTracker</h2>
+<h2>4.4 JobTracker</h2>
 <p>位于 Master 上, 是MR 作业主处理程序, 负责拆分、映射作业到 TaskTracker.</p>
 <p>同 NameNode 一样, 它也是个<strong>单点</strong>进程.</p>
 <blockquote>
 <p>仅为 Hadoop 1.x 上的概念, Hadoop 2.x 上用 ResourceManager 替代了.</p>
 </blockquote>
-<h2 id="45-tasktracker">4.5 TaskTracker</h2>
+<h2>4.5 TaskTracker</h2>
 <p>位于 Slave 节点上, 管理各自的 Task.</p>
 <blockquote>
 <p>仅为 Hadoop 1.x 上的概念, Hadoop 2.x 上用 NodeManager 替代了.</p>
 </blockquote>
-<h1 id="5-cdh">5. CDH</h1>
+<h1>5. CDH</h1>
 <p>Hadoop 是一套开源框架, 许多公司都推出了各自版本的 Hadoop, 也有一些公司则围绕 Hadoop 开发产品; 在 Hadoop 生态体系中, 规模最大、知名度最高的公司则是 Cloudera (简称 CDH), 类似 Ubuntu 和 Linux 的关系.</p>
 <p>后续会对 CDH 进行单独的介绍, 这里仅为了解下是什么就可以了.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a>

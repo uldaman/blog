@@ -53,74 +53,74 @@
 </h6>
 
 
-    <h1 id="_1">带参数的信号/槽</h1>
+    <h1>带参数的信号/槽</h1>
 <p>首先看一个程序</p>
-<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg"></p>
 <p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)));&lt;/font&gt;
+<div class="highlight"><pre><span></span><span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span>connect(ui.verticalSlider_1, SIGNAL(valueChanged(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>)), ui.spinBox_1, SLOT(setValue(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>)));<span class="nt">&lt;/font&gt;</span>
 </pre></div>
 
 
 <p>实现功能的就是这句代码, 可以看到带参数的信号/槽要明确的在 connect 函数中<strong>写出参数的类型</strong>.</p>
-<hr />
-<h1 id="_2">自定义信号槽</h1>
+<hr>
+<h1>自定义信号槽</h1>
 <p>Qt 的信号槽机制并不仅仅是使用系统提供的那部分, 还会允许我们自己设计自己的信号和槽.</p>
 <p>看下面这段代码, 它实现了一个报纸类 <code>Newspaper</code>, 一个订阅者类 Reader, 当 <code>Newspaper</code>有了新的内容的时候, Reader 可以立即得到通知.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;!!! Qt5&lt;/span&gt;
-#include &lt;QObject&gt;
+<div class="highlight"><pre><span></span><span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>!!! Qt5<span class="nt">&lt;/span&gt;</span>
+#include <span class="nt">&lt;QObject&gt;</span>
 
-&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ newspaper.h&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; Newspaper
-    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; QObject {
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #808080&quot;</span><span class="nt">&gt;</span>/////////<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>/ newspaper.h<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Newspaper
+    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QObject {
     Q_OBJECT
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    Newspaper(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name) :
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+    Newspaper(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>const<span class="nt">&lt;/span&gt;</span> QString <span class="err">&amp;</span><span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name) :
         m_name(name) {
     }
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; send() {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> send() {
         emit newPaper(m_name);
     }
 
 signals:
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; newPaper(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;name);
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> newPaper(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>const<span class="nt">&lt;/span&gt;</span> QString <span class="err">&amp;</span><span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>name);
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
     QString m_name;
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ reader.h&lt;/span&gt;
-#include &lt;QObject&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
-&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;QDebug&gt;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #808080&quot;</span><span class="nt">&gt;</span>/////////<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>/ reader.h<span class="nt">&lt;/span&gt;</span>
+#include <span class="nt">&lt;QObject&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span>#include <span class="nt">&lt;/font&gt;&lt;/span&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;QDebug&gt;</span>
 
-&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; Reader
-    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; QObject {
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Reader
+    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QObject {
     Q_OBJECT
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
     Reader() {}
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; receiveNewspaper(&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; QString &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name) {
-        qDebug() &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Receives Newspaper: &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt; name;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> receiveNewspaper(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>const<span class="nt">&lt;/span&gt;</span> QString <span class="err">&amp;</span><span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name) {
+        qDebug() <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Receives Newspaper: <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span><span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name;
     }
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #808080&quot;&gt;/////////&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;/ main.cpp&lt;/span&gt;
-#include &lt;QCoreApplication&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #808080&quot;</span><span class="nt">&gt;</span>/////////<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>/ main.cpp<span class="nt">&lt;/span&gt;</span>
+#include <span class="nt">&lt;QCoreApplication&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
 
-&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;newspaper.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
-&lt;font face=&quot;M+ 1mn regular&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;reader.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
+<span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span>#include <span class="nt">&lt;/font&gt;&lt;/span&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>newspaper.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span>#include <span class="nt">&lt;/font&gt;&lt;/span&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>reader.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span>
 
-&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;argv[]) {
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> main(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> argc, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>char<span class="nt">&lt;/span&gt;</span> *<span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>argv[]) {
     QCoreApplication app(argc, argv);
 
-    Newspaper newspaper(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Newspaper A&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    Newspaper newspaper(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Newspaper A<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
     Reader reader;
-    QObject::connect(&lt;/span&gt;&amp;newspaper, &amp;Newspaper::newPaper, &amp;reader, &amp;&lt;/font&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt;&lt;span style=&quot;color: #000000&quot;&gt;Reader::receiveNewspaper);
+    QObject::connect(<span class="nt">&lt;/span&gt;</span><span class="err">&amp;</span>newspaper, <span class="err">&amp;</span>Newspaper::newPaper, <span class="err">&amp;</span>reader, <span class="err">&amp;</span><span class="nt">&lt;/font&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Reader::receiveNewspaper);
 
     newspaper.send();
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;&lt;font face=&quot;M+ 1mn regular&quot;&gt; app.exec();
-}&lt;/font&gt;&lt;/span&gt;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span> app.exec();
+}<span class="nt">&lt;/font&gt;&lt;/span&gt;</span>
 </pre></div>
 
 
@@ -135,8 +135,8 @@ moc 会读取标记了 Q_OBJECT 的头文件，生成以 moc_ 为前缀的文件
 Newspaper 类的 send() 函数比较简单, 只有一个语句 emit newPaper(m_name), emit 是 Qt 对 C++ 的扩展, 是一个关键字(其实也是一个宏), emit 的含义是发出, 也就是发出 newPaper() 信号, 感兴趣的接收者会关注这个信号.</p>
 <p>Reader 类更简单, 因为这个类需要接受信号, 所以我们将其继承了QObject, 并且添加了Q_OBJECT宏.
 与信号函数不同, 槽函数必须自己完成实现代码, <strong>槽函数就是普通的成员函数</strong>, 因此作为成员函数, 也会受到 public、private 等访问控制符的影响.</p>
-<hr />
-<h1 id="_3">总结一下自定义信号槽需要注意的事项:</h1>
+<hr>
+<h1>总结一下自定义信号槽需要注意的事项:</h1>
 <p>发送者和接收者都需要是 QObject的 子类;</p>
 <p>使用 signals 标记信号函数, 信号是一个函数声明, 返回 void, 不需要实现函数代码;</p>
 <p>槽函数是普通的成员函数, 作为成员函数, 会受到 public、private、protected 的影响;</p>

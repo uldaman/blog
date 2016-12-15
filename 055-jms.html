@@ -53,20 +53,11 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">概念</a></li>
-<li><a href="#activemq">ActiveMQ</a><ul>
-<li><a href="#_2">介绍</a></li>
-<li><a href="#_3">使用</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <blockquote>
 <p>我们仅了解下有这么个东西就行, 后面的 Kafka 才是我们要学的 (JMS 常用在 JavaEE 里, 而大数据领域多是用 Kafka).</p>
 </blockquote>
-<h1 id="_1">概念</h1>
+<h1>概念</h1>
 <p>JMS 即 Java 消息服务 (Java Message Service) 应用程序<strong>接口</strong>, 是一个 Java 平台中关于面向消息中间件 (MOM) 的 API, 用于在两个应用程序之间, 或分布式系统中发送消息, 进行异步通信. 它便于消息系统中的 Java 应用程序进行消息交换, 并且通过提供标准的产生、发送、接收消息的接口简化企业应用的开发. Java 消息服务是一个与具体平台无关的 API, 绝大多数 MOM 提供商都对 JMS 提供支持.</p>
 <p>JMS 由以下<strong>元素</strong>组成:</p>
 <ul>
@@ -80,8 +71,8 @@
 <li>JMS 队列: 一个容纳那些被发送的等待阅读的消息的区域. 与队列名字所暗示的意思不同, 消息的接受顺序并不一定要与消息的发送顺序相同. 一旦一个消息被阅读, 该消息将被从队列中移走.</li>
 <li>JMS 主题: 一种支持发送消息给多个订阅者的机制.</li>
 </ul>
-<h1 id="activemq">ActiveMQ</h1>
-<h2 id="_2">介绍</h2>
+<h1>ActiveMQ</h1>
+<h2>介绍</h2>
 <p>ActiveMQ 是一个完全支持 JMS 1.1 和 J2EE 1.4 规范的 JMS Provider 实现.</p>
 <blockquote>
 <p>目前比较流行的 4 个消息队列中间件产品: ActiveMQ、RabbitMQ、Kafka 和 Redis</p>
@@ -103,7 +94,7 @@
 <blockquote>
 <p>跟 redis 的消息队列差不多的概念.</p>
 </blockquote>
-<h2 id="_3">使用</h2>
+<h2>使用</h2>
 <p><a href="http://archive.apache.org/dist">ActiveMQ</a> 解压后, 配置文件在 <code>conf/activemq.xml</code> 下, 其中 <code>transportConnector</code> 标签定义了 ActiveMQ 的通信方式.</p>
 <blockquote>
 <p>客户端与代理 (Client-to-Broker) 之间的通信连接器称为传输连接器 (transport connectors), 用于接收和监听客户端的请求.</p>

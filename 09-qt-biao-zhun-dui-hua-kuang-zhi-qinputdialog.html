@@ -74,14 +74,14 @@
 <li>getItem (下拉)</li>
 </ul>
 <p>首先来看看 getText 函数：</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">PyQt4</span> <span style="color: #8B008B; font-weight: bold">import</span> QtGui
-QtGui.QInputDialog.getText(<span style="color: #658b00">self</span>, <span style="color: #CD5555">u&#39;提示&#39;</span>, <span style="color: #CD5555">u&#39;输入信息:&#39;</span>, QtGui.QLineEdit.Normal, <span style="color: #CD5555">u&quot;请输入你的信息...&quot;</span>)
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<span class="n">QtGui</span><span class="o">.</span><span class="n">QInputDialog</span><span class="o">.</span><span class="n">getText</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">u&#39;提示&#39;</span><span class="p">,</span> <span class="s1">u&#39;输入信息:&#39;</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLineEdit</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="s2">u&quot;请输入你的信息...&quot;</span><span class="p">)</span>
 </pre></div>
 
 
 <p><br>
 代码比较简单，使用 getText 函数就可以弹出一个可供用户输入的对话框:</p>
-<p><img alt="" src="http://i63.tinypic.com/w1qixt.jpg" /></p>
+<p><img alt="" src="http://i63.tinypic.com/w1qixt.jpg"></p>
 <p>另外, 该函数接收两个返回值:</p>
 <ul>
 <li>QString 用户输入的信息 (如果用户点击 cancel , 则该值为空)</li>

@@ -53,50 +53,42 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#vim-httpfs-envsh">vim httpfs-env.sh</a></li>
-<li><a href="#vim-core-sitexml">vim core-site.xml</a></li>
-<li><a href="#hdfs-sitexml">hdfs-site.xml</a></li>
-<li><a href="#namenode">重启 NameNode</a></li>
-<li><a href="#_1">测试</a></li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <p>要使用 rest 操作 HDFS, 需要先开启集群的 rest 服务.</p>
-<h1 id="vim-httpfs-envsh">vim httpfs-env.sh</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">export</span> <span style="color: #00688B">HTTPFS_HTTP_PORT</span>=14000
+<h1>vim httpfs-env.sh</h1>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">HTTPFS_HTTP_PORT</span><span class="o">=</span>14000
 </pre></div>
 
 
 <p><br></p>
-<h1 id="vim-core-sitexml">vim core-site.xml</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #228B22">&lt;!--可使用节点--&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>*<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #228B22">&lt;!--可使用用户组--&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>*<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
+<h1>vim core-site.xml</h1>
+<div class="highlight"><pre><span></span><span class="nt">&lt;property&gt;</span>
+    <span class="c">&lt;!--可使用节点--&gt;</span>
+    <span class="nt">&lt;name&gt;</span>hadoop.proxyuser.root.hosts<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;value&gt;</span>*<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+    <span class="c">&lt;!--可使用用户组--&gt;</span>
+    <span class="nt">&lt;name&gt;</span>hadoop.proxyuser.root.groups<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;value&gt;</span>*<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="hdfs-sitexml">hdfs-site.xml</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">&lt;property&gt;</span>
-    <span style="color: #228B22">&lt;!--启动 webhdfs--&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;name&gt;</span>dfs.webhdfs.enabled<span style="color: #8B008B; font-weight: bold">&lt;/name&gt;</span>
-    <span style="color: #8B008B; font-weight: bold">&lt;value&gt;</span>true<span style="color: #8B008B; font-weight: bold">&lt;/value&gt;</span>
-<span style="color: #8B008B; font-weight: bold">&lt;/property&gt;</span>
+<h1>hdfs-site.xml</h1>
+<div class="highlight"><pre><span></span><span class="nt">&lt;property&gt;</span>
+    <span class="c">&lt;!--启动 webhdfs--&gt;</span>
+    <span class="nt">&lt;name&gt;</span>dfs.webhdfs.enabled<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="namenode">重启 NameNode</h1>
+<h1>重启 NameNode</h1>
 <p>修改好配置文件后, 重新启动 NameNode:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>./stop-all.sh
+<div class="highlight"><pre><span></span>./stop-all.sh
 ./start-all.sh
 ./httpfs.sh start
 </pre></div>
@@ -104,7 +96,7 @@
 
 <p><br>
 最后一行就是启动集群的 rest 服务器.</p>
-<h1 id="_1">测试</h1>
+<h1>测试</h1>
 <p>执行命令 <code>curl -i "http://192.168.1.213:14000/webhdfs/v1?user.name=root&amp;op=LISTSTATUS"</code></p>
 <blockquote>
 <p>-i 表示显示 http response 的头信息, 连同网页代码一起.</p>

@@ -54,7 +54,7 @@
 <li>第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.</li>
 <li>第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.</li>
 <li>第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.</li>
-<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 ...</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 …</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -73,16 +73,9 @@
 <blockquote>
 <p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
 </blockquote>
-<div class="toc">
-<ul>
-<li><a href="#qt">初识 Qt 中的事件</a></li>
-<li><a href="#qt_1">深入 Qt 的事件</a></li>
-<li><a href="#event">event() 函数</a></li>
-<li><a href="#_1">事件过滤器</a></li>
-</ul>
-</div>
-<h1 id="qt">初识 Qt 中的事件</h1>
-<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>[TOC]</p>
+<h1>初识 Qt 中的事件</h1>
+<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说, 使用 Qt 组件时, 我们并不会把主要精力放在事件上, 因为在 Qt 中, 我们关心的更多的是事件关联的一个信号 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -99,18 +92,18 @@
 
 
 <blockquote>
-<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+<p>说明: 这些文章都是本人学习"devbean QT 学习之路2"的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
 </blockquote>
 <p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
-<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
-<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg"></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg"></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">void</span> Qt_Notepad::OpenFile() {
-    QString fileName = QFileDialog::getOpenFileName(<span style="color: #8B008B; font-weight: bold">this</span>, <span style="color: #CD5555">&quot;Open File&quot;</span>, <span style="color: #658b00">NULL</span>, <span style="color: #CD5555">&quot;file (*.*)&quot;</span>);
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Qt_Notepad</span><span class="o">::</span><span class="n">OpenFile</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">::</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&quot;Open File&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;file (*.*)&quot;</span><span class="p">);</span>
 
-    <span style="color: #8B008B; font-weight: bold">if</span> (!fileName.isEmpty()) {
-        QFile file;
-        file ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fileName</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QFile</span> <span class="n">file</span><span class="p">;</span>
+        <span class="n">file …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -139,7 +132,7 @@
 <li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
 <li><code>QPrintDialog</code>: 打印机配置;</li>
 <li><code>QPrintPreviewDialog</code>: 打印预览;</li>
-<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<li><code>QProgressDialog …</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -161,9 +154,9 @@
 
 <p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
-<h1 id="_1">模态对话框</h1>
+<h1>模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
-<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -180,10 +173,10 @@
 
 
 <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;</span> MyDialog : <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QDialog {
     Q_OBJECT
 
-&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<span class="nt">&lt;/span …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -199,21 +192,19 @@
 </h6>
 
 
-<div class="toc">
-<ul>
-<li><a href="#_1">添加资源</a></li>
-<li><a href="#action">添加 Action</a></li>
-</ul>
-</div>
-<h1 id="_1">添加资源</h1>
+<p>[TOC]</p>
+<h1>添加资源</h1>
 <p>Qt 资源系统是一个跨平台的资源机制, 用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部. 如果你的程序需要加载特定的资源(图标、文本翻译等), 那么, 将其放置在资源文件中, 就再也不需要担心这些文件的丢失. 也就是说, 如果你将资源以资源文件形式存储, 它是会编译到可执行文件内部.</p>
 <p>双击打VS项目文件中的.qrc文件打开资源编辑器.</p>
-<p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg" /></p>
-<p><img alt="" src="http://i62.tinypic.com/15f20s1.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg"></p>
+<p><img alt="" src="http://i62.tinypic.com/15f20s1.jpg"></p>
 <p>Add Prefix 添加前缀, 即上图的 /Demo .</p>
 <p>Add File 添加资源文件.</p>
-<p><img alt="" src="http://i60.tinypic.com/29vat06.jpg" /></p>
-<p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p><img alt="" src="http://i60.tinypic.com/29vat06.jpg"></p>
+<p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了.</p>
+<p><img alt="" src="http://i60.tinypic.com/24b0qc8.jpg"></p>
+<p>接下来为这个新添加的资源文件关联动作.</p>
+<h1>添加 …</h1><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -230,7 +221,7 @@
 
 
 <p>转自: <a href="http://www.devbean.net/">http://www.devbean.net/</a></p>
-<p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C ...</em></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>在使用标准 C++ 编译器编译 Qt 源程序之前，Qt 先使用一个叫做 moc（Meta Object Compiler，元对象编译器）的工具，先对 Qt 源代码进行一次预处理（<em>注意，这个预处理与标准 C++ 的预处理有所不同。Qt 的 moc 预处理发生在标准 C …</em></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -272,7 +263,7 @@
 ui.setupUi(this);
 connect(ui.pushButton_4, SIGNAL(clicked()), this, SLOT(On_Out()));
 connect(ui.pushButton_5, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_6, SIGNAL(clicked ...</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 

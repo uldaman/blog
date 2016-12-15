@@ -53,26 +53,21 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#1">1. 语言特性</a></li>
-<li><a href="#2">2. 语言结构</a></li>
-</ul>
-</div>
-<h1 id="1">1. 语言特性</h1>
+    <p>[TOC]</p>
+<h1>1. 语言特性</h1>
 <p>我觉得吧, 大概有个印象即可, 深入学习并使用一段时间, 然后和 C 及 Python 一比较, 自然就明白了.</p>
-<p><img alt="GO 的特性" src="http://i68.tinypic.com/a1kgh5.jpg" /></p>
-<h1 id="2">2. 语言结构</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">package</span> main
+<p><img alt="GO 的特性" src="http://i68.tinypic.com/a1kgh5.jpg"></p>
+<h1>2. 语言结构</h1>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
-<span style="color: #8B008B; font-weight: bold">import</span> (
-    <span style="color: #CD5555">&quot;fmt&quot;</span>
-)
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-<span style="color: #8B008B; font-weight: bold">func</span> main() {
-    <span style="color: #228B22">/* 这是我的第一个简单的程序 */</span>
-    fmt.Println(<span style="color: #CD5555">&quot;Hello World!&quot;</span>)
-}
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="cm">/* 这是我的第一个简单的程序 */</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -91,13 +86,13 @@
 <p>main() 函数没有返回值, 也没有参数, 通过 <strong>os.Args</strong> 来获取命令行参数.</p>
 </blockquote>
 <ul>
-<li>下一行 /*&hellip;*/ 是块注释, 注释方面的方法和 C 一致, // 为行注释, /**/ 为块注释.</li>
-<li>下一行 fmt.Println(&hellip;) 可以将字符串输出到控制台, 并在最后自动增加换行字符 <strong>\n</strong>, 使用 fmt.Print(&ldquo;hello, world\n&rdquo;) 可以得到相同的结果.</li>
+<li>下一行 /*...*/ 是块注释, 注释方面的方法和 C 一致, // 为行注释, /**/ 为块注释.</li>
+<li>下一行 fmt.Println(...) 可以将字符串输出到控制台, 并在最后自动增加换行字符 <strong>\n</strong>, 使用 fmt.Print("hello, world\n") 可以得到相同的结果.</li>
 </ul>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 一个常规的函数定义包含以下部分:</span>
-<span style="color: #8B008B; font-weight: bold">func</span> 函数名(参数列表)(返回值列表) {
-    <span style="color: #228B22">// 函数体</span>
-}
+<div class="highlight"><pre><span></span><span class="c1">// 一个常规的函数定义包含以下部分:</span>
+<span class="kd">func</span> <span class="nx">函数名</span><span class="p">(</span><span class="nx">参数列表</span><span class="p">)(</span><span class="nx">返回值列表</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 函数体</span>
+<span class="p">}</span>
 </pre></div>
 
 

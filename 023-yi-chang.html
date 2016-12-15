@@ -53,17 +53,8 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">异常体系</a></li>
-<li><a href="#throwable">Throwable</a></li>
-<li><a href="#_2">异常处理</a></li>
-<li><a href="#_3">自定义异常</a></li>
-<li><a href="#throwthrows">throw、throws</a></li>
-<li><a href="#_4">重写的异常</a></li>
-</ul>
-</div>
-<h2 id="_1">异常体系</h2>
+    <p>[TOC]</p>
+<h2>异常体系</h2>
 <p>Java 把异常当作对象来处理, 并定义一个基类 <strong>java.lang.Throwable</strong> 作为所有异常的超类(父类), 有两个子类 <strong>Error</strong> 和 <strong>Exception</strong>, 分别表示错误和异常.</p>
 <ul>
 <li>Error 是程序无法处理的错误, 比如 OutOfMemoryError、ThreadDeath 等, 这些异常发生时, JVM 一般会选择线程终止, 所以你最好期望不要出现这类异常.</li>
@@ -73,8 +64,8 @@
 <p>Exception 也分为两大类: <strong>运行异常(RuntimeException)</strong>、<strong>编译异常</strong>.</p>
 <p><strong>运行异常</strong> 都是 RuntimeException 类及其子类异常, 如 NullPointerException、IndexOutOfBoundsException 等, 这些异常是不检查异常, 程序中可以选择捕获处理, 也可以不处理, 这些异常一般是由程序逻辑错误引起的, 程序应该从逻辑角度尽可能避免这类异常的发生.</p>
 <p><strong>编译异常</strong> 是 RuntimeException 以外的异常, 从程序语法角度讲是必须进行处理的异常, 如果不处理, 程序就不能编译通过, 如 IOException、SQLException 等以及用户自定义的 Exception.</p>
-<p><img alt="" src="http://i60.tinypic.com/245dm52.jpg" /></p>
-<h2 id="throwable">Throwable</h2>
+<p><img alt="" src="http://i60.tinypic.com/245dm52.jpg"></p>
+<h2>Throwable</h2>
 <p><strong>Throwable 常用方法:</strong></p>
 <p>getCause(): 返回抛出异常的原因, 如果 cause 不存在或未知, 则返回 null;</p>
 <p>getMessage(): 返回异常的消息信息.</p>
@@ -85,51 +76,51 @@
 <p>Throwable(String message): 构造带指定详细消息的新 throwable</p>
 <p>Throwable(Throwable cause): 构造一个带指定 cause 和 (cause==null ? null :cause.toString())（它通常包含类和 cause 的详细消息）的详细消息的新 throwable</p>
 <p>Throwable(String message, Throwable cause): 构造一个带指定详细消息和 cause 的新 throwable</p>
-<h2 id="_2">异常处理</h2>
+<h2>异常处理</h2>
 <p>在 Java 中, 使用 <strong>try-catch</strong> 及 <strong>try-catch-finally</strong> 来捕获并处理异常.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">try</span> {
-     <span style="color: #228B22">// 一些会抛出异常的方法</span>
-} <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
-     <span style="color: #228B22">// 该异常处理代码</span>
-}
+<div class="highlight"><pre><span></span><span class="k">try</span> <span class="o">{</span>
+     <span class="c1">// 一些会抛出异常的方法</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+     <span class="c1">// 该异常处理代码</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>例子:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">try</span>&lt; {
-    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;请输入你的年龄:&quot;</span>);
-    Scanner input = <span style="color: #8B008B; font-weight: bold">new</span> Scanner(System.<span style="color: #658b00">in</span>);
-    <span style="color: #a7a7a7; font-weight: bold">int</span> age = input.<span style="color: #658b00">newtInt</span>();
-    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;十年后你&quot;</span> + (age + <span style="color: #B452CD">10</span>) + <span style="color: #CD5555">&quot;岁&quot;</span>);
-} <span style="color: #8B008B; font-weight: bold">catch</span> (InputMismatchException e) {
-    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;你应该输入整数!&quot;</span>);
-}
-System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;程序结束!&quot;</span>);
+<div class="highlight"><pre><span></span><span class="k">try</span><span class="o">&lt;</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;请输入你的年龄:&quot;</span><span class="o">);</span>
+    <span class="n">Scanner</span> <span class="n">input</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="na">newtInt</span><span class="o">();</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;十年后你&quot;</span> <span class="o">+</span> <span class="o">(</span><span class="n">age</span> <span class="o">+</span> <span class="mi">10</span><span class="o">)</span> <span class="o">+</span> <span class="s">&quot;岁&quot;</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InputMismatchException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;你应该输入整数!&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;程序结束!&quot;</span><span class="o">);</span>
 </pre></div>
 
 
-<p>如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println(&ldquo;十年后你&rdquo; + (age + 10) + &ldquo;岁&rdquo;) 这包就不会被执行, 程序会跳到 catch 语句中, try-catch 执行完后, 后续的语句会继续执行.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">try</span> {
-     <span style="color: #228B22">// 一些会抛出异常的方法</span>
-} <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
-     <span style="color: #228B22">// 该异常处理代码</span>
-} <span style="color: #8B008B; font-weight: bold">finally</span> {
-     <span style="color: #228B22">// 最终要执行的一些代码</span>
-}
+<p>如果在 int age = input.newtInt() 这里输入了非整数的其他字符, 如 hello, 那么 System.out.println("十年后你" + (age + 10) + "岁") 这包就不会被执行, 程序会跳到 catch 语句中, try-catch 执行完后, 后续的语句会继续执行.</p>
+<div class="highlight"><pre><span></span><span class="k">try</span> <span class="o">{</span>
+     <span class="c1">// 一些会抛出异常的方法</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+     <span class="c1">// 该异常处理代码</span>
+<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+     <span class="c1">// 最终要执行的一些代码</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p><strong>何为 finally?</strong></p>
 <p>先看一个没有 finally 的异常处理 try-catch 语句:<br>
 假设 count 为要使用到的资源, 并且用完要求释放此资源, 那么我们可以把释放资源的语句放到 try-catch 后执行, 当前的程序不管是在执行完 try 语句块还是 catch 语句块, 都会顺序执行到下面释放资源的语句.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">int</span> count = <span style="color: #B452CD">0</span>; <span style="color: #228B22">// 初始化资源</span>
-<span style="color: #8B008B; font-weight: bold">try</span> {
-    count++;
-    <span style="color: #228B22">// 一些会抛出异常的方法</span>
-} <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
-    <span style="color: #228B22">// 异常处理</span>
-}
-count = <span style="color: #B452CD">0</span>; <span style="color: #228B22">//释放资源</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// 初始化资源</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">count</span><span class="o">++;</span>
+    <span class="c1">// 一些会抛出异常的方法</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 异常处理</span>
+<span class="o">}</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">//释放资源</span>
 </pre></div>
 
 
@@ -138,18 +129,18 @@ count = <span style="color: #B452CD">0</span>; <span style="color: #228B22">//�
 <blockquote>
 <p>system.exit() 是唯一可以中断 finally 的命令.</p>
 </blockquote>
-<h2 id="_3">自定义异常</h2>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">自定义异常类</span> <span style="color: #8B008B; font-weight: bold">extends</span> 异常类型 {
+<h2>自定义异常</h2>
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">自定义异常类</span> <span class="kd">extends</span> <span class="n">异常类型</span> <span class="o">{</span>
 
-    <span style="color: #228B22">// 构造函数</span>
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">自定义异常类</span>(String info) {
-        <span style="color: #8B008B; font-weight: bold">super</span>(info); <span style="color: #228B22">// 调用 父类(String message): 构造带指定详细消息的新异常</span>
-    }
-}
+    <span class="c1">// 构造函数</span>
+    <span class="kd">public</span> <span class="nf">自定义异常类</span><span class="o">(</span><span class="n">String</span> <span class="n">info</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">info</span><span class="o">);</span> <span class="c1">// 调用 父类(String message): 构造带指定详细消息的新异常</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
-<h2 id="throwthrows">throw、throws</h2>
+<h2>throw、throws</h2>
 <p>throw 关键字是用于__方法体内部__, 用来抛出一个 Throwable 类型的异常;</p>
 <ul>
 <li>如果抛出了检查异常, 则还应该在方法头部声明方法可能抛出的异常类型, 该方法的调用者也必须检查处理抛出的异常</li>
@@ -158,32 +149,32 @@ count = <span style="color: #B452CD">0</span>; <span style="color: #228B22">//�
 </ul>
 <p>throws 关键字用于__方法声明部分__, 用来声明方法可能会抛出某些异常, 仅当抛出了__检查异常__, 该方法的调用者才必须处理或者重新抛出该异常, 当方法的调用者无力处理该异常的时候, 应该继续抛出, 而不是囫囵吞枣, 一般在 catch 块中打印一下堆栈信息做个勉强处理.</p>
 <p>下面给出一个简单例子, 看看如何 使用这两个关键字:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">test</span>() <span style="color: #8B008B; font-weight: bold">throws</span> Exception {
-     <span style="color: #228B22">// 抛出一个检查异常</span>
-     <span style="color: #8B008B; font-weight: bold">throw</span> <span style="color: #8B008B; font-weight: bold">new</span> Exception(<span style="color: #CD5555">&quot;方法 test 中的Exception&quot;</span>);
-}
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+     <span class="c1">// 抛出一个检查异常</span>
+     <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="o">(</span><span class="s">&quot;方法 test 中的Exception&quot;</span><span class="o">);</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>之前说到: 如果抛出了检查异常, 则该方法的调用者也必须检查处理抛出的异常;<br>
 所以要调用 test() 的方法就必须处理 test() 抛出的异常或者添加 throws 声明将将异常继续上抛.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 处理 test() 抛出的异常</span>
-<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">compute_1</span>() {
-    <span style="color: #8B008B; font-weight: bold">try</span> {
-        test()
-    } <span style="color: #8B008B; font-weight: bold">catch</span> (Exception e) {
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;e.getMessage()&quot;</span>);
-    }
-}
+<div class="highlight"><pre><span></span><span class="c1">// 处理 test() 抛出的异常</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">compute_1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">test</span><span class="o">()</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;e.getMessage()&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-<span style="color: #228B22">// 或者添加 throws 声明, 将异常上抛</span>
-<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">compute_2</span>() <span style="color: #8B008B; font-weight: bold">throws</span> Exception {
-    test()
-}
+<span class="c1">// 或者添加 throws 声明, 将异常上抛</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">compute_2</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">test</span><span class="o">()</span>
+<span class="o">}</span>
 </pre></div>
 
 
-<h2 id="_4">重写的异常</h2>
+<h2>重写的异常</h2>
 <p>重写方法, 如果也要抛异常, 则只能抛出被覆盖的方法中同样的异常或者异常的子类.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>
 

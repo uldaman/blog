@@ -53,35 +53,14 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">总览</a></li>
-<li><a href="#collection">Collection</a></li>
-<li><a href="#map">Map 家族</a></li>
-<li><a href="#_2">工具类</a><ul>
-<li><a href="#contains-in-collection">contains in Collection</a></li>
-<li><a href="#contains-in-map">contains in Map</a></li>
-<li><a href="#indexof">indexOf</a></li>
-<li><a href="#lastindexof">lastIndexOf</a></li>
-</ul>
-</li>
-<li><a href="#collections">Collections</a><ul>
-<li><a href="#collectionssort">Collections.sort()</a></li>
-</ul>
-</li>
-<li><a href="#_3">迭代器</a></li>
-<li><a href="#treemap">TreeMap</a></li>
-<li><a href="#treeset">TreeSet</a></li>
-<li><a href="#hashtable">hashtable</a></li>
-</ul>
-</div>
-<h2 id="_1">总览</h2>
+    <p>[TOC]</p>
+<h2>总览</h2>
 <p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
 <p>Java 中的容器有两大接口: <strong>Collection</strong> 和 <strong>Map</strong>;</p>
 <p>Collection 又分为三个小接口: <em>List</em>、<em>Queue</em> 和 <em>Set</em>.</p>
-<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg"></p>
 <p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
-<h2 id="collection">Collection</h2>
+<h2>Collection</h2>
 <p>Collection 接口是 List、Set 和 Queue 接口的父接口, 它定义了可用于操作 List、Set 和 Queue 的方法(增、删、改、查).</p>
 <p>List 是元素有序并且可以重复的集合, List 可以精确控制每个元素的插入位置, 或删除某个位置的元素.</p>
 <p>ArrayList 是数组序列, 是 List 接口的一个重要实现类, 它的底层是由数组实现的.</p>
@@ -94,7 +73,7 @@
 <p><a href="http://yunpan.cn/cQsGPx38k4ISg">http://yunpan.cn/cQsGPx38k4ISg</a> 访问密码 8bf2</p>
 <p><a href="http://static.video.qq.com/TPout.swf?vid=d0156knzsv7&amp;auto=0">视频解说</a></p>
 <p>需要注意的是 Java 中的泛型不能是基本数据类型, 必须是其<strong>包装类</strong>, 如, ArrayList&lt;Integer>.</p>
-<h2 id="map">Map 家族</h2>
+<h2>Map 家族</h2>
 <p>Map 接口提供了一种映射关系, 其中的元素以<strong>键值对</strong>(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
 <p>Map 中的键值对以 <strong>Entry</strong> 类型的对象实例形式存在(stl::map 中是 value_type).</p>
 <p>Map 中的键值对中的 key 值是不可重复的, value 值则可以, 这一点 stl::map 也是一样的, 同样的, stl 提供了 multimap 来实现 key 值可重复的 map, Java 也提供了 key 值可以重复的 map, 就是 <strong>IdentityHashMap</strong>.</p>
@@ -111,8 +90,8 @@
 <p>实例:</p>
 <p>Collection 中的例子是一个学生选课的案例, 已经可以通过 List、Set 来管理备选课程, 现在继续为其添加功能, 通过 Map<String, Student> 进行学生信息管理, Key 为学生 ID, value 为学生对象.</p>
 <p><a href="http://yunpan.cn/cQAGwDcYmtdDP">http://yunpan.cn/cQAGwDcYmtdDP</a>  访问密码 ce09</p>
-<h2 id="_2">工具类</h2>
-<h3 id="contains-in-collection">contains in Collection</h3>
+<h2>工具类</h2>
+<h3>contains in Collection</h3>
 <ul>
 <li>contains: 判斷 Collection 中是否包含某元素, 包含返回 true</li>
 <li>判斷 Collection 中是否包含指定的所有元素</li>
@@ -134,19 +113,19 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <blockquote>
 <p>Eclipse 提供了快捷重寫 hashCode() 和 equasl() 方法的功能, 在 [編輯] – [源碼] 裡就能找到.</p>
 </blockquote>
-<h3 id="contains-in-map">contains in Map</h3>
+<h3>contains in Map</h3>
 <ul>
 <li>containskey() 用來判斷 Map 中是否包含某個 key 值.</li>
 <li>containsValue() 用來判斷 Map 中是否包含某個 value 值.</li>
 </ul>
 <p>這兩個內部還是調用的 equals 和 hashcode 方法, 如果有特殊需求, 可以重寫這兩個方法.</p>
-<h3 id="indexof">indexOf</h3>
+<h3>indexOf</h3>
 <p>獲取 List 中某元素的最先出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
-<h3 id="lastindexof">lastIndexOf</h3>
+<h3>lastIndexOf</h3>
 <p>獲取 List 中某元素的最後出現的索引位置(下標), 失敗返回 –1, 它的內部也是調用 equals() 方法;</p>
-<h2 id="collections">Collections</h2>
+<h2>Collections</h2>
 <p>Collections 是 Java.util 中的一個工具類, 它提供了一個對 Collection 的操作.</p>
-<h3 id="collectionssort">Collections.sort()</h3>
+<h3>Collections.sort()</h3>
 <p>排序, 默認是升序排序, 如果要對容器進行排序, 那麼容器裡的保存的對象必須實現 Comparable 接口, 具體應用參考 api 幫助.</p>
 <ul>
 <li>Comparable 接口 -- 默認排序規則</li>
@@ -168,8 +147,8 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <p>關於這兩個接口的用法可以參考網文:<br>
 <a href="http://www.cnblogs.com/gnuhpc/archive/2012/12/17/2822251.html">Comparable接口的实现和使用</a></p>
 <p>到這裡, Java 的集合框架的成員也就學習的差不多了.</p>
-<p><img alt="" src="http://i61.tinypic.com/330wvol.jpg" /></p>
-<h2 id="_3">迭代器</h2>
+<p><img alt="" src="http://i61.tinypic.com/330wvol.jpg"></p>
+<h2>迭代器</h2>
 <p>迭代器是一个对象, 它的工作是遍历并选择 Collection 中的对象, 而我们不必知道或者关心该 Collection 底层的结构.</p>
 <ul>
 <li>使用 next() 获得序列中的下一个元素<ul>
@@ -180,49 +159,49 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <li>使用 hasNext() 检查序列中是否还有元素</li>
 <li>使用 remove() 将迭代器新返回的元素删除</li>
 </ul>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.*</span>;
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
-<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">SimpleIteration</span> {
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleIteration</span> <span class="o">{</span>
 
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
-        <span style="color: #228B22">// TODO 自动生成的方法存根</span>
-        ArrayList&lt;Integer&gt; list = <span style="color: #8B008B; font-weight: bold">new</span> ArrayList&lt;Integer&gt;();
-        list.<span style="color: #658b00">add</span>(<span style="color: #8B008B; font-weight: bold">new</span> Integer(<span style="color: #B452CD">0</span>));
-        list.<span style="color: #658b00">add</span>(<span style="color: #8B008B; font-weight: bold">new</span> Integer(<span style="color: #B452CD">1</span>));
-        list.<span style="color: #658b00">add</span>(<span style="color: #8B008B; font-weight: bold">new</span> Integer(<span style="color: #B452CD">2</span>));
-        list.<span style="color: #658b00">add</span>(<span style="color: #8B008B; font-weight: bold">new</span> Integer(<span style="color: #B452CD">3</span>));
-        list.<span style="color: #658b00">add</span>(<span style="color: #8B008B; font-weight: bold">new</span> Integer(<span style="color: #B452CD">4</span>));
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO 自动生成的方法存根</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
 
-        Iterator&lt;Integer&gt; it = list.<span style="color: #658b00">iterator</span>();
+        <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 
-        <span style="color: #228B22">// iterator 方式遍历</span>
-        <span style="color: #8B008B; font-weight: bold">while</span> (it.<span style="color: #658b00">hasNext</span>()) {
-            Integer integer = it.<span style="color: #658b00">next</span>();
-            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>(integer + <span style="color: #CD5555">&quot; | &quot;</span>);
-        }
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>();
+        <span class="c1">// iterator 方式遍历</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">Integer</span> <span class="n">integer</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">integer</span> <span class="o">+</span> <span class="s">&quot; | &quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
 
-        <span style="color: #228B22">// 泛型 for 遍历</span>
-        <span style="color: #8B008B; font-weight: bold">for</span> (Integer integer : list) {
-            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">print</span>(integer + <span style="color: #CD5555">&quot; | &quot;</span>);
-        }
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>();
+        <span class="c1">// 泛型 for 遍历</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Integer</span> <span class="n">integer</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">integer</span> <span class="o">+</span> <span class="s">&quot; | &quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
 
-        <span style="color: #228B22">// 删除元素</span>
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(list); <span style="color: #228B22">// 输出原始的 list</span>
-        it = list.<span style="color: #658b00">iterator</span>(); <span style="color: #228B22">// 重新赋值 iterator</span>
-        <span style="color: #8B008B; font-weight: bold">while</span> (it.<span style="color: #658b00">hasNext</span>()) {
-            it.<span style="color: #658b00">next</span>();
-            it.<span style="color: #658b00">remove</span>();
-        }
-        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(list);
-    }
-}
+        <span class="c1">// 删除元素</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span> <span class="c1">// 输出原始的 list</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span> <span class="c1">// 重新赋值 iterator</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">it</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>执行结果:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>0 | 1 | 2 | 3 | 4 |
+<div class="highlight"><pre><span></span>0 | 1 | 2 | 3 | 4 |
 0 | 1 | 2 | 3 | 4 |
 [0, 1, 2, 3, 4]
 []
@@ -232,7 +211,7 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <blockquote>
 <p>如果只是希望遍历, 而并不打算修改 Collection 对象本身, 那么使用 <strong>foreach</strong> 语法会更简单.</p>
 </blockquote>
-<h2 id="treemap">TreeMap</h2>
+<h2>TreeMap</h2>
 <p>TreeMap 中所有的元素都保持着某种固定的顺序, 如果你需要得到一个有序的结果你就应该使用 TreeMap(HashMap 中元素的排列顺序是不固定的).</p>
 <p>TreeMap 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeMap 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeMap 对象时, 传递实现 Comparator 接口的比较器对象.<br>
 如果我们自己定义的一个类的对象要加入到 TreeSet 当中, 那么这个类必须要实现 Comparable 接口.</p>
@@ -249,29 +228,29 @@ Set 中 contains 的原理和 List 中的不一樣, Object 中還定義了一個
 <blockquote>
 <p>HashMap 通常比 TreeMap 快一点(树和哈希表的数据结构使然), 建议多使用 HashMap, 在需要排序的 Map 时候才用 TreeMap.</p>
 </blockquote>
-<h2 id="treeset">TreeSet</h2>
+<h2>TreeSet</h2>
 <p>TreeSet 是依靠 TreeMap 来实现的.</p>
 <p>所以, 同 TreeMap, TreeSet 也是一个<strong>有序集合</strong>, TreeSet 中的元素将按照升序排列, 缺省是按照自然排序进行排列, 意味着 TreeSet 中的元素要实现 <strong>Comparable</strong> 接口, 或者有一个自定义的比较器, 可以在构造 TreeSet 对象时, 传递实现 Comparator 接口的比较器对象.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.Iterator</span>;
-<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.util.*</span>;
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
-<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">TreeSetTest</span> {
-    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
-        Set ts = <span style="color: #8B008B; font-weight: bold">new</span> TreeSet();
-        ts.<span style="color: #658b00">add</span>(<span style="color: #CD5555">&quot;abc&quot;</span>);
-        ts.<span style="color: #658b00">add</span>(<span style="color: #CD5555">&quot;xyz&quot;</span>);
-        ts.<span style="color: #658b00">add</span>(<span style="color: #CD5555">&quot;rst&quot;</span>);
-        Iterator it = ts.<span style="color: #658b00">iterator</span>();
-        <span style="color: #8B008B; font-weight: bold">while</span> (it.<span style="color: #658b00">hasNext</span>()) {
-            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(it.<span style="color: #658b00">next</span>());
-        }
-    }
-}
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeSetTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Set</span> <span class="n">ts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeSet</span><span class="o">();</span>
+        <span class="n">ts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;abc&quot;</span><span class="o">);</span>
+        <span class="n">ts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;xyz&quot;</span><span class="o">);</span>
+        <span class="n">ts</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;rst&quot;</span><span class="o">);</span>
+        <span class="n">Iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
 <p>执行结果:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>abc
+<div class="highlight"><pre><span></span>abc
 rst
 xyz
 </pre></div>
@@ -279,7 +258,7 @@ xyz
 
 <p>打印结果不是和先前加入的顺序一样, 它是按照一个字母的排序法进行排序的, 这是因为 String 类实现了 Comparable 接口;<br>
 同样的, 如果自己定义的一个类的对象要加入到 TreeSet 当中, 那么这个类必须要实现 Comparable 接口.</p>
-<h2 id="hashtable">hashtable</h2>
+<h2>hashtable</h2>
 <p>hashtable 是线程安全的, 而 hashmap 是非线程安全的.</p>
 <p>待完善.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ji-chu.html">大数据 Java 基础</a>

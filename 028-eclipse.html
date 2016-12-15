@@ -53,37 +53,18 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">安装</a></li>
-<li><a href="#_2">使用</a><ul>
-<li><a href="#_3">设置字体</a></li>
-<li><a href="#_4">自动提示</a></li>
-<li><a href="#_5">导航器</a></li>
-<li><a href="#_6">自动构建</a></li>
-<li><a href="#_7">抽取函数</a></li>
-<li><a href="#_8">设置编码</a></li>
-<li><a href="#monokai">设置 Monokai 主题</a><ul>
-<li><a href="#_9">配置黑色框架</a></li>
-</ul>
-</li>
-<li><a href="#_10">配置代码编辑区的样式</a></li>
-</ul>
-</li>
-<li><a href="#_11">常用快捷键</a></li>
-</ul>
-</div>
-<h2 id="_1">安装</h2>
+    <p>[TOC]</p>
+<h2>安装</h2>
 <p>在官网上下载最新版本的 Eclipse, 不过它是英文版的, 我们需要手动下载语言包, Eclipse 有一个语言包项目, 叫 Eclipse Babel Project, 如果需要语言包, 可以联机从这儿下载.</p>
 <p><a href="http://www.eclipse.org/babel/">http://www.eclipse.org/babel/</a></p>
 <p>找到下载页面后, 还要根据自己使用的 Eclipse 的版本来确定在哪下载.</p>
-<p><img alt="" src="http://i59.tinypic.com/2ibyxyx.jpg" /></p>
-<p><img alt="" src="http://i58.tinypic.com/30sfqyb.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/2ibyxyx.jpg"></p>
+<p><img alt="" src="http://i58.tinypic.com/30sfqyb.jpg"></p>
 <p>可以看到我的是 Luna 版本.</p>
 <p>点击第一张图上的 Luna, 跳转到语言包下载界面, 找到中文包, 下载, 解压, 覆盖即可.</p>
-<p><img alt="" src="http://i57.tinypic.com/fn8sg0.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/fn8sg0.jpg"></p>
 <p>再次打开 Eclipse 就是中文的了.</p>
-<h2 id="_2">使用</h2>
+<h2>使用</h2>
 <p>用 Eclipse 编写 Java 程序可以总结为四步:</p>
 <ol>
 <li>创建 Java 项目</li>
@@ -91,100 +72,100 @@
 <li>编写 Java 源代码</li>
 <li>运行 Java 程序</li>
 </ol>
-<h3 id="_3">设置字体</h3>
-<p>&ldquo;窗口&rdquo; -&gt; &ldquo;首选项&rdquo;</p>
-<p>然后在左上角的过滤器中输入外观, 选择 &ldquo;颜色和字体&rdquo;, 在右边选择 &ldquo;基本&rdquo; -&gt; &ldquo;文本字体&rdquo; -&gt; &ldquo;编辑&rdquo;</p>
-<p><img alt="" src="http://i67.tinypic.com/op8do8.jpg" /></p>
-<h3 id="_4">自动提示</h3>
+<h3>设置字体</h3>
+<p>"窗口" -&gt; "首选项"</p>
+<p>然后在左上角的过滤器中输入外观, 选择 "颜色和字体", 在右边选择 "基本" -&gt; "文本字体" -&gt; "编辑"</p>
+<p><img alt="" src="http://i67.tinypic.com/op8do8.jpg"></p>
+<h3>自动提示</h3>
 <p>接下来, 设置下 eclipse 的自动提示<br>(你可以在任何时候 alt + / 来触发).
 window –&gt; Preferences –&gt; Java –&gt; Editor –&gt; Content Assist:</p>
-<p><img alt="" src="http://i60.tinypic.com/1zoj2no.jpg" /></p>
+<p><img alt="" src="http://i60.tinypic.com/1zoj2no.jpg"></p>
 <p><strong>abcdefghijklmnopqrstuvwxyz.</strong>(注意后面的点)</p>
-<p>这样改完后会有个问题, 就是当按下 &ldquo;空格键&rdquo;、&rdquo;=&rdquo; 时会上屏候选列表, 按习惯我们可改成 &ldquo;Tab&rdquo;、&rdquo;Enter&rdquo; 上屏.</p>
+<p>这样改完后会有个问题, 就是当按下 "空格键"、"=" 时会上屏候选列表, 按习惯我们可改成 "Tab"、"Enter" 上屏.</p>
 <p>首先, 最好下载一个 Eclipse RCP 版本 (该版本修改源代码比较方便，能自动导入源代码):</p>
-<p><img alt="" src="http://i66.tinypic.com/2aeytts.jpg" /></p>
+<p><img alt="" src="http://i66.tinypic.com/2aeytts.jpg"></p>
 <p>打开 window -> show view, 选择 Plug-ins (如果没有的话, 在 show view 的 other 里找找), 再找到 <code>org.eclipse.jface.text</code>, 右键单击, 选择 import as -> Source Project, 导入完成后, 在 Eclipse 的 workspace 就可以看到这个 project 了.</p>
-<p><img alt="" src="http://i67.tinypic.com/ok94jt.jpg" /></p>
-<p><img alt="" src="http://i67.tinypic.com/2nv79e9.jpg" /></p>
-<p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg" /></p>
+<p><img alt="" src="http://i67.tinypic.com/ok94jt.jpg"></p>
+<p><img alt="" src="http://i67.tinypic.com/2nv79e9.jpg"></p>
+<p><img alt="" src="http://i63.tinypic.com/53nvrd.jpg"></p>
 <p>打开 <code>org.eclipse.jface.text.contentassist.CompletionProposalPopup</code> 文件第 1336 行代码, 具体代码如下:</p>
-<p><img alt="" src="http://i67.tinypic.com/20rae14.jpg" /></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> (contains(triggers, key)) {
-                        e.<span style="color: #658b00">doit</span>= <span style="color: #8B008B; font-weight: bold">false</span>;
-                        hide();
-                        insertProposal(p, key, e.<span style="color: #658b00">stateMask</span>, fContentAssistSubjectControlAdapter.<span style="color: #658b00">getSelectedRange</span>().<span style="color: #658b00">x</span>);
-                    }
+<p><img alt="" src="http://i67.tinypic.com/20rae14.jpg"></p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">contains</span><span class="o">(</span><span class="n">triggers</span><span class="o">,</span> <span class="n">key</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">doit</span><span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                        <span class="n">hide</span><span class="o">();</span>
+                        <span class="n">insertProposal</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">stateMask</span><span class="o">,</span> <span class="n">fContentAssistSubjectControlAdapter</span><span class="o">.</span><span class="na">getSelectedRange</span><span class="o">().</span><span class="na">x</span><span class="o">);</span>
+                    <span class="o">}</span>
 </pre></div>
 
 
 <p><br>
 修改之后的代码是:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> (key != <span style="color: #CD5555">&#39;=&#39;</span> &amp;&amp; key != <span style="color: #B452CD">0x20</span> &amp;&amp; key != <span style="color: #CD5555">&#39;;&#39;</span> &amp;&amp; contains(triggers, key)) {
-                        e.<span style="color: #658b00">doit</span>= <span style="color: #8B008B; font-weight: bold">false</span>;
-                        hide();
-                        insertProposal(p, key, e.<span style="color: #658b00">stateMask</span>, fContentAssistSubjectControlAdapter.<span style="color: #658b00">getSelectedRange</span>().<span style="color: #658b00">x</span>);
-                    }
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">(</span><span class="n">key</span> <span class="o">!=</span> <span class="sc">&#39;=&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">!=</span> <span class="mh">0x20</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">!=</span> <span class="sc">&#39;;&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">contains</span><span class="o">(</span><span class="n">triggers</span><span class="o">,</span> <span class="n">key</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">doit</span><span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                        <span class="n">hide</span><span class="o">();</span>
+                        <span class="n">insertProposal</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">stateMask</span><span class="o">,</span> <span class="n">fContentAssistSubjectControlAdapter</span><span class="o">.</span><span class="na">getSelectedRange</span><span class="o">().</span><span class="na">x</span><span class="o">);</span>
+                    <span class="o">}</span>
 </pre></div>
 
 
 <p><br>
-如果想要使用 &ldquo;tab&rdquo; 键上屏需要修改 1328 行, 具体代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #a61717; background-color: #e3d2d2">&#39;</span>/t<span style="color: #a61717; background-color: #e3d2d2">&#39;</span>:
-e.<span style="color: #658b00">doit</span>= <span style="color: #8B008B; font-weight: bold">false</span>;
-fProposalShell.<span style="color: #658b00">setFocus</span>();
-<span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">false</span>;
+如果想要使用 "tab" 键上屏需要修改 1328 行, 具体代码如下:</p>
+<div class="highlight"><pre><span></span><span class="k">case</span> <span class="err">&#39;</span><span class="o">/</span><span class="n">t</span><span class="err">&#39;</span><span class="o">:</span>
+<span class="n">e</span><span class="o">.</span><span class="na">doit</span><span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+<span class="n">fProposalShell</span><span class="o">.</span><span class="na">setFocus</span><span class="o">();</span>
+<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </pre></div>
 
 
 <p><br>
 修改之后的代码是:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&#39;\t&#39;</span>:
-e.<span style="color: #658b00">doit</span>= <span style="color: #8B008B; font-weight: bold">false</span>;
-insertSelectedProposalWithMask(e.<span style="color: #658b00">stateMask</span>);
-<span style="color: #8B008B; font-weight: bold">break</span>;
+<div class="highlight"><pre><span></span><span class="k">case</span> <span class="sc">&#39;\t&#39;</span><span class="o">:</span>
+<span class="n">e</span><span class="o">.</span><span class="na">doit</span><span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+<span class="n">insertSelectedProposalWithMask</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">stateMask</span><span class="o">);</span>
+<span class="k">break</span><span class="o">;</span>
 </pre></div>
 
 
 <p><br>
 修改完成之后需要保存替换原来的 jar 文件:</p>
 <p>项目右键 -> export</p>
-<p><img alt="" src="http://i67.tinypic.com/2pydoci.jpg" /></p>
+<p><img alt="" src="http://i67.tinypic.com/2pydoci.jpg"></p>
 <p>选择导出方式如下图:</p>
-<p><img alt="" src="http://i64.tinypic.com/2yynhid.jpg" /></p>
+<p><img alt="" src="http://i64.tinypic.com/2yynhid.jpg"></p>
 <p>点击 Next, 选择 Destination 选项卡, 选择 Directory, 选择一个要保存插件的目录, 然后 Finish.</p>
-<p><img alt="" src="http://i63.tinypic.com/2vacpe1.jpg" /></p>
+<p><img alt="" src="http://i63.tinypic.com/2vacpe1.jpg"></p>
 <p>然后就会在所选的目录下产生一个新的 plugins 目录, 里面有一个 jar 文件, 用它替换掉 Eclipse/plugins 里面的 (注意版本号可能会不一样), 最后重新启动一下 Eclipse.</p>
-<h3 id="_5">导航器</h3>
-<p>类似 &ldquo;资源管理器&rdquo;, 它的视图和 &ldquo;包资源管理器&rdquo; 有点像, 因为有些文件或文件夹在 &ldquo;包资源管理器&rdquo; 看不到, 这时可以到 &ldquo;导航器&rdquo; 中查看.</p>
-<p>&ldquo;窗口&rdquo; -&gt; &ldquo;显示视图&rdquo; -&gt; &ldquo;其他&rdquo;, 在弹出窗中选择 &ldquo;常规&rdquo; -&gt; &ldquo;导航器&rdquo;, 此时 &ldquo;导航器&rdquo; 就出现在 IDE 左侧的视图中了.</p>
-<h3 id="_6">自动构建</h3>
+<h3>导航器</h3>
+<p>类似 "资源管理器", 它的视图和 "包资源管理器" 有点像, 因为有些文件或文件夹在 "包资源管理器" 看不到, 这时可以到 "导航器" 中查看.</p>
+<p>"窗口" -&gt; "显示视图" -&gt; "其他", 在弹出窗中选择 "常规" -&gt; "导航器", 此时 "导航器" 就出现在 IDE 左侧的视图中了.</p>
+<h3>自动构建</h3>
 <p>eclipse 的 java 构建器包含了两种构建 java 程序的方法:</p>
 <ul>
 <li>自动构建</li>
 <li>手动构建</li>
 </ul>
 <p>其中, 自动构建是 java 构建器默认采用的方式, 即当文件修改后保存或者对整个项目进行刷新时, java 构建器就会对其进行编译.</p>
-<p>这显然不是一种我希望的方式, 我希望是我点击 &ldquo;Run&rdquo; 或者 &ldquo;Debug&rdquo; 时 IDE 再去构建, 而不是保存一下文件就构建一下.</p>
-<p>关闭方法很简单, &ldquo;项目&rdquo; -&gt; &ldquo;自动构建&rdquo;, 取消 &ldquo;自动构建&rdquo; 前面的选项即可.</p>
-<h3 id="_7">抽取函数</h3>
+<p>这显然不是一种我希望的方式, 我希望是我点击 "Run" 或者 "Debug" 时 IDE 再去构建, 而不是保存一下文件就构建一下.</p>
+<p>关闭方法很简单, "项目" -&gt; "自动构建", 取消 "自动构建" 前面的选项即可.</p>
+<h3>抽取函数</h3>
 <p>快捷键 <code>Shift + Alt + M</code> 能将选中的代码块进行方法抽取.</p>
-<p>这是属于 <strong>重构</strong> 功能的一部分, 可以点击选中的代码块, 选择 &ldquo;重构&rdquo; -> &ldquo;抽取方法&rdquo;</p>
-<h3 id="_8">设置编码</h3>
+<p>这是属于 <strong>重构</strong> 功能的一部分, 可以点击选中的代码块, 选择 "重构" -> "抽取方法"</p>
+<h3>设置编码</h3>
 <p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Workspace -&gt; Text file encoding -&gt; Other -&gt; UTF-8.</p>
-<p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Content Types, 在右面选择 &ldquo;Text&rdquo;, 在 default encoding 输入 &ldquo;UTF-8&rdquo;, 点 &ldquo;update&rdquo; 按钮更新.</p>
-<h3 id="monokai">设置 Monokai 主题</h3>
-<h4 id="_9">配置黑色框架</h4>
+<p>统一设置为 <strong>utf-8</strong> 编码, Window -&gt; Preferences -&gt; General -&gt; Content Types, 在右面选择 "Text", 在 default encoding 输入 "UTF-8", 点 "update" 按钮更新.</p>
+<h3>设置 Monokai 主题</h3>
+<h4>配置黑色框架</h4>
 <p>Window -> Preferences -> General -> Apperance 选择主题为 Dark, 确认.</p>
-<p><img alt="" src="http://i68.tinypic.com/30hnd45.jpg" /></p>
+<p><img alt="" src="http://i68.tinypic.com/30hnd45.jpg"></p>
 <p>完成之后确认, 颜色大概是这个样子:</p>
-<p><img alt="" src="http://i66.tinypic.com/jb74aw.jpg" /></p>
+<p><img alt="" src="http://i66.tinypic.com/jb74aw.jpg"></p>
 <p>这肯定不是我们想要的样子, 因为这个主题只是配置了框架的颜色，代码编辑区的样式还需要我们继续配置.</p>
-<h3 id="_10">配置代码编辑区的样式</h3>
-<p>去 帮助 -> 安装新软件，按下 &ldquo;添加站点进入&rdquo;, 输入 <code>http://eclipse-color-theme.github.io/update</code> 作为网址, 然后点击继续安装.</p>
-<p><img alt="" src="http://i64.tinypic.com/2u7c7ro.jpg" /></p>
+<h3>配置代码编辑区的样式</h3>
+<p>去 帮助 -> 安装新软件，按下 "添加站点进入", 输入 <code>http://eclipse-color-theme.github.io/update</code> 作为网址, 然后点击继续安装.</p>
+<p><img alt="" src="http://i64.tinypic.com/2u7c7ro.jpg"></p>
 <p>安装完成之后, Window -> Preferences -> General -> Appereance -> Color Theme 选择其中的样式.</p>
-<p><img alt="" src="http://i63.tinypic.com/20ppxrn.jpg" /></p>
-<h2 id="_11">常用快捷键</h2>
+<p><img alt="" src="http://i63.tinypic.com/20ppxrn.jpg"></p>
+<h2>常用快捷键</h2>
 <ol>
 <li>Ctrl + 1 (快速修复)</li>
 <li>Ctrl + 鼠标, 跳转到鼠标点击处 api 的源码文件</li>

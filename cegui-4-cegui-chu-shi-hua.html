@@ -55,165 +55,165 @@
 
     <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD BehaviorFlags, D3DPRESENT_PARAMETERS *pPresentationParameters
-    , IDirect3DDevice9 **ppReturnedDeviceInterface) {
-    HRESULT hRet = m_pD3Dint-&gt;CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags
-                        , pPresentationParameters, ppReturnedDeviceInterface);
-    <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #a7a7a7; font-weight: bold">int</span> nCount = <span style="color: #B452CD">0</span>;
-    <span style="color: #8B008B; font-weight: bold">if</span> (SUCCEEDED(hRet)) {
-        theApp.m_pDevice = <span style="color: #8B008B; font-weight: bold">new</span> hkIDirect3DDevice9(ppReturnedDeviceInterface, pPresentationParameters, <span style="color: #8B008B; font-weight: bold">this</span>);
-        martin-&gt;add_log(<span style="color: #CD5555">&quot;Hooked Direct3D9 device: 0x%x -&gt; 0x%x&quot;</span>
-            , ((hkIDirect3DDevice9*)theApp.m_pDevice)-&gt;m_pD3Ddev, theApp.m_pDevice);
-        <span style="color: #8B008B; font-weight: bold">if</span> (++nCount == <span style="color: #B452CD">3</span>) {
-            theApp.initGui();
-            <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_OrgWndProc == <span style="color: #B452CD">0</span>) {
-                theApp.m_hGWnd = hFocusWindow;
-                theApp.m_OrgWndProc = ::GetWindowLong(theApp.m_hGWnd, GWL_WNDPROC);
-                <span style="color: #8B008B; font-weight: bold">if</span> (theApp.m_OrgWndProc) {
-                    ::SetWindowLong(theApp.m_hGWnd, GWL_WNDPROC, (LONG)&amp;FilterWndProc);
-                } <span style="color: #8B008B; font-weight: bold">else</span> {
-                    martin-&gt;add_log(<span style="color: #CD5555">&quot;GetWindowLong() Failed.&quot;</span>);
-                    ::ExitProcess(-<span style="color: #B452CD">1</span>);
-                }
-            }
-        }
-    }
+<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3D9</span><span class="o">::</span><span class="n">CreateDevice</span><span class="p">(</span><span class="n">UINT</span> <span class="n">Adapter</span><span class="p">,</span> <span class="n">D3DDEVTYPE</span> <span class="n">DeviceType</span><span class="p">,</span> <span class="n">HWND</span> <span class="n">hFocusWindow</span>
+    <span class="p">,</span> <span class="n">DWORD</span> <span class="n">BehaviorFlags</span><span class="p">,</span> <span class="n">D3DPRESENT_PARAMETERS</span> <span class="o">*</span><span class="n">pPresentationParameters</span>
+    <span class="p">,</span> <span class="n">IDirect3DDevice9</span> <span class="o">**</span><span class="n">ppReturnedDeviceInterface</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">HRESULT</span> <span class="n">hRet</span> <span class="o">=</span> <span class="n">m_pD3Dint</span><span class="o">-&gt;</span><span class="n">CreateDevice</span><span class="p">(</span><span class="n">Adapter</span><span class="p">,</span> <span class="n">DeviceType</span><span class="p">,</span> <span class="n">hFocusWindow</span><span class="p">,</span> <span class="n">BehaviorFlags</span>
+                        <span class="p">,</span> <span class="n">pPresentationParameters</span><span class="p">,</span> <span class="n">ppReturnedDeviceInterface</span><span class="p">);</span>
+    <span class="k">static</span> <span class="kt">int</span> <span class="n">nCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">SUCCEEDED</span><span class="p">(</span><span class="n">hRet</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">theApp</span><span class="p">.</span><span class="n">m_pDevice</span> <span class="o">=</span> <span class="k">new</span> <span class="n">hkIDirect3DDevice9</span><span class="p">(</span><span class="n">ppReturnedDeviceInterface</span><span class="p">,</span> <span class="n">pPresentationParameters</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="n">martin</span><span class="o">-&gt;</span><span class="n">add_log</span><span class="p">(</span><span class="s">&quot;Hooked Direct3D9 device: 0x%x -&gt; 0x%x&quot;</span>
+            <span class="p">,</span> <span class="p">((</span><span class="n">hkIDirect3DDevice9</span><span class="o">*</span><span class="p">)</span><span class="n">theApp</span><span class="p">.</span><span class="n">m_pDevice</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">m_pD3Ddev</span><span class="p">,</span> <span class="n">theApp</span><span class="p">.</span><span class="n">m_pDevice</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">nCount</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">theApp</span><span class="p">.</span><span class="n">initGui</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">theApp</span><span class="p">.</span><span class="n">m_OrgWndProc</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">theApp</span><span class="p">.</span><span class="n">m_hGWnd</span> <span class="o">=</span> <span class="n">hFocusWindow</span><span class="p">;</span>
+                <span class="n">theApp</span><span class="p">.</span><span class="n">m_OrgWndProc</span> <span class="o">=</span> <span class="o">::</span><span class="n">GetWindowLong</span><span class="p">(</span><span class="n">theApp</span><span class="p">.</span><span class="n">m_hGWnd</span><span class="p">,</span> <span class="n">GWL_WNDPROC</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">theApp</span><span class="p">.</span><span class="n">m_OrgWndProc</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="o">::</span><span class="n">SetWindowLong</span><span class="p">(</span><span class="n">theApp</span><span class="p">.</span><span class="n">m_hGWnd</span><span class="p">,</span> <span class="n">GWL_WNDPROC</span><span class="p">,</span> <span class="p">(</span><span class="n">LONG</span><span class="p">)</span><span class="o">&amp;</span><span class="n">FilterWndProc</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">martin</span><span class="o">-&gt;</span><span class="n">add_log</span><span class="p">(</span><span class="s">&quot;GetWindowLong() Failed.&quot;</span><span class="p">);</span>
+                    <span class="o">::</span><span class="n">ExitProcess</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span style="color: #8B008B; font-weight: bold">return</span> hRet;
-}
+    <span class="k">return</span> <span class="n">hRet</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>可以看到, 这里加了个 nCount 计数, 当游戏第三次 CreateDevice() 时才初始化 CEGUI;
 后面的代码等下再说, 先看看如何初始化 CEGUI, 也就是 initGui() 函数.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>CEGUI::Direct3D9Renderer::bootstrapSystem(theApp.m_pDevice);
-//-----------------------------------------------------------
-//    此行等同于下面两行, 即初始化 Direct3D9Renderer
-//    Direct3D9Renderer *myRenderer = &amp;CEGUI::Direct3D9Renderer::create(pDevice);
-//    System::create(*myRenderer);
-//-----------------------------------------------------------
+<div class="highlight"><pre><span></span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Direct3D9Renderer</span><span class="o">:</span><span class="nd">:bootstrapSystem</span><span class="o">(</span><span class="nt">theApp</span><span class="nc">.m_pDevice</span><span class="o">);</span>
+<span class="o">//</span><span class="nt">-----------------------------------------------------------</span>
+<span class="o">//</span>    <span class="err">此行等同于下面两行</span><span class="o">,</span> <span class="err">即初始化</span> <span class="nt">Direct3D9Renderer</span>
+<span class="o">//</span>    <span class="nt">Direct3D9Renderer</span> <span class="o">*</span><span class="nt">myRenderer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Direct3D9Renderer</span><span class="o">:</span><span class="nd">:create</span><span class="o">(</span><span class="nt">pDevice</span><span class="o">);</span>
+<span class="o">//</span>    <span class="nt">System</span><span class="o">:</span><span class="nd">:create</span><span class="o">(*</span><span class="nt">myRenderer</span><span class="o">);</span>
+<span class="o">//</span><span class="nt">-----------------------------------------------------------</span>
 
-/////////////////////////////////////////////////////////////////////////
-//    设置默认资源路径
-/////////////////////////////////////////////////////////////////////////
-CEGUI::DefaultResourceProvider* rp = static_cast&lt;CEGUI::DefaultResourceProvider*&gt;
-                    (CEGUI::System::getSingleton().getResourceProvider());
-rp-&gt;setResourceGroupDirectory(&quot;schemes&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\schemes&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;imagesets&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\imagesets&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;fonts&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\fonts&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;layouts&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\layouts&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;looknfeels&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\looknfeel&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;lua_scripts&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\lua_scripts&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;schemas&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\xml_schemas&quot;);
-rp-&gt;setResourceGroupDirectory(&quot;animations&quot;, &quot;E:\\cegui-0.8.4\\datafiles\\animations&quot;);
-martin-&gt;add_log(&quot;设置默认资源路径&quot;);
+<span class="o">/////////////////////////////////////////////////////////////////////////</span>
+<span class="o">//</span>    <span class="err">设置默认资源路径</span>
+<span class="o">/////////////////////////////////////////////////////////////////////////</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:DefaultResourceProvider</span><span class="o">*</span> <span class="nt">rp</span> <span class="o">=</span> <span class="nt">static_cast</span><span class="o">&lt;</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:DefaultResourceProvider</span><span class="o">*&gt;</span>
+                    <span class="o">(</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:System</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.getResourceProvider</span><span class="o">());</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;schemes&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\schemes&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;imagesets&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\imagesets&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;fonts&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\fonts&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;layouts&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\layouts&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;looknfeels&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\looknfeel&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;lua_scripts&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\lua_scripts&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;schemas&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\xml_schemas&quot;</span><span class="o">);</span>
+<span class="nt">rp-</span><span class="o">&gt;</span><span class="nt">setResourceGroupDirectory</span><span class="o">(</span><span class="s2">&quot;animations&quot;</span><span class="o">,</span> <span class="s2">&quot;E:\\cegui-0.8.4\\datafiles\\animations&quot;</span><span class="o">);</span>
+<span class="nt">martin-</span><span class="o">&gt;</span><span class="nt">add_log</span><span class="o">(</span><span class="s2">&quot;设置默认资源路径&quot;</span><span class="o">);</span>
 
-///////////////////////////////////////////////////////////////////////////
-////    设置使用的缺省资源
-///////////////////////////////////////////////////////////////////////////
-CEGUI::ImageManager::setImagesetDefaultResourceGroup(&quot;imagesets&quot;);
-CEGUI::Font::setDefaultResourceGroup(&quot;fonts&quot;);
-CEGUI::Scheme::setDefaultResourceGroup(&quot;schemes&quot;);
-CEGUI::WidgetLookManager::setDefaultResourceGroup(&quot;looknfeels&quot;);
-CEGUI::WindowManager::setDefaultResourceGroup(&quot;layouts&quot;);
-CEGUI::ScriptModule::setDefaultResourceGroup(&quot;lua_scripts&quot;);
-CEGUI::AnimationManager::setDefaultResourceGroup(&quot;animations&quot;);
-CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
-if (parser-&gt;isPropertyPresent(&quot;SchemaDefaultResourceGroup&quot;)) {
-parser-&gt;setProperty(&quot;SchemaDefaultResourceGroup&quot;, &quot;schemas&quot;);
-}
-martin-&gt;add_log(&quot;设置使用的缺省资源&quot;);
+<span class="o">///////////////////////////////////////////////////////////////////////////</span>
+<span class="o">////</span>    <span class="err">设置使用的缺省资源</span>
+<span class="o">///////////////////////////////////////////////////////////////////////////</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:ImageManager</span><span class="o">:</span><span class="nd">:setImagesetDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;imagesets&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Font</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;fonts&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Scheme</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;schemes&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:WidgetLookManager</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;looknfeels&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:WindowManager</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;layouts&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:ScriptModule</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;lua_scripts&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:AnimationManager</span><span class="o">:</span><span class="nd">:setDefaultResourceGroup</span><span class="o">(</span><span class="s2">&quot;animations&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:XMLParser</span><span class="o">*</span> <span class="nt">parser</span> <span class="o">=</span> <span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:System</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.getXMLParser</span><span class="o">();</span>
+<span class="nt">if</span> <span class="o">(</span><span class="nt">parser-</span><span class="o">&gt;</span><span class="nt">isPropertyPresent</span><span class="o">(</span><span class="s2">&quot;SchemaDefaultResourceGroup&quot;</span><span class="o">))</span> <span class="p">{</span>
+<span class="n">parser</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;SchemaDefaultResourceGroup&quot;</span><span class="o">,</span> <span class="s2">&quot;schemas&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nt">martin-</span><span class="o">&gt;</span><span class="nt">add_log</span><span class="o">(</span><span class="s2">&quot;设置使用的缺省资源&quot;</span><span class="o">);</span>
 
-///////////////////////////////////////////////////////////////////////
-//    加载方案
-///////////////////////////////////////////////////////////////////////
-// 加载主题
-CEGUI::SchemeManager::getSingleton().createFromFile(&quot;TaharezLook.scheme&quot;);
+<span class="o">///////////////////////////////////////////////////////////////////////</span>
+<span class="o">//</span>    <span class="err">加载方案</span>
+<span class="o">///////////////////////////////////////////////////////////////////////</span>
+<span class="o">//</span> <span class="err">加载主题</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:SchemeManager</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.createFromFile</span><span class="o">(</span><span class="s2">&quot;TaharezLook.scheme&quot;</span><span class="o">);</span>
 
-// 设置字体
-CEGUI::Font&amp; defaultFont = CEGUI::FontManager::getSingleton().createFromFile(&quot;DejaVuSans-12.font&quot;);
-CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont(&amp;defaultFont);
+<span class="o">//</span> <span class="err">设置字体</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Font</span><span class="o">&amp;</span> <span class="nt">defaultFont</span> <span class="o">=</span> <span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:FontManager</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.createFromFile</span><span class="o">(</span><span class="s2">&quot;DejaVuSans-12.font&quot;</span><span class="o">);</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:System</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.getDefaultGUIContext</span><span class="o">()</span><span class="nc">.setDefaultFont</span><span class="o">(&amp;</span><span class="nt">defaultFont</span><span class="o">);</span>
 
-// 设置鼠标, hook 游戏 d3d 时不用设置, 直接使用游戏的鼠标模型
-//System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage(&quot;TaharezLook/MouseArrow&quot;);
+<span class="o">//</span> <span class="err">设置鼠标</span><span class="o">,</span> <span class="nt">hook</span> <span class="err">游戏</span> <span class="nt">d3d</span> <span class="err">时不用设置</span><span class="o">,</span> <span class="err">直接使用游戏的鼠标模型</span>
+<span class="o">//</span><span class="nt">System</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.getDefaultGUIContext</span><span class="o">()</span><span class="nc">.getMouseCursor</span><span class="o">()</span><span class="nc">.setDefaultImage</span><span class="o">(</span><span class="s2">&quot;TaharezLook/MouseArrow&quot;</span><span class="o">);</span>
 
-// 得到窗口管理器
-CEGUI::WindowManager&amp; winMgr = CEGUI::WindowManager::getSingleton();
-martin-&gt;add_log(&quot;加载方案&quot;);
+<span class="o">//</span> <span class="err">得到窗口管理器</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:WindowManager</span><span class="o">&amp;</span> <span class="nt">winMgr</span> <span class="o">=</span> <span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:WindowManager</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">();</span>
+<span class="nt">martin-</span><span class="o">&gt;</span><span class="nt">add_log</span><span class="o">(</span><span class="s2">&quot;加载方案&quot;</span><span class="o">);</span>
 
-/////////////////////////////////////////////////////////////////////////
-//    开始绘图
-/////////////////////////////////////////////////////////////////////////
-// 得到根窗口, 即画布
-m_root = static_cast&lt;CEGUI::DefaultWindow*&gt;(winMgr.loadLayoutFromFile(&quot;monster.layout&quot;));
-CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(m_root);
+<span class="o">/////////////////////////////////////////////////////////////////////////</span>
+<span class="o">//</span>    <span class="err">开始绘图</span>
+<span class="o">/////////////////////////////////////////////////////////////////////////</span>
+<span class="o">//</span> <span class="err">得到根窗口</span><span class="o">,</span> <span class="err">即画布</span>
+<span class="nt">m_root</span> <span class="o">=</span> <span class="nt">static_cast</span><span class="o">&lt;</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:DefaultWindow</span><span class="o">*&gt;(</span><span class="nt">winMgr</span><span class="nc">.loadLayoutFromFile</span><span class="o">(</span><span class="s2">&quot;monster.layout&quot;</span><span class="o">));</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:System</span><span class="o">:</span><span class="nd">:getSingleton</span><span class="o">()</span><span class="nc">.getDefaultGUIContext</span><span class="o">()</span><span class="nc">.setRootWindow</span><span class="o">(</span><span class="nt">m_root</span><span class="o">);</span>
 
-// 得到主窗口
-m_mainWnd = static_cast&lt;CEGUI::FrameWindow*&gt;(m_root-&gt;getChild(&quot;Demo&quot;));
-m_mainWnd-&gt;subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
-CEGUI::Event::Subscriber(&amp;CGame::onEventHome, this));
+<span class="o">//</span> <span class="err">得到主窗口</span>
+<span class="nt">m_mainWnd</span> <span class="o">=</span> <span class="nt">static_cast</span><span class="o">&lt;</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:FrameWindow</span><span class="o">*&gt;(</span><span class="nt">m_root-</span><span class="o">&gt;</span><span class="nt">getChild</span><span class="o">(</span><span class="s2">&quot;Demo&quot;</span><span class="o">));</span>
+<span class="nt">m_mainWnd-</span><span class="o">&gt;</span><span class="nt">subscribeEvent</span><span class="o">(</span><span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:FrameWindow</span><span class="o">:</span><span class="nd">:EventCloseClicked</span><span class="o">,</span>
+<span class="nt">CEGUI</span><span class="o">:</span><span class="nd">:Event</span><span class="o">:</span><span class="nd">:Subscriber</span><span class="o">(&amp;</span><span class="nt">CGame</span><span class="o">:</span><span class="nd">:onEventHome</span><span class="o">,</span> <span class="nt">this</span><span class="o">));</span>
 
 
-martin-&gt;add_log(&quot;\n---------------------\n全部加载完毕...\n---------------------\n&quot;);
+<span class="nt">martin-</span><span class="o">&gt;</span><span class="nt">add_log</span><span class="o">(</span><span class="s2">&quot;\n---------------------\n全部加载完毕...\n---------------------\n&quot;</span><span class="o">);</span>
 
-m_root-&gt;setVisible(false);
-martin-&gt;ModuleHide(GetModuleHandle(&quot;D3D9_CEGUI.dll&quot;));
-m_bInit = true;
+<span class="nt">m_root-</span><span class="o">&gt;</span><span class="nt">setVisible</span><span class="o">(</span><span class="nt">false</span><span class="o">);</span>
+<span class="nt">martin-</span><span class="o">&gt;</span><span class="nt">ModuleHide</span><span class="o">(</span><span class="nt">GetModuleHandle</span><span class="o">(</span><span class="s2">&quot;D3D9_CEGUI.dll&quot;</span><span class="o">));</span>
+<span class="nt">m_bInit</span> <span class="o">=</span> <span class="nt">true</span><span class="o">;</span>
 </pre></div>
 
 
 <p>代码也没什么好说的, 标准的初始化 CEGUI 代码, 适用版本 8.0+ .</p>
 <p>接下来就是要游戏的画面上绘画我们刚初始化好的界面了, 我们只需要 HOOK IDevice 的 Present 虚函数即可:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Present(CONST RECT *pSourceRect, CONST RECT *pDestRect
-                , HWND hDestWindowOverride, CONST RGNDATA *pDirtyRegion) {
-    if (theApp.m_bInit) {
-        CEGUI::System::getSingleton().renderAllGUIContexts();
-    }
+<div class="highlight"><pre><span></span><span class="nt">HRESULT</span> <span class="nt">APIENTRY</span> <span class="nt">hkIDirect3DDevice9</span><span class="o">:</span><span class="nd">:Present</span><span class="o">(</span><span class="nt">CONST</span> <span class="nt">RECT</span> <span class="o">*</span><span class="nt">pSourceRect</span><span class="o">,</span> <span class="nt">CONST</span> <span class="nt">RECT</span> <span class="o">*</span><span class="nt">pDestRect</span>
+                <span class="o">,</span> <span class="nt">HWND</span> <span class="nt">hDestWindowOverride</span><span class="o">,</span> <span class="nt">CONST</span> <span class="nt">RGNDATA</span> <span class="o">*</span><span class="nt">pDirtyRegion</span><span class="o">)</span> <span class="p">{</span>
+    <span class="n">if</span> <span class="p">(</span><span class="n">theApp</span><span class="o">.</span><span class="n">m_bInit</span><span class="p">)</span> <span class="err">{</span>
+        <span class="n">CEGUI</span><span class="o">::</span><span class="n">System</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">()</span><span class="o">.</span><span class="n">renderAllGUIContexts</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    return m_pD3Ddev-&gt;Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
-}
+    <span class="nt">return</span> <span class="nt">m_pD3Ddev-</span><span class="o">&gt;</span><span class="nt">Present</span><span class="o">(</span><span class="nt">pSourceRect</span><span class="o">,</span> <span class="nt">pDestRect</span><span class="o">,</span> <span class="nt">hDestWindowOverride</span><span class="o">,</span> <span class="nt">pDirtyRegion</span><span class="o">);</span>
+<span class="err">}</span>
 </pre></div>
 
 
 <p>此时, CEGUI 已经初始化完毕了, 当然前提是你还需要准备 .layout 文件, 启动游戏并注入我们的 DLL 后, 暂时还是看不到我们的画面的, 因为上面的代码中倒数第三行 m_root-&gt;setVisible(false); 将窗体隐藏了, 为此, 我们可以 HOOK 游戏的窗口过程(HOOK 的代码就在上面 CreateDevice() 中), 然后给一个快捷键, 例如 HOME, 按下后, 就显示窗体.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">case</span> WM_KEYDOWN:
-<span style="color: #8B008B; font-weight: bold">switch</span> (wParam) {
-<span style="color: #8B008B; font-weight: bold">case</span> VK_HOME:
-    <span style="color: #8B008B; font-weight: bold">if</span> (m_bInit) {
-    <span style="color: #8B008B; font-weight: bold">if</span> (m_root-&gt;isVisible()) {
-        m_root-&gt;setVisible(<span style="color: #658b00">false</span>);
-    } <span style="color: #8B008B; font-weight: bold">else</span> {
-        m_root-&gt;setVisible(<span style="color: #658b00">true</span>);
-    }
-    }
-    <span style="color: #8B008B; font-weight: bold">break</span>;
-}
-<span style="color: #8B008B; font-weight: bold">break</span>;
-}
+<div class="highlight"><pre><span></span><span class="k">case</span> <span class="nl">WM_KEYDOWN</span><span class="p">:</span>
+<span class="k">switch</span> <span class="p">(</span><span class="n">wParam</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">case</span> <span class="nl">VK_HOME</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_bInit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_root</span><span class="o">-&gt;</span><span class="n">isVisible</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">m_root</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">m_root</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>但是我们 HOOK 窗口过程可并不只是因为这个需求;</p>
 <p>现在显示出来 CEGUI 窗体后, 你会发现, 窗体是静态的, 点击它, 拖动它, 完全不响应, 这是因为现在并没有把鼠标, 键盘等消息传递给 CEGUI, 也就是说, CEGUI 现在并不知道你点击了什么或者你拖动什么等等消息.
 我们 HOOK 游戏的窗口过程就是为了把这些消息传递给 CEGUI, 好让 CEGUI 去响应.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> (m_bInit) {
-    <span style="color: #8B008B; font-weight: bold">switch</span> (message) {
-    <span style="color: #8B008B; font-weight: bold">case</span> WM_MOUSEMOVE:
-        <span style="color: #228B22">//ShowCursor(true);</span>
-        <span style="color: #8B008B; font-weight: bold">if</span> (CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition((<span style="color: #a7a7a7; font-weight: bold">float</span>)(LOWORD(lparam))
-    , (<span style="color: #a7a7a7; font-weight: bold">float</span>)(HIWORD(lparam)))) {
-        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
-        }
-        <span style="color: #8B008B; font-weight: bold">break</span>;
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">m_bInit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nl">WM_MOUSEMOVE</span><span class="p">:</span>
+        <span class="c1">//ShowCursor(true);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">CEGUI</span><span class="o">::</span><span class="n">System</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">getDefaultGUIContext</span><span class="p">().</span><span class="n">injectMousePosition</span><span class="p">((</span><span class="kt">float</span><span class="p">)(</span><span class="n">LOWORD</span><span class="p">(</span><span class="n">lparam</span><span class="p">))</span>
+    <span class="p">,</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">HIWORD</span><span class="p">(</span><span class="n">lparam</span><span class="p">))))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
 
-    <span style="color: #8B008B; font-weight: bold">case</span> WM_LBUTTONDOWN:
-        <span style="color: #8B008B; font-weight: bold">if</span> (CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton)) {
-        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
-        }
-        <span style="color: #8B008B; font-weight: bold">break</span>;
-    }
-}
+    <span class="k">case</span> <span class="nl">WM_LBUTTONDOWN</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">CEGUI</span><span class="o">::</span><span class="n">System</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">getDefaultGUIContext</span><span class="p">().</span><span class="n">injectMouseButtonDown</span><span class="p">(</span><span class="n">CEGUI</span><span class="o">::</span><span class="n">LeftButton</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 

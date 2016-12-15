@@ -60,19 +60,19 @@ Java 通过 new 关键字生成具体的数组对象, 如 int[] n = new int[30];
 Java 中还提供了另外一种直接创建数组的方式, 它将声明数组、分配空间和赋值合并完成, 如 int[] n = { 10, 11, 12, 13 }, 或者可以这么写 int[] n = new int[]{ 10, 11, 12, 13 }.</p>
 <p>在 Java 中, 数组的访问和 C 中一致, 但是 Java 中的数组还提供了一些有用的属性和方法(因为它是一个对象), 这在 C 中就是不可能的了, 数组长度: length, 拷贝当前数组: clone().
 在 C 语言中, 要遍历一个数组需要提供两个数据, 数组名和数组长度, 在 Java 中就不需要提供长度了, 直接使用数组的 length 属性就可以了.</p>
-<hr />
+<hr>
 <p>二维数组</p>
 <p>所谓二维数组, 可以简单的理解为是一种“特殊”的一维数组, 它的每个数组空间中保存的是一个一维数组.</p>
 <p>二维数组定义方式: int[][] nn = null 或者 int nn[][] = null.</p>
 <p>不规则二维数组: 在定义二维数组时也可以只指定行的个数, 然后再为每一行分别指定列的个数, 如果每行的列数不同, 则创建的是不规则的二维数组, 如:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;[][] nn = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;[3&lt;span style=&quot;color: #000000;&quot;&gt;][];
-nn[&lt;/span&gt;0] = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;[5&lt;span style=&quot;color: #000000;&quot;&gt;];
-nn[&lt;/span&gt;1] = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;[6&lt;span style=&quot;color: #000000;&quot;&gt;];
-nn[&lt;/span&gt;2] = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;[7];
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>[][] nn = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>[3<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>][];
+nn[<span class="nt">&lt;/span&gt;</span>0] = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>[5<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>];
+nn[<span class="nt">&lt;/span&gt;</span>1] = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>[6<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>];
+nn[<span class="nt">&lt;/span&gt;</span>2] = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>[7];
 </pre></div>
 
 
-<hr />
+<hr>
 <p>Arrays 工具类</p>
 <p>Arrays 类是 Java 中提供的一个工具类, 在 java.util 包中, 该类中包含了一些方法用来直接操作数组, 比如可直接实现数组的排序、搜索等.</p>
 <p>Arrays 中常用的方法, 如:
@@ -95,7 +95,7 @@ nn[&lt;/span&gt;2] = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&
 </li>
 </ol>
 <p>具体的用法可以再参数网上资料.</p>
-<hr />
+<hr>
 <p>foreach</p>
 <p>在遍历数组、集合时, foreach 更简单便捷, 这种语法类似 C++11 中的 &lt;<a href="http://www.smallcpp.com/small_349.php">基于范围的 for 循环</a>&gt;.</p>
 <p>语法:</p>

@@ -54,7 +54,7 @@
 <p><strong>containsAll:</strong>
 判斷 Collection 中是否包含指定的所有元素.</p>
 <p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題? 這裡 List 和 Set 的解決方法是不同的;</p>
-<p><strong>先看 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<p><strong>先看 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -72,7 +72,7 @@
 
 <p>在寫測試代碼的時候, 發現個問題:
 程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
-<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -90,7 +90,7 @@
 
 <p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
 <p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
-<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -109,10 +109,10 @@
 <p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
 <p>Java 中的容器有两大接口: Collection 和 Map;</p>
 <p>Collection 又分为三个小接口: List、Queue 和 Set.</p>
-<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg"></p>
 <p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
-<hr />
-<p>Collection 接口是 List ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<hr>
+<p>Collection 接口是 List …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -130,7 +130,7 @@
 
 <p>Math 类位于 java.lang 包中, 包含用于执行基本数学运算的方法, Math 类的所有方法都是静态方法, 所以使用该类中的方法时, 可以直接使用类名.方法名, 如: Math.round();</p>
 <p>常用的方法:
-<img alt="" src="http://i59.tinypic.com/ofyt8z.jpg" /></p>
+<img alt="" src="http://i59.tinypic.com/ofyt8z.jpg"></p>
 <p>Math 类还提供了许多其他方法, 可自行查阅.
 ???</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
@@ -150,8 +150,8 @@
 
 <p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
 这个类最主要的作用就是获取当前时间.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
-&lt;span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="highlight"><pre><span></span>Date d = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> Date(); <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> Date 类的默认无参构造方法创建出的对象就代表当前时间<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -171,8 +171,8 @@
 <em>. 使用包装类的 toString() 方法
 </em>. 使用 String 类的 valueOf() 方法
 *. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
-String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> c = 10<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+String str1 <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -189,20 +189,20 @@ String str1 &lt;/span&gt;=&lt;span style=&quot;color ...</pre></div><p class="su
 
 
 <p>Java 为每个基本数据类型都提供了一个包装类, 这样我们就可以像操作对象那样来操作基本数据类型.</p>
-<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/nmep83.jpg"></p>
 <p>包装类主要提供了两大类方法:
 <em>. 将本类型和其他基本类型进行转换的方法
 </em>. 将字符串和本类型及包装类互相转换的方法</p>
-<hr />
+<hr>
 <p>以 Integet 为例, 其它类似</p>
 <p>Integer n1 = new Integer(5);
 Integet n2 = new Integer(“5”);</p>
-<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg" /></p>
-<hr />
+<p><img alt="" src="http://i60.tinypic.com/14j4tpw.jpg"></p>
+<hr>
 <p>JDK1.5 中引入了自动装箱和拆箱的机制</p>
 <p><strong>装箱：</strong>把基本类型转换成包装类，使其具有对象的性质，又可分为手动装箱和自动装箱;
-<img alt="" src="http://i59.tinypic.com/20rttud.jpg" /></p>
-<p><strong>拆箱：</strong>和装箱相反，把包装类对象转换成基本类型的值 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<img alt="" src="http://i59.tinypic.com/20rttud.jpg"></p>
+<p><strong>拆箱：</strong>和装箱相反，把包装类对象转换成基本类型的值 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -220,7 +220,7 @@ Integet n2 = new Integer(“5”);</p>
 
 <p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 StringBuilder 类或 StringBuffer 类存储字符串.</p>
 <p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.
-至于 StringBuilder 和StringBuffer ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+至于 StringBuilder 和StringBuffer …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 
@@ -238,8 +238,8 @@ Integet n2 = new Integer(“5”);</p>
 
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法：</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
-String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
+<div class="highlight"><pre><span></span>String si = &quot;xxx&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+String s2 <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>
 

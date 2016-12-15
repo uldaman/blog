@@ -56,118 +56,118 @@
     <p>观察者模式:
 定义对象间的一种一对多的依赖关系, 当一个对象的状态发生改变时, 所有依赖于它的对象都得到通知并被自动更新.</p>
 <p>这句话是什么意思呢?
-拿一个例子来说明会方便理解, 记得小时候的课堂吗? 当老师上课时, 全班同学都要&rdquo;观察&rdquo;老师的&rdquo;状态&rdquo;, 当老师转过身在黑板上写字的时候, 学霸们呢, 自然是开始做笔记了..学渣们嘛..当然是开始做小动作啦&hellip;</p>
-<p>在这个例子中, 学生就是观察者, 老师是被观察者, 当被观察者(老师)的状态发生改变时, 观察者(学生)就&rdquo;接受&rdquo;到通知, 然后..该干嘛就去干嘛..
-这个 [老师&ndash;学生] 的模型应该如下:</p>
-<p><img alt="" src="http://i59.tinypic.com/2luz0wy.jpg" /></p>
+拿一个例子来说明会方便理解, 记得小时候的课堂吗? 当老师上课时, 全班同学都要"观察"老师的"状态", 当老师转过身在黑板上写字的时候, 学霸们呢, 自然是开始做笔记了..学渣们嘛..当然是开始做小动作啦...</p>
+<p>在这个例子中, 学生就是观察者, 老师是被观察者, 当被观察者(老师)的状态发生改变时, 观察者(学生)就"接受"到通知, 然后..该干嘛就去干嘛..
+这个 [老师--学生] 的模型应该如下:</p>
+<p><img alt="" src="http://i59.tinypic.com/2luz0wy.jpg"></p>
 <p>OK, 现在来用 C++ 代码来实现这个模型.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
-#include &lt;/span&gt;&lt;tchar.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
-#include &lt;/span&gt;&lt;list&gt;&lt;span style=&quot;color: #000000&quot;&gt;
-#include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;iostream&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
+<div class="highlight"><pre><span></span>#include <span class="nt">&lt;windows.h&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+#include <span class="nt">&lt;/span&gt;&lt;tchar.h&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+#include <span class="nt">&lt;/span&gt;&lt;list&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+#include <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>iostream<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span>
 
-&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Student {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Student {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
     Student() {};
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; ~&lt;span style=&quot;color: #000000&quot;&gt;Student() {};
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> ~<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Student() {};
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; Update() = &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Update() = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;bool&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;operator&lt;/span&gt; == (&lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; Student&amp; stu) { &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;用remove要重载==，除非是内置类型&lt;/span&gt;
-        &lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (m_name ==&lt;span style=&quot;color: #000000&quot;&gt; stu.m_name) {
-            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;true&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>bool<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>operator<span class="nt">&lt;/span&gt;</span> == (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>const<span class="nt">&lt;/span&gt;</span> Student<span class="err">&amp;</span> stu) { <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>用remove要重载==，除非是内置类型<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> (m_name ==<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> stu.m_name) {
+            <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
         }
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;false&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
     }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    std::&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; m_name;
-    std::&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; m_studentState;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>protected<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+    std::<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> m_name;
+    std::<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> m_studentState;
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Teacher {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Teacher {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
     Teacher() {};
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; ~&lt;span style=&quot;color: #000000&quot;&gt;Teacher() {};
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> ~<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Teacher() {};
 
-    std::&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; m_teacherState;
+    std::<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> m_teacherState;
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; Attach(Student*&lt;span style=&quot;color: #000000&quot;&gt; pStudent) {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Attach(Student*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> pStudent) {
         m_IList.push_back(pStudent);
     }
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; Detack(Student*&lt;span style=&quot;color: #000000&quot;&gt; pStudent) {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Detack(Student*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> pStudent) {
         m_IList.remove(pStudent);
     }
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Notify() {};
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Notify() {};
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    std::list&lt;/span&gt;&lt;Student*&gt;&lt;span style=&quot;color: #000000&quot;&gt; m_IList;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>protected<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+    std::list<span class="nt">&lt;/span&gt;&lt;Student</span><span class="err">*</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> m_IList;
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; XueBa
-    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Student {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    XueBa(Teacher&lt;/span&gt;* teacher, std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; name) {
-        m_pTeacher &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; teacher;
-        m_name &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; name;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> XueBa
+    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Student {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+    XueBa(Teacher<span class="nt">&lt;/span&gt;</span>* teacher, std::<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name) {
+        m_pTeacher <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> teacher;
+        m_name <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name;
     }
-    &lt;/span&gt;~XueBa() &lt;span style=&quot;color: #0000ff&quot;&gt;override&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {}
+    <span class="nt">&lt;/span&gt;</span>~XueBa() <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>override<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {}
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Update() {
-        m_studentState &lt;/span&gt;= m_pTeacher-&gt;&lt;span style=&quot;color: #000000&quot;&gt;m_teacherState;
-        std::cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;我是学霸 &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; &lt;&lt; m_name.c_str() &lt;&lt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; &lt;&lt; &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;老师在 &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; &lt;&lt; m_studentState.c_str() &lt;&lt;&lt;span style=&quot;color: #000000&quot;&gt; std::endl;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Update() {
+        m_studentState <span class="nt">&lt;/span&gt;</span>= m_pTeacher-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>m_teacherState;
+        std::cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>我是学霸 <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;</span><span class="nt">&lt; m_name.c_str</span><span class="err">()</span> <span class="err">&lt;&lt;</span> <span class="err">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>, <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>老师在 <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;</span><span class="nt">&lt; m_studentState.c_str</span><span class="err">()</span> <span class="err">&lt;&lt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> std::endl;
     }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
-    Teacher&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; m_pTeacher;
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>protected<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+    Teacher<span class="nt">&lt;/span&gt;</span>*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> m_pTeacher;
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MathTeacher
-    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Teacher {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> MathTeacher
+    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Teacher {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
     MathTeacher() {};
-    &lt;/span&gt;~MathTeacher() &lt;span style=&quot;color: #0000ff&quot;&gt;override&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {};
+    <span class="nt">&lt;/span&gt;</span>~MathTeacher() <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>override<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {};
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; Notify() &lt;span style=&quot;color: #0000ff&quot;&gt;override&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (auto v : m_IList) {
-            v&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000&quot;&gt;Update();
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Notify() <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>override<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> (auto v : m_IList) {
+            v<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Update();
         }
     }
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000&quot;&gt; argv[]) {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> _tmain(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> argc, _TCHAR*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> argv[]) {
     MathTeacher teacher;
 
-    XueBa st1(&lt;/span&gt;&amp;teacher, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;张三&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    XueBa st2(&lt;/span&gt;&amp;teacher, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;李四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    XueBa st1(<span class="nt">&lt;/span&gt;</span><span class="err">&amp;</span>teacher, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>张三<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+    XueBa st2(<span class="nt">&lt;/span&gt;</span><span class="err">&amp;</span>teacher, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>李四<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
 
-    teacher.Attach(&lt;/span&gt;&amp;st1); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 张三进入教室&lt;/span&gt;
-    teacher.Attach(&amp;st2); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 李四进入教室&lt;/span&gt;
-    teacher.m_teacherState = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;讲课&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-    teacher.Notify(); &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 发出通知&lt;/span&gt;
-&lt;span style=&quot;color: #000000&quot;&gt;
-    printf(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;----------------------------------------\r\n&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    teacher.Attach(<span class="nt">&lt;/span&gt;</span><span class="ni">&amp;st1);</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 张三进入教室<span class="nt">&lt;/span&gt;</span>
+    teacher.Attach(<span class="ni">&amp;st2);</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 李四进入教室<span class="nt">&lt;/span&gt;</span>
+    teacher.m_teacherState = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>讲课<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+    teacher.Notify(); <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 发出通知<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+    printf(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>----------------------------------------\r\n<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
 
-    teacher.Detack(&lt;/span&gt;&amp;st2); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 李四 从后门逃课了..&lt;/span&gt;
-    teacher.m_teacherState = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;点名&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-    teacher.Notify(); &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 发出通知&lt;/span&gt;
-&lt;span style=&quot;color: #000000&quot;&gt;
-    system(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-}&lt;/span&gt;
+    teacher.Detack(<span class="nt">&lt;/span&gt;</span><span class="ni">&amp;st2);</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 李四 从后门逃课了..<span class="nt">&lt;/span&gt;</span>
+    teacher.m_teacherState = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>点名<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+    teacher.Notify(); <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 发出通知<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+    system(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>PAUSE<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 
-<p><img alt="" src="http://i58.tinypic.com/sw72c1.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/sw72c1.jpg"></p>
 <p>原始的观察者模式 UML 图如下:</p>
-<p><img alt="" src="http://i61.tinypic.com/2cdzyva.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/2cdzyva.jpg"></p>
 <p><strong>Subject:</strong> 抽象通知者(被观察者), 它把所有观察者对象的引用保存在一个集合里, 保存一个有关状态信息的属性, 提供三个虚方法来添加、删除、通知观察者对象.
 <strong>ConcreteSubject:</strong> 具体通知者类, 当通知者内部状态发生改变时, 给所有添加过的观察者发出通知. 它可以直接用 Subject 的方法, 也可以重写它们.
 <strong>Observer:</strong> 抽象观察者, 它保存一个状态信息的属性, 以便本身的状态和通知者状态相协调, 有定义一个接口, 在得到通知时更新自己.
 <strong>ConcreteObserver:</strong> 具体观察者, 实现象观察者的更新接口.</p>
-<h1 id="_1">适用场景</h1>
+<h1>适用场景</h1>
 <p>当一个对象的改变需要同时改变其他对象, 而它并不用知道有多少对象待改变时, 应该考虑使用观察者模式.
 观察者模式所做的工作其实就是在解除耦合, 让耦合的双方都依赖于抽象, 而不是依赖于具体, 从而使得各自的变化都不会影响另一边的变化.
  0</p>

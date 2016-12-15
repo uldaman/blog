@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h1 id="_1">题记</h1>
+    <h1>题记</h1>
 <blockquote>None question is stupid question.
 
 今天的苦逼是为了不这样一直苦逼下去!</blockquote>
@@ -81,7 +81,7 @@ Linux 有两种版本, 一种叫核心版本, 是由官方维护发布的.
 用户可以把其中一个主分区拿出来变为扩展分区, 然后可以对扩展分区可以进行再分区, 这些分区被称为逻辑分区.
 如下图, 整块硬盘被分成四块分区, 然后把第四块分区变成扩展分区进行再分区, 如是又有了两块逻辑分区.
 要注意的是扩展分区不能写入数据, 它只被用来包含逻辑分区.
-<img alt="" src="http://i60.tinypic.com/2n6f9ko.jpg" /></p>
+<img alt="" src="http://i60.tinypic.com/2n6f9ko.jpg"></p>
 <p>再来说下文件系统, 什么是文件系统?
 文件系统是操作系统用于明确磁盘或分区上的文件的方法和数据结构; 即在磁盘上组织文件的方法, 也指用于存储文件的磁盘或分区或文件系统种类.
 对于 Windows 来说, 它支持的文件系统有: FAT16、FAT32、NTFS; 现在大部分都在使用 NTFS. 具体有什么区别, 这理不做记录了, 了解下就好.
@@ -89,7 +89,7 @@ Linux 有两种版本, 一种叫核心版本, 是由官方维护发布的.
 <p>在前面已经说过 [Linux 中所有内容以文件形式保存, 包换硬件, 即<strong>一切内容皆文件</strong>] 这个概念, 现在我们就来深入理解它.
 首先, 计算机是由各个硬盘组成的: 硬盘、鼠标、软盘、CPU、主板、显卡等.
 这些硬件配备在 Linux 下都是以文件名存在. 底下列出了常见的硬件设备文件名:</p>
-<p><img alt="" src="http://i59.tinypic.com/24vo0ic.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/24vo0ic.jpg"></p>
 <p>可以看到所有的档名成缀都是 <strong>/dev.</strong>
 dev 是设备(device)的英文缩写. 这个目录中包含了所有 Linux 系统中使用的外部设备.
 它实际上是一个访问这些外部设备的端口, 可以非常方便地去访问这些外部设备, 就像访问一个文件、一个目录那样.
@@ -97,18 +97,18 @@ dev 是设备(device)的英文缩写. 这个目录中包含了所有 Linux 系�
 <p>现在已经有硬盘了(假设是 /dev/sda), 由于Linux 下一切内容皆文件, 那么硬盘的分区又是怎么命名的呢?
 很简单, 四大主分区为 <strong>/dev/sda[1 - 4],</strong> 逻辑分区为 <strong>/dev/sda[5 - 15]</strong> (IDE 硬盘是 5 - 63).
 要注意一下的就是逻辑分区是 5 开头, 1-4 是保留给主分区或扩展分区的.</p>
-<p><img alt="" src="http://i61.tinypic.com/abma89.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/abma89.jpg"></p>
 <p>现在有了硬盘有了分区, 但是怎么访问它们呢? 怎么向其中读/写数据呢?
 先来看看 Windows 下的做法.
 Windows 下对硬盘分好区后, 还要对其指定盘符才能正常访问使用.</p>
-<p><img alt="" src="http://i57.tinypic.com/29pxajd.jpg" /></p>
+<p><img alt="" src="http://i57.tinypic.com/29pxajd.jpg"></p>
 <p>理论上 Windows 总共可以存在 26 个分区 (A~Z).</p>
 <p><strong>说完了 Windows , 现在来看看 Linux.
 </strong>在 Linux 下要对分区进行读写就要引入一个挂载的概念了.
 所谓的『挂载』就是设置一个目录当成进入点, 将磁盘分区的数据放置在该目录下; 也就是说, 进入该目录就可以读/写该分区数据的意思;
 那个被当成进入点的目录称为『挂载点』(我们可以理解成挂载点就是Windows下的盘符, 但是每个挂载点都有自己的作用, 不是随便挂载的);
 底下是 Linux 分区挂载点的一些介绍:</p>
-<p><img alt="" src="http://i61.tinypic.com/5al3ld.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/5al3ld.jpg"></p>
 <p>由于整个 Linux 系统最重要的是<strong>根分区挂载点</strong>, 因此根分区挂载点一定需要挂载到某个分区的;
 另一个叫做<strong> swap</strong> 的分区挂载点也是必须的, 它的功能类似 Windows 下的虚拟内存.
 <strong>启动分区挂载点</strong>虽然不是必须的, 但也推荐指定, 因为默认没有指定的挂载点都放在根分区挂载点下, 如果根分区挂载点写入了大量数据会导致系统的启动文件被冲掉…然后..你懂的..
@@ -122,17 +122,17 @@ Windows 下对硬盘分好区后, 还要对其指定盘符才能正常访问使�
 例如, 如果分区 /dev/hda1 被 挂载在 /usr 上, 这意味着所有在 /usr 之下的文件和目录在物理意义上位于分区 /dev/hda5 上.</p>
 <p>下面是以 80G 独立硬盘为例定制的分区方案:</p>
 <p>1、普通桌面用户推荐分区方案（示例：80G桌面用户）：</p>
-<p><img alt="" src="http://i62.tinypic.com/qr1bvl.jpg" /></p>
+<p><img alt="" src="http://i62.tinypic.com/qr1bvl.jpg"></p>
 <p>2、服务器用户推荐分区方案一（示例：80GWEB服务器用户，用户程序与系统程序合用usr）：</p>
-<p><img alt="" src="http://i61.tinypic.com/107tnxg.jpg" /></p>
+<p><img alt="" src="http://i61.tinypic.com/107tnxg.jpg"></p>
 <p>3、服务器用户推荐分区方案二（示例：80GWEB服务器用户，用户程序与系统程序分用opt和usr）：</p>
-<p><img alt="" src="http://i58.tinypic.com/2mpz90y.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/2mpz90y.jpg"></p>
 <p>分区方案关键点：
 ——大数据库一般要加大/usr挂载点
 ——多用户、下载类、多存储文件等要加大/home挂载点
 ——文件小，用户多要注意/tmp和/var挂载点大小</p>
 <p>看到这里, 也许已经对 Linux 系统有了一了解了.
-如果对分区和挂载的概念不是很明白是正常的, 因为在我看来, Linux 最容易让人混淆的地方其实就是在<strong>目录树结构和文件系统之间的关系</strong>&hellip;后面的第六篇笔记中详细的解释了这两个概念.所以如果现在不清楚的话, 也请暂时忘记它们&hellip;</p>
+如果对分区和挂载的概念不是很明白是正常的, 因为在我看来, Linux 最容易让人混淆的地方其实就是在<strong>目录树结构和文件系统之间的关系</strong>...后面的第六篇笔记中详细的解释了这两个概念.所以如果现在不清楚的话, 也请暂时忘记它们...</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
 
 </p>

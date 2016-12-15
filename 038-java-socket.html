@@ -53,17 +53,11 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#tcp-vs-udp">TCP VS UDP</a></li>
-<li><a href="#java-socket">Java Socket</a></li>
-<li><a href="#_1">代码片段</a></li>
-</ul>
-</div>
+    <p>[TOC]</p>
 <p>References:<br>
 <a href="http://www.cnblogs.com/rond/p/3565113.html">[Java] Socket 和 ServerSocket 学习笔记</a><br>
 <a href="http://haohaoxuexi.iteye.com/blog/1979837">Java Socket 编程</a></p>
-<h1 id="tcp-vs-udp">TCP VS UDP</h1>
+<h1>TCP VS UDP</h1>
 <p><strong>UDP:</strong></p>
 <ul>
 <li>每个数据报中都给出了完整的地址信息, 因此无需建立发送方和接收方的连接</li>
@@ -81,20 +75,20 @@
 <li>TCP 在网络通信上有极强的生命力, 例如远程连接 (Telnet) 和文件传输 (FTP) 都需要不定长度的数据被可靠地传输; 但是可靠的传输是要付出代价的, 对数据内容正确性的检验必然占用计算机的处理时间和网络的带宽, 因此 TCP 传输的效率不如 UDP 高</li>
 <li>UDP 操作简单, 而且仅需要较少的监护, 因此通常用于局域网高可靠性的分散系统中 client/server 应用程序; 例如视频会议系统, 并不要求音频视频数据绝对的正确, 只要保证连贯性就可以了, 这种情况下显然使用 UDP 会更合理一些</li>
 </ul>
-<h1 id="java-socket">Java Socket</h1>
+<h1>Java Socket</h1>
 <p>在 Java 环境下, Socket 主要是指基于 TCP/IP 协议的网络编程 (UDP 用的是另一套).</p>
 <p>在包 java.net 中提供了两个类 <code>Socket</code> 和 <code>ServerSocket</code>, 分别用来表示双向连接的客户端和服务端, 这是两个封装得非常好的类, 使用很方便, 其<strong>构造方法</strong>如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port);
-Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">boolean</span> stream);
-Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> prot);
-Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> prot, <span style="color: #a7a7a7; font-weight: bold">boolean</span> stream);
-Socket(SocketImpl impl)
-Socket(String host, <span style="color: #a7a7a7; font-weight: bold">int</span> port, InetAddress localAddr, <span style="color: #a7a7a7; font-weight: bold">int</span> localPort)
-Socket(InetAddress address, <span style="color: #a7a7a7; font-weight: bold">int</span> port, InetAddress localAddr, <span style="color: #a7a7a7; font-weight: bold">int</span> localPort)
+<div class="highlight"><pre><span></span><span class="n">Socket</span><span class="o">(</span><span class="n">InetAddress</span> <span class="n">address</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">);</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">InetAddress</span> <span class="n">address</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">stream</span><span class="o">);</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">String</span> <span class="n">host</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prot</span><span class="o">);</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">String</span> <span class="n">host</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prot</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">stream</span><span class="o">);</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">SocketImpl</span> <span class="n">impl</span><span class="o">)</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">String</span> <span class="n">host</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="n">InetAddress</span> <span class="n">localAddr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">localPort</span><span class="o">)</span>
+<span class="n">Socket</span><span class="o">(</span><span class="n">InetAddress</span> <span class="n">address</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="n">InetAddress</span> <span class="n">localAddr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">localPort</span><span class="o">)</span>
 
-ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port);
-ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">int</span> backlog);
-ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port, <span style="color: #a7a7a7; font-weight: bold">int</span> backlog, InetAddress bindAddr)
+<span class="n">ServerSocket</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">);</span>
+<span class="n">ServerSocket</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="o">);</span>
+<span class="n">ServerSocket</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="o">,</span> <span class="n">InetAddress</span> <span class="n">bindAddr</span><span class="o">)</span>
 </pre></div>
 
 
@@ -111,88 +105,88 @@ ServerSocket(<span style="color: #a7a7a7; font-weight: bold">int</span> port, <s
 <p>0~1023 的端口号为系统所保留, 例如 http 服务的端口号为 80, telnet 服务的端口号为 21, ftp 服务的端口号为 23, 所以在选择端口号时, 最好选择一个大于 1023 的数以防止发生冲突.</p>
 <p>在创建 socket 时如果发生错误, 将产生 IOException, 在程序中必须对之作出处理, 所以在创建 Socket 或 ServerSocket 是必须捕获或抛出例外.</p>
 <p><strong>Socket 方法</strong></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>getInetAddress();   <span style="color: #228B22">//远程服务端的 IP 地址</span>
-getPort();          <span style="color: #228B22">//远程服务端的端口</span>
-getLocalAddress();  <span style="color: #228B22">//本地客户端的 IP 地址</span>
-getLocalPort();     <span style="color: #228B22">//本地客户端的端口</span>
-getInputStream();   <span style="color: #228B22">//获得输入流</span>
-getOutStream();     <span style="color: #228B22">//获得输出流</span>
+<div class="highlight"><pre><span></span><span class="n">getInetAddress</span><span class="o">();</span>   <span class="c1">//远程服务端的 IP 地址</span>
+<span class="n">getPort</span><span class="o">();</span>          <span class="c1">//远程服务端的端口</span>
+<span class="n">getLocalAddress</span><span class="o">();</span>  <span class="c1">//本地客户端的 IP 地址</span>
+<span class="n">getLocalPort</span><span class="o">();</span>     <span class="c1">//本地客户端的端口</span>
+<span class="n">getInputStream</span><span class="o">();</span>   <span class="c1">//获得输入流</span>
+<span class="n">getOutStream</span><span class="o">();</span>     <span class="c1">//获得输出流</span>
 </pre></div>
 
 
 <p><br>
 值得注意的是, 在这些方法里面, 最重要的就是 <code>getInputStream()</code> 和 <code>getOutputStream()</code>了.</p>
 <p><strong>Socket 状态</strong></p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>isClosed();     <span style="color: #228B22">//连接是否已关闭, 若关闭, 返回 true；否则返回 false</span>
-isConnect();    <span style="color: #228B22">//如果曾经连接过, 返回 true；否则返回 false</span>
-isBound();      <span style="color: #228B22">//如果 Socket 已经与本地一个端口绑定, 返回 true；否则返回 false</span>
+<div class="highlight"><pre><span></span><span class="n">isClosed</span><span class="o">();</span>     <span class="c1">//连接是否已关闭, 若关闭, 返回 true；否则返回 false</span>
+<span class="n">isConnect</span><span class="o">();</span>    <span class="c1">//如果曾经连接过, 返回 true；否则返回 false</span>
+<span class="n">isBound</span><span class="o">();</span>      <span class="c1">//如果 Socket 已经与本地一个端口绑定, 返回 true；否则返回 false</span>
 </pre></div>
 
 
 <p><br>
 如果要确认 Socket 的状态是否处于连接中, 下面语句是很好的判断方式:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">boolean</span> isConnection=socket.<span style="color: #658b00">isConnected</span>() &amp;&amp; !socket.<span style="color: #658b00">isClosed</span>();   <span style="color: #228B22">//判断当前是否处于连接</span>
+<div class="highlight"><pre><span></span><span class="kt">boolean</span> <span class="n">isConnection</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="na">isConnected</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">socket</span><span class="o">.</span><span class="na">isClosed</span><span class="o">();</span>   <span class="c1">//判断当前是否处于连接</span>
 </pre></div>
 
 
 <p><br></p>
-<h1 id="_1">代码片段</h1>
+<h1>代码片段</h1>
 <p>客户端</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Socket socket = <span style="color: #8B008B; font-weight: bold">new</span> Socket(<span style="color: #CD5555">&quot;127.0.0.1&quot;</span>, <span style="color: #B452CD">9999</span>);  <span style="color: #228B22">//创建 Socket 指定 ip 地址和端口号</span>
-InputStream is = socket.<span style="color: #658b00">getInputStream</span>();   <span style="color: #228B22">//获取输入流</span>
-OutputStream os = socket.<span style="color: #658b00">getOutputStream</span>(); <span style="color: #228B22">//获取输出流</span>
-BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(is));
-PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(os);
+<div class="highlight"><pre><span></span><span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Socket</span><span class="o">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="o">,</span> <span class="mi">9999</span><span class="o">);</span>  <span class="c1">//创建 Socket 指定 ip 地址和端口号</span>
+<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>   <span class="c1">//获取输入流</span>
+<span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span> <span class="c1">//获取输出流</span>
+<span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">));</span>
+<span class="n">PrintStream</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
 
-System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;我想报名就业班&quot;</span>);
-System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;爷不学了&quot;</span>);
-socket.<span style="color: #658b00">close</span>();
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+<span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;我想报名就业班&quot;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+<span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;爷不学了&quot;</span><span class="o">);</span>
+<span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </pre></div>
 
 
 <p><br>
 服务端</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ServerSocket server = <span style="color: #8B008B; font-weight: bold">new</span> ServerSocket(<span style="color: #B452CD">9999</span>);   <span style="color: #228B22">//创建服务器</span>
-Socket socket = server.<span style="color: #658b00">accept</span>();            <span style="color: #228B22">//接受客户端的请求</span>
-InputStream is = socket.<span style="color: #658b00">getInputStream</span>();   <span style="color: #228B22">//获取输入流</span>
-OutputStream os = socket.<span style="color: #658b00">getOutputStream</span>(); <span style="color: #228B22">//获取输出流</span>
+<div class="highlight"><pre><span></span><span class="n">ServerSocket</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="mi">9999</span><span class="o">);</span>   <span class="c1">//创建服务器</span>
+<span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>            <span class="c1">//接受客户端的请求</span>
+<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>   <span class="c1">//获取输入流</span>
+<span class="n">OutputStream</span> <span class="n">os</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">();</span> <span class="c1">//获取输出流</span>
 
-BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(is));
-PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(os);
+<span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">is</span><span class="o">));</span>
+<span class="n">PrintStream</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="n">os</span><span class="o">);</span>
 
-ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;欢迎咨询 Java 培训班&quot;</span>);
-System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;班满了, 请报下一期吧&quot;</span>);
-System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-server.<span style="color: #658b00">close</span>();
-socket.<span style="color: #658b00">close</span>();
+<span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;欢迎咨询 Java 培训班&quot;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+<span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;班满了, 请报下一期吧&quot;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+<span class="n">server</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </pre></div>
 
 
 <p><br>
 多线程版服务端</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>ServerSocket server = <span style="color: #8B008B; font-weight: bold">new</span> ServerSocket(<span style="color: #B452CD">9999</span>);   <span style="color: #228B22">//创建服务器</span>
-    <span style="color: #8B008B; font-weight: bold">while</span>(<span style="color: #8B008B; font-weight: bold">true</span>) {
-        <span style="color: #8B008B; font-weight: bold">final</span> Socket socket = server.<span style="color: #658b00">accept</span>();  <span style="color: #228B22">//接受客户端的请求</span>
-        <span style="color: #8B008B; font-weight: bold">new</span> Thread() {
-            <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #a7a7a7; font-weight: bold">void</span> <span style="color: #008b45">run</span>() {
-                <span style="color: #8B008B; font-weight: bold">try</span> {
-                    BufferedReader br = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(socket.<span style="color: #658b00">getInputStream</span>()));
-                    PrintStream ps = <span style="color: #8B008B; font-weight: bold">new</span> PrintStream(socket.<span style="color: #658b00">getOutputStream</span>());
-                    ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;欢迎咨询 Java 培训班&quot;</span>);
-                    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-                    ps.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;班满了, 请报下一期吧&quot;</span>);
-                    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(br.<span style="color: #658b00">readLine</span>());
-                    socket.<span style="color: #658b00">close</span>();
-                } <span style="color: #8B008B; font-weight: bold">catch</span> (IOException e) {
-                    e.<span style="color: #658b00">printStackTrace</span>();
-                }
-            }
-        }.<span style="color: #658b00">start</span>();
-    }
-}
+<div class="highlight"><pre><span></span><span class="n">ServerSocket</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServerSocket</span><span class="o">(</span><span class="mi">9999</span><span class="o">);</span>   <span class="c1">//创建服务器</span>
+    <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">Socket</span> <span class="n">socket</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>  <span class="c1">//接受客户端的请求</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
+                    <span class="n">PrintStream</span> <span class="n">ps</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+                    <span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;欢迎咨询 Java 培训班&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+                    <span class="n">ps</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;班满了, 请报下一期吧&quot;</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+                    <span class="n">socket</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 

@@ -51,8 +51,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3D9</span><span class="o">::</span><span class="n">CreateDevice</span><span class="p">(</span><span class="n">UINT</span> <span class="n">Adapter</span><span class="p">,</span> <span class="n">D3DDEVTYPE</span> <span class="n">DeviceType</span><span class="p">,</span> <span class="n">HWND</span> <span class="n">hFocusWindow</span>
+    <span class="p">,</span> <span class="n">DWORD …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -72,10 +72,10 @@
 <p>首先是 Debug 和 Release 版本通用设置:</p>
 <ol>
 <li>[包含目录] 和 [库目录] 的设置
-<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg"></li>
 </ol>
 <p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
-E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -93,7 +93,7 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 
 <p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
 <p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
-<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -110,18 +110,18 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 
 
 <blockquote>
-<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+<p>说明: 这些文章都是本人学习"devbean QT 学习之路2"的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
 </blockquote>
 <p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
-<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg" /></p>
-<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg" /></p>
+<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg"></p>
+<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg"></p>
 <p>实现代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a7a7a7; font-weight: bold">void</span> Qt_Notepad::OpenFile() {
-    QString fileName = QFileDialog::getOpenFileName(<span style="color: #8B008B; font-weight: bold">this</span>, <span style="color: #CD5555">&quot;Open File&quot;</span>, <span style="color: #658b00">NULL</span>, <span style="color: #CD5555">&quot;file (*.*)&quot;</span>);
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Qt_Notepad</span><span class="o">::</span><span class="n">OpenFile</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">QString</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">::</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&quot;Open File&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;file (*.*)&quot;</span><span class="p">);</span>
 
-    <span style="color: #8B008B; font-weight: bold">if</span> (!fileName.isEmpty()) {
-        QFile file;
-        file ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fileName</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">QFile</span> <span class="n">file</span><span class="p">;</span>
+        <span class="n">file …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -150,7 +150,7 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 <li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
 <li><code>QPrintDialog</code>: 打印机配置;</li>
 <li><code>QPrintPreviewDialog</code>: 打印预览;</li>
-<li><code>QProgressDialog ...</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<li><code>QProgressDialog …</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -172,9 +172,9 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 
 <p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
-<h1 id="_1">模态对话框</h1>
+<h1>模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
-<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -191,10 +191,10 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 
 
 <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;</span> MyDialog : <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QDialog {
     Q_OBJECT
 
-&lt;/span ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<span class="nt">&lt;/span …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -215,7 +215,7 @@ CEGUI 开发者的目的是希望能够让游戏开发人员从繁琐的 GUI 实
 CEGUI 的渲染需要 3D 图形 API 的支持，如 OpenGL 或 Direct3D, 另外, 使用更高级的图形库也是可以的, 比如OGRE、Irrlicht和RenderWare等.</p>
 <p><strong>编译:</strong>
 vs2013
-Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+Directx …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -240,7 +240,7 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
 <p><strong>所在组</strong>
 当某个用户创建了一个文件后, 该文件的所在组就是该用户所在的组.
 用 ls -ahl 可以看到文件的所在组.
-也可以用 chgrp 组名 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
+也可以用 chgrp 组名 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
 
 </p>
 
@@ -256,14 +256,14 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
 </h6>
 
 
-<h1 id="_1">用户和用户组</h1>
+<h1>用户和用户组</h1>
 <p><strong>
 </strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, <strong>用户</strong>指的就是使用操作系统的人;
 而<strong>用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
 <p>来看一个例子(借用鸟哥的私房菜).
 假设有一家人, 家里只有三兄弟, 分别是大毛、二毛与三毛. 对于这三人而言, 客厅、厨房、WC等是共同拥有的, 大家都有权限使用.
 由于三人各自拥有自己的房间, 三毛觉得让大毛、二毛进入自己的房间无可厚非, 但是自己写给小丽的情书可不能被他们看见, 于是三毛把情书锁在抽屉里.
-所以, 大毛、二毛虽然可以进入三毛的房间, 但总不能撬三毛的抽屉吧 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
+所以, 大毛、二毛虽然可以进入三毛的房间, 但总不能撬三毛的抽屉吧 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ji-chu.html">大数据 Linux 基础</a>
 
 </p>
 

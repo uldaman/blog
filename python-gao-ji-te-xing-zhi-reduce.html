@@ -55,31 +55,31 @@
 
     <p>reduce() 函数接收两个参数, 一个是函数, 一个是序列;</p>
 <p>但传入的这个函数必须接收<strong>两个参数</strong>, reduce() 会把这个函数运算的结果继续和序列的下一个元素做<strong>累积</strong>运算, 相当于:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">reduce</span>(fun, [x1, x2, x3, x4]) = fun(fun(fun(x1, x2), x3), x4)
+<div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span><span class="p">])</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">),</span> <span class="n">x3</span><span class="p">),</span> <span class="n">x4</span><span class="p">)</span>
 </pre></div>
 
 
 <p>例子, 对序列求和:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">add</span>(x, y):
-    <span style="color: #8B008B; font-weight: bold">return</span> x + y
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
-<span style="color: #658b00">reduce</span>(add, [<span style="color: #B452CD">1</span>, <span style="color: #B452CD">3</span>, <span style="color: #B452CD">5</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">9</span>])
-&gt;&gt;&gt;<span style="color: #B452CD">25</span>
+<span class="nb">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="mi">25</span>
 </pre></div>
 
 
 <p>lambda 简化版:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">reduce</span>(<span style="color: #8B008B; font-weight: bold">lambda</span> x, y : x + y, [<span style="color: #B452CD">1</span>, <span style="color: #B452CD">3</span>, <span style="color: #B452CD">5</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">9</span>])
-&gt;&gt;&gt;<span style="color: #B452CD">25</span>
+<div class="highlight"><pre><span></span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span><span class="mi">25</span>
 </pre></div>
 
 
 <p>再来一个例子, 因为 <strong>python 中字符串 str 也是一个序列</strong>, 所以可以借此实现 python 自带的 int() 函数功能, 把一个字符串转换成整数:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">CharToNum</span>(i):
-    <span style="color: #8B008B; font-weight: bold">return</span> {<span style="color: #CD5555">&#39;0&#39;</span>: <span style="color: #B452CD">0</span>, <span style="color: #CD5555">&#39;1&#39;</span>: <span style="color: #B452CD">1</span>, <span style="color: #CD5555">&#39;2&#39;</span>: <span style="color: #B452CD">2</span>, <span style="color: #CD5555">&#39;3&#39;</span>: <span style="color: #B452CD">3</span>, <span style="color: #CD5555">&#39;4&#39;</span>: <span style="color: #B452CD">4</span>, <span style="color: #CD5555">&#39;5&#39;</span>: <span style="color: #B452CD">5</span>, <span style="color: #CD5555">&#39;6&#39;</span>: <span style="color: #B452CD">6</span>, <span style="color: #CD5555">&#39;7&#39;</span>: <span style="color: #B452CD">7</span>, <span style="color: #CD5555">&#39;8&#39;</span>: <span style="color: #B452CD">8</span>, <span style="color: #CD5555">&#39;9&#39;</span>: <span style="color: #B452CD">9</span>}[i]
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CharToNum</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;8&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}[</span><span class="n">i</span><span class="p">]</span>
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">StrToInt</span>(s):
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">reduce</span>(<span style="color: #8B008B; font-weight: bold">lambda</span> x, y : x * <span style="color: #B452CD">10</span> + y, <span style="color: #658b00">map</span>(CharToNum, s))
+<span class="k">def</span> <span class="nf">StrToInt</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="n">CharToNum</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/python.html">Python</a>
 

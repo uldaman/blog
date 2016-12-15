@@ -54,10 +54,10 @@
 <p><strong>模板方法模式:</strong> 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.</p>
 <p><strong>模板方法设计模式的意图</strong></p>
 <p>通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.</p>
-<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为&rdquo;模板方法&rdquo;), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg" /></a></p>
+<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为"模板方法"), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg"></a></p>
 <p>情景分析:</p>
-<p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -79,7 +79,7 @@
 <p>C++的拷贝构造函数分为浅拷贝和深拷贝.</p>
 <p>浅拷贝：就是给对象中的每个成员变量进行复制, 就是把A1类中的变量直接赋给A2类中变量, 属于值传递, 但是涉及到有指针类型的成为, 它们指向的是同一块内存. 这就出现了问题：当B把内存释放了（如：析构）, 这时A内的指针就是野指针了, 出现运行错误.</p>
 <p>深拷贝：就是不仅使用值传递, 而是要每个变量都有自己一份独立的内存空间, 互不干扰.</p>
-<p>原型模式 UML ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>原型模式 UML …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -96,8 +96,8 @@
 
 
 <p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></p>
-<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
-<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的<strong>&ldquo;开放-封闭原则 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把'+'等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加'case'的分支条件, 这修改了原有的类, 违背了我们的<strong>"开放-封闭原则",</strong> 于是, 工厂模式就来了 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -120,7 +120,7 @@
 <p>定义：关系最为松散的，单向的，暂时产生关系的事物之间使用。</p>
 <p>使用图例：在静态图、组件图、部署图中两事物的弱依赖关系用此图示。</p>
 <p>二：关联 Association</p>
-<p>图示：此图为visio中画法（在uml静态结构中,拖动复合图例，然后双击此图例，将出现下图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>图示：此图为visio中画法（在uml静态结构中,拖动复合图例，然后双击此图例，将出现下图 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -136,7 +136,7 @@
 </h6>
 
 
-<h3 id="_1">代理模式</h3>
+<h3>代理模式</h3>
 <p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
 <p>情景:</p>
 <ol>
@@ -148,11 +148,11 @@
 </li>
 </ol>
 <p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png" /></a></p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png"></a></p>
 <p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
 <p>RealSubject: 真实实体(老总/大小姐)</p>
 <p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
-<p>[cpp]#include ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>[cpp]#include …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -168,13 +168,13 @@
 </h6>
 
 
-<h3 id="_1">装饰者模式</h3>
+<h3>装饰者模式</h3>
 <p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过<strong>继承</strong>来扩展功能.</p>
 <p>然而, 使用继承是<strong>静态</strong>的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
 <p>而装饰者模式可以<strong>动态</strong>地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
 <blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
 
-<p>装饰模式的UML图 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>装饰模式的UML图 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -190,21 +190,14 @@
 </h6>
 
 
-<div class="toc">
-<ul>
-<li><a href="#_1">单一职责原则</a></li>
-<li><a href="#-">开放-封闭原则</a></li>
-<li><a href="#_2">里氏代换原则</a></li>
-<li><a href="#_3">接口隔离原则</a></li>
-<li><a href="#_4">依赖倒置原则</a></li>
-<li><a href="#_5">迪米特法则</a></li>
-</ul>
-</div>
-<h1 id="_1">单一职责原则</h1>
+<p>[TOC]</p>
+<h1>单一职责原则</h1>
 <p>单一职责原则: 就一个类而言, 应该仅有一个引起它变化的原因.</p>
 <p>日常编程, 我们习惯性的很自然给一个类加这样那样的功能, 比如之前讲过的计算器, 很可能我们会设计出一个类, 把计算 显示等功能都写那个类中, 这样的代码维护很麻烦, 复用不可能, 也缺乏灵活性, 因此我们对那个类进行了重构才引出了<strong>简单工厂模式</strong>和<strong>策略模式</strong>.</p>
 <p>如果一个类承担的职业过多, 就等于把这些职责耦合在一起, 一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力. 这种耦合会导致脆弱的设计, 当变化发生时, 设计会遭受到意想不到的破坏.</p>
-<p><strong>软件设计真正要做的许多内容 ...</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p><strong>软件设计真正要做的许多内容, 就是发现职责并把那此职责相互分离.</strong></p>
+<p>怎么判断是否应该分离?</p>
+<p>那就是如果你能够想到多于一个的动机去改变一个类, 那么这个类就具有多于一个职责, 就应该考虑类的职责分离 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -222,14 +215,14 @@
 
 <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
 
-<h4 id="_1">策略模式</h4>
+<h4>策略模式</h4>
 <p>回顾下简单工厂模式, 在最后的main函数中, 我们暴露了两个类, Operation类和Factory类.
 能不能对这两个类进行再封装, 使其最暴露一个类就能写完main函数呢?
 那就引入了策略模式.</p>
-<p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251" /></p>
+<p><img alt="策略模式" src="http://img.blog.csdn.net/20150212125513251"></p>
 <p>可以看到我们移除了简单工厂模式中的Factory类, 添加了一个OperContext类, 这个类用一个具体Operation来配置, 维护一个对Operation对象的引用.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; OperContext {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> OperContext {
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -246,10 +239,10 @@
 
 
 <p>首先看一下”计算器”程序:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
+<div class="highlight"><pre><span></span>#include <span class="nt">&lt;iostream&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>using<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>namespace<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> std;
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> _tmain …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
@@ -267,7 +260,7 @@
 
 <blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料</blockquote>
 
-<h4 id="_1">设计模式分类</h4>
+<h4>设计模式分类</h4>
 <p>一共23种设计模式！</p>
 <p>按照目的来分,设计模式可以分为<strong>创建型模式</strong>、<strong>结构型模式</strong>和<strong>行为型模式</strong>.</p>
 <ol>
@@ -293,10 +286,7 @@
 <p>建造者模式（Builder Pattern搜索）</p>
 </li>
 <li>
-<p>原型模式（Prototype Pattern）</p>
-</li>
-<li>
-<p>单例模式 ...</p></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>原型模式（Prototype Pattern …</p></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 

@@ -51,7 +51,7 @@
 
 <p>原理就是找到 d3d9.dll 的入口, 搜索特征码, 找到 Vtalbe(虚函数表), 查表找到需要 hook 的函数的地址, 然后hook, 這樣就不需要在遊戲啟動時劫持 d3d9.dll 了;</p>
 <p>這裡上傳一份 HOOK Present 的例子, 需要 Hook 其它函数的可以查一下其在虛表中的位置就可以了.</p>
-<p>Hook_Present.zip: <a href="http://yunpan.cn/cQcFqJeFapJue">http://yunpan.cn/cQcFqJeFapJue</a>  访问密码 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<p>Hook_Present.zip: <a href="http://yunpan.cn/cQcFqJeFapJue">http://yunpan.cn/cQcFqJeFapJue</a>  访问密码 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -69,10 +69,10 @@
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
-    m_pManager-&gt;PreReset();
+<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3DDevice9</span><span class="o">::</span><span class="n">Reset</span><span class="p">(</span><span class="n">D3DPRESENT_PARAMETERS</span> <span class="o">*</span><span class="n">pPresentationParameters</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_pManager</span><span class="o">-&gt;</span><span class="n">PreReset</span><span class="p">();</span>
 
-    HRESULT hRet = m_pD3Ddev- ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+    <span class="n">HRESULT</span> <span class="n">hRet</span> <span class="o">=</span> <span class="n">m_pD3Ddev …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -90,12 +90,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#pragma pack (push,1)</span>
-<span style="color: #8B008B; font-weight: bold">typedef</span> <span style="color: #8B008B; font-weight: bold">struct</span> _RoleTree {
-    DWORD dwLBase;      <span style="color: #228B22">//+0x0    左树</span>
-    DWORD dwSBase;      <span style="color: #228B22">//+0x4    上一层树的地址</span>
-    DWORD dwRBase;      <span style="color: #228B22">//+0x8    右树</span>
-    <span style="color: #a7a7a7; font-weight: bold">int</span> iID ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="highlight"><pre><span></span><span class="cp">#pragma pack (push,1)</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_RoleTree</span> <span class="p">{</span>
+    <span class="n">DWORD</span> <span class="n">dwLBase</span><span class="p">;</span>      <span class="c1">//+0x0    左树</span>
+    <span class="n">DWORD</span> <span class="n">dwSBase</span><span class="p">;</span>      <span class="c1">//+0x4    上一层树的地址</span>
+    <span class="n">DWORD</span> <span class="n">dwRBase</span><span class="p">;</span>      <span class="c1">//+0x8    右树</span>
+    <span class="kt">int</span> <span class="n">iID …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -113,8 +113,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
-    , DWORD ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3D9</span><span class="o">::</span><span class="n">CreateDevice</span><span class="p">(</span><span class="n">UINT</span> <span class="n">Adapter</span><span class="p">,</span> <span class="n">D3DDEVTYPE</span> <span class="n">DeviceType</span><span class="p">,</span> <span class="n">HWND</span> <span class="n">hFocusWindow</span>
+    <span class="p">,</span> <span class="n">DWORD …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -134,10 +134,10 @@
 <p>首先是 Debug 和 Release 版本通用设置:</p>
 <ol>
 <li>[包含目录] 和 [库目录] 的设置
-<img alt="" src="http://i62.tinypic.com/t69mvt.jpg" /></li>
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg"></li>
 </ol>
 <p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
-E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -155,7 +155,7 @@ E:\Microsoft DirectX ...</p><p class="subheader">Category: <a href="http://blog.
 
 <p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
 <p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
-<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -176,7 +176,7 @@ CEGUI 开发者的目的是希望能够让游戏开发人员从繁琐的 GUI 实
 CEGUI 的渲染需要 3D 图形 API 的支持，如 OpenGL 或 Direct3D, 另外, 使用更高级的图形库也是可以的, 比如OGRE、Irrlicht和RenderWare等.</p>
 <p><strong>编译:</strong>
 vs2013
-Directx ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
+Directx …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 

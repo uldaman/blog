@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h1 id="_1">用户和用户组</h1>
+    <h1>用户和用户组</h1>
 <p><strong>
 </strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, <strong>用户</strong>指的就是使用操作系统的人;
 而<strong>用户组</strong>, 就是指具有相同系统权限的一组用户.</p>
@@ -68,27 +68,27 @@
 <p>前面说过, Linux 下一切内容皆文件, 因此所有的用户和用户组信息也都被保存在一些关键文件中.
 <strong>/etc/group
 </strong>存储当前系统中所有用户组信息.
-<img alt="" src="http://i57.tinypic.com/2usa6pf.jpg" />
+<img alt="" src="http://i57.tinypic.com/2usa6pf.jpg">
 每一行都是一个用户组的信息, 信息被分为 4 部分;
 Group : x : 123 : abc,def
 组名 : 组密码占位符 : 组ID : 组中用户列表(最后一个信息没有不代表组中没有用户, 因为当组中只有一个用户且用户名和组名相同时, 它也是不显示用户列表的).
 对于 Linux 来说, root 组的 ID 始终为 0, 并且 1 – 499 是预留给系统的, 一般是留给系统中的软件或服务. 而我们手动创建的用户 ID 是从 500 开始的.</p>
 <p><strong>/etc/gshadow</strong>
 存储当前系统中用户组的密码信息
-<img alt="" src="http://i62.tinypic.com/2upfpn4.jpg" />
+<img alt="" src="http://i62.tinypic.com/2upfpn4.jpg">
 Group : x : : abc,def
 组名 : 组密码 : 组管理者 : 组中用户列表(如果组密码是 !、* 或 空 都可以认为这个组没有密码).</p>
 <p><strong>/etc/passwd</strong>
 存储当前系统中所有用户的信息.
-<img alt="" src="http://i60.tinypic.com/2zyzfpu.jpg" />
+<img alt="" src="http://i60.tinypic.com/2zyzfpu.jpg">
 user : x : 123 : 456 : xxxx : /home/martin : /bin/bash
 用户名 : 密码占位符 : 用户ID : 所在组ID : 用户注释信息 : 用户主目录 : 使用的 shell 解释器</p>
 <p><strong>/etc/shadow</strong>
 存储当前系统中所有用户的密码信息.
-<img alt="" src="http://i62.tinypic.com/2mzfc6r.jpg" />
+<img alt="" src="http://i62.tinypic.com/2mzfc6r.jpg">
 user : asdfasdfasdf… : : : : :
 用户 : 加密的密码 : 好吧, 一些乱七八糟东西, 暂时请无视它…了解一下就好.</p>
-<h1 id="_2">用户及用户组的管理命令</h1>
+<h1>用户及用户组的管理命令</h1>
 <p>[groupadd] [
 </td>
 <td width="72" >
@@ -118,14 +118,14 @@ user : asdfasdfasdf… : : : : :
 <p>[passwd] [-l] [用户名] 锁定用户
 [passwd] [-u] [用户名] 解锁用户
 [passwd] [-d] [用户名] 清除用户密码</p>
-<h1 id="_3">主要组和附属组</h1>
+<h1>主要组和附属组</h1>
 <p>Linux 下允许一个用户属于多个用户组, 这时, 只有一个组是用户的主要组, 其它的都是附属组.
 [gpasswd] [-a] [用户名] [组名] 为用户添加附属组, 如果要一次性添加多个附属组, 可以用逗号分隔用户组的名称.
 当用一个属于多个用户组的用户来创建一个文件的时候, 默认创建的文件属于用户的主要组, 如果想以附属组的权限来创建一个文件, 就要临时切换用户组.
 [newgrp] [组名] [组密码] 临时切换用户组(前提是要先切换成登录的用户再使用这条命令).
 [gpasswd] [-d] [用户名] [组名] 将一个用户从它的附属组中删除
 [useradd] [-g] [主用户组] [-G] [附属用户组列表(逗号隔开)] [用户名] 添加用户的时候同时指定主用户组和附属用户组</p>
-<h1 id="_4">其他命令</h1>
+<h1>其他命令</h1>
 <p>[gpasswd] [组名] 为用户组添加密码</p>
 <p>[su] [username] 切换当前用户, 如果不写 username 为切换成 root 用户, 切换的时候需要输入目标用户密码.
 需要注意, Ubuntu 为了系统的安全性, 默认 root 用户为随机密码, 除非手动重设 root 密码, 不过建议不要这么做.

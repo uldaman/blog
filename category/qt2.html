@@ -50,11 +50,11 @@
 
 
 <p>在第2篇笔记里, 当通过 VS 新建 Qt 工程时, 其中有一步会让选择当前工程包含的模块. 见下图:</p>
-<p><img alt="" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image10.png" /></p>
+<p><img alt="" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image10.png"></p>
 <p>现在对 Qt 5 的模块进行一个简单的介绍, 以便以后大家需要哪些功能的时候知道到哪个模块去寻找.</p>
 <p>Qt 5 模块分为 Essentials Modules 和 Add-on Modules 两部分.</p>
 <p>前者是基础模块, 在所有平台上都可用; 后者是扩展模块, 建立在基础模块的基础之上, 在能够运行 Qt 的平台之上可以酌情引入.</p>
-<p>Qt ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>Qt …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -70,11 +70,11 @@
 </h6>
 
 
-<h1 id="_1">带参数的信号/槽</h1>
+<h1>带参数的信号/槽</h1>
 <p>首先看一个程序</p>
-<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg" /></p>
+<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg"></p>
 <p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<div class="highlight"><pre><span></span><span class="nt">&lt;font</span> <span class="na">face=</span><span class="s">&quot;M+ 1mn regular&quot;</span><span class="nt">&gt;</span>connect(ui.verticalSlider_1, SIGNAL(valueChanged(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span>)), ui.spinBox_1, SLOT(setValue(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -90,13 +90,13 @@
 </h6>
 
 
-<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg" /></p>
+<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg"></p>
 <p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
 <p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
 <p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
 <p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
 <p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
-<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -113,17 +113,17 @@
 
 
 <p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
-<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg" /></p>
-<hr />
+<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg"></p>
+<hr>
 <p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
 <p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
-<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg" /></p>
+<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg"></p>
 <p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
-<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg" /></p>
+<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg"></p>
 <p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
-<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg" /></p>
-<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg" /></p>
-<p>点击 [显示从 QWidget ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg"></p>
+<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg"></p>
+<p>点击 [显示从 QWidget …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -141,7 +141,7 @@
 
 <p>在 Qt 代码的 const char* 这种窄字符串中使用中文就会发现显示的全是乱码.</p>
 <p>在 Qt5 之前, 大多数人通过下面这三句代码来解决:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>QTextCodec::setCodecForTr(...)
+<div class="highlight"><pre><span></span>QTextCodec::setCodecForTr(...)
 QTextCodec::setCodecForCStrings(...)
 QTextCodec::setCodecForLocale(...)
 
@@ -157,7 +157,7 @@ QTextCodec::setCodecForLocale(...)
 <p><a href="http://hi.baidu.com/cyclone/blog/item/aa56e5dd1a79f7e176c638be.html">Qt中translate、tr关系 与中文问题</a></p>
 <p>*</p>
 <p><a href="http://blog.csdn.net/dbzhang800/article/details/6334852">Qt国际化（源码含中文时）的点滴分析</a></p>
-<p>但是在 Qt5 之后, 移除了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>但是在 Qt5 之后, 移除了 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -176,11 +176,11 @@ QTextCodec::setCodecForLocale(...)
 <p>这个为什么要单独来说, 因为 Qt 的资料相对较少, 很多时候都要借助于 Qt 附带的帮助手册.</p>
 <p>打开方式:</p>
 <p>第一种方式:</p>
-<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb22.png" /></a></p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb22.png"></a></p>
 <p>第二种方式:</p>
 <p>进入 Qt 安装目录, 找到 assistant.exe<strong>.</strong></p>
 <p>D:\Development\Qt5.3.2\5.3\msvc2010_opengl\bin\assistant.exe</p>
-<p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -197,9 +197,9 @@ QTextCodec::setCodecForLocale(...)
 
 
 <p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
-<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png" /></a></p>
+<p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png"></a></p>
 <p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color ...</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<div class="highlight"><pre><span></span>#include <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>demo.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 
@@ -231,15 +231,15 @@ QTextCodec::setCodecForLocale(...)
 </h6>
 
 
-<h1 id="qt">QT是什么?</h1>
+<h1>QT是什么?</h1>
 <ol>
 <li>一个基于C++语言的框架(就是封装了很多类库, 我们可以直接拿来用)</li>
 <li>一个专注于用户图形界面的框架</li>
 <li>一个跨平台的框架</li>
 </ol>
-<p>QT不仅仅是 GUI 组件. 使用 Qt, 在一定程度上你获得的是一个&rdquo;一站式&rdquo;的解决方案: 不再需要研究 STL, 不再需要 C++ 的<string>, 不再需要到处去找解析 XML、连接数据库、访问网络的各种第三方库, 因为 Qt 自己内置了这些技术.</p>
-<h1 id="qt_1">QT的主要工具</h1>
-<p>qmake : 可以把 ...</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
+<p>QT不仅仅是 GUI 组件. 使用 Qt, 在一定程度上你获得的是一个"一站式"的解决方案: 不再需要研究 STL, 不再需要 C++ 的<string>, 不再需要到处去找解析 XML、连接数据库、访问网络的各种第三方库, 因为 Qt 自己内置了这些技术.</p>
+<h1>QT的主要工具</h1>
+<p>qmake : 可以把 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.com/category/qt.html">QT</a>
 
 </p>
 

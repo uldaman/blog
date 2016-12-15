@@ -62,13 +62,13 @@
 静态内部类
 方法内部类
 匿名内部类</p>
-<hr />
+<hr>
 <p>内部类中最常见的就是成员内部类, 也称为普通内部类.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Inner {
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> HelloWorld {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Inner {
 
     }
-}&lt;/span&gt;
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 
@@ -76,93 +76,93 @@
 <p>2、Inner 类中定义的方法可以直接访问 HelloWorld 类中的数据, 而不受访问控制符的影响.</p>
 <p>3、定义了成员内部类后, 必须使用外部类对象来创建内部类对象, 而不能直接去 new 一个内部类对象, 即: <strong>内部类 对象名 = 外部类对象.new 内部类( );</strong></p>
 <p>4、编译上面的程序后, 会发现产生了两个 .class 文件</p>
-<p><img alt="" src="http://i60.tinypic.com/2wgyirs.jpg" /></p>
+<p><img alt="" src="http://i60.tinypic.com/2wgyirs.jpg"></p>
 <p>其中，第二个是外部类的 .class 文件, 第一个是内部类的 .class 文件, 即成员内部类的 .class 文件.</p>
 <p>另外:<strong>
 </strong>1、外部类是不能直接使用内部类的成员和方法, 可先创建内部类的对象, 然后通过内部类的对象来访问其成员变量和方法.
 2、如果外部类和内部类具有相同的成员变量或方法, 内部类默认访问自己的成员变量或方, 如果要访问外部类的成员变量, 可以使用 this 关键字. 如：
-<img alt="" src="http://i61.tinypic.com/11blzpy.jpg" /></p>
-<hr />
+<img alt="" src="http://i61.tinypic.com/11blzpy.jpg"></p>
+<hr>
 <p>静态内部类是 static 修饰的内部类</p>
 <p>1、静态内部类不能直接访问外部类的非静态成员;
 2、如果外部类的静态成员与内部类的成员名称相同, 可通过“类名.静态成员”访问外部类的静态成员; 如果外部类的静态成员与内部类的成员名称不相同, 则可通过“成员名”直接调用外部类的静态成员;
 3、创建静态内部类的对象时, 不需要外部类的对象, 可以直接创建 **内部类 对象名= new 内部类();</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>外部类<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> HelloWorld {
 
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 外部类中的静态变量score&lt;/span&gt;
-    &lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; score = 84&lt;span style=&quot;color: #000000&quot;&gt;;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 外部类中的静态变量score<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>static<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> score = 84<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
 
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 创建静态内部类&lt;/span&gt;
-    &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; SInner {
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 内部类中的变量score&lt;/span&gt;
-        &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; score = 91&lt;span style=&quot;color: #000000&quot;&gt;;
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 创建静态内部类<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>static<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> SInner {
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 内部类中的变量score<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> score = 91<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
 
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; show() {
-            System.out.println(&lt;/span&gt;&quot;访问外部类中的score：&quot; +&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld.score);
-            System.out.println(&lt;/span&gt;&quot;访问内部类中的score：&quot; +&lt;span style=&quot;color: #000000&quot;&gt; score);
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> show() {
+            System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;访问外部类中的score：&quot; +<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> HelloWorld.score);
+            System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;访问内部类中的score：&quot; +<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> score);
         }
     }
 
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 测试静态内部类&lt;/span&gt;
-    &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; main(String[] args) {
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 直接创建内部类的对象&lt;/span&gt;
-        SInner si = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; SInner();
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 测试静态内部类<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>static<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> main(String[] args) {
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 直接创建内部类的对象<span class="nt">&lt;/span&gt;</span>
+        SInner si = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> SInner();
 
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 调用show方法&lt;/span&gt;
-&lt;span style=&quot;color: #000000&quot;&gt;        si.show();
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 调用show方法<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>        si.show();
     }
-}&lt;/span&gt;
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 
 <p>**</p>
-<hr />
+<hr>
 <p>方法内部类就是内部类定义在外部类的方法中, 它只能在该方法内可以使用.</p>
 <p><strong>注意: </strong>由于方法内部类不能在外部类的方法以外的地方使用, 因此方法内部类不能使用访问控制符和 static 修饰符.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;外部类&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld {
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>外部类<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> HelloWorld {
 
-  &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt; String name = &quot;爱慕课&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;</span> String name = &quot;爱慕课&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
 
-  &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 外部类中的show方法&lt;/span&gt;
-  &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; show() {
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 定义方法内部类&lt;/span&gt;
-        &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MInner {
-            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; score = 83&lt;span style=&quot;color: #000000&quot;&gt;;
-            &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; getScore() {
-                &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; score + 10&lt;span style=&quot;color: #000000&quot;&gt;;
+  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 外部类中的show方法<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> show() {
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 定义方法内部类<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> MInner {
+            <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> score = 83<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+            <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> getScore() {
+                <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> score + 10<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
             }
         }
 
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 创建方法内部类的对象&lt;/span&gt;
-        MInner ss = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; MInner();
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 创建方法内部类的对象<span class="nt">&lt;/span&gt;</span>
+        MInner ss = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> MInner();
 
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 调用内部类的方法&lt;/span&gt;
-        &lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; newScore =&lt;span style=&quot;color: #000000&quot;&gt; ss.getScore();
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 调用内部类的方法<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> newScore =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> ss.getScore();
 
-        System.out.println(&lt;/span&gt;&quot;姓名：&quot; + name + &quot;\n加分后的成绩：&quot; +&lt;span style=&quot;color: #000000&quot;&gt; newScore);
+        System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;姓名：&quot; + name + &quot;\n加分后的成绩：&quot; +<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> newScore);
     }
 
-    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 测试方法内部类&lt;/span&gt;
-    &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; main(String[] args) {
+    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 测试方法内部类<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>static<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> main(String[] args) {
 
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 创建外部类的对象&lt;/span&gt;
-        HelloWorld mo = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HelloWorld();
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 创建外部类的对象<span class="nt">&lt;/span&gt;</span>
+        HelloWorld mo = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> HelloWorld();
 
-        &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 调用外部类的方法&lt;/span&gt;
-&lt;span style=&quot;color: #000000&quot;&gt;        mo.show();
+        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 调用外部类的方法<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>        mo.show();
     }
-}&lt;/span&gt;
+}<span class="nt">&lt;/span&gt;</span>
 </pre></div>
 
 
-<hr />
+<hr>
 <p>匿名内部类也就是没有名字的内部类.</p>
 <p>正因为没有名字, 所以匿名内部类只能使用一次, 它通常用来简化代码编写.</p>
 <p>但使用匿名内部类还有个前提条件: 必须继承一个父类或实现一个接口.</p>
 <p>这个我们以后再说.
-&ldquo; </p>
+" </p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 
 </p>

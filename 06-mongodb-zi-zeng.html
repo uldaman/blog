@@ -55,104 +55,99 @@
 
     <p>MongoDB 原生是没有 SQL 那种可以让 Field 自动增长的功能, 在某些情况下, 可能需要这样的功能, 好在 MongoDB 官方给出解决方案, 可以让 MongoDB 的 Field 自动增长.</p>
 <p><a href="https://docs.mongodb.org/manual/tutorial/create-an-auto-incrementing-field/">官方参考文档</a></p>
-<p>这篇笔记我只个搬运工&hellip;</p>
+<p>这篇笔记我只个搬运工...</p>
 <p>官方提供了两种方法 <strong>Use Counters Collection</strong> 和 <strong>Optimistic Loop</strong>, 以 _id 为例来说明下这两种方法.</p>
-<div class="toc">
-<ul>
-<li><a href="#use-counters-collection">Use Counters Collection</a></li>
-<li><a href="#optimistic-loop">Optimistic Loop</a></li>
-</ul>
-</div>
-<h2 id="use-counters-collection">Use Counters Collection</h2>
+<p>[TOC]</p>
+<h2>Use Counters Collection</h2>
 <p>1. Insert into the counters collection, the initial value for the userid:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.counters.insert(
-   {
-      _id: <span style="color: #CD5555">&quot;userid&quot;</span>,
-      seq: <span style="color: #B452CD">0</span>
-   }
-)
+<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">counters</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span>
+   <span class="p">{</span>
+      <span class="nx">_id</span><span class="o">:</span> <span class="s2">&quot;userid&quot;</span><span class="p">,</span>
+      <span class="nx">seq</span><span class="o">:</span> <span class="mi">0</span>
+   <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 
 
 <p><br></p>
 <p>2. Create a <strong>getNextSequence</strong> function that accepts a name of the sequence. The function uses the findAndModify() method to atomically increment the seq value and return this new value:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> getNextSequence(name) {
-   <span style="color: #8B008B; font-weight: bold">var</span> ret = db.counters.findAndModify(
-          {
-            query: { _id: name },
-            update: { $inc: { seq: <span style="color: #B452CD">1</span> } },
-            <span style="color: #8B008B; font-weight: bold">new</span>: <span style="color: #8B008B; font-weight: bold">true</span> <span style="color: #228B22">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
-          }
-   );
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">getNextSequence</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">counters</span><span class="p">.</span><span class="nx">findAndModify</span><span class="p">(</span>
+          <span class="p">{</span>
+            <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">name</span> <span class="p">},</span>
+            <span class="nx">update</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$inc</span><span class="o">:</span> <span class="p">{</span> <span class="nx">seq</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">},</span>
+            <span class="k">new</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// true 表示返回 update 后的结果, false 表示返回 update 前的结果</span>
+          <span class="p">}</span>
+   <span class="p">);</span>
 
-   <span style="color: #8B008B; font-weight: bold">return</span> ret.seq;
-}
+   <span class="k">return</span> <span class="nx">ret</span><span class="p">.</span><span class="nx">seq</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p><br></p>
 <p>3. Use this <strong>getNextSequence()</strong> function during insert().</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.users.insert(
-   {
-     _id: getNextSequence(<span style="color: #CD5555">&quot;userid&quot;</span>),
-     name: <span style="color: #CD5555">&quot;Sarah C.&quot;</span>
-   }
-)
+<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span>
+   <span class="p">{</span>
+     <span class="nx">_id</span><span class="o">:</span> <span class="nx">getNextSequence</span><span class="p">(</span><span class="s2">&quot;userid&quot;</span><span class="p">),</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Sarah C.&quot;</span>
+   <span class="p">}</span>
+<span class="p">)</span>
 
-db.users.insert(
-   {
-     _id: getNextSequence(<span style="color: #CD5555">&quot;userid&quot;</span>),
-     name: <span style="color: #CD5555">&quot;Bob D.&quot;</span>
-   }
-)
+<span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span>
+   <span class="p">{</span>
+     <span class="nx">_id</span><span class="o">:</span> <span class="nx">getNextSequence</span><span class="p">(</span><span class="s2">&quot;userid&quot;</span><span class="p">),</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Bob D.&quot;</span>
+   <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 
 
 <p><br></p>
-<h2 id="optimistic-loop">Optimistic Loop</h2>
-<p>1. Create a function named <strong>insertDocument</strong> that performs the &ldquo;insert if not present&rdquo; loop. The function wraps the insert() method and takes a <strong>doc</strong> and a <strong>targetCollection</strong> arguments.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> insertDocument(doc, targetCollection) {
+<h2>Optimistic Loop</h2>
+<p>1. Create a function named <strong>insertDocument</strong> that performs the "insert if not present" loop. The function wraps the insert() method and takes a <strong>doc</strong> and a <strong>targetCollection</strong> arguments.</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">insertDocument</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="nx">targetCollection</span><span class="p">)</span> <span class="p">{</span>
 
-    <span style="color: #8B008B; font-weight: bold">while</span> (<span style="color: #B452CD">1</span>) {
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 
-        <span style="color: #8B008B; font-weight: bold">var</span> cursor = targetCollection.find( {}, { _id: <span style="color: #B452CD">1</span> } ).sort( { _id: -<span style="color: #B452CD">1</span> } ).limit(<span style="color: #B452CD">1</span>);
+        <span class="kd">var</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="nx">targetCollection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{},</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">}</span> <span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 
-        <span style="color: #8B008B; font-weight: bold">var</span> seq = cursor.hasNext() ? cursor.next()._id + <span style="color: #B452CD">1</span> : <span style="color: #B452CD">1</span>;
+        <span class="kd">var</span> <span class="nx">seq</span> <span class="o">=</span> <span class="nx">cursor</span><span class="p">.</span><span class="nx">hasNext</span><span class="p">()</span> <span class="o">?</span> <span class="nx">cursor</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">_id</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
 
-        doc._id = seq;
+        <span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">;</span>
 
-        <span style="color: #8B008B; font-weight: bold">var</span> results = targetCollection.insert(doc);
+        <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">targetCollection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>
 
-        <span style="color: #8B008B; font-weight: bold">if</span>( results.hasWriteError() ) {
-            <span style="color: #8B008B; font-weight: bold">if</span>( results.writeError.code == <span style="color: #B452CD">11000</span> <span style="color: #228B22">/* dup key */</span> )
-                <span style="color: #8B008B; font-weight: bold">continue</span>;
-            <span style="color: #8B008B; font-weight: bold">else</span>
-                print( <span style="color: #CD5555">&quot;unexpected error inserting data: &quot;</span> + tojson( results ) );
-        }
+        <span class="k">if</span><span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">hasWriteError</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span> <span class="nx">results</span><span class="p">.</span><span class="nx">writeError</span><span class="p">.</span><span class="nx">code</span> <span class="o">==</span> <span class="mi">11000</span> <span class="cm">/* dup key */</span> <span class="p">)</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="nx">print</span><span class="p">(</span> <span class="s2">&quot;unexpected error inserting data: &quot;</span> <span class="o">+</span> <span class="nx">tojson</span><span class="p">(</span> <span class="nx">results</span> <span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
 
-        <span style="color: #8B008B; font-weight: bold">break</span>;
-    }
-}
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p><br></p>
 <p>2. Use the <strong>insertDocument()</strong> function to perform an insert:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">var</span> myCollection = db.users2;
+<div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">myCollection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">users2</span><span class="p">;</span>
 
-insertDocument(
-   {
-     name: <span style="color: #CD5555">&quot;Grace H.&quot;</span>
-   },
-   myCollection
-);
+<span class="nx">insertDocument</span><span class="p">(</span>
+   <span class="p">{</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Grace H.&quot;</span>
+   <span class="p">},</span>
+   <span class="nx">myCollection</span>
+<span class="p">);</span>
 
-insertDocument(
-   {
-     name: <span style="color: #CD5555">&quot;Ted R.&quot;</span>
-   },
-   myCollection
-)
+<span class="nx">insertDocument</span><span class="p">(</span>
+   <span class="p">{</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Ted R.&quot;</span>
+   <span class="p">},</span>
+   <span class="nx">myCollection</span>
+<span class="p">)</span>
 </pre></div>
 
 

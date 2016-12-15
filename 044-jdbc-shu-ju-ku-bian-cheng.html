@@ -53,26 +53,11 @@
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#_1">基础知识补充</a><ul>
-<li><a href="#ddl">DDL</a></li>
-<li><a href="#dml">DML</a></li>
-<li><a href="#dcl">DCL</a></li>
-<li><a href="#tcl">TCL</a></li>
-</ul>
-</li>
-<li><a href="#jdbc">JDBC</a><ul>
-<li><a href="#jdbc_1">JDBC 配置</a></li>
-<li><a href="#_2">事务</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="_1">基础知识补充</h1>
+    <p>[TOC]</p>
+<h1>基础知识补充</h1>
 <p><strong>RDBMS</strong>: Relational Database Management System 关系型数据库管理系统</p>
 <p>SQL 四种语言: <strong>DDL</strong>、<strong>DML</strong>、<strong>DCL</strong>、<strong>TCL</strong>.</p>
-<h2 id="ddl">DDL</h2>
+<h2>DDL</h2>
 <p>Data Definition Language <strong>数据库定义语言</strong> statements are used to define the database structure or schema.</p>
 <p>DDL 是 SQL 语言的四大功能之一.</p>
 <p>用于定义数据库的三级结构, 包括外模式、概念模式、内模式及其相互之间的映像, 定义数据的完整性、安全控制等约束.</p>
@@ -85,7 +70,7 @@
 <li>COMMENT</li>
 <li>RENAME</li>
 </ul>
-<h2 id="dml">DML</h2>
+<h2>DML</h2>
 <p>Data Manipulation Language <strong>数据操纵语言</strong> statements are used for managing data within schema objects.</p>
 <p>由 DBMS 提供, 用于让用户或程序员使用, 实现对数据库中数据的操作.</p>
 <p>DML 分成交互型 DML 和嵌入型 DML 两类.</p>
@@ -101,21 +86,21 @@
 <li>EXPLAIN PLAN</li>
 <li>LOCK TABLE</li>
 </ul>
-<h2 id="dcl">DCL</h2>
+<h2>DCL</h2>
 <p>Data Control Language <strong>数据库控制语言</strong>, 授权, 角色控制等</p>
 <ul>
 <li>GRANT 授权</li>
 <li>REVOKE 取消授权</li>
 </ul>
-<h2 id="tcl">TCL</h2>
+<h2>TCL</h2>
 <p>Transaction Control Language <strong>事务控制语言</strong></p>
 <ul>
 <li>SAVEPOINT 设置保存点</li>
 <li>ROLLBACK  回滚</li>
 <li>SET TRANSACTION</li>
 </ul>
-<h1 id="jdbc">JDBC</h1>
-<h2 id="jdbc_1">JDBC 配置</h2>
+<h1>JDBC</h1>
+<h2>JDBC 配置</h2>
 <p><strong>References</strong>:<br>
 <a href="http://www.cnblogs.com/wuyuegb2312/p/3872607.html">通过 JDBC 进行简单的增删改查 (以 MySQL 为例)</a><br>
 <a href="http://www.yiibai.com/jdbc/jdbc_quick_guide.html">JDBC 快速入门教程</a></p>
@@ -123,24 +108,24 @@
 <blockquote>
 <p>JDBC 相关的 API 是 java.sql 及 javax.sql 下</p>
 </blockquote>
-<p>应用程序通过 JDBC API 与各数据提供的<strong>驱动程序</strong> &ldquo;交流&rdquo;, 然后数据库驱动程序再与数据库底层 &ldquo;交流&rdquo;.</p>
-<p><img alt="" src="http://i67.tinypic.com/vdetrk.jpg" /></p>
+<p>应用程序通过 JDBC API 与各数据提供的<strong>驱动程序</strong> "交流", 然后数据库驱动程序再与数据库底层 "交流".</p>
+<p><img alt="" src="http://i67.tinypic.com/vdetrk.jpg"></p>
 <ul>
-<li>JDBC 是 Java 访问数据库的应用程序<strong>接口</strong>, 是一套 &ldquo;规范&rdquo;</li>
+<li>JDBC 是 Java 访问数据库的应用程序<strong>接口</strong>, 是一套 "规范"</li>
 <li>驱动程序是各大数据库厂商提供的 JDBC 的具体<strong>实现</strong></li>
 </ul>
 <p>由此可见, 使用 JDBC 操作数据库的第一步就是安装对应的<strong>数据库驱动</strong>.</p>
 <p>所谓的<strong>数据库驱动</strong>其实就是一些对应的第三方 JAR 包, 下载下来导入到项目里就可以了 (例如 Mysql 的驱动: mysql-connecter-java).</p>
 <p>一般情况下, 我们会在项目目录下新建一个 <strong>lib</strong> 目录用来存放外来的 JAR 包.</p>
-<p><img alt="" src="http://i65.tinypic.com/xfcdck.jpg" /></p>
+<p><img alt="" src="http://i65.tinypic.com/xfcdck.jpg"></p>
 <p><strong>新建一个 lib 目录</strong></p>
-<p><img alt="" src="http://i66.tinypic.com/ztg751.jpg" /></p>
+<p><img alt="" src="http://i66.tinypic.com/ztg751.jpg"></p>
 <p><strong>把 jar 包拷贝到 lib 目录下后要添加到编译目录</strong> (就是相当于添加到 classpath 路径)</p>
-<p><img alt="" src="http://i64.tinypic.com/5votwn.jpg" /></p>
+<p><img alt="" src="http://i64.tinypic.com/5votwn.jpg"></p>
 <p><strong>添加后就会多出一栏引用的库</strong></p>
-<p><img alt="" src="http://i66.tinypic.com/2j3pedu.jpg" /></p>
+<p><img alt="" src="http://i66.tinypic.com/2j3pedu.jpg"></p>
 <p>其余的 JDBC 操作参考上面的 <strong>References</strong> 即可.</p>
-<h2 id="_2">事务</h2>
+<h2>事务</h2>
 <p>ACID: 数据库事务正确执行的四个基本要素</p>
 <ul>
 <li>原子性 (Atomicity)</li>
