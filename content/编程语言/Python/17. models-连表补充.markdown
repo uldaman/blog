@@ -8,83 +8,61 @@ title: models -- 连表(补充)
 
 如, 一个 多对多 的关系模型:
 
-    <span style="color: #0000ff">class</span> User(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        account = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
+```python
+class User(models.Model): # 表名
+    account = models.CharField(max_length=50) # 字段
 
-    <span style="color: #0000ff">class</span> Group(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        groupName = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
-        user_relation = models.ManyToManyField(<span style="color: #800000">"</span><span style="color: #800000">User</span><span style="color: #800000">"</span>) <span style="color: #008000">#</span><span style="color: #008000"> 建立关系, Django 会自动建立中间表</span>
-
-
-
-
-
+class Group(models.Model): # 表名
+    groupName = models.CharField(max_length=50) # 字段
+    user_relation = models.ManyToManyField("User") # 建立关系, Django 会自动建立中间表
+```
+<br>
 如果要插入关联, 先要获取一个 Group 对象 g1, 再获取一个 User 对象 u1, 然后使用, **g1.user_relation.add(u1)** 的方式就能插入数据. 或者** u1.group_set.add(g1).**
-
-
-
 
 **一对多**
 
+```python
+class UserType(models.Model): # 表名
+    name = models.CharField(max_length=50) # 字段
 
+# Create your models here.
+class UserInfo(models.Model): # 表名
+    username = models.CharField(max_length=50) # 字段
+    password = models.CharField(max_length=50) # 字段
+    '''
+    建立外键
+    字段名称＋ "_id" 做为数据库中的列名称
+    这里最终数据库中就是 typeId_id
+    '''<span style="color: #000000">
+    typeId = models.ForeignKey("UserType")
+```
+<br>
+UserInfo 中的 typeId 其实是一个对象, 通过它可以获取到另一张表的内容, 语法就是 **__ (两个下划线)**, 如:
 
-
-    <span style="color: #0000ff">class</span> UserType(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        name = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
-
-    <span style="color: #008000">#</span><span style="color: #008000"> Create your models here.</span>
-    <span style="color: #0000ff">class</span> UserInfo(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        username = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
-        password = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
-        <span style="color: #800000">'''</span><span style="color: #800000">
-        建立外键
-        字段名称＋ "_id" 做为数据库中的列名称
-        这里最终数据库中就是 typeId_id
-        </span><span style="color: #800000">'''</span><span style="color: #000000">
-        typeId </span>= models.ForeignKey(<span style="color: #800000">"</span><span style="color: #800000">UserType</span><span style="color: #800000">"</span>)
-
-
-
-
-
-UserInfo 中的 typeId 其实是一个对象, 通过它可以获取到另一张表的内容, 语法就是** __ (两个下划线)**, 如:
-
-
-
-
-    UserInfo.object.filter(typeId__name = <span style="color: #800000">"</span><span style="color: #800000">王四</span><span style="color: #800000">"</span>) <span style="color: #008000">#</span><span style="color: #008000"> 连表访问</span>
-
-
-
-
-
+`UserInfo.object.filter(typeId__name = "王四") # 连表访问`
 
 **多对多**
-
-
-
 
 还是上面那个 多对多 模型:
 
 
+```python
+class User(models.Model): # 表名
+    account = models.CharField(max_length=50) # 字段
 
-    <span style="color: #0000ff">class</span> User(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        account = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
+class Group(models.Model): # 表名
+    groupName = models.CharField(max_length=50) # 字段
+    user_relation = models.ManyToManyField("User") # 建立关系, Django 会自动建立中间表
+```
+<br>
+# 获取数据
+`group_obj.user_relation.all()`
 
-    <span style="color: #0000ff">class</span> Group(models.Model): <span style="color: #008000">#</span><span style="color: #008000"> 表名</span>
-        groupName = models.CharField(max_length=50) <span style="color: #008000">#</span><span style="color: #008000"> 字段</span>
-        user_relation = models.ManyToManyField(<span style="color: #800000">"</span><span style="color: #800000">User</span><span style="color: #800000">"</span>) <span style="color: #008000">#</span><span style="color: #008000"> 建立关系, Django 会自动建立中间表</span>
-
-
-
-
+`group_obj.user_relation.all().filter(id=1)`
 
 # 获取数据
-group_obj.user_relation.all()
-group_obj.user_relation.all().filter(id=1)
+`user_obj.group_set.all()`
 
-# 获取数据
-user_obj.group_set.all()
-user_obj.group_set.all().filter(groupName='CEO')
-user_obj.group_set.all().filter(groupName='CTO')
-:ry
+`user_obj.group_set.all().filter(groupName='CEO')`
+
+`user_obj.group_set.all().filter(groupName='CTO')`
