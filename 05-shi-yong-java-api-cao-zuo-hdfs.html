@@ -85,7 +85,7 @@
 <p>如果你是参考我的 Wiki <a href="http://wiki.smallcpp.com/Hadoop/%E6%90%AD%E5%BB%BA%20Hadoop%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.html#33">搭建 Hadoop 分布式实验环境</a> 搭建的实验环境, 那环境变量应该是已经配好了.</p>
 <p><code>vim ~/.bashrc</code></p>
 <div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/java/jdk1.8.0_101
-<span class="nb">export</span> <span class="nv">HADOOP_HOME</span><span class="o">=</span>/usr/itcast/hadoop-2.7.3
+<span class="nb">export</span> <span class="nv">HADOOP_HOME</span><span class="o">=</span>/usr/smallcpp/hadoop-2.7.3
 <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin:<span class="nv">$HADOOP_HOME</span>/bin:<span class="nv">$HADOOP_HOME</span>/sbin
 </pre></div>
 
@@ -95,7 +95,7 @@
 <h1>Hadoop 类目录</h1>
 <p>这个类目录的作用是当运行 hadoop 或者 hdfs 的命令时, 命令的搜索目录.</p>
 <p>首先到 Hadoop 的根目录下创建一个新目录:</p>
-<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/itcast/hadoop-2.7.3/
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/smallcpp/hadoop-2.7.3/
 mkdir myclass
 </pre></div>
 
@@ -103,7 +103,7 @@ mkdir myclass
 <p><br>
 然后 <code>vim hadoop-env.sh</code> 设置 <code>HADOOP_CLASSPATH</code>:</p>
 <div class="highlight"><pre><span></span><span class="c1"># Extra Java CLASSPATH elements.  Automatically insert capacity-scheduler.</span>
-<span class="nb">export</span> <span class="nv">HADOOP_CLASSPATH</span><span class="o">=</span>/usr/itcast/hadoop-2.7.3/myclass
+<span class="nb">export</span> <span class="nv">HADOOP_CLASSPATH</span><span class="o">=</span>/usr/smallcpp/hadoop-2.7.3/myclass
 
 <span class="k">for</span> f in <span class="nv">$HADOOP_HOME</span>/contrib/capacity-scheduler/*.jar<span class="p">;</span> <span class="k">do</span>
   <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$HADOOP_CLASSPATH</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
@@ -116,22 +116,22 @@ mkdir myclass
 
 
 <p><br>
-这样当执行 <code>hdfs FileSystemCat</code> 的时候, 就会去 <code>/usr/itcast/hadoop-2.7.3/myclass</code> 找我们写好的 <code>FileSystemCat</code> 应用了.</p>
+这样当执行 <code>hdfs FileSystemCat</code> 的时候, 就会去 <code>/usr/smallcpp/hadoop-2.7.3/myclass</code> 找我们写好的 <code>FileSystemCat</code> 应用了.</p>
 <h1>编译源码</h1>
 <p>要将 Java 源码文件编译成 <code>.class</code> 文件才能被 Hadoop 识别, 编译 Hdfs 应用需要导入 Hadoop 的 jar 包, 这些包位于以下目录:</p>
 <ul>
-<li>/usr/itcast/hadoop-2.7.1/share/hadoop/common</li>
-<li>/usr/itcast/hadoop-2.7.1/share/hadoop/common/lib</li>
-<li>/usr/itcast/hadoop-2.7.1/share/hadoop/hdfs</li>
-<li>/usr/itcast/hadoop-2.7.1/share/hadoop/hdfs/lib</li>
+<li>/usr/smallcpp/hadoop-2.7.1/share/hadoop/common</li>
+<li>/usr/smallcpp/hadoop-2.7.1/share/hadoop/common/lib</li>
+<li>/usr/smallcpp/hadoop-2.7.1/share/hadoop/hdfs</li>
+<li>/usr/smallcpp/hadoop-2.7.1/share/hadoop/hdfs/lib</li>
 </ul>
-<p>我们这里的例子用到的是 <code>/usr/itcast/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar</code> 包, 执行 <code>javac</code> 命令时用 <code>-cp</code> 指定下就好.</p>
-<div class="highlight"><pre><span></span>javac -cp /usr/itcast/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar FileSystemCat.java
+<p>我们这里的例子用到的是 <code>/usr/smallcpp/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar</code> 包, 执行 <code>javac</code> 命令时用 <code>-cp</code> 指定下就好.</p>
+<div class="highlight"><pre><span></span>javac -cp /usr/smallcpp/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar FileSystemCat.java
 </pre></div>
 
 
 <p><br>
-然后 <code>/usr/itcast/hadoop-2.7.3/myclass</code> 下就多了个 <code>FileSystemCat.class</code> 文件.</p>
+然后 <code>/usr/smallcpp/hadoop-2.7.3/myclass</code> 下就多了个 <code>FileSystemCat.class</code> 文件.</p>
 <p>这时执行 <code>hdfs FileSystemCat /xxx</code> 就能查看到 <code>xxx</code> 文件的内容啦, 类似 linux 的 <code>cat</code> 命令.</p>
 <h1>ant</h1>
 <p>由于编译源码时需要指定 Hadoop 的 jar 包, 当引入的 jar 包多时, 这样就特别麻烦, 我们可以借用 ant 工具来编译源码, ant 可以在 <code>bulid.xml</code> 中设定 jar 包的所在目录, 这样就比较方便了.</p>
