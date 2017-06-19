@@ -105,3 +105,8 @@ def gh_pages():
 
     local("ghp-import -b {github_pages_branch} {deploy_path}".format(**env))
     local("git push origin {github_pages_branch}".format(**env))
+
+def blog_commit():
+  local('D:/Git/bin/git add .')
+  local('D:/Git/bin/git commit -m "Update Notes"')
+  local('D:/Git/bin/git push')
