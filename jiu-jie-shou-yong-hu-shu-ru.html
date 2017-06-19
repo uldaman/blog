@@ -59,34 +59,34 @@
 <p>程序中, 我们往往需要接收用户键盘的输入, 在 C 中, 可以使用 scanf(), C++ 中可以使用 cin();
 而在 Java 中提供了三种方法(推荐第三种, 最简单强大):</p>
 <p>第一种: 从控制台接收一个字符.</p>
-<div class="highlight"><pre><span></span>System.out.print(&quot;Enter a Char:&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+<div class="highlight"><pre><span></span>System.out.print(&quot;Enter a Char:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>char<span class="nt">&lt;/span&gt;</span> i = &#39; &#39;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>try<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {
-    i <span class="nt">&lt;/span&gt;</span>= (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>char<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>) System.in.read();
-} <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>catch<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> (IOException e) {
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> TODO 自动生成的 catch 块<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>    e.printStackTrace();
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; i = &#39; &#39;&lt;span style=&quot;color: #000000&quot;&gt;;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;try&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
+    i &lt;/span&gt;= (&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) System.in.read();
+} &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;catch&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (IOException e) {
+    &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; TODO 自动生成的 catch 块&lt;/span&gt;
+&lt;span style=&quot;color: #000000&quot;&gt;    e.printStackTrace();
 }
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;your char is :&quot;+i);
+System.out.println(&lt;/span&gt;&quot;your char is :&quot;+i);
 </pre></div>
 
 
 <p>此方法的缺点很明显, 只能接收一个字符, 并且只能是 char, 当我们输入一个数字, 希望得到的也是一个整型变量的时候, 我们还得修改接收变量的类型.</p>
 <p>第二种: 使用 BufferedReader 类和 InputStreamReader 类(使用这两个类要导入相应的包).</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>static<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> main(String[] args) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>throws<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> IOException {
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; main(String[] args) &lt;span style=&quot;color: #0000ff&quot;&gt;throws&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; IOException {
 
-    BufferedReader br <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> BufferedReader(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> InputStreamReader(System.in));
+    BufferedReader br &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; InputStreamReader(System.in));
 
-    String str <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>null<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
+    String str &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
 
-    System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;Enter your value:&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+    System.out.println(&lt;/span&gt;&quot;Enter your value:&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-    str <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> br.readLine();
+    str &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; br.readLine();
 
-    System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;your value is :&quot;+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>str);
-}<span class="nt">&lt;/span&gt;</span>
+    System.out.println(&lt;/span&gt;&quot;your value is :&quot;+&lt;span style=&quot;color: #000000&quot;&gt;str);
+}&lt;/span&gt;
 </pre></div>
 
 
@@ -97,25 +97,25 @@ System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;your char is :&quo
 <p>*. 导入 java.util.Scanner.</p>
 <p>*. 创建 Scanner 对象.</p>
 <p>*. 接收并保存用户输入.</p>
-<div class="highlight"><pre><span></span>Scanner sc = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Scanner(System.in);
+<div class="highlight"><pre><span></span>Scanner sc = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Scanner(System.in);
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;请输入你的姓名：&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+System.out.println(&lt;/span&gt;&quot;请输入你的姓名：&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-String name <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> sc.nextLine();
+String name &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; sc.nextLine();
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;请输入你的年龄：&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+System.out.println(&lt;/span&gt;&quot;请输入你的年龄：&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> age =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> sc.nextInt();
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; age =&lt;span style=&quot;color: #000000&quot;&gt; sc.nextInt();
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;请输入你的工资：&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+System.out.println(&lt;/span&gt;&quot;请输入你的工资：&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>float<span class="nt">&lt;/span&gt;</span> salary =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> sc.nextFloat();
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;float&lt;/span&gt; salary =&lt;span style=&quot;color: #000000&quot;&gt; sc.nextFloat();
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;你的信息如下：&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
+System.out.println(&lt;/span&gt;&quot;你的信息如下：&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
 
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;姓名：&quot;+name+&quot;\n&quot;+&quot;年龄：&quot;+age+&quot;\n&quot;+&quot;工资：&quot;+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>salary);
+System.out.println(&lt;/span&gt;&quot;姓名：&quot;+name+&quot;\n&quot;+&quot;年龄：&quot;+age+&quot;\n&quot;+&quot;工资：&quot;+&lt;span style=&quot;color: #000000&quot;&gt;salary);
 
-sc.close();<span class="nt">&lt;/span&gt;</span>
+sc.close();&lt;/span&gt;
 </pre></div>
 
 

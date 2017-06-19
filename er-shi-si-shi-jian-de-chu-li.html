@@ -55,28 +55,28 @@
 
     <p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
 这个类最主要的作用就是获取当前时间.</p>
-<div class="highlight"><pre><span></span>Date d = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> Date(); <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> Date 类的默认无参构造方法创建出的对象就代表当前时间<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Sysem.out.println(d);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 输出结果如下:
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> Wed Jun 11 21:10:30 CST 2015<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
+&lt;span style=&quot;color: #000000&quot;&gt;Sysem.out.println(d);
+&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 输出结果如下:
+&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Wed Jun 11 21:10:30 CST 2015&lt;/span&gt;
 </pre></div>
 
 
 <p>显然, 这种输出格式不是很友好, 如果想要输出成 2015-06-13 09:22:30 这种格式就需要使用 java.text 包中的 SimpleDateFormat 类;
 该类可以对日期时间进行格式化, 如可以将日期转换为指定格式的文本, 也可将文本转换为日期.</p>
 <p>*. 使用 format() 方法将日期转换为指定格式的文本</p>
-<div class="highlight"><pre><span></span>Date d = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Date();
-SimpleDateFormat sdf <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
-String today <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> sdf.format(d);
-System.out.println(today);<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Date();
+SimpleDateFormat sdf &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+String today &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; sdf.format(d);
+System.out.println(today);&lt;/span&gt;
 </pre></div>
 
 
 <p>*. 使用 parse() 方法将文本转换为日期</p>
-<div class="highlight"><pre><span></span>String day = &quot;2014年02月14日 10:30:25&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
-SimpleDateFormat df <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;</span> SimpleDateFormat(&quot;yyyy年MM月dd日 HH:mm:ss&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
-Date date <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> df.parse(day);
-System.out.println(date);<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>String day = &quot;2014年02月14日 10:30:25&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+SimpleDateFormat df &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; SimpleDateFormat(&quot;yyyy年MM月dd日 HH:mm:ss&quot;&lt;span style=&quot;color: #000000&quot;&gt;);
+Date date &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; df.parse(day);
+System.out.println(date);&lt;/span&gt;
 </pre></div>
 
 
@@ -85,14 +85,14 @@ System.out.println(date);<span class="nt">&lt;/span&gt;</span>
 <p>Calendar 类</p>
 <p>Date 类最主要的作用就是获得当前时间, 同时这个类里面也具有设置时间以及一些其他的功能, 但是由于本身设计的问题, 这些方法却遭到众多批评, 不建议使用, 更推荐使用 Calendar 类进行时间和日期的处理.</p>
 <p>Calendar 类也包含在 java.util 中, 它是一个抽象类, 可以通过调用 getInstance()<strong> </strong>静态方法获取一个 Calendar 对象, 此对象已由当前日期时间初始化, 即默认代表当前时间, 如 Calendar c = Calendar.getInstance();</p>
-<div class="highlight"><pre><span></span>Calendar c = Calendar.getInstance(); <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 创建 Calendar 对象<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> year =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> c.get(Calendar.YEAR);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> month = c.get(Calendar.MONTH) + 1; <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> 月是以0开始<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> day =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> c.get(Calendar.DAY_OF_MONTH);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> hour =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> c.get(Calendar.HOUR_OF_DAY);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> minute =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> c.get(Calendar.MINUTE);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> second =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> c.get(Calendar.SECOND);
-System.out.println(<span class="nt">&lt;/span&gt;</span>&quot;当前时间: &quot; + yer + &quot;-&quot; + month + &quot;-&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute + &quot;:&quot; + second);
+<div class="highlight"><pre><span></span>Calendar c = Calendar.getInstance(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 创建 Calendar 对象&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; year =&lt;span style=&quot;color: #000000&quot;&gt; c.get(Calendar.YEAR);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; month = c.get(Calendar.MONTH) + 1; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 月是以0开始&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; day =&lt;span style=&quot;color: #000000&quot;&gt; c.get(Calendar.DAY_OF_MONTH);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; hour =&lt;span style=&quot;color: #000000&quot;&gt; c.get(Calendar.HOUR_OF_DAY);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; minute =&lt;span style=&quot;color: #000000&quot;&gt; c.get(Calendar.MINUTE);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; second =&lt;span style=&quot;color: #000000&quot;&gt; c.get(Calendar.SECOND);
+System.out.println(&lt;/span&gt;&quot;当前时间: &quot; + yer + &quot;-&quot; + month + &quot;-&quot; + day + &quot; &quot; + hour + &quot;:&quot; + minute + &quot;:&quot; + second);
 </pre></div>
 
 

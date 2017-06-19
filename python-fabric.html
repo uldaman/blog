@@ -320,13 +320,13 @@ Done.
 
 <p><br>
 执行结果:</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">user</span> <span class="n">name</span><span class="mf">@10.0.3.57</span><span class="p">]</span> <span class="n">Executing</span> <span class="n">task</span> <span class="err">&#39;</span><span class="n">remoteGit</span><span class="err">&#39;</span>
-<span class="p">[</span><span class="n">user</span> <span class="n">name</span><span class="mf">@10.0.3.57</span><span class="p">]</span> <span class="nl">run</span><span class="p">:</span> <span class="n">git</span> <span class="o">--</span><span class="n">version</span>
-<span class="p">[</span><span class="n">user</span> <span class="n">name</span><span class="mf">@10.0.3.57</span><span class="p">]</span> <span class="k">out</span><span class="o">:</span> <span class="n">git</span> <span class="n">version</span> <span class="mf">1.7.9.5</span>
-<span class="p">[</span><span class="n">user</span> <span class="n">name</span><span class="mf">@10.0.3.57</span><span class="p">]</span> <span class="k">out</span><span class="o">:</span>
+<div class="highlight"><pre><span></span>[user name@10.0.3.57] Executing task &#39;remoteGit&#39;
+[user name@10.0.3.57] run: git --version
+[user name@10.0.3.57] out: git version 1.7.9.5
+[user name@10.0.3.57] out:
 
-<span class="n">Done</span><span class="p">.</span>
-<span class="n">Disconnecting</span> <span class="n">from</span> <span class="n">user</span> <span class="n">name</span><span class="mf">@10.0.3.57</span><span class="p">...</span> <span class="n">done</span><span class="p">.</span>
+Done.
+Disconnecting from user name@10.0.3.57... done.
 </pre></div>
 
 
@@ -430,8 +430,8 @@ fab 认为 urlopen 也是一个任务.</p>
 <span class="kn">from</span> <span class="nn">fabric.tasks</span> <span class="kn">import</span> <span class="n">Task</span>
 
 <span class="k">class</span> <span class="nc">CustomTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">myarg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CustomTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">myarg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CustomTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">myarg</span> <span class="o">=</span> <span class="n">myarg</span>
 
@@ -569,7 +569,7 @@ fab 认为 urlopen 也是一个任务.</p>
 <span class="k">def</span> <span class="nf">test_for_execute</span><span class="p">():</span>
     <span class="n">local</span><span class="p">(</span><span class="s1">&#39;pip freeze&#39;</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">execute</span><span class="p">(</span><span class="n">test_for_execute</span><span class="p">)</span>
 </pre></div>
 

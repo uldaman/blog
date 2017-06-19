@@ -57,19 +57,19 @@
 <em>. 使用包装类的 toString() 方法
 </em>. 使用 String 类的 valueOf() 方法
 *. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> c = 10<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
-String str1 <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Integer.toString(c);
-String str2 <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> String.valueOf(c);
-String str3 <span class="nt">&lt;/span&gt;</span>= c + &quot;&quot;;
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
+String str1 &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; Integer.toString(c);
+String str2 &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; String.valueOf(c);
+String str3 &lt;/span&gt;= c + &quot;&quot;;
 </pre></div>
 
 
 <p>将字符串转换成基本类型有两种方法:
 <em>. 调用包装类的 parseXxx 静态方法
 </em>. 调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱</p>
-<div class="highlight"><pre><span></span>String str = &quot;10&quot;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>;
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> d =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> Integer.paseInt(str);
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> e = Integer.valueOf(str);
+<div class="highlight"><pre><span></span>String str = &quot;10&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; d =&lt;span style=&quot;color: #000000&quot;&gt; Integer.paseInt(str);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; e = Integer.valueOf(str);
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/java.html">JAVA</a>
 

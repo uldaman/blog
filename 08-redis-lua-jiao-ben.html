@@ -70,17 +70,17 @@
 <p><strong>需求分析:</strong><br>
 我们希望的 Redis 提供一个 "RATELIM ITING" 命令用来实现访问频率限制功能, 这个命令只需要我们提供键名、时间限制和在时间限制内最多访问的次数三个参数就可以直接返回访问频率是否超限!</p>
 <p>然而可惜的是 Redis 并没有提供这个命令, 不过我们可以使用 Redis 脚本功能自己定义新的命令, 代码如下:</p>
-<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">times</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">incr&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">if</span> <span class="n">times</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
+<div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">times</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;incr&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kr">if</span> <span class="n">times</span> <span class="o">==</span> <span class="mi">1</span> <span class="kr">then</span>
     <span class="c1">-- KEYS[1]键刚创建, 所以为其设置生存时间</span>
-    <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">expire&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="k">end</span>
+    <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;expire&#39;</span><span class="p">,</span> <span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kr">end</span>
 
-<span class="k">if</span> <span class="n">times</span> <span class="err">＞</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">then</span>
-    <span class="k">return</span> <span class="mi">0</span>
-<span class="k">end</span>
+<span class="kr">if</span> <span class="n">times</span> <span class="err">＞</span> <span class="nb">tonumber</span><span class="p">(</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="kr">then</span>
+    <span class="kr">return</span> <span class="mi">0</span>
+<span class="kr">end</span>
 
-<span class="k">return</span> <span class="mi">1</span>
+<span class="kr">return</span> <span class="mi">1</span>
 </pre></div>
 
 
@@ -97,8 +97,8 @@
 <h1>2. 语法说明</h1>
 <h2>2.1 Lua 调用 Redis 命令</h2>
 <p>可以使用 <strong>redis.call()</strong> 及 <strong>redis.pcall()</strong> 调用 Redis 命令, 就像这样:</p>
-<div class="highlight"><pre><span></span><span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">set&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">foo&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">bar&#39;</span><span class="p">)</span>
-<span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">get&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">foo&#39;</span><span class="p">)</span> <span class="c1">-- value 的值为 bar</span>
+<div class="highlight"><pre><span></span><span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">redis</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="c1">-- value 的值为 bar</span>
 </pre></div>
 
 

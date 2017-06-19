@@ -88,7 +88,7 @@
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">import</span> <span class="n">pyqtSignal</span>
 
 <span class="k">def</span> <span class="nf">on_new_solt</span><span class="p">():</span>
-    <span class="k">print</span> <span class="s1">u&#39;接收到新信号&#39;</span>
+    <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;接收到新信号&#39;</span>
 
 <span class="n">sin_new</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>  <span class="c1"># 定义新信号</span>
 <span class="n">sin_new</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">on_new_solt</span><span class="p">)</span>  <span class="c1"># 连接信号槽</span>
@@ -103,7 +103,7 @@
 
 <span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="n">Ui_Xxx</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_one</span><span class="o">.</span><span class="n">sin_update</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_one</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_one</span><span class="p">)</span>
 
@@ -111,10 +111,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_two</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_two</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第一个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第一个 table widget&#39;</span>
 
     <span class="k">def</span> <span class="nf">update_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第二个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第二个 table widget&#39;</span>
 </pre></div>
 
 
@@ -126,15 +126,15 @@
    <span class="n">table_widget_one</span><span class="o">.</span><span class="n">sin_update</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>  <span class="c1"># 类成员</span>
    <span class="n">table_widget_two</span><span class="o">.</span><span class="n">sin_update</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>  <span class="c1"># 类成员</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_one</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_one</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_two</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_two</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第一个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第一个 table widget&#39;</span>
 
     <span class="k">def</span> <span class="nf">update_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第二个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第二个 table widget&#39;</span>
 </pre></div>
 
 
@@ -155,15 +155,15 @@
 
 <span class="k">class</span> <span class="nc">ClassName</span><span class="p">(</span><span class="n">Ui_Xxx</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_one</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_one</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table_widget_two</span><span class="o">.</span><span class="n">sin_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_two</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第一个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第一个 table widget&#39;</span>
 
     <span class="k">def</span> <span class="nf">update_two</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s1">u&#39;更新第二个 table widget&#39;</span>
+        <span class="k">print</span> <span class="sa">u</span><span class="s1">&#39;更新第二个 table widget&#39;</span>
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a>
 

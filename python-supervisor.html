@@ -90,145 +90,145 @@
 <li>在当前目录创建配置文件 echo_supervisord_conf > supervisord.conf, 然后使用 <strong>-c</strong> 参数在启动时手动指定配置文件: <code>supervisord -c supervisord.conf</code></li>
 </ul>
 <p>默认配置文件 echo_supervisord_conf 内容:</p>
-<div class="highlight"><pre><span></span><span class="o">;</span> <span class="nt">Sample</span> <span class="nt">supervisor</span> <span class="nt">config</span> <span class="nt">file</span><span class="o">.</span>
-<span class="o">;</span>
-<span class="o">;</span> <span class="nt">For</span> <span class="nt">more</span> <span class="nt">information</span> <span class="nt">on</span> <span class="nt">the</span> <span class="nt">config</span> <span class="nt">file</span><span class="o">,</span> <span class="nt">please</span> <span class="nt">see</span><span class="o">:</span>
-<span class="o">;</span> <span class="nt">http</span><span class="o">://</span><span class="nt">supervisord</span><span class="nc">.org</span><span class="o">/</span><span class="nt">configuration</span><span class="nc">.html</span>
-<span class="o">;</span>
-<span class="o">;</span> <span class="nt">Note</span><span class="o">:</span> <span class="nt">shell</span> <span class="nt">expansion</span> <span class="o">(</span><span class="s2">&quot;~&quot;</span> <span class="nt">or</span> <span class="s2">&quot;$HOME&quot;</span><span class="o">)</span> <span class="nt">is</span> <span class="nt">not</span> <span class="nt">supported</span><span class="o">.</span>  <span class="nt">Environment</span>
-<span class="o">;</span> <span class="nt">variables</span> <span class="nt">can</span> <span class="nt">be</span> <span class="nt">expanded</span> <span class="nt">using</span> <span class="nt">this</span> <span class="nt">syntax</span><span class="o">:</span> <span class="s2">&quot;%(ENV_HOME)s&quot;</span><span class="o">.</span>
+<div class="highlight"><pre><span></span>; Sample supervisor config file.
+;
+; For more information on the config file, please see:
+; http://supervisord.org/configuration.html
+;
+; Note: shell expansion (&quot;~&quot; or &quot;$HOME&quot;) is not supported.  Environment
+; variables can be expanded using this syntax: &quot;%(ENV_HOME)s&quot;.
 
-<span class="cp">[</span><span class="nx">unix_http_server</span><span class="cp">]</span>          <span class="o">;</span> <span class="nt">supervisord</span> <span class="err">的</span> <span class="nt">unix</span> <span class="nt">socket</span> <span class="err">服务配置</span>
-<span class="nt">file</span><span class="o">=/</span><span class="nt">tmp</span><span class="o">/</span><span class="nt">supervisor</span><span class="nc">.sock</span>   <span class="o">;</span> <span class="nt">socket</span> <span class="err">文件的保存目录</span>
-<span class="o">;</span><span class="nt">chmod</span><span class="o">=</span><span class="nt">0700</span>                 <span class="o">;</span> <span class="nt">socket</span> <span class="err">的文件权限</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">0700</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">chown</span><span class="o">=</span><span class="nt">nobody</span><span class="nd">:nogroup</span>       <span class="o">;</span> <span class="nt">socket</span> <span class="err">的拥有者和组名</span>
-<span class="o">;</span><span class="nt">username</span><span class="o">=</span><span class="nt">user</span>              <span class="o">;</span> <span class="err">默认不需要登陆用户</span> <span class="o">(</span><span class="nt">open</span> <span class="nt">server</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">password</span><span class="o">=</span><span class="nt">123</span>               <span class="o">;</span> <span class="err">默认不需要登陆密码</span> <span class="o">(</span><span class="nt">open</span> <span class="nt">server</span><span class="o">)</span>
+[unix_http_server]          ; supervisord 的 unix socket 服务配置
+file=/tmp/supervisor.sock   ; socket 文件的保存目录
+;chmod=0700                 ; socket 的文件权限 (default 0700)
+;chown=nobody:nogroup       ; socket 的拥有者和组名
+;username=user              ; 默认不需要登陆用户 (open server)
+;password=123               ; 默认不需要登陆密码 (open server)
 
-<span class="o">;</span><span class="cp">[</span><span class="nx">inet_http_server</span><span class="cp">]</span>         <span class="o">;</span> <span class="nt">supervisord</span> <span class="err">的</span> <span class="nt">tcp</span> <span class="err">服务配置</span>
-<span class="o">;</span><span class="nt">port</span><span class="o">=</span><span class="nt">127</span><span class="nc">.0.0.1</span><span class="nd">:9001</span>        <span class="o">;</span> <span class="nt">tcp</span> <span class="err">端口</span>
-<span class="o">;</span><span class="nt">username</span><span class="o">=</span><span class="nt">user</span>              <span class="o">;</span> <span class="nt">tcp</span> <span class="err">登陆用户</span>
-<span class="o">;</span><span class="nt">password</span><span class="o">=</span><span class="nt">123</span>               <span class="o">;</span> <span class="nt">tcp</span> <span class="err">登陆密码</span>
+;[inet_http_server]         ; supervisord 的 tcp 服务配置
+;port=127.0.0.1:9001        ; tcp 端口
+;username=user              ; tcp 登陆用户
+;password=123               ; tcp 登陆密码
 
-<span class="cp">[</span><span class="nx">supervisord</span><span class="cp">]</span>                <span class="o">;</span> <span class="nt">supervisord</span> <span class="err">的主进程配置</span>
-<span class="nt">logfile</span><span class="o">=/</span><span class="nt">tmp</span><span class="o">/</span><span class="nt">supervisord</span><span class="nc">.log</span> <span class="o">;</span> <span class="err">主要的进程日志配置</span>
-<span class="nt">logfile_maxbytes</span><span class="o">=</span><span class="nt">50MB</span>        <span class="o">;</span> <span class="err">最大日志体积</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">50MB</span>
-<span class="nt">logfile_backups</span><span class="o">=</span><span class="nt">10</span>           <span class="o">;</span> <span class="err">日志文件备份数目</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">10</span>
-<span class="nt">loglevel</span><span class="o">=</span><span class="nt">info</span>                <span class="o">;</span> <span class="err">日志级别</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">info</span><span class="o">;</span> <span class="err">还有</span><span class="o">:</span> <span class="nt">debug</span><span class="o">,</span> <span class="nt">warn</span><span class="o">,</span> <span class="nt">trace</span>
-<span class="nt">pidfile</span><span class="o">=/</span><span class="nt">tmp</span><span class="o">/</span><span class="nt">supervisord</span><span class="nc">.pid</span> <span class="o">;</span> <span class="nt">supervisord</span> <span class="err">的</span> <span class="nt">pidfile</span> <span class="err">文件</span>
-<span class="nt">nodaemon</span><span class="o">=</span><span class="nt">false</span>               <span class="o">;</span> <span class="err">是否以守护进程的方式启动</span>
-<span class="nt">minfds</span><span class="o">=</span><span class="nt">1024</span>                  <span class="o">;</span> <span class="err">最小的有效文件描述符</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">1024</span>
-<span class="nt">minprocs</span><span class="o">=</span><span class="nt">200</span>                 <span class="o">;</span> <span class="err">最小的有效进程描述符</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">200</span>
-<span class="o">;</span><span class="nt">umask</span><span class="o">=</span><span class="nt">022</span>                   <span class="o">;</span> <span class="err">进程文件的</span> <span class="nt">umask</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">200</span>
-<span class="o">;</span><span class="nt">user</span><span class="o">=</span><span class="nt">chrism</span>                 <span class="o">;</span> <span class="err">默认为当前用户</span><span class="o">,</span> <span class="err">如果为</span> <span class="nt">root</span> <span class="err">则必填</span>
-<span class="o">;</span><span class="nt">identifier</span><span class="o">=</span><span class="nt">supervisor</span>       <span class="o">;</span> <span class="nt">supervisord</span> <span class="err">的表示符</span><span class="o">,</span> <span class="err">默认时</span> <span class="s1">&#39;supervisor&#39;</span>
-<span class="o">;</span><span class="nt">directory</span><span class="o">=/</span><span class="nt">tmp</span>              <span class="o">;</span> <span class="err">在运行前</span> <span class="nt">cwd</span> <span class="err">到指定的目录</span><span class="o">,</span> <span class="err">默认不执行</span> <span class="nt">cmd</span>
-<span class="o">;</span><span class="nt">nocleanup</span><span class="o">=</span><span class="nt">true</span>              <span class="o">;</span> <span class="err">不在启动的时候清除临时文件</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">false</span>
-<span class="o">;</span><span class="nt">childlogdir</span><span class="o">=/</span><span class="nt">tmp</span>            <span class="o">;</span> <span class="o">(</span><span class="s1">&#39;AUTO&#39;</span> <span class="nt">child</span> <span class="nt">log</span> <span class="nt">dir</span><span class="o">,</span> <span class="nt">default</span> <span class="o">$</span><span class="nt">TEMP</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">environment</span><span class="o">=</span><span class="nt">KEY</span><span class="o">=</span><span class="nt">value</span>       <span class="o">;</span> <span class="err">初始键值对传递给进程</span>
-<span class="o">;</span><span class="nt">strip_ansi</span><span class="o">=</span><span class="nt">false</span>            <span class="o">;</span> <span class="o">(</span><span class="nt">strip</span> <span class="nt">ansi</span> <span class="nt">escape</span> <span class="nt">codes</span> <span class="nt">in</span> <span class="nt">logs</span><span class="o">;</span> <span class="nt">def</span><span class="o">.</span> <span class="nt">false</span><span class="o">)</span>
+[supervisord]                ; supervisord 的主进程配置
+logfile=/tmp/supervisord.log ; 主要的进程日志配置
+logfile_maxbytes=50MB        ; 最大日志体积, 默认 50MB
+logfile_backups=10           ; 日志文件备份数目, 默认 10
+loglevel=info                ; 日志级别, 默认 info; 还有: debug, warn, trace
+pidfile=/tmp/supervisord.pid ; supervisord 的 pidfile 文件
+nodaemon=false               ; 是否以守护进程的方式启动
+minfds=1024                  ; 最小的有效文件描述符, 默认 1024
+minprocs=200                 ; 最小的有效进程描述符, 默认 200
+;umask=022                   ; 进程文件的 umask, 默认 200
+;user=chrism                 ; 默认为当前用户, 如果为 root 则必填
+;identifier=supervisor       ; supervisord 的表示符, 默认时 &#39;supervisor&#39;
+;directory=/tmp              ; 在运行前 cwd 到指定的目录, 默认不执行 cmd
+;nocleanup=true              ; 不在启动的时候清除临时文件, 默认 false
+;childlogdir=/tmp            ; (&#39;AUTO&#39; child log dir, default $TEMP)
+;environment=KEY=value       ; 初始键值对传递给进程
+;strip_ansi=false            ; (strip ansi escape codes in logs; def. false)
 
-<span class="o">;</span> <span class="nt">the</span> <span class="nt">below</span> <span class="nt">section</span> <span class="nt">must</span> <span class="nt">remain</span> <span class="nt">in</span> <span class="nt">the</span> <span class="nt">config</span> <span class="nt">file</span> <span class="nt">for</span> <span class="nt">RPC</span>
-<span class="o">;</span> <span class="o">(</span><span class="nt">supervisorctl</span><span class="o">/</span><span class="nt">web</span> <span class="nt">interface</span><span class="o">)</span> <span class="nt">to</span> <span class="nt">work</span><span class="o">,</span> <span class="nt">additional</span> <span class="nt">interfaces</span> <span class="nt">may</span> <span class="nt">be</span>
-<span class="o">;</span> <span class="nt">added</span> <span class="nt">by</span> <span class="nt">defining</span> <span class="nt">them</span> <span class="nt">in</span> <span class="nt">separate</span> <span class="nt">rpcinterface</span><span class="o">:</span> <span class="nt">sections</span>
-<span class="cp">[</span><span class="nx">rpcinterface</span><span class="p">:</span><span class="nx">supervisor</span><span class="cp">]</span>
-<span class="nt">supervisor</span><span class="nc">.rpcinterface_factory</span> <span class="o">=</span> <span class="nt">supervisor</span><span class="nc">.rpcinterface</span><span class="nd">:make_main_rpcinterface</span>
+; the below section must remain in the config file for RPC
+; (supervisorctl/web interface) to work, additional interfaces may be
+; added by defining them in separate rpcinterface: sections
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
-<span class="cp">[</span><span class="nx">supervisorctl</span><span class="cp">]</span>
-<span class="nt">serverurl</span><span class="o">=</span><span class="nt">unix</span><span class="o">:///</span><span class="nt">tmp</span><span class="o">/</span><span class="nt">supervisor</span><span class="nc">.sock</span> <span class="o">;</span> <span class="nt">use</span> <span class="nt">a</span> <span class="nt">unix</span><span class="o">://</span> <span class="nt">URL</span>  <span class="nt">for</span> <span class="nt">a</span> <span class="nt">unix</span> <span class="nt">socket</span>
-<span class="o">;</span><span class="nt">serverurl</span><span class="o">=</span><span class="nt">http</span><span class="o">://</span><span class="nt">127</span><span class="nc">.0.0.1</span><span class="nd">:9001</span> <span class="o">;</span> <span class="nt">use</span> <span class="nt">an</span> <span class="nt">http</span><span class="o">://</span> <span class="nt">url</span> <span class="nt">to</span> <span class="nt">specify</span> <span class="nt">an</span> <span class="nt">inet</span> <span class="nt">socket</span>
-<span class="o">;</span><span class="nt">username</span><span class="o">=</span><span class="nt">chris</span>              <span class="o">;</span> <span class="err">如果设置应该与</span> <span class="nt">http_username</span> <span class="err">相同</span>
-<span class="o">;</span><span class="nt">password</span><span class="o">=</span><span class="nt">123</span>                <span class="o">;</span> <span class="err">如果设置应该与</span> <span class="nt">http_password</span> <span class="err">相同</span>
-<span class="o">;</span><span class="nt">prompt</span><span class="o">=</span><span class="nt">mysupervisor</span>         <span class="o">;</span> <span class="err">命令行提示符</span><span class="o">,</span> <span class="err">默认</span> <span class="s1">&#39;supervisor&#39;</span>
-<span class="o">;</span><span class="nt">history_file</span><span class="o">=~/</span><span class="nc">.sc_history</span>  <span class="o">;</span> <span class="err">命令行历史纪录</span>
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+;serverurl=http://127.0.0.1:9001 ; use an http:// url to specify an inet socket
+;username=chris              ; 如果设置应该与 http_username 相同
+;password=123                ; 如果设置应该与 http_password 相同
+;prompt=mysupervisor         ; 命令行提示符, 默认 &#39;supervisor&#39;
+;history_file=~/.sc_history  ; 命令行历史纪录
 
-<span class="o">;</span> <span class="nt">The</span> <span class="nt">below</span> <span class="nt">sample</span> <span class="nt">program</span> <span class="nt">section</span> <span class="nt">shows</span> <span class="nt">all</span> <span class="nt">possible</span> <span class="nt">program</span> <span class="nt">subsection</span> <span class="nt">values</span><span class="o">,</span>
-<span class="o">;</span> <span class="nt">create</span> <span class="nt">one</span> <span class="nt">or</span> <span class="nt">more</span> <span class="s1">&#39;real&#39;</span> <span class="nt">program</span><span class="o">:</span> <span class="nt">sections</span> <span class="nt">to</span> <span class="nt">be</span> <span class="nt">able</span> <span class="nt">to</span> <span class="nt">control</span> <span class="nt">them</span> <span class="nt">under</span>
-<span class="o">;</span> <span class="nt">supervisor</span><span class="o">.</span>
+; The below sample program section shows all possible program subsection values,
+; create one or more &#39;real&#39; program: sections to be able to control them under
+; supervisor.
 
-<span class="o">;</span><span class="cp">[</span><span class="nx">program</span><span class="p">:</span><span class="nx">theprogramname</span><span class="cp">]</span>
-<span class="o">;</span><span class="nt">command</span><span class="o">=/</span><span class="nt">bin</span><span class="o">/</span><span class="nt">cat</span>              <span class="o">;</span> <span class="err">运行的程序</span> <span class="o">(</span><span class="err">相对使用</span><span class="nt">PATH</span><span class="err">路径</span><span class="o">,</span> <span class="err">可以使用参数</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">process_name</span><span class="o">=%(</span><span class="nt">program_name</span><span class="o">)</span><span class="nt">s</span> <span class="o">;</span> <span class="err">进程名表达式</span><span class="o">,</span> <span class="err">默认为</span> <span class="o">%(</span><span class="nt">program_name</span><span class="o">)</span><span class="nt">s</span>
-<span class="o">;</span><span class="nt">numprocs</span><span class="o">=</span><span class="nt">1</span>                    <span class="o">;</span> <span class="err">默认启动的进程数目</span><span class="o">,</span> <span class="err">默认为</span> <span class="nt">1</span>
-<span class="o">;</span><span class="nt">directory</span><span class="o">=/</span><span class="nt">tmp</span>                <span class="o">;</span> <span class="err">在运行前</span> <span class="nt">cwd</span> <span class="err">到指定的目录</span><span class="o">,</span> <span class="err">默认不执行</span> <span class="nt">cmd</span>
-<span class="o">;</span><span class="nt">umask</span><span class="o">=</span><span class="nt">022</span>                     <span class="o">;</span> <span class="err">进程</span> <span class="nt">umask</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">None</span>
-<span class="o">;</span><span class="nt">priority</span><span class="o">=</span><span class="nt">999</span>                  <span class="o">;</span> <span class="err">程序运行的优先级</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">999</span>
-<span class="o">;</span><span class="nt">autostart</span><span class="o">=</span><span class="nt">true</span>                <span class="o">;</span> <span class="err">默认随</span> <span class="nt">supervisord</span> <span class="err">自动启动</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">true</span>
-<span class="o">;</span><span class="nt">autorestart</span><span class="o">=</span><span class="nt">unexpected</span>        <span class="o">;</span> <span class="err">被监控程序异常中断是否自动重启</span>
-<span class="o">;</span><span class="nt">startsecs</span><span class="o">=</span><span class="nt">1</span>                   <span class="o">;</span> <span class="err">被监控程序启动时持续时间</span> <span class="o">(</span><span class="nt">def</span><span class="o">.</span> <span class="nt">1</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">startretries</span><span class="o">=</span><span class="nt">3</span>                <span class="o">;</span> <span class="err">被监控程序启动失败重试的次数</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">3</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">exitcodes</span><span class="o">=</span><span class="nt">0</span><span class="o">,</span><span class="nt">2</span>                 <span class="o">;</span> <span class="err">期望的退出码</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">0</span><span class="o">,</span> <span class="nt">2</span>
-<span class="o">;</span><span class="nt">stopsignal</span><span class="o">=</span><span class="nt">QUIT</span>               <span class="o">;</span> <span class="err">杀死进程的信号</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">TERM</span>
-<span class="o">;</span><span class="nt">stopwaitsecs</span><span class="o">=</span><span class="nt">10</span>               <span class="o">;</span> <span class="nt">max</span> <span class="nt">num</span> <span class="nt">secs</span> <span class="nt">to</span> <span class="nt">wait</span> <span class="nt">b4</span> <span class="nt">SIGKILL</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">10</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stopasgroup</span><span class="o">=</span><span class="nt">false</span>             <span class="o">;</span> <span class="err">向</span> <span class="nt">unix</span> <span class="err">进程组发送停止信号</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">false</span>
-<span class="o">;</span><span class="nt">killasgroup</span><span class="o">=</span><span class="nt">false</span>             <span class="o">;</span> <span class="err">向</span> <span class="nt">unix</span> <span class="err">进程组发送</span><span class="nt">SIGKILL</span><span class="err">信号</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">false</span>
-<span class="o">;</span><span class="nt">user</span><span class="o">=</span><span class="nt">chrism</span>                   <span class="o">;</span> <span class="err">为运行程序的</span> <span class="nt">unix</span> <span class="err">帐号设置</span> <span class="nt">setuid</span>
-<span class="o">;</span><span class="nt">redirect_stderr</span><span class="o">=</span><span class="nt">true</span>          <span class="o">;</span> <span class="err">将标准错误重定向到标准输出</span><span class="o">,</span> <span class="err">默认</span> <span class="nt">false</span>
-<span class="o">;</span><span class="nt">stdout_logfile</span><span class="o">=/</span><span class="nt">a</span><span class="o">/</span><span class="nt">path</span>        <span class="o">;</span> <span class="err">标准输出的文件路径</span> <span class="nt">NONE</span><span class="err">＝</span><span class="nt">none</span><span class="o">;</span> <span class="err">默认</span> <span class="nt">AUTO</span>
-<span class="o">;</span><span class="nt">stdout_logfile_maxbytes</span><span class="o">=</span><span class="nt">1MB</span>   <span class="o">;</span> <span class="nt">max</span> <span class="err">#</span> <span class="nt">logfile</span> <span class="nt">bytes</span> <span class="nt">b4</span> <span class="nt">rotation</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">50MB</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stdout_logfile_backups</span><span class="o">=</span><span class="nt">10</span>     <span class="o">;</span> <span class="err">#</span> <span class="nt">of</span> <span class="nt">stdout</span> <span class="nt">logfile</span> <span class="nt">backups</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">10</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stdout_capture_maxbytes</span><span class="o">=</span><span class="nt">1MB</span>   <span class="o">;</span> <span class="nt">number</span> <span class="nt">of</span> <span class="nt">bytes</span> <span class="nt">in</span> <span class="s1">&#39;capturemode&#39;</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">0</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stdout_events_enabled</span><span class="o">=</span><span class="nt">false</span>   <span class="o">;</span> <span class="nt">emit</span> <span class="nt">events</span> <span class="nt">on</span> <span class="nt">stdout</span> <span class="nt">writes</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">false</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stderr_logfile</span><span class="o">=/</span><span class="nt">a</span><span class="o">/</span><span class="nt">path</span>        <span class="o">;</span> <span class="nt">stderr</span> <span class="nt">log</span> <span class="nt">path</span><span class="o">,</span> <span class="nt">NONE</span> <span class="nt">for</span> <span class="nt">none</span><span class="o">;</span> <span class="nt">default</span> <span class="nt">AUTO</span>
-<span class="o">;</span><span class="nt">stderr_logfile_maxbytes</span><span class="o">=</span><span class="nt">1MB</span>   <span class="o">;</span> <span class="nt">max</span> <span class="err">#</span> <span class="nt">logfile</span> <span class="nt">bytes</span> <span class="nt">b4</span> <span class="nt">rotation</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">50MB</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stderr_logfile_backups</span><span class="o">=</span><span class="nt">10</span>     <span class="o">;</span> <span class="err">#</span> <span class="nt">of</span> <span class="nt">stderr</span> <span class="nt">logfile</span> <span class="nt">backups</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">10</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stderr_capture_maxbytes</span><span class="o">=</span><span class="nt">1MB</span>   <span class="o">;</span> <span class="nt">number</span> <span class="nt">of</span> <span class="nt">bytes</span> <span class="nt">in</span> <span class="s1">&#39;capturemode&#39;</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">0</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">stderr_events_enabled</span><span class="o">=</span><span class="nt">false</span>   <span class="o">;</span> <span class="nt">emit</span> <span class="nt">events</span> <span class="nt">on</span> <span class="nt">stderr</span> <span class="nt">writes</span> <span class="o">(</span><span class="nt">default</span> <span class="nt">false</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">environment</span><span class="o">=</span><span class="nt">A</span><span class="o">=</span><span class="nt">1</span><span class="o">,</span><span class="nt">B</span><span class="o">=</span><span class="nt">2</span>           <span class="o">;</span> <span class="nt">process</span> <span class="nt">environment</span> <span class="nt">additions</span> <span class="o">(</span><span class="nt">def</span> <span class="nt">no</span> <span class="nt">adds</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">serverurl</span><span class="o">=</span><span class="nt">AUTO</span>                <span class="o">;</span> <span class="nt">override</span> <span class="nt">serverurl</span> <span class="nt">computation</span> <span class="o">(</span><span class="nt">childutils</span><span class="o">)</span>
+;[program:theprogramname]
+;command=/bin/cat              ; 运行的程序 (相对使用PATH路径, 可以使用参数)
+;process_name=%(program_name)s ; 进程名表达式, 默认为 %(program_name)s
+;numprocs=1                    ; 默认启动的进程数目, 默认为 1
+;directory=/tmp                ; 在运行前 cwd 到指定的目录, 默认不执行 cmd
+;umask=022                     ; 进程 umask, 默认 None
+;priority=999                  ; 程序运行的优先级, 默认 999
+;autostart=true                ; 默认随 supervisord 自动启动, 默认 true
+;autorestart=unexpected        ; 被监控程序异常中断是否自动重启
+;startsecs=1                   ; 被监控程序启动时持续时间 (def. 1)
+;startretries=3                ; 被监控程序启动失败重试的次数 (default 3)
+;exitcodes=0,2                 ; 期望的退出码, 默认 0, 2
+;stopsignal=QUIT               ; 杀死进程的信号, 默认 TERM
+;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+;stopasgroup=false             ; 向 unix 进程组发送停止信号, 默认 false
+;killasgroup=false             ; 向 unix 进程组发送SIGKILL信号, 默认 false
+;user=chrism                   ; 为运行程序的 unix 帐号设置 setuid
+;redirect_stderr=true          ; 将标准错误重定向到标准输出, 默认 false
+;stdout_logfile=/a/path        ; 标准输出的文件路径 NONE＝none; 默认 AUTO
+;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)
+;stdout_capture_maxbytes=1MB   ; number of bytes in &#39;capturemode&#39; (default 0)
+;stdout_events_enabled=false   ; emit events on stdout writes (default false)
+;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO
+;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stderr_logfile_backups=10     ; # of stderr logfile backups (default 10)
+;stderr_capture_maxbytes=1MB   ; number of bytes in &#39;capturemode&#39; (default 0)
+;stderr_events_enabled=false   ; emit events on stderr writes (default false)
+;environment=A=1,B=2           ; process environment additions (def no adds)
+;serverurl=AUTO                ; override serverurl computation (childutils)
 
-<span class="o">;</span> <span class="nt">The</span> <span class="nt">below</span> <span class="nt">sample</span> <span class="nt">eventlistener</span> <span class="nt">section</span> <span class="nt">shows</span> <span class="nt">all</span> <span class="nt">possible</span>
-<span class="o">;</span> <span class="nt">eventlistener</span> <span class="nt">subsection</span> <span class="nt">values</span><span class="o">,</span> <span class="nt">create</span> <span class="nt">one</span> <span class="nt">or</span> <span class="nt">more</span> <span class="s1">&#39;real&#39;</span>
-<span class="o">;</span> <span class="nt">eventlistener</span><span class="o">:</span> <span class="nt">sections</span> <span class="nt">to</span> <span class="nt">be</span> <span class="nt">able</span> <span class="nt">to</span> <span class="nt">handle</span> <span class="nt">event</span> <span class="nt">notifications</span>
-<span class="o">;</span> <span class="nt">sent</span> <span class="nt">by</span> <span class="nt">supervisor</span><span class="o">.</span>
+; The below sample eventlistener section shows all possible
+; eventlistener subsection values, create one or more &#39;real&#39;
+; eventlistener: sections to be able to handle event notifications
+; sent by supervisor.
 
-<span class="o">;</span><span class="cp">[</span><span class="nx">eventlistener</span><span class="p">:</span><span class="nx">theeventlistenername</span><span class="cp">]</span>
-<span class="o">;</span><span class="nt">command</span><span class="o">=/</span><span class="nt">bin</span><span class="o">/</span><span class="nt">eventlistener</span>    <span class="o">;</span> <span class="err">运行的程序</span> <span class="o">(</span><span class="err">相对使用</span> <span class="nt">PATH</span> <span class="err">路径</span><span class="o">,</span> <span class="err">可以使用参数</span><span class="o">)</span>
-<span class="o">;</span><span class="nt">process_name</span><span class="o">=%(</span><span class="nt">program_name</span><span class="o">)</span><span class="nt">s</span> <span class="o">;</span> <span class="err">进程名表达式</span><span class="o">,</span> <span class="err">默认为</span> <span class="o">%(</span><span class="nt">program_name</span><span class="o">)</span><span class="nt">s</span>
-<span class="o">;</span><span class="nt">numprocs</span><span class="o">=</span><span class="nt">1</span>                    <span class="o">;</span> <span class="err">默认启动的进程数目</span><span class="o">,</span> <span class="err">默认为</span> <span class="nt">1</span>
-<span class="o">;</span><span class="nt">events</span><span class="o">=</span><span class="nt">EVENT</span>                  <span class="o">;</span> <span class="nt">event</span> <span class="nt">notif</span><span class="o">.</span> <span class="nt">types</span> <span class="nt">to</span> <span class="nt">subscribe</span> <span class="nt">to</span> <span class="o">(</span><span class="nt">req</span><span class="s1">&#39;d)</span>
-<span class="s1">;buffer_size=10                ; 事件缓冲区队列大小, 默认 10</span>
-<span class="s1">;directory=/tmp                ; 在运行前 cwd 到指定的目录, 默认不执行 cmd</span>
-<span class="s1">;umask=022                     ; 进程umask, 默认 None</span>
-<span class="s1">;priority=-1                   ; 程序运行的优先级, 默认 -1</span>
-<span class="s1">;autostart=true                ; 默认随supervisord自动启动, 默认true</span>
-<span class="s1">;autorestart=unexpected        ; whether/when to restart (default: unexpected)</span>
-<span class="s1">;startsecs=1                   ; number of secs prog must stay running (def. 1)</span>
-<span class="s1">;startretries=3                ; max # of serial start failures (default 3)</span>
-<span class="s1">;exitcodes=0,2                 ; 期望的退出码, 默认 0,2</span>
-<span class="s1">;stopsignal=QUIT               ; 杀死进程的信号, 默认 TERM</span>
-<span class="s1">;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)</span>
-<span class="s1">;stopasgroup=false             ; 向unix进程组发送停止信号, 默认false</span>
-<span class="s1">;killasgroup=false             ; 向unix进程组发送SIGKILL信号, 默认false</span>
-<span class="s1">;user=chrism                   ; setuid to this UNIX account to run the program</span>
-<span class="s1">;redirect_stderr=true          ; redirect proc stderr to stdout (default false)</span>
-<span class="s1">;stdout_logfile=/a/path        ; stdout log path, NONE for none; default AUTO</span>
-<span class="s1">;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span>
-<span class="s1">;stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)</span>
-<span class="s1">;stdout_events_enabled=false   ; emit events on stdout writes (default false)</span>
-<span class="s1">;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO</span>
-<span class="s1">;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span>
-<span class="s1">;stderr_logfile_backups        ; # of stderr logfile backups (default 10)</span>
-<span class="s1">;stderr_events_enabled=false   ; emit events on stderr writes (default false)</span>
-<span class="s1">;environment=A=1,B=2           ; process environment additions</span>
-<span class="s1">;serverurl=AUTO                ; override serverurl computation (childutils)</span>
+;[eventlistener:theeventlistenername]
+;command=/bin/eventlistener    ; 运行的程序 (相对使用 PATH 路径, 可以使用参数)
+;process_name=%(program_name)s ; 进程名表达式, 默认为 %(program_name)s
+;numprocs=1                    ; 默认启动的进程数目, 默认为 1
+;events=EVENT                  ; event notif. types to subscribe to (req&#39;d)
+;buffer_size=10                ; 事件缓冲区队列大小, 默认 10
+;directory=/tmp                ; 在运行前 cwd 到指定的目录, 默认不执行 cmd
+;umask=022                     ; 进程umask, 默认 None
+;priority=-1                   ; 程序运行的优先级, 默认 -1
+;autostart=true                ; 默认随supervisord自动启动, 默认true
+;autorestart=unexpected        ; whether/when to restart (default: unexpected)
+;startsecs=1                   ; number of secs prog must stay running (def. 1)
+;startretries=3                ; max # of serial start failures (default 3)
+;exitcodes=0,2                 ; 期望的退出码, 默认 0,2
+;stopsignal=QUIT               ; 杀死进程的信号, 默认 TERM
+;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)
+;stopasgroup=false             ; 向unix进程组发送停止信号, 默认false
+;killasgroup=false             ; 向unix进程组发送SIGKILL信号, 默认false
+;user=chrism                   ; setuid to this UNIX account to run the program
+;redirect_stderr=true          ; redirect proc stderr to stdout (default false)
+;stdout_logfile=/a/path        ; stdout log path, NONE for none; default AUTO
+;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)
+;stdout_events_enabled=false   ; emit events on stdout writes (default false)
+;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO
+;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+;stderr_logfile_backups        ; # of stderr logfile backups (default 10)
+;stderr_events_enabled=false   ; emit events on stderr writes (default false)
+;environment=A=1,B=2           ; process environment additions
+;serverurl=AUTO                ; override serverurl computation (childutils)
 
-<span class="s1">; The below sample group section shows all possible group values,</span>
-<span class="s1">; create one or more &#39;</span><span class="nt">real</span><span class="err">&#39;</span> <span class="nt">group</span><span class="o">:</span> <span class="nt">sections</span> <span class="nt">to</span> <span class="nt">create</span> <span class="s2">&quot;heterogeneous&quot;</span>
-<span class="o">;</span> <span class="nt">process</span> <span class="nt">groups</span><span class="o">.</span>
+; The below sample group section shows all possible group values,
+; create one or more &#39;real&#39; group: sections to create &quot;heterogeneous&quot;
+; process groups.
 
-<span class="o">;</span><span class="cp">[</span><span class="k">group</span><span class="p">:</span><span class="nx">thegroupname</span><span class="cp">]</span>
-<span class="o">;</span><span class="nt">programs</span><span class="o">=</span><span class="nt">progname1</span><span class="o">,</span><span class="nt">progname2</span>  <span class="o">;</span> <span class="err">任何在</span><span class="cp">[</span><span class="nx">program</span><span class="p">:</span><span class="nx">x</span><span class="cp">]</span><span class="err">中定义的</span><span class="nt">x</span>
-<span class="o">;</span><span class="nt">priority</span><span class="o">=</span><span class="nt">999</span>                  <span class="o">;</span> <span class="err">程序运行的优先级</span><span class="o">,</span> <span class="err">默认</span><span class="nt">999</span>
+;[group:thegroupname]
+;programs=progname1,progname2  ; 任何在[program:x]中定义的x
+;priority=999                  ; 程序运行的优先级, 默认999
 
-<span class="o">;</span> <span class="nt">The</span> <span class="cp">[</span><span class="nb">include</span><span class="cp">]</span> <span class="nt">section</span> <span class="nt">can</span> <span class="nt">just</span> <span class="nt">contain</span> <span class="nt">the</span> <span class="s2">&quot;files&quot;</span> <span class="nt">setting</span><span class="o">.</span>  <span class="nt">This</span>
-<span class="o">;</span> <span class="nt">setting</span> <span class="nt">can</span> <span class="nt">list</span> <span class="nt">multiple</span> <span class="nt">files</span> <span class="o">(</span><span class="nt">separated</span> <span class="nt">by</span> <span class="nt">whitespace</span> <span class="nt">or</span>
-<span class="o">;</span> <span class="nt">newlines</span><span class="o">).</span>  <span class="nt">It</span> <span class="nt">can</span> <span class="nt">also</span> <span class="nt">contain</span> <span class="nt">wildcards</span><span class="o">.</span>  <span class="nt">The</span> <span class="nt">filenames</span> <span class="nt">are</span>
-<span class="o">;</span> <span class="nt">interpreted</span> <span class="nt">as</span> <span class="nt">relative</span> <span class="nt">to</span> <span class="nt">this</span> <span class="nt">file</span><span class="o">.</span>  <span class="nt">Included</span> <span class="nt">files</span> <span class="o">*</span><span class="nt">cannot</span><span class="o">*</span>
-<span class="o">;</span> <span class="nt">include</span> <span class="nt">files</span> <span class="nt">themselves</span><span class="o">.</span>
+; The [include] section can just contain the &quot;files&quot; setting.  This
+; setting can list multiple files (separated by whitespace or
+; newlines).  It can also contain wildcards.  The filenames are
+; interpreted as relative to this file.  Included files *cannot*
+; include files themselves.
 
-<span class="o">;</span><span class="cp">[</span><span class="nb">include</span><span class="cp">]</span>
-<span class="o">;</span><span class="nt">files</span> <span class="o">=</span> <span class="nt">relative</span><span class="o">/</span><span class="nt">directory</span><span class="o">/*</span><span class="nc">.ini</span>
+;[include]
+;files = relative/directory/*.ini
 </pre></div>
 
 
@@ -277,8 +277,8 @@ killasgroup=true
 </blockquote>
 <h1>6. 通过 web 方式查看状态</h1>
 <p>配置文件中配置:</p>
-<div class="highlight"><pre><span></span><span class="cp">[</span><span class="nx">inet_http_server</span><span class="cp">]</span>         <span class="o">;</span> <span class="nt">inet</span> <span class="o">(</span><span class="nt">TCP</span><span class="o">)</span> <span class="nt">server</span> <span class="nt">disabled</span> <span class="nt">by</span> <span class="nt">default</span>
-<span class="nt">port</span><span class="o">=</span><span class="nt">127</span><span class="nc">.0.0.1</span><span class="nd">:9001</span>        <span class="o">;</span> <span class="o">(</span><span class="nt">ip_address</span><span class="nd">:port</span> <span class="nt">specifier</span><span class="o">,</span> <span class="o">*</span><span class="nd">:port</span> <span class="nt">for</span> <span class="nt">all</span> <span class="nt">iface</span><span class="o">)</span>
+<div class="highlight"><pre><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
+port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
 </pre></div>
 
 

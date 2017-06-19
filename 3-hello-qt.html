@@ -56,40 +56,40 @@
     <p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png"></a></p>
 <p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="highlight"><pre><span></span>#include <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>demo.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-#include <span class="nt">&lt;/span&gt;&lt;QtWidgets</span><span class="err">/QApplication</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+#include &lt;/span&gt;&lt;QtWidgets/QApplication&gt;
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> main(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> argc, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>char<span class="nt">&lt;/span&gt;</span> *<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>argv[])
+&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; main(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;argv[])
 {
     QApplication a(argc, argv);
     Demo w;
     w.show();
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> a.exec();
-}<span class="nt">&lt;/span&gt;</span>
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; a.exec();
+}&lt;/span&gt;
 </pre></div>
 
 
 <p>对于 Qt 程序来说, <code>main()</code>函数一般以创建 application 对象开始(GUI 程序是<code>QApplication</code>, 非 GUI 程序是<code>QCoreApplication</code>, <code>QApplication</code>实际上是<code>QCoreApplication</code>的子类),后面才是实际业务的代码. 这个对象用于管理 Qt 程序的生命周期、 开启事件循环.</p>
 <p>而 demo.h 里是我们 Qt 程序的界面类, 它继承于 QWidget类, 它是 Qt 程序所有用户界面对象的基类.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>#ifndef DEMO_H
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>#define<span class="nt">&lt;/span&gt;</span> DEMO_H<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #000000&quot;&gt;#ifndef DEMO_H
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; DEMO_H&lt;span style=&quot;color: #000000&quot;&gt;
 
-#include <span class="nt">&lt;/span&gt;&lt;QtWidgets</span><span class="err">/QWidget</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-#include <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>ui_demo.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span>
+#include &lt;/span&gt;&lt;QtWidgets/QWidget&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+#include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;ui_demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;</span> Demo : <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> QWidget
+&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; Demo : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QWidget
 {
     Q_OBJECT
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
-    Demo(QWidget <span class="nt">&lt;/span&gt;</span>*parent = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
-    <span class="nt">&lt;/span&gt;</span>~<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Demo();
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
+    Demo(QWidget &lt;/span&gt;*parent = &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo();
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>:
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
     Ui::DemoClass ui;
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>#endif<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span>//<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #008000&quot;</span><span class="nt">&gt;</span> DEMO_H<span class="nt">&lt;/span&gt;</span>
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#endif&lt;/span&gt; &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; DEMO_H&lt;/span&gt;
 </pre></div>
 
 
@@ -191,20 +191,20 @@
 <p>右侧可以设计控件的一些属性, 例如我们把 Label 的文本改成局中显示:</p>
 <p><a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image20.png"><img alt="image" src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb20.png"></a></p>
 <p>返回我们的 VS 工程, 打开 demo.cpp:</p>
-<div class="highlight"><pre><span></span>#include <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>demo.h<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;font</span> <span class="na">style=</span><span class="s">&quot;background-color: #ff0000&quot;</span><span class="nt">&gt;</span>#include <span class="nt">&lt;/font&gt;&lt;/span&gt;&lt;font</span> <span class="na">style=</span><span class="s">&quot;background-color: #ff0000&quot;</span><span class="nt">&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>QLabel<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+&lt;font style=&quot;background-color: #ff0000&quot;&gt;#include &lt;/font&gt;&lt;/span&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;QLabel&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 
-Demo::Demo(QWidget <span class="nt">&lt;/span&gt;</span>*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>parent)
+Demo::Demo(QWidget &lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt;parent)
     : QWidget(parent)
 {
-    ui.setupUi(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>);
-    <span class="nt">&lt;font</span> <span class="na">style=</span><span class="s">&quot;background-color: #ff0000&quot;</span><span class="nt">&gt;</span>ui.label_Hello<span class="nt">&lt;/font&gt;&lt;/span&gt;&lt;font</span> <span class="na">style=</span><span class="s">&quot;background-color: #ff0000&quot;</span><span class="nt">&gt;</span>-&gt;setText(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Hello Qt!<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;/font&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;&lt;font</span> <span class="na">style=</span><span class="s">&quot;background-color: #ff0000&quot;</span><span class="nt">&gt;</span>);<span class="nt">&lt;/font&gt;</span>
+    ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+    &lt;font style=&quot;background-color: #ff0000&quot;&gt;ui.label_Hello&lt;/font&gt;&lt;/span&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;-&gt;setText(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hello Qt!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;color: #000000&quot;&gt;&lt;font style=&quot;background-color: #ff0000&quot;&gt;);&lt;/font&gt;
 }
 
-Demo::<span class="nt">&lt;/span&gt;</span>~<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>Demo()
+Demo::&lt;/span&gt;~&lt;span style=&quot;color: #000000&quot;&gt;Demo()
 {
 
-}<span class="nt">&lt;/span&gt;</span>
+}&lt;/span&gt;
 </pre></div>
 
 

@@ -65,100 +65,100 @@
 <p>Builder：给出一个抽象接口，以规范产品对象的各个组成成分的建造. 这个接口规定要实现复杂对象的哪些部分的创建，并不涉及具体的对象部件的创建.</p>
 <p>ConcreteBuilder：实现Builder接口，针对不同的商业逻辑，具体化复杂对象的各部分的创建.  在建造过程完成后，提供产品的实例.</p>
 <p>Director：调用具体建造者来创建复杂对象的各个部分，在指导者中不涉及具体产品的信息，只负责保证对象各部分完整创建或按某种顺序创建.</p>
-<div class="highlight"><pre><span></span>#include <span class="nt">&lt;iostream&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>
-#include <span class="nt">&lt;/span&gt;&lt;vector&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>using<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>namespace<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> std;
+<div class="highlight"><pre><span></span>#include &lt;iostream&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+#include &lt;/span&gt;&lt;vector&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Product {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>protected<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    vector<span class="nt">&lt;/span&gt;</span><span class="err">&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;</span>&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> m_parts;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Product {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    vector&lt;/span&gt;&lt;&lt;span style=&quot;color: #0000ff;&quot;&gt;string&lt;/span&gt;&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_parts;
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Add(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>string<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> part) {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; Add(&lt;span style=&quot;color: #0000ff;&quot;&gt;string&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; part) {
         m_parts.push_back(part);
     }
 
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Show() {
-        cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>产品 -- --<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;</span> (unsigned <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> i = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;</span>; i <span class="nt">&lt; m_parts.size</span><span class="err">();</span> <span class="err">i++&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>) {
-            cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> m_parts[i].c_str();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Show() {
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;产品 -- --&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; (unsigned &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;; i &lt; m_parts.size(); i++&lt;span style=&quot;color: #000000;&quot;&gt;) {
+            cout &lt;/span&gt;&lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; m_parts[i].c_str();
         }
-        cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> endl;
+        cout &lt;/span&gt;&lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
     }
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Builder {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> BuildPartA() = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> BuildPartB() = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>virtual<span class="nt">&lt;/span&gt;</span> Product GetResult() = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; BuildPartA() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; BuildPartB() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; Product GetResult() = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> ConcreteBuilder_1
-    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Builder {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> BuildPartA() {
-        m_product.Add(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>部件A<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_1
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartA() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件A&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     }
 
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> BuildPartB() {
-        m_product.Add(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>部件B<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartB() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件B&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     }
 
     Product GetResult() {
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> m_product;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_product;
     }
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     Product m_product;
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> ConcreteBuilder_2
-    : <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Builder {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> BuildPartA() {
-        m_product.Add(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>部件X<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_2
+    : &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Builder {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartA() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件X&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     }
 
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> BuildPartB() {
-        m_product.Add(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>部件Y<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; BuildPartB() {
+        m_product.Add(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;部件Y&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
     }
 
     Product GetResult() {
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> m_product;
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; m_product;
     }
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>private<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     Product m_product;
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Director {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> Construct(Builder*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> builder) {
-        builder<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>BuildPartA();
-        builder<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>BuildPartB();
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Director {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; Construct(Builder*&lt;span style=&quot;color: #000000;&quot;&gt; builder) {
+        builder&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;BuildPartA();
+        builder&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;BuildPartB();
     }
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> _tmain(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> argc, _TCHAR*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> argv[]) {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
     Director director;
 
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>Builder<span class="nt">&lt;/span&gt;</span>* p_b1 = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> ConcreteBuilder_1();
-    Builder<span class="nt">&lt;/span&gt;</span>* p_b2 = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> ConcreteBuilder_2();
+    &lt;span style=&quot;color: #000000;&quot;&gt;Builder&lt;/span&gt;* p_b1 = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_1();
+    Builder&lt;/span&gt;* p_b2 = &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreteBuilder_2();
 
     director.Construct(p_b1);
-    Product p1 <span class="nt">&lt;/span&gt;</span>= p_b1-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>GetResult();
+    Product p1 &lt;/span&gt;= p_b1-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;GetResult();
     p1.Show();
 
-    cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>**********************************************<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> endl;
+    cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;**********************************************&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
 
     director.Construct(p_b2);
-    Product p2 <span class="nt">&lt;/span&gt;</span>= p_b2-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>GetResult();
+    Product p2 &lt;/span&gt;= p_b2-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;GetResult();
     p2.Show();
 
-    system(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>PAUSE<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
-}<span class="nt">&lt;/span&gt;&lt;/span&gt;</span>
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;&lt;/span&gt;
 </pre></div>
 
 

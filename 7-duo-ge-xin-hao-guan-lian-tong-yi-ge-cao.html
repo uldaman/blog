@@ -64,25 +64,25 @@
 <p><img alt="" src="http://i59.tinypic.com/nzlmxz.jpg"></p>
 <p>将几个按钮和编辑框的对象名分别改成: pushButton_4, pushButton_5, pushButton_6, lineEdit_Out.</p>
 <p>返回 VS 中, 在头文件中添加槽函数.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> slots:
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;</span> On_Out();
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; slots:
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt; On_Out();
 </pre></div>
 
 
 <p>在.cpp实现文件中, 关联信号/槽, 和实现槽函数.</p>
-<div class="highlight"><pre><span></span>testCalc::testCalc(QWidget *<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>parent)
+<div class="highlight"><pre><span></span>testCalc::testCalc(QWidget *&lt;span style=&quot;color: #000000;&quot;&gt;parent)
     : QMainWindow(parent)
 {
-    ui.setupUi(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
-    connect(ui.pushButton_4, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
-    connect(ui.pushButton_5, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
-    connect(ui.pushButton_6, SIGNAL(clicked()), <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>this<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>, SLOT(On_Out()));
+    ui.setupUi(&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    connect(ui.pushButton_4, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
+    connect(ui.pushButton_5, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
+    connect(ui.pushButton_6, SIGNAL(clicked()), &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, SLOT(On_Out()));
 }
 
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> testCalc::On_Out() {
-    ui.lineEdit_Out<span class="nt">&lt;/span&gt;</span>-&gt;setText(((QPushButton*)sender())-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>text());
-}<span class="nt">&lt;/span&gt;</span>
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; testCalc::On_Out() {
+    ui.lineEdit_Out&lt;/span&gt;-&gt;setText(((QPushButton*)sender())-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;text());
+}&lt;/span&gt;
 </pre></div>
 
 

@@ -59,74 +59,74 @@
 <p>SubSystemXxx: 子系统类, 他们实现子系统的功能, 处理外观类指派的任务.</p>
 <p>我们大家最容易理解和知道的外观模式就是，使用的API接口的封装，我们将第三方的API接口引入到我们的项目中的时候，我们需要对这些接口进行包装，将具体调用过程进行包装成外观类的形式，通过外观类来进行统一的调用。</p>
 <p>C++模拟代码如下:</p>
-<div class="highlight"><pre><span></span>#include <span class="nt">&lt;iostream&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>using<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>namespace<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> std;
+<div class="highlight"><pre><span></span>#include &lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemOne {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> MethodOne() {
-        cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>子系统方法一<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> endl;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemOne {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; MethodOne() {
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;子系统方法一&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
     }
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemTwo {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> MethodTwo() {
-        cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>子系统方法二<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> endl;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemTwo {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; MethodTwo() {
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;子系统方法二&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
     }
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemThree {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> MethodThree() {
-        cout <span class="nt">&lt;/span&gt;</span><span class="err">&lt;&lt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>子系统方法三<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;</span> <span class="err">&lt;&lt;</span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> endl;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemThree {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; MethodThree() {
+        cout &lt;/span&gt;&lt;&lt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;子系统方法三&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; &lt;&lt;&lt;span style=&quot;color: #000000;&quot;&gt; endl;
     }
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>class<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> Facade {
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>public<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; Facade {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
     Facade() {
-        m_pOne <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemOne();
-        m_pTwo <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemTwo();
-        m_pThree <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>new<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> SubSystemThree();
+        m_pOne &lt;/span&gt;= &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemOne();
+        m_pTwo &lt;/span&gt;= &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemTwo();
+        m_pThree &lt;/span&gt;= &lt;span style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; SubSystemThree();
     }
 
-    <span class="nt">&lt;/span&gt;</span>~<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>Facade() {
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> (m_pOne !=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL) {
+    &lt;/span&gt;~&lt;span style=&quot;color: #000000;&quot;&gt;Facade() {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;if&lt;/span&gt; (m_pOne !=&lt;span style=&quot;color: #000000;&quot;&gt; NULL) {
             delete m_pOne;
         }
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> (m_pTwo !=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;if&lt;/span&gt; (m_pTwo !=&lt;span style=&quot;color: #000000;&quot;&gt; NULL) {
             delete m_pTwo;
         }
-        <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> (m_pThree !=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL) {
+        &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;if&lt;/span&gt; (m_pThree !=&lt;span style=&quot;color: #000000;&quot;&gt; NULL) {
             delete m_pThree;
         }
     }
 
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> MethodA() {
-        m_pOne<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>MethodOne();
-        m_pThree<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>MethodThree();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; MethodA() {
+        m_pOne&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;MethodOne();
+        m_pThree&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;MethodThree();
     }
 
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>void<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> MethodB() {
-        m_pOne<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>MethodOne();
-        m_pTwo<span class="nt">&lt;/span&gt;</span>-&gt;<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>MethodTwo();
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; MethodB() {
+        m_pOne&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;MethodOne();
+        m_pTwo&lt;/span&gt;-&gt;&lt;span style=&quot;color: #000000;&quot;&gt;MethodTwo();
     }
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>protected<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>:
-    SubSystemOne<span class="nt">&lt;/span&gt;</span>* m_pOne =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL;
-    SubSystemTwo<span class="nt">&lt;/span&gt;</span>* m_pTwo =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL;
-    SubSystemThree<span class="nt">&lt;/span&gt;</span>* m_pThree =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> NULL;
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;protected&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
+    SubSystemOne&lt;/span&gt;* m_pOne =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;
+    SubSystemTwo&lt;/span&gt;* m_pTwo =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;
+    SubSystemThree&lt;/span&gt;* m_pThree =&lt;span style=&quot;color: #000000;&quot;&gt; NULL;
 };
 
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> _tmain(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>int<span class="nt">&lt;/span&gt;</span> argc, _TCHAR*<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span> argv[]) {
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
     Facade facade;
     facade.MethodA();
     facade.MethodB();
 
-    system(<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>PAUSE<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000;&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>);
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff;&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800080;&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000;&quot;</span><span class="nt">&gt;</span>;
-}<span class="nt">&lt;/span&gt;</span>
+    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+}&lt;/span&gt;
 </pre></div>
 
 

@@ -64,20 +64,20 @@
 <p>Python 多重继承使用 Method Resolution Order 的动态算法来解决一个方法名的调用顺序, mro 其实说来简单, 就是一个深度优先的继承列表, 很易理解, 但随之来的是遇到互不相同的构造器 __init__ 参数的问题.</p>
 <p>Codepad运行结果: <a href="http://codepad.org/qQNiMzBl">http://codepad.org/qQNiMzBl</a></p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in A, with arg1 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">arg1</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in B, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in C, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="n">__mro__</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="vm">__mro__</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="s2">&quot;C&#39;s arg1&quot;</span><span class="p">,</span> <span class="s2">&quot;C&#39;s arg2&quot;</span><span class="p">)</span>
 </pre></div>
@@ -100,20 +100,20 @@ init func in A, with arg1 &#39;C&#39;s arg1&#39;
 <h3>1. 使用传统类的方式, 显式调用被继承类的构造器, 避开 super 的 mro 自动化工作.</h3>
 <p>Codepad 看运行效果: <a href="http://codepad.org/XCVdKCPm">http://codepad.org/XCVdKCPm</a></p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in A, with arg1 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">arg1</span>
 
 <span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in B, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
         <span class="k">print</span> <span class="s2">&quot;init func in C, with arg1&#39;</span><span class="si">%s</span><span class="s2">&#39;, arg2 &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
         <span class="c1"># super(C, self).__init__(arg1)  # 这两行</span>
-        <span class="n">A</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">)</span>  <span class="c1"># 等价</span>
-        <span class="n">B</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
-        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="n">__mro__</span>
+        <span class="n">A</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">)</span>  <span class="c1"># 等价</span>
+        <span class="n">B</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">C</span><span class="o">.</span><span class="vm">__mro__</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="s2">&quot;C&#39;s arg1&quot;</span><span class="p">,</span> <span class="s2">&quot;C&#39;s arg2&quot;</span><span class="p">)</span>
 </pre></div>

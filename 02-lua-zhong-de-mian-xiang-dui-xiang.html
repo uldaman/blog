@@ -55,85 +55,85 @@
 
     <p>在 Cocos2d-x 中, 經常使用 Lua 作為腳本語言輔助編程, Lua 的基礎應用就不多學了, 來看一看 Lua 中的面向對象.</p>
 <p>Lua 中本身並沒有類這個數據結構, 但是可以使用 Lua 中的 table 來為什麼面向對象中的類, 如下所示:</p>
-<div class="highlight"><pre><span></span>People =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {}
-People.sayHi <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>()
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span>(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Hi People!<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>People =&lt;span style=&quot;color: #000000&quot;&gt; {}
+People.sayHi &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;()
+    &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi People!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>或者可以這樣:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> People.sayHi()
-     <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span>(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Hi People!<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; People.sayHi()
+     &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi People!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>這就相當於創建一個類 People, 那怎麼生成這個類的實例呢? 它的構造函數呢?往下看:</p>
-<div class="highlight"><pre><span></span>People.new = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>()
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> self =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {}
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;</span> key, var <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>pairs<span class="nt">&lt;/span&gt;</span>(People) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>do<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-        self[key] <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> var
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> self
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;()
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; {}
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(People) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        self[key] &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; var
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; self
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> p1 =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> People.new()
-p1.sayHi()<span class="nt">&lt;/span&gt;</span>
+&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; p1 =&lt;span style=&quot;color: #000000&quot;&gt; People.new()
+p1.sayHi()&lt;/span&gt;
 </pre></div>
 
 
 <p>我們還可以為這個類添加帶參數的構造函數:</p>
-<div class="highlight"><pre><span></span>People.new = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>(name)
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> self =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {}
-    self.name <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> name;
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;</span> key, var <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>pairs<span class="nt">&lt;/span&gt;</span>(People) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>do<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-        self[key] <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> var
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> self
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>People.new = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(name)
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; {}
+    self.name &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; name;
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(People) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        self[key] &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; var
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; self
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> p2 = People.new(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>李四<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span>(p2.name)
+&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; p2 = People.new(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;李四&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+&lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(p2.name)
 </pre></div>
 
 
 <p>現在, 我們類可以通過 new() 方法來實例化了.</p>
 <p>新問題是, 我們都知道, C++ 類有個 this 指針, 這點, 又要怎麼實現了? 可以借助 Lua 的語法糖(冒號):</p>
-<div class="highlight"><pre><span></span>People.sayHello = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>(this)
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span>(this.name .. <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span> Say Hello!<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>People.sayHello = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(this)
+    &lt;/span&gt;&lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(this.name .. &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt; Say Hello!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> p3 = People.new(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>張三<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-p3:sayHello()<span class="nt">&lt;/span&gt;</span>
+&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; p3 = People.new(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;張三&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+p3:sayHello()&lt;/span&gt;
 </pre></div>
 
 
 <p>this 指針現在也有了, 那 C++ 類可以繼承, Lua 中又怎麼實現呢?</p>
-<div class="highlight"><pre><span></span>Man =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> {}
-Man.new <span class="nt">&lt;/span&gt;</span>= <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>(this)
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>local<span class="nt">&lt;/span&gt;</span> self =<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> People.new()
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;</span> key, var <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>pairs<span class="nt">&lt;/span&gt;</span>(Man) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>do<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-        self[key] <span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> var
-    <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> self
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>Man =&lt;span style=&quot;color: #000000&quot;&gt; {}
+Man.new &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(this)
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; self =&lt;span style=&quot;color: #000000&quot;&gt; People.new()
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; key, var &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;pairs&lt;/span&gt;(Man) &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+        self[key] &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; var
+    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+    &lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; self
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>這裡先生成一個 Peolple "對象", 然後把這個對象 Key 對應的 value 替換成 Man 中 Key 對應的 value, 這樣的話, 如果 Man 中沒有 "重寫" People 中的方法, 那麼, 返回的 self 中的方法還是為 People 中的方法, 如果 "重寫" 了 People 中的方法, 因為做了替換操作, 所以返回的 self 中的方法其實是對應的 Man 中的方法, 這裡比較難理解, 我在下面錄製了個視頻來解釋這點.</p>
 <p>然後, 我們來重寫下 sayHi() 方法:</p>
-<div class="highlight"><pre><span></span>Man.sayHi = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function()<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #ff00ff&quot;</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span>(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>Hi Man<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #800000&quot;</span><span class="nt">&gt;</span>&quot;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>)
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;</span>
+<div class="highlight"><pre><span></span>Man.sayHi = &lt;span style=&quot;color: #0000ff&quot;&gt;function()&lt;/span&gt;
+    &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Hi Man&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
 </pre></div>
 
 
 <p>不管怎麼樣, 我們現在已經可以實現多態了:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>function<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span> 多態(tab)
+<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; 多態(tab)
     tab.sayHi()
-<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #0000ff&quot;</span><span class="nt">&gt;</span>end<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">&quot;color: #000000&quot;</span><span class="nt">&gt;</span>
-多態(m)<span class="nt">&lt;/span&gt;</span>
+&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+多態(m)&lt;/span&gt;
 </pre></div>
 
 
