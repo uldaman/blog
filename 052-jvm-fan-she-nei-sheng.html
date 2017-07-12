@@ -53,8 +53,14 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>JVM 结构</h1>
+    <div class="toc">
+<ul>
+<li><a href="#jvm">JVM 结构</a></li>
+<li><a href="#_1">反射</a></li>
+<li><a href="#_2">内省</a></li>
+</ul>
+</div>
+<h1 id="jvm">JVM 结构</h1>
 <p>更多关于 JVM 内存结构参考:<br>
 1. <a href="http://blog.csdn.net/autofei/article/details/7456213">Java 的内存结构 (Memory Structure) 和垃圾收集 (Garbage Collection) 图解</a><br>
 2. <a href="http://blog.sina.com.cn/s/blog_68158ebf0100wp83.html">我对 Java 内存的认识</a><br>
@@ -99,7 +105,7 @@
 <p>补充静态代码块:<br>
 使用 <code>Class.forName(" ")</code> 加载类时, 如果指定第二个参数为 <code>false</code>, 则不执行静态代码块, 等下次加载时会再执行静态代码块 (只执行静态代码块, 并不会重新加载类, 类只会被加载一次)</p>
 </blockquote>
-<h1>反射</h1>
+<h1 id="_1">反射</h1>
 <p><strong>反射</strong>: 动态访问对象的属性和方法 (通过类描述符得到指定的方法描述符, 然后通过 <code>method.invoke(object, param)</code> 调用方法);</p>
 <ul>
 <li><code>java.lang.Class</code>: 类类, 描述类的类, 类描述符</li>
@@ -115,68 +121,68 @@
 <p><code>class.newInstance</code> 要求类有<strong>无参</strong>构造函数, 如果没有的话就会报异常, 解决方法是通过 <code>class.getDeclaredConstructor</code> 获取构造函数, 然后通过 <code>constructor.newInstance</code> 来实例化对象.</p>
 <p><code>class.getDeclaredConstructor</code> 可以获取到所有的构造函数, 而 <code>class.getConstructor</code> 只能获取到 public 的构造函数.</p>
 <p><code>class.getDeclaredField</code> 获取到类的字段描述后, 可以再通过 <code>field.get(object)</code> 来获取到实例的字段值, 依然遵守方法修饰符权限的规则 (public, private, protect), 但通过 <code>method.setAccessible(true)</code> 可以修改它的修饰符权限.</p>
-<h1>内省</h1>
+<h1 id="_2">内省</h1>
 <p>Reference: <a href="http://www.cnblogs.com/peida/archive/2013/06/03/3090842.html">深入理解 Java: 内省 (Introspector)</a></p>
 <p>通过反射的方式访问 JavaBean 的技术, 是 Java 语言对 Bean 类属性、事件的一种缺省处理方法.</p>
 <p>例如类 A 中有属性 name, 那我们可以通过 <code>getName</code>、<code>setName</code> 来得到其值或者设置新的值, 通过 <code>getName/setName</code> 来访问 name 属性, 这就是默认的规则.</p>
 <p>Java 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法, 通过这些 API 可以使你不需要了解这个规则, 这些 API 存放于包 <code>java.beans</code> 中.</p>
 <p>一般的做法是通过类 <code>Introspector</code> 来获取某个对象的 BeanInfo 信息, 然后通过 BeanInfo 来获取属性的描述器 (<strong>PropertyDescriptor</strong>), 通过这个属性描述器就可以获取某个属性对应的 <code>getter/setter</code> 方法, 然后我们就可以通过反射机制来调用这些方法.</p>
 <p>下面我们来看一个例子, 这个例子把某个对象的所有属性名称和值都打印出来:</p>
-<div class="highlight"><pre><span></span><span class="n">importjava</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">BeanInfo</span><span class="o">;</span>
-<span class="n">importjava</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">Introspector</span><span class="o">;</span>
-<span class="n">importjava</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">PropertyDescriptor</span><span class="o">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>importjava.<span style="color: #658b00">beans</span>.<span style="color: #658b00">BeanInfo</span>;
+importjava.<span style="color: #658b00">beans</span>.<span style="color: #658b00">Introspector</span>;
+importjava.<span style="color: #658b00">beans</span>.<span style="color: #658b00">PropertyDescriptor</span>;
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntrospectorDemo</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">IntrospectorDemo</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntrospectorDemo</span><span class="o">();</span>
-        <span class="n">demo</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;WinterLau&quot;</span><span class="o">);</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">IntrospectorDemo</span> {
+    String name;
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[]args) <span style="color: #8B008B; font-weight: bold">throws</span> Exception {
+        IntrospectorDemo demo = <span style="color: #8B008B; font-weight: bold">new</span> IntrospectorDemo();
+        demo.<span style="color: #658b00">setName</span>(<span style="color: #CD5555">&quot;WinterLau&quot;</span>);
 
-        <span class="c1">// 如果不想把父类的属性也列出来的话, 那 getBeanInfo 的第二个参数填写父类的信息</span>
-        <span class="n">BeanInfo</span> <span class="n">bi</span> <span class="o">=</span> <span class="n">Introspector</span><span class="o">.</span><span class="na">getBeanInfo</span><span class="o">(</span><span class="n">demo</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="n">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="n">PropertyDescriptor</span><span class="o">[]</span> <span class="n">props</span> <span class="o">=</span> <span class="n">bi</span><span class="o">.</span><span class="na">getPropertyDescriptors</span><span class="o">();</span>
+        <span style="color: #228B22">// 如果不想把父类的属性也列出来的话, 那 getBeanInfo 的第二个参数填写父类的信息</span>
+        BeanInfo bi = Introspector.<span style="color: #658b00">getBeanInfo</span>(demo.<span style="color: #658b00">getClass</span>(), Object.<span style="color: #658b00">class</span>);
+        PropertyDescriptor[] props = bi.<span style="color: #658b00">getPropertyDescriptors</span>();
 
-        <span class="cm">/*for (int i = 0; i &lt; props.length; i++) {</span>
-<span class="cm">            System.out.println(props[i].getName() + &quot;=&quot; + props[i].getReadMethod().invoke(demo));</span>
-<span class="cm">        }*/</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">PropertyDescriptor</span> <span class="n">prop</span> <span class="o">:</span> <span class="n">props</span> <span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">prop</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;=&quot;</span> <span class="o">+</span> <span class="n">prop</span><span class="o">.</span><span class="na">getReadMethod</span><span class="o">().</span><span class="na">invoke</span><span class="o">(</span><span class="n">demo</span><span class="o">));</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+        <span style="color: #228B22">/*for (int i = 0; i &lt; props.length; i++) {</span>
+<span style="color: #228B22">            System.out.println(props[i].getName() + &quot;=&quot; + props[i].getReadMethod().invoke(demo));</span>
+<span style="color: #228B22">        }*/</span>
+        <span style="color: #8B008B; font-weight: bold">for</span> (PropertyDescriptor prop : props ) {
+            System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(prop.<span style="color: #658b00">getName</span>() + <span style="color: #CD5555">&quot;=&quot;</span> + prop.<span style="color: #658b00">getReadMethod</span>().<span style="color: #658b00">invoke</span>(demo));
+        }
+    }
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">(){</span>
-        <span class="n">retur</span> <span class="n">nname</span><span class="o">;</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> String <span style="color: #008b45">getName</span>(){
+        retur nname;
+    }
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">name</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">setName</span>(String name){
+        <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">name</span>=name;
+    }
+}
 </pre></div>
 
 
 <p><br>
 另外, 如果已知属性名的话, 是可以直接通过 <code>PropertyDescriptor</code> 类来操作 JavaBean 的.</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntrospectorDemo</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">IntrospectorDemo</span> <span class="n">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntrospectorDemo</span><span class="o">();</span>
-        <span class="n">demo</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;WinterLau&quot;</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">IntrospectorDemo</span> {
+    String name;
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[]args) <span style="color: #8B008B; font-weight: bold">throws</span> Exception {
+        IntrospectorDemo demo = <span style="color: #8B008B; font-weight: bold">new</span> IntrospectorDemo();
+        demo.<span style="color: #658b00">setName</span>(<span style="color: #CD5555">&quot;WinterLau&quot;</span>);
 
-        <span class="n">PropertyDescriptor</span> <span class="n">propDesc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PropertyDescriptor</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="n">demo</span><span class="o">);</span>
-        <span class="n">Method</span> <span class="n">methodGetName</span> <span class="o">=</span> <span class="n">proDescriptor</span><span class="o">.</span><span class="na">getReadMethod</span><span class="o">();</span>
-        <span class="n">Object</span> <span class="n">objName</span> <span class="o">=</span> <span class="n">methodGetName</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">demo</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;get name:&quot;</span> <span class="o">+</span> <span class="n">objName</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-    <span class="o">}</span>
+        PropertyDescriptor propDesc = <span style="color: #8B008B; font-weight: bold">new</span> PropertyDescriptor(<span style="color: #CD5555">&quot;name&quot;</span>, demo);
+        Method methodGetName = proDescriptor.<span style="color: #658b00">getReadMethod</span>();
+        Object objName = methodGetName.<span style="color: #658b00">invoke</span>(demo);
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;get name:&quot;</span> + objName.<span style="color: #658b00">toString</span>());
+    }
 
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">(){</span>
-        <span class="n">retur</span> <span class="n">nname</span><span class="o">;</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> String <span style="color: #008b45">getName</span>(){
+        retur nname;
+    }
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">=</span><span class="n">name</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">setName</span>(String name){
+        <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">name</span>=name;
+    }
+}
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 

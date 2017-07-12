@@ -54,8 +54,8 @@
 
 
     <p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></p>
-<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把'+'等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
-<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加'case'的分支条件, 这修改了原有的类, 违背了我们的<strong>"开放-封闭原则",</strong> 于是, 工厂模式就来了...</p>
+<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的<strong>&ldquo;开放-封闭原则&rdquo;,</strong> 于是, 工厂模式就来了&hellip;</p>
 <p>工厂模式: 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041357457281.jpg"><img alt="工厂模式" src="http://images.cnitblog.com/blog/723444/201502/132041374791953.jpg"></a></p>
 <p>[cpp]#include <iostream>
@@ -63,7 +63,7 @@ using namespace std;</p>
 <p>class Operation {
 public:
     virtual double GetResult() = 0;</p>
-<div class="highlight"><pre><span></span>double m_dNum_A = 0;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>double m_dNum_A = 0;
 double m_dNum_B = 0;
 </pre></div>
 
@@ -132,9 +132,9 @@ public:
 <p>int _tmain(int argc, _TCHAR<em> argv[]) {
     IFactory</em> operFactory = NULL;
     char cOp;
-    cout &lt;&lt; "请输入操作符(+ - * / . . .):" &lt;&lt; endl;
+    cout &lt;&lt; &ldquo;请输入操作符(+ - * / . . .):&rdquo; &lt;&lt; endl;
     cin &gt;&gt; cOp;</p>
-<div class="highlight"><pre><span></span>switch (cOp) {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>switch (cOp) {
 case &#39;+&#39;:
     operFactory = new AddFactory();
     break;
@@ -172,15 +172,15 @@ return 0;
 <p>}[/cpp]</p>
 <p>这是我用C++模拟出来的工厂模式, 这个例子虽然实现出了工厂模式, 它将选择判断的问题丢给了客户端, 使得客户端维护起来变得麻烦, 如果要添加新运算,  本来是改工厂类, 而现在是改客户端, 看起来好像变得更麻烦了, 那为什么还要用工厂模式呢?</p>
 <p><strong>那到底什么时候该用工厂模式呢?</strong></p>
-<p>来看&lt;大话设计模式&gt;中雷锋的例子, 现在有个雷锋类, 它有扫地, 洗衣, 买米三个方法, 现在有三个快毕业的大学生要学习雷锋做好事, 于是他们就要继承雷锋那个类, 这里一开始用简单工厂模式, 有个简单的"雷锋工厂" -- SimpleFactory, 通过传入的参数来实例化对象. 因为学习雷锋出来学生外还是社会志愿者, 所以这个简单工厂类可能像下面这样:</p>
+<p>来看&lt;大话设计模式&gt;中雷锋的例子, 现在有个雷锋类, 它有扫地, 洗衣, 买米三个方法, 现在有三个快毕业的大学生要学习雷锋做好事, 于是他们就要继承雷锋那个类, 这里一开始用简单工厂模式, 有个简单的&rdquo;雷锋工厂&rdquo; &ndash; SimpleFactory, 通过传入的参数来实例化对象. 因为学习雷锋出来学生外还是社会志愿者, 所以这个简单工厂类可能像下面这样:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041389644465.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/132041404641207.png"></a></p>
 <p>再来看客户端代码:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041416987262.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/132041432613220.png"></a></p>
-<p>好, 现在需求来了,  这三个学生毕业了, 他们从大学生编程了社区志愿者, 我们需要改原码, 把三名创建"学雷锋的大学生"换成"社区志愿者", 我们需要改动三个地方. 那么就里就会出现重复的操作, 如果改成工厂模式来实现:</p>
+<p>好, 现在需求来了,  这三个学生毕业了, 他们从大学生编程了社区志愿者, 我们需要改原码, 把三名创建&rdquo;学雷锋的大学生&rdquo;换成&rdquo;社区志愿者&rdquo;, 我们需要改动三个地方. 那么就里就会出现重复的操作, 如果改成工厂模式来实现:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041489646743.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/132041508867656.png"></a></p>
 <p>再来看客户端代码:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/132041524176155.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/132041532293741.png"></a></p>
-<p>此时, 如果我们换成"社区志愿者", 只要修改第一句代码就可以了.</p>
+<p>此时, 如果我们换成&rdquo;社区志愿者&rdquo;, 只要修改第一句代码就可以了.</p>
 <p>写在最后:</p>
 <p>其实什么时候用简单工厂, 什么时候用工厂, 我还没完全弄明白, 下面这段摘自网上的分析:</p>
 <blockquote>工厂方法模式是为了克服简单工厂模式的缺点（主要是为了满足OCP）而设计出来的。但是，工厂方法模式就一定比简单工厂模式好呢？笔者的答案是不一定。下面笔者将详细比较两种模式。

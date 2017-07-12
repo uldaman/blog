@@ -54,21 +54,21 @@
 
 
     <p>使用 chardet 可以很方便的实现字符串/文件的编码检测, 尤其是中文网页, 有的页面使用 GBK/GB2312, 有的使用 UTF-8, 如果你需要去爬一些页面, 知道网页编码很重要的.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">chardet</span>
-<span class="n">chardet</span><span class="o">.</span><span class="n">detect</span><span class="p">(</span><span class="s1">&#39;待检测变量&#39;</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">chardet</span>
+chardet.detect(<span style="color: #CD5555">&#39;待检测变量&#39;</span>)
 </pre></div>
 
 
 <p><br>
 返回结果:</p>
-<div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="mf">0.98999999999999999</span><span class="p">,</span> <span class="s1">&#39;encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;GB2312&#39;</span><span class="p">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>{<span style="color: #CD5555">&#39;confidence&#39;</span>: <span style="color: #B452CD">0.98999999999999999</span>, <span style="color: #CD5555">&#39;encoding&#39;</span>: <span style="color: #CD5555">&#39;GB2312&#39;</span>}
 </pre></div>
 
 
 <p><br>
 chardet 可以直接用 detect 函数来检测所给字符的编码, 函数返回值为字典, 有 2 个元素, 一个是检测的可信度, 另外一个就是检测到的编码.</p>
 <p>如果报下面的错误:</p>
-<div class="highlight"><pre><span></span>Expected a bytes object, not a unicode object
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Expected a bytes object, not a unicode object
 </pre></div>
 
 

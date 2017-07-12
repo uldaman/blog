@@ -55,16 +55,16 @@
 
     <p>Django 对数据库的操作比较简单, 它已经对数据库进行了封闭, 我们无需去关注数据库的细节(即无需像三层架构那样对数据库进行封闭, Django 已经为我们封装好了).</p>
 <p>首先, 打开工作目录下的 settings.py 文件, 修改 DATABASES:</p>
-<div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span><span class="s1">&#39;django.db.backends.mysql&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span><span class="s1">&#39;newdjango&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;USER&#39;</span><span class="p">:</span><span class="s1">&#39;root&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span><span class="s1">&#39;3306&#39;</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>DATABASES = {
+    <span style="color: #CD5555">&#39;default&#39;</span>: {
+        <span style="color: #CD5555">&#39;ENGINE&#39;</span>:<span style="color: #CD5555">&#39;django.db.backends.mysql&#39;</span>,
+        <span style="color: #CD5555">&#39;NAME&#39;</span>:<span style="color: #CD5555">&#39;newdjango&#39;</span>,
+        <span style="color: #CD5555">&#39;USER&#39;</span>:<span style="color: #CD5555">&#39;root&#39;</span>,
+        <span style="color: #CD5555">&#39;PASSWORD&#39;</span>:<span style="color: #CD5555">&#39;admin&#39;</span>,
+        <span style="color: #CD5555">&#39;HOST&#39;</span>:<span style="color: #CD5555">&#39;&#39;</span>,
+        <span style="color: #CD5555">&#39;PORT&#39;</span>:<span style="color: #CD5555">&#39;3306&#39;</span>,
+    }
+}
 </pre></div>
 
 
@@ -72,36 +72,36 @@
 上面的 NAME 指的是数据库名, 如下图:</p>
 <p><img alt="" src="http://i62.tinypic.com/28vwrvc.jpg"></p>
 <p>接下来, 检查下 settings.py 里的 INSTALLED_APPS 是否包含 app:</p>
-<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;web&#39;</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>INSTALLED_APPS = (
+    <span style="color: #CD5555">&#39;django.contrib.admin&#39;</span>,
+    <span style="color: #CD5555">&#39;django.contrib.auth&#39;</span>,
+    <span style="color: #CD5555">&#39;django.contrib.contenttypes&#39;</span>,
+    <span style="color: #CD5555">&#39;django.contrib.sessions&#39;</span>,
+    <span style="color: #CD5555">&#39;django.contrib.messages&#39;</span>,
+    <span style="color: #CD5555">&#39;django.contrib.staticfiles&#39;</span>,
+    <span style="color: #CD5555">&#39;web&#39;</span>,
+)
 </pre></div>
 
 
 <p><br>
-这里是最后一个 'web'.</p>
+这里是最后一个 &lsquo;web&rsquo;.</p>
 <p>Django 不能自动为我们创建数据库, 但是可以为自动创建表, 现在在 models.py 中设置表和字段.</p>
-<div class="highlight"><pre><span></span><span class="c1">#-*- coding:utf-8 -*-</span>
-<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">#-*- coding:utf-8 -*-</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">django.db</span> <span style="color: #8B008B; font-weight: bold">import</span> models
 
-<span class="c1"># Create your models here.</span>
-<span class="k">class</span> <span class="nc">UserInfo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># 表名</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 指定字段</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 指定字段</span>
+<span style="color: #228B22"># Create your models here.</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">UserInfo</span>(models.Model): <span style="color: #228B22"># 表名</span>
+    username = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 指定字段</span>
+    password = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 指定字段</span>
 </pre></div>
 
 
 <p><br>
 然后, 依次执行命令:</p>
-<p><strong>python manage.py makemigrations</strong> -- 基于当前的 Model 创建新的策略文件</p>
-<p><strong>python manage.py migrate</strong> -- 让我们在修改 Model 后可以在不影响现有数据的前提下重建表结构</p>
-<p>python manage.py syncdb -- migrate 已具有 syncdb 的功能, 所以无需再执行</p>
+<p><strong>python manage.py makemigrations</strong> &ndash; 基于当前的 Model 创建新的策略文件</p>
+<p><strong>python manage.py migrate</strong> &ndash; 让我们在修改 Model 后可以在不影响现有数据的前提下重建表结构</p>
+<p>python manage.py syncdb &ndash; migrate 已具有 syncdb 的功能, 所以无需再执行</p>
 <p>Python 1.7 以下的版本执行 syncdb.</p>
 <p>如果报错: No module named MySQLdb
 那么就是没有安装 MySQL Python 模块, 安装下即可, 用 pip 似乎有点问题, 可以下载<a href="http://yunpan.cn/cm69fkFPDirFu">http://yunpan.cn/cm69fkFPDirFu</a> 访问密码 2f0c 安装即可.</p>
@@ -316,36 +316,36 @@ gender = models.CharField(max_length=2,choices = GENDER_CHOICE)
 <td width="598" valign="top" >
 </td></tr></tbody></table>
 
-<p><strong>外键 -- 多对一</strong></p>
+<p><strong>外键 &ndash; 多对一</strong></p>
 <p>用来形成表表对应, 即让一张表里的某些字段和另一张表里的 ID 字段形成联系.</p>
-<div class="highlight"><pre><span></span><span class="c1">#-*- coding:utf-8 -*-</span>
-<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">#-*- coding:utf-8 -*-</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">django.db</span> <span style="color: #8B008B; font-weight: bold">import</span> models
 
-<span class="k">class</span> <span class="nc">UserType</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># 表名</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 字段</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">UserType</span>(models.Model): <span style="color: #228B22"># 表名</span>
+    name = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 字段</span>
 
-<span class="c1"># Create your models here.</span>
-<span class="k">class</span> <span class="nc">UserInfo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># 表名</span>
-    <span class="n">username</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 字段</span>
-    <span class="n">password</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 字段</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    建立外键</span>
-<span class="sd">    字段名称＋ &quot;_id&quot; 做为数据库中的列名称</span>
-<span class="sd">    这里最终数据库中就是 typeId_id</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">typeId</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;UserType&quot;</span><span class="p">)</span>
+<span style="color: #228B22"># Create your models here.</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">UserInfo</span>(models.Model): <span style="color: #228B22"># 表名</span>
+    username = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 字段</span>
+    password = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 字段</span>
+    <span style="color: #CD5555">&#39;&#39;&#39;</span>
+<span style="color: #CD5555">    建立外键</span>
+<span style="color: #CD5555">    字段名称＋ &quot;_id&quot; 做为数据库中的列名称</span>
+<span style="color: #CD5555">    这里最终数据库中就是 typeId_id</span>
+<span style="color: #CD5555">    &#39;&#39;&#39;</span>
+    typeId = models.ForeignKey(<span style="color: #CD5555">&quot;UserType&quot;</span>)
 </pre></div>
 
 
 <p><br></p>
-<p><strong>外键 -- 多对多</strong></p>
-<p>要实现多对多, 需要再创建一个"中间表", 使用 Django, 它会自动帮我们创建.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># 表名</span>
-    <span class="n">account</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 字段</span>
+<p><strong>外键 &ndash; 多对多</strong></p>
+<p>要实现多对多, 需要再创建一个&rdquo;中间表&rdquo;, 使用 Django, 它会自动帮我们创建.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">User</span>(models.Model): <span style="color: #228B22"># 表名</span>
+    account = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 字段</span>
 
-<span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> <span class="c1"># 表名</span>
-    <span class="n">groupName</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># 字段</span>
-    <span class="n">user_relation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="c1"># 建立关系, Django 会自动建立中间表</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Group</span>(models.Model): <span style="color: #228B22"># 表名</span>
+    groupName = models.CharField(max_length=<span style="color: #B452CD">50</span>) <span style="color: #228B22"># 字段</span>
+    user_relation = models.ManyToManyField(<span style="color: #CD5555">&quot;User&quot;</span>) <span style="color: #228B22"># 建立关系, Django 会自动建立中间表</span>
 </pre></div>
 
 

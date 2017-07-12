@@ -91,11 +91,11 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
 </h6>
 
 
-<h1>带参数的信号/槽</h1>
+<h1 id="_1">带参数的信号/槽</h1>
 <p>首先看一个程序</p>
 <p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg"></p>
 <p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="highlight"><pre><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
@@ -187,7 +187,7 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
 <p>SubSystemXxx: 子系统类, 他们实现子系统的功能, 处理外观类指派的任务.</p>
 <p>我们大家最容易理解和知道的外观模式就是，使用的API接口的封装，我们将第三方的API接口引入到我们的项目中的时候，我们需要对这些接口进行包装，将具体调用过程进行包装成外观类的形式，通过外观类来进行统一的调用。</p>
 <p>C++模拟代码如下:</p>
-<div class="highlight"><pre><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
@@ -205,18 +205,18 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
 
 
 <p>这段时间过春节,  学习什么的都放下了, 现在总算忙的差不多了, 把之前2014年底学的设计模式做个小结.</p>
-<h2>首先看下我们目前已经学习过的设计模式:</h2>
-<p>创建型模式: -- 用来处理对象的创建过程</p>
+<h2 id="_1">首先看下我们目前已经学习过的设计模式:</h2>
+<p>创建型模式: &ndash; 用来处理对象的创建过程</p>
 <blockquote>工厂模式 (简单工厂模式严格来说不是设计的一种) : 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.</blockquote>
 
 <blockquote>原型模式 : 用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象.</blockquote>
 
-<p>结构型模式: -- 用来处理类或者对象的组合</p>
+<p>结构型模式: &ndash; 用来处理类或者对象的组合</p>
 <blockquote>装饰者模式 : 动态地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</blockquote>
 
 <blockquote>代理模式 : 为其他对象提供一种代理以控制对这个对象的访问.</blockquote>
 
-<p>行为型模式: -- 用来对类或对象怎样交互和怎样分配职责进行描述</p>
+<p>行为型模式: &ndash; 用来对类或对象怎样交互和怎样分配职责进行描述</p>
 <blockquote>策略模式 : 一种定义一系列算法的行为, 从概念上看, 所有这些算法完成的都是相同的工作, 只是实现不同 …</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
@@ -233,7 +233,7 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
 </h6>
 
 
-<p>新的一年, 新的目标...</p>
+<p>新的一年, 新的目标&hellip;</p>
 <ol>
 <li>
 <p>瘦 10-20 斤</p>
@@ -265,7 +265,7 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
 <p><strong>模板方法模式:</strong> 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.</p>
 <p><strong>模板方法设计模式的意图</strong></p>
 <p>通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.</p>
-<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为"模板方法"), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
+<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为&rdquo;模板方法&rdquo;), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg"></a></p>
 <p>情景分析:</p>
 <p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>

@@ -57,56 +57,56 @@
 <p>打开 LiteIDE, 点击新建</p>
 <p><img alt="新建 calc" src="http://i66.tinypic.com/24vutn4.jpg"></p>
 <p>在 main.go 中输入如下代码:</p>
-<div class="highlight"><pre><span></span><span class="c1">// clac project main.go</span>
-<span class="kn">package</span> <span class="nx">main</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// clac project main.go</span>
+<span style="color: #8B008B; font-weight: bold">package</span> main
 
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;fmt&quot;</span>
-    <span class="s">&quot;os&quot;</span>    <span class="c1">// 用来取命令行参数</span>
-    <span class="s">&quot;simplemath&quot;</span>    <span class="c1">// 我们自定义的包, 里面是 add 算法</span>
-    <span class="s">&quot;strconv&quot;</span>    <span class="c1">// 用来做字符串转换</span>
-<span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">import</span> (
+    <span style="color: #CD5555">&quot;fmt&quot;</span>
+    <span style="color: #CD5555">&quot;os&quot;</span>    <span style="color: #228B22">// 用来取命令行参数</span>
+    <span style="color: #CD5555">&quot;simplemath&quot;</span>    <span style="color: #228B22">// 我们自定义的包, 里面是 add 算法</span>
+    <span style="color: #CD5555">&quot;strconv&quot;</span>    <span style="color: #228B22">// 用来做字符串转换</span>
+)
 
-<span class="kd">var</span> <span class="nx">Usage</span> <span class="p">=</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;USAGE: calc command [arguments]...&quot;</span><span class="p">)</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\nThe commands are:\n\tadd\tAddition of two values.&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+<span style="color: #8B008B; font-weight: bold">var</span> Usage = <span style="color: #8B008B; font-weight: bold">func</span>() {
+    fmt.Println(<span style="color: #CD5555">&quot;USAGE: calc command [arguments]...&quot;</span>)
+    fmt.Println(<span style="color: #CD5555">&quot;\nThe commands are:\n\tadd\tAddition of two values.&quot;</span>)
+}
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">args</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span>    <span class="c1">// := 表示同时进行变量声明和初始化的工作</span>
-    <span class="k">if</span> <span class="nx">args</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nb">len</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">3</span> <span class="p">{</span>
-        <span class="nx">Usage</span><span class="p">()</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
+<span style="color: #8B008B; font-weight: bold">func</span> main() {
+    args := os.Args    <span style="color: #228B22">// := 表示同时进行变量声明和初始化的工作</span>
+    <span style="color: #8B008B; font-weight: bold">if</span> args == <span style="color: #8B008B; font-weight: bold">nil</span> || <span style="color: #658b00">len</span>(args) &lt; <span style="color: #B452CD">3</span> {
+        Usage()
+        <span style="color: #8B008B; font-weight: bold">return</span>
+    }
 
-    <span class="k">switch</span> <span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="s">&quot;add&quot;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span> <span class="p">{</span>
-            <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-        <span class="nx">v1</span><span class="p">,</span> <span class="nx">err1</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-        <span class="nx">v2</span><span class="p">,</span> <span class="nx">err2</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nx">err1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">err2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-            <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-        <span class="nx">ret</span> <span class="o">:=</span> <span class="nx">simplemath</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">v1</span><span class="p">,</span> <span class="nx">v2</span><span class="p">)</span>
-        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Result: &quot;</span><span class="p">,</span> <span class="nx">ret</span><span class="p">)</span>
-    <span class="k">default</span><span class="p">:</span>
-        <span class="nx">Usage</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color: #8B008B; font-weight: bold">switch</span> args[<span style="color: #B452CD">1</span>] {
+    <span style="color: #8B008B; font-weight: bold">case</span> <span style="color: #CD5555">&quot;add&quot;</span>:
+        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(args) != <span style="color: #B452CD">4</span> {
+            fmt.Println(<span style="color: #CD5555">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
+            <span style="color: #8B008B; font-weight: bold">return</span>
+        }
+        v1, err1 := strconv.Atoi(args[<span style="color: #B452CD">2</span>])
+        v2, err2 := strconv.Atoi(args[<span style="color: #B452CD">3</span>])
+        <span style="color: #8B008B; font-weight: bold">if</span> err1 != <span style="color: #8B008B; font-weight: bold">nil</span> || err2 != <span style="color: #8B008B; font-weight: bold">nil</span> {
+            fmt.Println(<span style="color: #CD5555">&quot;USAGE: calc add &lt;integer1&gt; &lt;integer2&gt;&quot;</span>)
+            <span style="color: #8B008B; font-weight: bold">return</span>
+        }
+        ret := simplemath.Add(v1, v2)
+        fmt.Println(<span style="color: #CD5555">&quot;Result: &quot;</span>, ret)
+    <span style="color: #8B008B; font-weight: bold">default</span>:
+        Usage()
+    }
+}
 </pre></div>
 
 
 <p><br>
 然后, 在 src 目录下 (与 calc 目录同级) 新建个 <strong>simplemath</strong> 目录, 并新建个 add.go 文件:</p>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">simplemath</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">package</span> simplemath
 
-<span class="kd">func</span> <span class="nx">Add</span><span class="p">(</span><span class="nx">a</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
-<span class="p">}</span>
+<span style="color: #8B008B; font-weight: bold">func</span> Add(a <span style="color: #00688B; font-weight: bold">int</span>, b <span style="color: #00688B; font-weight: bold">int</span>) <span style="color: #00688B; font-weight: bold">int</span> {
+    <span style="color: #8B008B; font-weight: bold">return</span> a + b
+}
 </pre></div>
 
 
@@ -117,16 +117,16 @@
 <p><img alt="命令行" src="http://i63.tinypic.com/2ztem21.jpg"></p>
 <p>另外, LiteIDE 支持__单元测试__, 我们在写 simplemath 包时, 可以为 add 函数编写了对应的单元测试代码.</p>
 <p>再新建个 add_test.go 文件:</p>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">simplemath</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">package</span> simplemath
 
-<span class="kn">import</span> <span class="s">&quot;testing&quot;</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #CD5555">&quot;testing&quot;</span>
 
-<span class="kd">func</span> <span class="nx">TestAdd1</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nx">r</span> <span class="o">!=</span> <span class="mi">3</span> <span class="p">{</span>
-        <span class="nx">t</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;Add(1, 2) failed. Got %d, expected 3.&quot;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span style="color: #8B008B; font-weight: bold">func</span> TestAdd1(t *testing.T) {
+    r := Add(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">2</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> r != <span style="color: #B452CD">3</span> {
+        t.Errorf(<span style="color: #CD5555">&quot;Add(1, 2) failed. Got %d, expected 3.&quot;</span>, r)
+    }
+}
 </pre></div>
 
 

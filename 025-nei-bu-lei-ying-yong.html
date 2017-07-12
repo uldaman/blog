@@ -53,45 +53,50 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h2>1. 多重继承</h2>
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 多重继承</a></li>
+<li><a href="#2">2. 闭包与回调</a></li>
+</ul>
+</div>
+<h2 id="1">1. 多重继承</h2>
 <p>内部类最吸引的原因是: 每个内部类都能独立地继承/实现一个类/接口.</p>
-<p>这样就为类提供了__"多重继承"__的可能.</p>
-<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">D</span> <span class="o">{</span>
-<span class="o">}</span>
+<p>这样就为类提供了__&rdquo;多重继承&rdquo;__的可能.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">D</span> {
+}
 
-<span class="kd">class</span> <span class="nc">E</span> <span class="o">{</span>
-<span class="o">}</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">E</span> {
+}
 
-<span class="kd">class</span> <span class="nc">O</span> <span class="kd">extends</span> <span class="n">D</span> <span class="o">{</span> <span class="c1">// 外部类继承 D</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">O</span> <span style="color: #8B008B; font-weight: bold">extends</span> D { <span style="color: #228B22">// 外部类继承 D</span>
 
-    <span class="kd">class</span> <span class="nc">I</span> <span class="kd">extends</span> <span class="n">E</span> <span class="o">{</span> <span class="c1">// 内部类继承 E</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">I</span> <span style="color: #8B008B; font-weight: bold">extends</span> E { <span style="color: #228B22">// 内部类继承 E</span>
+    }
 
-    <span class="kd">public</span> <span class="n">E</span> <span class="nf">makeE</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">I</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> E <span style="color: #008b45">makeE</span>() {
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">new</span> I();
+    }
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestDemo</span> <span class="o">{</span>
-    <span class="kd">static</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">takesD</span><span class="o">(</span><span class="n">D</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
-    <span class="o">}</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">TestDemo</span> {
+    <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">takesD</span>(D d) {
+    }
 
-    <span class="kd">static</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">takesE</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">takesE</span>(E e) {
+    }
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">O</span> <span class="n">o</span> <span class="o">=</span> <span class="k">new</span> <span class="n">O</span><span class="o">();</span>
-        <span class="n">takesD</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
-        <span class="n">takesE</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">makeE</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        O o = <span style="color: #8B008B; font-weight: bold">new</span> O();
+        takesD(o);
+        takesE(o.<span style="color: #658b00">makeE</span>());
+    }
+}
 </pre></div>
 
 
-<p>如上面的代码, 我们的类 O 本身继承了 D, 又可以通过 makeE() 方法返回一个继承 E 的对象, 这就相当于"多重继承": 让类 O "拥有"了类 D 和 类 E 的特征.<br>
+<p>如上面的代码, 我们的类 O 本身继承了 D, 又可以通过 makeE() 方法返回一个继承 E 的对象, 这就相当于&rdquo;多重继承&rdquo;: 让类 O &ldquo;拥有&rdquo;了类 D 和 类 E 的特征.<br>
 如果你还有一个类需要被继承, 可以在类 O 里再添加一个内部类, 用它来继承那个类.</p>
-<h2>2. 闭包与回调</h2>
+<h2 id="2">2. 闭包与回调</h2>
 <blockquote>
 <p>闭包貌似是在 Java8 中才被引进的, 但我在使用其他语言(Lua、Python)时, 早已接触过闭包了.</p>
 </blockquote>
@@ -100,72 +105,72 @@
 <p>更官方的一点定义是:<br>
 闭包(closure)是一个可调用的对象, 它记录了一些信息, 这些信息来自于创建它的作用域.</p>
 <p>通过这个定义, 可以看出, java 中的内部类就是一个面向对象的闭包, 因为它不仅包含其外部类对象(创建内部类的作用域)的信息, 还自动拥有一个__指向此外部类对象的引用__, 在此作用域内, 内部类有权操作外部类的所有成员.</p>
-<p>而所谓的__回调__, 就是通过传递对象的一些信息, 然后在稍后的某个时刻允许这些信息调用其初始的对象, 在 C 中这一般通过传递对象的指针来实现, 而指针的弊端嘛...大家都懂的;</p>
+<p>而所谓的__回调__, 就是通过传递对象的一些信息, 然后在稍后的某个时刻允许这些信息调用其初始的对象, 在 C 中这一般通过传递对象的指针来实现, 而指针的弊端嘛&hellip;大家都懂的;</p>
 <p>在 Java 中, 内部类提供的闭包功能是一个优良的替代方案, 它比指针灵活、安全.</p>
-<div class="highlight"><pre><span></span><span class="kd">interface</span> <span class="nc">Incrementable</span> <span class="o">{</span> <span class="c1">// 一个计数器接口</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">();</span>
-<span class="o">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">interface</span> <span style="color: #008b45; font-weight: bold">Incrementable</span> { <span style="color: #228B22">// 一个计数器接口</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">increment</span>();
+}
 
-<span class="kd">class</span> <span class="nc">Caller</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Incrementable</span> <span class="n">callbackReference</span><span class="o">;</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Caller</span> {
+    <span style="color: #8B008B; font-weight: bold">private</span> Incrementable callbackReference;
 
-    <span class="n">Caller</span><span class="o">(</span><span class="n">Incrementable</span> <span class="n">cbh</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">callbackReference</span> <span class="o">=</span> <span class="n">cbh</span><span class="o">;</span>
-    <span class="o">}</span>
+    Caller(Incrementable cbh) {
+        callbackReference = cbh;
+    }
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">callbackReference</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span> <span class="c1">// 通过引用回调 increment() 方法</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">run</span>() {
+        callbackReference.<span style="color: #658b00">increment</span>(); <span style="color: #228B22">// 通过引用回调 increment() 方法</span>
+    }
+}
 
-<span class="kd">class</span> <span class="nc">Callee1</span> <span class="kd">implements</span> <span class="n">Incrementable</span> <span class="o">{</span> <span class="c1">// 实现接口</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Callee1</span> <span style="color: #8B008B; font-weight: bold">implements</span> Incrementable { <span style="color: #228B22">// 实现接口</span>
+    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #00688B; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>;
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;一个计数器&quot;</span><span class="o">);</span>
-        <span class="n">i</span><span class="o">++;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">increment</span>() {
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;一个计数器&quot;</span>);
+        i++;
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(i);
+    }
+}
 
-<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">MyIncrement</span> <span class="o">{</span> <span class="c1">// 一个计数器抽象类</span>
-    <span class="kd">abstract</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">();</span>
-<span class="o">}</span>
+<span style="color: #8B008B; font-weight: bold">abstract</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MyIncrement</span> { <span style="color: #228B22">// 一个计数器抽象类</span>
+    <span style="color: #8B008B; font-weight: bold">abstract</span> <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">increment</span>();
+}
 
-<span class="kd">class</span> <span class="nc">Callee2</span> <span class="kd">extends</span> <span class="n">MyIncrement</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Callee2</span> <span style="color: #8B008B; font-weight: bold">extends</span> MyIncrement {
+    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #00688B; font-weight: bold">int</span> i = <span style="color: #B452CD">10</span>;
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 重写</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;另一个计数器&quot;</span><span class="o">);</span>
-        <span class="n">i</span><span class="o">++;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">increment</span>() { <span style="color: #228B22">// 重写</span>
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;另一个计数器&quot;</span>);
+        i++;
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(i);
+    }
 
-    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">Closure</span> <span class="kd">implements</span> <span class="n">Incrementable</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 实现, 提供一个外部类的 Hook</span>
-            <span class="n">Callee2</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">increment</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">private</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Closure</span> <span style="color: #8B008B; font-weight: bold">implements</span> Incrementable {
+        <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">increment</span>() { <span style="color: #228B22">// 实现, 提供一个外部类的 Hook</span>
+            Callee2.<span style="color: #658b00">this</span>.<span style="color: #658b00">increment</span>();
+        }
+    }
 
-    <span class="kd">public</span> <span class="n">Incrementable</span> <span class="nf">getCallbackReference</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 返回一个 Incrementable 引用, 任何人拿到这个引用也只能调用 increment() 方法</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">Closure</span><span class="o">();</span>
-    <span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> Incrementable <span style="color: #008b45">getCallbackReference</span>() { <span style="color: #228B22">// 返回一个 Incrementable 引用, 任何人拿到这个引用也只能调用 increment() 方法</span>
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">new</span> Closure();
+    }
 
-    <span class="c1">// 其它方法</span>
-<span class="o">}</span>
+    <span style="color: #228B22">// 其它方法</span>
+}
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestDemo</span> <span class="o">{</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">TestDemo</span> {
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Callee1</span> <span class="n">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Callee1</span><span class="o">();</span>
-        <span class="n">Caller</span> <span class="n">caller1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Caller</span><span class="o">(</span><span class="n">c1</span><span class="o">);</span> <span class="c1">// 设置回调</span>
-        <span class="n">caller1</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
+        Callee1 c1 = <span style="color: #8B008B; font-weight: bold">new</span> Callee1();
+        Caller caller1 = <span style="color: #8B008B; font-weight: bold">new</span> Caller(c1); <span style="color: #228B22">// 设置回调</span>
+        caller1.<span style="color: #658b00">run</span>();
 
-        <span class="n">Callee2</span> <span class="n">c2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Callee2</span><span class="o">();</span>
-        <span class="n">Caller</span> <span class="n">caller2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Caller</span><span class="o">(</span><span class="n">c2</span><span class="o">.</span><span class="na">getCallbackReference</span><span class="o">());</span> <span class="c1">// 设置回调</span>
-        <span class="n">caller2</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+        Callee2 c2 = <span style="color: #8B008B; font-weight: bold">new</span> Callee2();
+        Caller caller2 = <span style="color: #8B008B; font-weight: bold">new</span> Caller(c2.<span style="color: #658b00">getCallbackReference</span>()); <span style="color: #228B22">// 设置回调</span>
+        caller2.<span style="color: #658b00">run</span>();
+    }
+}
 </pre></div>
 
 
@@ -175,9 +180,9 @@
 </blockquote>
 <p>假设我们需要一个计数功能, Callee1 是一个简单的解决方法, 它单独地去实现 Incrementable 接口, 然后传给 Caller 的构造函数, 这没什么好说的.</p>
 <p>主要看 Callee2, 它继承于 MyIncrement, 它也有一个 increment() 方法, 我们希望能够让 Caller 去回调这个方法, 但是可惜的是 Callee2 并不实现 Incrementable 接口, 所以不能传递给 Caller 的构造函数.</p>
-<p>所幸, 我们还有内部类 Closure, 这个内部类实现了 Incrementable, 并提供一个其外部类 Callee2 的 "Hook", 而且是一个安全的 "Hook", 这样, 无论谁拿到 Closure 引用, 都只能调用 Callee2 的 increment() 方法, 而不能去操作 Callee2 的其它成员.</p>
+<p>所幸, 我们还有内部类 Closure, 这个内部类实现了 Incrementable, 并提供一个其外部类 Callee2 的 &ldquo;Hook&rdquo;, 而且是一个安全的 &ldquo;Hook&rdquo;, 这样, 无论谁拿到 Closure 引用, 都只能调用 Callee2 的 increment() 方法, 而不能去操作 Callee2 的其它成员.</p>
 <p>这也是为什么说内部类比指针更灵活, 安全的原因.<br>
-因为, 如果你得到了某个对象的指针, 相当于拥有了这个对象的完全控制权, 而内部类不一样, 它是可控的, 你可以在内部类中指定要 "Hook" 的成员, 例如刚才的例子, 我们就只 "Hook" 了 increment() 方法.</p>
+因为, 如果你得到了某个对象的指针, 相当于拥有了这个对象的完全控制权, 而内部类不一样, 它是可控的, 你可以在内部类中指定要 &ldquo;Hook&rdquo; 的成员, 例如刚才的例子, 我们就只 &ldquo;Hook&rdquo; 了 increment() 方法.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 
 </p>

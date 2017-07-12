@@ -56,16 +56,16 @@
     <p>filter() 函数接收两个参数, 一个是函数, 一个是序列;</p>
 <p>filter() 把传入的函数依次作用于每个元素, 然后根据返回值是 True 还是 False 决定保留还是丢弃该元素.</p>
 <p>例如, 在一个 list 中, 删掉偶数, 只保留奇数, 可以这么写:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_odd</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">is_odd</span>(n):
+    <span style="color: #8B008B; font-weight: bold">return</span> n % <span style="color: #B452CD">2</span> == <span style="color: #B452CD">1</span>
 
-<span class="nb">filter</span><span class="p">(</span><span class="n">is_odd</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="o">&gt;&gt;&gt;</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span style="color: #658b00">filter</span>(is_odd, <span style="color: #658b00">range</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">11</span>))
+&gt;&gt;&gt;[<span style="color: #B452CD">1</span>, <span style="color: #B452CD">3</span>, <span style="color: #B452CD">5</span>, <span style="color: #B452CD">7</span>, <span style="color: #B452CD">9</span>]
 </pre></div>
 
 
 <p>lambda 简化版:</p>
-<div class="highlight"><pre><span></span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #658b00">filter</span>(<span style="color: #8B008B; font-weight: bold">lambda</span> x : x % <span style="color: #B452CD">2</span> == <span style="color: #B452CD">1</span>, <span style="color: #658b00">range</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">11</span>))
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 

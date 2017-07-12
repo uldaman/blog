@@ -53,8 +53,17 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>1. Supervisor 介绍</h1>
+    <div class="toc">
+<ul>
+<li><a href="#1-supervisor">1. Supervisor 介绍</a></li>
+<li><a href="#2">2. 安装</a></li>
+<li><a href="#3">3. 配置</a></li>
+<li><a href="#4">4. 添加一个程序</a></li>
+<li><a href="#5-supervisor">5. 使用 supervisor 管理程序</a></li>
+<li><a href="#6-web">6. 通过 web 方式查看状态</a></li>
+</ul>
+</div>
+<h1 id="1-supervisor">1. Supervisor 介绍</h1>
 <p>Supervisor 是用 Python 实现的一款非常实用的进程管理工具, Supervisor 会帮你把应用程序转成 Daemon 程序, 而且可以方便的通过命令开启、关闭、重启等操作, 托管给它管理的进程一旦崩溃也会自动重启, 这样就可以保证程序执行中断后的情况下有自我修复的功能.</p>
 <p>注意事项:</p>
 <ul>
@@ -76,21 +85,21 @@
 <blockquote>
 <p>简单的说就是先使用 <strong>supervisord</strong> 开始 Supervisor 服务, 然后通过 <strong>supervisorctl</strong> 管理 Supervisor 服务</p>
 </blockquote>
-<h1>2. 安装</h1>
-<div class="highlight"><pre><span></span>pip install supervisor
+<h1 id="2">2. 安装</h1>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pip install supervisor
 </pre></div>
 
 
 <p><br>
-可以安装在系统级的 Python 环境下, 也可以安装在 virtualenv 级的 Python 环境下, 建议安装在系统级的 Python 环境, 这样就可以把 supervisor 配成开机启动, 而且 supervisor 也算是通用扩展了...</p>
-<h1>3. 配置</h1>
+可以安装在系统级的 Python 环境下, 也可以安装在 virtualenv 级的 Python 环境下, 建议安装在系统级的 Python 环境, 这样就可以把 supervisor 配成开机启动, 而且 supervisor 也算是通用扩展了&hellip;</p>
+<h1 id="3">3. 配置</h1>
 <p>安装完成后, 使用下面这两种方式创建配置文件:</p>
 <ul>
 <li>创建一个全局配置文件 echo_supervisord_conf > /etc/supervisord.conf</li>
 <li>在当前目录创建配置文件 echo_supervisord_conf > supervisord.conf, 然后使用 <strong>-c</strong> 参数在启动时手动指定配置文件: <code>supervisord -c supervisord.conf</code></li>
 </ul>
 <p>默认配置文件 echo_supervisord_conf 内容:</p>
-<div class="highlight"><pre><span></span>; Sample supervisor config file.
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>; Sample supervisor config file.
 ;
 ; For more information on the config file, please see:
 ; http://supervisord.org/configuration.html
@@ -233,14 +242,14 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 
 <p><br></p>
-<h1>4. 添加一个程序</h1>
+<h1 id="4">4. 添加一个程序</h1>
 <p>编辑配置文件 supervisord.conf, 在后面添加新程序:</p>
-<div class="highlight"><pre><span></span><span class="k">[program:test_py]</span>
-<span class="na">command</span><span class="o">=</span><span class="s">python /etc/my_pro/test.py</span>
-<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
-<span class="na">directory</span><span class="o">=</span><span class="s">/etc/my_pro</span>
-<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/etc/my_pro/test_stdout.log</span>
-<span class="na">stderr_logfile</span><span class="o">=</span><span class="s">/etc/my_pro/test_stderr.log</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[program:test_py]
+command=python /etc/my_pro/test.py
+autorestart=true
+directory=/etc/my_pro
+stdout_logfile=/etc/my_pro/test_stdout.log
+stderr_logfile=/etc/my_pro/test_stderr.log
 </pre></div>
 
 
@@ -252,13 +261,13 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 如果配置中的 command 是执行一个 bash, 然后在 bash 里执行了 python 脚本, 那么当使用 supervisor 停止程序时, 只有上层进程被停止(即 bash 被停止了), 但 python 进程没有被停止.</p>
 <p>解决办法:<br>
 在配置文件中设置:</p>
-<div class="highlight"><pre><span></span>stopasgroup=true
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>stopasgroup=true
 killasgroup=true
 </pre></div>
 
 
 <p><br></p>
-<h1>5. 使用 supervisor 管理程序</h1>
+<h1 id="5-supervisor">5. 使用 supervisor 管理程序</h1>
 <ul>
 <li>使用指定配置文件启动: supervisord -c supervisord.conf</li>
 <li>使用默认配置文件启动: supervisord</li>
@@ -275,9 +284,9 @@ killasgroup=true
 <blockquote>
 <p>可以先键入 supervisorctl 进入交互状态, 再使用 status、start 等命令.</p>
 </blockquote>
-<h1>6. 通过 web 方式查看状态</h1>
+<h1 id="6-web">6. 通过 web 方式查看状态</h1>
 <p>配置文件中配置:</p>
-<div class="highlight"><pre><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[inet_http_server]         ; inet (TCP) server disabled by default
 port=127.0.0.1:9001        ; (ip_address:port specifier, *:port for all iface)
 </pre></div>
 

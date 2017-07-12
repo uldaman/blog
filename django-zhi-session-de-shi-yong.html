@@ -59,11 +59,11 @@
 <p>获取 : request.session.get(‘key’, None) 第二个参数是默认值</p>
 <p>销毁 : del request.session[‘key’]</p>
 <p>登录成功后, 保存 session, 然后重定向(redirect)登录后的页面, 当然在登录后的页面里还要验证 session.</p>
-<p>接下来, 就是什么时候销毁 session(不可能永远保持登录...), session 有默认的过期时间, Django 是两周, 可以在 settings.py 里的 <strong>SESSION_COOKIE_AGE</strong> 可设置, 单位秒.
+<p>接下来, 就是什么时候销毁 session(不可能永远保持登录&hellip;), session 有默认的过期时间, Django 是两周, 可以在 settings.py 里的 <strong>SESSION_COOKIE_AGE</strong> 可设置, 单位秒.
 还可以设置浏览器关闭时自动销毁, <strong>SESSION_EXPIRE_AT_BROWSER_CLOSE</strong> = True.
 当然也可以通过 del request.session[‘key’] 来主动销毁.</p>
 <p>上代码:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.shortcuts &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; redirect
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.shortcuts &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; redirect
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; All(request, p):

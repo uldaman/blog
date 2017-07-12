@@ -53,8 +53,21 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>简介</h1>
+    <div class="toc">
+<ul>
+<li><a href="#_1">简介</a></li>
+<li><a href="#_2">配置</a></li>
+<li><a href="#_3">客户端工具</a></li>
+<li><a href="#java-api">Java Api</a></li>
+<li><a href="#zookeeper">zookeeper 应用</a><ul>
+<li><a href="#_4">洞察服务器上下线</a></li>
+<li><a href="#_5">共享锁</a></li>
+<li><a href="#_6">高可用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">简介</h1>
 <p>zookeeper 是一个分布式协调服务, 管理分布式环境中的数据, 为分布式应用提供<strong>一致性</strong>服务的软件, 提供的功能包括: 配置维护、名字服务、分布式同步、组服务等.</p>
 <p>zookeeper 本身也集群, 只要集群里有半数以上, 就能正常为我们服务. 所以 zookeeper 适合安装在是奇数台的集群中.</p>
 <p>zookeeper 集群角色:</p>
@@ -79,7 +92,7 @@
 <li>ephemeral 临时节点, 客户端断开链接自删, 不允许建立子节点</li>
 <li>ephemeral_sequential</li>
 </ul>
-<h1>配置</h1>
+<h1 id="_2">配置</h1>
 <p>直接去 <a href="http://archive.apache.org/dist/">http://archive.apache.org/dist/</a> 下载回来解压就好, 参考 <a href="http://wiki.smallcpp.cn/Hadoop/%E6%90%AD%E5%BB%BA%20Hadoop%20%E5%88%86%E5%B8%83%E5%BC%8F%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.html#3-hadoop">Ubuntu 下 Hadoop 的安装</a>.</p>
 <p>首先把 <code>conf/zoo_sample.cfg</code> 拷贝一份并重命名为 <code>zoo.cfg</code>, 这就是 zookeeper 的配置文件. 关键配置:</p>
 <ul>
@@ -94,11 +107,11 @@
 <li>bin/zkServer.sh start 启动 zk 集群</li>
 <li>bin/zkServer.sh status 查看 zk 集群状态</li>
 </ul>
-<h1>客户端工具</h1>
+<h1 id="_3">客户端工具</h1>
 <p>zookeeper 提供了一个 客户端工具 zkCli.sh, 通过命令 <code>zkCli.sh connect host:port</code> 就能连上 zk 集群.</p>
 <p>常用命令: <code>ls</code>、<code>creae</code>、<code>get</code>、<code>set</code>、<code>delete</code>、<code>rmr</code></p>
 <p>在 get/ls 时注册 <strong>watch</strong>, <strong>watch</strong> 只生效一次, 被触发后就失效了.</p>
-<h1>Java Api</h1>
+<h1 id="java-api">Java Api</h1>
 <p>连接 zookeeper 集群:<br>
 <code>zk_obj=zookeeper(zk 集群的 ip:port, timeout, new Watcher(){})</code> (zookeeper 会开启个守护线程保持和 zk 的长链接).</p>
 <p>在 Watcher 里监听事件并处理 (回调)</p>
@@ -107,7 +120,7 @@
 <li>event.getPath</li>
 </ul>
 <p>需要注意一下, 有时我们拿到 zk_obj 后, 由于 zk 环境还是准备后, 会导致后续的操作失败, 所以我们拿到 zk_obj 后可以通过 zk_obj.getState() 来判断下当前集群的状态, 当它为 CONNECTED 时才继续操作.</p>
-<div class="highlight"><pre><span></span>路径=zk_obj.create(路径, 数据, 权限, 节点模式)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>路径=zk_obj.create(路径, 数据, 权限, 节点模式)
 
 zk_obj.getChildren(路径, 监听器)
 
@@ -122,9 +135,9 @@ zk_obj.setData(路径, 数据, -1) 参数3 同上
 
 
 <p><br></p>
-<h1>zookeeper 应用</h1>
+<h1 id="zookeeper">zookeeper 应用</h1>
 <p>zookeeper 虽然本质上只提供了两个功能: 数据保管和节点监听, 但是它提供了丰富的 API, 使用这个 API 我们就能写业务逻辑来实现诸多功能, 下面是两个例子.</p>
-<h2>洞察服务器上下线</h2>
+<h2 id="_4">洞察服务器上下线</h2>
 <p><strong>利用 zookeeper 实现客户端实时洞察服务器上下线的变化</strong></p>
 <ul>
 <li>服务器上线就 -&gt; zk 注册临时节点, 启动服务端业务功能<ul>
@@ -134,7 +147,7 @@ zk_obj.setData(路径, 数据, -1) 参数3 同上
 <li>客户端获取 zk 节点并监听, 获取当前在线服务器列表, 根据规则(如果有)去挑选服务器</li>
 <li>客户端监听到服务节点上下线事件通知重新获取列表并监听</li>
 </ul>
-<h2>共享锁</h2>
+<h2 id="_5">共享锁</h2>
 <p><strong>利用 zookeeper 实现分布式共享锁</strong></p>
 <ul>
 <li>客户程序启动 -&gt; zk 注册带临时序号的节点 (假设为 uuid)</li>
@@ -143,7 +156,7 @@ zk_obj.setData(路径, 数据, -1) 参数3 同上
 <li>访问后将自己的 uuid 删掉, 并注册新的节点</li>
 <li>其他客户程序收到事件变化, 重新获取当前所有 uuid 最小的去访问资源</li>
 </ul>
-<h2>高可用</h2>
+<h2 id="_6">高可用</h2>
 <p><strong>利用 zookeeper 实现高可用</strong></p>
 <p>原理都差不多, 无非就是自写逻辑监听 zk 节点变化, 这里分析下 keepalived 与 zookeeper, 参考<a href="https://www.zhihu.com/question/47632675/answer/127669517">知乎一篇不错的答案</a>.</p>
 <p>keepalived 与 zookeeper 都可以用来实现高可用, 另外常见的还有 DNS.</p>

@@ -53,9 +53,19 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul>
+<li><a href="#key">Key 操作</a></li>
+<li><a href="#string">String</a></li>
+<li><a href="#hash">Hash</a></li>
+<li><a href="#list">List</a></li>
+<li><a href="#set">Set</a></li>
+<li><a href="#sorted-set">Sorted Set</a></li>
+<li><a href="#hyperloglog">HyperLogLog</a></li>
+</ul>
+</div>
 <p>命令速查: <a href="http://doc.redisfans.com/">http://doc.redisfans.com/</a></p>
-<h1>Key 操作</h1>
+<h1 id="key">Key 操作</h1>
 <p>redis 中不管保存什么类型的数据, 它都要对应一个 key, 先看看 key 的命令有哪些.</p>
 <ul>
 <li><strong>keys</strong>: 返回所有符合给定模式(正则)的 key<ul>
@@ -162,7 +172,7 @@
 </ul>
 </li>
 </ul>
-<h1>String</h1>
+<h1 id="string">String</h1>
 <p>一个键最多存储 <strong>512 MB</strong>.</p>
 <blockquote>
 <p>注意: 所有的 String 命令, 设置 value 时要用引号包起来(数字除外, 输入数字 redis 会自动在内部转化成 str)</p>
@@ -216,11 +226,11 @@
 </ul>
 </li>
 <li><strong>mset</strong>: 设置多个 key 的 value<ul>
-<li>语法 mset key1 value1 key2 value2 ...</li>
+<li>语法 mset key1 value1 key2 value2 &hellip;</li>
 </ul>
 </li>
 <li><strong>mget</strong>: 获取个 key 的 value<ul>
-<li>语法 mset key1 key2 ...<ul>
+<li>语法 mset key1 key2 &hellip;<ul>
 <li>返回多行字符串</li>
 </ul>
 </li>
@@ -316,7 +326,7 @@
 </ul>
 </li>
 </ul>
-<h1>Hash</h1>
+<h1 id="hash">Hash</h1>
 <p>Redis Hash 其实是 key 的 value 中保存的是一个 HashMap, 如果该 Map 的成员数比较少, 则会采用类似一维线性的紧凑格式来存储该 Map, 即省去了大量指针的内存开销, 这个参数控制对应在 redis.conf 配置文件中下面 2 项:</p>
 <ul>
 <li>hash-max-zipmap-entries 64</li>
@@ -342,11 +352,11 @@
 </ul>
 </li>
 <li><strong>hmset</strong>: 设置相关 key 中保存的 Hash 的多个 field 的值<ul>
-<li>语法 hmset key field1 value1 field2 value2 ...</li>
+<li>语法 hmset key field1 value1 field2 value2 &hellip;</li>
 </ul>
 </li>
 <li><strong>hmget</strong>: 获取相关 key 中保存的 Hash 的多个 field 的值<ul>
-<li>语法 hmget key field1 field2 ...<ul>
+<li>语法 hmget key field1 field2 &hellip;<ul>
 <li>返回多行字符串</li>
 </ul>
 </li>
@@ -405,10 +415,10 @@
 </ul>
 </li>
 </ul>
-<h1>List</h1>
+<h1 id="list">List</h1>
 <p>List 型的 value 最多存储 (2^32 - 1) 个元素</p>
 <p>List 类型的数据的弊端和常规 List 一样 -- 通过下标(索引)来访问, 效率很低.</p>
-<div class="highlight"><pre><span></span>list 就是数据结构中的双向链表, 因此它的内存空间可以是不连续的, 通过指针来进行数据的访问, 这个特点使得它的随即存取变的非常没有效率, 但它的 插入/删除、取首/尾数据 效率高.
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>list 就是数据结构中的双向链表, 因此它的内存空间可以是不连续的, 通过指针来进行数据的访问, 这个特点使得它的随即存取变的非常没有效率, 但它的 插入/删除、取首/尾数据 效率高.
 </pre></div>
 
 
@@ -416,7 +426,7 @@
 <p>注意, 列表的 <strong>左端</strong> 的下标为 0, 即为列表头.</p>
 <ul>
 <li><strong>lpush</strong>: 向左端添加元素(一个或多个)<ul>
-<li>语法 lpush key value1 value2 ...<ul>
+<li>语法 lpush key value1 value2 &hellip;<ul>
 <li>如果 key 不存在, 则新建</li>
 <li>如果 key 中原有 value 不是 list, 则报错</li>
 <li>返回插入后的 List 长度</li>
@@ -515,7 +525,7 @@
 </ul>
 </li>
 <li><strong>blpop</strong>: lpop 的阻塞版本, 但它支持多个 key<ul>
-<li>语法 blpop key1 key2 ... timeout<ul>
+<li>语法 blpop key1 key2 &hellip; timeout<ul>
 <li>如果给定列表中没有元素, 则该命令不会返回, 直到 timeout 或者有元素可 pop(即有另一个客户端对列表执行 push 命令)</li>
 <li>timeout 设为 0 表示永久等待</li>
 <li>多个 key 参数时, 按参数 key 的先后顺序依次检查各个列表, 弹出第一个非空列表的头元素<ul>
@@ -541,14 +551,14 @@
 </ul>
 </li>
 </ul>
-<h1>Set</h1>
+<h1 id="set">Set</h1>
 <p>可以理解成一种特殊的 list.</p>
 <p>但和 List 类型不同的是, Set 集合中不允许出现重复的元素, 这一点和 C++ 标准库中的 set 容器是完全相同的.</p>
 <p>和 List 类型相比, Set 类型在功能上还存在着一个非常重要的特性, 即完成多个 Set 之间的聚合计算操作, 如并集、差集.</p>
 <p>例如做 QQ号 好友推荐功能, 两个 QQ号 的好友都用集合来存储, 就可以通过集合的差集功能.</p>
 <ul>
 <li><strong>sadd</strong>: 向集合中添加元素<ul>
-<li>语法 sadd key member1 member2 ...<ul>
+<li>语法 sadd key member1 member2 &hellip;<ul>
 <li>返回添加元素的个数</li>
 </ul>
 </li>
@@ -573,7 +583,7 @@
 </ul>
 </li>
 <li><strong>srem</strong>: 删除集合中的一个或多个成员<ul>
-<li>语法 srem key member1 member2 ...<ul>
+<li>语法 srem key member1 member2 &hellip;<ul>
 <li>返回成功删除的元素个数</li>
 </ul>
 </li>
@@ -602,7 +612,7 @@
 </ul>
 </li>
 <li><strong>sdiff</strong>: 返回集合间的差集<ul>
-<li>语法 sdiff key1 key2 ...<ul>
+<li>语法 sdiff key1 key2 &hellip;<ul>
 <li>key 的顺序很重要, 谁在前面, 就返回谁的差集<ul>
 <li>如 key1 = [1, 2, 3], key2 = [2, 3, 4]</li>
 <li>sdiff key1 key2<ul>
@@ -620,15 +630,15 @@
 </ul>
 </li>
 <li><strong>sinter</strong>: 返回集合间的交集<ul>
-<li>语法 sinter key1 key2 ...</li>
+<li>语法 sinter key1 key2 &hellip;</li>
 </ul>
 </li>
 <li><strong>sunion</strong>: 返回集合间的并集<ul>
-<li>语法 sunion key1 key2 ...</li>
+<li>语法 sunion key1 key2 &hellip;</li>
 </ul>
 </li>
 <li><strong>sdiffstore</strong>: 将差集结果保存到指定集合中<ul>
-<li>语法 sdiffstore destination key1 key2 ...<ul>
+<li>语法 sdiffstore destination key1 key2 &hellip;<ul>
 <li>将 key1 key2 集合的差集保存到集合 destination 中</li>
 <li>destination 也可以中 key1/key2 本身</li>
 </ul>
@@ -644,7 +654,7 @@
 </ul>
 </li>
 </ul>
-<h1>Sorted Set</h1>
+<h1 id="sorted-set">Sorted Set</h1>
 <p>相当于给 set 中的元素都关联一个权值, SortedSet 根据权值可以为集合进行排序.</p>
 <ul>
 <li><strong>zrank</strong>: 获取元素的排名(下标)<ul>
@@ -664,7 +674,7 @@
 </ul>
 </li>
 <li><strong>zdd</strong>: 将元素及其分数添加到集合中<ul>
-<li>语法  zdd key score1(权值) member1(元素) score2 member2 ...<ul>
+<li>语法  zdd key score1(权值) member1(元素) score2 member2 &hellip;<ul>
 <li>返回添加的成员数量</li>
 <li>score1 可以是 +inf(正, 无穷大) -inf(负, 无穷小)</li>
 </ul>
@@ -735,7 +745,7 @@
 </ul>
 </li>
 <li><strong>zrem</strong>: 删除一个或多个元素<ul>
-<li>语法 rem key member1 member2 ...<ul>
+<li>语法 rem key member1 member2 &hellip;<ul>
 <li>返回删除元素的个数</li>
 </ul>
 </li>
@@ -756,7 +766,7 @@
 </ul>
 </li>
 <li><strong>zinterstore</strong>: 返回集合间的交集<ul>
-<li>语法 zinterstore destination numkeys key1 key2 [weight weight1 weight2 ...] [aggregate SUM | MIN | MAX]<ul>
+<li>语法 zinterstore destination numkeys key1 key2 [weight weight1 weight2 &hellip;] [aggregate SUM | MIN | MAX]<ul>
 <li>返回 destination 元素的个数</li>
 <li>计算给定的一个或多个有序集的交集, 并将该交集(结果集)储存到 destination</li>
 <li>给定 key 的数量必须以 numkeys 参数指定</li>
@@ -782,9 +792,9 @@
 </ul>
 </li>
 </ul>
-<h1>HyperLogLog</h1>
+<h1 id="hyperloglog">HyperLogLog</h1>
 <p>这是 Redis 在 2.8.9 版本新添加的类型.</p>
-<div class="highlight"><pre><span></span>需求:
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>需求:
 记录网站每天获得的独立 IP 数量
 
 2.8.9 的解决方案:
@@ -799,7 +809,7 @@
 <ul>
 <li>基数<ul>
 <li>集合中不同元素的数量<ul>
-<li>比如 {'apple', 'banana', 'cherry', 'banana', 'apple'} 的基数就是 3</li>
+<li>比如 {&lsquo;apple&rsquo;, &lsquo;banana&rsquo;, &lsquo;cherry&rsquo;, &lsquo;banana&rsquo;, &lsquo;apple&rsquo;} 的基数就是 3</li>
 </ul>
 </li>
 </ul>

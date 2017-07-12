@@ -55,7 +55,7 @@
 <p>Ø 逻辑运算符</p>
 <p>Ø 条件运算符</p>
 <p>和C/C++差不多, 这里仅列出有点小区别的部分.</p>
-<p>＋：除了加法，还有连接符的作用，“He”+"llo" = "Hello"</p>
+<p>＋：除了加法，还有连接符的作用，“He”+&rdquo;llo&rdquo; = &ldquo;Hello&rdquo;</p>
 <p>三元运算符: 即 C/C++ 中的三目运算符.
 语法形式: 布尔表达式 ？ 表达式1 ：表达式2;
 如果布尔表达式的值为 true …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
@@ -158,7 +158,7 @@
 <p>2、通过 Javac 命令对该 java 文件进行编译.</p>
 <p>3、通过 java 命令执行生成的 class 文件.</p>
 <p>新建一个 txt 文件, 然后改名为 HelloWorld.java, 用记事本打开该文件, 输写代码:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;public …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
 
 </p>
 
@@ -239,9 +239,16 @@
 <blockquote>
 <p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
 </blockquote>
-<p>[TOC]</p>
-<h1>初识 Qt 中的事件</h1>
-<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说, 使用 Qt 组件时, 我们并不会把主要精力放在事件上, 因为在 Qt 中, 我们关心的更多的是事件关联的一个信号 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+<div class="toc">
+<ul>
+<li><a href="#qt">初识 Qt 中的事件</a></li>
+<li><a href="#qt_1">深入 Qt 的事件</a></li>
+<li><a href="#event">event() 函数</a></li>
+<li><a href="#_1">事件过滤器</a></li>
+</ul>
+</div>
+<h1 id="qt">初识 Qt 中的事件</h1>
+<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
@@ -259,12 +266,12 @@
 
 <p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
 <p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
-<div class="highlight"><pre><span></span><span class="cp">#pragma pack (push,1)</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_RoleTree</span> <span class="p">{</span>
-    <span class="n">DWORD</span> <span class="n">dwLBase</span><span class="p">;</span>      <span class="c1">//+0x0    左树</span>
-    <span class="n">DWORD</span> <span class="n">dwSBase</span><span class="p">;</span>      <span class="c1">//+0x4    上一层树的地址</span>
-    <span class="n">DWORD</span> <span class="n">dwRBase</span><span class="p">;</span>      <span class="c1">//+0x8    右树</span>
-    <span class="kt">int</span> <span class="n">iID …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#pragma pack (push,1)</span>
+<span style="color: #8B008B; font-weight: bold">typedef</span> <span style="color: #8B008B; font-weight: bold">struct</span> _RoleTree {
+    DWORD dwLBase;      <span style="color: #228B22">//+0x0    左树</span>
+    DWORD dwSBase;      <span style="color: #228B22">//+0x4    上一层树的地址</span>
+    DWORD dwRBase;      <span style="color: #228B22">//+0x8    右树</span>
+    <span style="color: #00688B; font-weight: bold">int</span> iID …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 

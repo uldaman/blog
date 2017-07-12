@@ -53,8 +53,13 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>添加资源</h1>
+    <div class="toc">
+<ul>
+<li><a href="#_1">添加资源</a></li>
+<li><a href="#action">添加 Action</a></li>
+</ul>
+</div>
+<h1 id="_1">添加资源</h1>
 <p>Qt 资源系统是一个跨平台的资源机制, 用于将程序运行时所需要的资源以二进制的形式存储于可执行文件内部. 如果你的程序需要加载特定的资源(图标、文本翻译等), 那么, 将其放置在资源文件中, 就再也不需要担心这些文件的丢失. 也就是说, 如果你将资源以资源文件形式存储, 它是会编译到可执行文件内部.</p>
 <p>双击打VS项目文件中的.qrc文件打开资源编辑器.</p>
 <p><img alt="" src="http://i61.tinypic.com/20uphmc.jpg"></p>
@@ -65,7 +70,7 @@
 <p>返回 Qt 编辑器中, 可以发现资源文件已经添加好了.</p>
 <p><img alt="" src="http://i60.tinypic.com/24b0qc8.jpg"></p>
 <p>接下来为这个新添加的资源文件关联动作.</p>
-<h1>添加 Action</h1>
+<h1 id="action">添加 Action</h1>
 <p>Action 可以显示在<strong>菜单栏</strong>, 作为一个菜单项, 当用户点击该菜单项, 对用户的点击做出响应;<br>
 也可以在<strong>工具栏</strong>, 作为一个工具栏按钮, 用户点击这个按钮就可以执行相应的操作, Qt 使用 QAction 类作为动作.<br>
 动作包含了图标、菜单文字、快捷键、状态栏文字、浮动帮助等信息.</p>
@@ -82,14 +87,14 @@
 <p>很简单, 直接拖拽动作编辑器中的icon到工具栏或菜单项里就可以了.</p>
 <p><img alt="" src="http://i62.tinypic.com/dh915h.jpg"></p>
 <p>接下来就要为这个 Action 关联操作代码了, 即连接信号和槽.</p>
-<div class="highlight"><pre><span></span><span class="n">Demo</span><span class="o">::</span><span class="n">Demo</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">ui</span><span class="p">.</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="n">connect</span><span class="p">(</span><span class="n">ui</span><span class="p">.</span><span class="n">action_New</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QAction</span><span class="o">::</span><span class="n">triggered</span><span class="p">,</span> <span class="p">[](</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;This is a Demo&quot;</span><span class="p">;</span>
-    <span class="p">});</span>
-<span class="p">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Demo::Demo(QWidget *parent)
+    : QMainWindow(parent)
+{
+    ui.setupUi(<span style="color: #8B008B; font-weight: bold">this</span>);
+    connect(ui.action_New, &amp;QAction::triggered, [](<span style="color: #00688B; font-weight: bold">bool</span>) {
+        qDebug() &lt;&lt; <span style="color: #CD5555">&quot;This is a Demo&quot;</span>;
+    });
+}
 </pre></div>
 
 

@@ -53,54 +53,63 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>URL 网络编程</h1>
-<h2>URL 编程</h2>
+    <div class="toc">
+<ul>
+<li><a href="#url">URL 网络编程</a><ul>
+<li><a href="#url_1">URL 编程</a></li>
+<li><a href="#gzip">处理 gzip 压缩的网页</a></li>
+</ul>
+</li>
+<li><a href="#_1">多线程下载</a></li>
+</ul>
+</div>
+<h1 id="url">URL 网络编程</h1>
+<h2 id="url_1">URL 编程</h2>
 <p>URL (Uniform Resource Locator) 中文名为统一资源定位符, 有时也被俗称为网页地址, 表示为互联网上的资源，如网页或者 FTP 地址.</p>
 <p>URL可以分为如下几个部分: <code>protocol://host:port/path?query#ref</code></p>
 <p>在 java.net 包中定义了 URL 类和 URLConection 类使编程者方便地利用 URL 在 Internet 上进行网络通信</p>
 <p>Reference: <a href="http://www.runoob.com/java/java-url-processing.html">Java URL 处理</a></p>
-<div class="highlight"><pre><span></span><span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://blog.smallcpp.cn/archives.html&quot;</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>URL url = <span style="color: #8B008B; font-weight: bold">new</span> URL(<span style="color: #CD5555">&quot;http://blog.smallcpp.cn/archives.html&quot;</span>);
 
-<span class="n">URLConnection</span> <span class="n">uc</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">uc</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-<span class="n">ByteArrayOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+URLConnection uc = url.<span style="color: #658b00">openConnection</span>();
+InputStream is = uc.<span style="color: #658b00">getInputStream</span>();
+ByteArrayOutputStream bos = <span style="color: #8B008B; font-weight: bold">new</span> ByteArrayOutputStream();
 
-<span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">8</span><span class="o">];</span>
-<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">buffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bos</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-<span class="n">bos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span style="color: #00688B; font-weight: bold">byte</span>[] buffer = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #00688B; font-weight: bold">byte</span>[<span style="color: #B452CD">1024</span> * <span style="color: #B452CD">8</span>];
+<span style="color: #00688B; font-weight: bold">int</span> len = <span style="color: #B452CD">0</span>;
+<span style="color: #8B008B; font-weight: bold">while</span> ((len = is.<span style="color: #658b00">read</span>(buffer)) != -<span style="color: #B452CD">1</span>) {
+    bos.<span style="color: #658b00">write</span>(buffer, <span style="color: #B452CD">0</span>, len);
+}
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(bos.<span style="color: #658b00">toString</span>());
+bos.<span style="color: #658b00">close</span>();
+is.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br></p>
-<h2>处理 gzip 压缩的网页</h2>
+<h2 id="gzip">处理 gzip 压缩的网页</h2>
 <p>ContentEncoding 为 text/html 或其他类似的文本直接打印出来就行, 如果网页是经过 gzip 压缩的话, 需要再转化一下.</p>
 <p>上程序:</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://www.baidu.com&quot;</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">cumtURL</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span> <span class="n">url</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">cumtConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span><span class="n">cumtURL</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">cumtConnection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;User-Agent&quot;</span><span class="o">,</span> <span class="s">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13&quot;</span><span class="o">);</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cumtConnection</span><span class="o">.</span><span class="na">getContentEncoding</span><span class="o">());</span>
-<span class="n">InputStream</span> <span class="n">urlStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GZIPInputStream</span><span class="o">(</span><span class="n">cumtConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
-<span class="n">BufferedReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">urlStream</span><span class="o">,</span><span class="s">&quot;gb2312&quot;</span><span class="o">));</span>
-<span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
-<span class="k">while</span><span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">urlStream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String url = <span style="color: #CD5555">&quot;http://www.baidu.com&quot;</span>;
+URL cumtURL = <span style="color: #8B008B; font-weight: bold">new</span> URL( url);
+HttpURLConnection cumtConnection = (HttpURLConnection)cumtURL.<span style="color: #658b00">openConnection</span>();
+cumtConnection.<span style="color: #658b00">setRequestProperty</span>(<span style="color: #CD5555">&quot;User-Agent&quot;</span>, <span style="color: #CD5555">&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13&quot;</span>);
+System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(cumtConnection.<span style="color: #658b00">getContentEncoding</span>());
+InputStream urlStream = <span style="color: #8B008B; font-weight: bold">new</span> GZIPInputStream(cumtConnection.<span style="color: #658b00">getInputStream</span>());
+BufferedReader reader = <span style="color: #8B008B; font-weight: bold">new</span> BufferedReader(<span style="color: #8B008B; font-weight: bold">new</span> InputStreamReader(urlStream,<span style="color: #CD5555">&quot;gb2312&quot;</span>));
+String line = <span style="color: #CD5555">&quot;&quot;</span>;
+<span style="color: #8B008B; font-weight: bold">while</span>((line = reader.<span style="color: #658b00">readLine</span>()) != <span style="color: #8B008B; font-weight: bold">null</span>) {
+    System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(line);
+}
+reader.<span style="color: #658b00">close</span>();
+urlStream.<span style="color: #658b00">close</span>();
 </pre></div>
 
 
 <p><br></p>
-<h1>多线程下载</h1>
+<h1 id="_1">多线程下载</h1>
 <p>关键就是 URLConnection 里有个 <code>setRequestProperty</code> 方法, 可以设置请求头的 <code>Range</code> 参数, 即指定指示文件的起始位置.</p>
-<div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;Range&quot;</span><span class="o">,</span> <span class="s">&quot;bytes=&quot;</span> <span class="o">+</span> <span class="n">startIndex</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="n">endIndex</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>conn.<span style="color: #658b00">setRequestProperty</span>(<span style="color: #CD5555">&quot;Range&quot;</span>, <span style="color: #CD5555">&quot;bytes=&quot;</span> + startIndex + <span style="color: #CD5555">&quot;-&quot;</span> + endIndex);
 </pre></div>
 
 

@@ -53,34 +53,44 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h2>简介</h2>
-<p>Mongodb 是一款 NoSQL(Not Only Sql 非关系型数据库), 由 C++ 语言编写而成, 现在网上说 Mongodb 这里不行那里不行的人挺多, 包括性能什么的, 特别是大访问量的时候...</p>
-<p>其实 Mongodb 是也是支持大访问量的, 性能也还不错, 很多大型网站也都是使用 Mongodb 做数据库, 但是首先, 你得遵照它的设计原则, 如果不尊重它的原则和要求, 它就会"惩罚"你...</p>
+    <div class="toc">
+<ul>
+<li><a href="#_1">简介</a></li>
+<li><a href="#_2">下载</a></li>
+<li><a href="#_3">创建数据目录</a></li>
+<li><a href="#cmd-mongodb">以 CMD 进程运行 MongoDB 服务器</a></li>
+<li><a href="#windows-mongodb">以 Windows 服务运行 MongoDB 服务器</a></li>
+<li><a href="#mongodb-client">MongoDB 自带的 Client</a></li>
+<li><a href="#_4">关闭服务</a></li>
+</ul>
+</div>
+<h2 id="_1">简介</h2>
+<p>Mongodb 是一款 NoSQL(Not Only Sql 非关系型数据库), 由 C++ 语言编写而成, 现在网上说 Mongodb 这里不行那里不行的人挺多, 包括性能什么的, 特别是大访问量的时候&hellip;</p>
+<p>其实 Mongodb 是也是支持大访问量的, 性能也还不错, 很多大型网站也都是使用 Mongodb 做数据库, 但是首先, 你得遵照它的设计原则, 如果不尊重它的原则和要求, 它就会&rdquo;惩罚&rdquo;你&hellip;</p>
 <p>MongoDB 是面向__文档__存储的数据库, 它将传统意义上的数据库视为一个__文档__, 数据结构由__键值对__(key=>value)对组成.</p>
-<h2>下载</h2>
+<h2 id="_2">下载</h2>
 <p>直接去官网下载即可.</p>
 <p>另外, 对于 Windows 下, 有一个__桌面化管理工具__: <a href="https://yunpan.cn/cqXnDqkxqwSCX">Robomongo 64位</a>, 访问密码 <strong>378c</strong>, 也可下载配合使用.</p>
 <p><strong>mongo 命令不区分大小写.</strong></p>
-<h2>创建数据目录</h2>
+<h2 id="_3">创建数据目录</h2>
 <p>安装好后, Mongodb 需要手动创建一个根目录用来存放数据, 请注意, 数据目录应该放在根目录下(如 C:\ 或者 D:\ 等).<br>
 如在 C: 盘 下创建一个 Data 目录做为 Mongodb 的数据目录.</p>
-<div class="highlight"><pre><span></span>D:\
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>D:\
 
 mkdir Data
 </pre></div>
 
 
 <p><br></p>
-<h2>以 CMD 进程运行 MongoDB 服务器</h2>
+<h2 id="cmd-mongodb">以 CMD 进程运行 MongoDB 服务器</h2>
 <p>为了从命令提示符下运行 MongoDB 服务器, 需要在 MongoDB 目录的 <strong>bin</strong> 目录中执行 <strong>mongod.exe</strong> 文件.</p>
-<div class="highlight"><pre><span></span>mongod --dbpath D:\Data
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>mongod --dbpath D:\Data
 </pre></div>
 
 
 <p><br></p>
 <p>如果执行成功, 可能会输出类似如下信息:</p>
-<div class="highlight"><pre><span></span>I CONTROL  [main] Hotfix KB2731284 or later update is not installed, will zero-out data files
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>I CONTROL  [main] Hotfix KB2731284 or later update is not installed, will zero-out data files
 I CONTROL  [initandlisten] MongoDB starting : pid=10916 port=27017 dbpath=D:\Data 64-bit host=SH61041PCW
 I CONTROL  [initandlisten] targetMinOS: Windows Vista/Windows Server 2008
 I CONTROL  [initandlisten] db version v3.2.4
@@ -100,8 +110,8 @@ I NETWORK  [initandlisten] waiting for connections on port 27017
 
 
 <p><br></p>
-<h2>以 Windows 服务运行 MongoDB 服务器</h2>
-<div class="highlight"><pre><span></span>mongod --bind_ip [your id adress] --logpath [D:\Data\mongodb.log] --logappend --dbpath [D:\Data] --port [your port number] --serviceName [your service name] --serviceDisplayName [your service name] --install
+<h2 id="windows-mongodb">以 Windows 服务运行 MongoDB 服务器</h2>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>mongod --bind_ip [your id adress] --logpath [D:\Data\mongodb.log] --logappend --dbpath [D:\Data] --port [your port number] --serviceName [your service name] --serviceDisplayName [your service name] --install
 </pre></div>
 
 
@@ -117,10 +127,10 @@ I NETWORK  [initandlisten] waiting for connections on port 27017
 <li><strong>serviceDisplayName</strong>    指定服务名称, 有多个 mongodb 服务时执行</li>
 <li><strong>install</strong>               指定作为一个 Windows 服务安装</li>
 </ul>
-<h2>MongoDB 自带的 Client</h2>
+<h2 id="mongodb-client">MongoDB 自带的 Client</h2>
 <p>MongoDB 自带的 Client 是交互式的 Shell, 用来对 MongoDB 进行操作和管理, 执行 MongoDB 根目录下 <strong>bin</strong> 目录中的 <strong>mongo.exe</strong> 文件就能打开这个交互环境.</p>
 <p>当进入 MongoDB Client 后, 它默认会链接到 <strong>test</strong> 文档(<strong>MongoDB 的文档就是常规理解中的数据库</strong>)</p>
-<div class="highlight"><pre><span></span>&gt; mongo
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt; mongo
 MongoDB shell version: 3.0.6
 connecting to: test
 ……
@@ -129,7 +139,7 @@ connecting to: test
 
 <p><br>
 <strong>db</strong> 命令用于查看当前操作的文档(数据库):</p>
-<div class="highlight"><pre><span></span>&gt; db
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt; db
 test
 &gt;
 </pre></div>
@@ -137,32 +147,32 @@ test
 
 <p><br>
 <strong>db.serverCmdLineOpts()</strong> 方法用来查看连接的 Mongodb 的信息:</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">serverCmdLineOpts</span><span class="p">()</span>
-<span class="p">{</span>
-        <span class="s2">&quot;argv&quot;</span> <span class="o">:</span> <span class="p">[</span>
-                <span class="s2">&quot;mongod&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;--dbpath&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;D:\\Data&quot;</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;parsed&quot;</span> <span class="o">:</span> <span class="p">{</span>
-                <span class="s2">&quot;storage&quot;</span> <span class="o">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;dbPath&quot;</span> <span class="o">:</span> <span class="s2">&quot;D:\\Data&quot;</span>
-                <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;ok&quot;</span> <span class="o">:</span> <span class="mi">1</span>
-<span class="p">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.serverCmdLineOpts()
+{
+        <span style="color: #CD5555">&quot;argv&quot;</span> : [
+                <span style="color: #CD5555">&quot;mongod&quot;</span>,
+                <span style="color: #CD5555">&quot;--dbpath&quot;</span>,
+                <span style="color: #CD5555">&quot;D:\\Data&quot;</span>
+        ],
+        <span style="color: #CD5555">&quot;parsed&quot;</span> : {
+                <span style="color: #CD5555">&quot;storage&quot;</span> : {
+                        <span style="color: #CD5555">&quot;dbPath&quot;</span> : <span style="color: #CD5555">&quot;D:\\Data&quot;</span>
+                }
+        },
+        <span style="color: #CD5555">&quot;ok&quot;</span> : <span style="color: #B452CD">1</span>
+}
 </pre></div>
 
 
 <p><br>
 MongoDB Client 中还可以运行一些简单的算术运算:</p>
-<div class="highlight"><pre><span></span>&gt; 2 + 2
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt; 2 + 2
 4
 &gt;
 </pre></div>
 
 
-<h2>关闭服务</h2>
+<h2 id="_4">关闭服务</h2>
 <p>可以用以下三种方法来关闭已启动的 Mongodb 服务器:</p>
 <ul>
 <li>最暴力, 直接 kill mongodb process</li>

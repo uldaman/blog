@@ -53,15 +53,20 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>基本用法</h1>
+    <div class="toc">
+<ul>
+<li><a href="#_1">基本用法</a></li>
+<li><a href="#_2">命令参考</a></li>
+</ul>
+</div>
+<h1 id="_1">基本用法</h1>
 <p>执行一个 HDFS 命令, 有下面两种写法:</p>
 <ul>
 <li>hadoop 1.x <code>hadoop fs -???</code></li>
 <li>hadoop 2.x <code>hdfs dfs -???</code></li>
 </ul>
 <p>后面的 <code>???</code> 是一个具体的文件系统命令, 和 Linux 的文件系统命令很相似, 如查看当前 HDFS 文件系统中的文件:</p>
-<div class="highlight"><pre><span></span>HDFS dfs -ls hdfs://smallcpp01:9000/
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HDFS dfs -ls hdfs://smallcpp01:9000/
 </pre></div>
 
 
@@ -84,7 +89,7 @@
 </tbody>
 </table>
 <p>如果在 <code>core-site.xml</code> 里指定了 <code>defaultFS</code>, 那上面地址中的 协议 和 主机地址端口 可以省略, 简写个目录结构就可以了:</p>
-<div class="highlight"><pre><span></span>HDFS dfs -ls /
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HDFS dfs -ls /
 </pre></div>
 
 
@@ -94,7 +99,7 @@
 <table>
 <thead>
 <tr>
-<th>-rw-r--r--</th>
+<th>-rw-r&ndash;r&ndash;</th>
 <th>2</th>
 <th>martin</th>
 <th>supergroup</th>
@@ -120,13 +125,13 @@
 <p><strong>数据存在哪?</strong></p>
 <p>从 OS 的角度, 数据被放在 DataNode 的 <code>/tmp/dfs/data/current/</code> 目录下, 当然从 OS 的角度, 是看不懂这里面的文件的, 打开后都是些二进制.</p>
 <p><strong>帮助?</strong></p>
-<div class="highlight"><pre><span></span>hdfs dfs -help
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>hdfs dfs -help
 hdfs dfs -help 具体命令
 </pre></div>
 
 
 <p><br></p>
-<h1>命令参考</h1>
+<h1 id="_2">命令参考</h1>
 <p>更多命令参考: <a href="http://pan.baidu.com/s/1kUXcdxl">hdfs 命令.doc</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a>
 

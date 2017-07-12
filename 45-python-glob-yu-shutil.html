@@ -54,36 +54,45 @@
 
 
     <p>glob 模块是最简单的模块之一, 内容非常少, 用它可以查找符合特定规则的文件路径名, 就像在 windows 下使用文件搜索功能一样, 查找文件只用到三个匹配符: <code>*</code>, <code>?</code>, <code>[]</code>, <code>*</code> 匹配 0 个或多个字符, <code>?</code> 匹配单个字符, <code>[]</code> 匹配指定范围内的字符 (如 [0-9]匹配数字).</p>
-<p>[TOC]</p>
-<h1>glob</h1>
-<h2>glob.glob</h2>
+<div class="toc">
+<ul>
+<li><a href="#glob">glob</a><ul>
+<li><a href="#globglob">glob.glob</a></li>
+<li><a href="#globiglob">glob.iglob</a></li>
+</ul>
+</li>
+<li><a href="#shutil">shutil</a></li>
+</ul>
+</div>
+<h1 id="glob">glob</h1>
+<h2 id="globglob">glob.glob</h2>
 <p>返回所有匹配的文件路径列表, 它只有一个参数 pathname, 定义了文件路径匹配规则, 这里可以是绝对路径, 也可以是相对路径, 下面是使用 glob.glob 的例子:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">glob</span>
 
-<span class="c1"># 获取指定目录下的所有图片</span>
-<span class="k">print</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;E:\Picture\*\*.jpg&quot;</span><span class="p">)</span>
+<span style="color: #228B22"># 获取指定目录下的所有图片</span>
+<span style="color: #8B008B; font-weight: bold">print</span> glob.glob(<span style="color: #CD5555">r&quot;E:\Picture\*\*.jpg&quot;</span>)
 
-<span class="c1"># 获取上级目录的所有.py文件</span>
-<span class="k">print</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;../*.py&#39;</span><span class="p">)</span>  <span class="c1"># 相对路径</span>
+<span style="color: #228B22"># 获取上级目录的所有.py文件</span>
+<span style="color: #8B008B; font-weight: bold">print</span> glob.glob(<span style="color: #CD5555">r&#39;../*.py&#39;</span>)  <span style="color: #228B22"># 相对路径</span>
 </pre></div>
 
 
 <p><br></p>
-<h2>glob.iglob</h2>
+<h2 id="globiglob">glob.iglob</h2>
 <p>与 glob.glob 类似, 但它获取的是一个可迭代对象, 使用它可以逐个获取匹配的文件路径名 (类似 rang 与 xrang 的区别).</p>
 <p>下面是一个简单的例子:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
-<span class="c1"># 父目录中的.py文件</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;../*.py&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">f</span>  <span class="c1"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">glob</span>
+<span style="color: #228B22"># 父目录中的.py文件</span>
+f = glob.iglob(<span style="color: #CD5555">r&#39;../*.py&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">print</span> f  <span style="color: #228B22"># &lt;generator object iglob at 0x00B9FF80&gt;</span>
 
-<span class="k">for</span> <span class="n">py</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">py</span>
+<span style="color: #8B008B; font-weight: bold">for</span> py <span style="color: #8B008B">in</span> f:
+    <span style="color: #8B008B; font-weight: bold">print</span> py
 </pre></div>
 
 
 <p><br></p>
-<h1>shutil</h1>
+<h1 id="shutil">shutil</h1>
 <p>High-level file operations  高级的文件操作模块, 提供了一些易操作的文件<strong>移动</strong>、<strong>复制</strong>、<strong>打包</strong>、<strong>压缩</strong>、<strong>解压</strong>API.</p>
 <table>
 <thead>
@@ -131,7 +140,7 @@
 </tr>
 <tr>
 <td>make_archive(base_name, format, root_dir=None, base_dir=None, verbose=0, dry_run=0, owner=None, group=None, logger=None)</td>
-<td>压缩打包<br>base_name: 压缩打包后的文件名或者路径名<br>format: 压缩或者打包格式 "zip"、"tar"、"bztar"、"gztar"<br>root_dir: 将哪个目录或者文件打包 (也就是源文件)</td>
+<td>压缩打包<br>base_name: 压缩打包后的文件名或者路径名<br>format: 压缩或者打包格式 &ldquo;zip&rdquo;、&rdquo;tar&rdquo;、&rdquo;bztar&rdquo;、&rdquo;gztar&rdquo;<br>root_dir: 将哪个目录或者文件打包 (也就是源文件)</td>
 </tr>
 </tbody>
 </table>

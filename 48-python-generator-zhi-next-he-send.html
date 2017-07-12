@@ -55,16 +55,16 @@
 
     <p>对于普通的生成器(参考下面的例子), 第一个 <code>next</code> 调用, 相当于启动生成器, 会从生成器函数的第一行代码开始执行, 直到第一次执行完 <code>yield</code> 语句 (第4行) 后, 跳出生成器函数.<br>
 然后第二个 <code>next</code> 调用, 进入生成器函数后, 从 <code>yield</code> 语句的下一句语句 (第5行) 开始执行, 然后重新运行到 <code>yield</code> 语句, 执行后, 跳出生成器函数，后面再次调用 <code>next</code>, 依次类推.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">consumer</span><span class="p">():</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="s1">&#39;here&#39;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="k">yield</span> <span class="n">r</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">consumer</span>():
+    r = <span style="color: #CD5555">&#39;here&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">xrange</span>(<span style="color: #B452CD">3</span>):
+        <span style="color: #8B008B; font-weight: bold">yield</span> r
+        r = <span style="color: #CD5555">&#39;200 OK&#39;</span> + <span style="color: #658b00">str</span>(i)
 
-<span class="n">c</span> <span class="o">=</span> <span class="n">consumer</span><span class="p">()</span>
-<span class="n">n1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-<span class="n">n2</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-<span class="n">n3</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+c = consumer()
+n1 = c.next()
+n2 = c.next()
+n3 = c.next()
 </pre></div>
 
 
@@ -78,47 +78,47 @@
 <p>下面运行到 <code>send(1)</code> 时, 进入生成器函数, 注意这里与调用 <code>next</code> 的不同, 这里是从第四行开始执行, 把 1 赋值给 n, 但是并不执行 <code>yield</code> 部分.</p>
 <p>下面继续从 <code>yield</code> 的下一语句继续执行, 然后重新运行到 <code>yield</code> 语句, 执行后, 跳出生成器函数.</p>
 <p>即 <code>send</code> 和 <code>next</code> 相比, 只是开始多了一次赋值的动作, 其他运行流程是相同的.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">consumer</span><span class="p">():</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">r</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">n</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[CONSUMER] Consuming </span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">consumer</span>():
+    r = <span style="color: #CD5555">&#39;&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> <span style="color: #658b00">True</span>:
+        n = <span style="color: #8B008B; font-weight: bold">yield</span> r
+        <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> n:
+            <span style="color: #8B008B; font-weight: bold">return</span>
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;[CONSUMER] Consuming %s...&#39;</span> % n)
+        r = <span style="color: #CD5555">&#39;200 OK&#39;</span>
 
-<span class="k">def</span> <span class="nf">produce</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[PRODUCER] Producing </span><span class="si">%s</span><span class="s1">...&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;[PRODUCER] Consumer return: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">r</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">produce</span>(c):
+    c.send(<span style="color: #658b00">None</span>)
+    n = <span style="color: #B452CD">0</span>
+    <span style="color: #8B008B; font-weight: bold">while</span> n &lt; <span style="color: #B452CD">5</span>:
+        n = n + <span style="color: #B452CD">1</span>
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;[PRODUCER] Producing %s...&#39;</span> % n)
+        r = c.send(n)
+        <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&#39;[PRODUCER] Consumer return: %s&#39;</span> % r)
+    c.close()
 
-<span class="n">c</span> <span class="o">=</span> <span class="n">consumer</span><span class="p">()</span>
-<span class="n">produce</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+c = consumer()
+produce(c)
 </pre></div>
 
 
 <p><br>
 运行结果:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>PRODUCER<span class="o">]</span> Producing <span class="m">1</span>...
-<span class="o">[</span>CONSUMER<span class="o">]</span> Consuming <span class="m">1</span>...
-<span class="o">[</span>PRODUCER<span class="o">]</span> Consumer <span class="k">return</span>: <span class="m">200</span> OK
-<span class="o">[</span>PRODUCER<span class="o">]</span> Producing <span class="m">2</span>...
-<span class="o">[</span>CONSUMER<span class="o">]</span> Consuming <span class="m">2</span>...
-<span class="o">[</span>PRODUCER<span class="o">]</span> Consumer <span class="k">return</span>: <span class="m">200</span> OK
-<span class="o">[</span>PRODUCER<span class="o">]</span> Producing <span class="m">3</span>...
-<span class="o">[</span>CONSUMER<span class="o">]</span> Consuming <span class="m">3</span>...
-<span class="o">[</span>PRODUCER<span class="o">]</span> Consumer <span class="k">return</span>: <span class="m">200</span> OK
-<span class="o">[</span>PRODUCER<span class="o">]</span> Producing <span class="m">4</span>...
-<span class="o">[</span>CONSUMER<span class="o">]</span> Consuming <span class="m">4</span>...
-<span class="o">[</span>PRODUCER<span class="o">]</span> Consumer <span class="k">return</span>: <span class="m">200</span> OK
-<span class="o">[</span>PRODUCER<span class="o">]</span> Producing <span class="m">5</span>...
-<span class="o">[</span>CONSUMER<span class="o">]</span> Consuming <span class="m">5</span>...
-<span class="o">[</span>PRODUCER<span class="o">]</span> Consumer <span class="k">return</span>: <span class="m">200</span> OK
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[PRODUCER] Producing <span style="color: #B452CD">1</span>...
+[CONSUMER] Consuming <span style="color: #B452CD">1</span>...
+[PRODUCER] Consumer <span style="color: #8B008B; font-weight: bold">return</span>: <span style="color: #B452CD">200</span> OK
+[PRODUCER] Producing <span style="color: #B452CD">2</span>...
+[CONSUMER] Consuming <span style="color: #B452CD">2</span>...
+[PRODUCER] Consumer <span style="color: #8B008B; font-weight: bold">return</span>: <span style="color: #B452CD">200</span> OK
+[PRODUCER] Producing <span style="color: #B452CD">3</span>...
+[CONSUMER] Consuming <span style="color: #B452CD">3</span>...
+[PRODUCER] Consumer <span style="color: #8B008B; font-weight: bold">return</span>: <span style="color: #B452CD">200</span> OK
+[PRODUCER] Producing <span style="color: #B452CD">4</span>...
+[CONSUMER] Consuming <span style="color: #B452CD">4</span>...
+[PRODUCER] Consumer <span style="color: #8B008B; font-weight: bold">return</span>: <span style="color: #B452CD">200</span> OK
+[PRODUCER] Producing <span style="color: #B452CD">5</span>...
+[CONSUMER] Consuming <span style="color: #B452CD">5</span>...
+[PRODUCER] Consumer <span style="color: #8B008B; font-weight: bold">return</span>: <span style="color: #B452CD">200</span> OK
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 

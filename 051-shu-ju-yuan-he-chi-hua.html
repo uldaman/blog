@@ -53,13 +53,15 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul></ul>
+</div>
 <p>Java 中的数据源是一种类似内存池的技术, 即一次性创建多个连接并保存在池内, 需要的时候从中获取一个连接, 用完了再放回池.</p>
 <p>Java 定义了数据源的规范, 即 <code>DataSource</code> 接口:</p>
 <ul>
 <li><code>DataSource</code> 用来取代 <code>DriverManager</code> 来获取  Connection</li>
 <li><code>DataSource</code> 内部通过连接池 (Connection Pool) 来维护数据库连接</li>
-<li>从 Connection Pool 中获取的 "连接" 并不是原生的 Connection, 而是它的包装, 主要将 <code>close</code> 方法被修改为将 Connection 放回 Pool (而不是直接关闭 Connection)</li>
+<li>从 Connection Pool 中获取的 &ldquo;连接&rdquo; 并不是原生的 Connection, 而是它的包装, 主要将 <code>close</code> 方法被修改为将 Connection 放回 Pool (而不是直接关闭 Connection)</li>
 </ul>
 <p>由于 <code>DataSource</code> 是个接口, 所以要想使用它, 必须得先实现它, 当然已经有很多现实的实现:</p>
 <ul>

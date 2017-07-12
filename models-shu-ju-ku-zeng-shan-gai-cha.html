@@ -56,7 +56,7 @@
     <p>models.py 定义只是数据库的表、字段信息, 真实的向数据库中写数据的代码还是 views.py (业务逻辑中处理) 完成的.</p>
 <p>objects 是 Django 实现的 MTV 中的 M, Django 中的模型类都有一个 objects 对象, 它是一个 Django 中定义的 QuerySet 类型的对象, 它包含了模型对象的实例.</p>
 <p><strong>增</strong></p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; models.py&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; models.py&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Asset(models.Model):
     hostName &lt;/span&gt;= models.CharField(max_length=50&lt;span style=&quot;color: #000000&quot;&gt;)
     create_data &lt;/span&gt;= models.DateTimeField(auto_now_add=&lt;span style=&quot;color: #000000&quot;&gt;True)
@@ -75,7 +75,7 @@
 
 <p><strong>删除
 </strong></p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 删除&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; 删除&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Delete(request, id):
     Asset.objects.get(id&lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt;id).delete()
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; HttpResponse(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;OK&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;)
@@ -83,7 +83,7 @@
 
 
 <p><strong>改</strong></p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page, Add, Delete, Update
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; Page, Add, Delete, Update
 
 urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^page/(?P&lt;index&gt;\d*/)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, Page, {&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;index&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt; : 1&lt;span style=&quot;color: #000000&quot;&gt;}),
@@ -109,7 +109,7 @@ urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
 </pre></div>
 
 
-<p>具体的"操作符", 如 __gt, 自行搜索吧..</p>
+<p>具体的&rdquo;操作符&rdquo;, 如 __gt, 自行搜索吧..</p>
 <p><strong>其它常用操作:</strong></p>
 <table cellpadding="2" width="800" border="0" cellspacing="0" class="table" >
 <tbody >

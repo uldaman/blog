@@ -53,58 +53,69 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>简介</h1>
+    <div class="toc">
+<ul>
+<li><a href="#_1">简介</a></li>
+<li><a href="#_2">常用数据库操作</a></li>
+<li><a href="#_3">一些具体用法</a><ul>
+<li><a href="#preparedstatement">创建 PreparedStatement 对象</a></li>
+<li><a href="#in">传递 IN 参数</a></li>
+<li><a href="#in_1">IN 参数中数据类型的一致性</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">简介</h1>
 <p>PreparedStatement 接口继承了 Statement, 有人主张, 在 JDBC 应用中, 如果你已经是稍有水平开发者, 你就应该始终以 PreparedStatement 代替 Statement.</p>
 <p>PreparedStatement 对比 Statement 主要有两方面有所不同:</p>
 <ul>
-<li>PreparedStatement 实例包含已编译的 SQL 语句, 这就是使语句"准备好", 包含于 PreparedStatement 对象中的 SQL 语句可具有一个或多个 IN 参数, IN 参数的值在 SQL 语句创建时未被指定, 相反的, 该语句为每个 IN 参数保留一个问号 ("？") 作为占位符, 每个问号的值必须在该语句执行之前, 通过适当的 setXXX 方法来提供</li>
+<li>PreparedStatement 实例包含已编译的 SQL 语句, 这就是使语句&rdquo;准备好&rdquo;, 包含于 PreparedStatement 对象中的 SQL 语句可具有一个或多个 IN 参数, IN 参数的值在 SQL 语句创建时未被指定, 相反的, 该语句为每个 IN 参数保留一个问号 (&ldquo;？&rdquo;) 作为占位符, 每个问号的值必须在该语句执行之前, 通过适当的 setXXX 方法来提供</li>
 <li>由于 PreparedStatement 对象已预编译过, 所以其执行速度要快于 Statement 对象, 因此, 多次执行的 SQL 语句经常创建为 PreparedStatement 对象, 以提高效率</li>
 </ul>
-<h1>常用数据库操作</h1>
+<h1 id="_2">常用数据库操作</h1>
 <p><strong>引用特定的包</strong></p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.sql.PreparedStatement</span>;
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">java.sql.ResultSet</span>;
 </pre></div>
 
 
 <p><br>
 <strong>一般实例化一个 PreparedStatement 和结果集</strong></p>
-<div class="highlight"><pre><span></span><span class="n">PreparedStatement</span> <span class="n">prepstmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-<span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>PreparedStatement prepstmt = <span style="color: #8B008B; font-weight: bold">null</span>;
+ResultSet rs = <span style="color: #8B008B; font-weight: bold">null</span>;
 </pre></div>
 
 
 <p><br>
 <strong>得到 SQL 语句</strong></p>
-<div class="highlight"><pre><span></span><span class="n">prepstmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">String</span> <span class="n">StrSQl</span><span class="o">);</span> <span class="c1">// conn 为 Connection 类型</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>prepstmt = conn.<span style="color: #658b00">prepareStatement</span>(String StrSQl); <span style="color: #228B22">// conn 为 Connection 类型</span>
 </pre></div>
 
 
 <p><br>
 <strong>执行 SQL, 得到结果集</strong></p>
-<div class="highlight"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="n">prepstmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span> <span class="c1">// rs 为 ResultSet 类型</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>rs = prepstmt.<span style="color: #658b00">executeQuery</span>(); <span style="color: #228B22">// rs 为 ResultSet 类型</span>
 </pre></div>
 
 
 <p><br></p>
-<h1>一些具体用法</h1>
-<h2>创建 PreparedStatement 对象</h2>
+<h1 id="_3">一些具体用法</h1>
+<h2 id="preparedstatement">创建 PreparedStatement 对象</h2>
 <p>以下的代码段 (其中 con 是 Connection 对象) 创建包含带两个 IN 参数占位符的 SQL 语句的 PreparedStatement 对象:</p>
-<div class="highlight"><pre><span></span><span class="n">PreparedStatement</span> <span class="n">pstmt</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s">&quot;UPDATE table4 SET m = ? WHERE x = ?&quot;</span><span class="o">);</span>　　
-<span class="n">PreparedStatement</span> <span class="n">pstmt</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="s">&quot;UPDATE table4 SET m = ? WHERE x = ?&quot;</span><span class="o">);</span> 　　
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>PreparedStatement pstmt = con.<span style="color: #658b00">prepareStatement</span>(<span style="color: #CD5555">&quot;UPDATE table4 SET m = ? WHERE x = ?&quot;</span>);　　
+PreparedStatement pstmt = con.<span style="color: #658b00">prepareStatement</span>(<span style="color: #CD5555">&quot;UPDATE table4 SET m = ? WHERE x = ?&quot;</span>); 　　
 </pre></div>
 
 
 <p><br>
 pstmt 对象包含语句 <code>"UPDATE table4 SET m = ? WHERE x = ?"</code>, 它已发送给 DBMS, 并为执行作好了准备.</p>
-<h2>传递 IN 参数</h2>
+<h2 id="in">传递 IN 参数</h2>
 <p>在执行 PreparedStatement 对象之前, 必须设置每个 ? 参数的值, 这可通过调用 <code>setXXX</code> 方法来完成, 其中 XXX 是与该参数相应的类型.</p>
 <p>例如, 如果参数具有 Java 类型 long, 则使用的方法就是 <code>setLong</code>.</p>
 <p><code>setXXX</code> 方法的第一个参数是要设置的参数的序数位置, 第二个参数是设置给该参数的值.</p>
 <p>例如, 以下代码将第一个参数设为 123456789, 第二个参数设为 100000000:</p>
-<div class="highlight"><pre><span></span><span class="n">pstmt</span><span class="o">.</span><span class="na">setLong</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">123456789</span><span class="o">);</span>
-<span class="n">pstmt</span><span class="o">.</span><span class="na">setLong</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">100000000</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pstmt.<span style="color: #658b00">setLong</span>(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">123456789</span>);
+pstmt.<span style="color: #658b00">setLong</span>(<span style="color: #B452CD">2</span>, <span style="color: #B452CD">100000000</span>);
 </pre></div>
 
 
@@ -112,19 +123,19 @@ pstmt 对象包含语句 <code>"UPDATE table4 SET m = ? WHERE x = ?"</code>, 它
 一旦设置了给定语句的参数值, 就可用它多次执行该语句, 直到调用 <code>clearParameters</code> 方法清除它为止, 在连接的缺省模式下 (启用自动提交), 当语句完成时将自动提交或还原该语句.</p>
 <p>如果基本数据库和驱动程序在语句提交之后仍保持这些语句的打开状态, 则同一个 PreparedStatement 可执行多次, 如果这一点不成立, 那么试图通过使用 PreparedStatement 对象代替 Statement 对象来提高性能是没有意义的.</p>
 <p>利用 <code>pstmt</code> (前面创建的 PreparedStatement 对象), 以下代码例示了如何设置两个参数占位符的值并执行 <code>pstmt</code> 10 次, 如上所述, 为做到这一点, 数据库不能关闭 <code>pstmt</code>, 在该示例中, 第一个参数被设置为 <code>"Hi"</code> 并保持为常数; 在 for 循环中, 每次都将第二个参数设置为不同的值: 从 0 开始, 到 9 结束.</p>
-<div class="highlight"><pre><span></span><span class="n">pstmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Hi&quot;</span><span class="o">);</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-    <span class="n">pstmt</span><span class="o">.</span><span class="na">setInt</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">rowCount</span> <span class="o">=</span> <span class="n">pstmt</span><span class="o">.</span><span class="na">executeUpdate</span><span class="o">();</span>
-<span class="o">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pstmt.<span style="color: #658b00">setString</span>(<span style="color: #B452CD">1</span>, <span style="color: #CD5555">&quot;Hi&quot;</span>);
+<span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #00688B; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; <span style="color: #B452CD">10</span>; i++) {
+    pstmt.<span style="color: #658b00">setInt</span>(<span style="color: #B452CD">2</span>, i);
+    <span style="color: #00688B; font-weight: bold">int</span> rowCount = pstmt.<span style="color: #658b00">executeUpdate</span>();
+}
 </pre></div>
 
 
 <p><br></p>
-<h2>IN 参数中数据类型的一致性</h2>
-<p><code>setXXX</code> 方法中的 XXX 是 Java 类型, 它是一种隐含的 JDBC 类型 (一般 SQL 类型), 因为驱动程序将把 Java 类型映射为相应的 JDBC 类型 (遵循该 JDBCGuide 中 §8.6.2 "映射 Java 和 JDBC 类型" 表中所指定的映射) , 并将该 JDBC 类型发送给数据库.</p>
+<h2 id="in_1">IN 参数中数据类型的一致性</h2>
+<p><code>setXXX</code> 方法中的 XXX 是 Java 类型, 它是一种隐含的 JDBC 类型 (一般 SQL 类型), 因为驱动程序将把 Java 类型映射为相应的 JDBC 类型 (遵循该 JDBCGuide 中 §8.6.2 &ldquo;映射 Java 和 JDBC 类型&rdquo; 表中所指定的映射) , 并将该 JDBC 类型发送给数据库.</p>
 <p>例如, 以下代码段将 PreparedStatement 对象 <code>pstmt</code> 的第二个参数设置为 44, Java 类型为 short:</p>
-<div class="highlight"><pre><span></span><span class="n">pstmt</span><span class="o">.</span><span class="na">setShort</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">44</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pstmt.<span style="color: #658b00">setShort</span>(<span style="color: #B452CD">2</span>, <span style="color: #B452CD">44</span>);
 </pre></div>
 
 

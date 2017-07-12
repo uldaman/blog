@@ -53,7 +53,7 @@
 </h6>
 
 
-    <h3>装饰者模式</h3>
+    <h3 id="_1">装饰者模式</h3>
 <p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过<strong>继承</strong>来扩展功能.</p>
 <p>然而, 使用继承是<strong>静态</strong>的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
 <p>而装饰者模式可以<strong>动态</strong>地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
@@ -64,9 +64,9 @@
 <p>●　　<strong>抽象构件(Component)类：</strong>给出一个抽象接口, 以规范准备接收附加责任的对象.</p>
 <p>●　　<strong>具体构件(ConcreteComponent)类：</strong>被修饰的者, 是定义了一个具体的对象, 可以给这个对象添加一些职责(也就是装饰它).</p>
 <p>●　　<strong>装饰(Decorator)类：</strong>抽象装饰类, 维护一个构件(Component)对象的实例, 定义一个与抽象构件接口一致的接口.</p>
-<p>●　　<strong>具体装饰(ConcreteDecorator)类：</strong>具体装饰类, 负责给构件对象"贴上"附加的责任.</p>
+<p>●　　<strong>具体装饰(ConcreteDecorator)类：</strong>具体装饰类, 负责给构件对象&rdquo;贴上&rdquo;附加的责任.</p>
 <p>它的C++模型如下(技术有限, 可能实现的有问题, 欢迎指正):</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; ConsoleApplication1.cpp : 定义控制台应用程序的入口点。
 &lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt;//
 &lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;stdafx.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
@@ -152,7 +152,7 @@
 <p>1、装饰者模式可以提供比继承更多的灵活性</p>
 <p>2、可以通过一种动态的方式来扩展一个对象的功能，在运行时选择不同的装饰器，从而实现不同的行为.</p>
 <p>3、通过使用不同的具体装饰类以及这些装饰类的排列组合, 可以创造出很多不同行为的组合. 可以使用多个具体装饰类来装饰同一对象，得到功能更为强大的对象.</p>
-<p>4、具体构件类与具体装饰类可以独立变化, 用户可以根据需要增加新的具体构件类和具体装饰类, 在使用时再对其进行组合, 原有代码无须改变, 符合"开闭原则".</p>
+<p>4、具体构件类与具体装饰类可以独立变化, 用户可以根据需要增加新的具体构件类和具体装饰类, 在使用时再对其进行组合, 原有代码无须改变, 符合&rdquo;开闭原则&rdquo;.</p>
 <p>它的缺点也是一样的明显:</p>
 <p>1、会产生很多的小对象, 增加了系统的复杂性</p>
 <p>2、这种比继承更加灵活机动的特性, 也同时意味着装饰模式比继承更加易于出错, 排错也很困难, 对于多次装饰的对象, 调试时寻找错误可能需要逐级排查, 较为烦琐.</p>
@@ -161,10 +161,10 @@
 <p>此时就可以实用我们的装饰者模式:</p>
 <p><a href="http://images.cnitblog.com/blog/723444/201502/131406440587059.png"><img alt="image" src="http://images.cnitblog.com/blog/723444/201502/131406451205401.png"></a></p>
 <p>具体代码省略, 参考:<a href="http://blog.chinaunix.net/uid-20761674-id-304542.html">http://blog.chinaunix.net/uid-20761674-id-304542.html</a></p>
-<h3>模式的简化</h3>
+<h3 id="_2">模式的简化</h3>
 <p>如果只有一个ConcreteComponent类, 那么可以考虑去掉Cpmponent类, 让Decorator直接继承ConcreteComponent类, 重写ConcreteComponent的Operation方法.</p>
 <p>同样, 如果只有一个ConreteDecortor类, 那么也可以去掉单独的Decorator类, 把Decorator和ConreteDecortor的合并.</p>
-<div class="highlight"><pre><span></span>#include &lt;iostream&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
 &lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;namespace&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; std;
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; ConcreateComponent {

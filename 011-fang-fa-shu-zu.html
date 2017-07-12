@@ -53,24 +53,24 @@
 </h6>
 
 
-    <h2>1. Java 中的方法</h2>
-<h4>1.1</h4>
+    <h2 id="1-java">1. Java 中的方法</h2>
+<h4 id="11">1.1</h4>
 <p>Java 中的方法跟 C 中的函数差不多, 没什么太多好说的, 可支持函数重载, 注意, 重载只与函数的参数有关, 与函数类型(即返回值)无关.</p>
-<h4>1.2 变参</h4>
-<p>Java 中也支持变参,  格式是 <strong>类型...</strong>(三个点).<br>Java 把可变参数当做数组处理.</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span><span class="o">...</span> <span class="n">args</span><span class="o">){</span>
-    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
-    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
-    <span class="n">sum</span> <span class="o">+=</span> <span class="n">args</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-<span class="o">}</span>
+<h4 id="12">1.2 变参</h4>
+<p>Java 中也支持变参,  格式是 <strong>类型&hellip;</strong>(三个点).<br>Java 把可变参数当做数组处理.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">int</span> <span style="color: #008b45">add</span>(<span style="color: #00688B; font-weight: bold">int</span> x, <span style="color: #00688B; font-weight: bold">int</span>... args){
+    <span style="color: #00688B; font-weight: bold">int</span> sum = x;
+    <span style="color: #8B008B; font-weight: bold">for</span>(<span style="color: #00688B; font-weight: bold">int</span> i = <span style="color: #B452CD">0</span>; i &lt; args.<span style="color: #658b00">length</span>; i++){
+    sum += args[i];
+}
 
-    <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
-<span class="o">}</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> sum;
+}
 </pre></div>
 
 
-<h2>2. Java 中的数组</h2>
-<h4>2.1 普通数组</h4>
+<h2 id="2-java">2. Java 中的数组</h2>
+<h4 id="21">2.1 普通数组</h4>
 <p>Java 中的数组和 C 中数组在使用上可能看不出什么区别, 实际上也的确差不多;<br>
 但是它们在内存中还是有很大区别的, Java 中的数组不像 C 语言中那样是连续的内存块, 它是一个对象;</p>
 <p>Java 通过 <strong>数据类型标示符</strong> + <strong>数组符号[]</strong> 来声明一个数组对象的引用. 如 int[] n = null, String[] str = null 等等, 也可以用类 C 的方式: int n[] = null.<br>
@@ -78,36 +78,36 @@ Java 通过 <strong>new</strong> 关键字生成具体的数组对象, 如 int[]
 Java 中还提供了另外一种直接创建数组的方式, 它将声明数组、分配空间和赋值合并完成, 如 int[] n = { 10, 11, 12, 13 }, 或者可以这么写 int[] n = new int[]{ 10, 11, 12, 13 }.</p>
 <p>在 Java 中, 数组的访问和 C 中一致, 但是 Java 中的数组还提供了一些有用的属性和方法(因为它是一个对象), 这在 C 中就是不可能的了, 数组长度: <strong>length</strong>, 拷贝当前数组: <strong>clone()</strong>.<br>
 在 C 语言中, 要遍历一个数组需要提供两个数据, 数组名和数组长度, 在 Java 中就不需要提供长度了, 直接使用数组的 <strong>length</strong> 属性就可以了.</p>
-<h4>2.2 空数组</h4>
+<h4 id="22">2.2 空数组</h4>
 <p>空数组是个很奇怪的东西.</p>
 <p>int[]  arr = new int[0]</p>
-<p>看这句代码, 声明一个数组, 但这个数组的长度为 0, 这在 C/C++ 中的数组好像是没有类似的概念,  但上面有说过, java 中的数组实质是个对象, 那就有点和 STL 中的容器有点像了, 例如声明一个 vector, 但现在这个 vector 中没有数据...</p>
-<h4>2.3 泛型遍历</h4>
+<p>看这句代码, 声明一个数组, 但这个数组的长度为 0, 这在 C/C++ 中的数组好像是没有类似的概念,  但上面有说过, java 中的数组实质是个对象, 那就有点和 STL 中的容器有点像了, 例如声明一个 vector, 但现在这个 vector 中没有数据&hellip;</p>
+<h4 id="23">2.3 泛型遍历</h4>
 <p>普通的数组遍历也没什么好说的, 不过 java 中的数组支持泛型遍历.</p>
 <p>在遍历数组、集合时, foreach 更简单便捷, 这种语法类似 C++11 中的 &lt;<a href="https://msdn.microsoft.com/zh-cn/library/jj203382.aspx">基于范围的 for 循环</a>&gt;.
 语法:</p>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="n">元素类型</span> <span class="n">元素变量</span> <span class="o">:</span> <span class="n">遍历对象</span><span class="o">)</span> <span class="o">{</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">for</span> (元素类型 元素变量 : 遍历对象) {
 
-<span class="o">}</span>
+}
 </pre></div>
 
 
-<h4>2.3 二维数组</h4>
+<h4 id="23_1">2.3 二维数组</h4>
 <p>所谓二维数组, 可以简单的理解为是一种“特殊”的一维数组, 它的每个数组空间中保存的是一个一维数组.</p>
 <p>二维数组定义方式: int[][] nn = null 或者 int nn[][] = null.</p>
 <p><strong>不规则二维数组</strong>: 在定义二维数组时也可以只指定行的个数(即列数全部为空数组), 然后再为每一行分别指定列的个数, 如果每行的列数不同, 则创建的是不规则的二维数组, 如:</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="o">[][]</span> <span class="n">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">][];</span>
-<span class="n">nn</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
-<span class="n">nn</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">6</span><span class="o">];</span>
-<span class="n">nn</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">7</span><span class="o">];</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">int</span>[][] nn = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #00688B; font-weight: bold">int</span>[<span style="color: #B452CD">3</span>][];
+nn[] = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #00688B; font-weight: bold">int</span>[<span style="color: #B452CD">5</span>];
+nn[] = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #00688B; font-weight: bold">int</span>[<span style="color: #B452CD">6</span>];
+nn[] = <span style="color: #8B008B; font-weight: bold">new</span> <span style="color: #00688B; font-weight: bold">int</span>[<span style="color: #B452CD">7</span>];
 </pre></div>
 
 
 <p><br></p>
 <p>规则的二维数组可以理解成矩形, int[][] nn = new int[<strong>行</strong>][<strong>列</strong>]</p>
-<p>而不规则的二维数组则是"缺胳膊少腿"的矩形:<br>
+<p>而不规则的二维数组则是&rdquo;缺胳膊少腿&rdquo;的矩形:<br>
 <img alt="" src="http://i67.tinypic.com/14y2z3k.jpg"></p>
-<h2>3. Arrays 工具类</h2>
+<h2 id="3-arrays">3. Arrays 工具类</h2>
 <p>Arrays 类是 Java 中提供的一个工具类, 在 java.util 包中, 该类中包含了一些方法用来直接操作数组, 比如可直接实现数组的排序、搜索等.</p>
 <p>Arrays 中常用的方法, 如:
 使用前要先导入包: import java.util.Arrays;</p>

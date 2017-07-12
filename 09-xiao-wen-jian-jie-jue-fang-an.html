@@ -53,18 +53,23 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul>
+<li><a href="#_1">可选方案</a></li>
+<li><a href="#hadoop-archives">Hadoop Archives</a></li>
+</ul>
+</div>
 <blockquote>
 <p>所谓的小文件指的是小于一个 block size 的文件.</p>
 </blockquote>
-<h1>可选方案</h1>
+<h1 id="_1">可选方案</h1>
 <p>对于<strong>尚未上传</strong>到 HDFS 的文件, 可以采用以下几种方案:</p>
 <ul>
 <li>应用程序自己合并文件上传 (要根据实际情况来, 因为上传后不好处理)</li>
 <li>SequenceFile/MapFile, 同样需要自己编程上传文件, 上传的数据将被打包成 k, v 的形式</li>
 </ul>
 <blockquote>
-<p>通常对于 "the small files problem" 的回应会是: 使用 SequenceFile.<br>
+<p>通常对于 &ldquo;the small files problem&rdquo; 的回应会是: 使用 SequenceFile.<br>
 这种方法是说, 使用 filename 作为 key, 而 file contents 作为 value.</p>
 </blockquote>
 <p>对于<strong>已存在</strong>于 HDFS 上的文件, 可以使用:</p>
@@ -74,7 +79,7 @@
 <li>HBase compact (HBase 的内容, 把多个 HFile 合并成一个 HFile)</li>
 </ul>
 <p>CombineFileInputFormat 及 HBase compact 将在后面的 MR 及 HBase 专题记录, 本篇介绍下 Hadoop Archives.</p>
-<h1>Hadoop Archives</h1>
+<h1 id="hadoop-archives">Hadoop Archives</h1>
 <p><strong>References</strong>:<br>
 <a href="http://blog.csdn.net/lastsweetop/article/details/9123155">Hadoop 深入研究: (五) —— Archives</a><br>
 <a href="https://my.oschina.net/u/270950/blog/170570">Hadoop 关于处理大量小文件的问题和解决方法</a></p>

@@ -53,12 +53,43 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul>
+<li><a href="#1">1. 安装</a><ul>
+<li><a href="#mingw">借助 MinGW</a></li>
+<li><a href="#vs2010">借助 VS2010</a></li>
+<li><a href="#microsoft-visual-c-compiler-package-for-python-27">解决 Microsoft Visual C++ Compiler Package for Python 2.7 无效</a></li>
+</ul>
+</li>
+<li><a href="#2-fabric">2. 第一个 fabric 脚本</a></li>
+<li><a href="#3">3. 带参数的脚本</a></li>
+<li><a href="#4">4. 执行本地操作</a></li>
+<li><a href="#5">5. 执行远程操作</a></li>
+<li><a href="#6">6. 基于角色的执行任务</a></li>
+<li><a href="#7">7. 项目同步工具</a></li>
+<li><a href="#8">8. 新风格任务</a><ul>
+<li><a href="#81">8.1 经典风格</a></li>
+<li><a href="#82">8.2 新风格</a><ul>
+<li><a href="#task-default">@task default</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#9-virtualenv">9. 使用 virtualenv</a><ul>
+<li><a href="#91-virtualenv">9.1. 调用远程的 virtualenv</a></li>
+<li><a href="#92-virtualenv">9.2. 调用本地的 virtualenv</a></li>
+</ul>
+</li>
+<li><a href="#10-python-task">10. 通过 python 来执行 task</a></li>
+<li><a href="#11">11. 中文问题</a></li>
+<li><a href="#_1">参考文档</a></li>
+</ul>
+</div>
 <p>Python fabric 号称 Python 三神器之一, 可以在本地、远程依次执行一系列 shell 命令、程序等, 比如从代码库更新代码、执行数据迁移脚本、重启服务进程等等, 因此常常被用来自动化远程部署项目, 非常的方便.</p>
 <p>当然你要说 <strong>Docker</strong> 更好, 我也同意, 然而有一些 32 位的低配系统, 并不适合用 <strong>Docker</strong>, 更不用说虚拟机了, 这时一个轻量级的 fabric 就能帮你解决部署问题.</p>
-<h1>1. 安装</h1>
+<h1 id="1">1. 安装</h1>
 <p>虽然 fabric 是支持 pip 来安装的, 但实际操作时, 安装 fabric 的依赖库 pycrypto 会报错, 大概的意思就是编译环境的问题.</p>
-<p>这是因为 fabric 涉及了一些系统底层的东西, 凡是安装和操作系统底层密切相关的扩展, 大多都会调用 C 编译器去编译一些系统 DLL, 如果你的系统没有这个编译器, 就会报错...</p>
+<p>这是因为 fabric 涉及了一些系统底层的东西, 凡是安装和操作系统底层密切相关的扩展, 大多都会调用 C 编译器去编译一些系统 DLL, 如果你的系统没有这个编译器, 就会报错&hellip;</p>
 <p>有几种解决方法 (<strong>推荐第三种中的第二种</strong>):</p>
 <ul>
 <li>第一种: 一般这类的扩展都提供 windows 的安装版本(<a href="http://www.voidspace.org.uk/python/modules.shtml#pycrypto">msi 或者 exe 执行文件</a>)</li>
@@ -76,42 +107,42 @@
 <a href="http://www.myexception.cn/windows/414562.html">http://www.myexception.cn/windows/414562.html</a><br>
 <a href="http://blog.csdn.net/donger_soft/article/details/44838109">http://blog.csdn.net/donger_soft/article/details/44838109</a><br>
 <a href="http://www.2cto.com/os/201506/409745.html">http://www.2cto.com/os/201506/409745.html</a></p>
-<h2>借助 MinGW</h2>
+<h2 id="mingw">借助 MinGW</h2>
 <p>首先安装 MinGW, 在 MinGW 的安装目录下找到 bin 的文件夹, 找到 mingw32-make.exe, 复制一份更名为 make.exe;</p>
 <p>把 MinGW 的路径添加到环境变量 path 中, 比如我把 MinGW 安装到 D:\MinGW\ 中, 就把 D:\MinGW\bin 添加到 path 中;</p>
 <p>打开命令行窗口, 在命令行窗口中进入到要安装代码的目录下, 输入如下命令就可以安装了:</p>
-<div class="highlight"><pre><span></span>python setup.py build --compiler=mingw32 install
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>python setup.py build --compiler=mingw32 install
 </pre></div>
 
 
 <p><br></p>
-<h2>借助 VS2010</h2>
+<h2 id="vs2010">借助 VS2010</h2>
 <p>去下载安装 VS2010 (08版貌似也行, 不过没必要用旧版, 指不定哪个库又无法编译)</p>
 <p>配置系统环境变量 <strong>VS90COMNTOOLS</strong> 指向 <code>%VS你的版本COMNTOOLS%</code></p>
 <ul>
 <li>如果你安装的是 2012 版 <code>%VS110COMNTOOLS%</code></li>
 <li>如果你安装的是 2013 版 <code>%VS120COMNTOOLS%</code></li>
 </ul>
-<p>或者更暴力, 在 python 安装路径 ~\Lib\distutils 目录下有个 <strong>msvc9compiler.py</strong>(这个就是为什么要配 "VS90COMNTOOLS" 的原因, 因为人家文件名都告诉你了是 Microsoft vc 9 compiler, 代码都写死了要 vc9 的 comntools).<br>
+<p>或者更暴力, 在 python 安装路径 ~\Lib\distutils 目录下有个 <strong>msvc9compiler.py</strong>(这个就是为什么要配 &ldquo;VS90COMNTOOLS&rdquo; 的原因, 因为人家文件名都告诉你了是 Microsoft vc 9 compiler, 代码都写死了要 vc9 的 comntools).<br>
 找到 243 行:</p>
-<div class="highlight"><pre><span></span>toolskey = &quot;VS%0.f0COMNTOOLS&quot; % version
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>toolskey = &quot;VS%0.f0COMNTOOLS&quot; % version
 直接改为
 toolskey = &quot;VS你的版本COMNTOOLS&quot;
 </pre></div>
 
 
 <p><br>
-然后该重启的重启, clean 一下之前安装 Python 扩展失败的残留文件, 然后该 pip 的 pip 吧...</p>
-<div class="highlight"><pre><span></span>pip install fabric
+然后该重启的重启, clean 一下之前安装 Python 扩展失败的残留文件, 然后该 pip 的 pip 吧&hellip;</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>pip install fabric
 </pre></div>
 
 
 <p><br></p>
-<h2>解决 Microsoft Visual C++ Compiler Package for Python 2.7 无效</h2>
+<h2 id="microsoft-visual-c-compiler-package-for-python-27">解决 Microsoft Visual C++ Compiler Package for Python 2.7 无效</h2>
 <p><strong>错误描述:</strong><br>
 明明从官网下载并安装了 Microsoft Visual C++ Compiler Package for Python 2.7, 且配置了环境变量 path, 但还是报编译错误.</p>
 <p><strong>错误原因:</strong><br>
-报这个错误的原因是 Python 的 distutils 模块中的 msvc9compiler.py 并不从环境变量指定的路径中寻找 'vcvarsall.bat', 而是通过注册表来寻找, 然而, 不知为什么编译器安装过程没有配置注册表.</p>
+报这个错误的原因是 Python 的 distutils 模块中的 msvc9compiler.py 并不从环境变量指定的路径中寻找 &lsquo;vcvarsall.bat&rsquo;, 而是通过注册表来寻找, 然而, 不知为什么编译器安装过程没有配置注册表.</p>
 <p><strong>解决办法:</strong><br>
 只要手工把注册表配置好, 就可以了.</p>
 <ul>
@@ -131,17 +162,17 @@ toolskey = &quot;VS你的版本COMNTOOLS&quot;
 </ul>
 </li>
 </ul>
-<h1>2. 第一个 fabric 脚本</h1>
+<h1 id="2-fabric">2. 第一个 fabric 脚本</h1>
 <p>我这里使用的是 virtualenv 环境, 安装 pycrypto 使用的是 <strong>第一种</strong> 方法 (即直接下载 exe 安装的), 所以需要拷贝系统 python ~\Lib\site-packages 下的 <strong>Crypto</strong> 文件夹到 virtualenv 中, 然后 cmd 进入虚拟环境(即执行 activate), 安装 fabric: <code>pip install fabric</code></p>
 <p>安装好 fabric 后, 新建一个 py 脚本: <strong>fabfile.py</strong></p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">hello</span>():
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;Hello world!&quot;</span>)
 </pre></div>
 
 
 <p><br>
 命令行执行:</p>
-<div class="highlight"><pre><span></span>(venv) fab hello
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>(venv) fab hello
 Hello world!
 
 Done.
@@ -150,7 +181,7 @@ Done.
 
 <p><br>
 <strong>fabfile</strong> 是 fabric 默认的脚本名, 可以不用 <strong>fabfile</strong>, 但是在执行时就需要通过 <strong>-f</strong> 指定文件名了, 例如把上面的 fabfile.py 改为 <strong>test.py</strong></p>
-<div class="highlight"><pre><span></span>(venv) fab hello
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>(venv) fab hello
 
 Fatal error: Couldn&#39;t find any fabfiles!
 
@@ -173,15 +204,15 @@ fab.exe 在 python 安装目录的 Scripts 目录, 要把该路径加入到环�
 原因: 跟 python 的 PYTHONPATH 有关系, 如果 fabfile.py 没有放在 PYTHONPATH 中, 会提示找不到.<br>
 解决:使用 -f 指定文件</p>
 </blockquote>
-<h1>3. 带参数的脚本</h1>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> = </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+<h1 id="3">3. 带参数的脚本</h1>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">hello</span>(name, value):
+    <span style="color: #8B008B; font-weight: bold">print</span>(<span style="color: #CD5555">&quot;%s = %s!&quot;</span> % (name, value))
 </pre></div>
 
 
 <p><br>
 执行:</p>
-<div class="highlight"><pre><span></span>(venv) fab hello:name=age, value=20
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>(venv) fab hello:name=age, value=20
 age = 20!
 
 Done.
@@ -193,7 +224,7 @@ Done.
 
 
 <p><br></p>
-<h1>4. 执行本地操作</h1>
+<h1 id="4">4. 执行本地操作</h1>
 <p>在 fabric 中:
 caputure=False 时,本地 subprocess 的可通过全局输出控制,output.stdout 等,此时返回为空。
 caputure=True 时,命令 stdout 作为类 string 对象返回,同 run/sudo 一样,返回值有 return_code,stderr,failed 和 succeeded 属性。</p>
@@ -220,17 +251,17 @@ caputure=True 时,命令 stdout 作为类 string 对象返回,同 run/sudo 一�
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> local, lcd
 
-<span class="k">def</span> <span class="nf">dirCurrent</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s1">&#39;./Current&#39;</span><span class="p">):</span>
-        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;dir&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">dirCurrent</span>():
+    <span style="color: #8B008B; font-weight: bold">with</span> lcd(<span style="color: #CD5555">&#39;./Current&#39;</span>):
+        local(<span style="color: #CD5555">&#39;dir&#39;</span>)
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="highlight"><pre><span></span>(venv) fab dirCurrent
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>(venv) fab dirCurrent
 [localhost] local: cd ./Current
 [localhost] local: dir
 E:\venv\Current 的目录
@@ -247,17 +278,17 @@ Done.
 
 <p><br>
 我们可以通过 fabric 完成 Git 版本库的日常维护, 例如:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span><span class="p">,</span> <span class="n">lcd</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> local, lcd
 
-<span class="k">def</span> <span class="nf">dailyGit</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s1">&#39;./iMessageCracker&#39;</span><span class="p">):</span>
-        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;git add .&#39;</span><span class="p">)</span>
-        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;git commit -m &quot;daily update&quot;&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">dailyGit</span>():
+    <span style="color: #8B008B; font-weight: bold">with</span> lcd(<span style="color: #CD5555">&#39;./iMessageCracker&#39;</span>):
+        local(<span style="color: #CD5555">&#39;git add .&#39;</span>)
+        local(<span style="color: #CD5555">&#39;git commit -m &quot;daily update&quot;&#39;</span>)
 </pre></div>
 
 
 <p><br></p>
-<h1>5. 执行远程操作</h1>
+<h1 id="5">5. 执行远程操作</h1>
 <p>在 fabric 中:</p>
 <ul>
 <li>run: 用来执行远程命令<ul>
@@ -294,33 +325,33 @@ Done.
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># prefix 举例</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># prefix 举例</span>
 
-<span class="k">with</span> <span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;workon myvenv&#39;</span><span class="p">):</span>
-        <span class="n">run</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">with</span> prefix(<span style="color: #CD5555">&#39;workon myvenv&#39;</span>):
+        run(<span style="color: #CD5555">&#39;ls&#39;</span>)
 </pre></div>
 
 
 <p><br>
 相当于执行命令: <code>workon myvenv &amp;&amp; ls</code></p>
-<div class="highlight"><pre><span></span><span class="c1"># 远程操作举例</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># 远程操作举例</span>
 
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span><span class="p">,</span> <span class="n">cd</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">env</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> local, cd, run, env
 
-<span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;user name@ip:port&#39;</span><span class="p">,]</span>
-<span class="n">env</span><span class="o">.</span><span class="n">passwords</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;user name@ip:port&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span>
-<span class="p">}</span>
+env.hosts = [<span style="color: #CD5555">&#39;user name@ip:port&#39;</span>,]
+env.passwords = {
+    <span style="color: #CD5555">&#39;user name@ip:port&#39;</span>: <span style="color: #CD5555">&#39;xxx&#39;</span>
+}
 
-<span class="k">def</span> <span class="nf">remoteGit</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s1">&#39;/usr/project/&#39;</span><span class="p">):</span>
-        <span class="n">run</span><span class="p">(</span><span class="s1">&#39;git --version&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">remoteGit</span>():
+    <span style="color: #8B008B; font-weight: bold">with</span> cd(<span style="color: #CD5555">&#39;/usr/project/&#39;</span>):
+        run(<span style="color: #CD5555">&#39;git --version&#39;</span>)
 </pre></div>
 
 
 <p><br>
 执行结果:</p>
-<div class="highlight"><pre><span></span>[user name@10.0.3.57] Executing task &#39;remoteGit&#39;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[user name@10.0.3.57] Executing task &#39;remoteGit&#39;
 [user name@10.0.3.57] run: git --version
 [user name@10.0.3.57] out: git version 1.7.9.5
 [user name@10.0.3.57] out:
@@ -331,38 +362,38 @@ Disconnecting from user name@10.0.3.57... done.
 
 
 <p><br></p>
-<h1>6. 基于角色的执行任务</h1>
+<h1 id="6">6. 基于角色的执行任务</h1>
 <p>在 <code>5. 执行远程操作</code> 的例子中, fabric 会将任务应用到所有 env.hosts 中指定的 hosts.</p>
 <p>通过 <code>env.roledefs</code> 可以指定一个任务只运行到某个或某几个 hosts 上.</p>
-<p>env.roledefs 的是一个字典, key 为 role 名 (自定义就好), value 是 host 列表 (如: ['10.1.6.186', '10.1.6.159'])</p>
+<p>env.roledefs 的是一个字典, key 为 role 名 (自定义就好), value 是 host 列表 (如: [&lsquo;10.1.6.186&rsquo;, &lsquo;10.1.6.159&rsquo;])</p>
 <p>env.passwords 的 key 来自 env.roledefs 的 value.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span><span class="p">,</span> <span class="n">cd</span><span class="p">,</span> <span class="n">run</span><span class="p">,</span> <span class="n">env</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> local, cd, run, env
 
-<span class="n">env</span><span class="o">.</span><span class="n">roledefs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;web1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">host</span> <span class="err">列表</span><span class="p">],</span> <span class="s1">&#39;web2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">host</span> <span class="err">列表</span><span class="p">]}</span>
-<span class="n">env</span><span class="o">.</span><span class="n">passwords</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;user name@ip:port&#39;</span><span class="p">:</span> <span class="s1">&#39;xxx&#39;</span>
-<span class="p">}</span>
+env.roledefs = {<span style="color: #CD5555">&#39;web1&#39;</span>: [host <span style="color: #a61717; background-color: #e3d2d2">列表</span>], <span style="color: #CD5555">&#39;web2&#39;</span>: [host <span style="color: #a61717; background-color: #e3d2d2">列表</span>]}
+env.passwords = {
+    <span style="color: #CD5555">&#39;user name@ip:port&#39;</span>: <span style="color: #CD5555">&#39;xxx&#39;</span>
+}
 
-<span class="nd">@roles</span><span class="p">(</span><span class="s1">&#39;web1&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">remoteGit</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s1">&#39;/usr/project/&#39;</span><span class="p">):</span>
-        <span class="n">run</span><span class="p">(</span><span class="s1">&#39;git --version&#39;</span><span class="p">)</span>
+<span style="color: #707a7c">@roles</span>(<span style="color: #CD5555">&#39;web1&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">remoteGit</span>():
+    <span style="color: #8B008B; font-weight: bold">with</span> cd(<span style="color: #CD5555">&#39;/usr/project/&#39;</span>):
+        run(<span style="color: #CD5555">&#39;git --version&#39;</span>)
 </pre></div>
 
 
 <p><br>
 上面的 remoteGit 就只会被运行在指定的 <strong>web1</strong> 上了.</p>
-<h1>7. 项目同步工具</h1>
-<p><code>from fabric.contrib.project import rsync_project</code> 是个很好的工具, 不过只有 linux 下能用... 因为 windows 上没有 <strong>rsync</strong>.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.contrib.project</span> <span class="kn">import</span> <span class="n">rsync_project</span>
+<h1 id="7">7. 项目同步工具</h1>
+<p><code>from fabric.contrib.project import rsync_project</code> 是个很好的工具, 不过只有 linux 下能用&hellip; 因为 windows 上没有 <strong>rsync</strong>.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.contrib.project</span> <span style="color: #8B008B; font-weight: bold">import</span> rsync_project
 
-<span class="n">rsync_project</span><span class="p">(</span><span class="n">local_dir</span> <span class="o">=</span> <span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="n">remote_dir</span> <span class="o">=</span> <span class="s1">&#39;/home/user name/xxx&#39;</span><span class="p">,</span> <span class="n">exclude</span> <span class="o">=</span> <span class="s1">&#39;.git&#39;</span><span class="p">)</span>
+rsync_project(local_dir = <span style="color: #CD5555">&#39;xxx&#39;</span>, remote_dir = <span style="color: #CD5555">&#39;/home/user name/xxx&#39;</span>, exclude = <span style="color: #CD5555">&#39;.git&#39;</span>)
 </pre></div>
 
 
 <p><br>
 与之功能相似的还有 <code>fabric.contrib.project.upload_project</code></p>
-<h1>8. 新风格任务</h1>
+<h1 id="8">8. 新风格任务</h1>
 <p>在 fabric 1.1 之后, fabric 引进两种不同的任务定义方法: 新风格和经典风格</p>
 <p>它们在判断 fabfile 中什么对象才是 fabric 任务时方式不同:</p>
 <ul>
@@ -370,7 +401,7 @@ Disconnecting from user name@10.0.3.57... done.
 <li>__新风格__认为 Task (新风格引用的任务基类) 的实例或者它的子类为任务, 并且可以递归 import 模块中的任务, 而且支持不同的命名空间(__init__.py)</li>
 </ul>
 <p>这两种定义方式是__相互排斥__的, 如果 fabric 发现任何新风格的任务对象, 它就会认为你已经使用这种新风格的任务声明, 而不会考虑任何没有 <strong>Task</strong> 声明的对象, 如果没有新风格任务发现, 它会使用默认经典风格.</p>
-<h2>8.1 经典风格</h2>
+<h2 id="81">8.1 经典风格</h2>
 <p>在之前, 我们使用的都是经典任务风格, 是的, 那就是普通的 python 函数, 当没有新风格任务发现时, fabric 默认都是经典任务, 注意一下情况:</p>
 <ul>
 <li>函数名以 __ 下划线开头, python 认为是 private 的函数, fabric认为不是任务</li>
@@ -380,17 +411,17 @@ Disconnecting from user name@10.0.3.57... done.
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">urlopen</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">run</span>
-<span class="k">def</span> <span class="nf">webservice_read</span><span class="p">():</span>
-    <span class="n">objects</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://my/web/service/?foo=bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">urllib</span> <span style="color: #8B008B; font-weight: bold">import</span> urlopen
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> run
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">webservice_read</span>():
+    objects = urlopen(<span style="color: #CD5555">&#39;http://my/web/service/?foo=bar&#39;</span>).read().split()
+    <span style="color: #8B008B; font-weight: bold">print</span>(objects)
 </pre></div>
 
 
 <p><br>
 fab 认为 urlopen 也是一个任务.</p>
-<h2>8.2 新风格</h2>
+<h2 id="82">8.2 新风格</h2>
 <p>新风格任务的出现是为了对面向对象特性及命名空间提供支持。</p>
 <p>通过引进 Task, 有两种方式来定义新任务。</p>
 <ul>
@@ -406,75 +437,75 @@ fab 认为 urlopen 也是一个任务.</p>
 <blockquote>
 <p>注意, 如果有多个装饰器时, @task 必须做为第一个, 否则会出现一些奇怪的问题</p>
 </blockquote>
-<div class="highlight"><pre><span></span><span class="c1"># 通过装饰器定义</span>
-<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">run</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># 通过装饰器定义</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> task, run
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">mytask</span><span class="p">():</span> <span class="c1"># 任务名为 mytask</span>
-    <span class="n">run</span><span class="p">(</span><span class="s1">&#39;a command&#39;</span><span class="p">)</span>
+<span style="color: #707a7c">@task</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">mytask</span>(): <span style="color: #228B22"># 任务名为 mytask</span>
+    run(<span style="color: #CD5555">&#39;a command&#39;</span>)
 
-<span class="c1"># 通过继承 Task 类</span>
-<span class="k">class</span> <span class="nc">MyTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;deploy&quot;</span> <span class="c1"># 任务名为 deploy</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">run</span><span class="p">(</span><span class="s1">&#39;git clone foo&#39;</span><span class="p">)</span>
-        <span class="n">sudo</span><span class="p">(</span><span class="s1">&#39;service apache2 restart&#39;</span><span class="p">)</span>
+<span style="color: #228B22"># 通过继承 Task 类</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">MyTask</span>(Task):
+    name = <span style="color: #CD5555">&quot;deploy&quot;</span> <span style="color: #228B22"># 任务名为 deploy</span>
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">run</span>(<span style="color: #658b00">self</span>):
+        run(<span style="color: #CD5555">&#39;git clone foo&#39;</span>)
+        sudo(<span style="color: #CD5555">&#39;service apache2 restart&#39;</span>)
 
-<span class="n">instance</span> <span class="o">=</span> <span class="n">MyTask</span><span class="p">()</span>
+instance = MyTask()
 </pre></div>
 
 
 <p><br>
 也可以结合这两种定义方式, 例如下面这个例子:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">task</span>
-<span class="kn">from</span> <span class="nn">fabric.tasks</span> <span class="kn">import</span> <span class="n">Task</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> task
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.tasks</span> <span style="color: #8B008B; font-weight: bold">import</span> Task
 
-<span class="k">class</span> <span class="nc">CustomTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">myarg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CustomTask</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">myarg</span> <span class="o">=</span> <span class="n">myarg</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">CustomTask</span>(Task):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, func, myarg, *args, **kwargs):
+        <span style="color: #658b00">super</span>(CustomTask, <span style="color: #658b00">self</span>).<span style="color: #008b45">__init__</span>(*args, **kwargs)
+        <span style="color: #658b00">self</span>.func = func
+        <span style="color: #658b00">self</span>.myarg = myarg
 
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">run</span>(<span style="color: #658b00">self</span>, *args, **kwargs):
+        <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">self</span>.func(*args, **kwargs)
 
-<span class="nd">@task</span><span class="p">(</span><span class="n">task_class</span> <span class="o">=</span> <span class="n">CustomTask</span><span class="p">,</span> <span class="n">myarg</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">alias</span> <span class="o">=</span> <span class="s1">&#39;at&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">actual_task</span><span class="p">():</span>
-    <span class="k">pass</span>
+<span style="color: #707a7c">@task</span>(task_class = CustomTask, myarg = <span style="color: #CD5555">&#39;value&#39;</span>, alias = <span style="color: #CD5555">&#39;at&#39;</span>)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">actual_task</span>():
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 </pre></div>
 
 
 <p><br>
 这相当于生成一个新任务:</p>
-<div class="highlight"><pre><span></span><span class="n">task_obj</span> <span class="o">=</span> <span class="n">CustomTask</span><span class="p">(</span><span class="n">actual_task</span><span class="p">,</span> <span class="n">myarg</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>task_obj = CustomTask(actual_task, myarg = <span style="color: #CD5555">&#39;value&#39;</span>)
 </pre></div>
 
 
 <p><br>
 当然, myarg 参数可以在运行任务时指定:</p>
-<div class="highlight"><pre><span></span>fab actual_task:myarg=value
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>fab actual_task:myarg=value
 </pre></div>
 
 
 <p><br>
 这种组合的方式, 在你想用使用 class metaprogramming or similar techniques 时会有用.</p>
-<h3>@task default</h3>
+<h3 id="task-default">@task default</h3>
 <p>新建一个文件 deploy.py:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">task</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> task
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">migrate</span><span class="p">():</span>
-    <span class="k">pass</span>
+<span style="color: #707a7c">@task</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">migrate</span>():
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">full_deploy</span><span class="p">():</span>
-    <span class="n">migrate</span><span class="p">()</span>
+<span style="color: #707a7c">@task</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">full_deploy</span>():
+    migrate()
 </pre></div>
 
 
 <p><br>
 然后在 fabfile.py 中 import deploy, 再通过命令行 <code>fab -list</code> 查看当前可用任务:</p>
-<div class="highlight"><pre><span></span>Available commands:
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Available commands:
 
     deploy.full_deploy
     deploy.migrate
@@ -483,21 +514,21 @@ fab 认为 urlopen 也是一个任务.</p>
 
 <p><br>
 现在我们把 full_deploy 设为默认任务, 看看有什么效果:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">task</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> task
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">migrate</span><span class="p">():</span>
-    <span class="k">pass</span>
+<span style="color: #707a7c">@task</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">migrate</span>():
+    <span style="color: #8B008B; font-weight: bold">pass</span>
 
-<span class="nd">@task</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">full_deploy</span><span class="p">():</span>
-    <span class="n">migrate</span><span class="p">()</span>
+<span style="color: #707a7c">@task</span>(default = <span style="color: #658b00">True</span>)
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">full_deploy</span>():
+    migrate()
 </pre></div>
 
 
 <p><br>
 再次通过命令行 <code>fab -list</code> 查看当前可用任务:</p>
-<div class="highlight"><pre><span></span>Available commands:
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Available commands:
 
     deploy
     deploy.full_deploy
@@ -507,70 +538,70 @@ fab 认为 urlopen 也是一个任务.</p>
 
 <p><br>
 可以看到多了一个 deploy 任务, 它就是 deploy.py 的默认任务</p>
-<h1>9. 使用 virtualenv</h1>
+<h1 id="9-virtualenv">9. 使用 virtualenv</h1>
 <p>想通过 <code>run('source ./venv/bin/activate')</code> 去进入 virtualenv 是不行的.</p>
-<h2>9.1. 调用远程的 virtualenv</h2>
+<h2 id="91-virtualenv">9.1. 调用远程的 virtualenv</h2>
 <p>官方提供的解决方案是使用 <strong>prefix</strong>, prefix 与 cd 类似, 是远程命令:</p>
-<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">prefix</span><span class="p">(</span><span class="s1">&#39;source ~/venv/bin/activate&#39;</span><span class="p">):</span>
-    <span class="n">run</span><span class="p">(</span><span class="s1">&#39;./manage.py syncdb&#39;</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">with</span> prefix(<span style="color: #CD5555">&#39;source ~/venv/bin/activate&#39;</span>):
+    run(<span style="color: #CD5555">&#39;./manage.py syncdb&#39;</span>)
 </pre></div>
 
 
 <p><br>
 或者, 可以使用第三方扩展 <strong>fabric-virtualenv</strong>.</p>
 <p>直接使用 <code>pip install fabric-virtualenv</code> 即可安装, 使用起来也很简单:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabvenv</span> <span class="kn">import</span> <span class="n">virtualenv</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabvenv</span> <span style="color: #8B008B; font-weight: bold">import</span> virtualenv
 
-<span class="k">with</span> <span class="n">virtualenv</span><span class="p">(</span><span class="s1">&#39;/home/venv&#39;</span><span class="p">):</span>
-    <span class="n">run</span><span class="p">(</span><span class="s1">&#39;pip freeze&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">with</span> virtualenv(<span style="color: #CD5555">&#39;/home/venv&#39;</span>):
+    run(<span style="color: #CD5555">&#39;pip freeze&#39;</span>)
 </pre></div>
 
 
 <p><br>
 好了, 根据结果看看是不是输出了对应 virtualenv 下的扩展包.</p>
 <p><strong>注意:</strong> fabric-virtualenv 内部使用的也是 prefix , 所以也只支持远程操作, 不是本地的.</p>
-<h2>9.2. 调用本地的 virtualenv</h2>
-<p>因为 prefix 是远程命令, 所以如果想添加本地支持的话, 就得自己来模拟了...</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">posixpath</span>
-<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<h2 id="92-virtualenv">9.2. 调用本地的 virtualenv</h2>
+<p>因为 prefix 是远程命令, 所以如果想添加本地支持的话, 就得自己来模拟了&hellip;</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">posixpath</span>
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">contextlib</span> <span style="color: #8B008B; font-weight: bold">import</span> contextmanager
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
 
-<span class="nd">@contextmanager</span>
-<span class="k">def</span> <span class="nf">lvirtualenv</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">activate</span> <span class="o">=</span> <span class="n">posixpath</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;bin/activate&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">activate</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;Cannot activate virtualenv </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
-    <span class="n">activate</span> <span class="o">=</span> <span class="s1">&#39;. </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">activate</span>
+<span style="color: #707a7c">@contextmanager</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">lvirtualenv</span>(path):
+    activate = posixpath.join(path, <span style="color: #CD5555">&#39;bin/activate&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #8B008B">not</span> os.path.exists(activate):
+        <span style="color: #8B008B; font-weight: bold">raise</span> <span style="color: #008b45; font-weight: bold">OSError</span>(<span style="color: #CD5555">&quot;Cannot activate virtualenv %s&quot;</span> % path)
+    activate = <span style="color: #CD5555">&#39;. %s&#39;</span> % activate
 
-    <span class="k">def</span> <span class="nf">local_call</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">local</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> &amp;&amp; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">activate</span><span class="p">,</span> <span class="n">command</span><span class="p">))</span>
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">local_call</span>(command):
+        <span style="color: #8B008B; font-weight: bold">return</span> local(<span style="color: #CD5555">&#39;%s &amp;&amp; %s&#39;</span> % (activate, command))
 
-    <span class="k">yield</span> <span class="n">local_call</span>
+    <span style="color: #8B008B; font-weight: bold">yield</span> local_call
 
-<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">lvirtualenv</span><span class="p">(</span><span class="s1">&#39;/home/apuser/PyMC/pymc_venv&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">local</span><span class="p">:</span>
-        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;pwd&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test</span>():
+    <span style="color: #8B008B; font-weight: bold">with</span> lvirtualenv(<span style="color: #CD5555">&#39;/home/apuser/PyMC/pymc_venv&#39;</span>) <span style="color: #8B008B; font-weight: bold">as</span> local:
+        local(<span style="color: #CD5555">&#39;pwd&#39;</span>)
 </pre></div>
 
 
 <p><br>
 这样我们最终的输出结果就是:</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>localhost<span class="o">]</span> local: . /home/apuser/PyMC/pymc_venv/bin/activate <span class="o">&amp;&amp;</span> <span class="nb">pwd</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>[localhost] local: . /home/apuser/PyMC/pymc_venv/bin/activate &amp;&amp; <span style="color: #658b00">pwd</span>
 /home/apuser/PyMC/iMessageCracker/Deploy
 </pre></div>
 
 
 <p><br></p>
-<h1>10. 通过 python 来执行 task</h1>
+<h1 id="10-python-task">10. 通过 python 来执行 task</h1>
 <p>在之前, 我们通过 <strong>fab</strong> 工具来执行 task.</p>
 <p>在 Fabric &gt;=1.3 中, 可以使用 execute 来在 python 中运行一个 task, 就像下面这样:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span><span class="p">,</span> <span class="n">execute</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">fabric.api</span> <span style="color: #8B008B; font-weight: bold">import</span> local, execute
 
-<span class="k">def</span> <span class="nf">test_for_execute</span><span class="p">():</span>
-    <span class="n">local</span><span class="p">(</span><span class="s1">&#39;pip freeze&#39;</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_for_execute</span>():
+    local(<span style="color: #CD5555">&#39;pip freeze&#39;</span>)
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">execute</span><span class="p">(</span><span class="n">test_for_execute</span><span class="p">)</span>
+<span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #00688B">__name__</span> == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+    execute(test_for_execute)
 </pre></div>
 
 
@@ -581,12 +612,12 @@ fab 认为 urlopen 也是一个任务.</p>
 <li>local 命令需要设置 capture 参数</li>
 <li>run 命令直接使用返回值就可以了</li>
 </ul>
-<h1>11. 中文问题</h1>
-<p>使用 fabric 获取的标准输出流中的中文是被 gbk 编码的, 如果你最终存放结果的"地方"不支持 gbk 显示, 就要用 <code>xxx.decode('gbk')</code> 进行解码...</p>
+<h1 id="11">11. 中文问题</h1>
+<p>使用 fabric 获取的标准输出流中的中文是被 gbk 编码的, 如果你最终存放结果的&rdquo;地方&rdquo;不支持 gbk 显示, 就要用 <code>xxx.decode('gbk')</code> 进行解码&hellip;</p>
 <blockquote>
 <p>你可以通过 python 第三方工具包 chardet 来判断字符串编码方式: <code>chardet.detect(xxx)</code></p>
 </blockquote>
-<h1>参考文档</h1>
+<h1 id="_1">参考文档</h1>
 <p><a href="http://blog.csdn.net/raptor/article/details/50397658">http://blog.csdn.net/raptor/article/details/50397658</a><br>
 <a href="http://paperplane.ruhoh.com/documentation/fabric/">http://paperplane.ruhoh.com/documentation/fabric/</a><br>
 <a href="http://paperplane.ruhoh.com/fabric/fabric-api/">http://paperplane.ruhoh.com/fabric/fabric-api/</a><br>

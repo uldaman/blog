@@ -53,28 +53,36 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h2>1. 导出 package</h2>
+    <div class="toc">
+<ul>
+<li><a href="#1-package">1. 导出 package</a></li>
+<li><a href="#2-package">2. 导入 package</a></li>
+<li><a href="#3">3. 权限总结</a></li>
+<li><a href="#4-cp">4. -cp 参数</a></li>
+<li><a href="#5-jar">5. JAR 包</a></li>
+</ul>
+</div>
+<h2 id="1-package">1. 导出 package</h2>
 <p>包, 即软件包, 可以理解成文件夹.</p>
 <p>使用关键字 <strong>package 包名</strong> 来使用, 如: package test;</p>
-<div class="highlight"><pre><span></span><span class="c1">// Test.java</span>
-<span class="kn">package</span> <span class="nn">com.test</span><span class="o">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// Test.java</span>
+<span style="color: #8B008B; font-weight: bold">package</span> <span style="color: #008b45; text-decoration: underline">com.test</span>;
 
-<span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-    <span class="c1">// . . .</span>
-<span class="o">}</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Test</span> {
+    <span style="color: #228B22">// . . .</span>
+}
 </pre></div>
 
 
 <p>编译方法:</p>
-<div class="highlight"><pre><span></span>javac -d . Test.java // 点代表当前目录
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>javac -d . Test.java // 点代表当前目录
 </pre></div>
 
 
 <p><strong>-d</strong> 参数:<br>
 该参数的作用是依照包名在指定目录下生成相应的文件夹, 并把生成的目标文件放在该文件夹下.</p>
-<p>打包后, 就在当前目录下生成了一个目录树: <strong>./com/test/Test.class</strong>, 同时这个类的命名为 <strong>"包名"＋" . "＋"类名"</strong>, 即: com.test.Test, 也就是说, 使用 java 命令执行时, 要写成:</p>
-<div class="highlight"><pre><span></span>java com.test.Test
+<p>打包后, 就在当前目录下生成了一个目录树: <strong>./com/test/Test.class</strong>, 同时这个类的命名为 <strong>&ldquo;包名&rdquo;＋&rdquo; . &ldquo;＋&rdquo;类名&rdquo;</strong>, 即: com.test.Test, 也就是说, 使用 java 命令执行时, 要写成:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>java com.test.Test
 </pre></div>
 
 
@@ -88,13 +96,13 @@
 <li>所有字母小写</li>
 <li>域名倒过来写，如：com.baidu</li>
 </ul>
-<h2>2. 导入 package</h2>
+<h2 id="2-package">2. 导入 package</h2>
 <p>刚已经知道, 当跨包使用一个类的时候, 要写类的全名，如此太麻烦，可以通过导入包的方法来一次性解决，不再需要写类的全名，就像是在同一个包内一样.</p>
 <p>使用 <strong>import</strong> 关键字，如: import com.test.Test</p>
 <p>导入后，在被导入的类中使用导入的类不需要再写全名.</p>
-<h2>3. 权限总结</h2>
+<h2 id="3">3. 权限总结</h2>
 <p><img alt="权限总结" src="http://i61.tinypic.com/5p52lf.jpg"></p>
-<h2>4. -cp 参数</h2>
+<h2 id="4-cp">4. -cp 参数</h2>
 <p>当我们实际开发时, 常常会建立 <strong>classes、src、lib</strong> 三个文件夹来建立文件管理.</p>
 <ul>
 <li>classes, class 目录, 我们编译 *.java 文件生成的 *.class 文件都放在这里</li>
@@ -103,14 +111,14 @@
 </ul>
 <p>当在 src 文件夹下写好源代码后, 通过 <strong>-d</strong> 参数指定生成的 *.class 文件放在 classes 目录下, 通过 <strong>-cp(ClassPath)</strong> 参数指定依赖库目录, -cp 可以除了指定目录外还可以指定 jar 包.</p>
 <p>如, 现在把刚才的 Test.java 放到 src 目录, 然后重新生成 *.class 文件.</p>
-<div class="highlight"><pre><span></span>javac -cp classes/;lib/xxx.jar; -d classes/ src/Test.java
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>javac -cp classes/;lib/xxx.jar; -d classes/ src/Test.java
 </pre></div>
 
 
-<h2>5. JAR 包</h2>
+<h2 id="5-jar">5. JAR 包</h2>
 <p>参考网文: <a href="http://blog.chinaunix.net/uid-692788-id-2681136.html">http://blog.chinaunix.net/uid-692788-id-2681136.html</a></p>
 <p>JAR 包是 Java 中所特有一种压缩文档, 它是由 JDK ~\bin\jar.exe 命令生成, 该命令将指定目录下的 package 压缩成 jar 包, 其实就可以把它理解为 .zip 包, 当然也是有区别的, JAR 包中有一个 META-INF\MANIFEST.MF 文件, 当你生成 JAR 包时, 它会自动生成.</p>
-<div class="highlight"><pre><span></span>C:\Users\Administrator\Desktop&gt;jar
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>C:\Users\Administrator\Desktop&gt;jar
 用法: jar {ctxui}[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...
 选项:
     -c  创建新档案
@@ -140,7 +148,7 @@
 
 
 <p>根据上一节所说, 我们的 class 文件都在 classes 目录下, jar 目录生成在 lib 目录下, 所以:</p>
-<div class="highlight"><pre><span></span>jar cvf lib/test.jar -C classes/ . (&lt;=注意这个点, 这个点是必须的, 而且前面有个空格)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>jar cvf lib/test.jar -C classes/ . (&lt;=注意这个点, 这个点是必须的, 而且前面有个空格)
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 

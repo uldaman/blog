@@ -53,7 +53,15 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul>
+<li><a href="#namedtuple">namedtuple</a></li>
+<li><a href="#deque">deque</a></li>
+<li><a href="#counter">Counter</a></li>
+<li><a href="#ordereddict">OrderedDict</a></li>
+<li><a href="#defaultdict">defaultdict</a></li>
+</ul>
+</div>
 <p>collections 是 Python 内置的一个集合模块, 在 Python 内置数据类型的基础上, 又提供了几个额外的数据类型供我们使用.</p>
 <ul>
 <li><code>namedtuple</code>: 生成可以使用名字来访问元素内容的 tuple 子类</li>
@@ -62,11 +70,11 @@
 <li><code>OrderedDict</code>: 有序字典</li>
 <li><code>defaultdict</code>: 带有默认值的字典</li>
 </ul>
-<h1>namedtuple</h1>
+<h1 id="namedtuple">namedtuple</h1>
 <p>如果看到一个 tuple <code>(1, 2)</code>, 很难看出这是用来表示一个坐标的, 这时, <code>namedtuple</code> 就派上了用场：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">collections</span> <span style="color: #8B008B; font-weight: bold">import</span> namedtuple
+Point = namedtuple(<span style="color: #CD5555">&#39;Point&#39;</span>, [<span style="color: #CD5555">&#39;x&#39;</span>, <span style="color: #CD5555">&#39;y&#39;</span>])
+p = Point(<span style="color: #B452CD">1</span>, <span style="color: #B452CD">2</span>)
 </pre></div>
 
 
@@ -74,7 +82,7 @@
 <code>namedtuple</code> 是一个函数, 它用来创建一个自定义的 tuple 对象, 并且规定了 tuple 元素的个数, 并可以用<strong>名称</strong>而不是索引来引用 tuple 的某个元素.</p>
 <p>这样一来, 我们用 <code>namedtuple</code> 可以很方便地定义一种数据类型, 它具备 tuple 的不变性, 又可以根据属性来引用, 使用十分方便.</p>
 <p>可以验证创建的 Point 对象是 tuple 的一种子类：</p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; isinstance(p, Point)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; isinstance(p, Point)
 True
 &gt;&gt;&gt; isinstance(p, tuple)
 True
@@ -82,68 +90,68 @@ True
 
 
 <p><br></p>
-<h1>deque</h1>
+<h1 id="deque">deque</h1>
 <p>使用 <code>list</code> 存储数据时, 按索引访问元素很快, 但是插入和删除元素就很慢了, 因为 list 是线性存储, 数据量大的时候, 插入和删除效率很低; 而 <code>deque</code> 是为了高效实现插入和删除操作的双向列表.</p>
 <p>deque 其实是 double-ended queue 的缩写, 翻译过来就是双端队列, 它最大的好处就是实现了从队列头部快速增加和取出对象: <code>popleft()</code>、<code>appendleft()</code>.</p>
 <p>关于 <code>deque</code> 和 <code>list</code> 的差别参考 wiki: <a href="http://wiki.smallcpp.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/vector%E3%80%81deque%E3%80%81list%20%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB.html">vector、deque、list 三者的区别</a></p>
-<h1>Counter</h1>
+<h1 id="counter">Counter</h1>
 <p><code>Counter</code> 是一个简单的计数器, 例如, 统计字符出现的个数：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="s1">&#39;programming&#39;</span><span class="p">:</span>
-    <span class="n">c</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">collections</span> <span style="color: #8B008B; font-weight: bold">import</span> Counter
+c = Counter()
+<span style="color: #8B008B; font-weight: bold">for</span> ch <span style="color: #8B008B">in</span> <span style="color: #CD5555">&#39;programming&#39;</span>:
+    c[ch] = c[ch] + <span style="color: #B452CD">1</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; c
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&gt;&gt;&gt; c
 Counter({&#39;g&#39;: 2, &#39;m&#39;: 2, &#39;r&#39;: 2, &#39;a&#39;: 1, &#39;i&#39;: 1, &#39;o&#39;: 1, &#39;n&#39;: 1, &#39;p&#39;: 1})
 </pre></div>
 
 
 <p><br>
-<code>Counter</code> 实际上也是 <code>dict</code> 的一个子类, 上面的结果可以看出, 字符 'g'、'm'、'r' 各出现了两次, 其他字符各出现了一次.</p>
-<h1>OrderedDict</h1>
+<code>Counter</code> 实际上也是 <code>dict</code> 的一个子类, 上面的结果可以看出, 字符 &lsquo;g&rsquo;、&rsquo;m&rsquo;、&rsquo;r&rsquo; 各出现了两次, 其他字符各出现了一次.</p>
+<h1 id="ordereddict">OrderedDict</h1>
 <p>在 Python 中, <code>dict</code> 这个数据结构由于 hash 的特性, 是无序的, 这在有的时候会给我们带来一些麻烦,  幸运的是, collections 模块为我们提供了 <code>OrderedDict</code>, 当你要获得一个有序的字典对象时, 用它就对了.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">collections</span> <span style="color: #8B008B; font-weight: bold">import</span> OrderedDict
+d = <span style="color: #658b00">dict</span>([(<span style="color: #CD5555">&#39;a&#39;</span>, <span style="color: #B452CD">1</span>), (<span style="color: #CD5555">&#39;b&#39;</span>, <span style="color: #B452CD">2</span>), (<span style="color: #CD5555">&#39;c&#39;</span>, <span style="color: #B452CD">3</span>)])
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="highlight"><pre><span></span>d # dict 的Key是无序的
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>d # dict 的Key是无序的
 {&#39;a&#39;: 1, &#39;c&#39;: 3, &#39;b&#39;: 2}
 </pre></div>
 
 
 <p><br>
 改用 OrderedDict:</p>
-<div class="highlight"><pre><span></span><span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>od = OrderedDict([(<span style="color: #CD5555">&#39;a&#39;</span>, <span style="color: #B452CD">1</span>), (<span style="color: #CD5555">&#39;b&#39;</span>, <span style="color: #B452CD">2</span>), (<span style="color: #CD5555">&#39;c&#39;</span>, <span style="color: #B452CD">3</span>)])
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="highlight"><pre><span></span>od # OrderedDict的Key是有序的
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>od # OrderedDict的Key是有序的
 OrderedDict([(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 3)])
 </pre></div>
 
 
 <p><br>
 注意, OrderedDict 的 Key 会按照<strong>插入的顺序</strong>排列, 不是Key本身排序.</p>
-<h1>defaultdict</h1>
+<h1 id="defaultdict">defaultdict</h1>
 <p>使用 <code>dict</code> 时, 如果引用的 Key 不存在, 就会抛出 KeyError. 如果希望 key 不存在时, 返回一个默认值, 就可以用 <code>defaultdict</code>:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;N/A&#39;</span><span class="p">)</span>
-<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">collections</span> <span style="color: #8B008B; font-weight: bold">import</span> defaultdict
+dd = defaultdict(<span style="color: #8B008B; font-weight: bold">lambda</span>: <span style="color: #CD5555">&#39;N/A&#39;</span>)
+dd[<span style="color: #CD5555">&#39;key1&#39;</span>] = <span style="color: #CD5555">&#39;abc&#39;</span>
 </pre></div>
 
 
 <p><br>
 结果:</p>
-<div class="highlight"><pre><span></span>dd[&#39;key1&#39;] # key1 存在
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>dd[&#39;key1&#39;] # key1 存在
 &#39;abc&#39;
 
 dd[&#39;key2&#39;] # key2不存在, 返回默认值

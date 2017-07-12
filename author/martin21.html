@@ -51,8 +51,8 @@
 
 <p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
 <p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
-<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3D9</span><span class="o">::</span><span class="n">CreateDevice</span><span class="p">(</span><span class="n">UINT</span> <span class="n">Adapter</span><span class="p">,</span> <span class="n">D3DDEVTYPE</span> <span class="n">DeviceType</span><span class="p">,</span> <span class="n">HWND</span> <span class="n">hFocusWindow</span>
-    <span class="p">,</span> <span class="n">DWORD …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
+    , DWORD …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -110,18 +110,18 @@ E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.
 
 
 <blockquote>
-<p>说明: 这些文章都是本人学习"devbean QT 学习之路2"的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
 </blockquote>
 <p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
 <p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg"></p>
 <p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg"></p>
 <p>实现代码如下:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Qt_Notepad</span><span class="o">::</span><span class="n">OpenFile</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">QString</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">::</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&quot;Open File&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;file (*.*)&quot;</span><span class="p">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">void</span> Qt_Notepad::OpenFile() {
+    QString fileName = QFileDialog::getOpenFileName(<span style="color: #8B008B; font-weight: bold">this</span>, <span style="color: #CD5555">&quot;Open File&quot;</span>, <span style="color: #658b00">NULL</span>, <span style="color: #CD5555">&quot;file (*.*)&quot;</span>);
 
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fileName</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">QFile</span> <span class="n">file</span><span class="p">;</span>
-        <span class="n">file …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+    <span style="color: #8B008B; font-weight: bold">if</span> (!fileName.isEmpty()) {
+        QFile file;
+        file …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
@@ -172,7 +172,7 @@ E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.
 
 <p>某些情况下, 项目需求对话框能与父窗口通信, 这在 Qt 中很容易做到.</p>
 <p>因为, 对话框分为模态和非模态两种, 所以, 对应的也有两种不同的通信手段.</p>
-<h1>模态对话框</h1>
+<h1 id="_1">模态对话框</h1>
 <p>因为打开模态对话时, 代码会被阻塞住, 所以实时的在父窗口中获取对话框数据几乎是不可能的(或许窗口级别的模态能够实现对话框与非父窗口进行实时通信, 但是对话框与其父窗口应该是不行的).</p>
 <p>使用了<code>exec()</code>显示的模态对话框, 可以在<code>exec()</code>函数之后通过 QDialog …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
@@ -191,7 +191,7 @@ E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.
 
 
 <p>Qt 中的对话框通过 QDialog 类来实现, 它是三大父窗口之一(QWidget、QMainWindow、Qdialog), 编程中, 通常我们会设计一个类继承它.</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt; MyDialog : &lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; QDialog {
     Q_OBJECT
 
 &lt;/span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
@@ -256,7 +256,7 @@ Linux 中的每个文件都有 所有者、所在组、其它组 三种权限.</
 </h6>
 
 
-<h1>用户和用户组</h1>
+<h1 id="_1">用户和用户组</h1>
 <p><strong>
 </strong>Linux 是个多人多任务的系统, 常常会有多人同时使用系统来进行工作的情况, 简单的说, <strong>用户</strong>指的就是使用操作系统的人;
 而<strong>用户组</strong>, 就是指具有相同系统权限的一组用户.</p>

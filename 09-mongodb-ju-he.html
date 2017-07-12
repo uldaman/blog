@@ -54,183 +54,194 @@
 
 
     <p>MongoDB 中聚合(aggregate)主要用于处理数据(如统计平均值、求和等), 并返回计算后的数据结果, 这样我们就可能利用 Mongdb 直接去处理一些数据, 而不用先把数据拿到本地再运算.</p>
-<p>[TOC]</p>
-<h1>1. count</h1>
+<div class="toc">
+<ul>
+<li><a href="#1-count">1. count</a></li>
+<li><a href="#2-distinct">2. distinct</a></li>
+<li><a href="#3-group">3. group</a><ul>
+<li><a href="#31-group">3.1 group 基础</a></li>
+<li><a href="#32">3.2 完成器</a></li>
+<li><a href="#33">3.3 将函数做为分组依据</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="1-count">1. count</h1>
 <p>count 是最简单的聚合工具, 返回集合中的 Document 数量.</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
-<span class="mi">0</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
-<span class="mi">1</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
-<span class="mi">2</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.col.count()
+<span style="color: #B452CD">0</span>
+db.col.insert({<span style="color: #CD5555">&#39;x&#39;</span>: <span style="color: #B452CD">1</span>})
+db.col.count()
+<span style="color: #B452CD">1</span>
+db.col.insert({<span style="color: #CD5555">&#39;x&#39;</span>: <span style="color: #B452CD">2</span>})
+db.col.count()
+<span style="color: #B452CD">2</span>
 </pre></div>
 
 
 <p><br>
 count 和 find 一样, 也接受条件:</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">col</span><span class="p">.</span><span class="nx">count</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">})</span>
-<span class="mi">1</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.col.count({<span style="color: #CD5555">&#39;x&#39;</span>: <span style="color: #B452CD">1</span>})
+<span style="color: #B452CD">1</span>
 </pre></div>
 
 
 <p><br>
 从结果可以看出，只有符合条件的文档参与了计算.</p>
-<h1>2. distinct</h1>
+<h1 id="2-distinct">2. distinct</h1>
 <p>distinct 用来统计集合中给定 key 所有不同的值.</p>
 <p>插入 4 条测试数据(请留意Age字段):</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Ada&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">20</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">35</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Andy&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">35</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Susan&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="o">:</span> <span class="mi">60</span><span class="p">})</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.test.insert({<span style="color: #CD5555">&#39;name&#39;</span>: <span style="color: #CD5555">&#39;Ada&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>: <span style="color: #B452CD">20</span>})
+db.test.insert({<span style="color: #CD5555">&#39;name&#39;</span>: <span style="color: #CD5555">&#39;Fred&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>: <span style="color: #B452CD">35</span>})
+db.test.insert({<span style="color: #CD5555">&#39;name&#39;</span>: <span style="color: #CD5555">&#39;Andy&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>: <span style="color: #B452CD">35</span>})
+db.test.insert({<span style="color: #CD5555">&#39;name&#39;</span>: <span style="color: #CD5555">&#39;Susan&#39;</span>, <span style="color: #CD5555">&#39;age&#39;</span>: <span style="color: #B452CD">60</span>})
 </pre></div>
 
 
 <p><br>
 distinct 命令必须指定集合名称和需要统计的字段, 如: age</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">runCommand</span><span class="p">({</span><span class="s2">&quot;distinct&quot;</span><span class="o">:</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="o">:</span><span class="s2">&quot;age&quot;</span><span class="p">})</span>
-<span class="p">{</span>
-        <span class="s2">&quot;values&quot;</span> <span class="o">:</span> <span class="p">[</span>
-                <span class="mi">20</span><span class="p">,</span>
-                <span class="mi">35</span><span class="p">,</span>
-                <span class="mi">60</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;stats&quot;</span> <span class="o">:</span> <span class="p">{</span>
-                <span class="s2">&quot;n&quot;</span> <span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="s2">&quot;nscanned&quot;</span> <span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="s2">&quot;nscannedObjects&quot;</span> <span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="s2">&quot;timems&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;cursor&quot;</span> <span class="o">:</span> <span class="s2">&quot;BasicCursor&quot;</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;ok&quot;</span> <span class="o">:</span> <span class="mi">1</span>
-<span class="p">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.runCommand({<span style="color: #CD5555">&quot;distinct&quot;</span>:<span style="color: #CD5555">&quot;test&quot;</span>, <span style="color: #CD5555">&quot;key&quot;</span>:<span style="color: #CD5555">&quot;age&quot;</span>})
+{
+        <span style="color: #CD5555">&quot;values&quot;</span> : [
+                <span style="color: #B452CD">20</span>,
+                <span style="color: #B452CD">35</span>,
+                <span style="color: #B452CD">60</span>
+        ],
+        <span style="color: #CD5555">&quot;stats&quot;</span> : {
+                <span style="color: #CD5555">&quot;n&quot;</span> : <span style="color: #B452CD">4</span>,
+                <span style="color: #CD5555">&quot;nscanned&quot;</span> : <span style="color: #B452CD">4</span>,
+                <span style="color: #CD5555">&quot;nscannedObjects&quot;</span> : <span style="color: #B452CD">4</span>,
+                <span style="color: #CD5555">&quot;timems&quot;</span> : <span style="color: #B452CD">0</span>,
+                <span style="color: #CD5555">&quot;cursor&quot;</span> : <span style="color: #CD5555">&quot;BasicCursor&quot;</span>
+        },
+        <span style="color: #CD5555">&quot;ok&quot;</span> : <span style="color: #B452CD">1</span>
+}
 </pre></div>
 
 
 <p><br></p>
-<h1>3. group</h1>
-<h2>3.1 group 基础</h2>
+<h1 id="3-group">3. group</h1>
+<h2 id="31-group">3.1 group 基础</h2>
 <p>group 聚合工具有些复杂:<br>
 先选定分组所依据的键, 此后 MongoDB 就会将集合中的数据, 依据 <strong>选定键的值的不同</strong> 分成若干组(即选定键的值相同的为一组), 然后可以通过聚合(运算)每一组内的文档, 产生一个结果文档.</p>
 <blockquote>
 <p>有点类似 <em>05、Mongodb Cursor</em> 中提到的 <strong>forEach()</strong> 方法和 <strong>map()</strong> 方法, 不同的是 group 会先根据指定 key 对要聚合的 Documents 进行分组, 而且它的运算也更复杂.</p>
 </blockquote>
 <p>先插入一点测试数据:</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20 03:20:40&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.23</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21 11:28:00&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.27</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20 05:00:00&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.10</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-22&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-22 05:26:00&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.30</span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21 08:34:00&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.01</span><span class="p">})</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.test.insert({<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20&#39;</span>, <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20 03:20:40&#39;</span>, <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.23</span>})
+db.test.insert({<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21&#39;</span>, <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21 11:28:00&#39;</span>, <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.27</span>})
+db.test.insert({<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20&#39;</span>, <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20 05:00:00&#39;</span>, <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.10</span>})
+db.test.insert({<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-22&#39;</span>, <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-22 05:26:00&#39;</span>, <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.30</span>})
+db.test.insert({<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21&#39;</span>, <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21 08:34:00&#39;</span>, <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.01</span>})
 </pre></div>
 
 
 <p><br>
 我们先分析下这几条测试数据:<br>
-根据 <strong>day</strong> 的不同, 上面插入的测试数据可以分为三组, 即: '2016-04-20'、'2016-04-21' 和 '2016-04-22', 然后:<br>
-<strong>'2016-04-20'</strong> 这一组里, <strong>time</strong> 最新的为 <strong>'2016-04-20 05:00:00'</strong><br>
-<strong>'2016-04-21'</strong> 这一组里, <strong>time</strong> 最新的为 <strong>'2016-04-21 11:28:00'</strong><br>
-<strong>'2016-04-22'</strong> 这一组里, <strong>time</strong> 最新的为 <strong>'2016-04-22 05:26:00'</strong><br></p>
+根据 <strong>day</strong> 的不同, 上面插入的测试数据可以分为三组, 即: &lsquo;2016-04-20&rsquo;、&lsquo;2016-04-21&rsquo; 和 &lsquo;2016-04-22&rsquo;, 然后:<br>
+<strong>&lsquo;2016-04-20&rsquo;</strong> 这一组里, <strong>time</strong> 最新的为 <strong>&lsquo;2016-04-20 05:00:00&rsquo;</strong><br>
+<strong>&lsquo;2016-04-21&rsquo;</strong> 这一组里, <strong>time</strong> 最新的为 <strong>&lsquo;2016-04-21 11:28:00&rsquo;</strong><br>
+<strong>&lsquo;2016-04-22&rsquo;</strong> 这一组里, <strong>time</strong> 最新的为 <strong>&lsquo;2016-04-22 05:26:00&rsquo;</strong><br></p>
 <p>那么, Mongodb 的 <strong>group</strong> 工具就可以完成上面的这种功能.<br>
 可以将 <strong>day</strong> 作为 <strong>group</strong> 的分组键, 然后取出 <strong>time</strong> 键值为最新时间的文档, 同时也取出该文档的 <strong>price</strong> 键值.</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-    <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="c1">// 如果是多个字段, 可以为 {&#39;f1&#39;: true,&#39;f2&#39;: true}</span>
-    <span class="s1">&#39;initial&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;0&#39;</span><span class="p">},</span> <span class="c1">// initial 表示 $reduce 函数参数 prev 的初始值</span>
-    <span class="s1">&#39;$reduce&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="nx">prev</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// $reduce 方法接受两个参数, doc 正在迭代的当前 document, prev 表示上一次迭代的结果 document</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">time</span> <span class="o">&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">time</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">day</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">day</span><span class="p">;</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">time</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">time</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">})</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.test.group({
+    <span style="color: #CD5555">&#39;key&#39;</span>: {<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #8B008B; font-weight: bold">true</span>}, <span style="color: #228B22">// 如果是多个字段, 可以为 {&#39;f1&#39;: true,&#39;f2&#39;: true}</span>
+    <span style="color: #CD5555">&#39;initial&#39;</span>: {<span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;0&#39;</span>}, <span style="color: #228B22">// initial 表示 $reduce 函数参数 prev 的初始值</span>
+    <span style="color: #CD5555">&#39;$reduce&#39;</span>: <span style="color: #8B008B; font-weight: bold">function</span>(doc, prev) { <span style="color: #228B22">// $reduce 方法接受两个参数, doc 正在迭代的当前 document, prev 表示上一次迭代的结果 document</span>
+        <span style="color: #8B008B; font-weight: bold">if</span> (doc.time &gt; prev.time) {
+            prev.day = doc.day;
+            prev.price = doc.price;
+            prev.time = doc.time;
+        }
+    }
+})
 
-<span class="c1">// 下面是 group 的返回结果, 可以看到就是 $reduce 方法中最终 prev 的数据</span>
-<span class="p">[</span>
-    <span class="p">{</span>
-        <span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-20 05:00:00&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.1</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-21 11:28:00&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.27</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-22&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;2016-04-22 05:26:00&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="mf">4.3</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+<span style="color: #228B22">// 下面是 group 的返回结果, 可以看到就是 $reduce 方法中最终 prev 的数据</span>
+[
+    {
+        <span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20&#39;</span>,
+        <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-20 05:00:00&#39;</span>,
+        <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.1</span>
+    },
+    {
+        <span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21&#39;</span>,
+        <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-21 11:28:00&#39;</span>,
+        <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.27</span>
+    },
+    {
+        <span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #CD5555">&#39;2016-04-22&#39;</span>,
+        <span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;2016-04-22 05:26:00&#39;</span>,
+        <span style="color: #CD5555">&#39;price&#39;</span>: <span style="color: #B452CD">4.3</span>
+    }
+]
 </pre></div>
 
 
 <p><br></p>
 <p>在某些时候, 你还可以使用 <strong>condition</strong> 参数 (也可以用 <strong>cond</strong> 参数 或者 <strong>q</strong> 参数, 功能是一样的) 来过滤要运算的文档, 就像 <strong>find()</strong> 方法的 <strong>query</strong> 一样.</p>
 <p>例如, 我现在只想运算 <strong>price &gt; 4.1</strong> 的文档:</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-    <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;day&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span>
-    <span class="s1">&#39;initial&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="o">:</span> <span class="s1">&#39;0&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;$reduce&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">,</span> <span class="nx">prev</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">time</span> <span class="o">&gt;</span> <span class="nx">prev</span><span class="p">.</span><span class="nx">time</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">day</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">day</span><span class="p">;</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
-            <span class="nx">prev</span><span class="p">.</span><span class="nx">time</span> <span class="o">=</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">time</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s1">&#39;condition&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;price&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="s1">&#39;4.1&#39;</span><span class="p">}}</span> <span class="c1">// 只运算 price &gt; 4.1 的文档</span>
-<span class="p">})</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.test.group({
+    <span style="color: #CD5555">&#39;key&#39;</span>: {<span style="color: #CD5555">&#39;day&#39;</span>: <span style="color: #8B008B; font-weight: bold">true</span>},
+    <span style="color: #CD5555">&#39;initial&#39;</span>: {<span style="color: #CD5555">&#39;time&#39;</span>: <span style="color: #CD5555">&#39;0&#39;</span>},
+    <span style="color: #CD5555">&#39;$reduce&#39;</span>: <span style="color: #8B008B; font-weight: bold">function</span>(doc, prev) {
+        <span style="color: #8B008B; font-weight: bold">if</span> (doc.time &gt; prev.time) {
+            prev.day = doc.day;
+            prev.price = doc.price;
+            prev.time = doc.time;
+        }
+    },
+    <span style="color: #CD5555">&#39;condition&#39;</span>: {<span style="color: #CD5555">&#39;price&#39;</span>: {<span style="color: #CD5555">&#39;$gt&#39;</span>: <span style="color: #CD5555">&#39;4.1&#39;</span>}} <span style="color: #228B22">// 只运算 price &gt; 4.1 的文档</span>
+})
 </pre></div>
 
 
 <p><br></p>
-<h2>3.2 完成器</h2>
+<h2 id="32">3.2 完成器</h2>
 <p>通过上面已经知道 <strong>group</strong> 工具最终会返回一个结果文档, 但有的时候, 我们可能不需要整个结果文档, 而是需要对这个结果再运算, 然后得到一个值, 可以是字符串, 可以是数字, 我们只想要这个结果值, 那怎么办?<br>
 或者有的时候, 我们是想要在结果文档中添加一个新字段, 那又该怎么办?</p>
-<p><strong>group</strong> 工具的 <strong>finalize</strong> (完成器) 参数就是用来对 <strong>group</strong> 返回的结果文档再加工的...</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">test</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="nx">day</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span>
-    <span class="nx">initial</span><span class="o">:</span> <span class="p">{</span><span class="nx">count</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
-    <span class="nx">reduce</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">prev</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">prev</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">},</span>
-    <span class="nx">finalize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// $finalize 方法接受一个参数, 即 $reduce 返回的结果文档, 这里做测试用, 仅在结果文档中新增一个键</span>
-        <span class="nx">out</span><span class="p">.</span><span class="nx">scaledCount</span> <span class="o">=</span> <span class="nx">out</span><span class="p">.</span><span class="nx">count</span> <span class="o">*</span> <span class="mi">10</span>
-    <span class="p">}</span>
-<span class="p">})</span>
+<p><strong>group</strong> 工具的 <strong>finalize</strong> (完成器) 参数就是用来对 <strong>group</strong> 返回的结果文档再加工的&hellip;</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.test.group({
+    key: { day: <span style="color: #8B008B; font-weight: bold">true</span>},
+    initial: {count: <span style="color: #B452CD">0</span>},
+    reduce: <span style="color: #8B008B; font-weight: bold">function</span>(obj, prev) {
+        prev.count++;
+    },
+    finalize: <span style="color: #8B008B; font-weight: bold">function</span>(out) { <span style="color: #228B22">// $finalize 方法接受一个参数, 即 $reduce 返回的结果文档, 这里做测试用, 仅在结果文档中新增一个键</span>
+        out.scaledCount = out.count * <span style="color: #B452CD">10</span>
+    }
+})
 
-<span class="p">[</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;day&quot;</span> <span class="o">:</span> <span class="s2">&quot;2012-08-20&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;count&quot;</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;scaledCount&quot;</span> <span class="o">:</span> <span class="mi">20</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;day&quot;</span> <span class="o">:</span> <span class="s2">&quot;2012-08-21&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;count&quot;</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;scaledCount&quot;</span> <span class="o">:</span> <span class="mi">20</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;day&quot;</span> <span class="o">:</span> <span class="s2">&quot;2012-08-22&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;count&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;scaledCount&quot;</span> <span class="o">:</span> <span class="mi">10</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+[
+    {
+        <span style="color: #CD5555">&quot;day&quot;</span> : <span style="color: #CD5555">&quot;2012-08-20&quot;</span>,
+        <span style="color: #CD5555">&quot;count&quot;</span> : <span style="color: #B452CD">2</span>,
+        <span style="color: #CD5555">&quot;scaledCount&quot;</span> : <span style="color: #B452CD">20</span>
+    },
+    {
+        <span style="color: #CD5555">&quot;day&quot;</span> : <span style="color: #CD5555">&quot;2012-08-21&quot;</span>,
+        <span style="color: #CD5555">&quot;count&quot;</span> : <span style="color: #B452CD">2</span>,
+        <span style="color: #CD5555">&quot;scaledCount&quot;</span> : <span style="color: #B452CD">20</span>
+    },
+    {
+        <span style="color: #CD5555">&quot;day&quot;</span> : <span style="color: #CD5555">&quot;2012-08-22&quot;</span>,
+        <span style="color: #CD5555">&quot;count&quot;</span> : <span style="color: #B452CD">1</span>,
+        <span style="color: #CD5555">&quot;scaledCount&quot;</span> : <span style="color: #B452CD">10</span>
+    }
+]
 </pre></div>
 
 
 <p><br></p>
-<h2>3.3 将函数做为分组依据</h2>
+<h2 id="33">3.3 将函数做为分组依据</h2>
 <p>在 3.1 和 3.2 中我们都是用 <strong>day</strong> 来做为分组依据的, 但在某些情况下, 单纯的使用字段来做为分组依据可能实现不了我们实际想要的功能.</p>
-<p>例如, 假设存在一个保存了文章列表的集合, 集合里面有个 <strong>tag</strong> 字段, 用来标识文章的标签, 此时我们应该忽略 tag 值的大小写, 因为 AAA 和 aaa 表示的都是同一个标签...但如果直接用 <strong>tag</strong> 做分组依据, AAA 和 aaa 就会被分为不同组....</p>
+<p>例如, 假设存在一个保存了文章列表的集合, 集合里面有个 <strong>tag</strong> 字段, 用来标识文章的标签, 此时我们应该忽略 tag 值的大小写, 因为 AAA 和 aaa 表示的都是同一个标签&hellip;但如果直接用 <strong>tag</strong> 做分组依据, AAA 和 aaa 就会被分为不同组....</p>
 <p>为了消除这个问题, 就要定义一个__函数__来确定文档分组的依据, 定义分组函数要用到 <strong>$keyf</strong>, 注意, 不是 <strong>key</strong>.</p>
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">blog</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
-    <span class="s1">&#39;$keyf&#39;</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// $keyf 方法接收一个参数, 表示当前集合的文档, 要返回一个值, 表示分组依据, 这里就把 tag 转成小写后的 值做为分组依据</span>
-        <span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">tag</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
-    <span class="p">},</span>
-    <span class="p">......</span>
-<span class="p">})</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>db.blog.group({
+    <span style="color: #CD5555">&#39;$keyf&#39;</span> : <span style="color: #8B008B; font-weight: bold">function</span>(x) { <span style="color: #228B22">// $keyf 方法接收一个参数, 表示当前集合的文档, 要返回一个值, 表示分组依据, 这里就把 tag 转成小写后的 值做为分组依据</span>
+        <span style="color: #8B008B; font-weight: bold">return</span> x.tag.toLowerCase();
+    },
+    ......
+})
 </pre></div>
 
 

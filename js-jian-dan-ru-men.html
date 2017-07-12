@@ -54,7 +54,7 @@
 
 
     <p>js 在 html 中的使用方式和 css 很像, 可以通过内联和外部引用两方式:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text/javascript&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; src&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;test.js&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text/javascript&quot;&lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt; src&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;test.js&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;
 
 &lt;span style=&quot;color: #0000ff&quot;&gt;&lt;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;script &lt;/span&gt;&lt;span style=&quot;color: #ff0000&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;=&quot;text/javascript&quot;&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;&gt;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;
     document.write(&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;a&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000; background-color: #f5f5f5&quot;&gt;);
@@ -67,11 +67,11 @@
 <p>因为 html 是从下向下解释的, 所以如果把 js 放在前面, 会导致出错时, js 下面的代码无法被解释.
 因此, 一般都会把 js 放在下面.</p>
 <p><strong>如何调试 JS</strong></p>
-<p><strong>console.log;</strong> -- 输出 Log 信息, 可在审查代码的 Console 选项卡里看到.
-<strong>alert(str);</strong> -- 弹出对话框, 类似 messagebox
-<strong>debugger;</strong> -- 当开启浏览器的 javascript 调试器时, 代码会在这里断下来.
-<strong>window.onerror;</strong> -- 当出错时, 会调用这个函数, 所以可以重写这个函数, 注意, 该函数只能运行时检查, 如果语法错误, 并不能提示.</p>
-<div class="highlight"><pre><span></span>window.onerror = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (szMsg, szUrl, szLine) {
+<p><strong>console.log;</strong> &ndash; 输出 Log 信息, 可在审查代码的 Console 选项卡里看到.
+<strong>alert(str);</strong> &ndash; 弹出对话框, 类似 messagebox
+<strong>debugger;</strong> &ndash; 当开启浏览器的 javascript 调试器时, 代码会在这里断下来.
+<strong>window.onerror;</strong> &ndash; 当出错时, 会调用这个函数, 所以可以重写这个函数, 注意, 该函数只能运行时检查, 如果语法错误, 并不能提示.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>window.onerror = &lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (szMsg, szUrl, szLine) {
     str &lt;/span&gt;= &quot;&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
     str &lt;/span&gt;+=&lt;span style=&quot;color: #000000&quot;&gt; szMsg;
     str &lt;/span&gt;+= &quot;\r\n&quot;&lt;span style=&quot;color: #000000&quot;&gt;
@@ -138,21 +138,21 @@ javascript 的全局变量和局部变量和 C/C++ 有不少的区别, 详见: <
 
 <p>null 和 undefined 的区别参考: <a href="http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html">http://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html</a>
 总结就是:
-null 表示"没有对象", 即该处不应该有值.
-undefined 表示"缺少值", 就是此处应该有一个值, 但是还没有定义.</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;var&lt;/span&gt; car = 123&lt;span style=&quot;color: #000000&quot;&gt;;
+null 表示&rdquo;没有对象&rdquo;, 即该处不应该有值.
+undefined 表示&rdquo;缺少值&rdquo;, 就是此处应该有一个值, 但是还没有定义.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;var&lt;/span&gt; car = 123&lt;span style=&quot;color: #000000&quot;&gt;;
 alert(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;typeof&lt;/span&gt; car);
 </pre></div>
 
 
 <p><strong>默认参数</strong></p>
-<p>js 的默认参数和 C/C++及 Python 也是很不一样的, 它并不能在参数列表中直接指定, 要在函数体内指定...
+<p>js 的默认参数和 C/C++及 Python 也是很不一样的, 它并不能在参数列表中直接指定, 要在函数体内指定&hellip;
 <img alt="" src="http://i58.tinypic.com/1zp3yit.jpg"></p>
 <p><img alt="" src="http://i62.tinypic.com/2mdf7fa.jpg"></p>
-<p><strong>匿名函数 -- 就是把一个函数复制给一个变量, 和 lua 差不多, 不多解释.</strong></p>
+<p><strong>匿名函数 &ndash; 就是把一个函数复制给一个变量, 和 lua 差不多, 不多解释.</strong></p>
 <p><strong>自执行函数</strong></p>
-<p>不需主动调用自己就可以执行的函数, 就是通过<strong>两个括号</strong>...</p>
-<div class="highlight"><pre><span></span>(&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;() {
+<p>不需主动调用自己就可以执行的函数, 就是通过<strong>两个括号</strong>&hellip;</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>(&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;() {
 
 })();&lt;/span&gt;
 </pre></div>
@@ -161,15 +161,15 @@ alert(&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;typeof&lt;/span&
 <p>自执行函数还有其他写法, 记住这一种就可以.</p>
 <p><strong>数组</strong></p>
 <p>声明, 如: var array = Array() 或 var array = []</p>
-<p>添加, array.push() -- 追加;
-array.unshift() -- 最前插入;
-array.splice() -- 插入, 这个函数比较复杂, 具体去查 google.</p>
+<p>添加, array.push() &ndash; 追加;
+array.unshift() &ndash; 最前插入;
+array.splice() &ndash; 插入, 这个函数比较复杂, 具体去查 google.</p>
 <p>删除, array.pop()
 array.shift()
 array.splice()</p>
-<p>其他的操作请参考 google...</p>
+<p>其他的操作请参考 google&hellip;</p>
 <p>遍历, 两种方式:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;var&lt;/span&gt; array = [11, 12, 13&lt;span style=&quot;color: #000000&quot;&gt;]
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;var&lt;/span&gt; array = [11, 12, 13&lt;span style=&quot;color: #000000&quot;&gt;]
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt;(&lt;span style=&quot;color: #0000ff&quot;&gt;var&lt;/span&gt; index &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; array) {
     console.log(array[index]);
 }

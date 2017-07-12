@@ -53,17 +53,17 @@
 </h6>
 
 
-    <h2>1. 关键字</h2>
-<p>老生常谈, 不多说了...</p>
-<h2>2. 数据类型</h2>
-<h4>2.1</h4>
+    <h2 id="1">1. 关键字</h2>
+<p>老生常谈, 不多说了&hellip;</p>
+<h2 id="2">2. 数据类型</h2>
+<h4 id="21">2.1</h4>
 <p><img alt="" src="http://i57.tinypic.com/2utnpeb.jpg"></p>
 <p>在 Java 的领域里, 基本数据类型变量存的是数据本身, 而引用类型变量存的是保存数据的空间地址(和指针有点像).</p>
 <p>char 类型在 C/C++ 和 java 中所占字节是不同的, 因为编码不同, 在C/C++中, 占 1Byte, 而在 java 中占 2byte.</p>
 <p>另外, boolean 类型也有点小意思, 它可以占 1 byte, 也可以占 4 byte, 如果它是一个单独的变量类型, 它占 4 byte, 如果它是数组中的一个元素, 那么它占 1 byte.</p>
 <p>整数默认是 int 型, 小数默认是 double 型.</p>
 <p>Java 是强类型语言, float f = 2.5, 这样编译是通不过的, float f = 2.5f 才可以.</p>
-<h4>2.2 自动类型转换</h4>
+<h4 id="22">2.2 自动类型转换</h4>
 <p>又叫自动类型提升, 当放生运算时, 低字节将被提升到高字节类型.</p>
 <ul>
 <li>所有的 byte、short、char 类型将被提升成 int 型;</li>
@@ -71,27 +71,27 @@
 <li>如时有一个操作数是 float, 计算结果是 float;</li>
 <li>如时有一个操作数是 double, 计算结果是 double;</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kt">byte</span> <span class="n">b1</span><span class="o">,</span> <span class="n">b2</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
-<span class="n">b1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-<span class="n">b2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">+</span> <span class="n">b2</span><span class="o">;</span> <span class="c1">// 报错</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">byte</span> b1, b2, b;
+b1 = <span style="color: #B452CD">1</span>;
+b2 = <span style="color: #B452CD">2</span>;
+b = b1 + b2; <span style="color: #228B22">// 报错</span>
 </pre></div>
 
 
 <p>这段代码会报错, 原因就是因为放生运算时,  byte 类型被提升成 int 型, 将 int 型赋给 b 肯定会报错.</p>
-<div class="highlight"><pre><span></span><span class="kt">byte</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">i</span><span class="o">;</span>  <span class="c1">// 报错</span>
-<span class="n">s</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>   <span class="c1">// √</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">byte</span> s = <span style="color: #B452CD">2</span>;
+<span style="color: #00688B; font-weight: bold">int</span> i = <span style="color: #B452CD">10</span>;
+s = s + i;  <span style="color: #228B22">// 报错</span>
+s += i;   <span style="color: #228B22">// √</span>
 </pre></div>
 
 
 <p>为什么 s += i 是对的呢?<br>因为 Java 编译器对 += 运算做了优化, s1+=1 相当与 s1 = short(s1+1).</p>
-<h4>2.3 强制类型转换</h4>
+<h4 id="23">2.3 强制类型转换</h4>
 <p>(void)xxx，如：(int)2.3</p>
 <p>强制类型转换可能会造成数据的丢失, 例如, 通过强制类型转换将 75.8 赋值给 int 型变量后, 结果为 75, 数值上并未进行四舍五入, 而是直接将小数位截断.<br>
 再例如, 之前<a href="http://www.smallcpp.cn/qi-yuan-ma-fan-ma-bu-ma.html">第七节笔记</a>最后面提到的溢出也是强制类型转换引起的问题.</p>
-<h2>3.常量</h2>
+<h2 id="3">3.常量</h2>
 <p>和 C/C++ 中差不多, 在 Java 中可以通过 final 关键字来声明一个常量:<br>final 类型 常量名 = 值.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 

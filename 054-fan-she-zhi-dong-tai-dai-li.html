@@ -53,149 +53,168 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h1>代理模式</h1>
+    <div class="toc">
+<ul>
+<li><a href="#_1">代理模式</a><ul>
+<li><a href="#_2">静态代理</a></li>
+<li><a href="#_3">动态代理</a></li>
+</ul>
+</li>
+<li><a href="#_4">动态代理实例</a><ul>
+<li><a href="#api">相关 API</a><ul>
+<li><a href="#1-javalangreflectproxy">1) java.lang.reflect.Proxy</a></li>
+<li><a href="#2-javalangreflectinvocationhandler">2) java.lang.reflect.InvocationHandler</a></li>
+<li><a href="#3-javalangclassloader">3) java.lang.ClassLoader</a></li>
+</ul>
+</li>
+<li><a href="#_5">实现步骤</a></li>
+<li><a href="#_6">示例</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1">代理模式</h1>
 <p>代理模式是 GOF 的23种设计模式之一 (结构型模式), 通过引入一个新的对象, 来实现对真实对象的操作或者将新的对象作为真实对象的一个替身, 即代理对象. 它可以在客户端和目标对象之间起到中介的作用, 并且可以通过代理对象去掉客户不能看到的内容和服务或者添加客户需要的额外服务.</p>
 <p>根据代理类的生成时间不同可以将代理分为<strong>静态</strong>代理和<strong>动态</strong>代理两种.</p>
-<h2>静态代理</h2>
+<h2 id="_2">静态代理</h2>
 <p>由程序员创建或工具生成代理类的源码, 再编译代理类. 所谓静态也就是在程序运行前就已经存在代理类的字节码文件, 代理类和委托类的关系在运行前就确定了.</p>
 <p><strong>缺点</strong>:</p>
 <ul>
 <li>代理对象的一个接口只服务于一种类型的对象, 如果要代理的方法很多, 势必要为每一种方法都进行代理, 静态代理在程序规模稍大时就无法胜任了</li>
 <li>如果接口增加一个方法, 除了所有实现类需要实现这个方法外, 所有代理类也需要实现此方法. 增加了代码维护的复杂度</li>
 </ul>
-<h2>动态代理</h2>
+<h2 id="_3">动态代理</h2>
 <p>动态代理类的源码是在程序运行期间由 JVM 根据反射等机制动态的生成, 所以不存在代理类的字节码文件. 代理类和委托类的关系是在程序运行时确定.</p>
 <p><strong>优点</strong>:</p>
 <p>动态代理与静态代理相比较, 最大的好处是接口中声明的所有方法都被转移到调用处理器一个集中的方法中处理 (InvocationHandler.invoke). 这样, 在接口方法数量比较多的时候, 我们可以进行灵活处理, 而不需要像静态代理那样每一个方法进行中转.</p>
 <p><strong>缺点</strong>:</p>
 <p>动态代理解决了代理代理的缺点, 但它始终无法摆脱仅支持 interface 代理的桎梏; 但是我们有更强大的代理 -- <code>cglib</code>, 以后再介绍这个.</p>
-<h1>动态代理实例</h1>
-<h2>相关 API</h2>
-<h3>1) <code>java.lang.reflect.Proxy</code></h3>
+<h1 id="_4">动态代理实例</h1>
+<h2 id="api">相关 API</h2>
+<h3 id="1-javalangreflectproxy">1) <code>java.lang.reflect.Proxy</code></h3>
 <p>这是 Java 动态代理机制生成的所有动态代理类的父类, 它提供了一组静态方法来为一组接口动态地生成代理类及其对象.</p>
-<div class="highlight"><pre><span></span><span class="c1">// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器</span>
-<span class="kd">static</span> <span class="n">InvocationHandler</span> <span class="nf">getInvocationHandler</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 方法 1: 该方法用于获取指定代理对象所关联的调用处理器</span>
+<span style="color: #8B008B; font-weight: bold">static</span> InvocationHandler <span style="color: #008b45">getInvocationHandler</span>(Object proxy)
 
-<span class="c1">// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象</span>
-<span class="kd">static</span> <span class="n">Class</span> <span class="nf">getProxyClass</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">Class</span><span class="o">[]</span> <span class="n">interfaces</span><span class="o">)</span>
+<span style="color: #228B22">// 方法 2：该方法用于获取关联于指定类装载器和一组接口的动态代理类的类对象</span>
+<span style="color: #8B008B; font-weight: bold">static</span> Class <span style="color: #008b45">getProxyClass</span>(ClassLoader loader, Class[] interfaces)
 
-<span class="c1">// 方法 3：该方法用于判断指定类对象是否是一个动态代理类</span>
-<span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isProxyClass</span><span class="o">(</span><span class="n">Class</span> <span class="n">cl</span><span class="o">)</span>
+<span style="color: #228B22">// 方法 3：该方法用于判断指定类对象是否是一个动态代理类</span>
+<span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">boolean</span> <span style="color: #008b45">isProxyClass</span>(Class cl)
 
-<span class="c1">// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例</span>
-<span class="kd">static</span> <span class="n">Object</span> <span class="nf">newProxyInstance</span><span class="o">(</span><span class="n">ClassLoader</span> <span class="n">loader</span><span class="o">,</span> <span class="n">Class</span><span class="o">[]</span> <span class="n">interfaces</span><span class="o">,</span> <span class="n">InvocationHandler</span> <span class="n">h</span><span class="o">)</span>
+<span style="color: #228B22">// 方法 4：该方法用于为指定类装载器、一组接口及调用处理器生成动态代理类实例</span>
+<span style="color: #8B008B; font-weight: bold">static</span> Object <span style="color: #008b45">newProxyInstance</span>(ClassLoader loader, Class[] interfaces, InvocationHandler h)
 </pre></div>
 
 
 <p><br></p>
-<h3>2) <code>java.lang.reflect.InvocationHandler</code></h3>
+<h3 id="2-javalangreflectinvocationhandler">2) <code>java.lang.reflect.InvocationHandler</code></h3>
 <p>这是调用处理器接口, 它自定义了一个 invoke 方法, 用于集中处理在动态代理类对象上的方法调用, 通常在该方法中实现对委托类的代理访问. 每次生成动态代理类对象时都要指定一个对应的调用处理器对象.</p>
-<div class="highlight"><pre><span></span><span class="c1">// 该方法负责集中处理动态代理类上的所有方法调用. 第一个参数既是代理类实例, 第二个参数是被调用的方法对象</span>
-<span class="c1">// 第三个方法是调用参数. 调用处理器根据这三个参数进行预处理或分派到委托类实例上反射执行</span>
-<span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 该方法负责集中处理动态代理类上的所有方法调用. 第一个参数既是代理类实例, 第二个参数是被调用的方法对象</span>
+<span style="color: #228B22">// 第三个方法是调用参数. 调用处理器根据这三个参数进行预处理或分派到委托类实例上反射执行</span>
+Object <span style="color: #008b45">invoke</span>(Object proxy, Method method, Object[] args)
 </pre></div>
 
 
 <p><br></p>
-<h3>3) <code>java.lang.ClassLoader</code></h3>
+<h3 id="3-javalangclassloader">3) <code>java.lang.ClassLoader</code></h3>
 <p>这是类装载器类, 负责将类的字节码装载到 Java 虚拟机 (JVM) 中并为其定义类对象, 然后该类才能被使用. Proxy 静态方法生成动态代理类同样需要通过类装载器来进行装载才能使用, 它与普通类的唯一区别就是其字节码是由 JVM 在运行时动态生成的而非预存在于任何一个 <code>.class</code> 文件中.</p>
 <p>每次生成动态代理类对象时都需要指定一个类装载器对象.</p>
-<h2>实现步骤</h2>
+<h2 id="_5">实现步骤</h2>
 <ul>
 <li>实现 InvocationHandler 接口创建自己的调用处理器</li>
 <li>给 Proxy 类提供 ClassLoader 和代理接口类型数组创建动态代理类</li>
 <li>以调用处理器类型为参数, 利用反射机制得到动态代理类的构造函数</li>
 <li>以调用处理器对象为参数, 利用动态代理类的构造函数创建动态代理类对象</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
-<span class="c1">// 其内部通常包含指向委托类实例的引用, 用于真正执行分派转发过来的方法调用</span>
-<span class="n">InvocationHandler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InvocationHandlerImpl</span><span class="o">(..);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
+<span style="color: #228B22">// 其内部通常包含指向委托类实例的引用, 用于真正执行分派转发过来的方法调用</span>
+InvocationHandler handler = <span style="color: #8B008B; font-weight: bold">new</span> InvocationHandlerImpl(..);
 
-<span class="c1">// 通过 Proxy 为包括 Interface 接口在内的一组接口动态创建代理类的类对象</span>
-<span class="n">Class</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">Proxy</span><span class="o">.</span><span class="na">getProxyClass</span><span class="o">(</span><span class="n">classLoader</span><span class="o">,</span> <span class="k">new</span> <span class="n">Class</span><span class="o">[]</span> <span class="o">{</span> <span class="n">Interface</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="o">...</span> <span class="o">});</span>
+<span style="color: #228B22">// 通过 Proxy 为包括 Interface 接口在内的一组接口动态创建代理类的类对象</span>
+Class clazz = Proxy.<span style="color: #658b00">getProxyClass</span>(classLoader, <span style="color: #8B008B; font-weight: bold">new</span> Class[] { Interface.<span style="color: #658b00">class</span>, ... });
 
-<span class="c1">// 通过反射从生成的类对象获得构造函数对象</span>
-<span class="n">Constructor</span> <span class="n">constructor</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getConstructor</span><span class="o">(</span><span class="k">new</span> <span class="n">Class</span><span class="o">[]</span> <span class="o">{</span> <span class="n">InvocationHandler</span><span class="o">.</span><span class="na">class</span> <span class="o">});</span>
+<span style="color: #228B22">// 通过反射从生成的类对象获得构造函数对象</span>
+Constructor constructor = clazz.<span style="color: #658b00">getConstructor</span>(<span style="color: #8B008B; font-weight: bold">new</span> Class[] { InvocationHandler.<span style="color: #658b00">class</span> });
 
-<span class="c1">// 通过构造函数对象创建动态代理类实例</span>
-<span class="n">Interface</span> <span class="n">Proxy</span> <span class="o">=</span> <span class="o">(</span><span class="n">Interface</span><span class="o">)</span><span class="n">constructor</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="k">new</span> <span class="n">Object</span><span class="o">[]</span> <span class="o">{</span> <span class="n">handler</span> <span class="o">});</span>
+<span style="color: #228B22">// 通过构造函数对象创建动态代理类实例</span>
+Interface Proxy = (Interface)constructor.<span style="color: #658b00">newInstance</span>(<span style="color: #8B008B; font-weight: bold">new</span> Object[] { handler });
 </pre></div>
 
 
 <p><br>
 Proxy类的静态方法newProxyInstance对上面具体步骤的后三步做了封装, 简化了动态代理对象的获取过程.</p>
-<div class="highlight"><pre><span></span><span class="c1">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
-<span class="n">InvocationHandler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InvocationHandlerImpl</span><span class="o">(..);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// InvocationHandlerImpl 实现了 InvocationHandler 接口, 并能实现方法调用从代理类到委托类的分派转发</span>
+InvocationHandler handler = <span style="color: #8B008B; font-weight: bold">new</span> InvocationHandlerImpl(..);
 
-<span class="c1">// 通过 Proxy 直接创建动态代理类实例</span>
-<span class="n">Interface</span> <span class="n">proxy</span> <span class="o">=</span> <span class="o">(</span><span class="n">Interface</span><span class="o">)</span><span class="n">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span><span class="n">classLoader</span><span class="o">,</span> <span class="k">new</span> <span class="n">Class</span><span class="o">[]</span> <span class="o">{</span> <span class="n">Interface</span><span class="o">.</span><span class="na">class</span> <span class="o">},</span> <span class="n">handler</span><span class="o">);</span>
+<span style="color: #228B22">// 通过 Proxy 直接创建动态代理类实例</span>
+Interface proxy = (Interface)Proxy.<span style="color: #658b00">newProxyInstance</span>(classLoader, <span style="color: #8B008B; font-weight: bold">new</span> Class[] { Interface.<span style="color: #658b00">class</span> }, handler);
 </pre></div>
 
 
 <p><br></p>
-<h2>示例</h2>
+<h2 id="_6">示例</h2>
 <p>创建自己的调用处理器</p>
-<div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * 动态代理类对应的调用处理程序类</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SubjectInvocationHandler</span> <span class="kd">implements</span> <span class="n">InvocationHandler</span> <span class="o">{</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">/**</span>
+<span style="color: #228B22"> * 动态代理类对应的调用处理程序类</span>
+<span style="color: #228B22"> */</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">SubjectInvocationHandler</span> <span style="color: #8B008B; font-weight: bold">implements</span> InvocationHandler {
 
- <span class="c1">//代理类持有一个委托类的对象引用</span>
- <span class="kd">private</span> <span class="n">Object</span> <span class="n">delegate</span><span class="o">;</span>
+ <span style="color: #228B22">//代理类持有一个委托类的对象引用</span>
+ <span style="color: #8B008B; font-weight: bold">private</span> Object delegate;
 
- <span class="kd">public</span> <span class="nf">SubjectInvocationHandler</span><span class="o">(</span><span class="n">Object</span> <span class="n">delegate</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">this</span><span class="o">.</span><span class="na">delegate</span> <span class="o">=</span> <span class="n">delegate</span><span class="o">;</span>
- <span class="o">}</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #008b45">SubjectInvocationHandler</span>(Object delegate) {
+  <span style="color: #8B008B; font-weight: bold">this</span>.<span style="color: #658b00">delegate</span> = delegate;
+ }
 
- <span class="nd">@Override</span>
- <span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
-  <span class="kt">long</span> <span class="n">stime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-  <span class="c1">//利用反射机制将请求分派给委托类处理. Method的invoke返回Object对象作为方法执行结果.</span>
-  <span class="c1">//因为示例程序没有返回值, 所以这里忽略了返回值处理</span>
-  <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">delegate</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-  <span class="kt">long</span> <span class="n">ftime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;执行任务耗时&quot;</span><span class="o">+(</span><span class="n">ftime</span> <span class="o">-</span> <span class="n">stime</span><span class="o">)+</span><span class="s">&quot;毫秒&quot;</span><span class="o">);</span>
+ <span style="color: #707a7c">@Override</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> Object <span style="color: #008b45">invoke</span>(Object proxy, Method method, Object[] args) <span style="color: #8B008B; font-weight: bold">throws</span> Throwable {
+  <span style="color: #00688B; font-weight: bold">long</span> stime = System.<span style="color: #658b00">currentTimeMillis</span>();
+  <span style="color: #228B22">//利用反射机制将请求分派给委托类处理. Method的invoke返回Object对象作为方法执行结果.</span>
+  <span style="color: #228B22">//因为示例程序没有返回值, 所以这里忽略了返回值处理</span>
+  method.<span style="color: #658b00">invoke</span>(delegate, args);
+  <span style="color: #00688B; font-weight: bold">long</span> ftime = System.<span style="color: #658b00">currentTimeMillis</span>();
+  System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;执行任务耗时&quot;</span>+(ftime - stime)+<span style="color: #CD5555">&quot;毫秒&quot;</span>);
 
-  <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
- <span class="o">}</span>
-<span class="o">}</span>
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">null</span>;
+ }
+}
 </pre></div>
 
 
 <p><br>
 生成动态代理对象的工厂, 工厂方法列出了如何生成动态代理类对象的步骤.</p>
-<div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * 生成动态代理对象的工厂.</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DynProxyFactory</span> <span class="o">{</span>
- <span class="c1">//客户类调用此工厂方法获得代理对象.</span>
- <span class="c1">//对客户类来说, 其并不知道返回的是代理类对象还是委托类对象.</span>
- <span class="kd">public</span> <span class="kd">static</span> <span class="n">Subject</span> <span class="nf">getInstance</span><span class="o">(){</span>
-  <span class="n">Subject</span> <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RealSubject</span><span class="o">();</span>
-  <span class="n">InvocationHandler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SubjectInvocationHandler</span><span class="o">(</span><span class="n">delegate</span><span class="o">);</span>
-  <span class="n">Subject</span> <span class="n">proxy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-  <span class="n">proxy</span> <span class="o">=</span> <span class="o">(</span><span class="n">Subject</span><span class="o">)</span><span class="n">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span>
-    <span class="n">delegate</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">(),</span>
-    <span class="n">delegate</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getInterfaces</span><span class="o">(),</span>
-    <span class="n">handler</span><span class="o">);</span>
-  <span class="k">return</span> <span class="n">proxy</span><span class="o">;</span>
- <span class="o">}</span>
-<span class="o">}</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">/**</span>
+<span style="color: #228B22"> * 生成动态代理对象的工厂.</span>
+<span style="color: #228B22"> */</span>
+<span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">DynProxyFactory</span> {
+ <span style="color: #228B22">//客户类调用此工厂方法获得代理对象.</span>
+ <span style="color: #228B22">//对客户类来说, 其并不知道返回的是代理类对象还是委托类对象.</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> Subject <span style="color: #008b45">getInstance</span>(){
+  Subject delegate = <span style="color: #8B008B; font-weight: bold">new</span> RealSubject();
+  InvocationHandler handler = <span style="color: #8B008B; font-weight: bold">new</span> SubjectInvocationHandler(delegate);
+  Subject proxy = <span style="color: #8B008B; font-weight: bold">null</span>;
+  proxy = (Subject)Proxy.<span style="color: #658b00">newProxyInstance</span>(
+    delegate.<span style="color: #658b00">getClass</span>().<span style="color: #658b00">getClassLoader</span>(),
+    delegate.<span style="color: #658b00">getClass</span>().<span style="color: #658b00">getInterfaces</span>(),
+    handler);
+  <span style="color: #8B008B; font-weight: bold">return</span> proxy;
+ }
+}
 </pre></div>
 
 
 <p><br>
 动态代理客户类</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Client</span> {
 
- <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+ <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">static</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">main</span>(String[] args) {
 
-  <span class="n">Subject</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">DynProxyFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
-  <span class="n">proxy</span><span class="o">.</span><span class="na">dealTask</span><span class="o">(</span><span class="s">&quot;DBQueryTask&quot;</span><span class="o">);</span>
- <span class="o">}</span>
+  Subject proxy = DynProxyFactory.<span style="color: #658b00">getInstance</span>();
+  proxy.<span style="color: #658b00">dealTask</span>(<span style="color: #CD5555">&quot;DBQueryTask&quot;</span>);
+ }
 
-<span class="o">}</span>
+}
 </pre></div>
 
 

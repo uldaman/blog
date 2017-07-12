@@ -53,8 +53,21 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h2>MQ 系统</h2>
+    <div class="toc">
+<ul>
+<li><a href="#mq">MQ 系统</a></li>
+<li><a href="#_1">发布订阅模式</a><ul>
+<li><a href="#subscribe">subscribe 订阅</a></li>
+<li><a href="#unsubscribe">unsubscribe 退订</a></li>
+<li><a href="#psubscribe-regex">psubscribe 订阅(RegEx)</a></li>
+<li><a href="#punsubscribe">punsubscribe 退订</a></li>
+<li><a href="#publish">publish 发布</a></li>
+<li><a href="#pubsub">pubsub 自省</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mq">MQ 系统</h2>
 <p>Redis 提供了两种方式来作消息队列:</p>
 <ul>
 <li>生产者/消费者模式 模式 (采用 redis 的 list 类型)<ul>
@@ -71,23 +84,23 @@
 <li>第一种队列方式, 一个任务只会被一个客户端消费</li>
 <li>第二种队列方式, 一个任务会被所有客户端消费</li>
 </ul>
-<h2>发布订阅模式</h2>
+<h2 id="_1">发布订阅模式</h2>
 <p>这可以说是一种__观察者__模式<br>
 发布订阅模式中有两个角色: <strong>发布者</strong> 和 <strong>订阅者</strong><br>
 __订阅者__可以订阅一个或多个频道(channel)<br>
 __发布者__可以向指定频道发布消息(publish)<br>
 所以订阅了该频道的订阅者都将接受到该消息.</p>
-<h3>subscribe 订阅</h3>
+<h3 id="subscribe">subscribe 订阅</h3>
 <ul>
-<li>subscribe channel1 channel2 ...<ul>
+<li>subscribe channel1 channel2 &hellip;<ul>
 <li>订阅一个或多个频道</li>
 <li>如 subscribe news.it<ul>
 <li>使用 subscribe 时的返回值<ul>
-<li>1) "subscribe"<ul>
+<li>1) &ldquo;subscribe&rdquo;<ul>
 <li>返回值的类型: 显示订阅成功</li>
 </ul>
 </li>
-<li>2) "news.it"<ul>
+<li>2) &ldquo;news.it&rdquo;<ul>
 <li>订阅的频道</li>
 </ul>
 </li>
@@ -98,15 +111,15 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 <li>接收到消息时的返回值<ul>
-<li>1) "message"<ul>
+<li>1) &ldquo;message&rdquo;<ul>
 <li>返回值的类型: 消息</li>
 </ul>
 </li>
-<li>2) "news.it"<ul>
+<li>2) &ldquo;news.it&rdquo;<ul>
 <li>消息本身的频道</li>
 </ul>
 </li>
-<li>3) "Google buy Motorola"<ul>
+<li>3) &ldquo;Google buy Motorola&rdquo;<ul>
 <li>消息的内容</li>
 </ul>
 </li>
@@ -117,9 +130,9 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 </ul>
-<h3>unsubscribe 退订</h3>
+<h3 id="unsubscribe">unsubscribe 退订</h3>
 <ul>
-<li>unsubscribe channe1 channe2 ...<ul>
+<li>unsubscribe channe1 channe2 &hellip;<ul>
 <li>退订通过 <strong>subscribe</strong> 订阅的频道<ul>
 <li>如果没有频道被指定, 那么客户端通过 <strong>subscribe</strong> 订阅的所有频道都会被退订</li>
 </ul>
@@ -127,9 +140,9 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 </ul>
-<h3>psubscribe 订阅(RegEx)</h3>
+<h3 id="psubscribe-regex">psubscribe 订阅(RegEx)</h3>
 <ul>
-<li>psubscribe mode1 mode2 ...<ul>
+<li>psubscribe mode1 mode2 &hellip;<ul>
 <li>订阅一个或多个符合给定模式(RegEx)的频道<ul>
 <li>* 匹配所有字符</li>
 <li>? 匹配一个任意字符</li>
@@ -139,11 +152,11 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </li>
 <li>如 psubscribe news.*<ul>
 <li>使用 subscribe 时的返回值<ul>
-<li>1) "ppsubscribe"<ul>
+<li>1) &ldquo;ppsubscribe&rdquo;<ul>
 <li>返回值的类型: 显示订阅成功</li>
 </ul>
 </li>
-<li>2) "news.*"<ul>
+<li>2) &ldquo;news.*&rdquo;<ul>
 <li>订阅的频道模式</li>
 </ul>
 </li>
@@ -154,19 +167,19 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 <li>接收到消息时的返回值<ul>
-<li>1) "pmessage"<ul>
+<li>1) &ldquo;pmessage&rdquo;<ul>
 <li>返回值的类型: 消息</li>
 </ul>
 </li>
-<li>2) "news.*"<ul>
+<li>2) &ldquo;news.*&rdquo;<ul>
 <li>消息匹配的频道模式</li>
 </ul>
 </li>
-<li>3) "news.it"<ul>
+<li>3) &ldquo;news.it&rdquo;<ul>
 <li>消息本身的频道</li>
 </ul>
 </li>
-<li>4) "Google buy Motorola"<ul>
+<li>4) &ldquo;Google buy Motorola&rdquo;<ul>
 <li>消息的内容</li>
 </ul>
 </li>
@@ -177,9 +190,9 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 </ul>
-<h3>punsubscribe 退订</h3>
+<h3 id="punsubscribe">punsubscribe 退订</h3>
 <ul>
-<li>punsubscribe mode1 mode2 ...<ul>
+<li>punsubscribe mode1 mode2 &hellip;<ul>
 <li>退订通过 <strong>psubscribe</strong> 订阅的频道<ul>
 <li>如果没有频道被指定, 那么客户端通过 <strong>psubscribe</strong> 订阅的所有频道都会被退订</li>
 </ul>
@@ -187,14 +200,14 @@ __发布者__可以向指定频道发布消息(publish)<br>
 </ul>
 </li>
 </ul>
-<h3>publish 发布</h3>
+<h3 id="publish">publish 发布</h3>
 <ul>
 <li>publish channel message<ul>
 <li>发布消息, 返回接收到这个消息的客户端个数</li>
 </ul>
 </li>
 </ul>
-<h3>pubsub 自省</h3>
+<h3 id="pubsub">pubsub 自省</h3>
 <p>pubsub 是一个查看订阅与发布系统状态的内省命令，它由数个不同格式的子命令组成.</p>
 <p>参考连接: <a href="http://doc.redisfans.com/pub_sub/pubsub.html">http://doc.redisfans.com/pub_sub/pubsub.html</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a>

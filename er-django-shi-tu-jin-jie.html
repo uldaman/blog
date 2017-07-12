@@ -55,12 +55,12 @@
 
     <p><strong>通用视图</strong></p>
 <p>有的时候, views.py 的处理只是简单的返回一个 html, 这种情况就可以通过 [通用视图] 简写在 urls.py 中.</p>
-<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #008000&quot;</span><span class="o">&gt;</span><span class="c1">#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;from django.views.generic.simlpe import direct_to_template 版本更新, 用下面这个代替&lt;/span&gt;</span>
-<span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #0000ff&quot;</span><span class="o">&gt;</span><span class="n">from</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="n">django</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">generic</span><span class="o">.</span><span class="n">base</span> <span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #0000ff&quot;</span><span class="o">&gt;</span><span class="n">import</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="n">TemplateView</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;from django.views.generic.simlpe import direct_to_template 版本更新, 用下面这个代替&lt;/span&gt;
+&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.views.generic.base &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; TemplateView
 
-<span class="n">urlpatterns</span> <span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;=&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span> <span class="p">[</span>
-    <span class="n">url</span><span class="p">(</span><span class="n">r</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #800000&quot;</span><span class="o">&gt;</span><span class="s1">&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^about/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">TemplateView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #800000&quot;</span><span class="o">&gt;</span><span class="s1">&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;about.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;color: #000000&quot;</span><span class="o">&gt;</span><span class="p">)),</span>
-<span class="p">]</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
+    url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^about/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;, TemplateView.as_view(template_name=&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;about.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)),
+]&lt;/span&gt;
 </pre></div>
 
 
@@ -70,7 +70,7 @@
 <hr>
 <p>有的时候, views.py 里的视图函数有部分相同的逻辑, 此时可以把这部分逻辑提取出来.</p>
 <p>views.py</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view1(request):
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view1(request):
     &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;1.html&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
 
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; view2(request):
@@ -85,14 +85,14 @@
 
 
 <p>urls.py</p>
-<div class="highlight"><pre><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>urlpatterns =&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^view1/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, views(view1)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^view2/$&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, views(view2)),
 ]&lt;/span&gt;
 </pre></div>
 
 
-<p>00"</p>
+<p>00&rdquo;</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 
 </p>

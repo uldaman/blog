@@ -93,7 +93,7 @@
 
 <p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
 这个类最主要的作用就是获取当前时间.</p>
-<div class="highlight"><pre><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
 &lt;span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
 
 </p>
@@ -114,7 +114,7 @@
 <em>. 使用包装类的 toString() 方法
 </em>. 使用 String 类的 valueOf() 方法
 *. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
 String str1 &lt;/span&gt;=&lt;span style=&quot;color …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
 
 </p>
@@ -181,7 +181,7 @@ Integet n2 = new Integer(“5”);</p>
 
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法：</p>
-<div class="highlight"><pre><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String si = &quot;xxx&quot;&lt;span style=&quot;color: #000000&quot;&gt;;
 String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
 
 </p>
@@ -220,10 +220,10 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 <p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
 <p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="highlight"><pre><span></span><span class="n">HRESULT</span> <span class="n">APIENTRY</span> <span class="n">hkIDirect3DDevice9</span><span class="o">::</span><span class="n">Reset</span><span class="p">(</span><span class="n">D3DPRESENT_PARAMETERS</span> <span class="o">*</span><span class="n">pPresentationParameters</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">m_pManager</span><span class="o">-&gt;</span><span class="n">PreReset</span><span class="p">();</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
+    m_pManager-&gt;PreReset();
 
-    <span class="n">HRESULT</span> <span class="n">hRet</span> <span class="o">=</span> <span class="n">m_pD3Ddev …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
+    HRESULT hRet = m_pD3Ddev- …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
@@ -240,12 +240,12 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
 
 
 <p>老生常谈, 参考 C++.</p>
-<h1>类型转换</h1>
+<h1 id="_1">类型转换</h1>
 <p>需要注意一下类型转换的问题, 和 C++ 类一样, 向上类型转换(即将子类的对象赋值给父类的引用)是安全的, 向下类型转换则是有风险的;
 为此, Java 提供了 instanceof 运算符, 用来解决向下转换的安全性问题.</p>
 <p>首先, 我们来看一下向下类型转换的风险.</p>
 <p>假设存在, 一个父类 Animal, 两个子类, Dog 和 Cat.</p>
-<div class="highlight"><pre><span></span>Dog dog = &lt;span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Dog dog = &lt;span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
 
 </p>
 

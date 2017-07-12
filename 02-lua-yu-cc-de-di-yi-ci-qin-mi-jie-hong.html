@@ -62,8 +62,8 @@
 <p><strong>Lua 访问 C/C++ 接口
 </strong>即用 C/C++ 来完成底层功能, 然后暴露自定义的 api 给 Lua，以供其调用.
 我们把这种 C/C++ 暴露给 Lua 的接口称做 LuaGlue 函数.
-当然, "制作"这种接口需要用到 Lua 提供给 C/C++ 的 API, 通常把它们称之为 Lua API.
-Lua 除了提供这种"制作" LuaGlue 函数的 Lua API 外, 还提供了其它诸如能获取 Lua 脚本中变量值、调用 Lua 函数等功能的 Lua API.
+当然, &ldquo;制作&rdquo;这种接口需要用到 Lua 提供给 C/C++ 的 API, 通常把它们称之为 Lua API.
+Lua 除了提供这种&rdquo;制作&rdquo; LuaGlue 函数的 Lua API 外, 还提供了其它诸如能获取 Lua 脚本中变量值、调用 Lua 函数等功能的 Lua API.
 <strong>简单来说:</strong> Lua 脚本通过 LuaGlue 来访问和操作 C/C++, 而 C/C++ 通过 Lua API 来访问和操作 Lua 脚本.</p>
 <p>在创建 LuaGlue 之前, 首先要在 VS 中初始化 Lua 环境, 基本的初始化步骤如下：
 1. 使用 <strong>luaL_newstate()</strong> 创建一个新的 Lua 环境(Lua_State).
@@ -75,12 +75,12 @@ Lua 除了提供这种"制作" LuaGlue 函数的 Lua API 外, 还提供了其它
 luaopen_base(L);
 luaopen_io(L);
 luaopen_math(L);
-...</p>
+&hellip;</p>
 <p>当然在此之前还要按上篇文件的内容搭建好开发环境.</p>
 <p>初始化好 Lua 环境后, 就可以开始编写 LuaGule 函数了.
 所有的 LuaGule 函数被要求为 int 返回和一个 lua_State* 参数, 并且必须是 C 方式调用, 这意味着, 我们需要用 <strong>extern “C”</strong>来声明函数.
-编写好后, 为了让其能被 Lua 访问, 程序需要使用一个 Lua API -- <strong>lua_register(lua_State <em>L, const char </em>name, lua_CFunction f)</strong> 来注册 LuaGule 函数.</p>
-<div class="highlight"><pre><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+编写好后, 为了让其能被 Lua 访问, 程序需要使用一个 Lua API &ndash; <strong>lua_register(lua_State <em>L, const char </em>name, lua_CFunction f)</strong> 来注册 LuaGule 函数.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;tchar.h&gt;&lt;span style=&quot;color: #000000&quot;&gt;
 #include &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;LuaEx.h&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;
 

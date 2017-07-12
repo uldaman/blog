@@ -53,13 +53,19 @@
 </h6>
 
 
-    <p>[TOC]</p>
-<h2>String 类</h2>
+    <div class="toc">
+<ul>
+<li><a href="#string">String 类</a></li>
+<li><a href="#stringbuilder-stringbuffer">StringBuilder / StringBuffer</a></li>
+<li><a href="#_1">字符串&lt;=&gt;基本类型</a></li>
+</ul>
+</div>
+<h2 id="string">String 类</h2>
 <p>在之前的笔记就已经使用了字符串, Java 中, 字符串被作为 String 类型的对象处理, 该类位于 java.lang 包中, 默认情况下这个包被自动导入所有的程序.</p>
 <p>创建 String 对象的方法:</p>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">si</span> <span class="o">=</span> <span class="s">&quot;xxx&quot;</span><span class="o">;</span>
-<span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">();</span>
-<span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&quot;xxx&quot;</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String si = <span style="color: #CD5555">&quot;xxx&quot;</span>;
+String s2 = <span style="color: #8B008B; font-weight: bold">new</span> String();
+String s3 = <span style="color: #8B008B; font-weight: bold">new</span> String(<span style="color: #CD5555">&quot;xxx&quot;</span>);
 </pre></div>
 
 
@@ -67,9 +73,9 @@
 <p>而平常见到的 Java 代码中, 对 String 对象的修改其实是__创建了新的对象__.</p>
 <p>一些 String 必须了解的细节:</p>
 <ul>
-<li>String s1 = "字符串" 声明了一个字符串对象, s1 存放的是字符串对象的引用, 其实质是创建了新的字符串对象, 变量 s1 指向了新创建的字符串对象.</li>
-<li>通过 <strong>String s1 = "字符串"</strong> 方式创建的字符串, 对于多次出现的字符常量, <strong>只会创建一个</strong>, 如 String s1 = "字符串", String s2 = "字符串", 那么 s1、s2 指向的是同一个对象, 即 s1 == s2.</li>
-<li>通过 <strong>String s1 = new String("字符串")</strong> 方式创建的字符串, 每次都是产生一个新的对象, 即便两个字符串的内容相同, 使用 "==" 比较时也为 "false", 如果只需比较内容是否相同, 应使用 "<strong>equals()</strong>" 方法(String 类重写了 equals() 方法).</li>
+<li>String s1 = &ldquo;字符串&rdquo; 声明了一个字符串对象, s1 存放的是字符串对象的引用, 其实质是创建了新的字符串对象, 变量 s1 指向了新创建的字符串对象.</li>
+<li>通过 <strong>String s1 = &ldquo;字符串&rdquo;</strong> 方式创建的字符串, 对于多次出现的字符常量, <strong>只会创建一个</strong>, 如 String s1 = &ldquo;字符串&rdquo;, String s2 = &ldquo;字符串&rdquo;, 那么 s1、s2 指向的是同一个对象, 即 s1 == s2.</li>
+<li>通过 <strong>String s1 = new String(&ldquo;字符串&rdquo;)</strong> 方式创建的字符串, 每次都是产生一个新的对象, 即便两个字符串的内容相同, 使用 &ldquo;==&rdquo; 比较时也为 &ldquo;false&rdquo;, 如果只需比较内容是否相同, 应使用 &ldquo;<strong>equals()</strong>&rdquo; 方法(String 类重写了 equals() 方法).</li>
 </ul>
 <p>String 类提供了许多用来处理字符串的方法, 例如, 获取字符串长度、对字符串进行截取、将字符串转换为大写或小写、字符串分割等.</p>
 <p><img alt="" src="http://i59.tinypic.com/w1624g.jpg"></p>
@@ -79,7 +85,7 @@
 <li>使用 indexOf 进行字符或字符串查找时, 如果匹配返回位置索引, 如果没有匹配结果, 返回 -1</li>
 <li>使用 substring(beginIndex , endIndex) 进行字符串截取时, 包括 beginIndex 位置的字符, 不包括 endIndex 位置的字符</li>
 </ul>
-<h2>StringBuilder / StringBuffer</h2>
+<h2 id="stringbuilder-stringbuffer">StringBuilder / StringBuffer</h2>
 <p>在 Java 中, 除了可以使用 String 类来存储字符串, 还可以使用 <strong>StringBuilder</strong> 类或 <strong>StringBuffer</strong> 类存储字符串.</p>
 <p>因为对 String 的修改会生成新的 String 对象, 所以当频繁操作 String 时, 就会额外产生很多消耗, 使用 StringBuilder 或 StringBuffer 就可以避免这个问题, 它们是可变类, 任何对它指向的字符串的操作都不会产生新的对象.</p>
 <p>至于 StringBuilder 和StringBuffer, 它们基本相似, 不同之处, StringBuffer 是线程安全的, 而 StringBuilder 则没有实现线程安全功能, 所以性能略高.</p>
@@ -90,17 +96,17 @@
 <p>StringBuilder str2 = new StringBuilder(“xxx”);</p>
 <p>StringBuilder 类也提供了一些方法来操作字符串:</p>
 <p><img alt="" src="http://i59.tinypic.com/2mzb78k.jpg"></p>
-<h2>字符串&lt;=&gt;基本类型</h2>
+<h2 id="_1">字符串&lt;=&gt;基本类型</h2>
 <p>Java 提供三种方法实现基本类型向字符串转换:</p>
 <ul>
 <li>使用包装类的 toString() 方法</li>
 <li>使用 String 类的 valueOf() 方法</li>
 <li>用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
-<span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-<span class="n">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-<span class="n">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">int</span> c = <span style="color: #B452CD">10</span>;
+String str1 = Integer.<span style="color: #658b00">toString</span>(c);
+String str2 = String.<span style="color: #658b00">valueOf</span>(c);
+String str3 = c + <span style="color: #CD5555">&quot;&quot;</span>;
 </pre></div>
 
 
@@ -109,9 +115,9 @@
 <li>调用包装类的 parseXxx 静态方法</li>
 <li>调用包装类的 valueOf() 方法转换为基本类型的包装类, 然后自动拆箱</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;10&quot;</span><span class="o">;</span>
-<span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">paseInt</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>String str = <span style="color: #CD5555">&quot;10&quot;</span>;
+<span style="color: #00688B; font-weight: bold">int</span> d = Integer.<span style="color: #658b00">paseInt</span>(str);
+<span style="color: #00688B; font-weight: bold">int</span> e = Integer.<span style="color: #658b00">valueOf</span>(str);
 </pre></div>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 

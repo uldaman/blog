@@ -53,7 +53,9 @@
 </h6>
 
 
-    <p>[TOC]</p>
+    <div class="toc">
+<ul></ul>
+</div>
 <p>References:<br>
 <a href="http://blog.csdn.net/andycpp/article/details/1327147/">在 Eclipse 中使用 JUnit4 进行单元测试 (初级篇)</a><br>
 <a href="http://blog.csdn.net/andycpp/article/details/1327346">在 Eclipse 中使用 JUnit4 进行单元测试 (中级篇)</a><br>
@@ -65,13 +67,13 @@
 <p>那有没有什么办法能不这么频繁的改动 main 方法又能测试完所有要测试的方法呢?</p>
 <p>利用 <strong>JUnit</strong> 就能做到这一点, 具体的 JUnit 使用方法参考上面的 <strong>References</strong>, 这里教大家一种简单点的使用方法.</p>
 <p>在你要测试的方法前加上 <code>@Test</code> 就可以了.</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="o">{</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">App</span> {
 
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_test</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;8888&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span style="color: #707a7c">@Test</span>
+    <span style="color: #8B008B; font-weight: bold">public</span> <span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">test_test</span>() {
+        System.<span style="color: #658b00">out</span>.<span style="color: #658b00">println</span>(<span style="color: #CD5555">&quot;8888&quot;</span>);
+    }
+}
 </pre></div>
 
 

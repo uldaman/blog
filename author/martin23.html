@@ -148,7 +148,7 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 
 <p>在 国嵌C++ 中曾分析过重载与重写.
 看下面这个例子:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; CParent {
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; CParent {
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;:
     &lt;/span&gt;&lt;span style=&quot;color …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
 
@@ -182,11 +182,11 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 </h6>
 
 
-<p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持"糖块句法", 允许程序通过一个简单的"foreach"语句自动遍历list中的元素.
+<p>这之前我们遍历一个数组或者一个list之类的容器, 需要写很多代码, 而其它语言实现支持&rdquo;糖块句法&rdquo;, 允许程序通过一个简单的&rdquo;foreach&rdquo;语句自动遍历list中的元素.
 C++11增加了一个类似的特性, for语句可以简单地遍历列表中的元素.</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
-<span class="c1">// double the value of each element in my_array:</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="nl">x</span> <span class="p">:</span> <span class="n">my_array …</span></pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">int</span> my_array[<span style="color: #B452CD">5</span>] = {<span style="color: #B452CD">1</span>, <span style="color: #B452CD">2</span>, <span style="color: #B452CD">3</span>, <span style="color: #B452CD">4</span>, <span style="color: #B452CD">5</span>};
+<span style="color: #228B22">// double the value of each element in my_array:</span>
+<span style="color: #8B008B; font-weight: bold">for</span> (<span style="color: #00688B; font-weight: bold">int</span> &amp;x : my_array …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
 
 </p>
 
@@ -203,7 +203,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 
 
 <p>先看下面这两个重载函数.</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000&quot;&gt;);
 &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; foo(&lt;span style=&quot;color: #0000ff …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
 
 </p>
@@ -226,7 +226,7 @@ C++11增加了一个类似的特性, for语句可以简单地遍历列表中的�
 </strong>auto 通知编译器去根据初始化代码推断所声明变量的真实类型.
 各种作用域内声明变量都可以用到它, 如: 名空间中, 程序块中, 或是for循环的初始化语句中.
 需要注意的是, auto不能用来声明函数的返回值.</p>
-<div class="highlight"><pre><span></span>auto i = &lt;span style …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>auto i = &lt;span style …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/c11.html">C++11</a>
 
 </p>
 

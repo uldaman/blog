@@ -87,20 +87,20 @@ cmake3.2.2</p>
 <p>点击错误</p>
 <p>定位到 Sample_FontDemo.cpp 文件
 第133行：
-将(encoded_char<em>)"+ - ? B I W Y f n t ℹ ⇦ ⇧ ⇨ ⇩ ⌘ ☎ ☐ ☑ ⚖ ⚙ ⚠ ⛏ ✎ ✑ ✓ ✔ ✕ ✖ ❝ ❞ ➡ ⬀ ⬁ ⬂ ⬃ ⬅ ⬆ ⬇ ⬈ ⬉ ⬊ ⬋                    "
-修改为(encoded_char</em>)"+111111111111111111111111"
+将(encoded_char<em>)&rdquo;+ - ? B I W Y f n t ℹ ⇦ ⇧ ⇨ ⇩ ⌘ ☎ ☐ ☑ ⚖ ⚙ ⚠ ⛏ ✎ ✑ ✓ ✔ ✕ ✖ ❝ ❞ ➡ ⬀ ⬁ ⬂ ⬃ ⬅ ⬆ ⬇ ⬈ ⬉ ⬊ ⬋                    &rdquo;
+修改为(encoded_char</em>)&rdquo;+111111111111111111111111&rdquo;
 第147行：
-将每个 "⬀ " 修改为"1"</p>
+将每个 &ldquo;⬀ &rdquo; 修改为&rdquo;1&rdquo;</p>
 <p>定位到GameMenu.cpp文件
 第691行：
-将finalText += reinterpret_cast("❚")
-修改为finalText += reinterpret_cast("d")
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)
 第717行：
-将finalText += reinterpret_cast("❚")
-修改为finalText += reinterpret_cast("d")
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)
 第749行：
-将finalText += reinterpret_cast("❚")
-修改为finalText += reinterpret_cast("d")</p>
+将finalText += reinterpret_cast(&ldquo;❚&rdquo;)
+修改为finalText += reinterpret_cast(&ldquo;d&rdquo;)</p>
 <p>重新进行编译, 完成之后在 cegui-0.8.4 文件夹的 bin 文件夹下找到 CEGUISampleFramework-0.8.exe, 双击打开.
 这时, 它会报个错:
 <img alt="" src="http://i61.tinypic.com/e9b66f.jpg"></p>

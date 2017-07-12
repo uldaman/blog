@@ -53,10 +53,10 @@
 </h6>
 
 
-    <p>manage.py -- 启动、入口文件</p>
-<p>settings.py -- 配置文件</p>
-<p>urls.py -- 路由系统( url 映射)</p>
-<p>wsgi.py -- wsgi 模块 (Web Server Gateway Interface 服务器网关接口)</p>
+    <p>manage.py &ndash; 启动、入口文件</p>
+<p>settings.py &ndash; 配置文件</p>
+<p>urls.py &ndash; 路由系统( url 映射)</p>
+<p>wsgi.py &ndash; wsgi 模块 (Web Server Gateway Interface 服务器网关接口)</p>
 <p>开始创建的那个项目是一个工程项目, 一个项目里会包含多个 app, 每一个 app 才是一个网站.
 在 WingIDE 的 Django 菜单里可以创建 app:
 <img alt="" src="http://oi61.tinypic.com/i78itc.jpg"></p>
@@ -67,15 +67,15 @@ admin.py 是 Django 提供的一个后台管理, 先不管.
 models.py 是 MTV 里 M (数据库操作).
 tests.py 是 Django 提供的测试, 先不管.
 views.py 是 MTV 里的 V (业务逻辑).
-MTV 里的 T 需要自己去建立...在 web 上右键创建一个 template 文件夹即可.</p>
+MTV 里的 T 需要自己去建立&hellip;在 web 上右键创建一个 template 文件夹即可.</p>
 <p>manage.py 除了 runserver 外, 还有几个其他常用命令:
-manage.py startapp appname -- 新建 app
-manage.py syncdb -- 同步数据库
-manage.py makemigrations -- 配合上 syncdb
-manage.py migrate -- 配合上 syncdb</p>
+manage.py startapp appname &ndash; 新建 app
+manage.py syncdb &ndash; 同步数据库
+manage.py makemigrations &ndash; 配合上 syncdb
+manage.py migrate &ndash; 配合上 syncdb</p>
 <p>最简单案例:</p>
 <p>打开 web 里的 views.py, 定义 index 方法:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; django.http.response &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; HttpResponse
 
 &lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt;#&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Create your views here.&lt;/span&gt;
 &lt;span style=&quot;color: #0000ff&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index(request):
@@ -84,7 +84,7 @@ manage.py migrate -- 配合上 syncdb</p>
 
 
 <p>打开 工程 里的 urls.py, 定义 url 映射:</p>
-<div class="highlight"><pre><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;from&lt;/span&gt; web.views &lt;span style=&quot;color: #0000ff&quot;&gt;import&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; index
 urlpatterns &lt;/span&gt;=&lt;span style=&quot;color: #000000&quot;&gt; [
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^admin/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, include(admin.site.urls)),
     url(r&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;^index/&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, index),
