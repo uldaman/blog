@@ -6,12 +6,12 @@
 
     <title>迁移 Github Project Page</title>
 
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -45,7 +45,7 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/qian-yi-github-project-page.html" rel="bookmark"
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/qian-yi-github-project-page.html" rel="bookmark"
         title="Permalink to 迁移 Github Project Page">迁移 Github Project Page</a></h3>
     </header>
 
@@ -53,7 +53,7 @@
 </h6>
 
 
-    <p>在很早之前我从 wordpress 迁移到 github, 参考日记: <a href="http://blog.smallcpp.com/cong-wp-qian-yi-dao-pelican-github.html">从 wp 迁移到 pelican (github)</a></p>
+    <p>在很早之前我从 wordpress 迁移到 github, 参考日记: <a href="http://blog.smallcpp.cn/cong-wp-qian-yi-dao-pelican-github.html">从 wp 迁移到 pelican (github)</a></p>
 <p>近期读到一个博主的文章: <a href="http://blog.xiaohansong.com/2016/01/16/kownledge-Management/">程序员的知识管理</a>, 参考了下他的 <a href="http://xiaohansong.com/">Github Page 首页</a>, 发现挺有意思的.</p>
 <p>他的 <a href="https://github.com/x-hansong/x-hansong.github.io">Github Page 本身</a> 很少内容, 但是 <a href="http://blog.xiaohansong.com/">http://blog.xiaohansong.com/</a> 却能访问到他的 <a href="https://github.com/x-hansong/blog">blog 仓储</a>, 而 <a href="http://blog.xiaohansong.com/">http://wiki.xiaohansong.com/</a> 也能访问 <a href="https://github.com/x-hansong/wiki">wiki 仓储</a>...</p>
 <p>查找到 <a href="https://help.github.com/categories/github-pages-basics/">Gihub 官方 Github Page 资料</a> 才发现还有 <strong>User Pages site</strong> 和 <strong>Project Pages site</strong> 之分, 而上面那位就是利用了 <strong>Project Pages site</strong>...于是, 本着学习的态度, 我迁移了自己的 Github Page.</p>
@@ -85,13 +85,13 @@ git rm -rf .
 <p><br>
 现在, 我们通过 <code>username.github.io/blog</code> 就能访问 <code>blog</code> 仓库 <code>gh-pages</code> 分支下的 <code>index.html</code> 文件.</p>
 <h1>添加自定义域名</h1>
-<p>首先修改 <code>gh-pages</code> 下的 <code>CNAME</code> 文件内容, 从顶级域名 <code>smallcpp.com</code> 改为子级域名 <code>blog.smallcpp.com</code>  (<code>smallcpp.com</code> 是我的顶级域名, 你需要自己购买), 改完后可以通过下面的方法验证下:</p>
+<p>首先修改 <code>gh-pages</code> 下的 <code>CNAME</code> 文件内容, 从顶级域名 <code>smallcpp.cn</code> 改为子级域名 <code>blog.smallcpp.cn</code>  (<code>smallcpp.cn</code> 是我的顶级域名, 你需要自己购买), 改完后可以通过下面的方法验证下:</p>
 <ul>
 <li>Repository settings buttonUnder your repository name, click  Settings.</li>
 <li>Under "GitHub Pages", you should see the custom domain from your CNAME file.</li>
 </ul>
 <p><img alt="" src="http://i64.tinypic.com/5dmhqc.jpg"></p>
-<p>然后去 <code>dnspod</code> 为 <code>smallcpp.com</code> 添加一个记录:</p>
+<p>然后去 <code>dnspod</code> 为 <code>smallcpp.cn</code> 添加一个记录:</p>
 <div class="highlight"><pre><span></span>blog    CNAME        username.github.io
 </pre></div>
 
@@ -110,7 +110,7 @@ git rm -rf .
     <span class="sd">&quot;&quot;&quot;Publish to GitHub Pages&quot;&quot;&quot;</span>
     <span class="n">rebuild</span><span class="p">()</span>
     <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="s1">&#39;{deploy_path}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">env</span><span class="p">)):</span>
-        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;echo blog.smallcpp.com &gt; CNAME&#39;</span><span class="p">)</span>
+        <span class="n">local</span><span class="p">(</span><span class="s1">&#39;echo blog.smallcpp.cn &gt; CNAME&#39;</span><span class="p">)</span>
 
     <span class="n">local</span><span class="p">(</span><span class="s2">&quot;ghp-import -b {github_pages_branch} {deploy_path}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">env</span><span class="p">))</span>
     <span class="n">local</span><span class="p">(</span><span class="s2">&quot;git push origin {github_pages_branch}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">env</span><span class="p">))</span>
@@ -124,7 +124,7 @@ git rm -rf .
 <a href="https://help.github.com/articles/setting-up-a-custom-subdomain/">Setting up a custom subdomain</a><br>
 <a href="http://wiki.jikexueyuan.com/project/github-pages-basics/">GitHub Pages 指南</a><br>
 <a href="https://segmentfault.com/a/1190000003946969">单个 GitHub 帐号下添加多个 GitHub Pages 的相关问题</a></p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a>
 
 </p>
 
@@ -135,7 +135,7 @@ git rm -rf .
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="qian-yi-github-project-page" data-title="迁移 Github Project Page" data-url="http://blog.smallcpp.com/qian-yi-github-project-page.html"></div>
+    <div class="ds-thread" data-thread-key="qian-yi-github-project-page" data-title="迁移 Github Project Page" data-url="http://blog.smallcpp.cn/qian-yi-github-project-page.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -157,30 +157,30 @@ git rm -rf .
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
         </ul>
 
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
 
         <h5 class="sidebar-title">Links</h5>

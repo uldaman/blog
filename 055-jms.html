@@ -6,12 +6,12 @@
 
     <title>055、JMS</title>
 
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -45,7 +45,7 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/055-jms.html" rel="bookmark"
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/055-jms.html" rel="bookmark"
         title="Permalink to 055、JMS">055、JMS</a></h3>
     </header>
 
@@ -76,7 +76,7 @@
 <p>ActiveMQ 是一个完全支持 JMS 1.1 和 J2EE 1.4 规范的 JMS Provider 实现.</p>
 <blockquote>
 <p>目前比较流行的 4 个消息队列中间件产品: ActiveMQ、RabbitMQ、Kafka 和 Redis</p>
-<p>RabbitMQ 是一个Advanced Message Queuing Protocol (AMQP) 的开源实现, 由以高性能、可伸缩性出名的 Erlang 写成. 关于 JMS 和 AMQP 的对比参见: <a href="http://wiki.smallcpp.com/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/JMS%20AMQP%20%E5%AF%B9%E6%AF%94%E8%A1%A8.html">JMS AMQP 对比表</a>, 简单的理解, JMS 是针对 Java 专门提出的解决方案, 而 AMQP 是通用的解决方案.</p>
+<p>RabbitMQ 是一个Advanced Message Queuing Protocol (AMQP) 的开源实现, 由以高性能、可伸缩性出名的 Erlang 写成. 关于 JMS 和 AMQP 的对比参见: <a href="http://wiki.smallcpp.cn/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/JMS%20AMQP%20%E5%AF%B9%E6%AF%94%E8%A1%A8.html">JMS AMQP 对比表</a>, 简单的理解, JMS 是针对 Java 专门提出的解决方案, 而 AMQP 是通用的解决方案.</p>
 <p>Kafka 是一种分布式的, 基于发布/订阅的消息系统. Kafka 开发语言为 Scala, 支持跨平台. 其设计主要目标如下: 以时间复杂度为 O(1) 的方式提供消息持久化能力、高吞吐率、支持 Kafka Server 间的消息分区, 及分布式消费, 同时保证消息顺序传输、支持离线数据处理和实时数据处理、支持在线水平扩展.</p>
 <p>Redis 是一个高性能的 key-value 内存数据库, 它的出现很大程度补偿了 memcached 这类 key-value 存储的不足. 虽然它是一个数据库系统, 但本身支持 MQ 功能, 完全可以当做一个轻量级的队列服务器使用.</p>
 </blockquote>
@@ -104,7 +104,7 @@
 <p>在默认的 <code>conf/activemq.xml</code> 中可以看到 TCP 连接端口是 61616, 双击 <code>bin/activemq.bat</code> 启动 activemq 服务, 然后通过查看该端口的信息可以测试 ActiveMQ 是否成功启动 <code>netstat -an|find "61616"</code>.</p>
 <p>ActiveMQ 默认启动时, 启动了内置的 jetty 服务器, 提供一个用于监控 ActiveMQ 的 admin 应用: <a href="http://127.0.0.1:8161/admin/">用户名和密码都是 admin</a></p>
 <p>后面怎么针对 ActiveMQ 用 Java 编程就不提了, 还是那句话: 仅了解下有这么个东西就行, 后面的 Kafka 才是我们要学的 (JMS 常用在 JavaEE 里, 而大数据领域多是用 Kafka).</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 
 </p>
 
@@ -115,7 +115,7 @@
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="055-jms" data-title="055、JMS" data-url="http://blog.smallcpp.com/055-jms.html"></div>
+    <div class="ds-thread" data-thread-key="055-jms" data-title="055、JMS" data-url="http://blog.smallcpp.cn/055-jms.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -137,30 +137,30 @@
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
         </ul>
 
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
 
         <h5 class="sidebar-title">Links</h5>

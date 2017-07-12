@@ -6,12 +6,12 @@
 
     <title>从 wp 迁移到 pelican (github)</title>
 
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.com/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.com/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.com/theme/js/modernizr.js"></script>
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 <div class="top-bar">
 <div class="row">
     <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.com">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
     </div>
 </div>
 </div>
@@ -45,7 +45,7 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.com/cong-wp-qian-yi-dao-pelican-github.html" rel="bookmark"
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/cong-wp-qian-yi-dao-pelican-github.html" rel="bookmark"
         title="Permalink to 从 wp 迁移到 pelican (github)">从 wp 迁移到 pelican (github)</a></h3>
     </header>
 
@@ -298,7 +298,7 @@ References:<br>
 <span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">files</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts&#39;</span><span class="p">)</span> <span class="c1"># 路径自己改</span>
+<span class="n">files</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.cn/_posts&#39;</span><span class="p">)</span> <span class="c1"># 路径自己改</span>
 <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">file</span> <span class="o">!=</span> <span class="sa">u</span><span class="s1">&#39;change_md_file_name.py&#39;</span><span class="p">:</span>
         <span class="n">file_object</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
@@ -365,14 +365,14 @@ References:<br>
 好了, 现在我们的 wp 已经迁移到了本地博客系统, 运行 <strong>make serve</strong> 看看是不是成功了...</p>
 <h1>6. 发布到 Github</h1>
 <blockquote>
-<p>更新: 关于发布到 Github 还是有些东西要说的, 见我另一篇笔记: <a href="http://blog.smallcpp.com/qian-yi-github-project-page.html">迁移 Github Project Page</a></p>
+<p>更新: 关于发布到 Github 还是有些东西要说的, 见我另一篇笔记: <a href="http://blog.smallcpp.cn/qian-yi-github-project-page.html">迁移 Github Project Page</a></p>
 </blockquote>
 <p>这个其实没啥好讲的了, 我是用的 github for windows 工具来管理 github, 每次 <strong>make html</strong> 后, 把 output 下的文件同步到 github 上 page 项目的主干下就行了...</p>
-<p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: <strong>www.smallcpp.com</strong>, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:</p>
+<p>再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 <strong>CNAME</strong> 文件, 里面写上你的顶级域名地址, 例如我的: <strong>www.smallcpp.cn</strong>, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:</p>
 <div class="highlight"><pre><span></span>@      CNAME        yourname.github.com
 www    CNAME        yourname.github.com
 </pre></div>
-<p class="subheader">Category: <a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a>
 
 </p>
 
@@ -383,7 +383,7 @@ www    CNAME        yourname.github.com
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="cong-wp-qian-yi-dao-pelican-github" data-title="从 wp 迁移到 pelican (github)" data-url="http://blog.smallcpp.com/cong-wp-qian-yi-dao-pelican-github.html"></div>
+    <div class="ds-thread" data-thread-key="cong-wp-qian-yi-dao-pelican-github" data-title="从 wp 迁移到 pelican (github)" data-url="http://blog.smallcpp.cn/cong-wp-qian-yi-dao-pelican-github.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -405,30 +405,30 @@ www    CNAME        yourname.github.com
     <aside class="large-3 columns">
         <h5 class="sidebar-title">Site</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.com/tags.html">Tags</a>
+            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
         </ul>
 
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.com/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.com/category/cocos2d.html">Cocos2d</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.com/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.com/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.com/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.com/category/java.html">JAVA</a></li>
-            <li><a href="http://blog.smallcpp.com/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.com/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.com/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.com/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.com/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.com/category/za-xiang.html">杂项</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
 
         <h5 class="sidebar-title">Links</h5>
