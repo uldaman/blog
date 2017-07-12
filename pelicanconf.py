@@ -45,7 +45,7 @@ MARKDOWN = {
       "markdown.extensions.smarty": {},
       "markdown.extensions.wikilinks": {},
       "markdown.extensions.admonition": {},
-      "markdown.extensions.codehilite": {guess_lang:False,pygments_style:perldoc,noclasses:True},
+      "markdown.extensions.codehilite": {"guess_lang":False,"pygments_style":"perldoc","noclasses":True},
     },
     'output_format': 'html5',
 }
