@@ -35,16 +35,20 @@ DELETE_OUTPUT_DIRECTORY = True # 编译之前删除 output 目录，这样保证
 
 SUMMARY_MAX_LENGTH = 30 # 文章摘要最大字数
 
-MARKDOWN = [
-  "extra",
-  "toc",
-  "headerid",
-  "meta",
-  "sane_lists",
-  "smarty",
-  "wikilinks",
-  "admonition",
-  "codehilite(guess_lang=False,pygments_style=perldoc,noclasses=True)"]
+MARKDOWN = {
+    'extension_configs': {
+      "markdown.extensions.extra": {},
+      "markdown.extensions.toc": {},
+      "markdown.extensions.headerid": {},
+      "markdown.extensions.meta": {},
+      "markdown.extensions.sane_lists": {},
+      "markdown.extensions.smarty": {},
+      "markdown.extensions.wikilinks": {},
+      "markdown.extensions.admonition": {},
+      "markdown.extensions.codehilite": {guess_lang:False,pygments_style:perldoc,noclasses:True},
+    },
+    'output_format': 'html5',
+}
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
