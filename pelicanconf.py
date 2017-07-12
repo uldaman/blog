@@ -35,7 +35,7 @@ DELETE_OUTPUT_DIRECTORY = True # 编译之前删除 output 目录，这样保证
 
 SUMMARY_MAX_LENGTH = 30 # 文章摘要最大字数
 
-MD_EXTENSIONS = [
+MARKDOWN = [
   "extra",
   "toc",
   "headerid",
