@@ -3,7 +3,7 @@ Author: Martin
 Date: 2016-05-25 18:45
 Summary: 将我的博客从 User Pages site 迁移到 Project Pages site.
 
-在很早之前我从 wordpress 迁移到 github, 参考日记: [从 wp 迁移到 pelican (github)](http://blog.smallcpp.com/cong-wp-qian-yi-dao-pelican-github.html)
+在很早之前我从 wordpress 迁移到 github, 参考日记: [从 wp 迁移到 pelican (github)](http://blog.smallcpp.cn/cong-wp-qian-yi-dao-pelican-github.html)
 
 近期读到一个博主的文章: [程序员的知识管理](http://blog.xiaohansong.com/2016/01/16/kownledge-Management/), 参考了下他的 [Github Page 首页](http://xiaohansong.com/), 发现挺有意思的.
 
@@ -42,14 +42,14 @@ git push origin gh-pages
 现在, 我们通过 `username.github.io/blog` 就能访问 `blog` 仓库 `gh-pages` 分支下的 `index.html` 文件.
 
 # 添加自定义域名
-首先修改 `gh-pages` 下的 `CNAME` 文件内容, 从顶级域名 `smallcpp.com` 改为子级域名 `blog.smallcpp.com`  (`smallcpp.com` 是我的顶级域名, 你需要自己购买), 改完后可以通过下面的方法验证下:
+首先修改 `gh-pages` 下的 `CNAME` 文件内容, 从顶级域名 `smallcpp.cn` 改为子级域名 `blog.smallcpp.cn`  (`smallcpp.cn` 是我的顶级域名, 你需要自己购买), 改完后可以通过下面的方法验证下:
 
 - Repository settings buttonUnder your repository name, click  Settings.
 - Under "GitHub Pages", you should see the custom domain from your CNAME file.
 
 ![](http://i64.tinypic.com/5dmhqc.jpg)
 
-然后去 `dnspod` 为 `smallcpp.com` 添加一个记录:
+然后去 `dnspod` 为 `smallcpp.cn` 添加一个记录:
 
 ```
 blog    CNAME        username.github.io
@@ -75,7 +75,7 @@ def gh_pages():
     """Publish to GitHub Pages"""
     rebuild()
     with lcd('{deploy_path}'.format(**env)):
-        local('echo blog.smallcpp.com > CNAME')
+        local('echo blog.smallcpp.cn > CNAME')
 
     local("ghp-import -b {github_pages_branch} {deploy_path}".format(**env))
     local("git push origin {github_pages_branch}".format(**env))

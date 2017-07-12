@@ -23,7 +23,7 @@ Summary: 学习使用 Eric 开发一个 Qt 程序的基本流程.
 
 ![](http://i66.tinypic.com/1phydz.jpg)
 
-关于如何使用 `Qt 设计师` 及 Qt 编程的基础知识参考我另一个系列笔记: [零基础QT入门](http://www.smallcpp.com/category/ling-ji-chu-qtru-men2.html)
+关于如何使用 `Qt 设计师` 及 Qt 编程的基础知识参考我另一个系列笔记: [零基础QT入门](http://www.smallcpp.cn/category/ling-ji-chu-qtru-men2.html)
 
 这个 `first_window.ui` 文件是 Qt 专用的, python 不认识它, 但是最终我们是通过 python 来运行程序, 所以需要把 `*.ui` 文件转化成 python 识别的格式, 方法很简单, 在 `*.ui` 文件上右键选择 `编译窗体` (编译成功/失败会弹框提示).
 

@@ -4,7 +4,7 @@ title: 9、Qt 各模块简介
 
 在第2篇笔记里, 当通过 VS 新建 Qt 工程时, 其中有一步会让选择当前工程包含的模块. 见下图:
 
-![](http://www.smallcpp.com/wp-content/uploads/2015/02/image10.png)
+![](http://www.smallcpp.cn/wp-content/uploads/2015/02/image10.png)
 
 
 

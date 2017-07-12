@@ -3,7 +3,7 @@ Author: Martin
 Date: 2016-05-12 00:29
 Summary: 学习使用 Eric 来创建一个信号槽.
 
-关于 Qt 信号槽的基础知识参考我另一个系列笔记: [零基础QT入门](http://www.smallcpp.com/category/ling-ji-chu-qtru-men2.html)
+关于 Qt 信号槽的基础知识参考我另一个系列笔记: [零基础QT入门](http://www.smallcpp.cn/category/ling-ji-chu-qtru-men2.html)
 
 [TOC]
 

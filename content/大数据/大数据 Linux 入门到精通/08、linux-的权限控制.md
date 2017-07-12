@@ -27,7 +27,7 @@ usermod -d 目录名 用户名 改变该用户登陆的初始目录.
 每行前面的第一段(例如:drwxr-xr-x)就是文件权限的描述.
 
 拿 drwxr-xr-x 这段做例子, 它实际被分为 4 部分.
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/04/image_thumb.png)](http://www.smallcpp.com/wp-content/uploads/2015/04/image.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/04/image_thumb.png)](http://www.smallcpp.cn/wp-content/uploads/2015/04/image.png)
 不过在说这个之前, 先说一下 r w x 的意思:
 r 表示 read 权限
 w 表示 write 权限

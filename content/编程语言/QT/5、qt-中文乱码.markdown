@@ -60,7 +60,7 @@ title: 5、QT 中文乱码
 
 这两种写法都是可以的.
 
-    <a href="http://www.smallcpp.com/wp-content/uploads/2015/02/image25.png"><img src="http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb25.png" style="background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" height="342" width="502" alt="image" border="0"></a>
+    <a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/image25.png"><img src="http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb25.png" style="background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" height="342" width="502" alt="image" border="0"></a>
 
 
 

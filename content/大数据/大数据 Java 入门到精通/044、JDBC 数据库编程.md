@@ -109,4 +109,4 @@ ACID: 数据库事务正确执行的四个基本要素
 
 数据库默认事务是自动提交的, 也就是发一条 sql 它就执行一条, 如果想多条 sql 放在一个事务中执行, 则需要设置 autocommit 为 false, 或者使用 `start transaction` 命令.
 
-参考 wiki: [mysql transaction 与 autocommit](http://wiki.smallcpp.com/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%20transaction%20%E4%B8%8E%20autocommit.html)
+参考 wiki: [mysql transaction 与 autocommit](http://wiki.smallcpp.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%20transaction%20%E4%B8%8E%20autocommit.html)

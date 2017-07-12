@@ -7,7 +7,7 @@ import urllib
 import os
 
 
-files=os.listdir('C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts')
+files=os.listdir('C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.cn/_posts')
 for file in files:
     if file != u'change_md_file_name.py':
         file_object = open(file)

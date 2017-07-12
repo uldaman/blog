@@ -4,7 +4,7 @@ title: (三)、配置 SecureCRT、SSH 及 ShadowSocks
 
 为方便操作, 我们为 ubuntu 安装上 SecureCRT、SSH 及 ShadowSocks
 
-SecureCRT 参考: [传送门](http://blog.smallcpp.com/si-securecrt-de-an-zhuang-he-shi-yong.html)
+SecureCRT 参考: [传送门](http://blog.smallcpp.cn/si-securecrt-de-an-zhuang-he-shi-yong.html)
 
 **配置 SSH 免密码**
 

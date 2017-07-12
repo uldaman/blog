@@ -277,7 +277,7 @@ import re
 import urllib
 import os
 
-files=os.listdir('C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.com/_posts') # 路径自己改
+files=os.listdir('C:/Users/Administrator/Desktop/exitwp-master/build/jekyll/www.smallcpp.cn/_posts') # 路径自己改
 for file in files:
     if file != u'change_md_file_name.py':
         file_object = open(file)
@@ -342,11 +342,11 @@ for file in files:
 好了, 现在我们的 wp 已经迁移到了本地博客系统, 运行 **make serve** 看看是不是成功了...
 
 #6. 发布到 Github
-> 更新: 关于发布到 Github 还是有些东西要说的, 见我另一篇笔记: [迁移 Github Project Page](http://blog.smallcpp.com/qian-yi-github-project-page.html)
+> 更新: 关于发布到 Github 还是有些东西要说的, 见我另一篇笔记: [迁移 Github Project Page](http://blog.smallcpp.cn/qian-yi-github-project-page.html)
 
 这个其实没啥好讲的了, 我是用的 github for windows 工具来管理 github, 每次 **make html** 后, 把 output 下的文件同步到 github 上 page 项目的主干下就行了...
 
-再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 **CNAME** 文件, 里面写上你的顶级域名地址, 例如我的: **www.smallcpp.com**, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:
+再来说说顶级域名吧, 首先, 在 github 的 page 项目的目录下, 新建一个 **CNAME** 文件, 里面写上你的顶级域名地址, 例如我的: **www.smallcpp.cn**, 然后到域名供应商那里 添加 or 修改 下解析设置, 我用的是 dnspod:
 
 ```
 @      CNAME        yourname.github.com

@@ -73,7 +73,7 @@ Arrays 中常用的方法, 如:
 
 foreach
 
-在遍历数组、集合时, foreach 更简单便捷, 这种语法类似 C++11 中的 <[基于范围的 for 循环](http://www.smallcpp.com/small_349.php)>.
+在遍历数组、集合时, foreach 更简单便捷, 这种语法类似 C++11 中的 <[基于范围的 for 循环](http://www.smallcpp.cn/small_349.php)>.
 
 语法:
 

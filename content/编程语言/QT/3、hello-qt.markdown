@@ -4,7 +4,7 @@ title: 3、Hello qt
 
 按上一篇的内容, 新建一个 VS Qt 工程.
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb16.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image16.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb16.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image16.png)
 
 main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.
 
@@ -71,7 +71,7 @@ main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 
 
 
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb17.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image17.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb17.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image17.png)
 
 
 
@@ -180,7 +180,7 @@ main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 
 
 
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb18.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image18.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb18.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image18.png)
 
 
 
@@ -193,7 +193,7 @@ main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 
 
 
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb19.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image19.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb19.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image19.png)
 
 
 
@@ -206,7 +206,7 @@ main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 
 
 
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb20.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image20.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb20.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image20.png)
 
 
 
@@ -258,5 +258,5 @@ main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 
 
 
 
-[![image](http://www.smallcpp.com/wp-content/uploads/2015/02/image_thumb21.png)](http://www.smallcpp.com/wp-content/uploads/2015/02/image21.png)
+[![image](http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb21.png)](http://www.smallcpp.cn/wp-content/uploads/2015/02/image21.png)
 ??
