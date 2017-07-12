@@ -44,6 +44,30 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html"><h3 class="article-title">11、[C++]模板方法模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:26:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<blockquote>在微软的WebCast上, 李建中老师有个设计模式的系列讲座, 其中在讲到模板方法(Template Method)曾说: 如果你只想学习一种设计模式就学习模板方法吧. 由此可见它使用的广泛性.</blockquote>
+
+<p><strong>模板方法模式:</strong> 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.</p>
+<p><strong>模板方法设计模式的意图</strong></p>
+<p>通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.</p>
+<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为&rdquo;模板方法&rdquo;), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg"></a></p>
+<p>情景分析:</p>
+<p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.cn/10-cyuan-xing-mo-shi.html"><h3 class="article-title">10、[C++]原型模式</h3></a>
 <h6 class="subheader" title="2015-02-15T14:25:00+08:00">Sun 15 February 2015
 </h6>
@@ -276,36 +300,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.cn/3-cshe-ji-mo-shi-yu-grasp.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/2-cumllei-tu.html"><h3 class="article-title">2、[C++]UML类图</h3></a>
-<h6 class="subheader" title="2015-02-15T14:17:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<blockquote>此目录下的内容均摘自 <大话设计模式>或其他资料
->
-> </blockquote>
-
-<p><img alt="UML类图样例" src="http://img.blog.csdn.net/20150211193154259"></p>
-<h4 id="_1">类图和接口图</h4>
-<p>首先<strong>动物</strong>矩形框, 它就代表一个<strong>类图</strong>, 分三层:
-第一层显示类的名称, 如果是<strong>抽象类</strong>, 则用斜体表示
-第二层是类的属性
-第三层是类的方法</p>
-<p>注意前面的符号:
-‘+’ –&gt; public
-‘-’ –&gt; private
-‘#’ –&gt; protected</p>
-<p>左下角的”飞翔”矩形框, 它是一个<strong>接口图</strong>, 它与类图的区别是顶端有<strong>interface</strong>显示, 然后它只有二层, 第二层是接口方法 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/2-cumllei-tu.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 

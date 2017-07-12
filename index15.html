@@ -44,6 +44,26 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.cn/django-kua-zhan-qing-qiu-wei-zao.html"><h3 class="article-title">Django 跨站请求伪造</h3></a>
+<h6 class="subheader" title="2015-09-14T09:35:00+08:00">Mon 14 September 2015
+</h6>
+
+
+<p>这个应该也是 Django 比较特色的东西, 就是防止没有标识的 post 请求, 这个标识在 Django 中被称为 token.</p>
+<p>它通过 <strong>MIDDLEWARE_CLASSES</strong> 中的 <strong>django.middleware.csrf.CsrfViewMiddleware</strong> 开关控制.</p>
+<p>这个标识其实也是 cookie 值, 通过简单的两步代码就可以给请求打上标识.</p>
+<p>Django 端</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>render_to_response(&lt;span style=&quot;color: #800000&quot;&gt;&#39;&lt;/span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/django-kua-zhan-qing-qiu-wei-zao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.cn/zi-ding-yi-cookies.html"><h3 class="article-title">自定义 cookies</h3></a>
 <h6 class="subheader" title="2015-09-14T03:56:00+08:00">Mon 14 September 2015
 </h6>
@@ -228,33 +248,6 @@
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.cn/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/models-shu-ju-ku-an-zhuang.html"><h3 class="article-title">models -- 数据库安装</h3></a>
-<h6 class="subheader" title="2015-09-05T02:25:00+08:00">Sat 05 September 2015
-</h6>
-
-
-<p>这里使用 MySql, 先去官网下载安装.
-为方便, 已经提前下载好转到 云盘 了: <a href="http://yunpan.cn/cm6WWhDRLwKYf">http://yunpan.cn/cm6WWhDRLwKYf</a> 访问密码 a3c1</p>
-<p><img alt="" src="http://i62.tinypic.com/141mlwy.jpg"></p>
-<p><img alt="" src="http://i59.tinypic.com/1z3apzq.jpg"></p>
-<p><img alt="" src="http://i60.tinypic.com/28qrm69.jpg"></p>
-<p>接下来是一些配置选项:
-<img alt="" src="http://i58.tinypic.com/28h2brd.jpg"></p>
-<p><img alt="" src="http://i59.tinypic.com/2uny2ra.jpg"></p>
-<p><img alt="" src="http://i61.tinypic.com/2cmptgy.jpg"></p>
-<p>接下来, 把安装路径下的 Bin 目录添加到环境变量, 如: C:\Program Files\MySQL\MySQL Server 5.6\bin;</p>
-<p><strong>然后设置字符集</strong></p>
-<p>进入安装目录 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/models-shu-ju-ku-an-zhuang.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
