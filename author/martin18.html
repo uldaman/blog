@@ -44,6 +44,24 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.cn/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
+<h6 class="subheader" title="2015-06-14T15:04:00+08:00">Sun 14 June 2015
+</h6>
+
+
+<p>在寫測試代碼的時候, 發現個問題:
+程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
+<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.cn/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
 <h6 class="subheader" title="2015-06-14T14:53:00+08:00">Sun 14 June 2015
 </h6>
@@ -230,27 +248,6 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
             <hr  class="gradient"/>
         </article>
 
-        <article>
-            <a href="http://blog.smallcpp.cn/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">[CEGUI]. 5、解决电脑休眠引起的黑屏问题</h3></a>
-<h6 class="subheader" title="2015-06-13T06:27:00+08:00">Sat 13 June 2015
-</h6>
-
-
-<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
-<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
-    m_pManager-&gt;PreReset();
-
-    HRESULT hRet = m_pD3Ddev- …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 18 of 27</h6>
@@ -291,6 +288,7 @@ String s2 &lt;/span&gt;= &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/sp
             <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
             <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
             <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
             <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
