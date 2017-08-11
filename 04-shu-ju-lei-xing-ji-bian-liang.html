@@ -82,13 +82,17 @@
 
 <p><br></p>
 <h1 id="2">2. 变量初始化</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">var</span> v1 <span style="color: #00688B; font-weight: bold">int</span> = <span style="color: #B452CD">10</span>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">var</span> v1 <span style="color: #00688B; font-weight: bold">int</span>  <span style="color: #228B22">// 编译器会将其初始化为零值</span>
+<span style="color: #8B008B; font-weight: bold">var</span> v1 <span style="color: #00688B; font-weight: bold">int</span> = <span style="color: #B452CD">10</span>
 <span style="color: #8B008B; font-weight: bold">var</span> v2 = <span style="color: #B452CD">20</span> <span style="color: #228B22">// 编译器将自动推导类型</span>
-v3 := <span style="color: #B452CD">30</span> <span style="color: #228B22">// 编译器将自动推导类型</span>
+v3 := <span style="color: #B452CD">30</span> <span style="color: #228B22">// 短变量声明操作符, 编译器将自动推导类型</span>
 </pre></div>
 
 
-<p><br></p>
+<p><br>
+<strong>Go 建议</strong>:<br>
+任何时候, 创建一个变量并初始化为其零值, 习惯是使用关键字 var, 这种用法是为了更明确地表示一个变量被设置为零值;<br>
+如果变量被初始化为某个非零值, 就使用短变量声明操作符来创建变量.</p>
 <h1 id="3">3. 多重赋值</h1>
 <p>在 C/C++ 中要交换两个变量的值, 可能需要这样:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>t = i;
