@@ -44,6 +44,27 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.cn/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html"><h3 class="article-title">19、事件小结及自定义事件</h3></a>
+<h6 class="subheader" title="2015-06-01T04:14:00+08:00">Mon 01 June 2015
+</h6>
+
+
+<p>现在我们可以总结一下 Qt 的事件处理, 实际上是有五个层次:</p>
+<ul>
+<li>第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.</li>
+<li>第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.</li>
+<li>第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.</li>
+<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 …</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.cn/18-qt-zhong-de-shi-jian.html"><h3 class="article-title">18、Qt 中的事件</h3></a>
 <h6 class="subheader" title="2015-05-30T12:23:00+08:00">Sat 30 May 2015
 </h6>
@@ -252,27 +273,6 @@ E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.
 
 
             <a class="button radius secondary small right" href="http://blog.smallcpp.cn/14-qt-zhong-de-dui-hua-kuang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/cegui-1-jian-jie-ji-bian-yi.html"><h3 class="article-title">[CEGUI]. 1、简介及编译</h3></a>
-<h6 class="subheader" title="2015-05-08T10:59:00+08:00">Fri 08 May 2015
-</h6>
-
-
-<p>CEGUI 是一个自由免费的 GUI 库, 基于LGPL协议, 使用C++实现, 完全面向对象设计.
-CEGUI 开发者的目的是希望能够让游戏开发人员从繁琐的 GUI 实现细节中抽身出来, 以便有更多的开发时间可以放在游戏性上.
-CEGUI 的渲染需要 3D 图形 API 的支持，如 OpenGL 或 Direct3D, 另外, 使用更高级的图形库也是可以的, 比如OGRE、Irrlicht和RenderWare等.</p>
-<p><strong>编译:</strong>
-vs2013
-Directx …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-1-jian-jie-ji-bian-yi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
