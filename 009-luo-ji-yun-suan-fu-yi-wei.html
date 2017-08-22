@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - 软件设计</title>
+    <title>009、逻辑运算符、移位</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -43,63 +43,67 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/wei-yan-ma-quan-xian-mo-xing-zu-he-biao-zhi.html"><h3 class="article-title">位掩码 (权限模型、组合标志)</h3></a>
-<h6 class="subheader" title="2017-08-22T13:27:00+08:00">Tue 22 August 2017
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/009-luo-ji-yun-suan-fu-yi-wei.html" rel="bookmark"
+        title="Permalink to 009、逻辑运算符、移位">009、逻辑运算符、移位</a></h3>
+    </header>
+
+<h6 class="subheader" title="2016-02-26T23:59:00+08:00">Fri 26 February 2016
 </h6>
 
 
-<p>位运算在程序设计中的使用 &ndash; 位掩码</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a>
+    <ol>
+<li>运算符
+逻辑运算符
+与（&amp;&amp;）、非（!）、或（||）</li>
+</ol>
+<p>位运算符
+与（&amp;）、非（~）、或（|）、异或（^）</p>
+<p>也没什么, 主要是搞清楚 &amp;&amp; 与 &amp; 和 || 与 | 的区别</p>
+<p>拿 &amp;&amp; 与 &amp; 举例
+有一种说法 &amp; 是与, 而 &amp;&amp; 是短路与(即第一个是 false 则不计算第二个表达式, 直接返回 false), &amp; 是要两边的表达式都要计算.</p>
+<p>从以前学习 C++ 的知识来看, 我认为 &amp;&amp; 是逻辑运算, 而 &amp; 是按位运算(算术运算), 两者是有本质上的区别, 之所以 &amp; 要两个表达式都运算次, 是因为它要拿两边表达式的结果按位与.</p>
+<ol>
+<li>移位操作
+&lt;&lt; &ndash; 左移.</li>
+</ol>
+<blockquote>
+<blockquote>
+<p>&ndash; 右移, 高位用符号位的二进制填充.</p>
+<blockquote>
+<p>&ndash; 无符号右移, 高位用 0 填充.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>对正数而言, 左移 n 位就是乘以 2^n, 右移 n 位就是除以 2^n.
+而对于负数, 因为负数的表示形式是补码, 它左移/右移就不是简单的乘/除 2^n 了.</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/wei-yan-ma-quan-xian-mo-xing-zu-he-biao-zhi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
 
-        <article>
-            <a href="http://blog.smallcpp.cn/guan-yu-kuang-jia.html"><h3 class="article-title">关于框架</h3></a>
-<h6 class="subheader" title="2017-08-13T13:27:00+08:00">Sun 13 August 2017
-</h6>
+<!--      -->
 
-
-<p>成也框架, 败也框架.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/guan-yu-kuang-jia.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/qian-liao-jia-gou-shi.html"><h3 class="article-title">浅聊架构师</h3></a>
-<h6 class="subheader" title="2016-11-10T13:27:00+08:00">Thu 10 November 2016
-</h6>
-
-
-<p>简单聊聊架构师及其职责.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/qian-liao-jia-gou-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-
-</p>
-</div>
-
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="009-luo-ji-yun-suan-fu-yi-wei" data-title="009、逻辑运算符、移位" data-url="http://blog.smallcpp.cn/009-luo-ji-yun-suan-fu-yi-wei.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
     </div>
     <!-- End Main Content -->
 
