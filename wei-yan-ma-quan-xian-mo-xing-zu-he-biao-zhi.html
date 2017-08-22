@@ -71,7 +71,7 @@
 
 
 <p><br>
-例如位运行的 <code>&amp;</code> (与) 和 <code>|</code> (或), 位掩码可以用来实现<strong>权限模型</strong>和<strong>组合标志</strong>等功能.</p>
+例用位运算的 <code>&amp;</code> (与) 和 <code>|</code> (或), 位掩码可以用来实现<strong>权限模型</strong>和<strong>组合标志</strong>等功能.</p>
 <h1 id="_1">权限模型</h1>
 <p>Linux 中的用户权限也是类似如此实现的, 原理是利用 <code>&amp;</code> 运算, 只有待运算的两位同时为 1 时, 运算的结果才为 1, 否则为 0.</p>
 <p><img alt="权限" src="http://blog.smallcpp.cn/theme/images/位掩码/权限.png"></p>
@@ -92,6 +92,8 @@
 <p>很遗憾, 验证结果为 0, 验证通过失败.</p>
 <p>这是用户单一权限的情况, 如果用户想要多个权限, 比如拥有通过第 1、2 两个通道的权限, 其用户权限该如何表达? 那么可以把两个单一权限进行 <code>|</code> 运算,  比如 <code>1000 | 0100 = 1100</code>. 这就是<strong>组合标志</strong>.</p>
 <h1 id="_2">组合标志</h1>
+<p>组合标志的一种运用是在<a href="http://blog.smallcpp.cn/wei-yan-ma-quan-xian-mo-xing-zu-he-biao-zhi.html#_1">权限模型</a>中设置用户权限. 另外在很多系统或语言提供的 API 中也会用到组合标志, 例如 C++ API <code>CreateFile</code>, 它的一个参数就是设置打开文件的标志: <code>GENERIC_READ | GENERIC_WRITE</code></p>
+<p>其原理是利用 <code>|</code> 运算, 待运算的两位中只要有一个是 1, 运算的结果就是 1, 又由于同一批位掩码互不重复、并且只有一位是 1, 所以对位掩码进行 <code>|</code> 运算能得到一个唯一的标志. 例如 <code>1100</code> 只可能是 <code>1000</code> 和 <code>0100</code> 进行 <code>|</code> 运算得来.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a>
 
 </p>
