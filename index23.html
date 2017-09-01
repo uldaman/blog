@@ -44,241 +44,244 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.cn/03-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html"><h3 class="article-title">03. 在 Ubuntu 中安装 Ulipad 编辑器</h3></a>
-<h6 class="subheader" title="2015-03-26T17:04:00+08:00">Thu 26 March 2015
+            <a href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
+<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
 </h6>
 
 
-<p>Ulipad 是一个国人编写的专业 Python 编辑器, 它基于 wxpython 开发的GUI(图形化界面).
-好吧, 有人说 vim, 我承认它确实是神器, 但上手实在是有点蛋疼…以后有机会使用的时候再学吧…</p>
-<h1 id="_1">安装</h1>
-<p>在安装之前, 有必要确认下我们 Ubuntu 上的 Python 是否正常.
-打开终端, 输入 python –V (注意大小写, 是大写的 V).</p>
-<p><img alt="" src="http://i61.tinypic.com/1zovrsl.jpg"></p>
-<p>如果正常输出了 Python …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a>
+<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg"></p>
+<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
+<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
+<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
+<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
+<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
+<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/02-shi-yong-vmware-an-zhuang-ubuntu-vm-tools-he-fcitx-shu-ru-fa.html"><h3 class="article-title">02. 使用 VMware 安装 Ubuntu  、VM Tools 和 Fcitx 输入法</h3></a>
-<h6 class="subheader" title="2015-03-26T08:51:00+08:00">Thu 26 March 2015
+            <a href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
+<h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
 </h6>
 
 
-<p>安装环境说明:
-本机系统: WIN7　64
-虚拟机：VMware Workstation 10 （中文版）
-安装目标：Ubuntu Desktop 14.04 LTS （<a href="http://www.wubantu.com/get-ubuntu-14-04-lts-desktop-iso.html">请点击这里下载</a>）</p>
-<p>具体步骤:</p>
+<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
+<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg"></p>
+<hr>
+<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
+<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
+<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg"></p>
+<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
+<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg"></p>
+<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
+<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg"></p>
+<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg"></p>
+<p>点击 [显示从 QWidget …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/14-c-jian-zao-zhe-mo-shi.html"><h3 class="article-title">14、[C++] 建造者模式</h3></a>
+<h6 class="subheader" title="2015-02-23T12:31:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>谈到建造自然会想到楼房.</p>
+<p>楼房是千差万别的, 楼房的外形、层数、内部房间的数量、房间的装饰等等都不一样, 但是对于建造者来说, 抽象出来的建筑流程是确定的, 往往建筑一座楼房包括下面的步骤：打桩, 建立基础 –&gt; 建立框架等.</p>
+<p>建造者模式的本质和建造楼房是一致的：<strong>即流程不变, 但每个流程实现的具体细节则是经常变化的</strong>.</p>
+<p>建造者模式的好处就是保证了流程不会变化, 流程即不会增加、也不会遗漏或者产生流程次序错误, 这是非常重要的.</p>
+<p>再想像一下麦当劳和肯得鸡, 为什么它们的食物味道都是一样的?</p>
+<p>因为它们产品的味道都是由工作流程决定的, 原料放多少, 加热几分钟都有严格规定; 我们去那里消费, 不用关心他们的工作流程, 如果发现鸡翅烤得焦了, 他们会调整具体的工作流程中的烧烤时间, 如果要新加一种汉堡, 做法都相同 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/14-c-jian-zao-zhe-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/13-c-wai-guan-mo-shi-men-mian-mo-shi.html"><h3 class="article-title">13、[C++] 外观模式/门面模式</h3></a>
+<h6 class="subheader" title="2015-02-23T10:03:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>外观模式: 即为子系统中的一组接口提供一个一致的界面, 此模式定义了一个高层接口, 这个接口使得这一子系统更加容易使用.</p>
+<p><a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/b77d9bedff80.jpg"><img alt="外观模式" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/thumb.jpg"></a></p>
+<p>Facade: 外观类, 他知道子类系统类负责处理的请求, 将客户的请求给适当的子系统对象.</p>
+<p>SubSystemXxx: 子系统类, 他们实现子系统的功能, 处理外观类指派的任务.</p>
+<p>我们大家最容易理解和知道的外观模式就是，使用的API接口的封装，我们将第三方的API接口引入到我们的项目中的时候，我们需要对这些接口进行包装，将具体调用过程进行包装成外观类的形式，通过外观类来进行统一的调用。</p>
+<p>C++模拟代码如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
+&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/13-c-wai-guan-mo-shi-men-mian-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/12-c-2014-xiao-jie.html"><h3 class="article-title">12、[C++] 2014 小结</h3></a>
+<h6 class="subheader" title="2015-02-23T05:05:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>这段时间过春节,  学习什么的都放下了, 现在总算忙的差不多了, 把之前2014年底学的设计模式做个小结.</p>
+<h2 id="_1">首先看下我们目前已经学习过的设计模式:</h2>
+<p>创建型模式: &ndash; 用来处理对象的创建过程</p>
+<blockquote>工厂模式 (简单工厂模式严格来说不是设计的一种) : 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.</blockquote>
+
+<blockquote>原型模式 : 用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象.</blockquote>
+
+<p>结构型模式: &ndash; 用来处理类或者对象的组合</p>
+<blockquote>装饰者模式 : 动态地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</blockquote>
+
+<blockquote>代理模式 : 为其他对象提供一种代理以控制对这个对象的访问.</blockquote>
+
+<p>行为型模式: &ndash; 用来对类或对象怎样交互和怎样分配职责进行描述</p>
+<blockquote>策略模式 : 一种定义一系列算法的行为, 从概念上看, 所有这些算法完成的都是相同的工作, 只是实现不同 …</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/12-c-2014-xiao-jie.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/2015-xin-de-kai-shi.html"><h3 class="article-title">2015, 新的开始</h3></a>
+<h6 class="subheader" title="2015-02-23T03:40:00+08:00">Mon 23 February 2015
+</h6>
+
+
+<p>新的一年, 新的目标&hellip;</p>
 <ol>
-<li>创建新的虚拟机</li>
-</ol>
-<p><img alt="" src="http://i59.tinypic.com/2jff68n.jpg"></p>
-<ol>
-<li>使用自定义模式</li>
-</ol>
-<p><img alt="" src="http://i60.tinypic.com/315ohh1.jpg"></p>
-<ol>
-<li>下一步直到选择安装源</li>
-</ol>
-<p><img alt="" src="http://i58.tinypic.com/33vp5af.jpg"></p>
-<ol>
-<li>选择操作系统</li>
-</ol>
-<p><img alt="" src="http://i62.tinypic.com/2lw6dz9.jpg"></p>
-<ol>
-<li>设置虚拟机名称及安装路径</li>
-</ol>
-<p><img alt="" src="http://i61.tinypic.com/t6e0c2.jpg"></p>
-<ol>
-<li>设置处理器</li>
-</ol>
-<p><img alt="" src="http://i60.tinypic.com/16gg5co.jpg"></p>
-<ol>
-<li>设置内存, 对于测试环境的 Linux 来说, 1G 足够.</li>
-</ol>
-<p><img alt="" src="http://i58.tinypic.com/16c2e6u.jpg"></p>
-<ol>
-<li>设置网络类型 …</li></ol><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a>
+<li>
+<p>瘦 10-20 斤</p>
+</li>
+<li>
+<p>存钱买车</p>
+</li>
+<li>
+<p>找到人生另一半</p>
+</li>
+</ol><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/02-shi-yong-vmware-an-zhuang-ubuntu-vm-tools-he-fcitx-shu-ru-fa.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/2015-xin-de-kai-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/01-python-zhi-linux-ji-chu.html"><h3 class="article-title">01. Python 之 Linux 基础</h3></a>
-<h6 class="subheader" title="2015-03-25T14:56:00+08:00">Wed 25 March 2015
+            <a href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html"><h3 class="article-title">11、[C++]模板方法模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:26:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<h1 id="_1">题记</h1>
-<blockquote>None question is stupid question.
+<blockquote>在微软的WebCast上, 李建中老师有个设计模式的系列讲座, 其中在讲到模板方法(Template Method)曾说: 如果你只想学习一种设计模式就学习模板方法吧. 由此可见它使用的广泛性.</blockquote>
 
-今天的苦逼是为了不这样一直苦逼下去!</blockquote>
-
-<p>为什么学习 Python 要先来学 Linux 呢..</p>
-<p>好吧, 其实我也不知道, 只是找到的 Python 学习资料是基于 Linux 的, 于是..你懂的…</p>
-<p>那么现在开始吧.</p>
-<p>Linux 是什么, 它的由来及它的历史啥的就不做笔记了, 反正我也记不住…至少对我们学习编程啥的是没什么影响..</p>
-<p><strong>首先</strong></p>
-<p>对于我这种习惯了 windows …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a>
+<p><strong>模板方法模式:</strong> 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.</p>
+<p><strong>模板方法设计模式的意图</strong></p>
+<p>通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.</p>
+<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为&rdquo;模板方法&rdquo;), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg"></a></p>
+<p>情景分析:</p>
+<p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/01-python-zhi-linux-ji-chu.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/20-c-guan-cha-zhe-mo-shi.html"><h3 class="article-title">20、[C++] 观察者模式</h3></a>
-<h6 class="subheader" title="2015-03-24T16:22:00+08:00">Tue 24 March 2015
+            <a href="http://blog.smallcpp.cn/10-cyuan-xing-mo-shi.html"><h3 class="article-title">10、[C++]原型模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:25:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>观察者模式:
-定义对象间的一种一对多的依赖关系, 当一个对象的状态发生改变时, 所有依赖于它的对象都得到通知并被自动更新.</p>
-<p>这句话是什么意思呢?
-拿一个例子来说明会方便理解, 记得小时候的课堂吗? 当老师上课时, 全班同学都要&rdquo;观察&rdquo;老师的&rdquo;状态&rdquo;, 当老师转过身在黑板上写字的时候, 学霸们呢, 自然是开始做笔记了..学渣们嘛..当然是开始做小动作啦&hellip;</p>
-<p>在这个例子中, 学生就是观察者, 老师是被观察者, 当被观察者(老师)的状态发生改变时, 观察者(学生)就&rdquo;接受&rdquo;到通知, 然后..该干嘛就去干嘛 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+<p>解决的问题：</p>
+<p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象.</p>
+<p>这个其实和C++的拷贝构造函数的作用是一致的, 实际上就是<strong>动态抽取当前对象运行时的状态</strong>(好吧, 其实我还没弄懂两者的区别, 请大牛赐教).</p>
+<p>C++的拷贝构造函数分为浅拷贝和深拷贝.</p>
+<p>浅拷贝：就是给对象中的每个成员变量进行复制, 就是把A1类中的变量直接赋给A2类中变量, 属于值传递, 但是涉及到有指针类型的成为, 它们指向的是同一块内存. 这就出现了问题：当B把内存释放了（如：析构）, 这时A内的指针就是野指针了, 出现运行错误.</p>
+<p>深拷贝：就是不仅使用值传递, 而是要每个变量都有自己一份独立的内存空间, 互不干扰.</p>
+<p>原型模式 UML …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/20-c-guan-cha-zhe-mo-shi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/10-cyuan-xing-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html"><h3 class="article-title">07. 事件驱动模型</h3></a>
-<h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
+            <a href="http://blog.smallcpp.cn/9-cgong-han-mo-shi.html"><h3 class="article-title">9、[C++]工厂模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
-在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
-<p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
-这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+<p>回想一下, 我们之前的简单工厂模式, <a href="http://www.cnblogs.com/hanxiao-martin/p/4289502.html">http://www.cnblogs.com/hanxiao-martin/p/4289502.html</a></p>
+<p>简单工厂模式的最大优点在于工厂类中包含了必要的逻辑判断, 根据客户端的选择条件动态实例化相关的类, 对于客户端来说, 去除了与具体产品的依赖, 在我们的计算器程序中, 只需要把&rsquo;+&rsquo;等符号给工厂就可以生成相应的实例, 然后客户端直接做运算就好了.</p>
+<p>但是同样的, 他还有个缺点, 就是这个工厂类本身并不容易扩展和维护, 例如现在要添加一个开方的计算, 首先从Operation继承一个开方类, 这一步没有问题, 接下来就要去给运算工厂类的方法里加&rsquo;case&rsquo;的分支条件, 这修改了原有的类, 违背了我们的<strong>&ldquo;开放-封闭原则 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/9-cgong-han-mo-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/06-52-lua-zhong-de-ke-bian-can-shu.html"><h3 class="article-title">06. 5.2+ Lua 中的可变参数</h3></a>
-<h6 class="subheader" title="2015-03-16T10:41:00+08:00">Mon 16 March 2015
+            <a href="http://blog.smallcpp.cn/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html"><h3 class="article-title">'[转]UML 中关系详解以及在visio中的表示'</h3></a>
+<h6 class="subheader" title="2015-02-15T14:24:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+<p>Uml 关系主要有四大类： 依赖，关联，泛化，实现。</p>
+<p>其中 依赖和关联是事物之间语义上的横向关系，泛化和实现是事物之间的纵向关系。</p>
+<p>一：依赖 Dependency</p>
+<p>图示：- - - - - &gt;</p>
+<p>定义：关系最为松散的，单向的，暂时产生关系的事物之间使用。</p>
+<p>使用图例：在静态图、组件图、部署图中两事物的弱依赖关系用此图示。</p>
+<p>二：关联 Association</p>
+<p>图示：此图为visio中画法（在uml静态结构中,拖动复合图例，然后双击此图例，将出现下图 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/06-52-lua-zhong-de-ke-bian-can-shu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/05-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">05. C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
-<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
-但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
-<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State <em>L, const char </em>str);</strong></p>
-<p>现在新建一个 Lua …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/05-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/04-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">04. LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg"></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/04-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/03-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">03. 重新编译 Lua 程序库</h3></a>
-<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/02-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">02. Lua 与 C/C++ 的第一次亲密接触</h3></a>
-<h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
-<p><strong>Lua 环境(Lua_State)
-</strong>Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.
-对于 C …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/02-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/zhuan-uml-zhong-guan-xi-xiang-jie-yi-ji-zai-visiozhong-de-biao-shi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 23 of 28</h6>
+<h6 class="subheader">Page 23 of 25</h6>
 
 <p>
             <a href="http://blog.smallcpp.cn/index22.html">&laquo; Prev</a>
@@ -304,19 +307,18 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
             <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java-ru-men-dao-jing-tong.html">Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/mongodb-ru-men-dao-jing-tong.html">Mongodb 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
             <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/redis-ru-men-dao-jing-tong.html">Redis 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
             <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>

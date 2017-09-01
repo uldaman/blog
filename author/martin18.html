@@ -102,147 +102,161 @@ People.sayHi &lt;/span&gt;= &lt;span style=&quot;color …</pre></div><p class="
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html"><h3 class="article-title">(二十九) 容器的一些其他操作</h3></a>
-<h6 class="subheader" title="2015-06-14T16:59:00+08:00">Sun 14 June 2015
+            <a href="http://blog.smallcpp.cn/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html"><h3 class="article-title">[CEGUI]. 5、解决电脑休眠引起的黑屏问题</h3></a>
+<h6 class="subheader" title="2015-06-13T06:27:00+08:00">Sat 13 June 2015
 </h6>
 
 
-<p><strong>contains:</strong>
-判斷 Collection 中是否包含某元素, 包含返回 true;</p>
-<p><strong>containsAll:</strong>
-判斷 Collection 中是否包含指定的所有元素.</p>
-<p>需要注意的是, contains 判斷的是內存地址是否相同, 如果新建一個元素, 它的值和 Collection 中的某個元素相同, 但因為它是新創建的, 和 Collection 中相同的那個元素指向的不是同一個地址, 因此也會返回 false, 那怎麼解決這個問題? 這裡 List 和 Set 的解決方法是不同的;</p>
-<p><strong>先看 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>在做游戏的时候发现个问题, 就是当电脑休眠再唤醒后, 游戏界面会失去响应.</p>
+<p>查阅资料发现, 电脑休眠时 D3D 会丢失设备, 当唤醒后, D3D 会调用 IDirect3DDevice9::Reset() 解决这个问题, 原始的 HOOK 后的 IDirect3DDevice9::Reset() 是下面这样:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3DDevice9::Reset(D3DPRESENT_PARAMETERS *pPresentationParameters) {
+    m_pManager-&gt;PreReset();
+
+    HRESULT hRet = m_pD3Ddev- …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-jiu-rong-qi-de-yi-xie-qi-ta-cao-zuo.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-5-jie-jue-dian-nao-xiu-mian-yin-qi-de-hei-ping-wen-ti.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html"><h3 class="article-title">(二十八) Scanner 类的 close() 方法引起的異常</h3></a>
-<h6 class="subheader" title="2015-06-14T15:04:00+08:00">Sun 14 June 2015
+            <a href="http://blog.smallcpp.cn/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html"><h3 class="article-title">19、事件小结及自定义事件</h3></a>
+<h6 class="subheader" title="2015-06-01T04:14:00+08:00">Mon 01 June 2015
 </h6>
 
 
-<p>在寫測試代碼的時候, 發現個問題:
-程序的不同的地方创建多个 Scanner 对象读取鍵盤信息, 每次用完后都很自然得调用了close() 方法关掉, 当第二次調用 Scanner 对象时就会出现 NoSuchElementException: No line found 的异常.</p>
-<p>這是因為 sc.close()会把 System.in(輸入流) 也关掉, 并且关掉之后不能再打开, 不同的 Scanner 對象虽然都是独立的对象, 但是用的是同一个输入流, 關閉 System …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>现在我们可以总结一下 Qt 的事件处理, 实际上是有五个层次:</p>
+<ul>
+<li>第一层丶重写paintEvent()、mousePressEvent()等事件处理函数. 这是最普通、最简单的形式, 同时功能也最简单.</li>
+<li>第二层丶重写event()函数. event()函数是所有对象的事件入口, QObject和QWidget中的实现, 默认是把事件传递给特定的事件处理函数.</li>
+<li>第三层丶在特定对象上面安装事件过滤器. 该过滤器仅过滤该对象接收到的事件.</li>
+<li>第四层丶在QCoreApplication::instance()上面安装事件过滤器. 该过滤器将过滤所有对象的所有事件, 因此和notify()函数一样强大, 但是它更灵活, 因为可以安装多个过滤器. 全局的事件过滤器可以看到 disabled 组件上面发出的鼠标事件. 全局过滤器有一个问题 …</li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-ba-scanner-lei-de-close-fang-fa-yin-qi-de-yi-chang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/19-shi-jian-xiao-jie-ji-zi-ding-yi-shi-jian.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-qi-map-he-hashmap.html"><h3 class="article-title">(二十七) Map 和 HashMap</h3></a>
-<h6 class="subheader" title="2015-06-14T14:53:00+08:00">Sun 14 June 2015
+            <a href="http://blog.smallcpp.cn/18-qt-zhong-de-shi-jian.html"><h3 class="article-title">18、Qt 中的事件</h3></a>
+<h6 class="subheader" title="2015-05-30T12:23:00+08:00">Sat 30 May 2015
 </h6>
 
 
-<p>上一篇笔记学习了 Java 容器中的 Collection 家庭, 接下来学一学 Map 家庭.</p>
-<p>Map 接口提供了一种映射关系, 其中的元素以键值对(key – value)的形式存储, 能够实现根据 key 快速查找 value(和 C++ 中的 stl::map 差不多).</p>
-<p>Map 中的键值对以 Entry 类型的对象实例形式存在(stl::map …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<blockquote>
+<p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
+</blockquote>
+<div class="toc">
+<ul>
+<li><a href="#qt">初识 Qt 中的事件</a></li>
+<li><a href="#qt_1">深入 Qt 的事件</a></li>
+<li><a href="#event">event() 函数</a></li>
+<li><a href="#_1">事件过滤器</a></li>
+</ul>
+</div>
+<h1 id="qt">初识 Qt 中的事件</h1>
+<p>事件驱动 这个程序设计概念应该并不陌生, C/C++ 编程中基本都会用到, 在 Qt 中, 事件的概念同信号槽类似, 一般来说 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-qi-map-he-hashmap.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/18-qt-zhong-de-shi-jian.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-liu-java-zhong-de-rong-qi.html"><h3 class="article-title">(二十六) Java 中的容器</h3></a>
-<h6 class="subheader" title="2015-06-14T04:53:00+08:00">Sun 14 June 2015
+            <a href="http://blog.smallcpp.cn/hei-ke-ji-er-cha-shu-bian-li.html"><h3 class="article-title">[黑科技]. 二叉树遍历</h3></a>
+<h6 class="subheader" title="2015-05-30T03:05:00+08:00">Sat 30 May 2015
 </h6>
 
 
-<p>学过 STL 的都应该知道容器的概念, Java 中也有这样的东西.</p>
-<p>Java 中的容器有两大接口: Collection 和 Map;</p>
-<p>Collection 又分为三个小接口: List、Queue 和 Set.</p>
-<p><img alt="" src="http://i59.tinypic.com/2w565u0.jpg"></p>
-<p>ArrayList、HashSet 和 HashMap 分别是 List、Set 和 Map 的实现类, 这三种也是使用最广泛的三个类.</p>
-<hr>
-<p>Collection 接口是 List …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>这个单独弄出来, 只是因为自己懒, 不想每次遍历时都重敲代码, 就做下笔记, 用到的时候 粘贴 复制…</p>
+<p>就是先分析下游戏二叉树的结构, 然后自己模拟着也定义一个.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#pragma pack (push,1)</span>
+<span style="color: #8B008B; font-weight: bold">typedef</span> <span style="color: #8B008B; font-weight: bold">struct</span> _RoleTree {
+    DWORD dwLBase;      <span style="color: #228B22">//+0x0    左树</span>
+    DWORD dwSBase;      <span style="color: #228B22">//+0x4    上一层树的地址</span>
+    DWORD dwRBase;      <span style="color: #228B22">//+0x8    右树</span>
+    <span style="color: #00688B; font-weight: bold">int</span> iID …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-liu-java-zhong-de-rong-qi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/hei-ke-ji-er-cha-shu-bian-li.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html"><h3 class="article-title">(二十五) Math 类(基本数学运算)</h3></a>
-<h6 class="subheader" title="2015-06-13T15:47:00+08:00">Sat 13 June 2015
+            <a href="http://blog.smallcpp.cn/cegui-4-cegui-chu-shi-hua.html"><h3 class="article-title">[CEGUI]. 4、CEGUI 初始化</h3></a>
+<h6 class="subheader" title="2015-05-29T16:19:00+08:00">Fri 29 May 2015
 </h6>
 
 
-<p>Math 类位于 java.lang 包中, 包含用于执行基本数学运算的方法, Math 类的所有方法都是静态方法, 所以使用该类中的方法时, 可以直接使用类名.方法名, 如: Math.round();</p>
-<p>常用的方法:
-<img alt="" src="http://i59.tinypic.com/ofyt8z.jpg"></p>
-<p>Math 类还提供了许多其他方法, 可自行查阅.
-???</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>环境搭建好, Device 也取得后就开始初始化 CEGUI 了.</p>
+<p>取 Device 时要注意下, 有的游戏不止创建了一个 Device, 有可能是多个, 所以 HOOK 的时候要先试试用哪个 Device 初始化 CEGUI 可以成功, 例如下面的代码:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>HRESULT APIENTRY hkIDirect3D9::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow
+    , DWORD …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-wu-math-lei-ji-ben-shu-xue-yun-suan.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-4-cegui-chu-shi-hua.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-si-shi-jian-de-chu-li.html"><h3 class="article-title">(二十四) 时间的处理</h3></a>
-<h6 class="subheader" title="2015-06-13T13:37:00+08:00">Sat 13 June 2015
+            <a href="http://blog.smallcpp.cn/cegui-3-vs-huan-jing-she-zhi.html"><h3 class="article-title">[CEGUI]. 3、VS 环境设置</h3></a>
+<h6 class="subheader" title="2015-05-29T08:05:00+08:00">Fri 29 May 2015
 </h6>
 
 
-<p>如果需要处理日期和时间的相关数据, 可以使用 java.util 包中的 Date 类;
-这个类最主要的作用就是获取当前时间.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>Date d = &lt;span style=&quot;color: #0000ff&quot;&gt;new&lt;/span&gt; Date(); &lt;span style=&quot;color: #008000&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000&quot;&gt; Date 类的默认无参构造方法创建出的对象就代表当前时间&lt;/span&gt;
-&lt;span …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>在正式开始前, 有必要先设置下 VS 的开发环境, 之前我就是因为没设置好, 导致生成的 dll 注入后各种问题, 折腾了一天才发现是依赖库没设置对…所以单独拿一篇笔记来记下这个.</p>
+<p>首先是 Debug 和 Release 版本通用设置:</p>
+<ol>
+<li>[包含目录] 和 [库目录] 的设置
+<img alt="" src="http://i62.tinypic.com/t69mvt.jpg"></li>
+</ol>
+<p>包含目录要把 D3D9 和 CEGUI 的路径加进去, 我这里都是安装在 E 盘:
+E:\Microsoft DirectX …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-si-shi-jian-de-chu-li.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-3-vs-huan-jing-she-zhi.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/er-shi-san-zi-fu-chuan-de-zhuan-huan.html"><h3 class="article-title">(二十三) 字符串的转换</h3></a>
-<h6 class="subheader" title="2015-06-13T13:28:00+08:00">Sat 13 June 2015
+            <a href="http://blog.smallcpp.cn/cegui-2-hook-d3d.html"><h3 class="article-title">[CEGUI]. 2、HOOK D3D</h3></a>
+<h6 class="subheader" title="2015-05-27T16:06:00+08:00">Wed 27 May 2015
 </h6>
 
 
-<p>Java 提供三种方法实现基本类型向字符串转换:
-<em>. 使用包装类的 toString() 方法
-</em>. 使用 String 类的 valueOf() 方法
-*. 用一个空字符串加上基本类型, 得到的就是基本类型数据对应的字符串</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; c = 10&lt;span style=&quot;color: #000000&quot;&gt;;
-String str1 &lt;/span&gt;=&lt;span style=&quot;color …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">JAVA</a>
+<p>使用 CEGUI 的第一步是要创建一个 Renderer 对象(渲染对象) 参考: <a href="http://blog.csdn.net/bluekane/article/details/3738376">cegui渲染入门</a></p>
+<p>最新的 CEGUI 支持的渲染组件有: Direct3D9、Direct3D10、Direct3D11、OpenGl、Ogre3d 等.</p>
+<p>一般的游戏都使用的是 Direct3D 系列, 而要创建一个 D3D Renderer 对象就需要提供一个参数, 即 Direct3DDevice (D3D 设备句柄), 这个参数由 D3D …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/er-shi-san-zi-fu-chuan-de-zhuan-huan.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/cegui-2-hook-d3d.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 18 of 28</h6>
+<h6 class="subheader">Page 18 of 25</h6>
 
 <p>
             <a href="http://blog.smallcpp.cn/author/martin17.html">&laquo; Prev</a>
@@ -268,19 +282,18 @@ String str1 &lt;/span&gt;=&lt;span style=&quot;color …</pre></div><p class="su
             <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-java-ru-men-dao-jing-tong.html">大数据 Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-linux-ru-men-dao-jing-tong.html">大数据 Linux 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-mongodb-ru-men-dao-jing-tong.html">大数据 Mongodb 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju-redis-ru-men-dao-jing-tong.html">大数据 Redis 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">JAVA</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java-ru-men-dao-jing-tong.html">Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/mongodb-ru-men-dao-jing-tong.html">Mongodb 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
             <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/redis-ru-men-dao-jing-tong.html">Redis 入门到精通</a></li>
             <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
             <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
