@@ -211,11 +211,11 @@ text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</sp
 </h6>
 
 
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.
+<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.<br>
 这种功能通过 Lua 运行时栈来完实现.</p>
 <p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
 <p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg"></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.
+<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.<br>
 Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
 <p>假设存在一个 LuaGlue 函数 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
@@ -233,8 +233,8 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 </h6>
 
 
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
+<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.<br>
+对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.<br>
 不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
@@ -252,8 +252,8 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 
 
 <p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
-<p><strong>Lua 环境(Lua_State)
-</strong>Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.
+<p><strong>Lua 环境(Lua_State)</strong></p>
+<p>Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.<br>
 对于 C …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
@@ -270,9 +270,9 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
 </h6>
 
 
-<p>Windows 搭建 Lua 环境包含3部分内容：<strong>编译lua的库文件(*.lib), 编译lua解释器(lua.exe), 编译lua编译器(luac.exe)</strong>.
+<p>Windows 搭建 Lua 环境包含3部分内容：<strong>编译lua的库文件(*.lib)、编译lua解释器(lua.exe)、编译lua编译器(luac.exe)</strong>.
 我们采用 VS2013 + lua-5.2.4 来进行编译.</p>
-<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a>
+<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a><br>
 我这里下载的是 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>

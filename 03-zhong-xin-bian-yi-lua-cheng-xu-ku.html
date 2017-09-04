@@ -53,13 +53,13 @@
 </h6>
 
 
-    <p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年, 拷贝好带身边</strong>.
+    <p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.<br>
+对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.<br>
+不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年, 拷贝好带身边</strong>.<br>
 接下来就开始创建这个程序库.</p>
-<p>同第一篇一样, 采用 VS2013 + lua-5.2.4 来进行编译, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a>
-然后修改源码, 使 Lua 支持中文的变量名及函数名.
-接下来打开 VS2013 新建一个 win32 静态链接库 程序, 取名为 LuaLib, 不要勾选预编译头.
+<p>同第一篇一样, 采用 VS2013 + lua-5.2.4 来进行编译, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a><br>
+然后修改源码, 使 Lua 支持中文的变量名及函数名.<br>
+接下来打开 VS2013 新建一个 win32 静态链接库 程序, 取名为 LuaLib, 不要勾选预编译头.<br>
 将 src 整个文件夹复制到工作目录下(注意这里是连 src 文件夹一起复制的, 第一篇中是复制的源码), 然后在刚新建的工程中添加<strong>除 luac.c 和 lua.c 外</strong>的其他源代码文件.</p>
 <p><img alt="" src="http://i62.tinypic.com/6r0n79.jpg"></p>
 <p>打开属性编辑框, 在工程的预处理器设置中添加一行 _CRT_SECURE_NO_WARNINGS, 并且设置当前工程的包含目录.</p>
@@ -68,92 +68,94 @@
 <p>将下来为工程创建一个 CLua 类(<a href="https://github.com/z351522453/LuaLib">源码传送门</a>), 该类封装了一部分 Lua API 函数, 隐藏了 Lua 需要的初始化和关闭处理, 它的使用说明及源码分析将在后面进一步说明.</p>
 <p>好, 接下来就开始编译 LuaLib 工程的 Debug 和 Release 版本, 将生成的 .lib 文件分别命名为 LuaLib_Debug.lib 和 LuaLib_Release.lib.</p>
 <p>现在把 CLua.h 单独复制出来, 在文件开头添加如下代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #000000;&quot;&gt;#ifdef _DEBUG
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#else&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Release.lib&quot;)
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#endif&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#ifdef _DEBUG</span>
+<span style="color: #1e889b">#pragma comment(lib,&quot;LuaLib_Debug.lib&quot;)</span>
+<span style="color: #1e889b">#else</span>
+<span style="color: #1e889b">#pragma comment(lib,&quot;LuaLib_Release.lib&quot;)</span>
+<span style="color: #1e889b">#endif</span>
 </pre></div>
 
 
-<p>好, 现在的 CLua.h 中的代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; once&lt;span style=&quot;color: #000000;&quot;&gt;
+<p><br>
+好, 现在的 CLua.h 中的代码如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#pragma once</span>
 
-#ifdef _DEBUG
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Debug.lib&quot;)
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#else&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#pragma&lt;/span&gt; comment(lib,&quot;LuaLib_Release.lib&quot;)
-&lt;span style=&quot;color: #0000ff;&quot;&gt;#endif&lt;/span&gt;
+<span style="color: #1e889b">#ifdef _DEBUG</span>
+<span style="color: #1e889b">#pragma comment(lib,&quot;LuaLib_Debug.lib&quot;)</span>
+<span style="color: #1e889b">#else</span>
+<span style="color: #1e889b">#pragma comment(lib,&quot;LuaLib_Release.lib&quot;)</span>
+<span style="color: #1e889b">#endif</span>
 
-&lt;span style=&quot;color: #0000ff;&quot;&gt;struct&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; lua_State;
+<span style="color: #8B008B; font-weight: bold">struct</span> lua_State;
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;#define&lt;/span&gt; LuaGlue extern &quot;C&quot; int  &lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 定义 LuaGlue 宏&lt;/span&gt;
+<span style="color: #1e889b">#define LuaGlue extern &quot;C&quot; int</span><span style="color: #228B22">// 定义 LuaGlue 宏</span>
 
-&lt;span style=&quot;color: #0000ff;&quot;&gt;extern&lt;/span&gt; &lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt; { &lt;span style=&quot;color: #008000;&quot;&gt;//&lt;/span&gt;&lt;span style=&quot;color: #008000;&quot;&gt; 定义一个 C 方式的 LuaFunctionType 类型函数指针&lt;/span&gt;
-    typedef &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;(*LuaFunctionType)(lua_State *&lt;span style=&quot;color: #000000;&quot;&gt;pLuaState);
+<span style="color: #8B008B; font-weight: bold">extern</span> <span style="color: #CD5555">&quot;C&quot;</span> { <span style="color: #228B22">// 定义一个 C 方式的 LuaFunctionType 类型函数指针</span>
+  <span style="color: #8B008B; font-weight: bold">typedef</span> <span style="color: #00688B; font-weight: bold">int</span>(*LuaFunctionType)(lua_State *pLuaState);
 };
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; cLua {
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;public&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
-    cLua();
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;virtual&lt;/span&gt; ~&lt;span style=&quot;color: #000000;&quot;&gt;cLua();
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">cLua</span> {
+<span style="color: #8B008B; font-weight: bold">public</span>:
+  cLua();
+  <span style="color: #8B008B; font-weight: bold">virtual</span> ~cLua();
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        RunScript(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pFilename);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        RunString(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pCommand);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* GetErrorString(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+  <span style="color: #00688B; font-weight: bold">bool</span>        <span style="color: #008b45">RunScript</span>(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pFilename);
+  <span style="color: #00688B; font-weight: bold">bool</span>        <span style="color: #008b45">RunString</span>(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pCommand);
+  <span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* <span style="color: #008b45">GetErrorString</span>(<span style="color: #00688B; font-weight: bold">void</span>);
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;bool&lt;/span&gt;        AddFunction(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pFunctionName, LuaFunctionType pFunction);
+  <span style="color: #00688B; font-weight: bold">bool</span>        <span style="color: #008b45">AddFunction</span>(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pFunctionName, LuaFunctionType pFunction);
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* GetStringArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;* pDefault =&lt;span style=&quot;color: #000000;&quot;&gt; NULL);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;        GetNumberArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt; dDefault = &lt;span style=&quot;color: #800080;&quot;&gt;0.0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;         GetIntArgument(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; num, &lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; nDefault = &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+  <span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* <span style="color: #008b45">GetStringArgument</span>(<span style="color: #00688B; font-weight: bold">int</span> num, <span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pDefault = <span style="color: #658b00">NULL</span>);
+  <span style="color: #00688B; font-weight: bold">double</span>        <span style="color: #008b45">GetNumberArgument</span>(<span style="color: #00688B; font-weight: bold">int</span> num, <span style="color: #00688B; font-weight: bold">double</span> dDefault = <span style="color: #B452CD">0.0</span>);
+  <span style="color: #00688B; font-weight: bold">int</span>         <span style="color: #008b45">GetIntArgument</span>(<span style="color: #00688B; font-weight: bold">int</span> num, <span style="color: #00688B; font-weight: bold">int</span> nDefault = <span style="color: #B452CD">0</span>);
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushString(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pString);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushNumber(&lt;span style=&quot;color: #0000ff;&quot;&gt;double&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; value);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        PushInt(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; value);
+  <span style="color: #00688B; font-weight: bold">void</span>        <span style="color: #008b45">PushString</span>(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pString);
+  <span style="color: #00688B; font-weight: bold">void</span>        <span style="color: #008b45">PushNumber</span>(<span style="color: #00688B; font-weight: bold">double</span> value);
+  <span style="color: #00688B; font-weight: bold">void</span>        <span style="color: #008b45">PushInt</span>(<span style="color: #00688B; font-weight: bold">int</span> value);
 
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;        SetErrorHandler(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;(*pErrHandler)(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; pError));
+  <span style="color: #00688B; font-weight: bold">void</span>        <span style="color: #008b45">SetErrorHandler</span>(<span style="color: #00688B; font-weight: bold">void</span>(*pErrHandler)(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* pError));
 
-    lua_State&lt;/span&gt;*  GetScriptContext(&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+  lua_State*  <span style="color: #008b45">GetScriptContext</span>(<span style="color: #00688B; font-weight: bold">void</span>);
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;private&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;:
-    lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt;  m_pScriptContext;
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;void&lt;/span&gt;(*m_pErrorHandler)(&lt;span style=&quot;color: #0000ff;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;char&lt;/span&gt; *&lt;span style=&quot;color: #000000;&quot;&gt;pError);
-};&lt;/span&gt;
+<span style="color: #8B008B; font-weight: bold">private</span>:
+  lua_State*  m_pScriptContext;
+  <span style="color: #00688B; font-weight: bold">void</span>(*m_pErrorHandler)(<span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span> *pError);
+};
 </pre></div>
 
 
-<p>此时, 我们新的 Lua 程序库就制作完毕了, 使用时只要将 <strong>刚修改的 CLua.h、LuaLib_Debug.lib</strong> 和 <strong>LuaLib_Release.lib</strong> 三份文件复制到工程目录下, 然后在合适的地方导入头文件 #include &ldquo;CLua.h&rdquo; 就可以了.</p>
+<p><br>
+此时, 我们新的 Lua 程序库就制作完毕了, 使用时只要将 刚修改的 <strong>CLua.h</strong>、<strong>LuaLib_Debug.lib</strong> 和 <strong>LuaLib_Release.lib</strong> 三份文件复制到工程目录下, 然后在合适的地方导入头文件 #include &ldquo;CLua.h&rdquo; 就可以了.</p>
 <hr>
-<p>接下来使用 CLua 来实现第二篇中的例子.
-打开 VS2013 新创建一个 win32 应用程序 工程, 将 CLua.h、LuaLib_Debug.lib 和 LuaLib_Release.lib 三份文件拷贝过去.
+<p>接下来使用 CLua 来实现第二篇中的例子.<br>
+打开 VS2013 新创建一个 win32 应用程序 工程, 将 CLua.h、LuaLib_Debug.lib 和 LuaLib_Release.lib 三份文件拷贝过去.<br>
 修改源码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;windows.h&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
-#include &lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;CLua.h&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #1e889b">#include</span> <span style="color: #228B22">&lt;windows.h&gt;</span><span style="color: #1e889b"></span>
+<span style="color: #1e889b">#include</span> <span style="color: #228B22">&quot;CLua.h&quot;</span><span style="color: #1e889b"></span>
 
 
-LuaGlue LuaGule_Out(lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000;&quot;&gt; L) {
-    printf(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;This is a LuaGule! \r\n&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
+LuaGlue <span style="color: #008b45">LuaGule_Out</span>(lua_State* L) {
+  printf(<span style="color: #CD5555">&quot;This is a LuaGule! \r\n&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff;&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000;&quot;&gt; argv[]) {
-    cLua lua;
-    lua.AddFunction(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;新函数&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;, LuaGule_Out);
-    lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;C:/Users/Administrator/Desktop/test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
+<span style="color: #00688B; font-weight: bold">int</span> <span style="color: #008b45">_tmain</span>(<span style="color: #00688B; font-weight: bold">int</span> argc, _TCHAR* argv[]) {
+  cLua lua;
+  lua.AddFunction(<span style="color: #CD5555">&quot;新函数&quot;</span>, LuaGule_Out);
+  lua.RunScript(<span style="color: #CD5555">&quot;C:/Users/Administrator/Desktop/test.lua&quot;</span>);
 
-    system(&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000;&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;;
-}&lt;/span&gt;
+  system(<span style="color: #CD5555">&quot;PAUSE&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
+}
 </pre></div>
 
 
-<p>可以看到, 相对第二篇中的程序, 新代码中的主要变化有:
-<em>. 主程序中不再有初始化和关闭 Lua 环境的代码;
-</em>. LuaGlue 函数的定义因为使用了 LuaGlue 宏而简化了;
-<em>. 注册 LuaGlue 函数的 Lua API 被 CLua::AddFunction 代替;
-</em>. 执行 Lua 脚本的 Lua API 被 CLua::RunScript 代替.
- ??</p>
+<p><br>
+可以看到, 相对第二篇中的程序, 新代码中的主要变化有:<br>
+<em>. 主程序中不再有初始化和关闭 Lua 环境的代码;<br>
+</em>. LuaGlue 函数的定义因为使用了 LuaGlue 宏而简化了;<br>
+<em>. 注册 LuaGlue 函数的 Lua API 被 CLua::AddFunction 代替;<br>
+</em>. 执行 Lua 脚本的 Lua API 被 CLua::RunScript 代替.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>

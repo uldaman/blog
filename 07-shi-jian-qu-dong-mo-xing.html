@@ -59,92 +59,93 @@
 这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 MFC 中的控件 ID).</p>
 <p>那来看看怎么设计这个事件驱动模型.
 首先, 提供一个 LuaGlue 函数来设定在 Lua 脚本中的事件处理程序.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>LuaGlue _RegisterEvent(lua_State*&lt;span style=&quot;color: #000000&quot;&gt; L) {
-    g_strEventHandle &lt;/span&gt;= g_lua.GetStringArgument(&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-}&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>LuaGlue <span style="color: #008b45">_RegisterEvent</span>(lua_State* L) {
+  g_strEventHandle = g_lua.<span style="color: #658b00">GetStringArgument</span>(<span style="color: #B452CD">1</span>, <span style="color: #CD5555">&quot;&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
+}
 </pre></div>
 
 
-<p>那么, 再来设计发送事件函数.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (g_strEventHandle != &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buf[&lt;span style=&quot;color: #800080&quot;&gt;256&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;];
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (args) {
-            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d, %s)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId, args);
-        } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
-            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId);
-        }
-        g_lua.RunString(buf);
+<p><br>
+那么, 再来设计发送事件函数.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">FireEvent</span>(<span style="color: #00688B; font-weight: bold">int</span> nId, <span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* args) {
+  <span style="color: #8B008B; font-weight: bold">if</span> (g_strEventHandle != <span style="color: #CD5555">&quot;&quot;</span>) {
+    <span style="color: #00688B; font-weight: bold">char</span> buf[<span style="color: #B452CD">256</span>];
+    <span style="color: #8B008B; font-weight: bold">if</span> (args) {
+      sprintf_s(buf, <span style="color: #B452CD">255</span>, <span style="color: #CD5555">&quot;%s(%d, %s)&quot;</span>, g_strEventHandle.<span style="color: #658b00">c_str</span>(), nId, args);
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+      sprintf_s(buf, <span style="color: #B452CD">255</span>, <span style="color: #CD5555">&quot;%s(%d)&quot;</span>, g_strEventHandle.<span style="color: #658b00">c_str</span>(), nId);
     }
-}&lt;/span&gt;
+    g_lua.<span style="color: #658b00">RunString</span>(buf);
+  }
+}
 </pre></div>
 
 
-<p>第一个参数是事件ID, 这个很好理解, 那第二个参数是什么?
+<p><br>
+第一个参数是事件ID, 这个很好理解, 那第二个参数是什么?
 因为 Lua 是支持变参系统的, 所以我们可以为每个事件设定不同的参数, 而第二个参数是用来表示那些可变参数的.</p>
 <p>接下来, 看看 Lua 事件处理函数的模板:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;local&lt;/span&gt; EVENT_SAMPLE = &lt;span style=&quot;color: #800080&quot;&gt;1000&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">local</span> EVENT_SAMPLE = <span style="color: #B452CD">1000</span>
 
-RegisterEvent(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;EventHandle&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
+RegisterEvent(<span style="color: #CD5555">&quot;EventHandle&quot;</span>)
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; EventHandle( nId, ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;  nId == EVENT_SAMPLE &lt;span style=&quot;color: #0000ff&quot;&gt;then&lt;/span&gt;
-        &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;Sample Event!&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;)
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;for&lt;/span&gt; i,v &lt;span style=&quot;color: #0000ff&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff&quot;&gt;ipairs&lt;/span&gt;{...} &lt;span style=&quot;color: #0000ff&quot;&gt;do&lt;/span&gt;
-            &lt;span style=&quot;color: #ff00ff&quot;&gt;print&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;(v)
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
-    &lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff&quot;&gt;end&lt;/span&gt;
+<span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">EventHandle</span>(nId, ...)
+  <span style="color: #8B008B; font-weight: bold">if</span>  nId == EVENT_SAMPLE <span style="color: #8B008B; font-weight: bold">then</span>
+    <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Sample Event!&quot;</span>)
+    <span style="color: #8B008B; font-weight: bold">for</span> i, v <span style="color: #8B008B; font-weight: bold">in</span> <span style="color: #658b00">ipairs</span>{...} <span style="color: #8B008B; font-weight: bold">do</span>
+      <span style="color: #658b00">print</span>(v)
+    <span style="color: #8B008B; font-weight: bold">end</span>
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
 </pre></div>
 
 
-<p>现在, 我们在 C/C++ 的主程序中发出事件, 看看会输出什么:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000&lt;span style=&quot;color: #000000&quot;&gt;
+<p><br>
+现在, 我们在 C/C++ 的主程序中发出事件, 看看会输出什么:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #a61717; background-color: #e3d2d2">#</span>define EVENT_SAMPLE    <span style="color: #B452CD">1000</span>
 cLua g_lua;
-g_lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:\\Users\\Administrator\\Desktop\\test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;\&quot;你好\&quot;, 10&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;);
+g_lua.<span style="color: #658b00">RunScript</span>(<span style="color: #CD5555">&quot;C:\\Users\\Administrator\\Desktop\\test.lua&quot;</span>);
+FireEvent(EVENT_SAMPLE, <span style="color: #CD5555">&quot;\&quot;你好\&quot;, 10&quot;</span>);
 </pre></div>
 
 
-<p><img alt="" src="http://i61.tinypic.com/24e8jsh.jpg"></p>
+<p><br>
+<img alt="" src="http://i61.tinypic.com/24e8jsh.jpg"></p>
 <p>看! 一个基于 C/C++ 和 Lua 的事件驱动模型建立起来了.
 这个系统需要注意的地方在于, Lua 代码和 C/C++ 代码需要对事件 ID 和传递的参数的含义保持一致.</p>
 <p>下面是完整的 C/C++ 端代码:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>std::&lt;span style=&quot;color: #0000ff&quot;&gt;string&lt;/span&gt; g_strEventHandle = &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>std::string g_strEventHandle = <span style="color: #CD5555">&quot;&quot;</span>;
 cLua g_lua;
 
-LuaGlue _RegisterEvent(lua_State&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; L) {
-    g_strEventHandle &lt;/span&gt;= g_lua.GetStringArgument(&lt;span style=&quot;color: #800080&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
+LuaGlue <span style="color: #008b45">_RegisterEvent</span>(lua_State* L) {
+  g_strEventHandle = g_lua.<span style="color: #658b00">GetStringArgument</span>(<span style="color: #B452CD">1</span>, <span style="color: #CD5555">&quot;&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;void&lt;/span&gt; FireEvent(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; nId, &lt;span style=&quot;color: #0000ff&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt;*&lt;span style=&quot;color: #000000&quot;&gt; args) {
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt; (g_strEventHandle != &lt;span style=&quot;color: #800000&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;) {
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;char&lt;/span&gt; buf[&lt;span style=&quot;color: #800080&quot;&gt;256&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;];
-        &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;if&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; (args) {
-            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d, %s)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId, args);
-        } &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;else&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt; {
-            sprintf_s(buf, &lt;/span&gt;&lt;span style=&quot;color: #800080&quot;&gt;255&lt;/span&gt;, &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;%s(%d)&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, g_strEventHandle.c_str(), nId);
-        }
-        g_lua.RunString(buf);
+<span style="color: #00688B; font-weight: bold">void</span> <span style="color: #008b45">FireEvent</span>(<span style="color: #00688B; font-weight: bold">int</span> nId, <span style="color: #8B008B; font-weight: bold">const</span> <span style="color: #00688B; font-weight: bold">char</span>* args) {
+  <span style="color: #8B008B; font-weight: bold">if</span> (g_strEventHandle != <span style="color: #CD5555">&quot;&quot;</span>) {
+    <span style="color: #00688B; font-weight: bold">char</span> buf[<span style="color: #B452CD">256</span>];
+    <span style="color: #8B008B; font-weight: bold">if</span> (args) {
+      sprintf_s(buf, <span style="color: #B452CD">255</span>, <span style="color: #CD5555">&quot;%s(%d, %s)&quot;</span>, g_strEventHandle.<span style="color: #658b00">c_str</span>(), nId, args);
+    } <span style="color: #8B008B; font-weight: bold">else</span> {
+      sprintf_s(buf, <span style="color: #B452CD">255</span>, <span style="color: #CD5555">&quot;%s(%d)&quot;</span>, g_strEventHandle.<span style="color: #658b00">c_str</span>(), nId);
     }
+    g_lua.<span style="color: #658b00">RunString</span>(buf);
+  }
 }
 
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;#define&lt;/span&gt; EVENT_SAMPLE    1000
+<span style="color: #a61717; background-color: #e3d2d2">#</span>define EVENT_SAMPLE    <span style="color: #B452CD">1000</span>
 
-&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; _tmain(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt; argc, _TCHAR*&lt;span style=&quot;color: #000000&quot;&gt; argv[]) {
-    g_lua.AddFunction(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;RegisterEvent&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;, _RegisterEvent);
-    g_lua.RunScript(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;C:\\Users\\Administrator\\Desktop\\test.lua&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    FireEvent(EVENT_SAMPLE, &lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;\&quot;你好\&quot;, 10&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
+<span style="color: #00688B; font-weight: bold">int</span> <span style="color: #008b45">_tmain</span>(<span style="color: #00688B; font-weight: bold">int</span> argc, _TCHAR* argv[]) {
+  g_lua.<span style="color: #658b00">AddFunction</span>(<span style="color: #CD5555">&quot;RegisterEvent&quot;</span>, _RegisterEvent);
+  g_lua.<span style="color: #658b00">RunScript</span>(<span style="color: #CD5555">&quot;C:\\Users\\Administrator\\Desktop\\test.lua&quot;</span>);
+  FireEvent(EVENT_SAMPLE, <span style="color: #CD5555">&quot;\&quot;你好\&quot;, 10&quot;</span>);
 
-    system(&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;PAUSE&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;);
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: #800080&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color: #000000&quot;&gt;;
-}&lt;/span&gt;
+  system(<span style="color: #CD5555">&quot;PAUSE&quot;</span>);
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">0</span>;
+}
 </pre></div>
-
-
-<p>\? </p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
