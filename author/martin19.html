@@ -44,63 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.cn/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html"><h3 class="article-title">17、通用对话框之 QFileDialog</h3></a>
-<h6 class="subheader" title="2015-05-26T08:25:00+08:00">Tue 26 May 2015
-</h6>
-
-
-<blockquote>
-<p>说明: 这些文章都是本人学习&rdquo;devbean QT 学习之路2&rdquo;的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
-</blockquote>
-<p>QFileDialog 即文件对话框, 常见的就是打开文件和保存文件对话框:</p>
-<p><img alt="" src="http://i60.tinypic.com/2bwhzb.jpg"></p>
-<p><img alt="" src="http://i57.tinypic.com/2j27qu0.jpg"></p>
-<p>实现代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #00688B; font-weight: bold">void</span> Qt_Notepad::OpenFile() {
-    QString fileName = QFileDialog::getOpenFileName(<span style="color: #8B008B; font-weight: bold">this</span>, <span style="color: #CD5555">&quot;Open File&quot;</span>, <span style="color: #658b00">NULL</span>, <span style="color: #CD5555">&quot;file (*.*)&quot;</span>);
-
-    <span style="color: #8B008B; font-weight: bold">if</span> (!fileName.isEmpty()) {
-        QFile file;
-        file …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/17-tong-yong-dui-hua-kuang-zhi-qfiledialog.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html"><h3 class="article-title">16、通用对话框之 QMessageBox</h3></a>
-<h6 class="subheader" title="2015-05-25T18:05:00+08:00">Mon 25 May 2015
-</h6>
-
-
-<blockquote>
-<p>说明: 这些文章都是本人学习”devbean QT 学习之路2”的笔记, 部分内容摘自原文, 部分是自己的领悟.</p>
-</blockquote>
-<p>Qt 的内置对话框大致分为以下几类;</p>
-<ul>
-<li><code>QColorDialog</code>: 选择颜色;</li>
-<li><code>QFileDialog</code>: 选择文件或者目录;</li>
-<li><code>QFontDialog</code>: 选择字体;</li>
-<li><code>QInputDialog</code>: 允许用户输入一个值, 并将其值返回;</li>
-<li><code>QMessageBox</code>: 模态对话框, 用于显示信息、询问问题等;</li>
-<li><code>QPageSetupDialog</code>: 为打印机提供纸张相关的选项;</li>
-<li><code>QPrintDialog</code>: 打印机配置;</li>
-<li><code>QPrintPreviewDialog</code>: 打印预览;</li>
-<li><code>QProgressDialog …</code></li></ul><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/16-tong-yong-dui-hua-kuang-zhi-qmessagebox.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.cn/15-dui-hua-kuang-jian-tong-xin.html"><h3 class="article-title">15、对话框间通信</h3></a>
 <h6 class="subheader" title="2015-05-25T18:00:00+08:00">Mon 25 May 2015
 </h6>
@@ -273,6 +216,44 @@ Linux 的文件系统是采用<strong>级层式</strong>的<strong>树状</stron
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.cn/04-securecrt-de-an-zhuang-he-shi-yong.html"><h3 class="article-title">04. SecureCRT 的安装和使用</h3></a>
+<h6 class="subheader" title="2015-03-26T18:32:00+08:00">Thu 26 March 2015
+</h6>
+
+
+<p>参考: <a href="http://wiki.smallcpp.cn/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/SecureCRT%20%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8.html">SecureCRT 的安装和使用</a></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/04-securecrt-de-an-zhuang-he-shi-yong.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/03-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html"><h3 class="article-title">03. 在 Ubuntu 中安装 Ulipad 编辑器</h3></a>
+<h6 class="subheader" title="2015-03-26T17:04:00+08:00">Thu 26 March 2015
+</h6>
+
+
+<p>Ulipad 是一个国人编写的专业 Python 编辑器, 它基于 wxpython 开发的GUI(图形化界面).
+好吧, 有人说 vim, 我承认它确实是神器, 但上手实在是有点蛋疼…以后有机会使用的时候再学吧…</p>
+<h1 id="_1">安装</h1>
+<p>在安装之前, 有必要确认下我们 Ubuntu 上的 Python 是否正常.
+打开终端, 输入 python –V (注意大小写, 是大写的 V).</p>
+<p><img alt="" src="http://i61.tinypic.com/1zovrsl.jpg"></p>
+<p>如果正常输出了 Python …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-zai-ubuntu-zhong-an-zhuang-ulipad-bian-ji-qi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 19 of 25</h6>
@@ -298,7 +279,6 @@ Linux 的文件系统是采用<strong>级层式</strong>的<strong>树状</stron
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>

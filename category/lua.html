@@ -44,6 +44,61 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
+            <a href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html"><h3 class="article-title">09. lua 中的闭包</h3></a>
+<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
+</h6>
+
+
+<h1 id="_1">闭包</h1>
+<p>对于习惯了 C/C++ 这种不可嵌套定义函数的语言来说, 理解闭包真不太容易;</p>
+<p>要解释闭包就要先理解个小知识点:<br>
+Lua 中的函数是带有词法定界（lexical scoping）的<strong>第一类值</strong> (first-class values).<br>
+第一类值（first-class values）是指, 函数和其他值（数值、字符串）一样, 可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值.</p>
+<p>正因为函数也可以被嵌套定义在另一個函数內部, 假设函数 f2 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/08-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">08. lua 中的面向对象</h3></a>
+<h6 class="subheader" title="2015-06-15T19:47:00+08:00">Mon 15 June 2015
+</h6>
+
+
+<p>Lua 中本身并没有类这种数据结构, 但是可以使用 table 来模拟面向对象中的类, 如下所示:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>People = {}
+People.sayHi = <span style="color: #8B008B; font-weight: bold">function</span>()
+  <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Hi People!&quot;</span>)
+<span style="color: #8B008B; font-weight: bold">end</span>
+</pre></div>
+
+
+<p><br>
+或者可以这样:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45; font-weight: bold">People</span>.<span style="color: #008b45">sayHi</span>()
+   <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Hi People!&quot;</span>)
+<span style="color: #8B008B; font-weight: bold">end</span>
+</pre></div>
+
+
+<p><br>
+这就相当于创建了一个 People 类, 那怎么生成这个类的实例呢? 它的构造函数呢? 往下看:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>People.new …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/08-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
             <a href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html"><h3 class="article-title">07. 事件驱动模型</h3></a>
 <h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
 </h6>
@@ -200,7 +255,6 @@ Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最�
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>

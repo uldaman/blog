@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>04. 元表與元方法</title>
+    <title>09. lua 中的闭包</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -45,16 +45,65 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/04-yuan-biao-yu-yuan-fang-fa.html" rel="bookmark"
-        title="Permalink to 04. 元表與元方法">04. 元表與元方法</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html" rel="bookmark"
+        title="Permalink to 09. lua 中的闭包">09. lua 中的闭包</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-06-16T13:34:00+08:00">Tue 16 June 2015
+<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
 </h6>
 
 
-    <p>直接参考: <a href="http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html">http://www.cnblogs.com/nepaul/archive/2011/08/18/2143936.html</a></p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a>
+    <h1 id="_1">闭包</h1>
+<p>对于习惯了 C/C++ 这种不可嵌套定义函数的语言来说, 理解闭包真不太容易;</p>
+<p>要解释闭包就要先理解个小知识点:<br>
+Lua 中的函数是带有词法定界（lexical scoping）的<strong>第一类值</strong> (first-class values).<br>
+第一类值（first-class values）是指, 函数和其他值（数值、字符串）一样, 可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值.</p>
+<p>正因为函数也可以被嵌套定义在另一個函数內部, 假设函数 f2 定义在函数 f1 中, 那么就称 f2 为 f1 的内嵌 (inner) 函数, f1 为 f2 的外包 (enclosing) 函数, 外包和内嵌都具有传递性, 即 f2 的内嵌必然是 f1的内嵌, 而 f1 的外包也一定是 f2 的外包, 内嵌函数能访问外包函数已创建的所有局部变量, 这种特性便是所谓的词法定界 (lexical scoping), 而这些局部变量则称为该内嵌函数的外部局部变量 (external local variable) 或 supvalue.</p>
+<p>简单的说闭包是一个函数加上它可以正确访问的 upvalue, 这个函数定义在另一个函数内部, 并且可以访问定义在外部函数内的成员变量、参数、以及全局函数, 如:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">f1</span>(n)
+  <span style="color: #228B22">-- 函数参数也是局部变量</span>
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">function</span> ()
+    <span style="color: #658b00">print</span>(n) <span style="color: #228B22">-- 引用外包函数的局部变量</span>
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
+</pre></div>
+
+
+<p><br>
+对闭包有兴趣的可以看看这篇网文: <a href="http://www.cnblogs.com/yyxt/p/3875185.html">http://www.cnblogs.com/yyxt/p/3875185.html</a></p>
+<h1 id="_2">通过闭包来模拟面向对象</h1>
+<p>上一篇笔记, 通过 table 模拟了面向对象, 这一次, 通过闭包来模拟.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">local</span> <span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">People</span>()
+  <span style="color: #8B008B; font-weight: bold">local</span> tab = {}
+
+  <span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45; font-weight: bold">tab</span>:<span style="color: #008b45">sayHi</span>()
+    <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Say Hi!&quot;</span>)
+  <span style="color: #8B008B; font-weight: bold">end</span>
+
+  <span style="color: #8B008B; font-weight: bold">return</span> tab
+<span style="color: #8B008B; font-weight: bold">end</span>
+
+<span style="color: #8B008B; font-weight: bold">local</span> p = People()
+p.sayHi()
+</pre></div>
+
+
+<p><br></p>
+<p>再來看看怎麼继承:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">local</span> <span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">Man</span>()
+  <span style="color: #8B008B; font-weight: bold">local</span> tab = People()  <span style="color: #228B22">-- &quot;继承&quot; People</span>
+
+  <span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45; font-weight: bold">tab</span>:<span style="color: #008b45">sayHi</span>()
+    <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Man Say Hi!&quot;</span>)
+  <span style="color: #8B008B; font-weight: bold">end</span>
+
+  <span style="color: #8B008B; font-weight: bold">return</span> tab
+<span style="color: #8B008B; font-weight: bold">end</span>
+
+<span style="color: #8B008B; font-weight: bold">local</span> m = Man()
+m.sayHi()
+</pre></div>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
 
@@ -65,7 +114,7 @@
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="04-yuan-biao-yu-yuan-fang-fa" data-title="04. 元表與元方法" data-url="http://blog.smallcpp.cn/04-yuan-biao-yu-yuan-fang-fa.html"></div>
+    <div class="ds-thread" data-thread-key="09-lua-zhong-de-bi-bao" data-title="09. lua 中的闭包" data-url="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -94,7 +143,6 @@
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>

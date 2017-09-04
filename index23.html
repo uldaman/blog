@@ -44,55 +44,6 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
-<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
-</h6>
-
-
-<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg"></p>
-<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
-<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
-<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
-<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
-<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
-<h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
-</h6>
-
-
-<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
-<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg"></p>
-<hr>
-<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
-<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
-<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg"></p>
-<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
-<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg"></p>
-<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
-<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg"></p>
-<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg"></p>
-<p>点击 [显示从 QWidget …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
             <a href="http://blog.smallcpp.cn/14-c-jian-zao-zhe-mo-shi.html"><h3 class="article-title">14、[C++] 建造者模式</h3></a>
 <h6 class="subheader" title="2015-02-23T12:31:00+08:00">Mon 23 February 2015
 </h6>
@@ -279,6 +230,60 @@
             <hr  class="gradient"/>
         </article>
 
+        <article>
+            <a href="http://blog.smallcpp.cn/8-cdai-li-mo-shi.html"><h3 class="article-title">8、[C++]代理模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:23:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<h3 id="_1">代理模式</h3>
+<p>代理模式: 为其他对象提供一种代理以控制对这个对象的访问.</p>
+<p>情景:</p>
+<ol>
+<li>
+<p>有人找公司老总, 但是老总很忙, 于是要找就先找老总的助理, 助理等老总不忙时, 再来告诉老总吧.</p>
+</li>
+<li>
+<p>想象一下古代大户人家的大小姐与仆人偷情, 有一天仆人想约大小姐出来赏月, 但仆人可能不方便直接见大小姐,  于是先告诉大小姐的丫鬟, 由丫鬟转告大小姐.</p>
+</li>
+</ol>
+<p>上面这两个情景, 助理和丫鬟都是担当着代理的这个角色(为其他对象提供一种代理以控制对这个对象的访问, 这里指老总和小姐).</p>
+<p><a href="http://images.cnitblog.com/blog/723444/201502/131615251209230.png"><img alt="代理模式" src="http://images.cnitblog.com/blog/723444/201502/131615264794717.png"></a></p>
+<p>Subject: 抽象类, 定义了Proxy和RealSubject的共用接口.</p>
+<p>RealSubject: 真实实体(老总/大小姐)</p>
+<p>Proxy: 代理类, 维护一个RealSubject的引用使得代理可以访问实体.</p>
+<p>[cpp]#include …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/8-cdai-li-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
+        <article>
+            <a href="http://blog.smallcpp.cn/7-czhuang-shi-zhe-mo-shi.html"><h3 class="article-title">7、[C++]装饰者模式</h3></a>
+<h6 class="subheader" title="2015-02-15T14:22:00+08:00">Sun 15 February 2015
+</h6>
+
+
+<h3 id="_1">装饰者模式</h3>
+<p>从我们之前学到的知识中, 已经知道扩展一个类的方法是为他派生新的子类, 也就是通过<strong>继承</strong>来扩展功能.</p>
+<p>然而, 使用继承是<strong>静态</strong>的, 在编译的时候就已经决定了子类的行为, 我们不便于控制增加行为的方式和时机.</p>
+<p>而装饰者模式可以<strong>动态</strong>地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</p>
+<blockquote>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。</blockquote>
+
+<p>装饰模式的UML图 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
+
+</p>
+
+
+
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/7-czhuang-shi-zhe-mo-shi.html">Read More</a>
+            <hr  class="gradient"/>
+        </article>
+
             <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 23 of 25</h6>
@@ -304,7 +309,6 @@
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/cocos2d.html">Cocos2d</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
