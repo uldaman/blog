@@ -49,12 +49,18 @@
 </h6>
 
 
+<div class="toc">
+<ul>
+<li><a href="#_1">闭包</a></li>
+<li><a href="#_2">通过闭包来模拟面向对象</a></li>
+</ul>
+</div>
 <h1 id="_1">闭包</h1>
 <p>对于习惯了 C/C++ 这种不可嵌套定义函数的语言来说, 理解闭包真不太容易;</p>
 <p>要解释闭包就要先理解个小知识点:<br>
 Lua 中的函数是带有词法定界（lexical scoping）的<strong>第一类值</strong> (first-class values).<br>
 第一类值（first-class values）是指, 函数和其他值（数值、字符串）一样, 可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值.</p>
-<p>正因为函数也可以被嵌套定义在另一個函数內部, 假设函数 f2 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+<p>正因为函数也可以被嵌套定义在另一個函数內部 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
 
@@ -124,8 +130,18 @@ People.sayHi = <span style="color: #8B008B; font-weight: bold">function</span>()
 
 
 <p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">text</span>( ... )
+  <span style="color: #8B008B; font-weight: bold">for</span> i = <span style="color: #B452CD">1</span>, arg.n <span style="color: #8B008B; font-weight: bold">do</span>
+    <span style="color: #658b00">print</span>(arg[i])
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
+
+text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</span>)
+</pre></div>
+
+
+<p><br>
+这完全没有问题, 在 5.2 之前, Lua 将函数的可变参数存放在一个叫 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
 

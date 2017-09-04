@@ -165,8 +165,18 @@
 
 
 <p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080 …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">text</span>( ... )
+  <span style="color: #8B008B; font-weight: bold">for</span> i = <span style="color: #B452CD">1</span>, arg.n <span style="color: #8B008B; font-weight: bold">do</span>
+    <span style="color: #658b00">print</span>(arg[i])
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
+
+text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</span>)
+</pre></div>
+
+
+<p><br>
+这完全没有问题, 在 5.2 之前, Lua 将函数的可变参数存放在一个叫 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
 

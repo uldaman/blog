@@ -54,40 +54,42 @@
 
 
     <p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;1&lt;/span&gt;, arg.n &lt;span style=&quot;color: #0000ff;&quot;&gt;do&lt;/span&gt;
-        &lt;span style=&quot;color: #ff00ff;&quot;&gt;print&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;(arg[i])
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">text</span>( ... )
+  <span style="color: #8B008B; font-weight: bold">for</span> i = <span style="color: #B452CD">1</span>, arg.n <span style="color: #8B008B; font-weight: bold">do</span>
+    <span style="color: #658b00">print</span>(arg[i])
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
 
-text(&lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;, &lt;span style=&quot;color: #800080;&quot;&gt;20&lt;/span&gt;)
+text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</span>)
 </pre></div>
 
 
-<p>这完全没有问题, 在 5.2 之前, Lua 将函数的可变参数存放在一个叫 arg 的表中, 除了参数以外, arg 表中还有一个域 n 表示参数的个数.</p>
+<p><br>
+这完全没有问题, 在 5.2 之前, Lua 将函数的可变参数存放在一个叫 arg 的表中, 除了参数以外, arg 表中还有一个域 n 表示参数的个数.</p>
 <p>但是, 到了 5.2 中, 定义函数的时候,  如果使用了 &ldquo;&hellip;&rdquo; 表达式, 那么语言后台将不会再帮忙打包 &ldquo;arg&rdquo; 对象了, 它将直接使用<strong> {&hellip;} — — </strong>用可变参数中的所有值创建一个列表.
 需要注意的是, 这个表没有 n 域, 它只含参数, 我们可以用下面这种遍历表的方法来遍历它:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i,v &lt;span style=&quot;color: #0000ff;&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color: #ff00ff;&quot;&gt;ipairs&lt;/span&gt;{...} &lt;span style=&quot;color: #0000ff;&quot;&gt;do&lt;/span&gt;
-    &lt;span style=&quot;color: #ff00ff;&quot;&gt;print&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;(v)
-&lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>  <span style="color: #8B008B; font-weight: bold">for</span> i,v <span style="color: #8B008B; font-weight: bold">in</span> <span style="color: #658b00">ipairs</span>{...} <span style="color: #8B008B; font-weight: bold">do</span>
+    <span style="color: #658b00">print</span>(v)
+  <span style="color: #8B008B; font-weight: bold">end</span>
 </pre></div>
 
 
-<p>或者我们可以自己手动构建 arg 表: local arg = table.pack(&hellip;)
-table.pack(&hellip;) 将返回用所有参数以键 1,2, 等填充的新表,  并将 &ldquo;<code>n</code>&rdquo; 这个域设为参数的总数(就像 5.2 之前 Lua 后台帮我们打包的一样).
+<p><br>
+或者我们可以自己手动构建 arg 表: <code>local arg = table.pack(...)</code><br>
+table.pack(&hellip;) 将返回用所有参数以键 1,2, 等填充的新表,  并将 &ldquo;<code>n</code>&rdquo; 这个域设为参数的总数(就像 5.2 之前 Lua 后台帮我们打包的一样).<br>
 接下来就可以像 5.2 之前那使用变参功能了.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;span style=&quot;color: #0000ff;&quot;&gt;function&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt; text( ... )
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;local&lt;/span&gt; arg =&lt;span style=&quot;color: #000000;&quot;&gt; table.pack(...)
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;for&lt;/span&gt; i = &lt;span style=&quot;color: #800080;&quot;&gt;1&lt;/span&gt;, arg.n &lt;span style=&quot;color: #0000ff;&quot;&gt;do&lt;/span&gt;
-        &lt;span style=&quot;color: #ff00ff;&quot;&gt;print&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;(arg[i])
-    &lt;/span&gt;&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;end&lt;/span&gt;&lt;span style=&quot;color: #000000;&quot;&gt;
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">text</span>( ... )
+  <span style="color: #8B008B; font-weight: bold">local</span> arg = <span style="color: #658b00">table.pack</span>(...)
+  <span style="color: #8B008B; font-weight: bold">for</span> i = <span style="color: #B452CD">1</span>, arg.n <span style="color: #8B008B; font-weight: bold">do</span>
+    <span style="color: #658b00">print</span>(arg[i])
+  <span style="color: #8B008B; font-weight: bold">end</span>
+<span style="color: #8B008B; font-weight: bold">end</span>
 
-text(&lt;/span&gt;&lt;span style=&quot;color: #800080;&quot;&gt;10&lt;/span&gt;, &lt;span style=&quot;color: #800080;&quot;&gt;20&lt;/span&gt;)
+text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</span>)
 </pre></div>
 
 
-<p>nar</p>
+<p><br></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
 
 </p>
