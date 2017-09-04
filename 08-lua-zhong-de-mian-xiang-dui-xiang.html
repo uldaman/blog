@@ -136,13 +136,14 @@ Man.new = <span style="color: #8B008B; font-weight: bold">function</span>(this)
 
 <p><br>
 不管怎么样, 我们现在已经可以实现多态了:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #a61717; background-color: #e3d2d2">多態</span>(tab)
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>sayHi = <span style="color: #8B008B; font-weight: bold">function</span>(tab)
   tab.sayHi()
 <span style="color: #8B008B; font-weight: bold">end</span>
-<span style="color: #a61717; background-color: #e3d2d2">多態</span>(m)
+sayHi(m)
 </pre></div>
 
 
+<p><br></p>
 <blockquote>
 <p>勘误: 之前提到了 Lua 中的语法糖, 其实 Lua 是有个默认 self 参数的, 和 this 指针一样, 具體參考: <a href="http://blog.csdn.net/stormbjm/article/details/38532413">http://blog.csdn.net/stormbjm/article/details/38532413</a></p>
 </blockquote>
