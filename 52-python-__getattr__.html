@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</title>
+    <title>52. Python __getattr__</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -43,75 +43,72 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/3-hello-qt.html"><h3 class="article-title">3、Hello qt</h3></a>
-<h6 class="subheader" title="2015-02-15T14:11:00+08:00">Sun 15 February 2015
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/52-python-__getattr__.html" rel="bookmark"
+        title="Permalink to 52. Python __getattr__">52. Python __getattr__</a></h3>
+    </header>
+
+<h6 class="subheader" title="2017-09-15T20:20:00+08:00">Fri 15 September 2017
 </h6>
 
 
-<p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
-<p><a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb16.png"></a></p>
-<p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/3-hello-qt.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/2-da-jian-vs-qt-xiang-mu-huan-jing.html"><h3 class="article-title">2、搭建VS + QT 项目环境</h3></a>
-<h6 class="subheader" title="2015-02-15T14:10:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<p>介绍如何在 Windows 下安装 QT, 及用 VS 新建一个 QT 项目.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/2-da-jian-vs-qt-xiang-mu-huan-jing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/1-qtji-chu.html"><h3 class="article-title">1、QT基础</h3></a>
-<h6 class="subheader" title="2015-02-15T14:08:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<h1 id="qt">QT是什么?</h1>
-<ol>
-<li>一个基于C++语言的框架(就是封装了很多类库, 我们可以直接拿来用)</li>
-<li>一个专注于用户图形界面的框架</li>
-<li>一个跨平台的框架</li>
-</ol>
-<p>QT不仅仅是 GUI 组件. 使用 Qt, 在一定程度上你获得的是一个&rdquo;一站式&rdquo;的解决方案: 不再需要研究 STL, 不再需要 C++ 的<string>, 不再需要到处去找解析 XML、连接数据库、访问网络的各种第三方库, 因为 Qt 自己内置了这些技术.</p>
-<h1 id="qt_1">QT的主要工具</h1>
-<p>qmake : 可以把 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/1-qtji-chu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 25 of 25</h6>
-
-<p>
-            <a href="http://blog.smallcpp.cn/index24.html">&laquo; Prev</a>
-
-</p>
+    <div class="toc">
+<ul></ul>
 </div>
+<p>在<a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-ding-zhi-lei.html#9595getattr9595">Python 高级特性之定制类</a>中已经提到过 <code>__getattr__</code> 及其的一种应用 (<strong>Restful API</strong>), 除此之外, <code>__getattr__</code> 还可以用来实现组合模式 (需要配合反射).</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">adaptee</span>(<span style="color: #658b00">object</span>):
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">foo</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in adaptee&#39;</span>
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">bar</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;bar in adaptee&#39;</span>
 
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">adapter</span>(<span style="color: #658b00">object</span>):
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #658b00">self</span>.adaptee = adaptee()
+
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">foo</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in adapter&#39;</span>
+    <span style="color: #658b00">self</span>.adaptee.foo()
+
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, name):
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">getattr</span>(<span style="color: #658b00">self</span>.adaptee, name)
+
+<span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #00688B">__name__</span> == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+  a = adapter()
+  a.foo()
+  a.bar()
+</pre></div>
+
+
+<p><br>
+如果 <code>adapter</code> 需要修改 <code>adaptee</code> 的行为, 那么定义一个同名的属性就行了, 其他的想直接&rdquo;继承&rdquo;的属性，通通交给 <code>__getattr__</code> 就行了.</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="52-python-__getattr__" data-title="52. Python __getattr__" data-url="http://blog.smallcpp.cn/52-python-__getattr__.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
     </div>
     <!-- End Main Content -->
 
