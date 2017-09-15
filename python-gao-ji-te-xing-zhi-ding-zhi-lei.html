@@ -55,19 +55,19 @@
 
     <div class="toc">
 <ul>
-<li><a href="#slots">slots (限制动态属性)</a></li>
-<li><a href="#property-gettersetter">property (神奇的 getter/setter)</a></li>
-<li><a href="#str-repr">str 与 repr (打印类)</a></li>
-<li><a href="#iter">iter (遍历类)</a></li>
-<li><a href="#call">call (实例自调用)</a></li>
-<li><a href="#getattr">getattr (动态生成属性)</a></li>
-<li><a href="#getitemsetitemdelitem">getitem、setitem、delitem</a></li>
+<li><a href="#9595slots9595">__slots__ (限制动态属性)</a></li>
+<li><a href="#property-gettersetter">@property (神奇的 getter/setter)</a></li>
+<li><a href="#9595str9595-9595repr9595">__str__ 与 __repr__ (打印类)</a></li>
+<li><a href="#9595iter9595">__iter__ (遍历类)</a></li>
+<li><a href="#9595call9595">__call__ (实例自调用)</a></li>
+<li><a href="#9595getattr9595">__getattr__ (动态生成属性)</a></li>
+<li><a href="#9595getitem95959595setitem95959595delitem9595">__getitem__、__setitem__、__delitem__</a></li>
 </ul>
 </div>
 <p>在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!<br>
 在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!<br>
 在这之前, 请确保所有的类都继承于 <strong>object</strong> !!!</p>
-<h1 id="slots">slots (限制动态属性)</h1>
+<h1 id="9595slots9595">__slots__ (限制动态属性)</h1>
 <p>作为一种动态语言, python 支持 在类实例化后, 为实例动态添加属性/方法的功能.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
     <span style="color: #8B008B; font-weight: bold">pass</span>
@@ -102,7 +102,7 @@ AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;
 
 <p>由于 &lsquo;score&rsquo; 没有被放到 <strong>__slots__</strong> 中, 所以不能绑定 score 属性, 试图绑定 score 将得到 <strong>AttributeError</strong> 的错误</p>
 <p>使用 <strong>__slots__</strong> 要注意, <strong>__slots__</strong> 定义的属性仅对<strong>当前类</strong>起作用, 对继承的子类是不起作用的, 除非在子类中也定义 <strong>__slots__</strong>, 这样, 子类允许定义的属性就是自身的 <strong>__slots__</strong> <strong>加上</strong>父类的 <strong>__slots__</strong>(注意, 是<strong>加上</strong>! <strong>加上</strong>! <strong>加上</strong>! 重要的事说三遍).</p>
-<h1 id="property-gettersetter">property (神奇的 getter/setter)</h1>
+<h1 id="property-gettersetter">@property (神奇的 getter/setter)</h1>
 <p>在 Java 中, 有一种 JavaBean 规范, 即所有属性对外部那是 private 的, 想要访问/设置, 必须通过 getter 和 setter 方法.</p>
 <p>这在 Python 中有更好的实现, 那就是 <strong>property</strong>, 它是一个装饰器, 负责把一个<strong>方法变成属性</strong>调用.</p>
 <p>需要注意一点的是, 属性要定义成 private 或 protected (如 _score 或 __score).</p>
@@ -154,7 +154,7 @@ Traceback (most recent call last):
 
 
 <p>上面的 <strong>birth</strong> 是可读写属性, 而 <strong>age</strong> 就是一个只读属性.</p>
-<h1 id="str-repr">str 与 repr (打印类)</h1>
+<h1 id="9595str9595-9595repr9595">__str__ 与 __repr__ (打印类)</h1>
 <p>当我们需要打指定 <strong>print</strong> 类或者直接输入类时的输出内容, 就可以定制 <strong>__str__</strong> 和 <strong>__repr__</strong>,
 直接显示变量调用的是 <strong>__str__</strong>, print 时调用的是是 <strong>__repr__</strong>.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
@@ -168,7 +168,7 @@ Traceback (most recent call last):
 </pre></div>
 
 
-<h1 id="iter">iter (遍历类)</h1>
+<h1 id="9595iter9595">__iter__ (遍历类)</h1>
 <p>如果一个类想被用于 <strong>for &hellip; in</strong> 循环, 类似 list 或 tuple 那样, 就必须实现一个 <strong>__iter__</strong> 方法, 该方法返回一个迭代对象, 然后, Python 的 for 循环就会不断调用该迭代对象的 <strong>next()</strong> 方法拿到循环的下一个值, 直到遇到 <strong>StopIteration</strong> 错误时退出循环.</p>
 <p>我们以斐波那契数列为例, 写一个 Fib 类, 可以作用于 for 循环:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Fib</span>(<span style="color: #658b00">object</span>):
@@ -202,7 +202,7 @@ Traceback (most recent call last):
 </pre></div>
 
 
-<h1 id="call">call (实例自调用)</h1>
+<h1 id="9595call9595">__call__ (实例自调用)</h1>
 <p>当调用一个类的实例方法时, 可以用 xxx.method() 来调用, 那能不能直接在实例本身上调用呢, 像 xxx() 这样?</p>
 <p>任何类, 只需要定义一个 <strong>__call__</strong> 方法, 就可以直接对实例进行调用.</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
@@ -228,7 +228,7 @@ My name <span style="color: #8B008B">is</span> Michael.
 </pre></div>
 
 
-<h1 id="getattr">getattr (动态生成属性)</h1>
+<h1 id="9595getattr9595">__getattr__ (动态生成属性)</h1>
 <p>正常情况下, 当我们调用类的方法或属性时, 如果不存在, 就会报错. 比如定义 Student 类:</p>
 <div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Student</span>(<span style="color: #658b00">object</span>):
 
@@ -335,7 +335,7 @@ http://api.server/user/timeline/list
 
 <p><br></p>
 <p>这样, 无论 API 有多少, 我们都可以通过上面这种链式调用的方法去访问!</p>
-<h1 id="getitemsetitemdelitem">getitem、setitem、delitem</h1>
+<h1 id="9595getitem95959595setitem95959595delitem9595">__getitem__、__setitem__、__delitem__</h1>
 <p>通过这三个方法, 可以将自己定义的类表现得和内置的 <strong>list、tuple、dict</strong> 没什么区别, 但这么做的话, 还有很多工作要做, 以后需要用到的时候再来补充吧.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 
