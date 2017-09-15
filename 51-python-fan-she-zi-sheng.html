@@ -54,8 +54,54 @@
 
 
     <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#_1">动态导入模块</a></li>
+<li><a href="#_2">动态实例化对象</a></li>
+<li><a href="#_3">动态操作对象属性</a></li>
+</ul>
 </div>
+<p>首先说下, 反射在 Python 中被称为自省 (不确定, 欢迎指证). 反射的主要功能就是通过字符串动态的导入包、实例化对象、调用方法以及访问属性.</p>
+<p>存在 <code>Person</code> 类:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22"># person.py</span>
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Person</span>:
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #658b00">self</span>.name = <span style="color: #CD5555">&#39;smallcpp&#39;</span>
+
+  <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">getName</span>(<span style="color: #658b00">self</span>):
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">self</span>.name
+</pre></div>
+
+
+<h1 id="_1">动态导入模块</h1>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>module = <span style="color: #658b00">__import__</span>(<span style="color: #CD5555">&#39;person&#39;</span>)
+</pre></div>
+
+
+<h1 id="_2">动态实例化对象</h1>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>module = <span style="color: #658b00">__import__</span>(<span style="color: #CD5555">&#39;person&#39;</span>)
+obj = <span style="color: #658b00">getattr</span>(module, <span style="color: #CD5555">&#39;Person&#39;</span>)()
+<span style="color: #8B008B; font-weight: bold">print</span> obj.getName()
+</pre></div>
+
+
+<p><br>
+或者 (以下这种仅了解下, 通常使用上面的方式):</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">person</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+obj = <span style="color: #658b00">globals</span>()[<span style="color: #CD5555">&#39;Person&#39;</span>]()
+<span style="color: #8B008B; font-weight: bold">print</span> obj.getName()
+</pre></div>
+
+
+<h1 id="_3">动态操作对象属性</h1>
+<p>Python 中与反射相关的方法有: <code>hasattr()</code>、<code>getattr()</code>、<code>setattr()</code>.</p>
+<p><code>hasattr(object, 'name')</code><br>
+判断实例对象里面是否有 name 属性或者 name 方法, 返回 BOOL 值, 有 name 返回 True, 否则返回 False.<br>
+也可以判断 <code>module</code> 中是否有指定的类/函数/全局变量.</p>
+<p><code>getattr(object, 'name'[, default])</code><br>
+获取实例对象的属性或者方法, 如果存在返回出来, 如果不存在, 返回 None 或默认值 (如果指定了 default).<br>
+也可以获取 <code>module</code> 中的类/函数/全局变量.</p>
+<p><code>setattr(object, 'name', values)</code><br>
+给实例对象的属性赋值, 若属性不存在, 先创建再赋值.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 
 </p>

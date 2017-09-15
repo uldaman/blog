@@ -56,33 +56,34 @@
     <div class="toc">
 <ul></ul>
 </div>
-<p>在<a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-ding-zhi-lei.html#9595getattr9595">Python 高级特性之定制类</a>中已经提到过 <code>__getattr__</code> 及其的一种应用 (<strong>Restful API</strong>), 除此之外, <code>__getattr__</code> 还可以用来实现组合模式 (需要配合反射).</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">adaptee</span>(<span style="color: #658b00">object</span>):
+<p>在<a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-ding-zhi-lei.html#9595getattr9595">Python 高级特性之定制类</a>中已经提到过 <code>__getattr__</code> 及其的一种应用 (<strong>Restful API</strong>), 除此之外, <code>__getattr__</code> 还可以用来实现组合模式 (需要配合<a href="http://blog.smallcpp.cn/51-python-fan-she-zi-sheng.html">反射</a>) &ndash; 组合优于继承.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Element</span>(<span style="color: #658b00">object</span>):
   <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">foo</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in adaptee&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in Element&#39;</span>
+
   <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">bar</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;bar in adaptee&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;bar in Element&#39;</span>
 
-<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">adapter</span>(<span style="color: #658b00">object</span>):
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Composite</span>(<span style="color: #658b00">object</span>):
   <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #658b00">self</span>.adaptee = adaptee()
+    <span style="color: #658b00">self</span>.element = Element()
 
   <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">foo</span>(<span style="color: #658b00">self</span>):
-    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in adapter&#39;</span>
-    <span style="color: #658b00">self</span>.adaptee.foo()
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;foo in Composite&#39;</span>
+    <span style="color: #658b00">self</span>.element.foo()
 
   <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__getattr__</span>(<span style="color: #658b00">self</span>, name):
-    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">getattr</span>(<span style="color: #658b00">self</span>.adaptee, name)
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #658b00">getattr</span>(<span style="color: #658b00">self</span>.element, name)
 
 <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #00688B">__name__</span> == <span style="color: #CD5555">&#39;__main__&#39;</span>:
-  a = adapter()
+  a = Composite()
   a.foo()
   a.bar()
 </pre></div>
 
 
 <p><br>
-如果 <code>adapter</code> 需要修改 <code>adaptee</code> 的行为, 那么定义一个同名的属性就行了, 其他的想直接&rdquo;继承&rdquo;的属性，通通交给 <code>__getattr__</code> 就行了.</p>
+如果 <code>Composite</code> 需要修改 <code>Element</code> 的行为, 那么定义一个同名的属性就行了, 其他的想直接&rdquo;继承&rdquo;的属性，通通交给 <code>__getattr__</code> 就行了.</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
 
 </p>
