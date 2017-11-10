@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Golang</title>
+    <title>05. 类型嵌入实践</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -43,95 +43,79 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html"><h3 class="article-title">05. 类型嵌入实践</h3></a>
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html" rel="bookmark"
+        title="Permalink to 05. 类型嵌入实践">05. 类型嵌入实践</a></h3>
+    </header>
+
 <h6 class="subheader" title="2017-11-10T14:00:00+08:00">Fri 10 November 2017
 </h6>
 
 
-<p>Go 中没有提供继承的语义, 可以使用组合设计模式, 只需简单的将一个类型嵌入另一个类型就能实现复用.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
+    <p>Go 中没有提供继承的语义, 可以使用组合设计模式, 只需简单的将一个类型嵌入另一个类型就能实现复用. 并且 Go 对组合模式进行了优化, 提供了匿名组合, 让组合类可以直接&rdquo;点&rdquo;出部分类的方法 (具体看下面的实践).</p>
+<p>本次实践体现了面向对象的三个原则: </p>
+<ol>
+<li>优先使用组合 (而非继承)</li>
+<li>针对接口编程</li>
+<li>延迟设计</li>
+</ol>
+<p>假设现在存在一个车类 (Car), 有一个开车方法 (Drive), 如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Car <span style="color: #8B008B; font-weight: bold">struct</span> {
+}
+
+<span style="color: #8B008B; font-weight: bold">func</span> (car *Car) Drive() {
+    log.Println(<span style="color: #CD5555">&quot;开车&quot;</span>)
+}
+</pre></div>
+
+
+<p>现在是没有接口的, &ldquo;过多&rdquo;或&rdquo;太早&rdquo;的设计都是没有意义的.</p>
+<p>然后来了个新需求, 需要设计一个客车类 (PassengerCar), 分析发现 PassengerCar 也需要 Drive 方法, 可以与 Car 类复用, 此时可以考虑剥离接口了 (针对接口编程):</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Driver <span style="color: #8B008B; font-weight: bold">interface</span> { <span style="color: #228B22">// Go 推荐单一行为的接口, 可用 行为 + er 来命名</span>
+    Drive()
+}
+
+<span style="color: #8B008B; font-weight: bold">type</span> PassengerCar <span style="color: #8B008B; font-weight: bold">struct</span> { <span style="color: #228B22">// 针对接口编程, 而不是对象, 即应该依赖接口</span>
+    Driver
+}
+
+<span style="color: #8B008B; font-weight: bold">func</span> (pcar *PassengerCar) TransportPassengers() {
+    log.Println(<span style="color: #CD5555">&quot;运输乘客&quot;</span>)
+}
+
+<span style="color: #8B008B; font-weight: bold">func</span> main() {
+    pcar := PassengerCar{<span style="color: #658b00">new</span>(Car)}
+    pcar.Drive()
+    pcar.TransportPassengers()
+}
+</pre></div>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
 
-        <article>
-            <a href="http://blog.smallcpp.cn/04-shu-ju-lei-xing-ji-bian-liang.html"><h3 class="article-title">04、数据类型及变量</h3></a>
-<h6 class="subheader" title="2016-01-19T20:30:00+08:00">Tue 19 January 2016
-</h6>
+<!--      -->
 
-
-<p>在这些基础类型之上 Go 还封装了下面这几种类型: <strong>int</strong>、<strong>uint</strong> 和 <strong>uintptr</strong> 等, 这些类型的特点在于使用方便, 但使用者不能对这些类型的长度做任何假设.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/04-shu-ju-lei-xing-ji-bian-liang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/03-go-gong-cheng.html"><h3 class="article-title">03、Go 工程</h3></a>
-<h6 class="subheader" title="2016-01-19T20:00:00+08:00">Tue 19 January 2016
-</h6>
-
-
-<p>我们通过一个命令行版本的计算器程序来体验下如何用 LiteIDE 进行 Go 开发.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-go-gong-cheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/02-go-chu-shi.html"><h3 class="article-title">02、Go 初识</h3></a>
-<h6 class="subheader" title="2016-01-07T21:00:00+08:00">Thu 07 January 2016
-</h6>
-
-
-<p>一般来说, main() 都是程序启动后第一个执行的函数(如果有 <strong>init()</strong> 函数则会先执行 init() 函数).</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/02-go-chu-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/01-da-jian-kai-fa-huan-jing.html"><h3 class="article-title">01、搭建开发环境</h3></a>
-<h6 class="subheader" title="2016-01-07T20:00:00+08:00">Thu 07 January 2016
-</h6>
-
-
-<p>开发工具可以选择 LiteIDE 或者 安装了 GoClipse 插件的 Eclipse.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/01-da-jian-kai-fa-huan-jing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-
-</p>
-</div>
-
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="05-lei-xing-qian-ru-shi-jian" data-title="05. 类型嵌入实践" data-url="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
     </div>
     <!-- End Main Content -->
 
