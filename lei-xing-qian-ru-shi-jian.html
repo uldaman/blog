@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>02、Go 初识</title>
+    <title>类型嵌入实践</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -45,66 +45,52 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/02-go-chu-shi.html" rel="bookmark"
-        title="Permalink to 02、Go 初识">02、Go 初识</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/lei-xing-qian-ru-shi-jian.html" rel="bookmark"
+        title="Permalink to 类型嵌入实践">类型嵌入实践</a></h3>
     </header>
 
-<h6 class="subheader" title="2016-01-07T21:00:00+08:00">Thu 07 January 2016
+<h6 class="subheader" title="2017-11-10T14:00:00+08:00">Fri 10 November 2017
 </h6>
 
 
-    <div class="toc">
-<ul>
-<li><a href="#1">1. 语言特性</a></li>
-<li><a href="#2">2. 语言结构</a></li>
-</ul>
-</div>
-<h1 id="1">1. 语言特性</h1>
-<p>我觉得吧, 大概有个印象即可, 深入学习并使用一段时间, 然后和 C 及 Python 一比较, 自然就明白了.</p>
-<p><img alt="GO 的特性" src="http://i68.tinypic.com/a1kgh5.jpg"></p>
-<h1 id="2">2. 语言结构</h1>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">package</span> main
+    <p>Go 中没有提供继承的语义, 可以使用组合设计模式, 只需简单的将一个类型嵌入另一个类型就能实现复用 (<a href="http://blog.csdn.net/xuejianing/article/details/6886613">组合 VS 继承</a>, 而且继承是静态的, 在写代码时就已经决定子类的上级, 而组合相对来说是动态的, 要到了运行时才知道到底组合了哪个部分类, 因为组合实际上是对象模型, 而非类模型). </p>
+<p>Go 对组合模式进行了优化, 提供了匿名组合, 让组合类可以直接&rdquo;点&rdquo;出部分类的方法 (具体看下面的实践).</p>
+<p>本次实践体现了面向对象的三个原则: </p>
+<ol>
+<li>优先使用组合 (而非继承)</li>
+<li>针对接口编程</li>
+<li>延迟设计</li>
+</ol>
+<p>假设现在存在一个车类 (Car), 有一个开车方法 (Drive), 如下:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Car <span style="color: #8B008B; font-weight: bold">struct</span> {
+}
 
-<span style="color: #8B008B; font-weight: bold">import</span> (
-    <span style="color: #CD5555">&quot;fmt&quot;</span>
-)
+<span style="color: #8B008B; font-weight: bold">func</span> (car *Car) Drive() {
+    log.Println(<span style="color: #CD5555">&quot;开车&quot;</span>)
+}
+</pre></div>
+
+
+<p>现在是没有接口的, &ldquo;过多&rdquo;或&rdquo;太早&rdquo;的设计都是没有意义的.</p>
+<p>然后来了个新需求, 需要设计一个客车类 (PassengerCar), 分析发现 PassengerCar 也需要 Drive 方法, 可以与 Car 类复用, 此时可以考虑剥离接口了 (针对接口编程):</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Driver <span style="color: #8B008B; font-weight: bold">interface</span> { <span style="color: #228B22">// Go 推荐单一行为的接口, 可用 行为 + er 来命名</span>
+    Drive()
+}
+
+<span style="color: #8B008B; font-weight: bold">type</span> PassengerCar <span style="color: #8B008B; font-weight: bold">struct</span> { <span style="color: #228B22">// 针对接口编程, 而不是对象, 即应该依赖接口</span>
+    Driver
+}
+
+<span style="color: #8B008B; font-weight: bold">func</span> (pcar *PassengerCar) TransportPassengers() {
+    log.Println(<span style="color: #CD5555">&quot;运输乘客&quot;</span>)
+}
 
 <span style="color: #8B008B; font-weight: bold">func</span> main() {
-    <span style="color: #228B22">/* 这是我的第一个简单的程序 */</span>
-    fmt.Println(<span style="color: #CD5555">&quot;Hello World!&quot;</span>)
+    pcar := PassengerCar{<span style="color: #658b00">new</span>(Car)}
+    pcar.Drive()
+    pcar.TransportPassengers()
 }
 </pre></div>
-
-
-<p><br></p>
-<ul>
-<li>第一行代码 <strong>package main</strong> 定义了包名, 必须在源文件中非注释的第一行指明这个文件属于哪个包. 如：package main.</li>
-</ul>
-<blockquote>
-<p>包是Go语言里最基本的分发单位, 也是工程管理中依赖关系的体现, 要生成 Go 可执行程序, 必须建立一个名为 <strong>main</strong> 的包, 并且在该包中包含一个叫 <strong>main()</strong> 的函数(该函数一般是Go可执行程序的执行起点)</p>
-</blockquote>
-<ul>
-<li>下一行 import 告诉 Go 编译器这个程序需要使用 <strong>fmt</strong> 包(的函数, 或其他元素), fmt 包实现了格式化 IO(输入/输出)的函数.</li>
-<li>下一行 func main() 是程序开始执行的函数, 一般来说都是程序启动后第一个执行的函数(如果有 <strong>init()</strong> 函数则会先执行 init() 函数).</li>
-</ul>
-<blockquote>
-<p>main() 函数没有返回值, 也没有参数, 通过 <strong>os.Args</strong> 来获取命令行参数.</p>
-</blockquote>
-<ul>
-<li>下一行 /*&hellip;*/ 是块注释, 注释方面的方法和 C 一致, // 为行注释, /**/ 为块注释.</li>
-<li>下一行 fmt.Println(&hellip;) 可以将字符串输出到控制台, 并在最后自动增加换行字符 <strong>\n</strong>, 使用 fmt.Print(&ldquo;hello, world\n&rdquo;) 可以得到相同的结果.</li>
-</ul>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #228B22">// 一个常规的函数定义包含以下部分:</span>
-<span style="color: #8B008B; font-weight: bold">func</span> 函数名(参数列表)(返回值列表) {
-    <span style="color: #228B22">// 函数体</span>
-}
-</pre></div>
-
-
-<p><br>
-Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必须赋值, 在函数返回时没有被明确赋值的返回值都会被设置为默认值.</p>
-<p>当标识符(包括常量、变量、类型、函数名、结构字段等等)以一个__大写__字母开头, 如：Group1, 那么使用这种形式的标识符的对象就可以被外部包的代码所使用(客户端程序需要先导入这个包), 这被称为<strong>导出</strong>(像面向对象语言中的 <strong>public</strong>);<br>
-标识符如果以__小写__字母开头, 则对包外是不可见的, 但是他们在整个包的内部是可见并且可用的(像面向对象语言中的 <strong>private</strong>).</p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
 
 </p>
@@ -116,7 +102,7 @@ Go 支持多个返回值, 但并不是返回值列表里的所有返回值都必
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="02-go-chu-shi" data-title="02、Go 初识" data-url="http://blog.smallcpp.cn/02-go-chu-shi.html"></div>
+    <div class="ds-thread" data-thread-key="lei-xing-qian-ru-shi-jian" data-title="类型嵌入实践" data-url="http://blog.smallcpp.cn/lei-xing-qian-ru-shi-jian.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

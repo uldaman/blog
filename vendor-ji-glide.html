@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>05. 类型嵌入实践</title>
+    <title>Vendor 及 Glide</title>
 
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
@@ -45,52 +45,37 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html" rel="bookmark"
-        title="Permalink to 05. 类型嵌入实践">05. 类型嵌入实践</a></h3>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/vendor-ji-glide.html" rel="bookmark"
+        title="Permalink to Vendor 及 Glide">Vendor 及 Glide</a></h3>
     </header>
 
-<h6 class="subheader" title="2017-11-10T14:00:00+08:00">Fri 10 November 2017
+<h6 class="subheader" title="2017-11-27T14:00:00+08:00">Mon 27 November 2017
 </h6>
 
 
-    <p>Go 中没有提供继承的语义, 可以使用组合设计模式, 只需简单的将一个类型嵌入另一个类型就能实现复用 (<a href="http://blog.csdn.net/xuejianing/article/details/6886613">组合 VS 继承</a>, 而且继承是静态的, 在写代码时就已经决定子类的上级, 而组合相对来说是动态的, 要到了运行时才知道到底组合了哪个部分类, 因为组合实际上是对象模型, 而非类模型). </p>
-<p>Go 对组合模式进行了优化, 提供了匿名组合, 让组合类可以直接&rdquo;点&rdquo;出部分类的方法 (具体看下面的实践).</p>
-<p>本次实践体现了面向对象的三个原则: </p>
+    <div class="toc">
+<ul>
+<li><a href="#vendor">Vendor</a></li>
+<li><a href="#glide">Glide</a></li>
+</ul>
+</div>
+<h1 id="vendor">Vendor</h1>
+<p>Vendor 是 Go 1.5 之后新添加的依赖目录. 1.5 时需要设置 <code>GO15VENDOREXPERIMENT=1</code>, 而 1.6 之后 Vendor 则直接可用.</p>
+<p>Vendor 依然要位于 <code>GOPATH/src</code> 目录之下, 当查找依赖包路径时, 搜索顺序如下：</p>
 <ol>
-<li>优先使用组合 (而非继承)</li>
-<li>针对接口编程</li>
-<li>延迟设计</li>
+<li>当前包下的 vendor 目录</li>
+<li>向上级寻找 src/vendor 目录</li>
+<li>GROOT 及 GOPATH</li>
 </ol>
-<p>假设现在存在一个车类 (Car), 有一个开车方法 (Drive), 如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Car <span style="color: #8B008B; font-weight: bold">struct</span> {
-}
-
-<span style="color: #8B008B; font-weight: bold">func</span> (car *Car) Drive() {
-    log.Println(<span style="color: #CD5555">&quot;开车&quot;</span>)
-}
-</pre></div>
-
-
-<p>现在是没有接口的, &ldquo;过多&rdquo;或&rdquo;太早&rdquo;的设计都是没有意义的.</p>
-<p>然后来了个新需求, 需要设计一个客车类 (PassengerCar), 分析发现 PassengerCar 也需要 Drive 方法, 可以与 Car 类复用, 此时可以考虑剥离接口了 (针对接口编程):</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">type</span> Driver <span style="color: #8B008B; font-weight: bold">interface</span> { <span style="color: #228B22">// Go 推荐单一行为的接口, 可用 行为 + er 来命名</span>
-    Drive()
-}
-
-<span style="color: #8B008B; font-weight: bold">type</span> PassengerCar <span style="color: #8B008B; font-weight: bold">struct</span> { <span style="color: #228B22">// 针对接口编程, 而不是对象, 即应该依赖接口</span>
-    Driver
-}
-
-<span style="color: #8B008B; font-weight: bold">func</span> (pcar *PassengerCar) TransportPassengers() {
-    log.Println(<span style="color: #CD5555">&quot;运输乘客&quot;</span>)
-}
-
-<span style="color: #8B008B; font-weight: bold">func</span> main() {
-    pcar := PassengerCar{<span style="color: #658b00">new</span>(Car)}
-    pcar.Drive()
-    pcar.TransportPassengers()
-}
-</pre></div>
+<p>那么为什么会需要 Vendor?</p>
+<p>其中一个答案是为了使用不同版本的 package. 举例, 现在有个项目, 里面有两个 package 都依赖另一个 package, 此时只要把这个依赖 package 放到 GOPATH/src 下就可以了; 但如果这两个 package 依赖的 package 版本并不一样呢? 那么统一的 GOPATH 显然不能解决这个问题, vendor 就可以出场了.</p>
+<h1 id="glide">Glide</h1>
+<p>Glide 则是和 Vendor 配合非常好的包管理解决方案, 它会帮我们在 Vendor 目录下管理 <code>glide.yml</code> 文件中指定的依赖 package.</p>
+<p>如果被依赖的 package 还依赖着其它 package, Glide 也会递归获取它们, 并将它们平展开存放在最开始的 vendor 目录下 (这样其实是有问题的, 比如 A depend B and C, B depend C, 这样 C 就被依赖了两次&hellip;).</p>
+<blockquote>
+<p>应将 <code>glide.yaml</code> 和 <code>glide.lock</code> 进行版本控制, 而将 <code>vendor</code> 目录忽略掉.</p>
+</blockquote>
+<p>更多使用参考: <a href="https://deepzz.com/search.html?q=tag:golang%E5%8C%85%E7%AE%A1%E7%90%86">Golang 包管理</a></p>
 <p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
 
 </p>
@@ -102,7 +87,7 @@
 
     <!-- 多说评论框 start -->
     <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="05-lei-xing-qian-ru-shi-jian" data-title="05. 类型嵌入实践" data-url="http://blog.smallcpp.cn/05-lei-xing-qian-ru-shi-jian.html"></div>
+    <div class="ds-thread" data-thread-key="vendor-ji-glide" data-title="Vendor 及 Glide" data-url="http://blog.smallcpp.cn/vendor-ji-glide.html"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
