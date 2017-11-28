@@ -1,4 +1,4 @@
-Title: 01、搭建开发环境
+Title: 搭建开发环境 (以及 GOPATH)
 Author: Martin
 Date: 2016-01-07 20:00
 Summary: 开发工具可以选择 LiteIDE 或者 安装了 GoClipse 插件的 Eclipse.
@@ -33,7 +33,7 @@ Summary: 开发工具可以选择 LiteIDE 或者 安装了 GoClipse 插件的 Ec
 ![缩进](http://blog.smallcpp.cn/theme/images/Golang/缩进.png)
 
 ##设置 GOPATH
-当编译器查找包时, 就会到 GOROOT 和 GOPATH 环境变量引用的位置去查找.
+当编译器查找包时, 就会到 GOROOT 和 GOPATH 环境变量引用的位置去查找 (实际是 `GOROOT/src` 和 `GOPATH/src`).
 
 查看->管理GOPATH, 创建新目录 G:\GoProject, 并添加到 "自定义目录".
 

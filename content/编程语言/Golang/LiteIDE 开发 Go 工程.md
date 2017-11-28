@@ -1,4 +1,4 @@
-Title: 03、Go 工程
+Title: LiteIDE 开发 Go 工程
 Author: Martin
 Date: 2016-01-19 20:00
 Summary: 我们通过一个命令行版本的计算器程序来体验下如何用 LiteIDE 进行 Go 开发.

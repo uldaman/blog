@@ -1,4 +1,4 @@
-Title: 02、Go 初识
+Title: Go 初识
 Author: Martin
 Date: 2016-01-07 21:00
 Summary: 一般来说, main() 都是程序启动后第一个执行的函数(如果有 **init()** 函数则会先执行 init() 函数).
