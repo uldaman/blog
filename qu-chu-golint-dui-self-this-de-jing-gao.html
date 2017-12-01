@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>去除 golint 对 self this 的警告</title>
+
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
+    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
+    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://blog.smallcpp.cn/qu-chu-golint-dui-self-this-de-jing-gao.html" rel="bookmark"
+        title="Permalink to 去除 golint 对 self this 的警告">去除 golint 对 self this 的警告</a></h3>
+    </header>
+
+<h6 class="subheader" title="2017-12-01T14:00:00+08:00">Fri 01 December 2017
+</h6>
+
+
+    <div class="toc">
+<ul></ul>
+</div>
+<p>首先, Go 官方指出不应该将方法的接收者命名为 self 和 this (<a href="https://github.com/golang/go/wiki/CodeReviewComments#receiver-names">Receiver Names</a>).</p>
+<p>但是早期的版本中并没有做这种要求, 所以很多其它面向对象语言转过来的开发会采用这种命名法, 造成的结果就是用新版的 golint 检测代码时会报一堆的命名警告, 看起来很不舒服. 此时正确的做法应该是重构代码. 如果怕麻烦的话, 也可以像我一样修改 golint 的源代码&hellip;</p>
+<p>golint 项目地址是: <a href="https://github.com/golang/lint">github.com/golang/lint</a>. fork 并 clone 到本地.</p>
+<p>将 lint 包下 lint.go 中的以下代码注释掉:</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">if</span> name == <span style="color: #CD5555">&quot;this&quot;</span> || name == <span style="color: #CD5555">&quot;self&quot;</span> {
+  f.errorf(n, <span style="color: #B452CD">1</span>, link(ref), category(<span style="color: #CD5555">&quot;naming&quot;</span>), <span style="color: #CD5555">`receiver name should be a reflection of its identity; don&#39;t use generic names such as &quot;this&quot; or &quot;self&quot;`</span>)
+  <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #8B008B; font-weight: bold">true</span>
+}
+</pre></div>
+
+
+<p><br>
+然后全局替换 <code>github.com/golang/lint</code> -> <code>github.com/z351522453/lint</code>, 修改好后 <code>git push</code>.</p>
+<blockquote>
+<p>主要是因为 golint 包下 golint.go 中用全路径 import 了 lint 包 (<code>import "github.com/golang/lint"</code>), 应该把路径改成自己的 github 库路径.</p>
+</blockquote>
+<p>最后再执行 <code>go get -u github.com/z351522453/lint/golint</code>.</p>
+<p>或者在本地 <code>cd</code> 到 golint 包下执行 <code>go build -o golint</code> 直接生成 golint 二进制文件 (要注意是 golint 包下执行, 而不是 lint 包, 因为 main 函数在 golint.go 中).</p>
+<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
+
+</p>
+
+
+
+
+<!--      -->
+
+    <!-- 多说评论框 start -->
+    <h4>Comments !</h4>
+    <div class="ds-thread" data-thread-key="qu-chu-golint-dui-self-this-de-jing-gao" data-title="去除 golint 对 self this 的警告" data-url="http://blog.smallcpp.cn/qu-chu-golint-dui-self-this-de-jing-gao.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name:"smallcpp"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
+            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
+        </ul>
+
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java-ru-men-dao-jing-tong.html">Java 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/mongodb-ru-men-dao-jing-tong.html">Mongodb 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/redis-ru-men-dao-jing-tong.html">Redis 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
