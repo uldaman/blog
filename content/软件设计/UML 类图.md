@@ -1,6 +1,6 @@
 author: Martin
 date: 2015-02-15 14:17
-title: 2、[C++]UML类图
+title: UML 类图
 
 ![UML类图样例](http://img.blog.csdn.net/20150211193154259)
 
