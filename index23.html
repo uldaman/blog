@@ -44,248 +44,94 @@
     <!-- Main Blog Content -->
     <div class="large-9 columns">
         <article>
-            <a href="http://blog.smallcpp.cn/10-ui-dui-xiang.html"><h3 class="article-title">10、UI 对象</h3></a>
-<h6 class="subheader" title="2015-03-08T13:33:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.cn/4-bang-zhu-shou-ce.html"><h3 class="article-title">4、帮助手册</h3></a>
+<h6 class="subheader" title="2015-02-15T14:12:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在前面的几个例子中已经见到了 UI 对象.</p>
-<blockquote>Ui::DemoClass ui;
-ui.setupUi(this);
-connect(ui.pushButton_4, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_5, SIGNAL(clicked()), this, SLOT(On_Out()));
-connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+<p>这个为什么要单独来说, 因为 Qt 的资料相对较少, 很多时候都要借助于 Qt 附带的帮助手册.</p>
+<p>打开方式:</p>
+<p>第一种方式:</p>
+<p><a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/image22.png"><img alt="image" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb22.png"></a></p>
+<p>第二种方式:</p>
+<p>进入 Qt 安装目录, 找到 assistant.exe<strong>.</strong></p>
+<p>D:\Development\Qt5.3.2\5.3\msvc2010_opengl\bin\assistant.exe</p>
+<p>发送到 桌面快捷方式, 以后点击那个快捷方式就打了了 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/10-ui-dui-xiang.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/4-bang-zhu-shou-ce.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/9-qt-ge-mo-kuai-jian-jie.html"><h3 class="article-title">9、Qt 各模块简介</h3></a>
-<h6 class="subheader" title="2015-03-08T12:20:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.cn/3-hello-qt.html"><h3 class="article-title">3、Hello qt</h3></a>
+<h6 class="subheader" title="2015-02-15T14:11:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p>在第2篇笔记里, 当通过 VS 新建 Qt 工程时, 其中有一步会让选择当前工程包含的模块. 见下图:</p>
-<p><img alt="" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/image10.png"></p>
-<p>现在对 Qt 5 的模块进行一个简单的介绍, 以便以后大家需要哪些功能的时候知道到哪个模块去寻找.</p>
-<p>Qt 5 模块分为 Essentials Modules 和 Add-on Modules 两部分.</p>
-<p>前者是基础模块, 在所有平台上都可用; 后者是扩展模块, 建立在基础模块的基础之上, 在能够运行 Qt 的平台之上可以酌情引入.</p>
-<p>Qt …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+<p>按上一篇的内容, 新建一个 VS Qt 工程.</p>
+<p><a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/image16.png"><img alt="image" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/image_thumb16.png"></a></p>
+<p>main.cpp 里是程序的入口, 里面只有一个 main 函数, 它维护一个 Qt 对象实例.</p>
+<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;span style=&quot;color: #800000&quot;&gt;&quot;&lt;/span&gt;&lt;span style=&quot;color: #800000&quot;&gt;demo.h&lt;/span&gt;&lt;span style=&quot;color …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/9-qt-ge-mo-kuai-jian-jie.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/3-hello-qt.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html"><h3 class="article-title">8、带参数的信号槽和自定义信号槽</h3></a>
-<h6 class="subheader" title="2015-03-08T11:33:00+08:00">Sun 08 March 2015
+            <a href="http://blog.smallcpp.cn/2-da-jian-vs-qt-xiang-mu-huan-jing.html"><h3 class="article-title">2、搭建VS + QT 项目环境</h3></a>
+<h6 class="subheader" title="2015-02-15T14:10:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<h1 id="_1">带参数的信号/槽</h1>
-<p>首先看一个程序</p>
-<p><img alt="" src="http://i59.tinypic.com/4jua0y.jpg"></p>
-<p>这个程序的功能是: 拖动滑块动态改变微调框内的数值.</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>&lt;font face=&quot;M+ 1mn regular&quot;&gt;connect(ui.verticalSlider_1, SIGNAL(valueChanged(&lt;span style=&quot;color: #0000ff&quot;&gt;int&lt;/span&gt;)), ui.spinBox_1, SLOT(setValue(&lt;span style=&quot;color: #0000ff&quot;&gt;int …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
+<p>介绍如何在 Windows 下安装 QT, 及用 VS 新建一个 QT 项目.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/8-dai-can-shu-de-xin-hao-cao-he-zi-ding-yi-xin-hao-cao.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/2-da-jian-vs-qt-xiang-mu-huan-jing.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
         <article>
-            <a href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html"><h3 class="article-title">7、多个信号关联同一个槽</h3></a>
-<h6 class="subheader" title="2015-02-28T09:51:00+08:00">Sat 28 February 2015
+            <a href="http://blog.smallcpp.cn/1-qtji-chu.html"><h3 class="article-title">1、QT基础</h3></a>
+<h6 class="subheader" title="2015-02-15T14:08:00+08:00">Sun 15 February 2015
 </h6>
 
 
-<p><img alt="" src="http://i62.tinypic.com/16lei6a.jpg"></p>
-<p>这是 windows 系统自带的计算器, 当我们点击上面的按钮时, 相应的操作结果(显示数字, 清除数字, 计算结果, 计算平方等)就会在上面的编辑框中显示.</p>
-<p>如果这个功能用 Qt 来做的话, 就是用信号/槽技术啦, 点击按钮时发送信号, 窗体接受信号.</p>
-<p>那么问题来了, 窗体怎么知道点击的是哪一个按钮?</p>
-<p>当然可以一个按钮关联一个槽, 但是这样就会产生很多个槽函数, 而且这些槽函数的代码有很多重复部分, 那怎么办呢?</p>
-<p>答案是让<strong>多个信号关联同一个槽, 在这个槽中区分信号来自哪里</strong>.</p>
-<p>sender()函数在槽中使用, 返回值就是引发这个槽函数的信号来源(connect …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/7-duo-ge-xin-hao-guan-lian-tong-yi-ge-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html"><h3 class="article-title">6、信号与槽</h3></a>
-<h6 class="subheader" title="2015-02-26T13:48:00+08:00">Thu 26 February 2015
-</h6>
-
-
-<p>在之前我们做了一个 Hello Qt 的小 Demo, 现在我们想实现这样一个功能: 在界面上添加一个按钮, 点击退出程序.</p>
-<p><img alt="" src="http://i62.tinypic.com/309u0k6.jpg"></p>
-<hr>
-<p>什么是信号/槽先不管, 按步骤做出这个小程序先.</p>
-<p>首先, 在Qt Creator中拖动一个Push Button控件, 这就是一个按钮控件.</p>
-<p><img alt="" src="http://i60.tinypic.com/2wnso4j.jpg"></p>
-<p>然后点击Qt Creator上红框里的按钮, 或者按键盘上 F4 打开信号/槽编辑模式.</p>
-<p><img alt="" src="http://i58.tinypic.com/bia5pf.jpg"></p>
-<p>鼠标移到按钮控件上, 按住不放, 拖动到窗体主界面上, 弹出信号/槽编辑器.</p>
-<p><img alt="" src="http://i62.tinypic.com/2q16oau.jpg"></p>
-<p><img alt="" src="http://i58.tinypic.com/2rnfw5k.jpg"></p>
-<p>点击 [显示从 QWidget …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/6-xin-hao-yu-cao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/14-c-jian-zao-zhe-mo-shi.html"><h3 class="article-title">14、[C++] 建造者模式</h3></a>
-<h6 class="subheader" title="2015-02-23T12:31:00+08:00">Mon 23 February 2015
-</h6>
-
-
-<p>谈到建造自然会想到楼房.</p>
-<p>楼房是千差万别的, 楼房的外形、层数、内部房间的数量、房间的装饰等等都不一样, 但是对于建造者来说, 抽象出来的建筑流程是确定的, 往往建筑一座楼房包括下面的步骤：打桩, 建立基础 –&gt; 建立框架等.</p>
-<p>建造者模式的本质和建造楼房是一致的：<strong>即流程不变, 但每个流程实现的具体细节则是经常变化的</strong>.</p>
-<p>建造者模式的好处就是保证了流程不会变化, 流程即不会增加、也不会遗漏或者产生流程次序错误, 这是非常重要的.</p>
-<p>再想像一下麦当劳和肯得鸡, 为什么它们的食物味道都是一样的?</p>
-<p>因为它们产品的味道都是由工作流程决定的, 原料放多少, 加热几分钟都有严格规定; 我们去那里消费, 不用关心他们的工作流程, 如果发现鸡翅烤得焦了, 他们会调整具体的工作流程中的烧烤时间, 如果要新加一种汉堡, 做法都相同 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/14-c-jian-zao-zhe-mo-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/13-c-wai-guan-mo-shi-men-mian-mo-shi.html"><h3 class="article-title">13、[C++] 外观模式/门面模式</h3></a>
-<h6 class="subheader" title="2015-02-23T10:03:00+08:00">Mon 23 February 2015
-</h6>
-
-
-<p>外观模式: 即为子系统中的一组接口提供一个一致的界面, 此模式定义了一个高层接口, 这个接口使得这一子系统更加容易使用.</p>
-<p><a href="http://www.smallcpp.cn/wp-content/uploads/2015/02/b77d9bedff80.jpg"><img alt="外观模式" src="http://www.smallcpp.cn/wp-content/uploads/2015/02/thumb.jpg"></a></p>
-<p>Facade: 外观类, 他知道子类系统类负责处理的请求, 将客户的请求给适当的子系统对象.</p>
-<p>SubSystemXxx: 子系统类, 他们实现子系统的功能, 处理外观类指派的任务.</p>
-<p>我们大家最容易理解和知道的外观模式就是，使用的API接口的封装，我们将第三方的API接口引入到我们的项目中的时候，我们需要对这些接口进行包装，将具体调用过程进行包装成外观类的形式，通过外观类来进行统一的调用。</p>
-<p>C++模拟代码如下:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>#include &lt;iostream&gt;
-&lt;span style=&quot;color: #0000ff;&quot;&gt;using&lt;/span&gt; &lt;span style …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/13-c-wai-guan-mo-shi-men-mian-mo-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/12-c-2014-xiao-jie.html"><h3 class="article-title">12、[C++] 2014 小结</h3></a>
-<h6 class="subheader" title="2015-02-23T05:05:00+08:00">Mon 23 February 2015
-</h6>
-
-
-<p>这段时间过春节,  学习什么的都放下了, 现在总算忙的差不多了, 把之前2014年底学的设计模式做个小结.</p>
-<h2 id="_1">首先看下我们目前已经学习过的设计模式:</h2>
-<p>创建型模式: &ndash; 用来处理对象的创建过程</p>
-<blockquote>工厂模式 (简单工厂模式严格来说不是设计的一种) : 定义一个用于创建对象的接口, 让子类决定实例化哪一个类, 工厂方法使一个类的实例化延迟到其子类.</blockquote>
-
-<blockquote>原型模式 : 用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象.</blockquote>
-
-<p>结构型模式: &ndash; 用来处理类或者对象的组合</p>
-<blockquote>装饰者模式 : 动态地将责任附加到对象上, 若要扩展对象, 装饰者模式提供了比继承更弹性的替代方案.</blockquote>
-
-<blockquote>代理模式 : 为其他对象提供一种代理以控制对这个对象的访问.</blockquote>
-
-<p>行为型模式: &ndash; 用来对类或对象怎样交互和怎样分配职责进行描述</p>
-<blockquote>策略模式 : 一种定义一系列算法的行为, 从概念上看, 所有这些算法完成的都是相同的工作, 只是实现不同 …</blockquote><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/12-c-2014-xiao-jie.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/2015-xin-de-kai-shi.html"><h3 class="article-title">2015, 新的开始</h3></a>
-<h6 class="subheader" title="2015-02-23T03:40:00+08:00">Mon 23 February 2015
-</h6>
-
-
-<p>新的一年, 新的目标&hellip;</p>
+<h1 id="qt">QT是什么?</h1>
 <ol>
-<li>
-<p>瘦 10-20 斤</p>
-</li>
-<li>
-<p>存钱买车</p>
-</li>
-<li>
-<p>找到人生另一半</p>
-</li>
-</ol><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a>
+<li>一个基于C++语言的框架(就是封装了很多类库, 我们可以直接拿来用)</li>
+<li>一个专注于用户图形界面的框架</li>
+<li>一个跨平台的框架</li>
+</ol>
+<p>QT不仅仅是 GUI 组件. 使用 Qt, 在一定程度上你获得的是一个&rdquo;一站式&rdquo;的解决方案: 不再需要研究 STL, 不再需要 C++ 的<string>, 不再需要到处去找解析 XML、连接数据库、访问网络的各种第三方库, 因为 Qt 自己内置了这些技术.</p>
+<h1 id="qt_1">QT的主要工具</h1>
+<p>qmake : 可以把 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/qt.html">QT</a>
 
 </p>
 
 
 
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/2015-xin-de-kai-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html"><h3 class="article-title">11、[C++]模板方法模式</h3></a>
-<h6 class="subheader" title="2015-02-15T14:26:00+08:00">Sun 15 February 2015
-</h6>
-
-
-<blockquote>在微软的WebCast上, 李建中老师有个设计模式的系列讲座, 其中在讲到模板方法(Template Method)曾说: 如果你只想学习一种设计模式就学习模板方法吧. 由此可见它使用的广泛性.</blockquote>
-
-<p><strong>模板方法模式:</strong> 定义一个操作中的算法的骨架, 而将一些步骤延迟到子类中, 模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤.</p>
-<p><strong>模板方法设计模式的意图</strong></p>
-<p>通常我们会遇到这样的一个问题: 我们知道一个算法所需的关键步骤, 并确定了这些步骤的执行顺序. 但是某些步骤的具体实现是未知的, 或者说某些步骤的实现与具体的环境相关.</p>
-<p>模板方法模式把我们不知道具体实现的步骤封装成抽象方法, 提供一个按正确顺序调用它们的具体方法(这些具体方法统称为&rdquo;模板方法&rdquo;), 这样构成一个抽象基类. 子类通过继承这个抽象基类去实现各个步骤的抽象方法, 而工作流程却由父类控制.</p>
-<p><a href="http://images.cnitblog.com/blog/723444/201502/150049425736751.jpg"><img alt="模板方法模式" src="http://images.cnitblog.com/blog/723444/201502/150049445735407.jpg"></a></p>
-<p>情景分析:</p>
-<p>还是拿游戏来做例子, 我们玩网游的时候会新建角色, 一般的步骤就是: 选择性别- …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/11-cmo-ban-fang-fa-mo-shi.html">Read More</a>
+            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/1-qtji-chu.html">Read More</a>
             <hr  class="gradient"/>
         </article>
 
             <!-- /#posts-list -->
 <div class="pagination-centered">
-<h6 class="subheader">Page 23 of 25</h6>
+<h6 class="subheader">Page 23 of 23</h6>
 
 <p>
             <a href="http://blog.smallcpp.cn/index22.html">&laquo; Prev</a>
 
-        <a href="http://blog.smallcpp.cn/index24.html">Next &raquo;</a>
 </p>
 </div>
 
@@ -303,20 +149,19 @@ connect(ui.pushButton_6, SIGNAL(clicked …</blockquote><p class="subheader">Cat
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
             <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-hua-she-ji-mo-shi.html">大话设计模式</a></li>
             <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
             <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
             <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
             <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java-ru-men-dao-jing-tong.html">Java 入门到精通</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux-ru-men-dao-jing-tong.html">Linux 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
             <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb-ru-men-dao-jing-tong.html">Mongodb 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
             <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
             <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
             <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis-ru-men-dao-jing-tong.html">Redis 入门到精通</a></li>
+            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
             <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
             <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
         </ul>
