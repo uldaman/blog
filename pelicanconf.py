@@ -3,14 +3,13 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'martin'
-SITENAME = u'Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.'
-SITEURL = 'http://blog.smallcpp.cn'
-
+SIDEBAR_DIGEST = u'勿在浮沙筑高台, 练从难处练, 用从易处用.'
+SITENAME = 'Small Cpp'
+SITEURL = 'http://blog.smallcpp.cn/'
 PATH = 'content'
-
 TIMEZONE = 'Asia/Shanghai'
-
-DEFAULT_LANG = u'zh'
+DEFAULT_LANG = 'zh'
+AVATAR = 'theme/images/avatar.png'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -18,16 +17,15 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-
-# Blogroll
-LINKS = (('CSDN', 'http://blog.csdn.net/u010850265'),)
+FEED_ATOM = None
+FEED_RSS = None
 
 # Social widget
 SOCIAL = (('CSDN', 'http://blog.csdn.net/u010850265'),)
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False  # 不分页
 
-THEME = 'pelican-themes/zurb-F5-basic'
+THEME = 'pelican-themes/notebook'
 
 USE_FOLDER_AS_CATEGORY = True # 这个可以让 pelican 根据 content 里的文件夹结构自动生成文章分类
 

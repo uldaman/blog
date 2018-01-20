@@ -1,0 +1,6 @@
+{% if article.translations %}
+<span class="label">Traductions : </span>
+{% for translation in article.translations %}
+	<a href="{{ SITEURL }}/{{ translation.url }}"><img src="/theme/images/icons/{{ translation.lang|lower }}.png"></a>
+{% endfor %}
+{% endif %}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+  <meta name="description" content="">
+  <meta name="author" content="{{ AUTHOR }}">
+
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="{{ SITEURL }}/{{ AVATAR}}">
+
+  <!-- Feed Meta Data -->
+  <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
+  {% if FEED_RSS %}
+  <link href="{{ SITEURL }}/{{ FEED_RSS }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+  {% endif %}
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="{{ TWITTER_USERNAME }}">
+  <meta name="twitter:image" content="{{ SITEURL }}/{{ AVATAR }}">
+  {% endblock %}
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="{{ SITEURL }}"><img id="avatar" src="{{ SITEURL }}/{{ AVATAR }}"></a></p>
+    <h1>{{ SITENAME }}</h1>
+    <p>{{ SIDEBAR_DIGEST }}</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      {% for name, link in SOCIAL %}
+      <a href="{{ link }}">{{ name }}</a></li>
+      {% endfor %}
+      {% if FEED_RSS %}
+      <li style="list-style-image : url({{ SITEURL }}/theme/images/icons/rss.png);"><a href="{{ SITEURL }}/{{ FEED_RSS }}" rel="alternate">RSS feed</a></li>
+      {% endif %}
+    </ul>
+    {% for title, link in MENUITEMS %}
+    <li><a href="{{ link }}">{{ title }}</a></li>
+    {% endfor %}
+    {% if DISPLAY_PAGES_ON_MENU and PAGES %}
+    <h2>Pages</h2>
+    <ul class="navbar">
+      {% for p in PAGES %}
+      <li><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if categories %}
+    <h2>Categories</h2>
+    <ul class="navbar">
+      {% for cat, null in categories %}
+      <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+      {% endfor %}
+    </ul> 
+    {% endif %}
+    {% if BLOGROLL %}
+      <h2>Blogroll</h2>
+      <ul class="navbar">
+      {% for title, link in BLOGROLL %}
+        <li><a href="{{ link }}">{{ title }}</a></li>
+      {% endfor %}
+      </ul> 
+    {% endif %}
+  </aside>
+
+  <!-- Content -->
+  <article>
+    {% block content %}
+    {% endblock %}
+  </article>
+
+  {% if GOOGLE_ANALYTICS %}
+  <!-- Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41598568-1', 'quack1.me');
+  ga('send', 'pageview');
+
+</script>  
+{% endif %}
+
+</body>
+</html>
