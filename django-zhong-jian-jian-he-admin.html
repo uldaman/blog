@@ -1,59 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Django 中间件和admin</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Django 中间件和admin</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/django-zhong-jian-jian-he-admin.html">
+<meta name="twitter:title" content="Small Cpp ~ Django 中间件和admin">
+<meta name="twitter:description" content="在django中, 中间件其实就是一个类, 在请求到来和结束后, django 会根据自己的规则在合适的时机执行中间件中相应的方法. 在 django 项目的 settings.py 模块中, 有一个 MIDDLEWARE_CLASSES 变量, 其中每一个元素就是一个中间件, 如下图. 除了上面的中间件外, 还有两个常用的中间件: django.middleware.gzip.GZipMiddleware # 用来压缩浏览器返回的内容, 减少服务器带宽 django.middleware.http.SetRemoteAddrFromForwardedFor # 处理反向代理 中间件中可以定义四个方法 …">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Django 中间件和admin" />
+<meta property="og:description" content="在django中, 中间件其实就是一个类, 在请求到来和结束后, django 会根据自己的规则在合适的时机执行中间件中相应的方法. 在 django 项目的 settings.py 模块中, 有一个 MIDDLEWARE_CLASSES 变量, 其中每一个元素就是一个中间件, 如下图. 除了上面的中间件外, 还有两个常用的中间件: django.middleware.gzip.GZipMiddleware # 用来压缩浏览器返回的内容, 减少服务器带宽 django.middleware.http.SetRemoteAddrFromForwardedFor # 处理反向代理 中间件中可以定义四个方法 …" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
 
-
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/django-zhong-jian-jian-he-admin.html" rel="bookmark"
-        title="Permalink to Django 中间件和admin">Django 中间件和admin</a></h3>
-    </header>
-
-<h6 class="subheader" title="2015-09-14T15:52:00+08:00">Mon 14 September 2015
-</h6>
-
-
-    <p>在django中, 中间件其实就是一个类, 在请求到来和结束后, django 会根据自己的规则在合适的时机执行中间件中相应的方法.</p>
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <header class="post_list">
+            <h2 class="post_title"><a href="http://blog.smallcpp.cn/django-zhong-jian-jian-he-admin.html" rel="bookmark" title="Permalink to Django 中间件和admin">Django 中间件和admin</a></h2>
+            <span>Par </span>
+            <a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+            <span> dans </span>
+            <span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+            <span> le </span>
+            <span class="post_date">Mon 14 September 2015</span>
+            <div></div>
+            <div><span>Tags : </span>
+            </div>
+        </header>
+        <div class="entry-content">
+            <p>在django中, 中间件其实就是一个类, 在请求到来和结束后, django 会根据自己的规则在合适的时机执行中间件中相应的方法.</p>
 <p>在 django 项目的 settings.py 模块中, 有一个 MIDDLEWARE_CLASSES 变量, 其中每一个元素就是一个中间件, 如下图.
 <img alt="" src="http://i3.tietuku.com/01e947913cfd69a0.png"></p>
 <p>除了上面的中间件外, 还有两个常用的中间件:
@@ -173,88 +199,12 @@ admin.site.register(models.UserInfo,UserInfoAdmin)&lt;/span&gt;
 <p>更多<a href="http://docs.30c.org/djangobook2/chapter06/">: http://docs.30c.org/djangobook2/chapter06/</a></p>
 <p><strong>设置 admin 用户: python manage.py createsuperuser</strong>
 0?</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-
-<!--      -->
-
-    <!-- 多说评论框 start -->
-    <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="django-zhong-jian-jian-he-admin" data-title="Django 中间件和admin" data-url="http://blog.smallcpp.cn/django-zhong-jian-jian-he-admin.html"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"smallcpp"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</article>
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
+            <div align="center" style="color:#ccc;">☠</div>
+        </div>
+    </article>
+</section>
+  </article>
 
 
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

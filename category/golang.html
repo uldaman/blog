@@ -1,225 +1,204 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Small Cpp - Golang</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Golang</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn">
+<meta name="twitter:title" content="Small Cpp">
+<meta name="twitter:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用.">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp" />
+<meta property="og:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用." />
+<meta property="og:image" content="theme/images/avatar.png" />
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/category/golang.html">
+<meta name="twitter:title" content="Small Cpp ~ Golang">
+<meta name="twitter:description" content="Articles de Golang">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Golang" />
+<meta property="og:description" content="Articles de Golang" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
+
+  <!-- Content -->
+  <article>
+<ol>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/qu-chu-golint-dui-self-this-de-jing-gao.html" rel="bookmark" title="Permalink to 去除 golint 对 self this 的警告">去除 golint 对 self this 的警告</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 01 December 2017</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/vendor-ji-glide.html" rel="bookmark" title="Permalink to Vendor 及 Glide">Vendor 及 Glide</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 27 November 2017</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/lei-xing-qian-ru-shi-jian.html" rel="bookmark" title="Permalink to 类型嵌入实践">类型嵌入实践</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 10 November 2017</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/shu-ju-lei-xing-ji-bian-liang.html" rel="bookmark" title="Permalink to 数据类型及变量">数据类型及变量</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 19 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/liteide-kai-fa-go-gong-cheng.html" rel="bookmark" title="Permalink to LiteIDE 开发 Go 工程">LiteIDE 开发 Go 工程</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 19 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/go-chu-shi.html" rel="bookmark" title="Permalink to Go 初识">Go 初识</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 07 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/da-jian-kai-fa-huan-jing-yi-ji-gopath.html" rel="bookmark" title="Permalink to 搭建开发环境 (以及 GOPATH)">搭建开发环境 (以及 GOPATH)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/golang.html" rel="bookmark" title="Permalink to Golang">[ Golang ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 07 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+</ol>
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/qu-chu-golint-dui-self-this-de-jing-gao.html"><h3 class="article-title">去除 golint 对 self this 的警告</h3></a>
-<h6 class="subheader" title="2017-12-01T14:00:00+08:00">Fri 01 December 2017
-</h6>
+  </article>
 
 
-<p>去除 golint 对方法接收者命名为 self、this 的警告.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/qu-chu-golint-dui-self-this-de-jing-gao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/vendor-ji-glide.html"><h3 class="article-title">Vendor 及 Glide</h3></a>
-<h6 class="subheader" title="2017-11-27T14:00:00+08:00">Mon 27 November 2017
-</h6>
-
-
-<p>Go 项目的一种依赖管理解决方案.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/vendor-ji-glide.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/lei-xing-qian-ru-shi-jian.html"><h3 class="article-title">类型嵌入实践</h3></a>
-<h6 class="subheader" title="2017-11-10T14:00:00+08:00">Fri 10 November 2017
-</h6>
-
-
-<p>Go 中没有提供继承的语义, 可以使用组合设计模式, 只需简单的将一个类型嵌入另一个类型就能实现复用.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/lei-xing-qian-ru-shi-jian.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/shu-ju-lei-xing-ji-bian-liang.html"><h3 class="article-title">数据类型及变量</h3></a>
-<h6 class="subheader" title="2016-01-19T20:30:00+08:00">Tue 19 January 2016
-</h6>
-
-
-<p>在这些基础类型之上 Go 还封装了下面这几种类型: <strong>int</strong>、<strong>uint</strong> 和 <strong>uintptr</strong> 等, 这些类型的特点在于使用方便, 但使用者不能对这些类型的长度做任何假设.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/shu-ju-lei-xing-ji-bian-liang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/liteide-kai-fa-go-gong-cheng.html"><h3 class="article-title">LiteIDE 开发 Go 工程</h3></a>
-<h6 class="subheader" title="2016-01-19T20:00:00+08:00">Tue 19 January 2016
-</h6>
-
-
-<p>我们通过一个命令行版本的计算器程序来体验下如何用 LiteIDE 进行 Go 开发.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/liteide-kai-fa-go-gong-cheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/go-chu-shi.html"><h3 class="article-title">Go 初识</h3></a>
-<h6 class="subheader" title="2016-01-07T21:00:00+08:00">Thu 07 January 2016
-</h6>
-
-
-<p>一般来说, main() 都是程序启动后第一个执行的函数(如果有 <strong>init()</strong> 函数则会先执行 init() 函数).</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/go-chu-shi.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/da-jian-kai-fa-huan-jing-yi-ji-gopath.html"><h3 class="article-title">搭建开发环境 (以及 GOPATH)</h3></a>
-<h6 class="subheader" title="2016-01-07T20:00:00+08:00">Thu 07 January 2016
-</h6>
-
-
-<p>开发工具可以选择 LiteIDE 或者 安装了 GoClipse 插件的 Eclipse.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/golang.html">Golang</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/da-jian-kai-fa-huan-jing-yi-ji-gopath.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-
-</p>
-</div>
-
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
-
-
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

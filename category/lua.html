@@ -1,318 +1,238 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Small Cpp - Lua</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Lua</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn">
+<meta name="twitter:title" content="Small Cpp">
+<meta name="twitter:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用.">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp" />
+<meta property="og:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用." />
+<meta property="og:image" content="theme/images/avatar.png" />
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/category/lua.html">
+<meta name="twitter:title" content="Small Cpp ~ Lua">
+<meta name="twitter:description" content="Articles de Lua">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Lua" />
+<meta property="og:description" content="Articles de Lua" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
+
+  <!-- Content -->
+  <article>
+<ol>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html" rel="bookmark" title="Permalink to 09. lua 中的闭包">09. lua 中的闭包</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 16 June 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/08-lua-zhong-de-mian-xiang-dui-xiang.html" rel="bookmark" title="Permalink to 08. lua 中的面向对象">08. lua 中的面向对象</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 15 June 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html" rel="bookmark" title="Permalink to 07. 事件驱动模型">07. 事件驱动模型</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 16 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/06-52-lua-zhong-de-ke-bian-can-shu.html" rel="bookmark" title="Permalink to 06. 5.2+ Lua 中的可变参数">06. 5.2+ Lua 中的可变参数</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 16 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/05-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html" rel="bookmark" title="Permalink to 05. C/C++ 调用 Lua 函数 与 Lua 栈平衡">05. C/C++ 调用 Lua 函数 与 Lua 栈平衡</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 15 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/04-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html" rel="bookmark" title="Permalink to 04. LuaGlue 函数 与 Lua 运行时栈">04. LuaGlue 函数 与 Lua 运行时栈</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 15 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/03-zhong-xin-bian-yi-lua-cheng-xu-ku.html" rel="bookmark" title="Permalink to 03. 重新编译 Lua 程序库">03. 重新编译 Lua 程序库</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 15 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/02-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html" rel="bookmark" title="Permalink to 02. Lua 与 C/C++ 的第一次亲密接触">02. Lua 与 C/C++ 的第一次亲密接触</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 14 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/01-windows-da-jian-xia-lua-kai-fa-huan-jing.html" rel="bookmark" title="Permalink to 01. Windows 搭建下 Lua 开发环境">01. Windows 搭建下 Lua 开发环境</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/lua.html" rel="bookmark" title="Permalink to Lua">[ Lua ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 14 March 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+</ol>
+
+
+  </article>
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html"><h3 class="article-title">09. lua 中的闭包</h3></a>
-<h6 class="subheader" title="2015-06-16T12:05:00+08:00">Tue 16 June 2015
-</h6>
-
-
-<div class="toc">
-<ul>
-<li><a href="#_1">闭包</a></li>
-<li><a href="#_2">通过闭包来模拟面向对象</a></li>
-</ul>
-</div>
-<h1 id="_1">闭包</h1>
-<p>对于习惯了 C/C++ 这种不可嵌套定义函数的语言来说, 理解闭包真不太容易;</p>
-<p>要解释闭包就要先理解个小知识点:<br>
-Lua 中的函数是带有词法定界（lexical scoping）的<strong>第一类值</strong> (first-class values).<br>
-第一类值（first-class values）是指, 函数和其他值（数值、字符串）一样, 可以被存放在变量中, 也可以存放在表中, 可以作为函数的参数, 还可以作为函数的返回值.</p>
-<p>正因为函数也可以被嵌套定义在另一個函数內部 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/09-lua-zhong-de-bi-bao.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/08-lua-zhong-de-mian-xiang-dui-xiang.html"><h3 class="article-title">08. lua 中的面向对象</h3></a>
-<h6 class="subheader" title="2015-06-15T19:47:00+08:00">Mon 15 June 2015
-</h6>
-
-
-<p>Lua 中本身并没有类这种数据结构, 但是可以使用 table 来模拟面向对象中的类, 如下所示:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>People = {}
-People.sayHi = <span style="color: #8B008B; font-weight: bold">function</span>()
-  <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Hi People!&quot;</span>)
-<span style="color: #8B008B; font-weight: bold">end</span>
-</pre></div>
-
-
-<p><br>
-或者可以这样:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45; font-weight: bold">People</span>.<span style="color: #008b45">sayHi</span>()
-   <span style="color: #658b00">print</span>(<span style="color: #CD5555">&quot;Hi People!&quot;</span>)
-<span style="color: #8B008B; font-weight: bold">end</span>
-</pre></div>
-
-
-<p><br>
-这就相当于创建了一个 People 类, 那怎么生成这个类的实例呢? 它的构造函数呢? 往下看:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span>People.new …</pre></div><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/08-lua-zhong-de-mian-xiang-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html"><h3 class="article-title">07. 事件驱动模型</h3></a>
-<h6 class="subheader" title="2015-03-16T10:48:00+08:00">Mon 16 March 2015
-</h6>
-
-
-<p>之前介绍了在 C/C++ 中如何调用 Lua 函数, 但是那种方法并不灵活, 它依赖于 Lua 函数的名字.
-在不考虑获取函数返回值的情况下, 使用一种事件驱动的模型来与 Lua 代码交互会更便于维护和扩展.</p>
-<p>如果要使用事件驱动模型的话, 那么它的过程应该是: 由 C/C++ 代码触发事件, 然后发送给 Lua 代码, 由 Lua 执行相应的功能.
-这里就需要一个&rdquo;媒介&rdquo;, 通过它来统一事件触发函数和事件处理函数(类似 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/07-shi-jian-qu-dong-mo-xing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/06-52-lua-zhong-de-ke-bian-can-shu.html"><h3 class="article-title">06. 5.2+ Lua 中的可变参数</h3></a>
-<h6 class="subheader" title="2015-03-16T10:41:00+08:00">Mon 16 March 2015
-</h6>
-
-
-<p>在 5.2 之前, 你也许像下面这样来使用 Lua 中的变参功能:</p>
-<div class="codehilite" style="background: #eeeedd"><pre style="line-height: 125%"><span></span><span style="color: #8B008B; font-weight: bold">function</span> <span style="color: #008b45">text</span>( ... )
-  <span style="color: #8B008B; font-weight: bold">for</span> i = <span style="color: #B452CD">1</span>, arg.n <span style="color: #8B008B; font-weight: bold">do</span>
-    <span style="color: #658b00">print</span>(arg[i])
-  <span style="color: #8B008B; font-weight: bold">end</span>
-<span style="color: #8B008B; font-weight: bold">end</span>
-
-text(<span style="color: #B452CD">10</span>, <span style="color: #B452CD">20</span>)
-</pre></div>
-
-
-<p><br>
-这完全没有问题, 在 5.2 之前, Lua 将函数的可变参数存放在一个叫 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/06-52-lua-zhong-de-ke-bian-can-shu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/05-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html"><h3 class="article-title">05. C/C++ 调用 Lua 函数 与 Lua 栈平衡</h3></a>
-<h6 class="subheader" title="2015-03-15T17:53:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>Lua 提供了一些 Lua API 用来在 C/C++ 代码中直接调用 Lua 函数.
-但是这种方法有个前提: 不管是调用 LuaGlue 函数还是原生的 Lua 函数, 我们必须知道被调用函数的函数名,.</p>
-<p>最简单的 Lua API 就是 <strong>int luaL_dostring (lua_State <em>L, const char </em>str);</strong></p>
-<p>现在新建一个 Lua …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/05-cc-diao-yong-lua-han-shu-yu-lua-zhan-ping-heng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/04-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html"><h3 class="article-title">04. LuaGlue 函数 与 Lua 运行时栈</h3></a>
-<h6 class="subheader" title="2015-03-15T16:17:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>在之前, 我们写了一个很简单的 LuaGlue 函数, 然而这个函数不接收参数和也没有返回值, 但是不可否认的是, LuaGlue 函数具有传递参数和返回值的能力.<br>
-这种功能通过 Lua 运行时栈来完实现.</p>
-<p>要搞明白 Lua 栈, 首先要搞清楚栈的索引是如何定义的.</p>
-<p><img alt="" src="http://i57.tinypic.com/219xv1h.jpg"></p>
-<p>当初始化一个栈的时候, 它的栈底索引是 1, 而栈顶相对索引是 -1.<br>
-Lua 栈的结构和 C/C++ 的栈具有异曲同工之处, 即先进后出, 最选压栈的元素被保存在栈底.</p>
-<p>假设存在一个 LuaGlue 函数 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/04-luaglue-han-shu-yu-lua-yun-xing-shi-zhan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/03-zhong-xin-bian-yi-lua-cheng-xu-ku.html"><h3 class="article-title">03. 重新编译 Lua 程序库</h3></a>
-<h6 class="subheader" title="2015-03-15T11:29:00+08:00">Sun 15 March 2015
-</h6>
-
-
-<p>通过上二篇的介绍, 已经可以在 C/C++ 程序中简单的使用 Lua 脚本, 然而那只是简单地在 VC 程序中直接访问 Lua API.<br>
-对于小项目来说这是可以的, 但更好的方式是抽象出简单的 Lua 程序库, 让它整合 C/C++ 和 Lua API 代码, 让其可以复用在多个项目中.<br>
-不是有首程序员版的&lt;双截棍&gt;吗, 里面有句歌词是这样的: <strong>一个优秀的库函数, 一用好多年 …</strong></p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-zhong-xin-bian-yi-lua-cheng-xu-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/02-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html"><h3 class="article-title">02. Lua 与 C/C++ 的第一次亲密接触</h3></a>
-<h6 class="subheader" title="2015-03-14T18:14:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Lua 引擎本身是由 C 语言撰写, 在 C 或 C++ 中使用 Lua 脚本也相当简单, 因此, Lua 常被用来扩展 C/C++ 程序.</p>
-<p><strong>Lua 环境(Lua_State)</strong></p>
-<p>Lua 脚本运行时的所有数据(变量, 函数, 数据结构等)都被保存在一个称做 Lua_State 的结构中.<br>
-对于 C …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/02-lua-yu-cc-de-di-yi-ci-qin-mi-jie-hong.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/01-windows-da-jian-xia-lua-kai-fa-huan-jing.html"><h3 class="article-title">01. Windows 搭建下 Lua 开发环境</h3></a>
-<h6 class="subheader" title="2015-03-14T13:02:00+08:00">Sat 14 March 2015
-</h6>
-
-
-<p>Windows 搭建 Lua 环境包含3部分内容：<strong>编译lua的库文件(*.lib)、编译lua解释器(lua.exe)、编译lua编译器(luac.exe)</strong>.
-我们采用 VS2013 + lua-5.2.4 来进行编译.</p>
-<p>VS2013 就不说了, 先去 Lua 官网下载 Lua 源码: <a href="http://www.lua.org">http://www.lua.org</a><br>
-我这里下载的是 …</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/lua.html">Lua</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/01-windows-da-jian-xia-lua-kai-fa-huan-jing.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-
-</p>
-</div>
-
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
-
-
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

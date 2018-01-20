@@ -1,59 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>07、pyqtSignature 装饰器</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>07、pyqtSignature 装饰器</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/07-pyqtsignature-zhuang-shi-qi.html">
+<meta name="twitter:title" content="Small Cpp ~ 07、pyqtSignature 装饰器">
+<meta name="twitter:description" content="在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(“”), 这个装饰器有什么作用呢?">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ 07、pyqtSignature 装饰器" />
+<meta property="og:description" content="在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(“”), 这个装饰器有什么作用呢?" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
 
-
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/07-pyqtsignature-zhuang-shi-qi.html" rel="bookmark"
-        title="Permalink to 07、pyqtSignature 装饰器">07、pyqtSignature 装饰器</a></h3>
-    </header>
-
-<h6 class="subheader" title="2016-05-14T18:03:00+08:00">Sat 14 May 2016
-</h6>
-
-
-    <p>在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(&ldquo;&rdquo;), 这个装饰器有什么作用呢?</p>
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <header class="post_list">
+            <h2 class="post_title"><a href="http://blog.smallcpp.cn/07-pyqtsignature-zhuang-shi-qi.html" rel="bookmark" title="Permalink to 07、pyqtSignature 装饰器">07、pyqtSignature 装饰器</a></h2>
+            <span>Par </span>
+            <a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+            <span> dans </span>
+            <span class="post_category"><a href="http://blog.smallcpp.cn/category/pyqt.html" rel="bookmark" title="Permalink to PyQt">[ PyQt ]</a></span>
+            <span> le </span>
+            <span class="post_date">Sat 14 May 2016</span>
+            <div></div>
+            <div><span>Tags : </span>
+            </div>
+        </header>
+        <div class="entry-content">
+            <p>在前面笔记的例子中, 我们发现槽函数有个装饰器 @pyqtSignature(&ldquo;&rdquo;), 这个装饰器有什么作用呢?</p>
 <p>这货往简单了说就是一个 &ldquo;标识&rdquo;, 标识这个槽函数是和哪个信号函数绑定的&hellip;那么, 为什么要有这个标识呢? 记得以前在用 C++ 开发 Qt 时, 并没有要标识&hellip;</p>
 <blockquote>
 <p>官方说该装饰器在新的 pyqt 中已被 <a href="http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html#PyQt4.QtCore.pyqtSlot">pyqtSlot</a> 替代</p>
@@ -79,88 +105,12 @@
 <p>个人理解是, 因为 Python 函数的灵活性 (PyQt4 allows any Python callable to be used as a slot, not just Qt slots), 太灵活了, 所以要被限制 ? ?</p>
 <p>以及 Python 不支持函数重载, 加上个标识, 同名的函数就可以被 Qt 认为是两个不同的函数了 ? ?</p>
 <p>这个标识可以是一个 python 的基本类型, 如 int、bool 等等.</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a>
-
-</p>
-
-
-
-
-<!--      -->
-
-    <!-- 多说评论框 start -->
-    <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="07-pyqtsignature-zhuang-shi-qi" data-title="07、pyqtSignature 装饰器" data-url="http://blog.smallcpp.cn/07-pyqtsignature-zhuang-shi-qi.html"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"smallcpp"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</article>
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
+            <div align="center" style="color:#ccc;">☠</div>
+        </div>
+    </article>
+</section>
+  </article>
 
 
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

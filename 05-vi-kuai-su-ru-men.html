@@ -1,59 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>05. vi 快速入门</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>05. vi 快速入门</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/05-vi-kuai-su-ru-men.html">
+<meta name="twitter:title" content="Small Cpp ~ 05. vi 快速入门">
+<meta name="twitter:description" content="好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我… vi 的模式 命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode. 插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 …">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ 05. vi 快速入门" />
+<meta property="og:description" content="好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我… vi 的模式 命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode. 插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 …" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
 
-
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/05-vi-kuai-su-ru-men.html" rel="bookmark"
-        title="Permalink to 05. vi 快速入门">05. vi 快速入门</a></h3>
-    </header>
-
-<h6 class="subheader" title="2015-03-27T12:09:00+08:00">Fri 27 March 2015
-</h6>
-
-
-    <p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <header class="post_list">
+            <h2 class="post_title"><a href="http://blog.smallcpp.cn/05-vi-kuai-su-ru-men.html" rel="bookmark" title="Permalink to 05. vi 快速入门">05. vi 快速入门</a></h2>
+            <span>Par </span>
+            <a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+            <span> dans </span>
+            <span class="post_category"><a href="http://blog.smallcpp.cn/category/linux.html" rel="bookmark" title="Permalink to Linux">[ Linux ]</a></span>
+            <span> le </span>
+            <span class="post_date">Fri 27 March 2015</span>
+            <div></div>
+            <div><span>Tags : </span>
+            </div>
+        </header>
+        <div class="entry-content">
+            <p>好吧, 昨天还说 vi 暂时不玩, 今天就改变主意了…请无视我…</p>
 <p><strong>vi 的模式
 </strong>命令模式: Normal Mode, 可使用 a、A、i、I、o、O 快捷键等进入 Insert Mode.
 插入模式: Insert Mode, 可使用 ESC 键进入 Normal Mode, 或者 ctrl + o 临时进入(这种方式很少用).
@@ -120,88 +146,12 @@ vi 还有其它几种模式, 但是一般不怎么用, 记住上面两个就可�
 4. gcc hello.c  会生成一个 a.out 文件 也可以通过 gcc -o my1 hello.c 来指定生成的文件名, 这里生成了 my1
 5. ./a.out 执行文件&hellip;
 ?/?</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/linux.html">Linux</a>
-
-</p>
-
-
-
-
-<!--      -->
-
-    <!-- 多说评论框 start -->
-    <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="05-vi-kuai-su-ru-men" data-title="05. vi 快速入门" data-url="http://blog.smallcpp.cn/05-vi-kuai-su-ru-men.html"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"smallcpp"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</article>
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
+            <div align="center" style="color:#ccc;">☠</div>
+        </div>
+    </article>
+</section>
+  </article>
 
 
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

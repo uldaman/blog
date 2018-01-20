@@ -1,274 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Small Cpp - Mongodb</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Mongodb</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn">
+<meta name="twitter:title" content="Small Cpp">
+<meta name="twitter:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用.">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp" />
+<meta property="og:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用." />
+<meta property="og:image" content="theme/images/avatar.png" />
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/category/mongodb.html">
+<meta name="twitter:title" content="Small Cpp ~ Mongodb">
+<meta name="twitter:description" content="Articles de Mongodb">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Mongodb" />
+<meta property="og:description" content="Articles de Mongodb" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
+
+  <!-- Content -->
+  <article>
+<ol>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/12-mongodb-shen-yong-local-ji-admin-ku.html" rel="bookmark" title="Permalink to 12、Mongodb 慎用 local 及 admin 库">12、Mongodb 慎用 local 及 admin 库</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 18 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/11-mongodb-mapreduce.html" rel="bookmark" title="Permalink to 11、Mongodb MapReduce">11、Mongodb MapReduce</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 13 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/10-mongodb-restful-api.html" rel="bookmark" title="Permalink to 10、Mongodb Restful Api">10、Mongodb Restful Api</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 13 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/09-mongodb-ju-he.html" rel="bookmark" title="Permalink to 09、Mongodb 聚合">09、Mongodb 聚合</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 12 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/08-mongodb-shi-wu.html" rel="bookmark" title="Permalink to 08、Mongodb 事务">08、Mongodb 事务</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/07-mongodb-profile-diao-you.html" rel="bookmark" title="Permalink to 07、Mongodb Profile 调优">07、Mongodb Profile 调优</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/06-mongodb-zi-zeng.html" rel="bookmark" title="Permalink to 06、Mongodb 自增">06、Mongodb 自增</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 09 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/05-mongodb-cursor.html" rel="bookmark" title="Permalink to 05、Mongodb Cursor">05、Mongodb Cursor</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/04-mongodb-suo-yin.html" rel="bookmark" title="Permalink to 04、Mongodb 索引">04、Mongodb 索引</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/03-mongodb-cun-chu-fu-za-dui-xiang.html" rel="bookmark" title="Permalink to 03、Mongodb 存储复杂对象">03、Mongodb 存储复杂对象</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/02-mongodb-chang-yong-ming-ling.html" rel="bookmark" title="Permalink to 02、Mongodb 常用命令">02、Mongodb 常用命令</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/01-mongodb-jian-jie-an-zhuang-he-pei-zhi.html" rel="bookmark" title="Permalink to 01、Mongodb 简介、安装和配置">01、Mongodb 简介、安装和配置</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/mongodb.html" rel="bookmark" title="Permalink to Mongodb">[ Mongodb ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+</ol>
+
+
+  </article>
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/12-mongodb-shen-yong-local-ji-admin-ku.html"><h3 class="article-title">12、Mongodb 慎用 local 及 admin 库</h3></a>
-<h6 class="subheader" title="2016-04-18T09:59:00+08:00">Mon 18 April 2016
-</h6>
-
-
-<p>MongoDB 副本集默认会创建 local、admin 数据库, local 数据库主要存储副本集的元数据, admin 数据库则主要存储 MongoDB 的用户、角色等信息</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/12-mongodb-shen-yong-local-ji-admin-ku.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/11-mongodb-mapreduce.html"><h3 class="article-title">11、Mongodb MapReduce</h3></a>
-<h6 class="subheader" title="2016-04-13T17:20:00+08:00">Wed 13 April 2016
-</h6>
-
-
-<p>MapReduce 是 Mongodb 中的高级聚合工具, count、distinct、group 能做的事 MapReduce 都能做.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/11-mongodb-mapreduce.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/10-mongodb-restful-api.html"><h3 class="article-title">10、Mongodb Restful Api</h3></a>
-<h6 class="subheader" title="2016-04-13T11:50:00+08:00">Wed 13 April 2016
-</h6>
-
-
-<p>MongoDB 提供一个 HTTP 协议的端口提供 REST 的服务, 这个端口是你 Server 端口加上 1000, 比如你的 Server 端口为 27017, 那么这个HTTP端口就是 28017.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/10-mongodb-restful-api.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/09-mongodb-ju-he.html"><h3 class="article-title">09、Mongodb 聚合</h3></a>
-<h6 class="subheader" title="2016-04-12T13:26:00+08:00">Tue 12 April 2016
-</h6>
-
-
-<p>MongoDB 中聚合(aggregate)主要用于处理数据(如统计平均值、求和等), 并返回计算后的数据结果.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/09-mongodb-ju-he.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/08-mongodb-shi-wu.html"><h3 class="article-title">08、Mongodb 事务</h3></a>
-<h6 class="subheader" title="2016-04-11T22:23:00+08:00">Mon 11 April 2016
-</h6>
-
-
-<p>事务是逻辑上的一组操作, 组成这组操作的各个单元, 要不全都成功要不全都失败, 对于 Mongodb 有一点恼人的地方 &ndash; 不能创建一个事务处理多个文档</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/08-mongodb-shi-wu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/07-mongodb-profile-diao-you.html"><h3 class="article-title">07、Mongodb Profile 调优</h3></a>
-<h6 class="subheader" title="2016-04-11T18:05:00+08:00">Mon 11 April 2016
-</h6>
-
-
-<p>Mongodb 可以通过 Profile 来监控慢查询数据, 进行优化.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/07-mongodb-profile-diao-you.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/06-mongodb-zi-zeng.html"><h3 class="article-title">06、Mongodb 自增</h3></a>
-<h6 class="subheader" title="2016-04-09T23:34:00+08:00">Sat 09 April 2016
-</h6>
-
-
-<p>MongoDB 原生是没有 SQL 那种可以让 Field 自动增长的功能, 在某些情况下, 可能需要这样的功能, 好在 MongoDB 官方给出解决方案, 可以让 MongoDB 的 Field 自动增长.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/06-mongodb-zi-zeng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/05-mongodb-cursor.html"><h3 class="article-title">05、Mongodb Cursor</h3></a>
-<h6 class="subheader" title="2016-04-08T22:54:00+08:00">Fri 08 April 2016
-</h6>
-
-
-<p>游标是数据库系统为用户开设的一个数据缓冲区, 用户可以逐一从游标中获取记录.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/05-mongodb-cursor.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/04-mongodb-suo-yin.html"><h3 class="article-title">04、Mongodb 索引</h3></a>
-<h6 class="subheader" title="2016-04-08T18:32:00+08:00">Fri 08 April 2016
-</h6>
-
-
-<p>本节笔记记录 Mongodb 索引(index) 的设计, 让操作数据库获得更好的性能.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/04-mongodb-suo-yin.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/03-mongodb-cun-chu-fu-za-dui-xiang.html"><h3 class="article-title">03、Mongodb 存储复杂对象</h3></a>
-<h6 class="subheader" title="2016-04-08T16:32:00+08:00">Fri 08 April 2016
-</h6>
-
-
-<p>本节笔记讲解如何将一些复杂对象映射到 Mongodb 里.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/03-mongodb-cun-chu-fu-za-dui-xiang.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 2</h6>
-
-<p>
-
-        <a href="http://blog.smallcpp.cn/category/mongodb2.html">Next &raquo;</a>
-</p>
-</div>
-
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
-
-
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

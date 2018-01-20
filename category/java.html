@@ -1,274 +1,1020 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Small Cpp - Java</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Java</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn">
+<meta name="twitter:title" content="Small Cpp">
+<meta name="twitter:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用.">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp" />
+<meta property="og:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用." />
+<meta property="og:image" content="theme/images/avatar.png" />
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/category/java.html">
+<meta name="twitter:title" content="Small Cpp ~ Java">
+<meta name="twitter:description" content="Articles de Java">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Java" />
+<meta property="og:description" content="Articles de Java" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
+
+  <!-- Content -->
+  <article>
+<ol>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/055-jms.html" rel="bookmark" title="Permalink to 055、JMS">055、JMS</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 14 November 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/054-fan-she-zhi-dong-tai-dai-li.html" rel="bookmark" title="Permalink to 054、反射之动态代理">054、反射之动态代理</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 11 October 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/052-jvm-fan-she-nei-sheng.html" rel="bookmark" title="Permalink to 052、JVM、反射、内省">052、JVM、反射、内省</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 09 August 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/053-nio.html" rel="bookmark" title="Permalink to 053、NIO">053、NIO</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 09 August 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/051-shu-ju-yuan-he-chi-hua.html" rel="bookmark" title="Permalink to 051、数据源和池化">051、数据源和池化</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 03 August 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/050-properties-pei-zhi-wai-bu-hua.html" rel="bookmark" title="Permalink to 050、Properties 配置外部化">050、Properties 配置外部化</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 01 August 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/049-mysql-cun-chu-guo-cheng.html" rel="bookmark" title="Permalink to 049、Mysql 存储过程">049、Mysql 存储过程</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 28 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/048-shi-yong-addbatch-ti-gao-xiao-lu.html" rel="bookmark" title="Permalink to 048、使用 addBatch() 提高效率">048、使用 addBatch() 提高效率</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 25 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/047-mysql-ju-ji-han-shu.html" rel="bookmark" title="Permalink to 047、Mysql 聚集函数">047、Mysql 聚集函数</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 25 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/046-preparedstatement.html" rel="bookmark" title="Permalink to 046、PreparedStatement">046、PreparedStatement</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 15 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/045-junit-dan-yuan-ce-shi.html" rel="bookmark" title="Permalink to 045、JUnit 单元测试">045、JUnit 单元测试</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 14 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/044-jdbc-shu-ju-ku-bian-cheng.html" rel="bookmark" title="Permalink to 044、JDBC 数据库编程">044、JDBC 数据库编程</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 13 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/043-url-ji-duo-xian-cheng-xia-zai.html" rel="bookmark" title="Permalink to 043、URL 及多线程下载">043、URL 及多线程下载</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 12 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/041-osi-yu-tcpip.html" rel="bookmark" title="Permalink to 041、OSI 与 TCP/IP">041、OSI 与 TCP/IP</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 12 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/042-java-udp-bian-cheng.html" rel="bookmark" title="Permalink to 042、Java UDP 编程">042、Java UDP 编程</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 12 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/040-java-runtime.html" rel="bookmark" title="Permalink to 040、Java Runtime">040、Java Runtime</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/039-tcp-qi-ci-wo-shou.html" rel="bookmark" title="Permalink to 039、TCP 七次握手">039、TCP 七次握手</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/038-java-socket.html" rel="bookmark" title="Permalink to 038、Java Socket">038、Java Socket</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/037-dan-li-mo-shi-vs-jing-tai-fang-fa.html" rel="bookmark" title="Permalink to 037、单例模式 VS 静态方法">037、单例模式 VS 静态方法</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 11 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/036-native2ascii-zi-fu-bian-ma-zhuan-huan.html" rel="bookmark" title="Permalink to 036、native2ascii (字符编码转换)">036、native2ascii (字符编码转换)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/035-li-yong-dui-xiang-liu-shi-xian-shen-du-fu-zhi.html" rel="bookmark" title="Permalink to 035、利用对象流实现深度复制">035、利用对象流实现深度复制</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 08 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/034-dui-xiang-liu-dui-xiang-de-xu-lie-hua.html" rel="bookmark" title="Permalink to 034、对象流 (对象的序列化)">034、对象流 (对象的序列化)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 07 July 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/033-io-ji-chu.html" rel="bookmark" title="Permalink to 033、IO 基础">033、IO 基础</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 22 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/032-315-xian-shang-ke.html" rel="bookmark" title="Permalink to 032、3.15 线上课">032、3.15 线上课</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 21 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/031-rong-qi.html" rel="bookmark" title="Permalink to 031、容器">031、容器</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 20 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/030-java-zhong-de-zi-fu-chuan.html" rel="bookmark" title="Permalink to 030、Java 中的字符串">030、Java 中的字符串</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 20 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/028-eclipse.html" rel="bookmark" title="Permalink to 028、Eclipse">028、Eclipse</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 19 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/028-xian-cheng-jian-tong-xin-thinking-in-java.html" rel="bookmark" title="Permalink to 028、线程间通信(Thinking in Java)">028、线程间通信(Thinking in Java)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 18 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/027-xian-cheng-tong-bu-thinking-in-java.html" rel="bookmark" title="Permalink to 027、线程同步(Thinking in Java)">027、线程同步(Thinking in Java)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 17 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/026-xian-cheng-ji-chu-thinking-in-java.html" rel="bookmark" title="Permalink to 026、线程基础(Thinking in Java)">026、线程基础(Thinking in Java)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 17 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/025-nei-bu-lei-ying-yong.html" rel="bookmark" title="Permalink to 025、内部类应用">025、内部类应用</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 16 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/024-package-yu-jar.html" rel="bookmark" title="Permalink to 024、package 与 jar">024、package 与 jar</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 15 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/023-yi-chang.html" rel="bookmark" title="Permalink to 023、异常">023、异常</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 15 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/022-duo-tai-zhong-de-yin-cang-yu-zhong-xie.html" rel="bookmark" title="Permalink to 022、多态中的隐藏与重写">022、多态中的隐藏与重写</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 15 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/021-nei-bu-lei.html" rel="bookmark" title="Permalink to 021、内部类">021、内部类</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 15 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/020-chou-xiang-lei-yu-jie-kou.html" rel="bookmark" title="Permalink to 020、抽象类与接口">020、抽象类与接口</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 09 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/019-zhong-xie-super-he-final.html" rel="bookmark" title="Permalink to 019、重写、super 和 final">019、重写、super 和 final</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 09 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/018-dai-ma-kuai-he-lei-jia-zai.html" rel="bookmark" title="Permalink to 018、代码块和类加载">018、代码块和类加载</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 07 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/017-feng-zhuang-yu-java-beans-gui-fan.html" rel="bookmark" title="Permalink to 017、封装与Java Beans 规范">017、封装与Java Beans 规范</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 06 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/016-di-er-jie-gong-kai-ke-da-yi.html" rel="bookmark" title="Permalink to 016、第二节公开课答疑">016、第二节公开课答疑</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 03 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/015-yun-xing-shi-zhan-zheng.html" rel="bookmark" title="Permalink to 015、运行时栈帧">015、运行时栈帧</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 03 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/014-dui-zhan-fang-fa-qu.html" rel="bookmark" title="Permalink to 014、堆、栈、方法区">014、堆、栈、方法区</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 03 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/013-lei-ni-ming-dui-xiang-this-static.html" rel="bookmark" title="Permalink to 013、类、匿名对象、this、static">013、类、匿名对象、this、static</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 03 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/012-bao-zhuang-lei.html" rel="bookmark" title="Permalink to 012、包装类">012、包装类</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 29 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/011-fang-fa-shu-zu.html" rel="bookmark" title="Permalink to 011、方法、数组">011、方法、数组</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 29 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/010-liu-cheng-kong-zhi.html" rel="bookmark" title="Permalink to 010、流程控制">010、流程控制</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 29 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/009-luo-ji-yun-suan-fu-yi-wei.html" rel="bookmark" title="Permalink to 009、逻辑运算符、移位">009、逻辑运算符、移位</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 26 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/008-guan-jian-zi-shu-ju-lei-xing-ji-chang-liang.html" rel="bookmark" title="Permalink to 008、关键字、数据类型及常量">008、关键字、数据类型及常量</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 26 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/007-yuan-ma-fan-ma-bu-ma.html" rel="bookmark" title="Permalink to 007、原码, 反码, 补码">007、原码, 反码, 补码</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 26 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/006-google-java-bian-cheng-gui-fan.html" rel="bookmark" title="Permalink to 006、Google Java 编程规范">006、Google Java 编程规范</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 26 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/005-hello-world.html" rel="bookmark" title="Permalink to 005、Hello World">005、Hello World</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 26 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/004-java-an-zhuang-ji-huan-jing-pei-zhi.html" rel="bookmark" title="Permalink to 004、Java 安装及环境配置">004、Java 安装及环境配置</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 25 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/003-windows-ji-chu.html" rel="bookmark" title="Permalink to 003、Windows 基础">003、Windows 基础</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 24 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/002-da-shu-ju-sheng-tai-quan-chang-xian.html" rel="bookmark" title="Permalink to 002、大数据生态圈尝鲜">002、大数据生态圈尝鲜</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 24 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/001-chu-shi-da-shu-ju.html" rel="bookmark" title="Permalink to 001、初识大数据">001、初识大数据</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/java.html" rel="bookmark" title="Permalink to Java">[ Java ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 17 February 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+</ol>
+
+
+  </article>
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/055-jms.html"><h3 class="article-title">055、JMS</h3></a>
-<h6 class="subheader" title="2016-11-14T14:14:00+08:00">Mon 14 November 2016
-</h6>
-
-
-<p>即 Java 消息服务 (Java Message Service), 我们仅了解下有这么个东西就行, 后面的 Kafka 才是我们要学的 (JMS 常用在 JavaEE 里, 而大数据领域多是用 Kafka).</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/055-jms.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/054-fan-she-zhi-dong-tai-dai-li.html"><h3 class="article-title">054、反射之动态代理</h3></a>
-<h6 class="subheader" title="2016-10-11T13:06:00+08:00">Tue 11 October 2016
-</h6>
-
-
-<p>代理模式是 GOF 的23种设计模式之一 (结构型模式), 通过引入一个新的对象, 来实现对真实对象的操作或者将新的对象作为真实对象的一个替身, 即代理对象. 它可以在客户端和目标对象之间起到中介的作用, 并且可以通过代理对象去掉客户不能看到的内容和服务或者添加客户需要的额外服务.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/054-fan-she-zhi-dong-tai-dai-li.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/052-jvm-fan-she-nei-sheng.html"><h3 class="article-title">052、JVM、反射、内省</h3></a>
-<h6 class="subheader" title="2016-08-09T15:22:00+08:00">Tue 09 August 2016
-</h6>
-
-
-<p>JVM 结构、反射、内省</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/052-jvm-fan-she-nei-sheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/053-nio.html"><h3 class="article-title">053、NIO</h3></a>
-<h6 class="subheader" title="2016-08-09T15:22:00+08:00">Tue 09 August 2016
-</h6>
-
-
-<p>New I/O</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/053-nio.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/051-shu-ju-yuan-he-chi-hua.html"><h3 class="article-title">051、数据源和池化</h3></a>
-<h6 class="subheader" title="2016-08-03T19:02:00+08:00">Wed 03 August 2016
-</h6>
-
-
-<p>利用数据源和池化技术减少数据库连接时的性能损耗.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/051-shu-ju-yuan-he-chi-hua.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/050-properties-pei-zhi-wai-bu-hua.html"><h3 class="article-title">050、Properties 配置外部化</h3></a>
-<h6 class="subheader" title="2016-08-01T17:27:00+08:00">Mon 01 August 2016
-</h6>
-
-
-<p>JAVA 中的 Properties 文件是一种配置文件, 主要用于表达配置信息.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/050-properties-pei-zhi-wai-bu-hua.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/049-mysql-cun-chu-guo-cheng.html"><h3 class="article-title">049、Mysql 存储过程</h3></a>
-<h6 class="subheader" title="2016-07-28T17:51:00+08:00">Thu 28 July 2016
-</h6>
-
-
-<p>存储过程 (procedure), 类似 mongodb 上的脚本, 就是把要执行的一组 SQL 语句放在 mysql 服务器上, 需要执行这组 SQL 语句时, 只要把参数及调用命令发送给 mysql 服务就可以了, 这样就大大降低了网络传输的损耗.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/049-mysql-cun-chu-guo-cheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/048-shi-yong-addbatch-ti-gao-xiao-lu.html"><h3 class="article-title">048、使用 addBatch() 提高效率</h3></a>
-<h6 class="subheader" title="2016-07-25T18:50:00+08:00">Mon 25 July 2016
-</h6>
-
-
-<p>使用事务及批处理提高 JDBC 效率</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/048-shi-yong-addbatch-ti-gao-xiao-lu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/047-mysql-ju-ji-han-shu.html"><h3 class="article-title">047、Mysql 聚集函数</h3></a>
-<h6 class="subheader" title="2016-07-25T17:50:00+08:00">Mon 25 July 2016
-</h6>
-
-
-<p>聚集函数和分组</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/047-mysql-ju-ji-han-shu.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/046-preparedstatement.html"><h3 class="article-title">046、PreparedStatement</h3></a>
-<h6 class="subheader" title="2016-07-15T17:12:00+08:00">Fri 15 July 2016
-</h6>
-
-
-<p>PreparedStatement 接口继承了 Statement, 并与之在两方面有所不同, 有人主张, 在 JDBC 应用中, 如果你已经是稍有水平开发者, 你就应该始终以 PreparedStatement 代替 Statement.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/java.html">Java</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/046-preparedstatement.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 6</h6>
-
-<p>
-
-        <a href="http://blog.smallcpp.cn/category/java2.html">Next &raquo;</a>
-</p>
-</div>
-
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
-
-
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

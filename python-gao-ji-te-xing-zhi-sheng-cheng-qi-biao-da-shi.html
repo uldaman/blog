@@ -1,59 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Python 高级特性之生成器表达式</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Python 高级特性之生成器表达式</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html">
+<meta name="twitter:title" content="Small Cpp ~ Python 高级特性之生成器表达式">
+<meta name="twitter:description" content="当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(generator)表达式而不是列表解析;">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Python 高级特性之生成器表达式" />
+<meta property="og:description" content="当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(generator)表达式而不是列表解析;" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
 
-
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-<article>
-    <header>
-        <h3 class="article-title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html" rel="bookmark"
-        title="Permalink to Python 高级特性之生成器表达式">Python 高级特性之生成器表达式</a></h3>
-    </header>
-
-<h6 class="subheader" title="2016-01-26T21:32:00+08:00">Tue 26 January 2016
-</h6>
-
-
-    <p>当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(<strong>generator</strong>)表达式而不是列表解析;</p>
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <header class="post_list">
+            <h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html" rel="bookmark" title="Permalink to Python 高级特性之生成器表达式">Python 高级特性之生成器表达式</a></h2>
+            <span>Par </span>
+            <a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+            <span> dans </span>
+            <span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+            <span> le </span>
+            <span class="post_date">Tue 26 January 2016</span>
+            <div></div>
+            <div><span>Tags : </span>
+            </div>
+        </header>
+        <div class="entry-content">
+            <p>当列表过长, 而我们也不需要一次性获取全部数据时, 应当考虑使用生成器(<strong>generator</strong>)表达式而不是列表解析;</p>
 <p>生成器表达式的语法和列表解析一样, 只不过生成器表达式是被（）括起来的, 而不是[ ], 如下:</p>
 <p><strong>(exp for iter_var in iterable)</strong></p>
 <p><strong>(exp for iter_var in iterable if cond_exp)</strong></p>
@@ -101,88 +127,12 @@ Traceback (most recent call last):
 
 <p>生成器表达式并不真正创建数字列表, 而是返回一个生成器, 这个生成器在每次计算出一个条目后, 把这个条目“产生”(<strong>yield</strong>)出来;</p>
 <p>生成器表达式使用了“惰性计算”(lazy evaluation, 也有翻译为“延迟求值”, 我以为这种按需调用 call by need 的方式翻译为惰性更好一些), 只有在检索时才被赋值(evaluated), 所以在列表比较长的情况下使用更有效(节省内存).</p>
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-
-<!--      -->
-
-    <!-- 多说评论框 start -->
-    <h4>Comments !</h4>
-    <div class="ds-thread" data-thread-key="python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi" data-title="Python 高级特性之生成器表达式" data-url="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name:"smallcpp"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-    </script>
-    <!-- 多说公共JS代码 end -->
-</article>
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
+            <div align="center" style="color:#ccc;">☠</div>
+        </div>
+    </article>
+</section>
+  </article>
 
 
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>

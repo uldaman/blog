@@ -1,274 +1,969 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8" />
-    <!-- Set the viewport width to device width for mobile -->
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>Small Cpp - Python</title>
+  <meta name="description" content="">
+  <meta name="author" content="martin">
 
-    <title>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. - Python</title>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/notebook.css" type="text/css" />
+  <link rel="shortcut icon" href="http://blog.smallcpp.cn/theme/images/avatar.png">
 
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/normalize.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/foundation.min.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/style.css" />
-    <link rel="stylesheet" href="http://blog.smallcpp.cn/theme/css/pygments.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="http://blog.smallcpp.cn/theme/images/favicon.ico" />
-    <script src="http://blog.smallcpp.cn/theme/js/modernizr.js"></script>
+  <!-- Feed Meta Data -->
+  <link href="http://blog.smallcpp.cn/" type="application/atom+xml" rel="alternate" title="Small Cpp ATOM Feed" />
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="http://blog.smallcpp.cn/theme/images/avatar.png">
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn">
+<meta name="twitter:title" content="Small Cpp">
+<meta name="twitter:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用.">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp" />
+<meta property="og:description" content="勿在浮沙筑高台, 练从难处练, 用从易处用." />
+<meta property="og:image" content="theme/images/avatar.png" />
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:url" content="http://blog.smallcpp.cn/category/python.html">
+<meta name="twitter:title" content="Small Cpp ~ Python">
+<meta name="twitter:description" content="Articles de Python">
+
+<!-- Facebook Meta Data -->
+<meta property="og:title" content="Small Cpp ~ Python" />
+<meta property="og:description" content="Articles de Python" />
+<meta property="og:image" content="theme/images/avatar.png" />
 </head>
 
 <body>
-
-<!-- Nav Bar -->
-<nav>
-<div class="top-bar">
-<div class="row">
-    <div class="large-9 large-centered columns">
-	    <h1><a href="http://blog.smallcpp.cn">Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用.</a></h1>
-    </div>
-</div>
-</div>
-
-<!-- Show menu items and pages -->
-<div class="row">
-<div class="large-9 columns">
-    <ul class="button-group navigation">
-
+  <!-- Sidebar -->
+  <aside>
+    <p><a href="http://blog.smallcpp.cn"><img id="avatar" src="http://blog.smallcpp.cn/theme/images/avatar.png"></a></p>
+    <h1>Small Cpp</h1>
+    <p>勿在浮沙筑高台, 练从难处练, 用从易处用.</p>
+    <hr>
+    <h2>Social</h2>
+    <ul class="social">
+      <a href="http://blog.csdn.net/u010850265">CSDN</a></li>
     </ul>
-</div>
-</div>
-</nav>
-<!-- End Nav -->
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
+      <li class="active"><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
+      <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
+    </ul> 
+  </aside>
+
+  <!-- Content -->
+  <article>
+<ol>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/52-python-__getattr__.html" rel="bookmark" title="Permalink to 52. Python __getattr__">52. Python __getattr__</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 15 September 2017</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/51-python-fan-she-zi-sheng.html" rel="bookmark" title="Permalink to 51. Python 反射 (自省)">51. Python 反射 (自省)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 15 September 2017</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/50-python-collections.html" rel="bookmark" title="Permalink to 50. Python collections">50. Python collections</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 10 October 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/49-python-unittest.html" rel="bookmark" title="Permalink to 49. Python unittest">49. Python unittest</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 14 September 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/48-python-generator-zhi-next-he-send.html" rel="bookmark" title="Permalink to 48. Python generator 之 next 和 send">48. Python generator 之 next 和 send</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 24 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/47-python-duo-zhong-ji-cheng.html" rel="bookmark" title="Permalink to 47. python 多重继承">47. python 多重继承</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 19 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/46-python-numpy.html" rel="bookmark" title="Permalink to 46. python numpy">46. python numpy</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 16 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/45-python-glob-yu-shutil.html" rel="bookmark" title="Permalink to 45. python glob 与 shutil">45. python glob 与 shutil</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 16 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/43-python-zi-fu-bian-ma-pan-duan.html" rel="bookmark" title="Permalink to 43. Python 字符编码判断">43. Python 字符编码判断</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 12 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/44-django-migration-vs-syncdb.html" rel="bookmark" title="Permalink to 44. Django migration vs syncdb">44. Django migration vs syncdb</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 12 May 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-supervisor.html" rel="bookmark" title="Permalink to Python Supervisor">Python Supervisor</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 24 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-fabric.html" rel="bookmark" title="Permalink to Python fabric">Python fabric</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 20 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/orm-sqlalchemy.html" rel="bookmark" title="Permalink to ORM SQLAlchemy">ORM SQLAlchemy</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 15 April 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-chou-xiang-lei.html" rel="bookmark" title="Permalink to Python 高级特性之抽象类">Python 高级特性之抽象类</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 31 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-ding-zhi-lei.html" rel="bookmark" title="Permalink to Python 高级特性之定制类">Python 高级特性之定制类</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 29 March 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sorted.html" rel="bookmark" title="Permalink to Python 高级特性之 sorted( )">Python 高级特性之 sorted( )</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-filter.html" rel="bookmark" title="Permalink to Python 高级特性之 filter( )">Python 高级特性之 filter( )</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-reduce.html" rel="bookmark" title="Permalink to Python 高级特性之 reduce( )">Python 高级特性之 reduce( )</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-map.html" rel="bookmark" title="Permalink to Python 高级特性之 map( )">Python 高级特性之 map( )</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-lambda.html" rel="bookmark" title="Permalink to Python 高级特性之 lambda">Python 高级特性之 lambda</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-sheng-cheng-qi-biao-da-shi.html" rel="bookmark" title="Permalink to Python 高级特性之生成器表达式">Python 高级特性之生成器表达式</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-gao-ji-te-xing-zhi-lie-biao-sheng-cheng-shi.html" rel="bookmark" title="Permalink to Python 高级特性之列表生成式">Python 高级特性之列表生成式</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 26 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/wsgi.html" rel="bookmark" title="Permalink to WSGI">WSGI</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 05 January 2016</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/wu-django-api-she-ji.html" rel="bookmark" title="Permalink to (五) Django API 设计">(五) Django API 设计</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 02 October 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/yi-zuo-biao-xi-xue-xi-fa.html" rel="bookmark" title="Permalink to (一) 坐标系学习法">(一) 坐标系学习法</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 26 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/san-django-huan-cun-xi-tong.html" rel="bookmark" title="Permalink to (三) Django 缓存系统">(三) Django 缓存系统</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 26 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/er-django-shi-tu-jin-jie.html" rel="bookmark" title="Permalink to (二) Django 视图进阶">(二) Django 视图进阶</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 26 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/si-django-urlspy-jin-jie.html" rel="bookmark" title="Permalink to (四) Django urls.py 进阶">(四) Django urls.py 进阶</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 23 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-zhong-jian-jian-he-admin.html" rel="bookmark" title="Permalink to Django 中间件和admin">Django 中间件和admin</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 14 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-kua-zhan-qing-qiu-wei-zao.html" rel="bookmark" title="Permalink to Django 跨站请求伪造">Django 跨站请求伪造</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 14 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/zi-ding-yi-cookies.html" rel="bookmark" title="Permalink to 自定义 cookies">自定义 cookies</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 14 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-zhi-session-de-shi-yong.html" rel="bookmark" title="Permalink to Django 之 session 的使用">Django 之 session 的使用</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 10 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-fen-ye-she-ji.html" rel="bookmark" title="Permalink to Django 分页设计">Django 分页设计</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 09 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-zhi-ajax-de-shi-yong.html" rel="bookmark" title="Permalink to Django 之 Ajax 的使用">Django 之 Ajax 的使用</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 08 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-jing-tai-wen-jian-chu-li.html" rel="bookmark" title="Permalink to Django 静态文件处理">Django 静态文件处理</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Tue 08 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/models-lian-biao-bu-chong.html" rel="bookmark" title="Permalink to models -- 连表(补充)">models -- 连表(补充)</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 07 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/models-mo-ban-yu-yan-ji-formyan-zheng.html" rel="bookmark" title="Permalink to models -- 模板语言及Form验证">models -- 模板语言及Form验证</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 06 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/models-shu-ju-ku-zeng-shan-gai-cha.html" rel="bookmark" title="Permalink to models — 数据库增删改查">models — 数据库增删改查</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sun 06 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/models-shu-ju-ku-biao-zi-duan-ji-lian-biao.html" rel="bookmark" title="Permalink to models -- 数据库表、字段及连表">models -- 数据库表、字段及连表</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 05 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/models-shu-ju-ku-an-zhuang.html" rel="bookmark" title="Permalink to models -- 数据库安装">models -- 数据库安装</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 05 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-lu-you-xi-tong.html" rel="bookmark" title="Permalink to Django 路由系统">Django 路由系统</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 04 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/django-kuang-jia-chu-kui.html" rel="bookmark" title="Permalink to Django 框架初窥">Django 框架初窥</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 04 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-web-huan-jing-pei-zhi.html" rel="bookmark" title="Permalink to python web 环境配置">python web 环境配置</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 03 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/python-mian-xiang-dui-xiang-gao-ji-bian-cheng.html" rel="bookmark" title="Permalink to python 面向对象高级编程">python 面向对象高级编程</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 02 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/jquery-ji-chu.html" rel="bookmark" title="Permalink to jQuery 基础">jQuery 基础</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 02 September 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/dom-ji-chu.html" rel="bookmark" title="Permalink to DOM 基础">DOM 基础</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Mon 31 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/js-jian-dan-ru-men.html" rel="bookmark" title="Permalink to js 简单入门">js 简单入门</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Sat 29 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/css.html" rel="bookmark" title="Permalink to CSS">CSS</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 27 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/html-ji-chu.html" rel="bookmark" title="Permalink to Html 基础">Html 基础</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 26 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/zheng-ze-biao-da-shi.html" rel="bookmark" title="Permalink to 正则表达式">正则表达式</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Fri 21 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/nei-jian-mo-kuai.html" rel="bookmark" title="Permalink to 内建模块">内建模块</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Thu 20 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li class="post_list"><p class="post_entry">
+		<table border="0">
+			<tr>
+				<td>
+					<h2 class="post_title"><a href="http://blog.smallcpp.cn/pa-chong-ru-men.html" rel="bookmark" title="Permalink to 爬虫入门">爬虫入门</a></h2>
+				</td>
+				<td>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;Par </span>
+					<a href="http://blog.smallcpp.cn/author/martin.html">@Martin</a>
+					<span> dans </span>
+					<span class="post_category"><a href="http://blog.smallcpp.cn/category/python.html" rel="bookmark" title="Permalink to Python">[ Python ]</a></span>
+					<span> le </span>
+					<span class="post_date">Wed 19 August 2015</span>
+				</td>
+			</tr>
+		</table>
+	</li>
+</ol>
+
+
+  </article>
 
 
-<!-- Main Page Content and Sidebar -->
-<div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns">
-        <article>
-            <a href="http://blog.smallcpp.cn/52-python-__getattr__.html"><h3 class="article-title">52. Python __getattr__</h3></a>
-<h6 class="subheader" title="2017-09-15T20:20:00+08:00">Fri 15 September 2017
-</h6>
-
-
-<p>当调用类中不存在的属性时, Python 解释器会试图调用类的 <strong>getattr</strong> 方法 (如果存在).</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/52-python-__getattr__.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/51-python-fan-she-zi-sheng.html"><h3 class="article-title">51. Python 反射 (自省)</h3></a>
-<h6 class="subheader" title="2017-09-15T19:20:00+08:00">Fri 15 September 2017
-</h6>
-
-
-<p>反射机制在 Python 中被称为自省 (不确定, 欢迎指证). 反射的主要功能就是通过字符串动态的导入包、实例化对象、调用方法以及访问属性.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/51-python-fan-she-zi-sheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/50-python-collections.html"><h3 class="article-title">50. Python collections</h3></a>
-<h6 class="subheader" title="2016-10-10T14:20:00+08:00">Mon 10 October 2016
-</h6>
-
-
-<p>collections 是 Python 内置的一个集合模块, 在 Python 内置数据类型的基础上, 又提供了几个额外的数据类型供我们使用.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/50-python-collections.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/49-python-unittest.html"><h3 class="article-title">49. Python unittest</h3></a>
-<h6 class="subheader" title="2016-09-14T15:31:00+08:00">Wed 14 September 2016
-</h6>
-
-
-<p>单元测试, 即对软件设计的最小单元进行内部逻辑、语法、算法、功能等的正解性进行验证.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/49-python-unittest.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/48-python-generator-zhi-next-he-send.html"><h3 class="article-title">48. Python generator 之 next 和 send</h3></a>
-<h6 class="subheader" title="2016-05-24T19:30:00+08:00">Tue 24 May 2016
-</h6>
-
-
-<p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/48-python-generator-zhi-next-he-send.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/47-python-duo-zhong-ji-cheng.html"><h3 class="article-title">47. python 多重继承</h3></a>
-<h6 class="subheader" title="2016-05-19T08:42:00+08:00">Thu 19 May 2016
-</h6>
-
-
-<p>最近在使用 Python 多重继承的时候, 发现没有继承到第二个类的成员, 查了查资料, 还来是 super 搞的鬼&hellip;</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/47-python-duo-zhong-ji-cheng.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/46-python-numpy.html"><h3 class="article-title">46. python numpy</h3></a>
-<h6 class="subheader" title="2016-05-16T20:40:00+08:00">Mon 16 May 2016
-</h6>
-
-
-<p>NumPy 是 Python 的一个科学计算的库, 提供了矩阵运算的功能, 说白了就是维护对象是同种元素的多维数组.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/46-python-numpy.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/45-python-glob-yu-shutil.html"><h3 class="article-title">45. python glob 与 shutil</h3></a>
-<h6 class="subheader" title="2016-05-16T19:16:00+08:00">Mon 16 May 2016
-</h6>
-
-
-<p>glob 与 shutil 是 python 的两个文件操作模块, glob 提供文件匹配功能, shutil 提供操作文件功能.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/45-python-glob-yu-shutil.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/43-python-zi-fu-bian-ma-pan-duan.html"><h3 class="article-title">43. Python 字符编码判断</h3></a>
-<h6 class="subheader" title="2016-05-12T20:08:00+08:00">Thu 12 May 2016
-</h6>
-
-
-<p>使用 chardet 可以很方便的实现字符串/文件的编码检测, 尤其是中文网页, 有的页面使用 GBK/GB2312, 有的使用 UTF-8, 如果你需要去爬一些页面, 知道网页编码很重要的.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/43-python-zi-fu-bian-ma-pan-duan.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-        <article>
-            <a href="http://blog.smallcpp.cn/44-django-migration-vs-syncdb.html"><h3 class="article-title">44. Django migration vs syncdb</h3></a>
-<h6 class="subheader" title="2016-05-12T20:08:00+08:00">Thu 12 May 2016
-</h6>
-
-
-<p>migration 是 Django 1.7+ 新特性, Migrations 将模型变更 (添加一个字段, 删除模型等) 映射到数据库 schema.</p><p class="subheader">Category: <a href="http://blog.smallcpp.cn/category/python.html">Python</a>
-
-</p>
-
-
-
-            <a class="button radius secondary small right" href="http://blog.smallcpp.cn/44-django-migration-vs-syncdb.html">Read More</a>
-            <hr  class="gradient"/>
-        </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 6</h6>
-
-<p>
-
-        <a href="http://blog.smallcpp.cn/category/python2.html">Next &raquo;</a>
-</p>
-</div>
-
-    </div>
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-    <aside class="large-3 columns">
-        <h5 class="sidebar-title">Site</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/archives.html">Archives</a>
-            <li><a href="http://blog.smallcpp.cn/tags.html">Tags</a>
-        </ul>
-
-        <h5 class="sidebar-title">Categories</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.smallcpp.cn/category/c11.html">C++11</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/da-shu-ju.html">大数据</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/du-shu-bi-ji.html">读书笔记</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/golang.html">Golang</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/hei-ke-ji.html">黑科技</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/java.html">Java</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/linux.html">Linux</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/lua.html">Lua</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/mongodb.html">Mongodb</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/pyqt.html">PyQt</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/python.html">Python</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qt.html">QT</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/qu-kuai-lian.html">区块链</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/redis.html">Redis</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/ruan-jian-she-ji.html">软件设计</a></li>
-            <li><a href="http://blog.smallcpp.cn/category/za-xiang.html">杂项</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Links</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-        <h5 class="sidebar-title">Social</h5>
-        <ul class="side-nav">
-            <li><a href="http://blog.csdn.net/u010850265">CSDN</a></li>
-        </ul>
-
-    </aside> <!-- End Sidebar -->
-
-</div> <!-- End Main Content and Sidebar -->
-
-
-<!-- Footer -->
-<footer class="row">
-    <div class="large-12 columns">
-        <hr />
-        <div class="row">
-            <div class="large-6 columns">
-              <!--                  <p>Small Cpp | 勿在浮沙筑高台, 练从难处练, 用从易处用. by martin</p> -->
-            </div>
-            </div>
-    </div>
-</footer>
 </body>
 </html>
