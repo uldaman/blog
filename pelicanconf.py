@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'martin'
 SIDEBAR_DIGEST = u'勿在浮沙筑高台, 练从难处练, 用从易处用.'
 SITENAME = 'Small Cpp'
-SITEURL = 'http://blog.smallcpp.cn/'
+SITEURL = 'http://blog.smallcpp.cn'
 PATH = 'content'
 TIMEZONE = 'Asia/Shanghai'
 DEFAULT_LANG = 'zh'
